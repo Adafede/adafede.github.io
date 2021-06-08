@@ -81,7 +81,7 @@ analytics:
 # Site Author
 author:
   name             : "Adriano Rutz"
-  avatar           : "profile.png"
+  avatar           : "https://upload.wikimedia.org/wikipedia/commons/3/37/Adriano_Rutz.jpg"
   bio              : "PhD Student in Phytochemistry and bioactive natural products"
   location         : "Geneva, Switzerland"
   employer         : "University of Geneva"
