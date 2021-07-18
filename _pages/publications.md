@@ -5,10 +5,6 @@ permalink: /publications/
 author_profile: true
 ---
 
-{% if author.googlescholar %}
-  You can also find my articles on <u><a href="{{author.googlescholar}}">my Google Scholar profile</a>.</u>
-{% endif %}
-
 {% include base_path %}
 
 {% for post in site.publications reversed %}
@@ -21,11 +17,19 @@ author_profile: true
 
 ### [Antiseizure potential of the ancient Greek medicinal plant Helleborus odorus subsp. cyclophyllus and identification of its main active principles](https://doi.org/10.1016/j.jep.2020.112954)
 
-
 ### [Insights on the Structural and Metabolic Resistance of Potato (Solanum tuberosum) Cultivars to Tuber Black Dot (Colletotrichum coccodes)](https://doi.org/10.3389/fpls.2020.01287)
-
 
 ### [Phytochemical analysis of the methanolic leaves extract of Niedenzuella multiglandulosa (Malpighiaceae), a plant species toxic to cattle in Brazil](https://doi.org/10.1016/j.phytol.2020.02.005)
 
-
 ### [Identification of Antifungal Compounds from the Root Bark of Cordia anisophylla J.S. Mill.](https://doi.org/10.21577/0103-5053.20180221)
+
+
+## Publication profile on:
+
+* **Scholia**: [https://scholia.toolforge.org/author/Q97455964](https://scholia.toolforge.org/author/Q97455964)
+ 
+* **ORCID**: [https://orcid.org/0000-0003-0443-9902](https://orcid.org/0000-0003-0443-9902)
+
+* **Google Scholar**: [https://scholar.google.com/citations?user=8889AMkAAAAJ](https://scholar.google.com/citations?user=8889AMkAAAAJ)
+
+* **ResearchGate**: [https://www.researchgate.net/profile/Adriano_Rutz](https://www.researchgate.net/profile/Adriano_Rutz)
