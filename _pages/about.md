@@ -11,3 +11,5 @@ redirect_from:
 *Adriano Rutz* is a pharmacist.
 After working with volatiles (GC-MS/GC-O) in the Analytical Research Laboratory and Research & Development department of Tradall SA (Bacardi group), he started a PhD in Phytochemistry in Prof. Wolfender’s group.
 He is now developing advanced LC-MS-based metabolite profiling methods and tools to assess phytochemical and sensorial profiles of complex plant extracts.
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Lotus_initiative_1_chemically_interpreted_biological_tree.svg">
