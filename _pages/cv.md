@@ -1,6 +1,6 @@
 ---
 layout: archive
-title: "CV"
+title: ""
 permalink: /cv/
 author_profile: true
 redirect_from:
@@ -80,4 +80,4 @@ Teaching
   
 Miscellaneous
 ======
-* ...
+* Artistic gymnastics trainer and national judge
