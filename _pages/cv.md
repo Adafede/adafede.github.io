@@ -11,10 +11,10 @@ redirect_from:
 
 Education
 ======
-## Ph.D in Pharmaceutical Sciences, University of Geneva, (2017 - ) (expected)
+## Ph.D in Pharmaceutical Sciences, University of Geneva, (2017 - end 2021) (expected)
 
 ## Master's degree, Pharmaceutical Sciences, University of Geneva (2014 - 2016)
-* Mention « excellent » for Master’s Thesis « GC chiral separation of main enantiomeric compounds as a tool of Quality Control of some botanicals and related specific final product »
+Mention « *excellent* » for Master’s Thesis « GC chiral separation of main enantiomeric compounds as a tool of Quality Control of some botanicals and related specific final product »
 
 ## Bachelor's degree, Pharmaceutical Sciences, University of Geneva (2011 - 2014)
 
@@ -38,27 +38,18 @@ Work experience
 
 ## 2015 - 2016: Assistant Pharmacist at Pharmacie de la Terrassière
 
-* Done as internship in the frame of Master's degree.
+Done as internship in the frame of Master's degree.
   
 Skills
 ======
-## *Expert*
-
 * Plants metabolomics
-* Natural Products
+* Natural Products (NP)
 * Mass Spectrometry (MS) based dereplication
-
-## *Proficient*
-
 * Programmatic data treatment
 * Data analysis
-* Data management
+* Knowledge management
 * Sensory analysis
-
-## *Learning*
-
-* Advanced Nuclear Magnetic Resonance (NMR)
-* Ontologies
+* English, French, Italian, German
 
 Publications
 ======
