@@ -10,7 +10,7 @@ locale                   : "en-US"
 title                    : "Adriano Rutz"
 title_separator          : "-"
 name                     : &name "Adriano Rutz"
-description              : &description "PhD Student in Phytochemistry and bioactive natural products"
+description              : &description "Swiss PhD Student in Phytochemistry and bioactive natural products"
 url                      : https://adafede.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "adafede/adafede.github.io"
@@ -82,7 +82,11 @@ analytics:
 author:
   name             : "Adriano Rutz"
   avatar           : "https://upload.wikimedia.org/wikipedia/commons/3/37/Adriano_Rutz.jpg"
-  bio              : "PhD Student in Phytochemistry and bioactive natural products"
+  bio              : "Swiss PhD Student in Phytochemistry and bioactive natural products"
+  languages_1      : "French: Mastery (C2)"
+  languages_2      : "English: Advanced (C1)"
+  languages_3      : "German: Advanced (C1)"
+  languages_4      : "Italian: Advanced (C1)"
   location         : "Geneva, Switzerland"
   employer         : "University of Geneva"
   pubmed           : "https://www.ncbi.nlm.nih.gov/pubmed/?term=Rutz+Adriano"
@@ -117,7 +121,6 @@ author:
   youtube          :
   wikipedia        : "AdrianoRutz"
   wikidata         : "Q97455964"
-
 
 # Reading Files
 include:
