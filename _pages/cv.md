@@ -26,7 +26,7 @@ Mention « *excellent* » for Master’s Thesis « GC chiral separation of ma
 
 Work experience
 ======
-## 2017 - present: Teaching and research assistant at Université de Genève
+## 2017 - present: Teaching and research assistant at University of Geneva
 
 * LC-HRMS/MS based approaches for comprehensive composition assessment of complex plant extracts
 * Dereplication, Molecular Networking
