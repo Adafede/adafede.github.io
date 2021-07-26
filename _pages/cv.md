@@ -13,7 +13,7 @@ Bio
 ======
 *Adriano Rutz* is a pharmacist. 
 After working with volatiles (GC-MS/GC-O) in the Analytical Research Laboratory and
-Research & Development department of Tradall SA (Bacardi group), 
+R&D department of Tradall SA (Bacardi group), 
 he started a PhD in Phytochemistry in Prof. Wolfender’s
 group. 
 He is now developing advanced LC-MS-based metabolite profiling methods and tools to assess phytochemical and
@@ -54,13 +54,12 @@ Done as internship in the frame of Master's degree.
 
 Skills
 ======
-Plants metabolomics <br/>
-Natural Products (NP) <br/>
-Mass Spectrometry (MS) based dereplication <br/>
-Programmatic data treatment <br/>
-Data analysis <br/>
-Knowledge management <br/>
-Sensory analysis <br/>
+* Mass Spectrometry (MS) based annotation and dereplication <br/>
+* Metabolomics (*UPLC-HRMS/MS*, *GC-MS*)<br/>
+* Natural Products (NP) (Extraction, Isolation, Characterization)<br/>
+* Programmatic data treatment, ease with progamming (different languages) <br/>
+* Data oriented, knowledge management <br/>
+* Sensory analysis <br/>
 
 Publications
 ======
