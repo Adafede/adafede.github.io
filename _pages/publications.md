@@ -13,7 +13,9 @@ author_profile: true
 
 ## Contributed publications:
 
-### [Molecular and Functional Analysis of Sunitinib-Resistance Induction in Human Renal Cell Carcinoma Cells](https://doi.org/10.3390%2FIJMS22126467)
+### [Drug Repurposing to Identify a Synergistic High-Order Drug Combination to Treat Sunitinib-Resistant Renal Cell Carcinoma](https://doi.org/10.3390/cancers13163978)
+
+### [Molecular and Functional Analysis of Sunitinib-Resistance Induction in Human Renal Cell Carcinoma Cells](https://doi.org/10.3390/ijms22126467)
 
 ### [Antiseizure potential of the ancient Greek medicinal plant Helleborus odorus subsp. cyclophyllus and identification of its main active principles](https://doi.org/10.1016/j.jep.2020.112954)
 
