@@ -4,7 +4,7 @@ collection: teaching
 type: "Undergraduate course"
 permalink: /teaching/2017-09-practicals
 venue: "Université de Genève, Pharmaceutical Sciences"
-date: 2019-09-15
+date: 2017-09-15
 location: "Geneva, Switzerlland"
 ---
 

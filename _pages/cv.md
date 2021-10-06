@@ -19,6 +19,27 @@ group.
 He is now developing advanced LC-MS-based metabolite profiling methods and tools to assess phytochemical and
 sensorial profiles of complex plant extracts.
 
+Work experience
+======
+
+## Teaching and research assistant at UNIGE (2017 - present)
+
+Development of *LC-HRMS/MS* based approaches for comprehensive composition assessment of complex plant extracts.<br/>
+In depth annotation using Spectral Networking. Plant metabolomics. <br/>
+Teaching activities with Bachelor and Master students. <br/>
+Analytical instruments maintenance and optimization.
+
+## Junior Research Chemist at Tradall (2016 - 2017)
+
+Work in analytical research and Research & Development laboratories following ISO norms. <br/>
+New products development, analytical and sensory characterization. <br/>
+In depth analysis of impact compounds, compounds evolution understanding. <br/>
+Analytical instruments maintenance.
+
+## Assistant Pharmacist at Pharmacie de la Terrassière (2015 - 2016)
+
+Done as internship in the frame of Master's degree.
+
 Education
 ======
 
@@ -31,55 +52,29 @@ Control of some botanicals and related specific final product »
 
 ## Bachelor's degree, Pharmaceutical Sciences, UNIGE (2011 - 2014)
 
-Work experience
-======
-
-## 2017 - present: Teaching and research assistant at UNIGE
-
-Developing *LC-HRMS/MS* based approaches for comprehensive composition assessment of complex plant extracts.<br/>
-In depth annotation using Spectral Networking. Plant metabolomics. <br/>
-Teaching activities with Bachelor and Master students. <br/>
-Analytical instruments maintenance and optimization.
-
-## 2016 - 2017: Junior Research Chemist at Tradall
-
-Work in analytical research and R&D laboratories following ISO norms. <br/>
-New products development, analytical and sensory characterization. <br/>
-In depth analysis of impact compounds, compounds evolution understanding. <br/>
-Analytical instruments maintenance.
-
-## 2015 - 2016: Assistant Pharmacist at Pharmacie de la Terrassière
-
-Done as internship in the frame of Master's degree.
-
 Skills
 ======
-* Mass Spectrometry (MS) based annotation and dereplication <br/>
-* Metabolomics (*UPLC-HRMS/MS*, *GC-MS*)<br/>
-* Natural Products (NP) (Extraction, Isolation, Characterization)<br/>
+* Mass Spectrometry based annotation and dereplication <br/>
+* Metabolomics <br/>
+* Natural Products (Extraction, Isolation, Characterization)<br/>
 * Programmatic data treatment, ease with progamming (different languages) <br/>
 * Data oriented, knowledge management <br/>
 * Sensory analysis <br/>
 
-Publications
-======
-  <ul>{% for post in site.publications %}
-    {% include archive-single-cv.html %}
-  {% endfor %}</ul>
-
-Talks
+Advocacy
 ======
   <ul>{% for post in site.talks %}
     {% include archive-single-talk-cv.html %}
   {% endfor %}</ul>
 
-Teaching
+Leadership
 ======
   <ul>{% for post in site.teaching %}
     {% include archive-single-cv.html %}
   {% endfor %}</ul>
 
-Miscellaneous
+Scientific contribution
 ======
-
-* Artistic gymnastics trainer and national judge
+  <ul>{% for post in site.publications %}
+    {% include archive-single-cv.html %}
+  {% endfor %}</ul>
