@@ -11,6 +11,7 @@ redirect_from:
 
 Bio
 ======
+
 *Adriano Rutz* is a pharmacist. 
 After working with volatiles (GC-MS/GC-O) in the Analytical Research Laboratory and
 R&D department of Tradall SA (Bacardi group), 
@@ -19,7 +20,7 @@ group.
 He is now developing advanced LC-MS-based metabolite profiling methods and tools to assess phytochemical and
 sensorial profiles of complex plant extracts.
 
-Work experience
+Experience
 ======
 
 ## Teaching and research assistant at UNIGE (2017 - present)
@@ -27,39 +28,39 @@ Work experience
 Development of *LC-HRMS/MS* based approaches for comprehensive composition assessment of complex plant extracts.<br/>
 In depth annotation using Spectral Networking. Plant metabolomics. <br/>
 Teaching activities with Bachelor and Master students. <br/>
-Analytical instruments maintenance and optimization.
+Maintenance and optimization of analytical instruments (LC).
 
 ## Junior Research Chemist at Tradall (2016 - 2017)
 
-Work in analytical research and Research & Development laboratories following ISO norms. <br/>
+Working in analytical research and Research & Development laboratories following ISO norms. <br/>
 New products development, analytical and sensory characterization. <br/>
 In depth analysis of impact compounds, compounds evolution understanding. <br/>
-Analytical instruments maintenance.
+Maintenance and optimization of analytical instruments (GC).
 
 ## Assistant Pharmacist at Pharmacie de la Terrassière (2015 - 2016)
 
-Done as internship in the frame of Master's degree.
+Internship in the frame of Master's degree.
 
 Education
 ======
 
-## Ph.D in Pharmaceutical Sciences, UNIGE, (2017 - end 2021) (expected)
+## Ph.D. in Pharmaceutical Sciences, UNIGE (2017 - expected early 2022)
 
-## Master's degree, Pharmaceutical Sciences, UNIGE (2014 - 2016)
+## B.Sc. and M.Sc. in Pharmaceutical Sciences, UNIGE (2011 - 2016)
 
 Mention « *excellent* » for Master’s thesis « GC chiral separation of main enantiomeric compounds as a tool of Quality
 Control of some botanicals and related specific final product »
-
-## Bachelor's degree, Pharmaceutical Sciences, UNIGE (2011 - 2014)
 
 Skills
 ======
 * Mass Spectrometry based annotation and dereplication <br/>
 * Metabolomics <br/>
-* Natural Products (Extraction, Isolation, Characterization)<br/>
+* Natural Products chemistry (extraction, isolation, characterization)<br/>
 * Programmatic data treatment, ease with progamming (different languages) <br/>
 * Data oriented, knowledge management <br/>
 * Sensory analysis <br/>
+
+<br/>
 
 Leadership
 ======
