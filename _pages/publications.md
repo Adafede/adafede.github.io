@@ -13,6 +13,8 @@ author_profile: true
 
 ## Contributed publications:
 
+### [Targeted isolation of photoactive pigments from mushrooms yielded a highly potent new photosensitizer: 7,7′-biphyscion](https://doi.org/10.1038/s41598-022-04975-9)
+
 ### [Feature-Based Molecular Networking—An Exciting Tool to Spot Species of the Genus <i>Cortinarius</i> with Hidden Photosensitizers](https://doi.org/10.3390/metabo11110791)
 
 ### [Drug Repurposing to Identify a Synergistic High-Order Drug Combination to Treat Sunitinib-Resistant Renal Cell Carcinoma](https://doi.org/10.3390/cancers13163978)
