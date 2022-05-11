@@ -1,0 +1,13 @@
+---
+title: "The LOTUS Initiative for Open Natural Products Research: Knowledge Management through Wikidata"
+collection: talks
+type: "Talk"
+permalink: /talks/2021-10-INPCHEM
+venue: "i-npchem inaugural e-meeting"
+date: 2021-10-04
+# location: "Online"
+---
+
+Advocating to the i-NPChem community for the [LOTUS initiative](https://lotus.nprod.net/).
+
+You can find the presentation [here](https://lotusnprod.github.io/lotus-slides/20211004_inpchem/index.html).
