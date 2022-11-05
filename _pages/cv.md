@@ -12,44 +12,45 @@ redirect_from:
 Bio
 ======
 
-*Adriano Rutz* is a pharmacist. 
-After working with volatiles (GC-MS/GC-O) in the Analytical Research Laboratory and
-R&D department of Tradall SA (Bacardi group), 
-he started a PhD in Phytochemistry in Prof. Wolfender’s
-group. 
-He is now developing advanced LC-MS-based metabolite profiling methods and tools to assess phytochemical and
-sensorial profiles of complex plant extracts.
+*Adriano Rutz* is a pharmacist.
+After working in the analytical research laboratory and R&D department of Tradall SA (Bacardi Group), he obtained his PhD in phytochemistry at the University of Geneva.
+He is currently developing computational tools and strategies based on mass spectrometry to better understand the chemistry of Life.
 
 Experience
 ======
 
-## Teaching and research assistant at UNIGE (2017 - present)
+## Postdoctoral Researcher, ETH Zürich (2022 - present)
+
+Computational metabolomics at the Institute of Molecular Systems Biology.
+
+##  Research & Teaching Assistant, UNIGE  (2017 - 2022)
 
 Development of *LC-HRMS/MS* based approaches for comprehensive composition assessment of complex plant extracts.<br/>
 In depth annotation using Spectral Networking. Plant metabolomics. <br/>
 Teaching activities with Bachelor and Master students. <br/>
 Maintenance and optimization of analytical instruments (LC).
 
-## Junior Research Chemist at Tradall (2016 - 2017)
+## Junior Research Chemist, Tradall (2016 - 2017)
 
 Working in analytical research and Research & Development laboratories following ISO norms. <br/>
 New products development, analytical and sensory characterization. <br/>
 In depth analysis of impact compounds, compounds evolution understanding. <br/>
 Maintenance and optimization of analytical instruments (GC).
 
-## Assistant Pharmacist at Pharmacie de la Terrassière (2015 - 2016)
+## Assistant Pharmacist, Pharmacie de la Terrassière (2015 - 2016)
 
 Internship in the frame of Master's degree.
 
 Education
 ======
 
-## Ph.D. in Pharmaceutical Sciences, UNIGE (2017 - expected early 2022)
+## Ph.D. in Pharmaceutical Sciences, UNIGE (2017 - 2022)
+
+Thesis entitled « Integrative Analytical and Computational Strategies for Qualitative and Semi-quantitative Plant Metabolome Characterization »
 
 ## B.Sc. and M.Sc. in Pharmaceutical Sciences, UNIGE (2011 - 2016)
 
-Mention « *excellent* » for Master’s thesis « GC chiral separation of main enantiomeric compounds as a tool of Quality
-Control of some botanicals and related specific final product »
+Mention « *excellent* » for Master’s thesis « GC chiral separation of main enantiomeric compounds as a tool of Quality Control of some botanicals and related specific final product »
 
 Skills
 ======
