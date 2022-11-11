@@ -13,6 +13,8 @@ author_profile: true
 
 ## Contributed publications:
 
+### [*Inventa*: A computational tool to discover structural novelty in natural extracts libraries](https://doi.org/10.3389/fmolb.2022.1028334)
+
 ### [Combining Activity Profiling with Advanced Annotation to Accelerate the Discovery of Natural Products Targeting Oncogenic Signaling in Melanoma](https://doi.org/10.1021/acs.jnatprod.2c00146)
 
 ### [Targeted isolation of photoactive pigments from mushrooms yielded a highly potent new photosensitizer: 7,7′-biphyscion](https://doi.org/10.1038/s41598-022-04975-9)
