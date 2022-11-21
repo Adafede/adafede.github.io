@@ -13,6 +13,8 @@ author_profile: true
 
 ## Contributed publications:
 
+### [Unifying the identification of biomedical entities with the Bioregistry](https://doi.org/10.1038/s41597-022-01807-3)
+
 ### [*Inventa*: A computational tool to discover structural novelty in natural extracts libraries](https://doi.org/10.3389/fmolb.2022.1028334)
 
 ### [Combining Activity Profiling with Advanced Annotation to Accelerate the Discovery of Natural Products Targeting Oncogenic Signaling in Melanoma](https://doi.org/10.1021/acs.jnatprod.2c00146)
