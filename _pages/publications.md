@@ -13,6 +13,8 @@ author_profile: true
 
 ## Contributed publications:
 
+### [Metabolomics in Ecology and Bioactive Natural Products Discovery: Challenges and Prospects for a Comprehensive Study of the Specialised Metabolome](https://doi.org/10.2533/chimia.2022.954)
+
 ### [Unifying the identification of biomedical entities with the Bioregistry](https://doi.org/10.1038/s41597-022-01807-3)
 
 ### [*Inventa*: A computational tool to discover structural novelty in natural extracts libraries](https://doi.org/10.3389/fmolb.2022.1028334)
