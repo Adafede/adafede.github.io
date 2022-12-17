@@ -37,6 +37,9 @@ author_profile: true
 
 ### [Identification of Antifungal Compounds from the Root Bark of *Cordia anisophylla* J.S. Mill.](https://doi.org/10.21577/0103-5053.20180221)
 
+## Doctoral thesis:
+
+### [Integrative Analytical and Computational Strategies for Qualitative and Semi-quantitative Plant Metabolome Characterization](https://doi.org/10.13097/archive-ouverte/unige:165668)
 
 ## Publication profile on:
 
