@@ -13,9 +13,11 @@ author_profile: true
 
 ## Contributed publications:
 
-### 2022
+### 2023
 
 #### [Open and re-usable annotated mass spectrometry dataset of a chemodiverse collection of 1,600 plant extracts](https://doi.org/10.1093/gigascience/giac124)
+
+### 2022
 
 #### [Metabolomics in Ecology and Bioactive Natural Products Discovery: Challenges and Prospects for a Comprehensive Study of the Specialised Metabolome](https://doi.org/10.2533/chimia.2022.954)
 
