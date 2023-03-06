@@ -15,6 +15,8 @@ author_profile: true
 
 ### 2023
 
+#### [Phytochemical study of Alzatea verticillata, the sole species belonging to the Alzateaceae family](https://doi.org/10.3389/fntpr.2023.1147195)
+
 #### [Open and re-usable annotated mass spectrometry dataset of a chemodiverse collection of 1,600 plant extracts](https://doi.org/10.1093/gigascience/giac124)
 
 ### 2022
