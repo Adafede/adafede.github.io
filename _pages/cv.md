@@ -61,8 +61,6 @@ Skills
 * Data oriented, knowledge management <br/>
 * Sensory analysis <br/>
 
-<br/>
-
 Leadership
 ======
   <ul>{% for post in site.teaching reversed %}
