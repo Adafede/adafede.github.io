@@ -62,5 +62,3 @@ author_profile: true
 * **ORCID**: [https://orcid.org/0000-0003-0443-9902](https://orcid.org/0000-0003-0443-9902)
 
 * **Google Scholar**: [https://scholar.google.com/citations?user=8889AMkAAAAJ](https://scholar.google.com/citations?user=8889AMkAAAAJ)
-
-* **ResearchGate**: [https://www.researchgate.net/profile/Adriano_Rutz](https://www.researchgate.net/profile/Adriano_Rutz)
