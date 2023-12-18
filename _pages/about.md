@@ -9,9 +9,9 @@ redirect_from:
 ---
 
 *Adriano Rutz* is a pharmacist.
-After working in the analytical research laboratory and R&D department of Tradall SA (Bacardi Group), he obtained his PhD in phytochemistry at the University of Geneva, under the supervision of Professor Jean-Luc Wolfender.
-An advocate of open science and open data, he is the proud author of the [LOTUS initiative](https://doi.org/10.7554/eLife.70780), a new way of sharing knowledge in the field of natural products research.
-His current research focuses on the development of open informatics tools and mass spectrometry-based strategies to better understand the chemistry of living organisms.
+After working in the analytical research laboratory and R&D department of Tradall SA (Bacardi Group), he obtained his PhD in phytochemistry at the University of Geneva.
+An advocate of open science and [open data](https://akademien-schweiz.ch/en/current/news/adriano-rutz-gewinnt-ersten-schweizer-ord-preis), he is the proud author of the [LOTUS initiative](https://doi.org/10.7554/eLife.70780), a new way of sharing knowledge in natural products research.
+He is currently developing open computational tools and mass spectrometry-based strategies to better understand the chemistry of living organisms.
 
 ## Studied topics
 
