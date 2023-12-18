@@ -1,5 +1,5 @@
 ---
-title: "Artistic gymnastic trainer and national judge"
+title: "Artistic gymnastics trainer and national judge"
 collection: teaching
 type: "Sports"
 permalink: /teaching/2019-09-gymnastics
@@ -11,7 +11,7 @@ location: "Geneva, Switzerland"
 Description
 ======
 
-* Artistic gymnastic trainer, with kids from 5 to 12 years
+* Artistic gymnastics trainer, with kids from 5 to 12 years
 
 * Federal recognition "Moniteur Jeunesse+Sport" (re-assessed each 2 years)
 
