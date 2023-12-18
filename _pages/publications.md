@@ -15,7 +15,11 @@ author_profile: true
 
 ### 2023
 
-#### [Phytochemical study of Alzatea verticillata, the sole species belonging to the Alzateaceae family](https://doi.org/10.3389/fntpr.2023.1147195)
+#### [MicrobeMASST: a taxonomically informed mass spectrometry search tool for microbial metabolomics data](https://doi.org/10.1038/s41564-023-01575-9)
+
+#### [Comparative metabolomics of fungal foliar endophytes and their long-lived host *Astrocaryum sciophilum*: a model for exploring the chemodiversity of host-microbe interactions](https://doi.org/10.3389/fpls.2023.1278745)
+
+#### [Phytochemical study of *Alzatea verticillata*, the sole species belonging to the Alzateaceae family](https://doi.org/10.3389/fntpr.2023.1147195)
 
 #### [Open and re-usable annotated mass spectrometry dataset of a chemodiverse collection of 1,600 plant extracts](https://doi.org/10.1093/gigascience/giac124)
 
@@ -33,7 +37,7 @@ author_profile: true
 
 ### 2021
 
-#### [Feature-Based Molecular Networking—An Exciting Tool to Spot Species of the Genus <i>Cortinarius</i> with Hidden Photosensitizers](https://doi.org/10.3390/metabo11110791)
+#### [Feature-Based Molecular Networking—An Exciting Tool to Spot Species of the Genus *Cortinarius* with Hidden Photosensitizers](https://doi.org/10.3390/metabo11110791)
 
 #### [Drug Repurposing to Identify a Synergistic High-Order Drug Combination to Treat Sunitinib-Resistant Renal Cell Carcinoma](https://doi.org/10.3390/cancers13163978)
 
