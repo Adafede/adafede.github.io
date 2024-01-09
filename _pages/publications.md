@@ -13,9 +13,11 @@ author_profile: true
 
 ## Contributed publications:
 
-### 2023
+### 2024
 
 #### [MicrobeMASST: a taxonomically informed mass spectrometry search tool for microbial metabolomics data](https://doi.org/10.1038/s41564-023-01575-9)
+
+### 2023
 
 #### [Comparative metabolomics of fungal foliar endophytes and their long-lived host *Astrocaryum sciophilum*: a model for exploring the chemodiversity of host-microbe interactions](https://doi.org/10.3389/fpls.2023.1278745)
 
