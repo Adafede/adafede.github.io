@@ -15,6 +15,8 @@ author_profile: true
 
 ### 2024
 
+#### [A Sample-Centric and Knowledge-Driven Computational Framework for Natural Products Drug Discovery](https://doi.org/10.1021/acscentsci.3c00800)
+
 #### [MicrobeMASST: a taxonomically informed mass spectrometry search tool for microbial metabolomics data](https://doi.org/10.1038/s41564-023-01575-9)
 
 ### 2023
