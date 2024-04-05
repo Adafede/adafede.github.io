@@ -13,9 +13,14 @@ Bio
 ======
 
 *Adriano Rutz* is a pharmacist.
-After working in the analytical research laboratory and R&D department of Tradall SA (Bacardi Group), he obtained his PhD in phytochemistry at the University of Geneva.
-An advocate of open science and [open data](https://akademien-schweiz.ch/en/current/news/adriano-rutz-gewinnt-ersten-schweizer-ord-preis), he is the proud author of the [LOTUS initiative](https://doi.org/10.7554/eLife.70780), a new way of sharing knowledge in natural products research.
-He is currently developing open computational tools and mass spectrometry-based strategies to better understand the chemistry of living organisms.
+After working in the analytical research laboratory and R&D department of Tradall SA (Bacardi Group), he obtained his
+PhD in phytochemistry at the University of Geneva.
+An advocate of open science
+and [open data](https://akademien-schweiz.ch/en/current/news/adriano-rutz-gewinnt-ersten-schweizer-ord-preis), he is the
+proud author of the [LOTUS initiative](https://doi.org/10.7554/eLife.70780), a new way of sharing knowledge in natural
+products research.
+He is currently developing open computational tools and mass spectrometry-based strategies to better understand the
+chemistry of living organisms.
 
 
 Experience
@@ -25,7 +30,7 @@ Experience
 
 Computational metabolomics at the Institute of Molecular Systems Biology.
 
-##  Research & Teaching Assistant, UNIGE  (2017 - 2022)
+## Research & Teaching Assistant, UNIGE  (2017 - 2022)
 
 Development of *LC-HRMS/MS* based approaches for comprehensive composition assessment of complex plant extracts.<br/>
 In depth annotation using Spectral Networking. Plant metabolomics. <br/>
@@ -48,14 +53,17 @@ Education
 
 ## Ph.D. in Pharmaceutical Sciences, UNIGE (2017 - 2022)
 
-Thesis entitled « Integrative Analytical and Computational Strategies for Qualitative and Semi-quantitative Plant Metabolome Characterization »
+Thesis entitled « Integrative Analytical and Computational Strategies for Qualitative and Semi-quantitative Plant
+Metabolome Characterization »
 
 ## B.Sc. and M.Sc. in Pharmaceutical Sciences, UNIGE (2011 - 2016)
 
-Mention « *excellent* » for Master’s thesis « GC chiral separation of main enantiomeric compounds as a tool of Quality Control of some botanicals and related specific final product »
+Mention « *excellent* » for Master’s thesis « GC chiral separation of main enantiomeric compounds as a tool of Quality
+Control of some botanicals and related specific final product »
 
 Skills
 ======
+
 * Mass Spectrometry based annotation and dereplication <br/>
 * Metabolomics <br/>
 * Natural Products chemistry (extraction, isolation, characterization)<br/>

@@ -8,7 +8,7 @@ author_profile: true
 {% include base_path %}
 
 {% for post in site.publications reversed %}
-  {% include archive-single.html %}
+{% include archive-single.html %}
 {% endfor %}
 
 ## Contributed publications:
@@ -66,7 +66,7 @@ author_profile: true
 ## Publication profile on:
 
 * **Scholia**: [https://scholia.toolforge.org/author/Q97455964](https://scholia.toolforge.org/author/Q97455964)
- 
+
 * **ORCID**: [https://orcid.org/0000-0003-0443-9902](https://orcid.org/0000-0003-0443-9902)
 
 * **Google Scholar**: [https://scholar.google.com/citations?user=8889AMkAAAAJ](https://scholar.google.com/citations?user=8889AMkAAAAJ)
