@@ -8,4 +8,4 @@ date: 2021-10-04
 ---
 
 Advocating to the i-NPChem community for
-the [LOTUS initiative](https://lotus.nprod.net/). [Available here](https://lotusnprod.github.io/lotus-slides/20211004_inpchem/index.html)
+the [LOTUS initiative](https://lotus.nprod.net/). [Available here](https://lotus.nprod.net/lotus-presentations/20211004_inpchem/index.html)

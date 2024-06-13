@@ -15,14 +15,19 @@ var addressPoints = [
     11.3927685
   ],
   [
+    "Bern, Switzerland",
+    46.9484742,
+    7.4521749
+  ],
+  [
     "Saclay, France",
     48.7305162,
     2.172576
   ],
   [
     "Prague, Czech Republic",
-    50.0596288,
-    14.446459273258009
+    50.0874654,
+    14.4212535
   ],
   [
     "Jena, Germany",
