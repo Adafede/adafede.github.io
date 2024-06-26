@@ -61,12 +61,23 @@ Metabolome Characterization »
 Mention « *excellent* » for Master’s thesis « GC chiral separation of main enantiomeric compounds as a tool of Quality
 Control of some botanicals and related specific final product »
 
+Awards
+======
+
+## Swiss National ORD Prize (2023)
+
+Awarded for the LOTUS initiative. See more at <https://akademien-schweiz.ch/en/medien/press-releases/2023/adriano-rutz-gewinnt-ersten-schweizer-ord-preis/>.
+
+## Dr. Willmar-Schwabe-Young-Talent-Prize (2023)
+
+Awarded for the LOTUS initiative. See more at <https://ga-online.org/dr-willmar-schwabe-young-talent-prize-2023-for-adriano-rutz/>.
+
 Skills
 ======
 
-* Mass Spectrometry based annotation and dereplication <br/>
+* Mass spectrometry based annotation, dereplication <br/>
 * Metabolomics <br/>
-* Natural Products chemistry (extraction, isolation, characterization)<br/>
+* Natural products chemistry (extraction, isolation, characterization)<br/>
 * Programmatic data treatment, ease with progamming (different languages) <br/>
 * Data oriented, knowledge management <br/>
 * Sensory analysis <br/>
