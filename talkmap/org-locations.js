@@ -5,6 +5,11 @@ var addressPoints = [
     11.1867187
   ],
   [
+    "Saint-R\u00e9my-l\u00e8s-Chevreuse, France",
+    48.7054888,
+    2.071109
+  ],
+  [
     "Z\u00fcrich, Switzerland",
     47.3744489,
     8.5410422
@@ -26,8 +31,8 @@ var addressPoints = [
   ],
   [
     "Prague, Czech Republic",
-    50.0874654,
-    14.4212535
+    50.0596288,
+    14.446459273258009
   ],
   [
     "Jena, Germany",
