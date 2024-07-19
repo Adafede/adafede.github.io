@@ -8,8 +8,7 @@ redirect_from:
   - /about.html
 ---
 
-*Adriano Rutz* is a pharmacist.
-After working in the analytical research laboratory and R&D department of Tradall SA (Bacardi Group), he obtained his
+*Adriano Rutz* is a pharmacologist. After working in the analytical research laboratory and R&D department of Tradall SA (Bacardi Group), he obtained his
 PhD in phytochemistry at the University of Geneva.
 An advocate of open science
 and [open data](https://akademien-schweiz.ch/en/current/news/adriano-rutz-gewinnt-ersten-schweizer-ord-preis), he is the
