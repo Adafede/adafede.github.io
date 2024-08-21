@@ -75,11 +75,12 @@ Awarded for the LOTUS initiative. See more at <https://ga-online.org/dr-willmar-
 Skills
 ======
 
-* Mass spectrometry based annotation, dereplication <br/>
-* Metabolomics <br/>
-* Natural products chemistry (extraction, isolation, characterization)<br/>
-* Programmatic data treatment, ease with progamming (different languages) <br/>
+* Bio/Chemoinformatics <br/>
 * Data oriented, knowledge management <br/>
+* Mass spectrometry <br/>
+* Metabolomics <br/>
+* Natural products chemistry <br/>
+* Scientific software programing (different languages) <br/>
 * Sensory analysis <br/>
 
 Leadership
