@@ -15,8 +15,7 @@ author_profile: true
 
 ### 2024
 
-#### [MIBiG 4.0: advancing biosynthetic gene cluster curation
-through global collaboration](https://doi.org/10.1093/nar/gkae1115)
+#### [MIBiG 4.0: advancing biosynthetic gene cluster curation through global collaboration](https://doi.org/10.1093/nar/gkae1115)
 
 #### [Untargeted metabolomics analyses to identify a new sweet compound released during post-fermentation maceration of wine.](https://doi.org/10.1016/j.foodchem.2024.140801_bb0005)
 
