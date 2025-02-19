@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     # https://docs.github.com/en/actions/using-jobs/assigning-permissions-to-jobs
     permissions:
+      actions: write
       contents: write
       pull-requests: write
 
