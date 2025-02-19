@@ -12,8 +12,17 @@ jobs:
     # https://docs.github.com/en/actions/using-jobs/assigning-permissions-to-jobs
     permissions:
       actions: write
+      attestations: write
+      checks: write
       contents: write
+      deployments: write
+      id-token: write|none
+      issues: read|write|none
+      packages: write
+      pages: write
       pull-requests: write
+      repository-projects: write
+      statuses: write
 
     steps:
       # To use this repository's private action, you must check out the repository
