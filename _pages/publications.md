@@ -13,6 +13,10 @@ author_profile: true
 
 ## Contributed publications:
 
+### 2025
+
+#### [Discovery of metabolites prevails amid in-source fragmentation](https://doi.org/10.1038/s42255-025-01239-4)
+
 ### 2024
 
 #### [MIBiG 4.0: advancing biosynthetic gene cluster curation through global collaboration](https://doi.org/10.1093/nar/gkae1115)
