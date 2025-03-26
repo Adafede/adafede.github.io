@@ -11,7 +11,7 @@ author_profile: true
 {% include archive-single.html %}
 {% endfor %}
 
-## Publication profile on:
+## Publication profiles
 
 * **Scholia**: <https://scholia.toolforge.org/author/Q97455964>
 
@@ -19,7 +19,7 @@ author_profile: true
 
 * **Google Scholar**: <https://scholar.google.com/citations?user=8889AMkAAAAJ>
 
-## Doctoral thesis:
+## Doctoral thesis
 
 ### [Integrative Analytical and Computational Strategies for Qualitative and Semi-quantitative Plant Metabolome Characterization](https://doi.org/10.13097/archive-ouverte/unige:165668)
 
