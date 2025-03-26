@@ -11,11 +11,33 @@ author_profile: true
 {% include archive-single.html %}
 {% endfor %}
 
-## Contributed publications:
+## Publication profile on:
+
+* **Scholia**: <https://scholia.toolforge.org/author/Q97455964>
+
+* **ORCID**: <https://orcid.org/0000-0003-0443-9902>
+
+* **Google Scholar**: <https://scholar.google.com/citations?user=8889AMkAAAAJ>
+
+## Doctoral thesis:
+
+### [Integrative Analytical and Computational Strategies for Qualitative and Semi-quantitative Plant Metabolome Characterization](https://doi.org/10.13097/archive-ouverte/unige:165668)
+
+## Joint first authorship
 
 ### 2025
 
 #### [Discovery of metabolites prevails amid in-source fragmentation](https://doi.org/10.1038/s42255-025-01239-4)
+
+### 2022
+
+#### [Combining Activity Profiling with Advanced Annotation to Accelerate the Discovery of Natural Products Targeting Oncogenic Signaling in Melanoma](https://doi.org/10.1021/acs.jnatprod.2c00146)
+
+### 2019
+
+#### [Taxonomically Informed Scoring Enhances Confidence in Natural Products Annotation](https://doi.org/10.3389/fpls.2019.01329)
+
+## Contributed publications
 
 ### 2024
 
@@ -43,8 +65,6 @@ author_profile: true
 
 #### [*Inventa*: A computational tool to discover structural novelty in natural extracts libraries](https://doi.org/10.3389/fmolb.2022.1028334)
 
-#### [Combining Activity Profiling with Advanced Annotation to Accelerate the Discovery of Natural Products Targeting Oncogenic Signaling in Melanoma](https://doi.org/10.1021/acs.jnatprod.2c00146)
-
 #### [Targeted isolation of photoactive pigments from mushrooms yielded a highly potent new photosensitizer: 7,7′-biphyscion](https://doi.org/10.1038/s41598-022-04975-9)
 
 ### 2021
@@ -67,14 +87,3 @@ author_profile: true
 
 #### [Identification of Antifungal Compounds from the Root Bark of *Cordia anisophylla* J.S. Mill.](https://doi.org/10.21577/0103-5053.20180221)
 
-## Doctoral thesis:
-
-### [Integrative Analytical and Computational Strategies for Qualitative and Semi-quantitative Plant Metabolome Characterization](https://doi.org/10.13097/archive-ouverte/unige:165668)
-
-## Publication profile on:
-
-* **Scholia**: [https://scholia.toolforge.org/author/Q97455964](https://scholia.toolforge.org/author/Q97455964)
-
-* **ORCID**: [https://orcid.org/0000-0003-0443-9902](https://orcid.org/0000-0003-0443-9902)
-
-* **Google Scholar**: [https://scholar.google.com/citations?user=8889AMkAAAAJ](https://scholar.google.com/citations?user=8889AMkAAAAJ)
