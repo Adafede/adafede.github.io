@@ -1,21 +1,15 @@
-# Base image: Ruby with necessary dependencies for Jekyll
-FROM ruby:3.4
+FROM ruby:3.4-alpine
 
-# Install dependencies
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    nodejs \
-    && rm -rf /var/lib/apt/lists/*
+RUN apk add --no-cache \
+    build-base \
+    nodejs
 
-# Set the working directory inside the container
 WORKDIR /usr/src/app
 
-# Copy Gemfile into the container (necessary for `bundle install`)
 COPY Gemfile ./
 
-# Install bundler and dependencies
-RUN gem install bundler:2.3.26 && bundle install
+RUN gem install bundler:2.3.26 && \
+    bundle config set --local path 'vendor/bundle' && \
+    bundle install --jobs 4 --retry 3
 
-# Command to serve the Jekyll site
 CMD ["jekyll", "serve", "-H", "0.0.0.0", "-w", "--config", "_config.yml,_config_docker.yml"]
-
