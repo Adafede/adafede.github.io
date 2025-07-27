@@ -1,0 +1,57 @@
+{
+  "Prague, Czech Republic": {
+    "latitude": 50.0874654,
+    "longitude": 14.4212535,
+    "address": "Hlavn\u00ed m\u011bsto Praha, Praha, \u010cesko"
+  },
+  "Saint-R\u00e9my-l\u00e8s-Chevreuse, France": {
+    "latitude": 48.7054888,
+    "longitude": 2.071109,
+    "address": "Saint-R\u00e9my-l\u00e8s-Chevreuse, Rambouillet, Yvelines, \u00cele-de-France, France m\u00e9tropolitaine, 78470, France"
+  },
+  "Bern, Switzerland": {
+    "latitude": 46.9484742,
+    "longitude": 7.4521749,
+    "address": "Bern, Verwaltungskreis Bern-Mittelland, Verwaltungsregion Bern-Mittelland, Bern/Berne, Schweiz/Suisse/Svizzera/Svizra"
+  },
+  "Prague, Czech Republic\"": {
+    "latitude": 50.0874654,
+    "longitude": 14.4212535,
+    "address": "Hlavn\u00ed m\u011bsto Praha, Praha, \u010cesko"
+  },
+  "Innsbruck, Austria": {
+    "latitude": 47.2654296,
+    "longitude": 11.3927685,
+    "address": "Innsbruck, Tirol, \u00d6sterreich"
+  },
+  "Z\u00fcrich, Switzerland": {
+    "latitude": 47.3744489,
+    "longitude": 8.5410422,
+    "address": "Z\u00fcrich, Bezirk Z\u00fcrich, Z\u00fcrich, Schweiz/Suisse/Svizzera/Svizra"
+  },
+  "Dublin, Ireland": {
+    "latitude": 53.3493795,
+    "longitude": -6.2605593,
+    "address": "Dublin, County Dublin, Leinster, \u00c9ire / Ireland"
+  },
+  "Saclay, France": {
+    "latitude": 48.7305162,
+    "longitude": 2.172576,
+    "address": "Saclay, Palaiseau, Essonne, \u00cele-de-France, France m\u00e9tropolitaine, 91400, France"
+  },
+  "Jena, Germany": {
+    "latitude": 50.9281717,
+    "longitude": 11.5879359,
+    "address": "Jena, Th\u00fcringen, Deutschland"
+  },
+  "Napoli, Italy": {
+    "latitude": 40.8358846,
+    "longitude": 14.2487679,
+    "address": "Napoli, Campania, Italia"
+  },
+  "Seefeld, Austria": {
+    "latitude": 47.3289241,
+    "longitude": 11.1867187,
+    "address": "Seefeld in Tirol, Bezirk Innsbruck-Land, Tirol, 6100, \u00d6sterreich"
+  }
+}
