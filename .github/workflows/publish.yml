@@ -43,8 +43,6 @@ jobs:
 
       - name: Build site
         run: |
-          quarto install extension schochastics/academicons
-          quarto install extension schochastics/classic-cv
           uv run quarto render
 
       - name: Deploy to GitHub pages 🚀
