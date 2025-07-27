@@ -41,15 +41,6 @@ jobs:
 
       - uses: quarto-dev/quarto-actions/setup@v2
 
-      - name: Get Script
-        run: curl -OLs https://eddelbuettel.github.io/r-ci/run.sh && chmod 0755 run.sh
-
-      - name: Bootstrap
-        run: ./run.sh bootstrap
-
-      - name: Dependencies
-        run: ./run.sh install_all
-
       - name: Build site
         run: uv run quarto render
 
