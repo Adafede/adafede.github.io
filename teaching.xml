@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>Adriano Rutz</title>
+<link>https://adafede.github.io/teaching.html</link>
+<atom:link href="https://adafede.github.io/teaching.xml" rel="self" type="application/rss+xml"/>
+<description>Personal website of Adriano Rutz</description>
+<generator>quarto-1.7.32</generator>
+<lastBuildDate>Wed, 01 Mar 2023 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Metabolomics block course</title>
+  <link>https://adafede.github.io/teaching/2023_blockcourse.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="topics" class="level2">
+<h2 class="anchored" data-anchor-id="topics">Topics</h2>
+<ul>
+<li><p>The course covers all basic aspects of metabolome measurements, from sample sampling to mass spectrometry and data analysis. Participants work in groups and independently perform and interpret metabolomic experiments.</p></li>
+<li><p>Performing and reporting a metabolomic experiment, understanding pro and cons of mass spectrometry based metabolomics. Knowledge of workflows and tools to assist experiment interpretation, and metabolite identification.</p></li>
+</ul>
+
+
+</section>
+
+ ]]></description>
+  <category>Teaching</category>
+  <guid>https://adafede.github.io/teaching/2023_blockcourse.html</guid>
+  <pubDate>Wed, 01 Mar 2023 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Advanced Course on Mass Spectrometry</title>
+  <dc:creator>Adriano Rutz</dc:creator>
+  <dc:creator>Jean-Luc Wolfender</dc:creator>
+  <link>https://adafede.github.io/teaching/2019_NAPOLI.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="topics" class="level2">
+<h2 class="anchored" data-anchor-id="topics">Topics</h2>
+<ul>
+<li><p>Mass spectrometry data preprocessing: Principle of Multivariate data analysis</p></li>
+<li><p>Efficient visualisation of complex metabolite profiles with molecular networks</p></li>
+<li><p>Automated metabolite annotation in combination with molecular networks</p></li>
+</ul>
+
+
+</section>
+
+ ]]></description>
+  <category>Teaching</category>
+  <guid>https://adafede.github.io/teaching/2019_NAPOLI.html</guid>
+  <pubDate>Mon, 14 Oct 2019 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Phytochemistry practicals</title>
+  <link>https://adafede.github.io/teaching/2017_practicals.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="topics" class="level2">
+<h2 class="anchored" data-anchor-id="topics">Topics</h2>
+<ul>
+<li><p>Extraction of an essential oil according to the European Pharmacopea</p></li>
+<li><p>Gas Chromatography - Flame Ionization Detection analysis as a tool for quality control</p></li>
+<li><p>Notions of method optimization</p></li>
+</ul>
+
+
+</section>
+
+ ]]></description>
+  <category>Teaching</category>
+  <guid>https://adafede.github.io/teaching/2017_practicals.html</guid>
+  <pubDate>Fri, 15 Sep 2017 00:00:00 GMT</pubDate>
+</item>
+</channel>
+</rss>

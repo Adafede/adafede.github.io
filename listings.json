@@ -1,0 +1,18 @@
+[
+  {
+    "listing": "/articles.html",
+    "items": [
+      "/articles/first/2025-04-05_sapid.html",
+      "/articles/first/2023-11-10_cascade.html",
+      "/articles/first/2022-05-26_lotus.html"
+    ]
+  },
+  {
+    "listing": "/teaching.html",
+    "items": [
+      "/teaching/2023_blockcourse.html",
+      "/teaching/2019_NAPOLI.html",
+      "/teaching/2017_practicals.html"
+    ]
+  }
+]

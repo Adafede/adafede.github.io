@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>Adriano Rutz</title>
+<link>https://adafede.github.io/articles.html</link>
+<atom:link href="https://adafede.github.io/articles.xml" rel="self" type="application/rss+xml"/>
+<description>Personal website of Adriano Rutz</description>
+<generator>quarto-1.7.32</generator>
+<lastBuildDate>Sat, 05 Apr 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>SAPID: a Strategy to Analyze Plant Extracts Taste In Depth. Application to the complex taste of Swertia chirayita (Roxb.) H.Karst.</title>
+  <link>https://adafede.github.io/articles/first/2025-04-05_sapid.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="ref-Rutz2025" class="csl-entry">
+Rutz, Adriano, Pascale Deneulin, Ivano Tonutti, Benoît Bach, and Jean-Luc Wolfender. 2025. <span>“SAPID: A Strategy to Analyze Plant Extracts Taste in Depth. Application to the Complex Taste of Swertia Chirayita (Roxb.) h.karst.”</span> <em>Current Research in Food Science</em> 10: 101043. <a href="https://doi.org/10.1016/j.crfs.2025.101043">https://doi.org/10.1016/j.crfs.2025.101043</a>.
+</div>
+</div></section></div> ]]></description>
+  <category>Metabolomics</category>
+  <category>Liquid Chromatography-Mass Spectrometry</category>
+  <category>Natural Extracts</category>
+  <category>Taste</category>
+  <guid>https://adafede.github.io/articles/first/2025-04-05_sapid.html</guid>
+  <pubDate>Sat, 05 Apr 2025 00:00:00 GMT</pubDate>
+  <media:content url="https://raw.githubusercontent.com/Adafede/sapid/refs/heads/main/man/figures/sapid-workflow.svg" medium="image" type="image/svg+xml"/>
+</item>
+<item>
+  <title>Automated Composition Assessment of Natural Extracts: Untargeted Mass Spectrometry-Based Metabolite Profiling Integrating Semiquantitative Detection</title>
+  <link>https://adafede.github.io/articles/first/2023-11-10_cascade.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="ref-Rutz2023" class="csl-entry">
+Rutz, Adriano, and Jean-Luc Wolfender. 2023. <span>“Automated Composition Assessment of Natural Extracts: Untargeted Mass Spectrometry-Based Metabolite Profiling Integrating Semiquantitative Detection.”</span> <em>Journal of Agricultural and Food Chemistry</em> 71 (46): 18010–23. <a href="https://doi.org/10.1021/acs.jafc.3c03099">https://doi.org/10.1021/acs.jafc.3c03099</a>.
+</div>
+</div></section></div> ]]></description>
+  <category>Metabolomics</category>
+  <category>Charged Aerosol Detector</category>
+  <category>Chemical Composition</category>
+  <category>Liquid Chromatography-Mass Spectrometry</category>
+  <category>Natural Extracts</category>
+  <category>Natural Products</category>
+  <category>Metabolite Annotation</category>
+  <guid>https://adafede.github.io/articles/first/2023-11-10_cascade.html</guid>
+  <pubDate>Fri, 10 Nov 2023 00:00:00 GMT</pubDate>
+  <media:content url="https://raw.githubusercontent.com/Adafede/cascade/refs/heads/main/man/figures/cascade-workflow.svg" medium="image" type="image/svg+xml"/>
+</item>
+<item>
+  <title>The LOTUS initiative for open knowledge management in natural products research</title>
+  <link>https://adafede.github.io/articles/first/2022-05-26_lotus.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="ref-Rutz2022" class="csl-entry">
+Rutz, Adriano, Maria Sorokina, Jakub Galgonek, Daniel Mietchen, Egon Willighagen, Arnaud Gaudry, James G Graham, et al. 2022. <span>“The LOTUS Initiative for Open Knowledge Management in Natural Products Research.”</span> <em>eLife</em> 11 (May). <a href="https://doi.org/10.7554/elife.70780">https://doi.org/10.7554/elife.70780</a>.
+</div>
+</div></section></div> ]]></description>
+  <category>LOTUS</category>
+  <category>Natural Products</category>
+  <category>Open Science</category>
+  <category>Wikidata</category>
+  <category>Knowledge Graph</category>
+  <guid>https://adafede.github.io/articles/first/2022-05-26_lotus.html</guid>
+  <pubDate>Thu, 26 May 2022 00:00:00 GMT</pubDate>
+  <media:content url="https://upload.wikimedia.org/wikipedia/commons/f/f1/Lotus_initiative_1_graphical_abstract.svg" medium="image" type="image/svg+xml"/>
+</item>
+</channel>
+</rss>
