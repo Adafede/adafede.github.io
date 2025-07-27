@@ -40,6 +40,8 @@ jobs:
       - uses: astral-sh/setup-uv@v6
 
       - uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          tinytex: true
 
       - name: Build site
         run: |
