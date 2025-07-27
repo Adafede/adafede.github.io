@@ -28,8 +28,6 @@ format:
 :::{#talks}
 :::
 
-## 🌍 Leaflet Map of Talk Locations
-
 ```{python}
 #| echo: false
 
