@@ -1,0 +1,33 @@
+---
+author: 
+  name: Adriano Rutz
+  orcid: 0000-0003-0443-9902
+title: Pharmaceutical Scientist
+format:
+  html: default
+  classic-cv-pdf: default
+cvfooter: 
+  left: "website: https://adafede.github.io"
+  right: "email: adriano.rutz@ik.me"
+cvcolor: 58748F # without `#`
+cvmeta:
+  - title: Status
+    left: Postdoctoral Researcher, ETH Zürich
+    right: Zürich, Switzerland
+  - title: Field
+    left: Metabolomics, Mass Spectrometry, Natural Products
+    right: "email: adriano.rutz@ik.me"
+  - title: Languages
+    left: French (C2), English (C1), German (C1), Italian (C1)
+    right: "website: https://adafede.github.io"
+---
+
+{{< include cv/bio.qmd >}}
+
+{{< include cv/experience.qmd >}}
+
+{{< include cv/education.qmd >}}
+
+{{< include cv/awards.qmd >}}
+
+{{< include cv/sports.qmd >}}

@@ -1,0 +1,49 @@
+project:
+  type: website
+  render:
+    - "404.qmd"
+    - "index.qmd"
+    - "cv.qmd"
+    - "articles.qmd"
+    - "articles/**/*.qmd"
+    - "talks.qmd"
+    - "talks/*.qmd"
+    - "teaching.qmd"
+    - "teaching/*.qmd"
+
+website:
+  title: "Adriano Rutz"
+  description: "Personal website of Adriano Rutz"
+  site-path: "./"
+  site-url: https://adafede.github.io
+  favicon: images/favicon/favicon.ico
+  repo-url: https://github.com/adafede/adafede.github.io
+  search:
+    location: navbar
+  open-graph:
+    locale: en
+    site-name: https://adafede.github.io
+  navbar:
+    left:
+      - text: "CV"
+        aria-label: "Curriculum vitæ"
+        href: cv.qmd
+      - text: "Articles"
+        aria-label: "Articles"
+        href: articles.qmd
+      - text: "Talks"
+        aria-label: "Talks"
+        href: talks.qmd
+      - text: "Teaching"
+        aria-label: "Teaching"
+        href: teaching.qmd
+
+format:
+  html:
+    grid:
+      body-width: 1200px
+    theme:
+      light: flatly
+      dark: darkly
+    respect-user-color-scheme: true
+    smooth-scroll: true

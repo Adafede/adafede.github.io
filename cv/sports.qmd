@@ -1,0 +1,5 @@
+## Sports
+
+{{< include cv/sports/2009_egag.qmd >}}
+
+{{< include cv/sports/2009_stv.qmd >}}

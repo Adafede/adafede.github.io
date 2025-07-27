@@ -1,0 +1,39 @@
+---
+title: Prior knowledge as a compass guiding untargeted metabolomics
+venue: Swiss Metabolomics Society Annual Meeting
+date: '2023-09-15'
+location: Zürich, Switzerland
+# image: ""
+# image-alt: ""
+categories:
+  - Poster
+author: 
+- name: 
+    given: Adriano 
+    family: Rutz
+  orcid: 0000-0003-0443-9902
+  number: 1
+  affiliations:
+    - ref: ethz
+- name: 
+    given: Nicola 
+    family: Zamboni
+  orcid: 0000-0003-1271-1021
+  number: 2
+  corresponding: true
+  email: nzamboni@ethz.ch
+  affiliations:
+    - ref: ethz
+affiliations:
+  - id: ethz
+    number: 1
+    name: ETH Zürich
+    department: Institute for Molecular Systems Biology
+    group: Zamboni
+    address: Otto-Stern-Weg, 3
+    city: Zürich
+    country: Switzerland
+    postal-code: 8093
+description: |
+  Poster presented at the [Swiss Metabolomics Society Annual Meeting](https://swiss-metabolomics.ch/annual-meeting).
+---
