@@ -1,0 +1,147 @@
+---
+title: Talks
+listing: 
+  - id: talks
+    contents: "talks/*.qmd"
+    sort: date desc
+    categories: true
+    feed: true
+    sort-ui: true
+    filter-ui: true
+    fields: 
+      - title
+      - description
+      - author
+      - venue
+      - location
+      - categories
+      - image
+      - image-alt
+      - doi
+      - date
+format:
+  html:
+    embed-resources: true
+    self-contained: true
+---
+
+:::{#talks}
+:::
+
+## 🌍 Leaflet Map of Talk Locations
+
+```{python}
+#| echo: false
+
+import json
+import markdown
+import yaml
+from pathlib import Path
+from time import sleep
+from geopy import Nominatim
+from ipyleaflet import Map, Marker, basemaps, basemap_to_tiles, MarkerCluster, Popup
+from ipywidgets import HTML
+import logging
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+# === Config ===
+TALKS_DIR = "talks"
+CACHE_FILE = "_cache/geocache.json"
+
+cache_path = Path(CACHE_FILE)
+if cache_path.exists():
+    with cache_path.open("r", encoding="utf-8") as f:
+        cache = json.load(f)
+else:
+    cache = {}
+
+geocoder = Nominatim(user_agent="talk_map_ipyleaflet")
+
+# We'll collect tuples: (lat, lon, metadata_dict)
+locations_with_meta = []
+
+for md_file in Path(TALKS_DIR).glob("*.qmd"):
+    text = md_file.read_text(encoding="utf-8")
+    if text.startswith("---"):
+        end = text.find("---", 3)
+        if end != -1:
+            yaml_text = text[3:end].strip()
+            meta = yaml.safe_load(yaml_text)
+            location = meta.get("location", None)
+            if location:
+                location = location.strip()
+            else:
+                continue
+        else:
+            continue
+    else:
+        continue
+
+    if location in cache:
+        geo = cache[location]
+        lat, lon = geo['latitude'], geo['longitude']
+    else:
+        try:
+            geo_info = geocoder.geocode(location)
+            if not geo_info:
+                logger.warning(f"⚠️ Not found: {location}")
+                continue
+            lat, lon = geo_info.latitude, geo_info.longitude
+            cache[location] = {
+                "latitude": lat,
+                "longitude": lon,
+                "address": geo_info.address
+            }
+            sleep(1)  # respect Nominatim usage policy
+        except Exception as e:
+            logger.error(f"❌ Error geocoding {location}: {e}")
+            continue
+
+    # Save tuple with metadata for later marker creation
+    locations_with_meta.append((lat, lon, meta))
+
+with cache_path.open("w", encoding="utf-8") as f:
+    json.dump(cache, f, indent=2)
+
+default_center = (locations_with_meta[0][0], locations_with_meta[0][1]) if locations_with_meta else (0, 0)
+
+m = Map(
+    center=default_center,
+)
+
+markers = []
+for lat, lon, meta in locations_with_meta:
+    title = f"<b>{meta.get('title', 'No title')}</b>"
+    
+    parts = []
+    if meta.get("venue"):
+        parts.append(f"Venue: {meta['venue']}")
+    if meta.get("date"):
+        parts.append(f"Date: {meta['date']}")
+    
+    info_line = "<br>".join(parts)
+
+    desc = markdown.markdown(meta.get("description", ""), output_format="html5").strip()
+
+    popup_html = f"{title}<br>{info_line}<br>{desc}" if info_line else f"{title}<br>{desc}"
+
+    popup = Popup(
+        location=(lat, lon),
+        child=HTML(popup_html),
+        close_button=True,
+        auto_close=False,
+        close_on_escape_key=True
+    )
+
+    marker = Marker(location=(lat, lon))
+    marker.popup = popup
+    markers.append(marker)
+
+if markers:
+    cluster = MarkerCluster(markers=markers)
+    m.add_layer(cluster)
+
+m
+```

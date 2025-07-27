@@ -1,0 +1,112 @@
+---
+listing: 
+  # - id: last
+  #   contents: "articles/last/*.qmd"
+  #   sort: date desc
+  #   categories: true
+  #   feed: true
+  #   sort-ui: true
+  #   filter-ui: true
+  #   fields: 
+  #     - title
+  #     - author
+  #     - venue
+  #     - categories
+  #     - image
+  #     - image-alt
+  #     - doi
+  #     - date
+  - id: first
+    contents: "articles/first/*.qmd"
+    sort: date desc
+    categories: true
+    feed: true
+    sort-ui: true
+    filter-ui: true
+    fields: 
+      - title
+      - author
+      - venue
+      - categories
+      - image
+      - image-alt
+      - doi
+      - date
+  # - id: shared
+  #   contents: "articles/shared/*.qmd"
+  #   sort: date desc
+  #   categories: true
+  #   feed: true
+  #   sort-ui: true
+  #   filter-ui: true
+  #   fields: 
+  #     - title
+  #     - author
+  #     - venue
+  #     - categories
+  #     - image
+  #     - image-alt
+  #     - doi
+  #     - date
+  # - id: co
+  #   contents: "articles/co/*.qmd"
+  #   sort: date desc
+  #   categories: true
+  #   feed: true
+  #   sort-ui: true
+  #   filter-ui: true
+  #   fields: 
+  #     - title
+  #     - author
+  #     - venue
+  #     - categories
+  #     - image
+  #     - image-alt
+  #     - doi
+  #     - date
+---
+
+{{< include articles/profiles.qmd >}}
+
+{{< include articles/thesis.qmd >}}
+
+<!-- ## Articles as last author -->
+
+<!-- :::{#last} -->
+<!-- ::: -->
+
+## Articles as single first author
+
+:::{#first}
+:::
+
+## Articles as shared first author
+
+<!-- :::{#shared} -->
+<!-- ::: -->
+
+### 2025
+
+#### [Translating community‑wide spectral library into actionable chemical knowledge: a proof of concept with monoterpene indole alkaloids](https://doi.org/10.1186/s13321-025-01009-0)
+
+#### [Discovery of metabolites prevails amid in-source fragmentation](https://doi.org/10.1038/s42255-025-01239-4)
+
+### 2022
+
+#### [Combining Activity Profiling with Advanced Annotation to Accelerate the Discovery of Natural Products Targeting Oncogenic Signaling in Melanoma](https://doi.org/10.1021/acs.jnatprod.2c00146)
+
+### 2019
+
+#### [Taxonomically Informed Scoring Enhances Confidence in Natural Products Annotation](https://doi.org/10.3389/fpls.2019.01329)
+
+## Articles as co-author
+
+<!-- :::{#co} -->
+<!-- ::: -->
+
+{{< include articles/co/2024.qmd >}}
+{{< include articles/co/2023.qmd >}}
+{{< include articles/co/2022.qmd >}}
+{{< include articles/co/2021.qmd >}}
+{{< include articles/co/2020.qmd >}}
+{{< include articles/co/2019.qmd >}}

@@ -1,0 +1,47 @@
+---
+title: Advanced Course on Mass Spectrometry
+venue: Università degli Studi di Napoli Federico II, Pharmaceutical Sciences
+date: '2019-10-14'
+location: Napoli, Italy
+# image: ""
+# image-alt: ""
+categories:
+  - Teaching
+author: 
+- name: 
+    given: Adriano 
+    family: Rutz
+  orcid: 0000-0003-0443-9902
+  number: 1
+  affiliations:
+    - ref: unige
+- name: 
+    given: Jean-Luc 
+    family: Wolfender
+  orcid: 0000-0002-0125-952X
+  number: 2
+  corresponding: true
+  email: jean-luc.wolfender@unige.ch
+  affiliations:
+    - ref: unige
+affiliations:
+  - id: unige
+    number: 1
+    name: University of Geneva
+    department:
+      - School of Pharmaceutical Sciences
+      - Institute of Pharmaceutical Sciences of Western Switzerland
+    group: Wolfender
+    address: Rue Michel-Servet, 1
+    city: Geneva
+    country: Switzerland
+    postal-code: 1211
+---
+
+## Topics
+
+* Mass spectrometry data preprocessing: Principle of Multivariate data analysis
+
+* Efficient visualisation of complex metabolite profiles with molecular networks
+
+* Automated metabolite annotation in combination with molecular networks

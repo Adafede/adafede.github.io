@@ -1,0 +1,17 @@
+---
+listing: 
+  - id: teaching
+    contents: "teaching/*.qmd"
+    sort: date desc
+    categories: true
+    feed: true
+    sort-ui: true
+    filter-ui: true
+    fields:
+      - title
+      - venue
+      - categories
+      - image
+      - image-alt
+      - date
+---

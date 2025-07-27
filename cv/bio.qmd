@@ -1,0 +1,6 @@
+## Bio
+
+*Adriano Rutz* is a pharmaceutical scientist with a focus on metabolomics, natural products, and analytical chemistry.
+He gained industry experience at Tradall SA (Bacardi Group) before completing his PhD in phytochemistry from the University of Geneva.
+Currently a postdoctoral researcher at ETH Zurich, he develops computational tools and mass spectrometry-based methods to study the chemistry of living organisms.
+He is committed to open science and [open data](https://akademien-schweiz.ch/en/current/news/adriano-rutz-gewinnt-ersten-schweizer-ord-preis), and is one of the authors of the [LOTUS initiative](https://doi.org/10.7554/eLife.70780), which explores new ways of sharing knowledge in natural products research.

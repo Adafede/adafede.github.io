@@ -1,0 +1,32 @@
+---
+title: The LOTUS initiative for knowledge sharing in Natural Products research
+venue: 69th International Congress and Annual Meeting of the Society for Medicinal Plant and Natural Product Research
+date: '2021-09-08'
+# location: online
+# image: ""
+# image-alt: ""
+categories:
+  - Talk
+author: 
+- name: 
+    given: Adriano 
+    family: Rutz
+  orcid: 0000-0003-0443-9902
+  number: 1
+  affiliations:
+    - ref: unige
+affiliations:
+  - id: unige
+    number: 1
+    name: University of Geneva
+    department: 
+      - School of Pharmaceutical Sciences
+      - Institute of Pharmaceutical Sciences of Western Switzerland
+    group: Wolfender
+    address: Rue Michel-Servet, 1
+    city: Geneva
+    country: Switzerland
+    postal-code: 1211
+description: |
+  Advocating to the Medicinal Plant and Natural Product community for the [LOTUS initiative](https://lotus.nprod.net/). [Available here](https://lotus.nprod.net/lotus-presentations/20210908_ga/210908_GA-lotus.pdf).
+---

@@ -1,0 +1,61 @@
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  release:
+    types: [published]
+  workflow_dispatch:
+
+name: Publish
+
+permissions:
+  actions: write
+  checks: write
+  contents: write
+  deployments: write
+  id-token: write
+  issues: read
+  discussions: read
+  packages: write
+  pages: write
+  pull-requests: read
+  repository-projects: read
+  security-events: read
+  statuses: read
+
+jobs:
+  altdoc:
+    runs-on: ubuntu-latest
+    # Only restrict concurrency for non-PR jobs
+    concurrency:
+      group: altdoc-${{ github.event_name != 'pull_request' || github.run_id }}
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v6
+
+      - uses: quarto-dev/quarto-actions/setup@v2
+
+      - name: Get Script
+        run: curl -OLs https://eddelbuettel.github.io/r-ci/run.sh && chmod 0755 run.sh
+
+      - name: Bootstrap
+        run: ./run.sh bootstrap
+
+      - name: Dependencies
+        run: ./run.sh install_all
+
+      - name: Build site
+        run: uv run quarto render
+
+      - name: Deploy to GitHub pages 🚀
+        if: github.event_name != 'pull_request'
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: _site

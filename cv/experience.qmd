@@ -1,0 +1,9 @@
+## Experience
+
+{{< include cv/experience/2022_ethz.qmd >}}
+
+{{< include cv/experience/2017_unige.qmd >}}
+
+{{< include cv/experience/2016_bacardi.qmd >}}
+
+{{< include cv/experience/2015_terrassiere.qmd >}}

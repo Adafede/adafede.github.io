@@ -1,0 +1,9 @@
+### 2022
+
+#### [Metabolomics in Ecology and Bioactive Natural Products Discovery: Challenges and Prospects for a Comprehensive Study of the Specialised Metabolome](https://doi.org/10.2533/chimia.2022.954)
+
+#### [Unifying the identification of biomedical entities with the Bioregistry](https://doi.org/10.1038/s41597-022-01807-3)
+
+#### [*Inventa*: A computational tool to discover structural novelty in natural extracts libraries](https://doi.org/10.3389/fmolb.2022.1028334)
+
+#### [Targeted isolation of photoactive pigments from mushrooms yielded a highly potent new photosensitizer: 7,7′-biphyscion](https://doi.org/10.1038/s41598-022-04975-9)
