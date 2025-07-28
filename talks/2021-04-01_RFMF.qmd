@@ -28,5 +28,7 @@ affiliations:
     country: Switzerland
     postal-code: 1211
 description: |
-  Advocating to the metabolomic community for the [LOTUS initiative](https://lotus.nprod.net/). [Available here](https://lotus.nprod.net/lotus-presentations/20210401_rfmf/index.html).
+  Advocating to the metabolomic community for the [LOTUS initiative](https://lotus.nprod.net/).
+  
+  Available [here](https://lotus.nprod.net/lotus-presentations/20210401_rfmf/index.html).
 ---

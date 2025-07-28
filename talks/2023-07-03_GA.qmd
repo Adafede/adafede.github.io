@@ -27,5 +27,9 @@ affiliations:
     country: Switzerland
     postal-code: 8093
 description: |
-  [Dr. Willmar Schwabe Young Talent Award](https://ga-online.org/about-ga/awards/dr-willmar-schwabe-young-talent-prize/) lecture for the [LOTUS initiative](https://lotus.nprod.net/). [Available here](https://lotus.nprod.net/lotus-presentations/20230703_ga/20230703_ga.pdf). Or in the congress [special issue](https://doi.org/10.1055/s-013-58620).
+  [Dr. Willmar Schwabe Young Talent Award](https://ga-online.org/about-ga/awards/dr-willmar-schwabe-young-talent-prize/) lecture for the [LOTUS initiative](https://lotus.nprod.net/).
+  
+  Available [here](https://lotus.nprod.net/lotus-presentations/20230703_ga/20230703_ga.pdf).
+  
+  Or in the [congress special issue](https://doi.org/10.1055/s-013-58620).
 ---

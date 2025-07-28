@@ -26,5 +26,7 @@ affiliations:
     country: Switzerland
     postal-code: 8093
 description: |
-  Talk given in the frame of the Swiss Academy of Sciences (SCNAT) symposium "Open Research Data – are we on track?". [Available here](https://adafede.github.io/my-presentations/20240531_bern/20240531_bern.pdf).
+  Talk given in the frame of the Swiss Academy of Sciences (SCNAT) symposium "Open Research Data – are we on track?".
+
+  Available [here](https://adafede.github.io/my-presentations/20240531_bern/20240531_bern.pdf).
 ---
