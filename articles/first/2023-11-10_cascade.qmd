@@ -11,7 +11,7 @@ categories:
   - Metabolomics
   - Charged Aerosol Detector
   - Chemical Composition
-  - Liquid Chromatography-Mass Spectrometry
+  - Liquid Chromatography-Tandem Mass Spectrometry
   - Natural Extracts
   - Natural Products
   - Metabolite Annotation
@@ -59,3 +59,7 @@ abstract: |
 nocite: |
   @Rutz2023
 ---
+
+```{=html}
+<iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q123938369" title="Scholia entry"></iframe>
+```

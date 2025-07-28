@@ -1,22 +1,23 @@
 project:
   type: website
   render:
-    - "404.qmd"
-    - "index.qmd"
-    - "cv.qmd"
-    - "articles.qmd"
-    - "articles/first/*.qmd"
-    - "talks.qmd"
-    - "talks/*.qmd"
-    - "teaching.qmd"
-    - "teaching/*.qmd"
-    - "varia.qmd"
-    - "varia/**/*.qmd"
+    - 404.qmd
+    - index.qmd
+    - cv.qmd
+    - articles.qmd
+    - articles/first/*.qmd
+    - articles/shared/*.qmd
+    - talks.qmd
+    - talks/*.qmd
+    - teaching.qmd
+    - teaching/*.qmd
+    - varia.qmd
+    - varia/**/*.qmd
 
 website:
-  title: "Adriano Rutz"
-  description: "Personal website of Adriano Rutz"
-  site-path: "./"
+  title: Adriano Rutz
+  description: Personal website of Adriano Rutz
+  site-path: ./
   site-url: https://adafede.github.io
   favicon: images/favicon/favicon.ico
   repo-url: https://github.com/adafede/adafede.github.io
@@ -27,26 +28,27 @@ website:
     site-name: https://adafede.github.io
   navbar:
     left:
-      - text: "Articles"
-        aria-label: "Articles"
+      - text: Articles
+        aria-label: Articles
         href: articles.qmd
-      - text: "CV"
-        aria-label: "Curriculum vitæ"
+      - text: CV
+        aria-label: Curriculum vitæ
         href: cv.qmd
-      - text: "Talks"
-        aria-label: "Talks"
+      - text: Talks
+        aria-label: Talks
         href: talks.qmd
-      - text: "Teaching"
-        aria-label: "Teaching"
+      - text: Teaching
+        aria-label: Teaching
         href: teaching.qmd
-      - text: "Varia"
-        aria-label: "Varia"
+      - text: Varia
+        aria-label: Varia
         href: varia.qmd
 
 format:
   html:
     grid:
       body-width: 1200px
+    link-external-newwindow: true
     theme:
       light: flatly
       dark: darkly

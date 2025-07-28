@@ -9,7 +9,7 @@ image: https://raw.githubusercontent.com/Adafede/sapid/refs/heads/main/man/figur
 image-alt: SAPID's Workflow
 categories:
   - Metabolomics
-  - Liquid Chromatography-Mass Spectrometry
+  - Liquid Chromatography-Tandem Mass Spectrometry
   - Natural Extracts
   - Taste
 authors:

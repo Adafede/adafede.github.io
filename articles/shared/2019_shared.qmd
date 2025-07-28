@@ -1,3 +1,0 @@
-### 2019
-
-* [Taxonomically Informed Scoring Enhances Confidence in Natural Products Annotation](https://doi.org/10.3389/fpls.2019.01329)

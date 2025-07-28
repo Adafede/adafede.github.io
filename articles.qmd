@@ -32,22 +32,23 @@ listing:
       - image-alt
       - doi
       - date
-  # - id: shared
-  #   contents: "articles/shared/*.qmd"
-  #   sort: date desc
-  #   categories: true
-  #   feed: true
-  #   sort-ui: true
-  #   filter-ui: true
-  #   fields: 
-  #     - title
-  #     - author
-  #     - venue
-  #     - categories
-  #     - image
-  #     - image-alt
-  #     - doi
-  #     - date
+      - wikidata
+  - id: shared
+    contents: "articles/shared/*.qmd"
+    sort: date desc
+    categories: true
+    feed: true
+    sort-ui: true
+    filter-ui: true
+    fields:
+      - title
+      - author
+      - venue
+      - categories
+      - image
+      - image-alt
+      - doi
+      - date
   # - id: co
   #   contents: "articles/co/*.qmd"
   #   sort: date desc
@@ -80,14 +81,8 @@ listing:
 
 ## Articles as shared first author
 
-<!-- :::{#shared} -->
-<!-- ::: -->
-
-{{< include articles/shared/2025_shared.qmd >}}
-
-{{< include articles/shared/2022_shared.qmd >}}
-
-{{< include articles/shared/2019_shared.qmd >}}
+:::{#shared}
+:::
 
 ## Articles as co-author
 

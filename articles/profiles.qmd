@@ -4,4 +4,4 @@
 
 * **ORCID** ![](https://upload.wikimedia.org/wikipedia/commons/0/06/ORCID_iD.svg){height=20} : <https://orcid.org/0000-0003-0443-9902>
 
-* **Google Scholar** ![](https://upload.wikimedia.org/wikipedia/commons/c/c7/Google_Scholar_logo.svg){height=20} : <https://orcid.org/0000-0003-0443-9902>: <https://scholar.google.com/citations?user=8889AMkAAAAJ>
+* **Google Scholar** ![](https://upload.wikimedia.org/wikipedia/commons/c/c7/Google_Scholar_logo.svg){height=20} : <https://scholar.google.com/citations?user=8889AMkAAAAJ>
