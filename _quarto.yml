@@ -5,7 +5,7 @@ project:
     - "index.qmd"
     - "cv.qmd"
     - "articles.qmd"
-    - "articles/**/*.qmd"
+    - "articles/first/*.qmd"
     - "talks.qmd"
     - "talks/*.qmd"
     - "teaching.qmd"

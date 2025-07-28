@@ -1,5 +1,5 @@
 ---
-title: Prior knowledge as a compass guiding untargeted metabolomics
+title: Prior Knowledge as a Compass Guiding Untargeted Metabolomics
 venue: Jena Centre for Bioinformatics
 date: '2023-02-12'
 location: Jena, Germany

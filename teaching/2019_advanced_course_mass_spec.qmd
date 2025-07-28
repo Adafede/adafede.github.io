@@ -1,5 +1,5 @@
 ---
-title: Advanced Course on Mass Spectrometry
+title: Advanced course on mass spectrometry
 venue: Università degli Studi di Napoli Federico II, Pharmaceutical Sciences
 date: '2019-10-14'
 location: Napoli, Italy

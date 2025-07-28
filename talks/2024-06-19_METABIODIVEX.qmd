@@ -1,5 +1,5 @@
 ---
-title: Traitement de données et outils d’annotations MS/MS
+title: Traitement de Données et Outils d’Annotation MS/MS
 venue: Ecole thématique METABIODIVEX 2024
 date: '2024-06-19'
 location: Saint-Rémy-lès-Chevreuse, France

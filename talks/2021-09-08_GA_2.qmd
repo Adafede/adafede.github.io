@@ -1,5 +1,5 @@
 ---
-title: "Untargeted chemical and sensory characterization of *Swertia chirayita*: a bitter case study"
+title: "Untargeted Chemical and Sensory Characterization of *Swertia chirayita*: a Bitter Case Study"
 venue: 69th International Congress and Annual Meeting of the Society for Medicinal Plant and Natural Product Research
 date: '2021-09-08'
 # location: online

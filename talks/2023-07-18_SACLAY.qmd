@@ -1,5 +1,5 @@
 ---
-title: Deep metabolome annotation
+title: Deep Metabolome Annotation
 venue: 6e Symposium International de l'AFERP
 date: '2023-07-18'
 location: Saclay, France
