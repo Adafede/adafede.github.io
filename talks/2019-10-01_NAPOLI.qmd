@@ -29,5 +29,5 @@ affiliations:
     country: Switzerland
     postal-code: 1211
 description: |
-  First academic lecture. Basics of statistics, Mass spectrometry data processing, annotation and visualization.
+  First academic lecture. Basics of statistics, mass spectrometry data processing, annotation and visualization.
 ---
