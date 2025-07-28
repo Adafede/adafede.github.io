@@ -25,12 +25,12 @@ website:
     site-name: https://adafede.github.io
   navbar:
     left:
-      - text: "CV"
-        aria-label: "Curriculum vitæ"
-        href: cv.qmd
       - text: "Articles"
         aria-label: "Articles"
         href: articles.qmd
+      - text: "CV"
+        aria-label: "Curriculum vitæ"
+        href: cv.qmd
       - text: "Talks"
         aria-label: "Talks"
         href: talks.qmd

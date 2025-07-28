@@ -1,11 +1,12 @@
 ---
-author: 
-  name: Adriano Rutz
-  orcid: 0000-0003-0443-9902
-title: Pharmaceutical Scientist
 format:
   html: default
-  classic-cv-pdf: default
+  pdf: 
+    filters: 
+      - cv/styles.lua
+    template: cv/template.tex
+cvauthor: Adriano Rutz
+cvprofession: Pharmaceutical Scientist
 cvfooter: 
   left: "website: https://adafede.github.io"
   right: "email: adriano.rutz@ik.me"
