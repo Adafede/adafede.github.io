@@ -508,6 +508,7 @@ div.csl-indent {
 </header>
 
 
+<iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q112143478" title="Scholia entry"></iframe>
 
 
 
@@ -616,6 +617,11 @@ Rutz, Adriano, Maria Sorokina, Jakub Galgonek, Daniel Mietchen, Egon Willighagen
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
         }
       }
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {

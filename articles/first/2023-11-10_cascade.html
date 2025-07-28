@@ -335,7 +335,7 @@ div.csl-indent {
     <div class="quarto-category">Metabolomics</div>
     <div class="quarto-category">Charged Aerosol Detector</div>
     <div class="quarto-category">Chemical Composition</div>
-    <div class="quarto-category">Liquid Chromatography-Mass Spectrometry</div>
+    <div class="quarto-category">Liquid Chromatography-Tandem Mass Spectrometry</div>
     <div class="quarto-category">Natural Extracts</div>
     <div class="quarto-category">Natural Products</div>
     <div class="quarto-category">Metabolite Annotation</div>
@@ -400,6 +400,7 @@ div.csl-indent {
 </header>
 
 
+<iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q123938369" title="Scholia entry"></iframe>
 
 
 
@@ -508,6 +509,11 @@ Rutz, Adriano, and Jean-Luc Wolfender. 2023. <span>“Automated Composition Asse
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
         }
       }
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {

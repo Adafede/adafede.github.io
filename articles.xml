@@ -10,7 +10,33 @@
 <atom:link href="https://adafede.github.io/articles.xml" rel="self" type="application/rss+xml"/>
 <description>Personal website of Adriano Rutz</description>
 <generator>quarto-1.7.32</generator>
-<lastBuildDate>Sat, 05 Apr 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Mon, 28 Apr 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Translating community-wide spectral library into actionable chemical knowledge: a proof of concept with monoterpene indole alkaloids</title>
+  <link>https://adafede.github.io/articles/shared/2025-04-28-miadb2.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q134267957" title="Scholia entry"></iframe>
+
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="ref-Szwarc2025" class="csl-entry">
+Szwarc, Sarah, Adriano Rutz, Kyungha Lee, Yassine Mejri, Olivier Bonnet, Hazrina Hazni, Adrien Jagora, et al. 2025. <span>“Translating Community-Wide Spectral Library into Actionable Chemical Knowledge: A Proof of Concept with Monoterpene Indole Alkaloids.”</span> <em>Journal of Cheminformatics</em> 17 (1). <a href="https://doi.org/10.1186/s13321-025-01009-0">https://doi.org/10.1186/s13321-025-01009-0</a>.
+</div>
+</div></section></div> ]]></description>
+  <category>Monoterpene Indole Alkaloids</category>
+  <category>Spectral Library</category>
+  <category>Tandem Mass Spectrometry</category>
+  <guid>https://adafede.github.io/articles/shared/2025-04-28-miadb2.html</guid>
+  <pubDate>Mon, 28 Apr 2025 00:00:00 GMT</pubDate>
+  <media:content url="https://media.springernature.com/lw685/springer-static/image/art%3A10.1186%2Fs13321-025-01009-0/MediaObjects/13321_2025_1009_Figa_HTML.png" medium="image" type="image/png"/>
+</item>
 <item>
   <title>SAPID: a Strategy to Analyze Plant Extracts Taste In Depth. Application to the complex taste of Swertia chirayita (Roxb.) H.Karst.</title>
   <link>https://adafede.github.io/articles/first/2025-04-05_sapid.html</link>
@@ -30,12 +56,37 @@ Rutz, Adriano, Pascale Deneulin, Ivano Tonutti, Benoît Bach, and Jean-Luc Wolfe
 </div>
 </div></section></div> ]]></description>
   <category>Metabolomics</category>
-  <category>Liquid Chromatography-Mass Spectrometry</category>
+  <category>Liquid Chromatography-Tandem Mass Spectrometry</category>
   <category>Natural Extracts</category>
   <category>Taste</category>
   <guid>https://adafede.github.io/articles/first/2025-04-05_sapid.html</guid>
   <pubDate>Sat, 05 Apr 2025 00:00:00 GMT</pubDate>
   <media:content url="https://raw.githubusercontent.com/Adafede/sapid/refs/heads/main/man/figures/sapid-workflow.svg" medium="image" type="image/svg+xml"/>
+</item>
+<item>
+  <title>Discovery of metabolites prevails amid in-source fragmentation</title>
+  <link>https://adafede.github.io/articles/shared/2025-02-28_isf.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="ref-ElAbiead2025" class="csl-entry">
+El Abiead, Yasin, Adriano Rutz, Simone Zuffa, Bashar Amer, Shipei Xing, Corinna Brungs, Robin Schmid, et al. 2025. <span>“Discovery of Metabolites Prevails Amid in-Source Fragmentation.”</span> <em>Nature Metabolism</em> 7 (3): 435–37. <a href="https://doi.org/10.1038/s42255-025-01239-4">https://doi.org/10.1038/s42255-025-01239-4</a>.
+</div>
+</div></section></div> ]]></description>
+  <category>In Source Fragmentation</category>
+  <category>Metabolomics</category>
+  <category>Liquid Chromatography-Tandem Mass Spectrometry</category>
+  <guid>https://adafede.github.io/articles/shared/2025-02-28_isf.html</guid>
+  <pubDate>Fri, 28 Feb 2025 00:00:00 GMT</pubDate>
+  <media:content url="https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs42255-025-01239-4/MediaObjects/42255_2025_1239_Fig1_HTML.png" medium="image" type="image/png"/>
 </item>
 <item>
   <title>Automated Composition Assessment of Natural Extracts: Untargeted Mass Spectrometry-Based Metabolite Profiling Integrating Semiquantitative Detection</title>
@@ -46,6 +97,7 @@ Rutz, Adriano, Pascale Deneulin, Ivano Tonutti, Benoît Bach, and Jean-Luc Wolfe
 
 
 
+<iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q123938369" title="Scholia entry"></iframe>
 
 
 
@@ -58,13 +110,43 @@ Rutz, Adriano, and Jean-Luc Wolfender. 2023. <span>“Automated Composition Asse
   <category>Metabolomics</category>
   <category>Charged Aerosol Detector</category>
   <category>Chemical Composition</category>
-  <category>Liquid Chromatography-Mass Spectrometry</category>
+  <category>Liquid Chromatography-Tandem Mass Spectrometry</category>
   <category>Natural Extracts</category>
   <category>Natural Products</category>
   <category>Metabolite Annotation</category>
   <guid>https://adafede.github.io/articles/first/2023-11-10_cascade.html</guid>
   <pubDate>Fri, 10 Nov 2023 00:00:00 GMT</pubDate>
   <media:content url="https://raw.githubusercontent.com/Adafede/cascade/refs/heads/main/man/figures/cascade-workflow.svg" medium="image" type="image/svg+xml"/>
+</item>
+<item>
+  <title>Combining Activity Profiling with Advanced Annotation to Accelerate the Discovery of Natural Products Targeting Oncogenic Signaling in Melanoma</title>
+  <link>https://adafede.github.io/articles/shared/2022-05-31_melanoma.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q112189007" title="Scholia entry"></iframe>
+
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="ref-Hell2022" class="csl-entry">
+Hell, Tanja, Adriano Rutz, Lara Dürr, Maciej Dobrzyński, Jakob K. Reinhardt, Timo Lehner, Morris Keller, et al. 2022. <span>“Combining Activity Profiling with Advanced Annotation to Accelerate the Discovery of Natural Products Targeting Oncogenic Signaling in Melanoma.”</span> <em>Journal of Natural Products</em> 85 (6): 1540–54. <a href="https://doi.org/10.1021/acs.jnatprod.2c00146">https://doi.org/10.1021/acs.jnatprod.2c00146</a>.
+</div>
+</div></section></div> ]]></description>
+  <category>Bioactivity</category>
+  <category>Charged Aerosol Detector</category>
+  <category>Metabolomics</category>
+  <category>Liquid Chromatography-Tandem Mass Spectrometry</category>
+  <category>Natural Extracts</category>
+  <category>Natural Products</category>
+  <category>Metabolite Annotation</category>
+  <guid>https://adafede.github.io/articles/shared/2022-05-31_melanoma.html</guid>
+  <pubDate>Tue, 31 May 2022 00:00:00 GMT</pubDate>
+  <media:content url="https://pubs.acs.org/cms/10.1021/acs.jnatprod.2c00146/asset/images/medium/np2c00146_0008.gif" medium="image" type="image/gif"/>
 </item>
 <item>
   <title>The LOTUS initiative for open knowledge management in natural products research</title>
@@ -75,6 +157,7 @@ Rutz, Adriano, and Jean-Luc Wolfender. 2023. <span>“Automated Composition Asse
 
 
 
+<iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q112143478" title="Scholia entry"></iframe>
 
 
 
@@ -92,6 +175,34 @@ Rutz, Adriano, Maria Sorokina, Jakub Galgonek, Daniel Mietchen, Egon Willighagen
   <guid>https://adafede.github.io/articles/first/2022-05-26_lotus.html</guid>
   <pubDate>Thu, 26 May 2022 00:00:00 GMT</pubDate>
   <media:content url="https://upload.wikimedia.org/wikipedia/commons/f/f1/Lotus_initiative_1_graphical_abstract.svg" medium="image" type="image/svg+xml"/>
+</item>
+<item>
+  <title>Taxonomically Informed Scoring Enhances Confidence in Natural Products Annotation</title>
+  <link>https://adafede.github.io/articles/shared/2019-10-25_tima.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q91218352" title="Scholia entry"></iframe>
+
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="ref-Rutz2019" class="csl-entry">
+Rutz, Adriano, Miwa Dounoue-Kubo, Simon Ollivier, Jonathan Bisson, Mohsen Bagheri, Tongchai Saesong, Samad Nejad Ebrahimi, Kornkanok Ingkaninan, Jean-Luc Wolfender, and Pierre-Marie Allard. 2019. <span>“Taxonomically Informed Scoring Enhances Confidence in Natural Products Annotation.”</span> <em>Frontiers in Plant Science</em> 10 (October). <a href="https://doi.org/10.3389/fpls.2019.01329">https://doi.org/10.3389/fpls.2019.01329</a>.
+</div>
+</div></section></div> ]]></description>
+  <category>Metabolomics</category>
+  <category>Liquid Chromatography-Tandem Mass Spectrometry</category>
+  <category>Natural Products</category>
+  <category>Metabolite Annotation</category>
+  <category>Taxonomy</category>
+  <guid>https://adafede.github.io/articles/shared/2019-10-25_tima.html</guid>
+  <pubDate>Fri, 25 Oct 2019 00:00:00 GMT</pubDate>
+  <media:content url="https://raw.githubusercontent.com/taxonomicallyinformedannotation/tima/refs/heads/main/man/figures/tima.svg" medium="image" type="image/svg+xml"/>
 </item>
 </channel>
 </rss>

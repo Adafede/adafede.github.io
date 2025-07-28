@@ -333,7 +333,7 @@ div.csl-indent {
 <h1 class="title"><strong>SAPID</strong>: a <strong>S</strong>trategy to <strong>A</strong>nalyze <strong>P</strong>lant Extracts Taste <strong>I</strong>n <strong>D</strong>epth. Application to the complex taste of <em>Swertia chirayita</em> (Roxb.) H.Karst.</h1>
   <div class="quarto-categories">
     <div class="quarto-category">Metabolomics</div>
-    <div class="quarto-category">Liquid Chromatography-Mass Spectrometry</div>
+    <div class="quarto-category">Liquid Chromatography-Tandem Mass Spectrometry</div>
     <div class="quarto-category">Natural Extracts</div>
     <div class="quarto-category">Taste</div>
   </div>
@@ -529,6 +529,11 @@ Rutz, Adriano, Pascale Deneulin, Ivano Tonutti, Benoît Bach, and Jean-Luc Wolfe
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
         }
       }
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
