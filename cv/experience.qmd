@@ -1,4 +1,4 @@
-## Experience
+## Professional Experience
 
 {{< include cv/experience/2022_ethz.qmd >}}
 

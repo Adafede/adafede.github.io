@@ -1,5 +1,5 @@
 ---
-title: Strategy for exhaustive plant metabolomes characterization from a qualitative and quantitative perspective
+title: Strategy for Exhaustive Plant Metabolomes Characterization from a Qualitative and Quantitative Perspective
 venue: 67th International Congress and Annual Meeting of the Society for Medicinal Plant and Natural Product Research
 date: '2019-09-01'
 location: Innsbruck, Austria

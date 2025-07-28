@@ -68,8 +68,6 @@ listing:
 
 {{< include articles/profiles.qmd >}}
 
-{{< include articles/thesis.qmd >}}
-
 <!-- ## Articles as last author -->
 
 <!-- :::{#last} -->
@@ -107,3 +105,5 @@ listing:
 {{< include articles/co/2020_co.qmd >}}
 
 {{< include articles/co/2019_co.qmd >}}
+
+{{< include articles/thesis.qmd >}}

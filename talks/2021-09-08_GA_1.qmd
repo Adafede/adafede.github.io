@@ -1,5 +1,5 @@
 ---
-title: The LOTUS initiative for knowledge sharing in Natural Products research
+title: The LOTUS Initiative for Knowledge Sharing in Natural Products Research
 venue: 69th International Congress and Annual Meeting of the Society for Medicinal Plant and Natural Product Research
 date: '2021-09-08'
 # location: online
