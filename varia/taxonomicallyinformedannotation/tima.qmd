@@ -1,0 +1,14 @@
+---
+title: "**TIMA**: **T**axonomically **I**nformed **M**etabolite **A**nnotation"
+url: https://taxonomicallyinformedannotation.github.io/tima
+image: https://raw.githubusercontent.com/taxonomicallyinformedannotation/tima/refs/heads/main/man/figures/logo.svg
+image-alt: Logo of TIMA
+categories:
+  - Mass spectrometry
+  - Metabolite annotation
+  - Natural products
+  - Taxonomy
+  - R
+description: |
+  <https://taxonomicallyinformedannotation.github.io/tima>
+---

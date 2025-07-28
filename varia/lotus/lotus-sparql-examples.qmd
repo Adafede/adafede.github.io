@@ -1,0 +1,12 @@
+---
+title: LOTUS SPARQL Examples
+url: https://lotus.nprod.net/lotus-sparql-examples
+image: https://upload.wikimedia.org/wikipedia/commons/9/98/Wikidata_RDF.svg
+image-alt: Illustration of Wikidata's RDF
+categories:
+  - LOTUS
+  - SPARQL
+  - Wikidata
+description: |
+  <https://lotus.nprod.net/lotus-sparql-examples>
+---

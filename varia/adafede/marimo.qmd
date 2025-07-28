@@ -1,0 +1,10 @@
+---
+title: Marimo
+url: https://adafede.github.io/marimo
+image: https://raw.githubusercontent.com/marimo-team/marimo/main/docs/_static/marimo-logotype-thick.svg
+image-alt: Logo of MARIMO
+categories:
+  - Python
+description: |
+  <https://adafede.github.io/marimo>
+---

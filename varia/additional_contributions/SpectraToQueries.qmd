@@ -1,0 +1,13 @@
+---
+title: SpectraToQueries
+url: https://spectra-to-knowledge.github.io/SpectraToQueries
+image: https://raw.githubusercontent.com/spectra-to-knowledge/SpectraToQueries/refs/heads/main/man/figures/logo.svg
+image-alt: Logo of SpectraToQueries
+categories:
+  - Chemical classes
+  - Mass spectrometry
+  - SMARTS
+  - R
+description: |
+  <https://spectra-to-knowledge.github.io/SpectraToQueries>
+---
