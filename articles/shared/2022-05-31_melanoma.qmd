@@ -1,0 +1,147 @@
+---
+bibliography: ../../references.bib
+title: Combining Activity Profiling with Advanced Annotation to Accelerate the Discovery of Natural Products Targeting Oncogenic Signaling in Melanoma
+type: article
+venue: Journal of Natural Products
+date: '2022-05-31'
+doi: https://doi.org/10.1021/acs.jnatprod.2c00146
+image: https://pubs.acs.org/cms/10.1021/acs.jnatprod.2c00146/asset/images/medium/np2c00146_0008.gif
+image-alt: Article's Graphical Abstract
+categories:
+  - Bioactivity
+  - Charged Aerosol Detector
+  - Metabolomics
+  - Liquid Chromatography-Tandem Mass Spectrometry
+  - Natural Extracts
+  - Natural Products
+  - Metabolite Annotation
+authors:
+  -
+    name: Tanja Hell
+    orcid: 0000-0002-8867-2412
+    number: 1
+    affiliations:
+      - ref: basel
+    equal-contributor: true
+  -
+    name: Adriano Rutz
+    orcid: 0000-0003-0443-9902
+    number: 2
+    affiliations:
+      - ref: unige
+    equal-contributor: true
+  -
+    name: Lara Dürr
+    orcid: 0000-0001-6551-1854
+    number: 3
+    affiliations:
+      - ref: basel
+  -
+    name: Maciej Dobrzyński
+    orcid: 0000-0002-0208-7758
+    number: 4
+    affiliations:
+      - ref: bern
+  -
+    name: Jakob K. Reinhardt
+    orcid: 0000-0002-8675-1029
+    number: 5
+    affiliations:
+      - ref: basel
+  -
+    name: Timo Lehner
+    number: 6
+    affiliations:
+      - ref: basel
+  -
+    name: Moris Keller
+    orcid: 0000-0002-4316-6591
+    number: 7
+    affiliations:
+      - ref: basel
+  -
+    name: Anika John
+    number: 8
+    affiliations:
+      - ref: bern
+  -
+    name: Mahabir Gupta
+    number: 9
+    affiliations:
+      - ref: panama
+    decesed: true
+  -
+    name: Olivier Pertz
+    number: 10
+    affiliations:
+      - ref: bern
+  -
+    name: Matthias Hamburger
+    orcid: 0000-0001-9331-273X
+    number: 11
+    affiliations:
+      - ref: basel
+  -
+    name: Jean-Luc Wolfender
+    orcid: 0000-0002-0125-952X
+    number: 12
+    affiliations:
+      - ref: unige
+  -
+    name: Eliane Garo
+    orcid: 0000-0002-3497-2524
+    email: eliane.garo@unibas.ch
+    number: 13
+    affiliations:
+      - ref: basel
+    correspondence: true
+affiliations:
+  - id: basel
+    number: 1
+    name: University of Basel
+    department: 
+      - Division of Pharmaceutical Biology, Department of Pharmaceutical Sciences
+    group: Wolfender
+    address: Klingelbergstrasse, 50
+    city: Basel
+    country: Switzerland
+    postal-code: 4056
+  - id: unige
+    number: 2
+    name: University of Geneva
+    department: 
+      - School of Pharmaceutical Sciences
+      - Institute of Pharmaceutical Sciences of Western Switzerland
+    group: Wolfender
+    address: Rue Michel-Servet, 1
+    city: Geneva
+    country: Switzerland
+    postal-code: 1211
+  - id: bern
+    number: 3
+    name: University of Bern
+    department: 
+      - Institute of Cell Biology
+    group: Pertz
+    address: Baltzerstrasse, 4
+    city: Bern
+    country: Switzerland
+    postal-code: 3012
+  - id: panama
+    number: 4
+    name: University of Panama
+    department: 
+      - Center for Pharmacognostic Research and Panamanian Flora, Faculty of Pharmacy
+    group: Pertz
+    city: Panama City
+    country: Republic of Panama
+    postal-code: 0824
+abstract: |
+  The discovery of bioactive natural products remains a time-consuming and challenging task. The ability to link high-confidence metabolite annotations in crude extracts with activity would be highly beneficial to the drug discovery process. To address this challenge, HPLC-based activity profiling and advanced UHPLC-HRMS/MS metabolite profiling for annotation were combined to leverage the information obtained from both approaches on a crude extract scaled down to the submilligram level. This strategy was applied to a subset of an extract library screening aiming to identify natural products inhibiting oncogenic signaling in melanoma. Advanced annotation and data organization enabled the identification of compounds that were likely responsible for the activity in the extracts. These compounds belonged to two different natural product scaffolds, namely, brevipolides from a *Hyptis brevipes* extract and methoxylated flavonoids identified in three different extracts of *Hyptis* and *Artemisia* spp. Targeted isolation of these prioritized compounds led to five brevipolides and seven methoxylated flavonoids. Brevipolide A (**1**) and 6-methoxytricin (**9**) were the most potent compounds from each chemical class and displayed AKT activity inhibition with an IC50 of 17.6 ± 1.6 and 4.9 ± 0.2 *μ*M, respectively.
+nocite: |
+  @Hell2022
+---
+
+```{=html}
+<iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q112189007" title="Scholia entry"></iframe>
+```
