@@ -26,5 +26,7 @@ affiliations:
     country: Switzerland
     postal-code: 8093
 description: |
-  <http://www.jcb-jena.de/2023/01/seminar-02-february-2023-dr-adriano-rutz/#more-2487>. [Available here](https://adafede.github.io/my-presentations/20230202_jena/20230202_jena.pdf).
+  <http://www.jcb-jena.de/2023/01/seminar-02-february-2023-dr-adriano-rutz/#more-2487>.
+  
+  Available [here](https://adafede.github.io/my-presentations/20230202_jena/20230202_jena.pdf).
 ---

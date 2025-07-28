@@ -28,5 +28,7 @@ affiliations:
     country: Switzerland
     postal-code: 1211
 description: |
-  Advocating to the Medicinal Plant and Natural Product community for the [LOTUS initiative](https://lotus.nprod.net/). [Available here](https://lotus.nprod.net/lotus-presentations/20210908_ga/210908_GA-lotus.pdf).
+  Advocating to the Medicinal Plant and Natural Product community for the [LOTUS initiative](https://lotus.nprod.net/).
+  
+  Available [here](https://lotus.nprod.net/lotus-presentations/20210908_ga/210908_GA-lotus.pdf).
 ---
