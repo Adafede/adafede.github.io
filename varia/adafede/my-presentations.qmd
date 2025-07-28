@@ -1,0 +1,10 @@
+---
+title: My presentations
+url: https://adafede.github.io/my-presentations
+image: https://upload.wikimedia.org/wikipedia/commons/e/ee/Ic_slideshow_48px.svg
+image-alt: Presentations icon
+categories:
+  - Slides
+description: |
+  <https://adafede.github.io/my-presentations>
+---

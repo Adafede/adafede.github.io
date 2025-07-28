@@ -1,0 +1,81 @@
+---
+listing: 
+  - id: varia_adafede
+    contents: "varia/adafede/*.qmd"
+    sort: date desc
+    categories: true
+    feed: true
+    sort-ui: false
+    filter-ui: true
+    fields:
+      - title
+      - categories
+      - image
+      - image-alt
+      - description
+    type: grid
+  - id: varia_lotus
+    contents: "varia/lotus/*.qmd"
+    sort: date desc
+    categories: true
+    feed: true
+    sort-ui: false
+    filter-ui: true
+    fields:
+      - title
+      - categories
+      - image
+      - image-alt
+      - description
+    type: grid
+  - id: varia_tima
+    contents: "varia/taxonomicallyinformedannotation/*.qmd"
+    sort: date desc
+    categories: true
+    feed: true
+    sort-ui: false
+    filter-ui: true
+    fields:
+      - title
+      - categories
+      - image
+      - image-alt
+      - description
+    type: grid
+  - id: varia_contribs
+    contents: "varia/additional_contributions/*.qmd"
+    sort: date desc
+    categories: true
+    feed: true
+    sort-ui: false
+    filter-ui: true
+    fields:
+      - title
+      - categories
+      - image
+      - image-alt
+      - description
+    type: grid
+---
+
+Some other pages of interest
+
+## Extras
+
+:::{#varia_adafede}
+:::
+
+## LOTUS
+
+:::{#varia_lotus}
+:::
+
+## Taxonomically Informed Metabolite Annotation
+
+:::{#varia_tima}
+:::
+
+## Additional contributions
+
+:::{#varia_contribs}
+:::

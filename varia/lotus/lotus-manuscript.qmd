@@ -1,0 +1,11 @@
+---
+title: LOTUS manuscript
+url: https://lotus.nprod.net/lotus-manuscript
+image: https://raw.githubusercontent.com/lotusnprod/lotus-manuscript/refs/heads/main/content/images/workflow.svg
+image-alt: LOTUS Workflow
+categories:
+  - LOTUS
+  - Manuscript
+description: |
+  <https://lotus.nprod.net/lotus-manuscript>
+---

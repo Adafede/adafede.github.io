@@ -1,0 +1,11 @@
+---
+title: CentroidR
+url: https://adafede.github.io/CentroidR
+image: https://raw.githubusercontent.com/Adafede/CentroidR/refs/heads/main/man/figures/logo.svg
+image-alt: Logo of CentroidR
+categories:
+  - Mass spectrometry
+  - R
+description: |
+  <https://adafede.github.io/CentroidR>
+---

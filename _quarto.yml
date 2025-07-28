@@ -10,6 +10,8 @@ project:
     - "talks/*.qmd"
     - "teaching.qmd"
     - "teaching/*.qmd"
+    - "varia.qmd"
+    - "varia/**/*.qmd"
 
 website:
   title: "Adriano Rutz"
@@ -37,6 +39,9 @@ website:
       - text: "Teaching"
         aria-label: "Teaching"
         href: teaching.qmd
+      - text: "Varia"
+        aria-label: "Varia"
+        href: varia.qmd
 
 format:
   html:

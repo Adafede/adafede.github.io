@@ -1,0 +1,12 @@
+---
+title: Wikidata Natural Products Up To Date
+url: https://adafede.github.io/wd-np-up-to-date
+image: https://upload.wikimedia.org/wikipedia/commons/f/f1/Lotus_initiative_1_graphical_abstract.svg
+image-alt: Logo of the LOTUS initiative
+categories:
+  - LOTUS
+  - Natural products
+  - Wikidata
+description: |
+  <https://adafede.github.io/wd-np-up-to-date>
+---

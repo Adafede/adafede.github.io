@@ -27,5 +27,5 @@ affiliations:
     country: Switzerland
     postal-code: 8093
 description: |
-  Talk given in the frame of the Prague Computational Mass Spectrometry Workshop. [Available here](https://adafede.github.io/my-presentations/20240417_prague/20240417_prague.pdf).
+  Talk given in the frame of the Prague Computational Mass Spectrometry Workshop. [Available here](https://adafede.github.io/my-presentations/20240417_prague/20240417_prague.pdf) [and here](https://adafede.github.io/my-presentations/20240417_prague/20240417_prague_hands_on.pdf).
 ---

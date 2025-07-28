@@ -1,0 +1,13 @@
+---
+title: SMARTCLASS
+url: https://zamboni-lab.github.io/smartclass
+# image: ""
+# image-alt: ""
+categories:
+  - Chemical classes
+  - Python
+  - SMARTS
+  - Wikidata
+description: |
+  <https://zamboni-lab.github.io/smartclass>
+---
