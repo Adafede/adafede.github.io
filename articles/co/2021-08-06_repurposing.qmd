@@ -1,0 +1,19 @@
+---
+bibliography: ../../references.bib
+title: Drug Repurposing to Identify a Synergistic High-Order Drug Combination to Treat Sunitinib-Resistant Renal Cell Carcinoma
+type: article
+venue: Cancers
+date: '2021-08-06'
+doi: https://doi.org/10.3390/cancers13163978
+url: "<https://doi.org/10.3390/cancers13163978>"
+# categories:
+#   - TODO
+# abstract: |
+#  TODO
+nocite: |
+  @Rasuch2021b
+---
+
+```{=html}
+<iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q108003603" title="Scholia entry"></iframe>
+```

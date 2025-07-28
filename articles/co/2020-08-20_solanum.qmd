@@ -1,0 +1,19 @@
+---
+bibliography: ../../references.bib
+title: Insights on the Structural and Metabolic Resistance of Potato (*Solanum tuberosum*) Cultivars to Tuber Black Dot (*Colletotrichum coccodes*)
+type: article
+venue: Frontiers in Plant Science
+date: '2020-08-20'
+doi: https://doi.org/10.3389/fpls.2020.01287
+url: "<https://doi.org/10.3389/fpls.2020.01287>"
+# categories:
+#   - TODO
+# abstract: |
+#  TODO
+nocite: |
+  @MassanaCodina2020
+---
+
+```{=html}
+<iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q99711601" title="Scholia entry"></iframe>
+```

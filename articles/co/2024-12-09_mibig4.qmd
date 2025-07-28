@@ -1,0 +1,19 @@
+---
+bibliography: ../../references.bib
+title: "MIBiG 4.0: advancing biosynthetic gene cluster curation through global collaboration"
+type: article
+venue: Nucleic Acids Research
+date: '2024-12-09'
+doi: https://doi.org/10.1093/nar/gkae1115
+url: "<https://doi.org/10.1093/nar/gkae1115>"
+# categories:
+#   - TODO
+# abstract: |
+#  TODO
+nocite: |
+  @Zdouc2024
+---
+
+```{=html}
+<iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q131432378" title="Scholia entry"></iframe>
+```

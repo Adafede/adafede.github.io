@@ -1,0 +1,19 @@
+---
+bibliography: ../../references.bib
+title: "microbeMASST: a taxonomically informed mass spectrometry search tool for microbial metabolomics data"
+type: article
+venue: Nature Microbiology
+date: '2024-02-05'
+doi: https://doi.org/10.1038/s41564-023-01575-9
+url: "<https://doi.org/10.1038/s41564-023-01575-9>"
+# categories:
+#   - TODO
+# abstract: |
+#  TODO
+nocite: |
+  @Zuffa2024
+---
+
+```{=html}
+<iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q124670541" title="Scholia entry"></iframe>
+```
