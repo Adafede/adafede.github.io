@@ -85,28 +85,25 @@ listing:
 <!-- :::{#shared} -->
 <!-- ::: -->
 
-### 2025
+{{< include articles/shared/2025_shared.qmd >}}
 
-#### [Translating community‑wide spectral library into actionable chemical knowledge: a proof of concept with monoterpene indole alkaloids](https://doi.org/10.1186/s13321-025-01009-0)
+{{< include articles/shared/2022_shared.qmd >}}
 
-#### [Discovery of metabolites prevails amid in-source fragmentation](https://doi.org/10.1038/s42255-025-01239-4)
-
-### 2022
-
-#### [Combining Activity Profiling with Advanced Annotation to Accelerate the Discovery of Natural Products Targeting Oncogenic Signaling in Melanoma](https://doi.org/10.1021/acs.jnatprod.2c00146)
-
-### 2019
-
-#### [Taxonomically Informed Scoring Enhances Confidence in Natural Products Annotation](https://doi.org/10.3389/fpls.2019.01329)
+{{< include articles/shared/2019_shared.qmd >}}
 
 ## Articles as co-author
 
 <!-- :::{#co} -->
 <!-- ::: -->
 
-{{< include articles/co/2024.qmd >}}
-{{< include articles/co/2023.qmd >}}
-{{< include articles/co/2022.qmd >}}
-{{< include articles/co/2021.qmd >}}
-{{< include articles/co/2020.qmd >}}
-{{< include articles/co/2019.qmd >}}
+{{< include articles/co/2024_co.qmd >}}
+
+{{< include articles/co/2023_co.qmd >}}
+
+{{< include articles/co/2022_co.qmd >}}
+
+{{< include articles/co/2021_co.qmd >}}
+
+{{< include articles/co/2020_co.qmd >}}
+
+{{< include articles/co/2019_co.qmd >}}
