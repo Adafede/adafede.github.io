@@ -19,6 +19,7 @@ listing:
   - id: first
     contents: "articles/first/*.qmd"
     sort: date desc
+    date-format: iso
     categories: true
     feed: true
     sort-ui: true
@@ -36,6 +37,7 @@ listing:
   - id: shared
     contents: "articles/shared/*.qmd"
     sort: date desc
+    date-format: iso
     categories: true
     feed: true
     sort-ui: true
@@ -49,22 +51,38 @@ listing:
       - image-alt
       - doi
       - date
-  # - id: co
-  #   contents: "articles/co/*.qmd"
-  #   sort: date desc
-  #   categories: true
-  #   feed: true
-  #   sort-ui: true
-  #   filter-ui: true
-  #   fields: 
-  #     - title
-  #     - author
-  #     - venue
-  #     - categories
-  #     - image
-  #     - image-alt
-  #     - doi
-  #     - date
+  - id: co
+    contents: "articles/co/*.qmd"
+    sort: date desc
+    date-format: iso
+    categories: true
+    feed: true
+    sort-ui: true
+    filter-ui:
+      - date
+      - link
+      - url
+      - venue
+    fields:
+      - date
+      - title
+      - venue
+      - url
+    type: table
+  - id: thesis
+    contents: "articles/thesis.qmd"
+    sort: date desc
+    date-format: iso
+    categories: true
+    feed: false
+    sort-ui: false
+    filter-ui: false
+    fields:
+      - date
+      - title
+      - venue
+      - url
+    type: table
 ---
 
 {{< include articles/profiles.qmd >}}
@@ -86,19 +104,10 @@ listing:
 
 ## Articles as co-author
 
-<!-- :::{#co} -->
-<!-- ::: -->
+:::{#co}
+:::
 
-{{< include articles/co/2024_co.qmd >}}
+## Doctoral thesis
 
-{{< include articles/co/2023_co.qmd >}}
-
-{{< include articles/co/2022_co.qmd >}}
-
-{{< include articles/co/2021_co.qmd >}}
-
-{{< include articles/co/2020_co.qmd >}}
-
-{{< include articles/co/2019_co.qmd >}}
-
-{{< include articles/thesis.qmd >}}
+:::{#thesis}
+:::

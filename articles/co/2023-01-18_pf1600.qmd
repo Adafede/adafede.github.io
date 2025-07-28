@@ -1,0 +1,19 @@
+---
+bibliography: ../../references.bib
+title: Open and reusable annotated mass spectrometry dataset of a chemodiverse collection of 1,600 plant extracts
+type: article
+venue: GigaScience
+date: '2023-01-18'
+doi: https://doi.org/10.1093/gigascience/giac124
+url: "<https://doi.org/10.1093/gigascience/giac124>"
+# categories:
+#   - TODO
+# abstract: |
+#  TODO
+nocite: |
+  @Allard2022
+---
+
+```{=html}
+<iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q116245417" title="Scholia entry"></iframe>
+```

@@ -1,0 +1,19 @@
+---
+bibliography: ../../references.bib
+title: "Metabolomics in Ecology and Bioactive Natural Products Discovery: Challenges and Prospects for a Comprehensive Study of the Specialised Metabolome"
+type: article
+venue: CHIMIA
+date: '2022-11-30'
+doi: https://doi.org/10.2533/chimia.2022.954
+url: "<https://doi.org/10.2533/chimia.2022.954>"
+# categories:
+#   - TODO
+# abstract: |
+#  TODO
+nocite: |
+  @Wolfender2022
+---
+
+```{=html}
+<iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q115517760" title="Scholia entry"></iframe>
+```

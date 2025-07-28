@@ -5,8 +5,10 @@ project:
     - index.qmd
     - cv.qmd
     - articles.qmd
+    - articles/co/*.qmd
     - articles/first/*.qmd
     - articles/shared/*.qmd
+    - articles/thesis.qmd
     - talks.qmd
     - talks/*.qmd
     - teaching.qmd
