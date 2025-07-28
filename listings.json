@@ -14,5 +14,25 @@
       "/teaching/2019_advanced_course_mass_spec.html",
       "/teaching/2017_practicals.html"
     ]
+  },
+  {
+    "listing": "/varia.html",
+    "items": [
+      "/varia/adafede/CentroidR.html",
+      "/varia/adafede/cascade.html",
+      "/varia/adafede/marimo.html",
+      "/varia/adafede/my-presentations.html",
+      "/varia/adafede/sapid.html",
+      "/varia/adafede/sparql-examples.html",
+      "/varia/adafede/wd-np-up-to-date.html",
+      "/varia/adafede/wd-taxon-names.html",
+      "/varia/lotus/lotus-manuscript.html",
+      "/varia/lotus/lotus-presentations.html",
+      "/varia/lotus/lotus-sparql-examples.html",
+      "/varia/taxonomicallyinformedannotation/tima.html",
+      "/varia/additional_contributions/MITE.html",
+      "/varia/additional_contributions/SpectraToQueries.html",
+      "/varia/additional_contributions/smartclass.html"
+    ]
   }
 ]
