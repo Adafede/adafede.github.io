@@ -12,7 +12,7 @@ url: <https://doi.org/10.3390/ijms22126467>
 # abstract: |
 #  TODO
 nocite: |
-  @Rasuch2021a
+  @Rausch2021a
 ---
 
 ```{=html}
