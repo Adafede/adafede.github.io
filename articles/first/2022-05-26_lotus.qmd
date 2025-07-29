@@ -3,7 +3,7 @@ bibliography: ../../references.bib
 title: The LOTUS initiative for open knowledge management in natural products research
 type: article
 venue: eLife
-date: '2022-05-26'
+date: 2022-05-26
 doi: https://doi.org/10.7554/eLife.70780
 image: https://upload.wikimedia.org/wikipedia/commons/f/f1/Lotus_initiative_1_graphical_abstract.svg
 image-alt: Logo of the LOTUS initiative
@@ -14,8 +14,7 @@ categories:
   - Wikidata
   - Knowledge Graph
 authors:
-  -
-    name: Adriano Rutz
+  - name: Adriano Rutz
     orcid: 0000-0003-0443-9902
     number: 1
     affiliations:
@@ -38,10 +37,9 @@ authors:
       - Writing – review & editing: true
       - Additional – LNPN website: false
       - Additional – NAPRALERT: false
-      - Additional – Sachem, IDSM: false
+      - "Additional – Sachem, IDSM": false
       - Additional – Wikidata: true
-  -
-    name: Maria Sorokina
+  - name: Maria Sorokina
     orcid: 0000-0001-9359-7149
     number: 2
     affiliations:
@@ -64,10 +62,9 @@ authors:
       - Writing – review & editing: true
       - Additional – LNPN website: true
       - Additional – NAPRALERT: false
-      - Additional – Sachem, IDSM: false
+      - "Additional – Sachem, IDSM": false
       - Additional – Wikidata: false
-  -
-    name: Jakub Galgonek
+  - name: Jakub Galgonek
     orcid: 0000-0002-7038-544X
     number: 3
     affiliations:
@@ -90,10 +87,9 @@ authors:
       - Writing – review & editing: true
       - Additional – LNPN website: false
       - Additional – NAPRALERT: false
-      - Additional – Sachem, IDSM: true
+      - "Additional – Sachem, IDSM": true
       - Additional – Wikidata: false
-  -
-    name: Daniel Mietchen
+  - name: Daniel Mietchen
     orcid: 0000-0001-9488-1870
     number: 4
     affiliations:
@@ -118,10 +114,9 @@ authors:
       - Writing – review & editing: true
       - Additional – LNPN website: false
       - Additional – NAPRALERT: false
-      - Additional – Sachem, IDSM: false
+      - "Additional – Sachem, IDSM": false
       - Additional – Wikidata: true
-  -
-    name: Egon Willighagen
+  - name: Egon Willighagen
     orcid: 0000-0001-7542-0286
     number: 5
     affiliations:
@@ -144,10 +139,9 @@ authors:
       - Writing – review & editing: true
       - Additional – LNPN website: false
       - Additional – NAPRALERT: false
-      - Additional – Sachem, IDSM: false
+      - "Additional – Sachem, IDSM": false
       - Additional – Wikidata: true
-  -
-    name: Arnaud Gaudry
+  - name: Arnaud Gaudry
     orcid: 0000-0002-3648-7362
     number: 6
     affiliations:
@@ -170,10 +164,9 @@ authors:
       - Writing – review & editing: true
       - Additional – LNPN website: false
       - Additional – NAPRALERT: false
-      - Additional – Sachem, IDSM: false
+      - "Additional – Sachem, IDSM": false
       - Additional – Wikidata: false
-  -
-    name: James G. Graham
+  - name: James G. Graham
     orcid: 0000-0002-7114-8921
     number: 7
     affiliations:
@@ -196,15 +189,13 @@ authors:
       - Writing – review & editing: true
       - Additional – LNPN website: false
       - Additional – NAPRALERT: true
-      - Additional – Sachem, IDSM: false
+      - "Additional – Sachem, IDSM": false
       - Additional – Wikidata: false
-  -
-    name: Ralf Stephan
+  - name: Ralf Stephan
     orcid: 0000-0002-4650-631X
     number: 8
     affiliations:
       - ref: oicr
-    # funders: 
     roles:
       - Conceptualization: false
       - Data curation: false
@@ -222,15 +213,13 @@ authors:
       - Writing – review & editing: true
       - Additional – LNPN website: false
       - Additional – NAPRALERT: false
-      - Additional – Sachem, IDSM: false
+      - "Additional – Sachem, IDSM": false
       - Additional – Wikidata: true
-  -
-    name: Roderic Page
+  - name: Roderic Page
     orcid: 0000-0002-7101-9767
     number: 9
     affiliations:
-      -  ref: glasgow
-    # funders: 
+      - ref: glasgow
     roles:
       - Conceptualization: false
       - Data curation: false
@@ -248,11 +237,9 @@ authors:
       - Writing – review & editing: false
       - Additional – LNPN website: false
       - Additional – NAPRALERT: false
-      - Additional – Sachem, IDSM: false
+      - "Additional – Sachem, IDSM": false
       - Additional – Wikidata: true
-  -
-    # github: 
-    name: Jiří Vondrášek
+  - name: Jiří Vondrášek
     orcid: 0000-0002-6066-973X
     number: 10
     affiliations:
@@ -275,10 +262,9 @@ authors:
       - Writing – review & editing: true
       - Additional – LNPN website: false
       - Additional – NAPRALERT: false
-      - Additional – Sachem, IDSM: true
+      - "Additional – Sachem, IDSM": true
       - Additional – Wikidata: false
-  -
-    name: Christoph Steinbeck
+  - name: Christoph Steinbeck
     orcid: 0000-0001-6966-0814
     number: 11
     affiliations:
@@ -301,10 +287,9 @@ authors:
       - Writing – review & editing: true
       - Additional – LNPN website: true
       - Additional – NAPRALERT: false
-      - Additional – Sachem, IDSM: false
+      - "Additional – Sachem, IDSM": false
       - Additional – Wikidata: false
-  -
-    name: Guido F. Pauli
+  - name: Guido F. Pauli
     orcid: 0000-0003-1022-4326
     number: 12
     affiliations:
@@ -327,10 +312,9 @@ authors:
       - Writing – review & editing: true
       - Additional – LNPN website: false
       - Additional – NAPRALERT: true
-      - Additional – Sachem, IDSM: false
+      - "Additional – Sachem, IDSM": false
       - Additional – Wikidata: false
-  -
-    name: Jean-Luc Wolfender
+  - name: Jean-Luc Wolfender
     orcid: 0000-0002-0125-952X
     number: 13
     affiliations:
@@ -354,10 +338,9 @@ authors:
       - Writing – review & editing: true
       - Additional – LNPN website: false
       - Additional – NAPRALERT: false
-      - Additional – Sachem, IDSM: false
+      - "Additional – Sachem, IDSM": false
       - Additional – Wikidata: false
-  -
-    name: Jonathan Bisson
+  - name: Jonathan Bisson
     orcid: 0000-0003-1640-9989
     email: research@bjonnh.net
     number: 14
@@ -382,10 +365,9 @@ authors:
       - Writing – review & editing: true
       - Additional – LNPN website: false
       - Additional – NAPRALERT: true
-      - Additional – Sachem, IDSM: false
+      - "Additional – Sachem, IDSM": false
       - Additional – Wikidata: true
-  -
-    name: Pierre-Marie Allard
+  - name: Pierre-Marie Allard
     orcid: 0000-0003-3389-2191
     email: pierre-marie.allard@unifr.ch
     number: 15
@@ -411,13 +393,13 @@ authors:
       - Writing – review & editing: true
       - Additional – LNPN website: false
       - Additional – NAPRALERT: false
-      - Additional – Sachem, IDSM: false
+      - "Additional – Sachem, IDSM": false
       - Additional – Wikidata: true
 affiliations:
   - id: unige
     number: 1
     name: University of Geneva
-    department: 
+    department:
       - School of Pharmaceutical Sciences
       - Institute of Pharmaceutical Sciences of Western Switzerland
     group: Wolfender
@@ -428,17 +410,17 @@ affiliations:
   - id: fsu_jena
     number: 2
     name: Friedrich-Schiller-University Jena
-    department: 
+    department:
       - Institute for Inorganic and Analytical Chemistry
     group: Steinbeck
     address: Lessingstraße, 8
     city: Jena
     country: Germany
-    postal-code: 07732
+    postal-code: 7732
   - id: iocb
     number: 3
     name: Czech Academy of Sciences
-    department: 
+    department:
       - Institute for Inorganic and Analytical Chemistry
     group: Vondrášek
     address: Flemingovo náměstí 2, 166 10
@@ -451,7 +433,7 @@ affiliations:
     address: 127 Haddon Pl
     city: Montclair
     country: United States
-    postal-code: 07043
+    postal-code: 7043
   - id: leibniz
     number: 5
     name: Leibniz Institute of Freshwater Ecology and Inland Fisheries
@@ -462,7 +444,7 @@ affiliations:
   - id: virginia
     number: 6
     name: University of Virginia
-    department: 
+    department:
       - School of Data Science
     address: Dell 1 Building
     city: Charlottesville
@@ -471,7 +453,7 @@ affiliations:
   - id: bigcat
     number: 7
     name: Maastricht University
-    department: 
+    department:
       - Dept of Bioinformatics-BiGCaT
       - NUTRIM
     address: Universiteitssingel 50
@@ -481,9 +463,11 @@ affiliations:
   - id: chicago
     number: 8
     name: University of Illinois at Chicago
-    department: 
+    department:
       - Department of Pharmaceutical Sciences; College of Pharmacy
-      - Center for Natural Product Technologies and WHO Collaborating Centre for Traditional Medicine (WHO CC/TRM), Pharmacognosy Institute; College of Pharmacy
+      - Center for Natural Product Technologies and WHO Collaborating Centre for
+        Traditional Medicine (WHO CC/TRM), Pharmacognosy Institute; College of
+        Pharmacy
     group: Pauli
     address: 833 South Wood Street
     city: Chicago
@@ -498,7 +482,7 @@ affiliations:
   - id: glasgow
     number: 10
     name: University of Glasgow
-    department: 
+    department:
       - IBAHCM
       - MVLS
     city: Glasgow
@@ -506,14 +490,14 @@ affiliations:
   - id: unifr
     number: 11
     name: University of Fribourg
-    department: 
+    department:
       - Department of Biology
     group: Allard
     address: Chemin du Musée 10
     city: Fribourg
     country: Switzerland
     postal-code: 1700
-abstract: |
+abstract: >
   Contemporary bioinformatic and chemoinformatic capabilities hold promise to reshape knowledge management, analysis and interpretation of data in natural products research.
   Currently, reliance on a disparate set of non-standardized, insular, and specialized databases presents a series of challenges for data access, both within the discipline and for integration and interoperability between related fields.
   The fundamental elements of exchange are referenced structure-organism pairs that establish relationships between distinct molecular structures and the living organisms from which they were identified.

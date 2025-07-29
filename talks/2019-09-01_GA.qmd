@@ -1,25 +1,25 @@
 ---
-title: Strategy for Exhaustive Plant Metabolomes Characterization from a Qualitative and Quantitative Perspective
-venue: 67th International Congress and Annual Meeting of the Society for Medicinal Plant and Natural Product Research
-date: '2019-09-01'
+title: Strategy for Exhaustive Plant Metabolomes Characterization from a
+  Qualitative and Quantitative Perspective
+venue: 67th International Congress and Annual Meeting of the Society for
+  Medicinal Plant and Natural Product Research
+date: 2019-09-01
 location: Innsbruck, Austria
-# image: ""
-# image-alt: ""
 categories:
   - Poster
-author: 
-- name: 
-    given: Adriano 
-    family: Rutz
-  orcid: 0000-0003-0443-9902
-  number: 1
-  affiliations:
-    - ref: unige
+author:
+  - name:
+      given: Adriano
+      family: Rutz
+    orcid: 0000-0003-0443-9902
+    number: 1
+    affiliations:
+      - ref: unige
 affiliations:
   - id: unige
     number: 1
     name: University of Geneva
-    department: 
+    department:
       - School of Pharmaceutical Sciences
       - Institute of Pharmaceutical Sciences of Western Switzerland
     group: Wolfender

@@ -1,7 +1,7 @@
 ---
-listing: 
+listing:
   - id: varia_adafede
-    contents: "varia/adafede/*.qmd"
+    contents: varia/adafede/*.qmd
     sort: date desc
     categories: true
     feed: true
@@ -15,7 +15,7 @@ listing:
       - description
     type: grid
   - id: varia_lotus
-    contents: "varia/lotus/*.qmd"
+    contents: varia/lotus/*.qmd
     sort: date desc
     categories: true
     feed: true
@@ -29,7 +29,7 @@ listing:
       - description
     type: grid
   - id: varia_tima
-    contents: "varia/taxonomicallyinformedannotation/*.qmd"
+    contents: varia/taxonomicallyinformedannotation/*.qmd
     sort: date desc
     categories: true
     feed: true
@@ -43,7 +43,7 @@ listing:
       - description
     type: grid
   - id: varia_contribs
-    contents: "varia/additional_contributions/*.qmd"
+    contents: varia/additional_contributions/*.qmd
     sort: date desc
     categories: true
     feed: true

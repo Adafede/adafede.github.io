@@ -1,11 +1,12 @@
 ---
 bibliography: ../../references.bib
-title: Feature-Based Molecular Networking—An Exciting Tool to Spot Species of the Genus *Cortinarius* with Hidden Photosensitizers
+title: Feature-Based Molecular Networking—An Exciting Tool to Spot Species of
+  the Genus *Cortinarius* with Hidden Photosensitizers
 type: article
 venue: Metabolites
-date: '2021-11-19'
+date: 2021-11-19
 doi: https://doi.org/10.3390/metabo11110791
-url: "<https://doi.org/10.3390/metabo11110791>"
+url: <https://doi.org/10.3390/metabo11110791>
 # categories:
 #   - TODO
 # abstract: |

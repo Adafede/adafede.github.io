@@ -1,11 +1,12 @@
 ---
 bibliography: ../../references.bib
-title: "*Inventa*: A computational tool to discover structural novelty in natural extracts libraries"
+title: "*Inventa*: A computational tool to discover structural novelty in
+  natural extracts libraries"
 type: article
 venue: Frontiers in Molecular Biosciences
-date: '2022-11-21'
+date: 2022-11-21
 doi: https://doi.org/10.3389/fmolb.2022.1028334
-url: "<https://doi.org/10.3389/fmolb.2022.1028334>"
+url: <https://doi.org/10.3389/fmolb.2022.1028334>
 # categories:
 #   - TODO
 # abstract: |

@@ -1,5 +1,6 @@
 ---
-title: "**SAPID**: A **S**trategy to **A**nalyze **P**lant Extracts Taste **I**n **D**epth"
+title: "**SAPID**: A **S**trategy to **A**nalyze **P**lant Extracts Taste **I**n
+  **D**epth"
 url: https://adafede.github.io/sapid
 image: https://raw.githubusercontent.com/Adafede/sapid/refs/heads/main/man/figures/logo.svg
 image-alt: Logo of SAPID

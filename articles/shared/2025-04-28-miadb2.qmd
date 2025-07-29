@@ -1,9 +1,10 @@
 ---
 bibliography: ../../references.bib
-title: "Translating community-wide spectral library into actionable chemical knowledge: a proof of concept with monoterpene indole alkaloids"
+title: "Translating community-wide spectral library into actionable chemical
+  knowledge: a proof of concept with monoterpene indole alkaloids"
 type: article
 venue: Journal of Cheminformatics
-date: '2025-04-28'
+date: 2025-04-28
 doi: https://doi.org/10.1186/s13321-025-01009-0
 image: https://media.springernature.com/lw685/springer-static/image/art%3A10.1186%2Fs13321-025-01009-0/MediaObjects/13321_2025_1009_Figa_HTML.png
 image-alt: Article's Graphical Abstract
@@ -12,8 +13,7 @@ categories:
   - Spectral Library
   - Tandem Mass Spectrometry
 # authors:
-#   -
-#     name: Adriano Rutz
+#   - name: Adriano Rutz
 #     orcid: 0000-0003-0443-9902
 #     number: 2
 #     affiliations:
@@ -29,8 +29,15 @@ categories:
 #     city: Zürich
 #     country: Switzerland
 #     postal-code: 8093
-abstract: |
-  "With over 3000 representatives, the monoterpene indole alkaloids (MIAs) class is among the most diverse families of plant natural products. The MS/MS spectral space exploration of these complex compounds using chemoinformatic and computational mass spectrometry tools offers a valuable opportunity to extract and share chemical insights from this emblematic family of natural products (NPs). In this work, we first present a substantially updated version of the MIADB, a database now containing 422 MS/MS spectra of MIAs that has been uploaded to the GNPS library versus 172 initial entries. We then introduce an innovative workflow that leverages hundreds of fragmentation spectra to support the FAIRification, extraction and dissemination of chemical knowledge. This workflow aims at the extraction of spectral patterns matching finely defined MIA skeletons. These extracted signatures can then be queried against complex biological extract datasets using MassQL. By applying this strategy to an LC-MS/MS dataset of 75 plant extracts, our results demonstrated the efficiency of this approach in identifying the diversity of MIA skeletons present in the analyzed samples. Additionally, our work enabled the digitization of structural data for diverse MIA skeletons by converting them into machine-readable formats and thereby enhancing their dissemination for the scientific community."
+abstract: >
+  "With over 3000 representatives, the monoterpene indole alkaloids (MIAs) class is among the most diverse families of plant natural products.
+  The MS/MS spectral space exploration of these complex compounds using chemoinformatic and computational mass spectrometry tools offers a valuable opportunity to extract and share chemical insights from this emblematic family of natural products (NPs).
+  In this work, we first present a substantially updated version of the MIADB, a database now containing 422 MS/MS spectra of MIAs that has been uploaded to the GNPS library versus 172 initial entries.
+  We then introduce an innovative workflow that leverages hundreds of fragmentation spectra to support the FAIRification, extraction and dissemination of chemical knowledge.
+  This workflow aims at the extraction of spectral patterns matching finely defined MIA skeletons.
+  These extracted signatures can then be queried against complex biological extract datasets using MassQL.
+  By applying this strategy to an LC-MS/MS dataset of 75 plant extracts, our results demonstrated the efficiency of this approach in identifying the diversity of MIA skeletons present in the analyzed samples.
+  Additionally, our work enabled the digitization of structural data for diverse MIA skeletons by converting them into machine-readable formats and thereby enhancing their dissemination for the scientific community."
 nocite: |
   @Szwarc2025
 ---

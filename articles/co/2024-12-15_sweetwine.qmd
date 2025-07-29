@@ -1,11 +1,12 @@
 ---
 bibliography: ../../references.bib
-title: Untargeted metabolomics analyses to identify a new sweet compound released during post-fermentation maceration of wine.
+title: Untargeted metabolomics analyses to identify a new sweet compound
+  released during post-fermentation maceration of wine.
 type: article
 venue: Food Chemistry
-date: '2024-12-15'
+date: 2024-12-15
 doi: https://doi.org/10.1016/j.foodchem.2024.140801
-url: "<https://doi.org/10.1016/j.foodchem.2024.140801>"
+url: <https://doi.org/10.1016/j.foodchem.2024.140801>
 # categories:
 #   - TODO
 # abstract: |
