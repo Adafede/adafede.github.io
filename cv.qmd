@@ -14,13 +14,13 @@ cvcolor: 58748F
 cvmeta:
   - title: Status
     left: Postdoctoral Researcher, ETH Zürich
-    right: Zürich, Switzerland
+    right: "website: https://adafede.github.io"
   - title: Field
     left: Metabolomics, Mass Spectrometry, Natural Products
-    right: "email: adriano.rutz@ik.me"
+    right: "phone: +41 76 521 45 40 - email: adriano.rutz@ik.me"
   - title: Languages
     left: French (C2), English (C1), German (C1), Italian (C1)
-    right: "website: https://adafede.github.io"
+    right: "address: Langgrütstrasse, 25, 8047 Zürich, Switzerland"
 ---
 
 {{< include cv/bio.qmd >}}
