@@ -5,7 +5,7 @@ image: https://upload.wikimedia.org/wikipedia/commons/3/37/Adriano_Rutz.jpg
 about:
   id: hero-heading
   image-alt: Adriano Rutz
-  image-width: 33%
+  image-width: 50%
   template: trestles
   links:
     # - text: '<i class="ai ai-cv"></i>'
@@ -32,13 +32,12 @@ about:
     #   href: https://scholia.toolforge.org/author/Q97455964
 format:
   html:
+    css: assets/about-widths.css
     page-layout: full
 ---
 
 :::{#hero-heading}
-
 {{< include cv/bio.qmd >}}
 
 {{< include expertise.qmd >}}
-
 :::

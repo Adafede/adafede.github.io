@@ -9,7 +9,7 @@ categories:
 
 ## Topics
 
-* Extraction of an essential oil according to the European Pharmacopea
+* Extraction of an essential oil according to the European Pharmacopoeia
 
 * Gas Chromatography - Flame Ionization Detection analysis as a tool for quality control
 
