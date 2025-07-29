@@ -2,6 +2,13 @@ body {
   margin-top: -60px; /* removes space at the top */
 }
 
+/* Mobile layout */
+@media screen and (max-width: 576px) {
+  body {
+    margin-top: -40px;
+  }
+}
+
 .about-entity {
   flex: 0 0 330.66px;
   max-width: 330.66px;
@@ -12,7 +19,6 @@ body {
   min-width: 0; /* prevents overflow in flex */
 }
 
-/* Mobile layout: stacked vertically */
 @media screen and (max-width: 991.98px) {
   .quarto-about-trestles {
     flex-direction: column;
