@@ -1,0 +1,26 @@
+body {
+  margin-top: -60px; /* removes space at the top */
+}
+
+.about-entity {
+  flex: 0 0 330.66px;
+  max-width: 330.66px;
+}
+
+.about-contents {
+  flex: 1;
+  min-width: 0; /* prevents overflow in flex */
+}
+
+/* Mobile layout: stacked vertically */
+@media screen and (max-width: 991.98px) {
+  .quarto-about-trestles {
+    flex-direction: column;
+  }
+
+  .about-entity,
+  .about-contents {
+    max-width: 100%;
+    flex: unset;
+  }
+}

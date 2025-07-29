@@ -18,14 +18,14 @@
     "href": "teaching/2017_practicals.html",
     "title": "Phytochemistry practicals",
     "section": "",
-    "text": "Extraction of an essential oil according to the European Pharmacopea\nGas Chromatography - Flame Ionization Detection analysis as a tool for quality control\nNotions of method optimization"
+    "text": "Extraction of an essential oil according to the European Pharmacopoeia\nGas Chromatography - Flame Ionization Detection analysis as a tool for quality control\nNotions of method optimization"
   },
   {
     "objectID": "teaching/2017_practicals.html#topics",
     "href": "teaching/2017_practicals.html#topics",
     "title": "Phytochemistry practicals",
     "section": "",
-    "text": "Extraction of an essential oil according to the European Pharmacopea\nGas Chromatography - Flame Ionization Detection analysis as a tool for quality control\nNotions of method optimization"
+    "text": "Extraction of an essential oil according to the European Pharmacopoeia\nGas Chromatography - Flame Ionization Detection analysis as a tool for quality control\nNotions of method optimization"
   },
   {
     "objectID": "talks.html",
@@ -112,6 +112,13 @@
     "text": "References\n\nHammerle, Fabian, Luis Quirós-Guerrero, Adriano Rutz, Jean-Luc Wolfender, Harald Schöbel, Ursula Peintner, and Bianka Siewert. 2021. “Feature-Based Molecular Networking—an Exciting Tool to Spot Species of the Genus Cortinarius with Hidden Photosensitizers.” Metabolites 11 (11): 791. https://doi.org/10.3390/metabo11110791."
   },
   {
+    "objectID": "articles/co/2021-06-16_sunitinib.html",
+    "href": "articles/co/2021-06-16_sunitinib.html",
+    "title": "Molecular and Functional Analysis of Sunitinib-Resistance Induction in Human Renal Cell Carcinoma Cells",
+    "section": "",
+    "text": "References\n\nRausch, Magdalena, Adriano Rutz, Pierre-Marie Allard, Céline Delucinge-Vivier, Mylène Docquier, Olivier Dormond, Jean-Luc Wolfender, and Patrycja Nowak-Sliwinska. 2021. “Molecular and Functional Analysis of Sunitinib-Resistance Induction in Human Renal Cell Carcinoma Cells.” International Journal of Molecular Sciences 22 (12): 6467. https://doi.org/10.3390/ijms22126467."
+  },
+  {
     "objectID": "articles/co/2020-08-20_solanum.html",
     "href": "articles/co/2020-08-20_solanum.html",
     "title": "Insights on the Structural and Metabolic Resistance of Potato (Solanum tuberosum) Cultivars to Tuber Black Dot (Colletotrichum coccodes)",
@@ -130,14 +137,14 @@
     "href": "cv.html",
     "title": "Adriano Rutz",
     "section": "",
-    "text": "Adriano Rutz is a pharmaceutical scientist with a focus on metabolomics, natural products, and analytical chemistry. He gained industry experience at Tradall SA (Bacardi Group) before completing his PhD in phytochemistry from the University of Geneva. Currently a postdoctoral researcher at ETH Zurich, he develops computational tools and mass spectrometry-based methods to study the chemistry of living organisms. He is committed to open science and open data, and is one of the authors of the LOTUS initiative, which explores new ways of sharing knowledge in natural products research."
+    "text": "Adriano Rutz is a postdoctoral researcher at ETH Zürich, where he develops computational and analytical methods for metabolomics. With a background in pharmaceutical sciences and phytochemistry, he combines mass spectrometry, cheminformatics, and open science to explore the chemical diversity of life. Following industry experience at Tradall SA (Bacardi Group), he completed his PhD at the University of Geneva. At ETH Zürich, he creates scalable, open-source tools for molecular annotation and metabolite discovery. He is a core contributor to the LOTUS initiative, a global, FAIR, community-driven knowledge base for natural products. His research fosters interdisciplinary collaboration across data science, chemistry, and biology, driving innovation in metabolomics and beyond."
   },
   {
     "objectID": "cv.html#bio",
     "href": "cv.html#bio",
     "title": "Adriano Rutz",
     "section": "",
-    "text": "Adriano Rutz is a pharmaceutical scientist with a focus on metabolomics, natural products, and analytical chemistry. He gained industry experience at Tradall SA (Bacardi Group) before completing his PhD in phytochemistry from the University of Geneva. Currently a postdoctoral researcher at ETH Zurich, he develops computational tools and mass spectrometry-based methods to study the chemistry of living organisms. He is committed to open science and open data, and is one of the authors of the LOTUS initiative, which explores new ways of sharing knowledge in natural products research."
+    "text": "Adriano Rutz is a postdoctoral researcher at ETH Zürich, where he develops computational and analytical methods for metabolomics. With a background in pharmaceutical sciences and phytochemistry, he combines mass spectrometry, cheminformatics, and open science to explore the chemical diversity of life. Following industry experience at Tradall SA (Bacardi Group), he completed his PhD at the University of Geneva. At ETH Zürich, he creates scalable, open-source tools for molecular annotation and metabolite discovery. He is a core contributor to the LOTUS initiative, a global, FAIR, community-driven knowledge base for natural products. His research fosters interdisciplinary collaboration across data science, chemistry, and biology, driving innovation in metabolomics and beyond."
   },
   {
     "objectID": "cv.html#professional-experience",
@@ -172,14 +179,14 @@
     "href": "index.html",
     "title": "Adriano Rutz",
     "section": "",
-    "text": "Adriano Rutz is a pharmaceutical scientist with a focus on metabolomics, natural products, and analytical chemistry. He gained industry experience at Tradall SA (Bacardi Group) before completing his PhD in phytochemistry from the University of Geneva. Currently a postdoctoral researcher at ETH Zurich, he develops computational tools and mass spectrometry-based methods to study the chemistry of living organisms. He is committed to open science and open data, and is one of the authors of the LOTUS initiative, which explores new ways of sharing knowledge in natural products research."
+    "text": "Adriano Rutz is a postdoctoral researcher at ETH Zürich, where he develops computational and analytical methods for metabolomics. With a background in pharmaceutical sciences and phytochemistry, he combines mass spectrometry, cheminformatics, and open science to explore the chemical diversity of life. Following industry experience at Tradall SA (Bacardi Group), he completed his PhD at the University of Geneva. At ETH Zürich, he creates scalable, open-source tools for molecular annotation and metabolite discovery. He is a core contributor to the LOTUS initiative, a global, FAIR, community-driven knowledge base for natural products. His research fosters interdisciplinary collaboration across data science, chemistry, and biology, driving innovation in metabolomics and beyond."
   },
   {
     "objectID": "index.html#bio",
     "href": "index.html#bio",
     "title": "Adriano Rutz",
     "section": "",
-    "text": "Adriano Rutz is a pharmaceutical scientist with a focus on metabolomics, natural products, and analytical chemistry. He gained industry experience at Tradall SA (Bacardi Group) before completing his PhD in phytochemistry from the University of Geneva. Currently a postdoctoral researcher at ETH Zurich, he develops computational tools and mass spectrometry-based methods to study the chemistry of living organisms. He is committed to open science and open data, and is one of the authors of the LOTUS initiative, which explores new ways of sharing knowledge in natural products research."
+    "text": "Adriano Rutz is a postdoctoral researcher at ETH Zürich, where he develops computational and analytical methods for metabolomics. With a background in pharmaceutical sciences and phytochemistry, he combines mass spectrometry, cheminformatics, and open science to explore the chemical diversity of life. Following industry experience at Tradall SA (Bacardi Group), he completed his PhD at the University of Geneva. At ETH Zürich, he creates scalable, open-source tools for molecular annotation and metabolite discovery. He is a core contributor to the LOTUS initiative, a global, FAIR, community-driven knowledge base for natural products. His research fosters interdisciplinary collaboration across data science, chemistry, and biology, driving innovation in metabolomics and beyond."
   },
   {
     "objectID": "articles.html",
@@ -236,6 +243,13 @@
     "title": "Antiseizure potential of the ancient Greek medicinal plant Helleborus odorus subsp. cyclophyllus and identification of its main active principles",
     "section": "",
     "text": "References\n\nBrillatz, Théo, Maxime Jacmin, Konstantina Vougogiannopoulou, Eleftherios A. Petrakis, Eleftherios Kalpoutzakis, Joëlle Houriet, Léonie Pellissier, et al. 2020. “Antiseizure Potential of the Ancient Greek Medicinal Plant Helleborus Odorus Subsp. Cyclophyllus and Identification of Its Main Active Principles.” Journal of Ethnopharmacology 259 (September): 112954. https://doi.org/10.1016/j.jep.2020.112954."
+  },
+  {
+    "objectID": "articles/co/2021-08-06_repurposing.html",
+    "href": "articles/co/2021-08-06_repurposing.html",
+    "title": "Drug Repurposing to Identify a Synergistic High-Order Drug Combination to Treat Sunitinib-Resistant Renal Cell Carcinoma",
+    "section": "",
+    "text": "References\n\nRausch, Magdalena, Adriano Rutz, Pierre-Marie Allard, Céline Delucinge-Vivier, Mylène Docquier, Olivier Dormond, Paul J. Dyson, Jean-Luc Wolfender, and Patrycja Nowak-Sliwinska. 2021. “Drug Repurposing to Identify a Synergistic High-Order Drug Combination to Treat Sunitinib-Resistant Renal Cell Carcinoma.” Cancers 13 (16): 3978. https://doi.org/10.3390/cancers13163978."
   },
   {
     "objectID": "articles/co/2022-01-22_biphyscion.html",
