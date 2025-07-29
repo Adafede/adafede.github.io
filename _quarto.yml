@@ -57,3 +57,5 @@ format:
       dark: darkly
     respect-user-color-scheme: true
     smooth-scroll: true
+
+kernel: .venv
