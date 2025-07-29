@@ -1,20 +1,18 @@
 ---
 title: "Lotus: A Living Knowledge Base for Modern Pharmacognosy"
 venue: Neue Forschungsergebnisse Pharmakognosie
-date: '2023-10-16'
+date: 2023-10-16
 location: Innsbruck, Austria
-# image: ""
-# image-alt: ""
 categories:
   - Talk
-author: 
-- name: 
-    given: Adriano 
-    family: Rutz
-  orcid: 0000-0003-0443-9902
-  number: 1
-  affiliations:
-    - ref: ethz
+author:
+  - name:
+      given: Adriano
+      family: Rutz
+    orcid: 0000-0003-0443-9902
+    number: 1
+    affiliations:
+      - ref: ethz
 affiliations:
   - id: ethz
     number: 1

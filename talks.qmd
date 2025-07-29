@@ -1,14 +1,14 @@
 ---
 title: Talks
-listing: 
+listing:
   - id: talks
-    contents: "talks/*.qmd"
+    contents: talks/*.qmd
     sort: date desc
     categories: true
     feed: true
     sort-ui: true
     filter-ui: true
-    fields: 
+    fields:
       - title
       - description
       - author

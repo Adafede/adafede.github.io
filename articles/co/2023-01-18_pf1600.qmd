@@ -1,11 +1,12 @@
 ---
 bibliography: ../../references.bib
-title: Open and reusable annotated mass spectrometry dataset of a chemodiverse collection of 1,600 plant extracts
+title: Open and reusable annotated mass spectrometry dataset of a chemodiverse
+  collection of 1,600 plant extracts
 type: article
 venue: GigaScience
-date: '2023-01-18'
+date: 2023-01-18
 doi: https://doi.org/10.1093/gigascience/giac124
-url: "<https://doi.org/10.1093/gigascience/giac124>"
+url: <https://doi.org/10.1093/gigascience/giac124>
 # categories:
 #   - TODO
 # abstract: |

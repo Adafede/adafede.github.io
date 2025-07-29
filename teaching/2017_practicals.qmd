@@ -1,10 +1,8 @@
 ---
 title: Phytochemistry practicals
 venue: Université de Genève, Pharmaceutical Sciences
-date: '2017-09-15'
+date: 2017-09-15
 location: Geneva, Switzerland
-# image: ""
-# image-alt: ""
 categories:
   - Teaching
 ---

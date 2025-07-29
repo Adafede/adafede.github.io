@@ -1,9 +1,11 @@
 ---
 bibliography: ../../references.bib
-title: "Automated Composition Assessment of Natural Extracts: Untargeted Mass Spectrometry-Based Metabolite Profiling Integrating Semiquantitative Detection"
+title: "Automated Composition Assessment of Natural Extracts: Untargeted Mass
+  Spectrometry-Based Metabolite Profiling Integrating Semiquantitative
+  Detection"
 type: article
 venue: Journal of Agricultural and Food Chemistry
-date: '2023-11-10'
+date: 2023-11-10
 doi: https://doi.org/10.1021/acs.jafc.3c03099
 image: https://raw.githubusercontent.com/Adafede/cascade/refs/heads/main/man/figures/cascade-workflow.svg
 image-alt: CASCADE's Workflow
@@ -16,8 +18,7 @@ categories:
   - Natural Products
   - Metabolite Annotation
 authors:
-  -
-    name: Adriano Rutz
+  - name: Adriano Rutz
     orcid: 0000-0003-0443-9902
     number: 1
     email: rutz@imsb.biol.ethz.ch
@@ -25,8 +26,7 @@ authors:
       - ref: unige
       - ref: ethz
     correspondence: true
-  -
-    name: Jean-Luc Wolfender
+  - name: Jean-Luc Wolfender
     orcid: 0000-0002-0125-952X
     number: 2
     email: jean-luc.wolfender@unige.ch
@@ -37,7 +37,7 @@ affiliations:
   - id: unige
     number: 1
     name: University of Geneva
-    department: 
+    department:
       - School of Pharmaceutical Sciences
       - Institute of Pharmaceutical Sciences of Western Switzerland
     group: Wolfender
@@ -54,8 +54,22 @@ affiliations:
     city: Zürich
     country: Switzerland
     postal-code: 8093
-abstract: |
-  Recent developments in mass spectrometry-based metabolite profiling allow unprecedented qualitative coverage of complex biological extract composition. However, the electrospray ionization used in metabolite profiling generates multiple artifactual signals for a single analyte. This leads to thousands of signals per analysis without satisfactory means of filtering those corresponding to abundant constituents. Generic approaches are therefore needed for the qualitative and quantitative annotation of a broad range of relevant constituents. For this, we used an analytical platform combining liquid chromatography–mass spectrometry (LC–MS) with Charged Aerosol Detection (CAD). We established a generic metabolite profiling for the concomitant recording of qualitative MS data and semiquantitative CAD profiles. The MS features (recorded in high-resolution tandem MS) are grouped and annotated using state-of-the-art tools. To efficiently attribute features to their corresponding extracted and integrated CAD peaks, a custom signal pretreatment and peak-shape comparison workflow is built. This strategy allows us to automatically contextualize features at both major and minor metabolome levels, together with a detailed reporting of their annotation including relevant orthogonal information (taxonomy, retention time). Signals not attributed to CAD peaks are considered minor metabolites. Results are illustrated on an ethanolic extract of *Swertia chirayita* (Roxb.) H. Karst., a bitter plant of industrial interest, exhibiting the typical complexity of plant extracts as a proof of concept. This generic qualitative and quantitative approach paves the way to automatically assess the composition of single natural extracts of interest or broader collections, thus facilitating new ingredient registrations or natural-extracts-based drug discovery campaigns.
+abstract: >
+  Recent developments in mass spectrometry-based metabolite profiling allow unprecedented qualitative coverage of complex biological extract
+  composition. 
+  However, the electrospray ionization used in metabolite profiling generates multiple artifactual signals for a single analyte.
+  This leads to thousands of signals per analysis without satisfactory means of filtering those corresponding to abundant constituents.
+  Generic approaches are therefore needed for the qualitative and quantitative annotation of a broad range of relevant constituents.
+  For this, we used an analytical platform combining liquid chromatography–mass spectrometry (LC–MS) with Charged Aerosol Detection (CAD).
+  We established a generic metabolite profiling for the concomitant recording of qualitative MS data and semiquantitative CAD profiles.
+  The MS features (recorded in high-resolution tandem MS) are grouped and annotated
+  using state-of-the-art tools.
+  To efficiently attribute features to their corresponding extracted and integrated CAD peaks, a custom signal pretreatment and peak-shape comparison workflow is built.
+  This strategy allows us to automatically contextualize features at both major and minor metabolome
+  levels, together with a detailed reporting of their annotation including relevant orthogonal information (taxonomy, retention time).
+  Signals not attributed to CAD peaks are considered minor metabolites.
+  Results are illustrated on an ethanolic extract of *Swertia chirayita* (Roxb.) H. Karst., a bitter plant of industrial interest, exhibiting the typical complexity of plant extracts as a proof of concept.
+  This generic qualitative and quantitative approach paves the way to automatically assess the composition of single natural extracts of interest or broader collections, thus facilitating new ingredient registrations or natural-extracts-based drug discovery campaigns.
 nocite: |
   @Rutz2023
 ---

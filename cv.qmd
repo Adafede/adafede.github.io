@@ -1,16 +1,16 @@
 ---
 format:
   html: default
-  pdf: 
-    filters: 
+  pdf:
+    filters:
       - cv/styles.lua
     template: cv/template.tex
 cvauthor: Adriano Rutz
 cvprofession: Pharmaceutical Scientist
-cvfooter: 
+cvfooter:
   left: "website: https://adafede.github.io"
   right: "email: adriano.rutz@ik.me"
-cvcolor: 58748F # without `#`
+cvcolor: 58748F
 cvmeta:
   - title: Status
     left: Postdoctoral Researcher, ETH Zürich

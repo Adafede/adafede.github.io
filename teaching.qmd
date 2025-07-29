@@ -1,7 +1,7 @@
 ---
-listing: 
+listing:
   - id: teaching
-    contents: "teaching/*.qmd"
+    contents: teaching/*.qmd
     sort: date desc
     categories: true
     feed: true

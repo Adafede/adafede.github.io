@@ -1,11 +1,12 @@
 ---
 bibliography: ../../references.bib
-title: Phytochemical analysis of the methanolic leaves extract of *Niedenzuella multiglandulosa* (Malpighiaceae), a plant species toxic to cattle in Brazil
+title: Phytochemical analysis of the methanolic leaves extract of *Niedenzuella
+  multiglandulosa* (Malpighiaceae), a plant species toxic to cattle in Brazil
 type: article
 venue: Phytochemistry Letters
-date: '2020-06-00'
+date: 2020-06-00
 doi: https://doi.org/10.1016/j.phytol.2020.02.005
-url: "<https://doi.org/10.1016/j.phytol.2020.02.005>"
+url: <https://doi.org/10.1016/j.phytol.2020.02.005>
 # categories:
 #   - TODO
 # abstract: |

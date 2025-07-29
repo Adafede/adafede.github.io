@@ -1,11 +1,13 @@
 ---
 bibliography: ../../references.bib
-title: "Comparative metabolomics of fungal foliar endophytes and their long-lived host *Astrocaryum sciophilum*: a model for exploring the chemodiversity of host-microbe interactions"
+title: "Comparative metabolomics of fungal foliar endophytes and their
+  long-lived host *Astrocaryum sciophilum*: a model for exploring the
+  chemodiversity of host-microbe interactions"
 type: article
 venue: Frontiers in Plant Science
-date: '2023-12-19'
+date: 2023-12-19
 doi: https://doi.org/10.3389/fpls.2023.1278745
-url: "<https://doi.org/10.3389/fpls.2023.1278745>"
+url: <https://doi.org/10.3389/fpls.2023.1278745>
 # categories:
 #   - TODO
 # abstract: |

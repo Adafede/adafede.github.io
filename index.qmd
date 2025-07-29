@@ -2,7 +2,7 @@
 title: Adriano Rutz
 subtitle: Swiss Pharmaceutical Scientist
 image: https://upload.wikimedia.org/wikipedia/commons/3/37/Adriano_Rutz.jpg
-about: 
+about:
   id: hero-heading
   image-alt: Adriano Rutz
   image-width: 33%
@@ -11,7 +11,7 @@ about:
     # - text: '<i class="ai ai-cv"></i>'
     #   href: https://adafede.github.io/cv
     - icon: envelope-at
-      href: "mailto:rutz@imsb.biol.ethz.ch"
+      href: mailto:rutz@imsb.biol.ethz.ch
     - icon: linkedin
       href: https://www.linkedin.com/in/AdrianoRutz/
     # - text: '<i class="ai ai-orcid"></i>'
@@ -30,8 +30,8 @@ about:
     #   href: https://www.researchgate.net/profile/Adriano_Rutz
     # - text: "![](https://upload.wikimedia.org/wikipedia/commons/5/5b/Scholia_Logo_Improved.svg){height=20}"
     #   href: https://scholia.toolforge.org/author/Q97455964
-format: 
-  html: 
+format:
+  html:
     page-layout: full
 ---
 

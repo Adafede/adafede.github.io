@@ -1,20 +1,18 @@
 ---
 title: Prior Knowledge as a Compass Guiding Untargeted Metabolomics
 venue: Jena Centre for Bioinformatics
-date: '2023-02-12'
+date: 2023-02-12
 location: Jena, Germany
-# image: ""
-# image-alt: ""
 categories:
   - Talk
-author: 
-- name: 
-    given: Adriano 
-    family: Rutz
-  orcid: 0000-0003-0443-9902
-  number: 1
-  affiliations:
-    - ref: ethz
+author:
+  - name:
+      given: Adriano
+      family: Rutz
+    orcid: 0000-0003-0443-9902
+    number: 1
+    affiliations:
+      - ref: ethz
 affiliations:
   - id: ethz
     number: 1
@@ -25,8 +23,9 @@ affiliations:
     city: Zürich
     country: Switzerland
     postal-code: 8093
-description: |
+description: >
   <http://www.jcb-jena.de/2023/01/seminar-02-february-2023-dr-adriano-rutz/#more-2487>.
-  
+
+
   Available [here](https://adafede.github.io/my-presentations/20230202_jena/20230202_jena.pdf).
 ---

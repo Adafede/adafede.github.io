@@ -3,9 +3,9 @@ bibliography: ../../references.bib
 title: Unifying the identification of biomedical entities with the Bioregistry
 type: article
 venue: Scientific Data
-date: '2022-11-19'
+date: 2022-11-19
 doi: https://doi.org/10.1038/s41597-022-01807-3
-url: "<https://doi.org/10.1038/s41597-022-01807-3>"
+url: <https://doi.org/10.1038/s41597-022-01807-3>
 # categories:
 #   - TODO
 # abstract: |

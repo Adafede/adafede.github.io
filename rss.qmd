@@ -3,7 +3,7 @@ title: Adriano Rutz's website
 search: false
 listing:
   sort: date desc
-  feed: 
+  feed:
     title: Adriano Rutz's website
     description: Adriano Rutz's website
     items: 60

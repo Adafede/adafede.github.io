@@ -1,13 +1,14 @@
 ---
-listing: 
+listing:
   # - id: last
-  #   contents: "articles/last/*.qmd"
+  #   contents: articles/last/*.qmd
   #   sort: date desc
+  #   date-format: iso
   #   categories: true
   #   feed: true
   #   sort-ui: true
   #   filter-ui: true
-  #   fields: 
+  #   fields:
   #     - title
   #     - author
   #     - venue
@@ -17,14 +18,14 @@ listing:
   #     - doi
   #     - date
   - id: first
-    contents: "articles/first/*.qmd"
+    contents: articles/first/*.qmd
     sort: date desc
     date-format: iso
     categories: true
     feed: true
     sort-ui: true
     filter-ui: true
-    fields: 
+    fields:
       - title
       - author
       - venue
@@ -33,9 +34,8 @@ listing:
       - image-alt
       - doi
       - date
-      - wikidata
   - id: shared
-    contents: "articles/shared/*.qmd"
+    contents: articles/shared/*.qmd
     sort: date desc
     date-format: iso
     categories: true
@@ -52,7 +52,7 @@ listing:
       - doi
       - date
   - id: co
-    contents: "articles/co/*.qmd"
+    contents: articles/co/*.qmd
     sort: date desc
     date-format: iso
     categories: true
@@ -70,7 +70,7 @@ listing:
       - url
     type: table
   - id: thesis
-    contents: "articles/thesis.qmd"
+    contents: articles/thesis.qmd
     sort: date desc
     date-format: iso
     categories: true

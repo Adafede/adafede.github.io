@@ -1,11 +1,13 @@
 ---
 bibliography: ../../references.bib
-title: "Metabolomics in Ecology and Bioactive Natural Products Discovery: Challenges and Prospects for a Comprehensive Study of the Specialised Metabolome"
+title: "Metabolomics in Ecology and Bioactive Natural Products Discovery:
+  Challenges and Prospects for a Comprehensive Study of the Specialised
+  Metabolome"
 type: article
 venue: CHIMIA
-date: '2022-11-30'
+date: 2022-11-30
 doi: https://doi.org/10.2533/chimia.2022.954
-url: "<https://doi.org/10.2533/chimia.2022.954>"
+url: <https://doi.org/10.2533/chimia.2022.954>
 # categories:
 #   - TODO
 # abstract: |

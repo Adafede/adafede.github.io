@@ -1,29 +1,27 @@
 ---
 title: Advanced course on mass spectrometry
 venue: Università degli Studi di Napoli Federico II, Pharmaceutical Sciences
-date: '2019-10-14'
+date: 2019-10-14
 location: Napoli, Italy
-# image: ""
-# image-alt: ""
 categories:
   - Teaching
-author: 
-- name: 
-    given: Adriano 
-    family: Rutz
-  orcid: 0000-0003-0443-9902
-  number: 1
-  affiliations:
-    - ref: unige
-- name: 
-    given: Jean-Luc 
-    family: Wolfender
-  orcid: 0000-0002-0125-952X
-  number: 2
-  corresponding: true
-  email: jean-luc.wolfender@unige.ch
-  affiliations:
-    - ref: unige
+author:
+  - name:
+      given: Adriano
+      family: Rutz
+    orcid: 0000-0003-0443-9902
+    number: 1
+    affiliations:
+      - ref: unige
+  - name:
+      given: Jean-Luc
+      family: Wolfender
+    orcid: 0000-0002-0125-952X
+    number: 2
+    corresponding: true
+    email: jean-luc.wolfender@unige.ch
+    affiliations:
+      - ref: unige
 affiliations:
   - id: unige
     number: 1

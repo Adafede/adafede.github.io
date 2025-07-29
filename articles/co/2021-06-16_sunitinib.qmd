@@ -1,11 +1,12 @@
 ---
 bibliography: ../../references.bib
-title: Molecular and Functional Analysis of Sunitinib-Resistance Induction in Human Renal Cell Carcinoma Cells
+title: Molecular and Functional Analysis of Sunitinib-Resistance Induction in
+  Human Renal Cell Carcinoma Cells
 type: article
 venue: International Journal of Molecular Sciences
-date: '2021-06-16'
+date: 2021-06-16
 doi: https://doi.org/10.3390/ijms22126467
-url: "<https://doi.org/10.3390/ijms22126467>"
+url: <https://doi.org/10.3390/ijms22126467>
 # categories:
 #   - TODO
 # abstract: |

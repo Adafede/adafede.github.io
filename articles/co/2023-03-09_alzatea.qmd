@@ -1,11 +1,12 @@
 ---
 bibliography: ../../references.bib
-title: Phytochemical study of *Alzatea verticillata*, the sole species belonging to the Alzateaceae family
+title: Phytochemical study of *Alzatea verticillata*, the sole species belonging
+  to the Alzateaceae family
 type: article
 venue: Frontiers in Natural Products
-date: '2023-03-09'
+date: 2023-03-09
 doi: https://doi.org/10.3389/fntpr.2023.1147195
-url: "<https://doi.org/10.3389/fntpr.2023.1147195>"
+url: <https://doi.org/10.3389/fntpr.2023.1147195>
 # categories:
 #   - TODO
 # abstract: |

@@ -1,11 +1,12 @@
 ---
 bibliography: ../../references.bib
-title: A Sample-Centric and Knowledge-Driven Computational Framework for Natural Products Drug Discovery
+title: A Sample-Centric and Knowledge-Driven Computational Framework for Natural
+  Products Drug Discovery
 type: article
 venue: ACS Central Science
-date: '2024-03-27'
+date: 2024-03-27
 doi: https://doi.org/10.1021/acscentsci.3c00800
-url: "<https://doi.org/10.1021/acscentsci.3c00800>"
+url: <https://doi.org/10.1021/acscentsci.3c00800>
 # categories:
 #   - TODO
 # abstract: |
