@@ -1,0 +1,19 @@
+---
+bibliography: ../../references.bib
+title: Degradation of extracellular polymeric substances shapes microbial community diversity
+type: article
+venue: PLOS Biology
+date: 2025-07-29
+doi: https://doi.org/10.1371/journal.pbio.3003287
+url: <https://doi.org/10.1371/journal.pbio.3003287>
+# categories:
+#   - TODO
+# abstract: |
+#  TODO
+nocite: |
+  @Pontrelli2025
+---
+
+<!-- ```{=html} -->
+<!-- <iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/TODO" title="Scholia entry"></iframe> -->
+<!-- ``` -->

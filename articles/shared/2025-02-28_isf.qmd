@@ -38,3 +38,7 @@ categories:
 nocite: |
   @ElAbiead2025
 ---
+
+<!-- ```{=html} -->
+<!-- <iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/TODO" title="Scholia entry"></iframe> -->
+<!-- ``` -->
