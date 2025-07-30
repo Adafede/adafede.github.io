@@ -10,7 +10,31 @@
 <atom:link href="https://adafede.github.io/articles.xml" rel="self" type="application/rss+xml"/>
 <description>Personal website of Adriano Rutz</description>
 <generator>quarto-1.7.32</generator>
-<lastBuildDate>Mon, 28 Apr 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Tue, 29 Jul 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Degradation of extracellular polymeric substances shapes microbial community diversity</title>
+  <link>https://adafede.github.io/articles/co/2025-07-29_eps.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<!-- ```{=html} -->
+<!-- <iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/TODO" title="Scholia entry"></iframe> -->
+<!-- ``` -->
+
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="ref-Pontrelli2025" class="csl-entry">
+Pontrelli, Sammy, Kian Bigovic Villi, Andreas Sichert, Julian Trouillon, Adriano Rutz, Zachary C. Landry, Simon H. Rüdisser, Roman Stocker, and Uwe Sauer. 2025. <span>“Degradation of Extracellular Polymeric Substances Shapes Microbial Community Diversity.”</span> Edited by Wenying Shou. <em>PLOS Biology</em> 23 (7): e3003287. <a href="https://doi.org/10.1371/journal.pbio.3003287">https://doi.org/10.1371/journal.pbio.3003287</a>.
+</div>
+</div></section></div> ]]></description>
+  <guid>https://adafede.github.io/articles/co/2025-07-29_eps.html</guid>
+  <pubDate>Tue, 29 Jul 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Translating community-wide spectral library into actionable chemical knowledge: a proof of concept with monoterpene indole alkaloids</title>
   <link>https://adafede.github.io/articles/shared/2025-04-28-miadb2.html</link>
@@ -46,6 +70,9 @@ Szwarc, Sarah, Adriano Rutz, Kyungha Lee, Yassine Mejri, Olivier Bonnet, Hazrina
 
 
 
+<!-- ```{=html} -->
+<!-- <iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/TODO" title="Scholia entry"></iframe> -->
+<!-- ``` -->
 
 
 
@@ -72,6 +99,9 @@ Rutz, Adriano, Pascale Deneulin, Ivano Tonutti, Benoît Bach, and Jean-Luc Wolfe
 
 
 
+<!-- ```{=html} -->
+<!-- <iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/TODO" title="Scholia entry"></iframe> -->
+<!-- ``` -->
 
 
 
@@ -461,28 +491,6 @@ Rausch, Magdalena, Adriano Rutz, Pierre-Marie Allard, Céline Delucinge-Vivier, 
 </div></section></div> ]]></description>
   <guid>https://adafede.github.io/articles/co/2021-08-06_repurposing.html</guid>
   <pubDate>Fri, 06 Aug 2021 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Molecular and Functional Analysis of Sunitinib-Resistance Induction in Human Renal Cell Carcinoma Cells</title>
-  <link>https://adafede.github.io/articles/co/2021-06-16_sunitinib.html</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q107270365" title="Scholia entry"></iframe>
-
-
-
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
-<div id="ref-Rausch2021a" class="csl-entry">
-Rausch, Magdalena, Adriano Rutz, Pierre-Marie Allard, Céline Delucinge-Vivier, Mylène Docquier, Olivier Dormond, Jean-Luc Wolfender, and Patrycja Nowak-Sliwinska. 2021. <span>“Molecular and Functional Analysis of Sunitinib-Resistance Induction in Human Renal Cell Carcinoma Cells.”</span> <em>International Journal of Molecular Sciences</em> 22 (12): 6467. <a href="https://doi.org/10.3390/ijms22126467">https://doi.org/10.3390/ijms22126467</a>.
-</div>
-</div></section></div> ]]></description>
-  <guid>https://adafede.github.io/articles/co/2021-06-16_sunitinib.html</guid>
-  <pubDate>Wed, 16 Jun 2021 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
