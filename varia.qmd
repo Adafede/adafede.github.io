@@ -4,7 +4,6 @@ listing:
     contents: varia/adafede/*.qmd
     sort: date desc
     categories: true
-    feed: true
     sort-ui: false
     filter-ui: true
     fields:
@@ -18,7 +17,6 @@ listing:
     contents: varia/lotus/*.qmd
     sort: date desc
     categories: true
-    feed: true
     sort-ui: false
     filter-ui: true
     fields:
@@ -32,7 +30,6 @@ listing:
     contents: varia/taxonomicallyinformedannotation/*.qmd
     sort: date desc
     categories: true
-    feed: true
     sort-ui: false
     filter-ui: true
     fields:
@@ -46,7 +43,6 @@ listing:
     contents: varia/additional_contributions/*.qmd
     sort: date desc
     categories: true
-    feed: true
     sort-ui: false
     filter-ui: true
     fields:
