@@ -23,6 +23,7 @@ website:
   site-path: ./
   site-url: https://adafede.github.io
   favicon: images/favicon/favicon.ico
+  feed: true
   repo-url: https://github.com/adafede/adafede.github.io
   search:
     location: navbar
