@@ -4,7 +4,6 @@ listing:
     contents: teaching/*.qmd
     sort: date desc
     categories: true
-    feed: true
     sort-ui: true
     filter-ui: true
     fields:
