@@ -5,7 +5,6 @@ listing:
     contents: talks/*.qmd
     sort: date desc
     categories: true
-    feed: true
     sort-ui: true
     filter-ui: true
     fields:
