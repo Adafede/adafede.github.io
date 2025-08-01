@@ -46,6 +46,9 @@ website:
       - text: Varia
         aria-label: Varia
         href: varia.qmd
+    right:
+      - icon: rss
+        href: index.xml
 
 format:
   html:
