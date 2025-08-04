@@ -34,8 +34,6 @@ format:
   html:
     css: assets/about-widths.css
     page-layout: full
-listing:
-  feed: true
 ---
 
 :::{#hero-heading}

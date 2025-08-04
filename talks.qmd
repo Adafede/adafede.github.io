@@ -30,7 +30,8 @@ format:
 ## 🌍 Talk Locations Map
 
 ```{python}
-#| echo: false
+#| include: false
+
 from scripts import talkmap
 talkmap.talkmap()
 ```
