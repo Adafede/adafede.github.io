@@ -27,7 +27,7 @@ affiliations:
     country: Switzerland
     postal-code: 1211
 description: >
-  Advocating to the i-NPChem community for the [LOTUS initiative](https://lotus.nprod.net/). 
+  Advocating to the i-NPChem community for the [LOTUS initiative](https://lotus.nprod.net/).
 
 
   Available [here](https://lotus.nprod.net/lotus-presentations/20211004_inpchem/index.html).

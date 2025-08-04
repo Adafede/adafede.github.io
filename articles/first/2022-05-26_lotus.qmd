@@ -407,6 +407,7 @@ affiliations:
     city: Geneva
     country: Switzerland
     postal-code: 1211
+    ror: https://ror.org/01swzsf04
   - id: fsu_jena
     number: 2
     name: Friedrich-Schiller-University Jena
@@ -417,6 +418,7 @@ affiliations:
     city: Jena
     country: Germany
     postal-code: 7732
+    ror: https://ror.org/05qpz1x62
   - id: iocb
     number: 3
     name: Czech Academy of Sciences
@@ -427,6 +429,7 @@ affiliations:
     city: Prague
     country: Czech Republic
     postal-code: 16000
+    ror: https://ror.org/04nfjn472
   - id: ronin
     number: 4
     name: Ronin Institute
@@ -434,6 +437,7 @@ affiliations:
     city: Montclair
     country: United States
     postal-code: 7043
+    ror: https://ror.org/04awze035
   - id: leibniz
     number: 5
     name: Leibniz Institute of Freshwater Ecology and Inland Fisheries
@@ -441,6 +445,7 @@ affiliations:
     city: Berlin
     country: Germany
     postal-code: 12587
+    ror: https://ror.org/01nftxb06
   - id: virginia
     number: 6
     name: University of Virginia
@@ -450,6 +455,7 @@ affiliations:
     city: Charlottesville
     country: United States
     postal-code: 22904
+    ror: https://ror.org/0153tk833
   - id: bigcat
     number: 7
     name: Maastricht University
@@ -460,6 +466,7 @@ affiliations:
     city: Maastricht
     country: The Netherlands
     postal-code: 6229
+    ror: https://ror.org/02jz4aj89
   - id: chicago
     number: 8
     name: University of Illinois at Chicago
@@ -473,12 +480,14 @@ affiliations:
     city: Chicago
     country: United States
     postal-code: 60612
+    ror: https://ror.org/02mpq6x41
   - id: oicr
     number: 9
     name: Ontario Institute for Cancer Research
     address: 661 University Ave Suite 510
     city: Toronto
     country: Canada
+    ror: https://ror.org/043q8yx54
   - id: glasgow
     number: 10
     name: University of Glasgow
@@ -487,6 +496,7 @@ affiliations:
       - MVLS
     city: Glasgow
     country: United Kingdom
+    ror: https://ror.org/00vtgdb53
   - id: unifr
     number: 11
     name: University of Fribourg
@@ -497,6 +507,7 @@ affiliations:
     city: Fribourg
     country: Switzerland
     postal-code: 1700
+    ror: https://ror.org/022fs9h90
 abstract: >
   Contemporary bioinformatic and chemoinformatic capabilities hold promise to reshape knowledge management, analysis and interpretation of data in natural products research.
   Currently, reliance on a disparate set of non-standardized, insular, and specialized databases presents a series of challenges for data access, both within the discipline and for integration and interoperability between related fields.

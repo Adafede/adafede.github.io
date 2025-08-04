@@ -27,6 +27,7 @@ affiliations:
     city: Geneva
     country: Switzerland
     postal-code: 1211
+    ror: https://ror.org/01swzsf04
 description: >
   Poster showcasing preliminary results linking *in depth* chemical characterization to sensory properties of complex plant extracts.
 ---
