@@ -41,6 +41,6 @@ That led me down a productive rabbit hole: first landing on [@obtains_background
 
 All the changes are documented in the following commit:
 
-<!-- INSERT LINK -->
+<https://github.com/Adafede/adafede.github.io/commit/bc2dfe6f>
 
 If you're using Quarto and care about attribution, long-term archiving, and DOIs and metadata, I highly recommend looking into [Rogue Scholar](https://rogue-scholar.org/).
