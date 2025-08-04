@@ -17,10 +17,10 @@ categories:
 #     orcid: 0000-0003-0443-9902
 #     number: 2
 #     affiliations:
-#       - ref: ethz
+#       - ref: imsb
 #     equal-contributor: true
 # affiliations:
-#   - id: ethz
+#   - id: imsb
 #     number: 1
 #     name: ETH Zürich
 #     department: Institute for Molecular Systems Biology
@@ -29,6 +29,7 @@ categories:
 #     city: Zürich
 #     country: Switzerland
 #     postal-code: 8093
+#     ror: https://ror.org/03j5gm982
 abstract: >
   With over 3000 representatives, the monoterpene indole alkaloids (MIAs) class is among the most diverse families of plant natural products.
   The MS/MS spectral space exploration of these complex compounds using chemoinformatic and computational mass spectrometry tools offers a valuable opportunity to extract and share chemical insights from this emblematic family of natural products (NPs).

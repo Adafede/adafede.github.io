@@ -27,6 +27,7 @@ affiliations:
     city: Geneva
     country: Switzerland
     postal-code: 1211
+    ror: https://ror.org/01swzsf04
 description: >
   Advocating to the Life Sciences Switzerland community for the [LOTUS initiative](https://lotus.nprod.net/).
 

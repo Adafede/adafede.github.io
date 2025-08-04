@@ -24,7 +24,7 @@ authors:
     email: rutz@imsb.biol.ethz.ch
     affiliations:
       - ref: unige
-      - ref: ethz
+      - ref: imsb
     correspondence: true
   - name: Jean-Luc Wolfender
     orcid: 0000-0002-0125-952X
@@ -45,7 +45,8 @@ affiliations:
     city: Geneva
     country: Switzerland
     postal-code: 1211
-  - id: ethz
+    ror: https://ror.org/01swzsf04
+  - id: imsb
     number: 2
     name: ETH Zürich
     department: Institute for Molecular Systems Biology
@@ -54,9 +55,10 @@ affiliations:
     city: Zürich
     country: Switzerland
     postal-code: 8093
+    ror: https://ror.org/03j5gm982
 abstract: >
   Recent developments in mass spectrometry-based metabolite profiling allow unprecedented qualitative coverage of complex biological extract
-  composition. 
+  composition.
   However, the electrospray ionization used in metabolite profiling generates multiple artifactual signals for a single analyte.
   This leads to thousands of signals per analysis without satisfactory means of filtering those corresponding to abundant constituents.
   Generic approaches are therefore needed for the qualitative and quantitative annotation of a broad range of relevant constituents.

@@ -21,7 +21,7 @@ authors:
     email: rutz@imsb.biol.ethz.ch
     affiliations:
       - ref: unige
-      - ref: ethz
+      - ref: imsb
     correspondence: true
   - name: Pascale Deneulin
     orcid: 0000-0001-5398-4419
@@ -56,7 +56,8 @@ affiliations:
     city: Geneva
     country: Switzerland
     postal-code: 1211
-  - id: ethz
+    ror: https://ror.org/01swzsf04
+  - id: imsb
     number: 2
     name: ETH Zürich
     department: Institute for Molecular Systems Biology
@@ -65,6 +66,7 @@ affiliations:
     city: Zürich
     country: Switzerland
     postal-code: 8093
+    ror: https://ror.org/03j5gm982
   - id: changins
     number: 3
     name: University of Applied Sciences and Arts Western Switzerland
@@ -74,6 +76,7 @@ affiliations:
     city: Nyon
     country: Switzerland
     postal-code: 1260
+    ror: https://ror.org/03nf8d138
   - id: bacardi
     number: 4
     name: TRADALL S.A. (Bacardi Group)
@@ -88,7 +91,7 @@ abstract: >
   Chemical characterization was performed through nuclear magnetic resonance spectroscopy experiments together with untargeted liquid chromatography-high resolution tandem mass spectrometry analysis coupled to a charged aerosol detector.
   After clustering the fractions based on chemical similarity, we performed free sensory analysis and classical descriptive analysis on each cluster.
   Our results confirmed the attribution of bitterness to iridoids and highlighted the role of other important compounds in the overall taste.
-  This method provides a systematic approach for analyzing and potentially enhancing the taste profiles of plant-based beverages. 
+  This method provides a systematic approach for analyzing and potentially enhancing the taste profiles of plant-based beverages.
 nocite: |
   @Rutz2025
 ---

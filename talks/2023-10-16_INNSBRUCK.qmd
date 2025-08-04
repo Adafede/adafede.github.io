@@ -12,9 +12,9 @@ author:
     orcid: 0000-0003-0443-9902
     number: 1
     affiliations:
-      - ref: ethz
+      - ref: imsb
 affiliations:
-  - id: ethz
+  - id: imsb
     number: 1
     name: ETH Zürich
     department: Institute for Molecular Systems Biology
@@ -23,6 +23,7 @@ affiliations:
     city: Zürich
     country: Switzerland
     postal-code: 8093
+    ror: https://ror.org/03j5gm982
 description: |
   Talk given in the frame of the Neue Forschungsergebnisse Pharmakognosie.
 ---

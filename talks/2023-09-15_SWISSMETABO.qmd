@@ -12,7 +12,7 @@ author:
     orcid: 0000-0003-0443-9902
     number: 1
     affiliations:
-      - ref: ethz
+      - ref: imsb
   - name:
       given: Nicola
       family: Zamboni
@@ -21,9 +21,9 @@ author:
     corresponding: true
     email: nzamboni@ethz.ch
     affiliations:
-      - ref: ethz
+      - ref: imsb
 affiliations:
-  - id: ethz
+  - id: imsb
     number: 1
     name: ETH Zürich
     department: Institute for Molecular Systems Biology
@@ -32,6 +32,7 @@ affiliations:
     city: Zürich
     country: Switzerland
     postal-code: 8093
+    ror: https://ror.org/03j5gm982
 description: >
   Poster presented at the [Swiss Metabolomics Society Annual Meeting](https://swiss-metabolomics.ch/annual-meeting).
 ---
