@@ -1,6 +1,8 @@
 ---
 project:
   type: website
+  pre-render:
+    - scripts/prerender.py
   render:
     - 404.qmd
     - index.qmd
@@ -10,6 +12,7 @@ project:
     - articles/first/*.qmd
     - articles/shared/*.qmd
     - articles/thesis.qmd
+    - posts/*.qmd
     - talks.qmd
     - talks/*.qmd
     - teaching.qmd

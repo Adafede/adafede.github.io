@@ -1,0 +1,46 @@
+---
+author:
+  - name:
+      given: Adriano
+      family: Rutz
+    orcid: 0000-0003-0443-9902
+    number: 1
+    affiliations:
+      - ref: imsb
+affiliations:
+  - id: imsb
+    number: 1
+    name: ETH Zürich
+    department: Institute for Molecular Systems Biology
+    group: Zamboni
+    address: Otto-Stern-Weg, 3
+    city: Zürich
+    country: Switzerland
+    postal-code: 8093
+    ror: https://ror.org/03j5gm982
+categories:
+- Open Science
+citation: true
+# description: TODO
+filters:
+  - cito
+format: html
+google-scholar: true
+license: CC BY-SA
+title: "Open Science Upgrade: Now Adding DOIs through Rogue Scholar"
+bibliography: references.bib
+---
+
+I have finally set up **Rogue Scholar** on my Quarto-based website!
+Every post should now automatically get a DOI.
+
+This is something I have wanted to do for a long time, largely inspired by the tireless and consistent example set by [Egon Willighagen](https://scholia.toolforge.org/author/Q20895241) [@cites:willighagen2024; @cites:willighagen2024a; @cites:willighagen2025].
+
+It was today's post of [@cites_as_related:fenner2025] that finally motivated me to look into it again.
+That led me down a productive rabbit hole: first landing on [@obtains_background_from:voncsefalvay2023]'s excellent guide, and then [@uses_method_in:fruehwald2025]’s clear write-up, both of which made the process of integrating Rogue Scholar into a Quarto-based site surprisingly smooth.
+
+All the changes are documented in the following commit:
+
+<!-- INSERT LINK -->
+
+If you're using Quarto and care about attribution, long-term archiving, and DOIs and metadata, I highly recommend looking into [Rogue Scholar](https://rogue-scholar.org/).
