@@ -6,14 +6,9 @@
       version="2.0">
 <channel>
 <title>Adriano Rutz</title>
-<link>https://adafede.github.io/</link>
-<atom:link href="https://adafede.github.io/index.xml" rel="self" type="application/rss+xml"/>
+<link>https://adafede.github.io/rss.html</link>
+<atom:link href="https://adafede.github.io/rss.xml" rel="self" type="application/rss+xml"/>
 <description>Personal website of Adriano Rutz</description>
-<image>
-<url>https://upload.wikimedia.org/wikipedia/commons/3/37/Adriano_Rutz.jpg</url>
-<title>Adriano Rutz</title>
-<link>https://adafede.github.io/</link>
-</image>
 <generator>quarto-1.7.32</generator>
 <lastBuildDate>Mon, 04 Aug 2025 00:00:00 GMT</lastBuildDate>
 <item>

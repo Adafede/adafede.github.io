@@ -39,161 +39,105 @@
     "href": "talks.html#talk-locations-map",
     "title": "Talks",
     "section": "🌍 Talk Locations Map",
-    "text": "🌍 Talk Locations Map\n\n\nINFO:scripts.talkmap:Map saved to _site/talk_map.html"
+    "text": "🌍 Talk Locations Map"
   },
   {
-    "objectID": "articles/thesis.html",
-    "href": "articles/thesis.html",
-    "title": "Integrative Analytical and Computational Strategies for Qualitative and Semi-quantitative Plant Metabolome Characterization",
+    "objectID": "posts/2025-08-04_rogue_scholar.html",
+    "href": "posts/2025-08-04_rogue_scholar.html",
+    "title": "Open Science Upgrade: Now Adding DOIs through Rogue Scholar",
     "section": "",
-    "text": "References\n\nRutz, Adriano. 2022. “Integrative Analytical and Computational Strategies for Qualitative and Semi-Quantitative Plant Metabolome Characterization.” PhD thesis, Université de Genève. https://doi.org/10.13097/ARCHIVE-OUVERTE/UNIGE:165668."
+    "text": "I have finally set up Rogue Scholar on my Quarto-based website! Every post should now automatically get a DOI.\nThis is something I have wanted to do for a long time, largely inspired by the tireless and consistent example set by Egon Willighagen (Willighagen 2024a, 2024b, 2025).\nIt was today’s post of (Fenner 2025) that finally motivated me to look into it again. That led me down a productive rabbit hole: first landing on (Csefalvay 2023)’s excellent guide, and then (Fruehwald 2025)’s clear write-up, both of which made the process of integrating Rogue Scholar into a Quarto-based site surprisingly smooth.\nAll the changes are documented in the following commit:\nhttps://github.com/Adafede/adafede.github.io/commit/bc2dfe6f\nIf you’re using Quarto and care about attribution, long-term archiving, and DOIs and metadata, I highly recommend looking into Rogue Scholar.\n\n\n\n\nReferences\n\nCsefalvay, Chris von. 2023. “Auto-DOI for Quarto Posts via Rogue Scholar.” http://dx.doi.org/10.59350/5hxdg-fz574.\n\n\nFenner, Martin. 2025. “Rogue Scholar Citation Tracking Launches to Production.” http://dx.doi.org/10.53731/zyg15-qv911.\n\n\nFruehwald, Josef. 2025. “Setting up Rogue Scholar.” http://dx.doi.org/10.59350/3fp6d-e6z90.\n\n\nWillighagen, Egon. 2024a. “GoatCounter, Rogue Scholar and More New Things.” http://dx.doi.org/10.59350/8x2f1-h6d21.\n\n\n———. 2024b. “FAIR Blog-to-Blog Citations.” http://dx.doi.org/10.59350/er1mn-m5q69.\n\n\n———. 2025. “Blog Updates.” http://dx.doi.org/10.59350/cf885-kee54.\n\nReuseCC BY-SA 4.0CitationBibTeX citation:@online{rutz2025,\n  author = {Rutz, Adriano},\n  title = {Open {Science} {Upgrade:} {Now} {Adding} {DOIs} Through\n    {Rogue} {Scholar}},\n  date = {2025-08-04},\n  url = {https://adafede.github.io/posts/2025-08-04_rogue_scholar.html},\n  doi = {10.59350/38tz1-47k08},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nRutz, Adriano. 2025. “Open Science Upgrade: Now Adding DOIs\nThrough Rogue Scholar.” August 4, 2025. https://doi.org/10.59350/38tz1-47k08."
   },
   {
-    "objectID": "articles/shared/2025-02-28_isf.html",
-    "href": "articles/shared/2025-02-28_isf.html",
-    "title": "Discovery of metabolites prevails amid in-source fragmentation",
+    "objectID": "articles/shared/2025-04-28-miadb2.html",
+    "href": "articles/shared/2025-04-28-miadb2.html",
+    "title": "Translating community-wide spectral library into actionable chemical knowledge: a proof of concept with monoterpene indole alkaloids",
     "section": "",
-    "text": "References\n\nEl Abiead, Yasin, Adriano Rutz, Simone Zuffa, Bashar Amer, Shipei Xing, Corinna Brungs, Robin Schmid, et al. 2025. “Discovery of Metabolites Prevails Amid in-Source Fragmentation.” Nature Metabolism 7 (3): 435–37. https://doi.org/10.1038/s42255-025-01239-4."
+    "text": "References\n\nSzwarc, Sarah, Adriano Rutz, Kyungha Lee, Yassine Mejri, Olivier Bonnet, Hazrina Hazni, Adrien Jagora, et al. 2025. “Translating Community-Wide Spectral Library into Actionable Chemical Knowledge: A Proof of Concept with Monoterpene Indole Alkaloids.” Journal of Cheminformatics 17 (1). https://doi.org/10.1186/s13321-025-01009-0."
   },
   {
-    "objectID": "articles/shared/2019-10-25_tima.html",
-    "href": "articles/shared/2019-10-25_tima.html",
-    "title": "Taxonomically Informed Scoring Enhances Confidence in Natural Products Annotation",
+    "objectID": "articles/shared/2022-05-31_melanoma.html",
+    "href": "articles/shared/2022-05-31_melanoma.html",
+    "title": "Combining Activity Profiling with Advanced Annotation to Accelerate the Discovery of Natural Products Targeting Oncogenic Signaling in Melanoma",
     "section": "",
-    "text": "References\n\nRutz, Adriano, Miwa Dounoue-Kubo, Simon Ollivier, Jonathan Bisson, Mohsen Bagheri, Tongchai Saesong, Samad Nejad Ebrahimi, Kornkanok Ingkaninan, Jean-Luc Wolfender, and Pierre-Marie Allard. 2019. “Taxonomically Informed Scoring Enhances Confidence in Natural Products Annotation.” Frontiers in Plant Science 10 (October). https://doi.org/10.3389/fpls.2019.01329."
+    "text": "References\n\nHell, Tanja, Adriano Rutz, Lara Dürr, Maciej Dobrzyński, Jakob K. Reinhardt, Timo Lehner, Morris Keller, et al. 2022. “Combining Activity Profiling with Advanced Annotation to Accelerate the Discovery of Natural Products Targeting Oncogenic Signaling in Melanoma.” Journal of Natural Products 85 (6): 1540–54. https://doi.org/10.1021/acs.jnatprod.2c00146."
   },
   {
-    "objectID": "articles/first/2023-11-10_cascade.html",
-    "href": "articles/first/2023-11-10_cascade.html",
-    "title": "Automated Composition Assessment of Natural Extracts: Untargeted Mass Spectrometry-Based Metabolite Profiling Integrating Semiquantitative Detection",
+    "objectID": "articles/first/2025-04-05_sapid.html",
+    "href": "articles/first/2025-04-05_sapid.html",
+    "title": "SAPID: a Strategy to Analyze Plant Extracts Taste In Depth. Application to the complex taste of Swertia chirayita (Roxb.) H.Karst.",
     "section": "",
-    "text": "References\n\nRutz, Adriano, and Jean-Luc Wolfender. 2023. “Automated Composition Assessment of Natural Extracts: Untargeted Mass Spectrometry-Based Metabolite Profiling Integrating Semiquantitative Detection.” Journal of Agricultural and Food Chemistry 71 (46): 18010–23. https://doi.org/10.1021/acs.jafc.3c03099."
+    "text": "References\n\nRutz, Adriano, Pascale Deneulin, Ivano Tonutti, Benoît Bach, and Jean-Luc Wolfender. 2025. “SAPID: A Strategy to Analyze Plant Extracts Taste in Depth. Application to the Complex Taste of Swertia Chirayita (Roxb.) h.karst.” Current Research in Food Science 10: 101043. https://doi.org/10.1016/j.crfs.2025.101043."
   },
   {
-    "objectID": "articles/co/2025-07-29_eps.html",
-    "href": "articles/co/2025-07-29_eps.html",
-    "title": "Degradation of extracellular polymeric substances shapes microbial community diversity",
+    "objectID": "articles/first/2022-05-26_lotus.html",
+    "href": "articles/first/2022-05-26_lotus.html",
+    "title": "The LOTUS initiative for open knowledge management in natural products research",
     "section": "",
-    "text": "References\n\nPontrelli, Sammy, Kian Bigovic Villi, Andreas Sichert, Julian Trouillon, Adriano Rutz, Zachary C. Landry, Simon H. Rüdisser, Roman Stocker, and Uwe Sauer. 2025. “Degradation of Extracellular Polymeric Substances Shapes Microbial Community Diversity.” Edited by Wenying Shou. PLOS Biology 23 (7): e3003287. https://doi.org/10.1371/journal.pbio.3003287."
+    "text": "References\n\nRutz, Adriano, Maria Sorokina, Jakub Galgonek, Daniel Mietchen, Egon Willighagen, Arnaud Gaudry, James G Graham, et al. 2022. “The LOTUS Initiative for Open Knowledge Management in Natural Products Research.” eLife 11 (May). https://doi.org/10.7554/elife.70780."
   },
   {
-    "objectID": "articles/co/2024-12-09_mibig4.html",
-    "href": "articles/co/2024-12-09_mibig4.html",
-    "title": "MIBiG 4.0: advancing biosynthetic gene cluster curation through global collaboration",
+    "objectID": "articles/co/2024-12-15_sweetwine.html",
+    "href": "articles/co/2024-12-15_sweetwine.html",
+    "title": "Untargeted metabolomics analyses to identify a new sweet compound released during post-fermentation maceration of wine.",
     "section": "",
-    "text": "References\n\nZdouc, Mitja M, Kai Blin, Nico L L Louwen, Jorge Navarro, Catarina Loureiro, Chantal D Bader, Constance B Bailey, et al. 2024. “MIBiG 4.0: Advancing Biosynthetic Gene Cluster Curation Through Global Collaboration.” Nucleic Acids Research 53 (D1): D678–90. https://doi.org/10.1093/nar/gkae1115."
+    "text": "References\n\nLe Scanff, Marie, Laurence Marcourt, Adriano Rutz, Warren Albertin, Jean-Luc Wolfender, and Axel Marchal. 2024. “Untargeted Metabolomics Analyses to Identify a New Sweet Compound Released During Post-Fermentation Maceration of Wine.” Food Chemistry 461 (December): 140801. https://doi.org/10.1016/j.foodchem.2024.140801."
   },
   {
-    "objectID": "articles/co/2024-02-05_microbemasst.html",
-    "href": "articles/co/2024-02-05_microbemasst.html",
-    "title": "microbeMASST: a taxonomically informed mass spectrometry search tool for microbial metabolomics data",
+    "objectID": "articles/co/2024-02-20_enpkg.html",
+    "href": "articles/co/2024-02-20_enpkg.html",
+    "title": "A Sample-Centric and Knowledge-Driven Computational Framework for Natural Products Drug Discovery",
     "section": "",
-    "text": "References\n\nZuffa, Simone, Robin Schmid, Anelize Bauermeister, Paulo Wender P. Gomes, Andres M. Caraballo-Rodriguez, Yasin El Abiead, Allegra T. Aron, et al. 2024. “microbeMASST: A Taxonomically Informed Mass Spectrometry Search Tool for Microbial Metabolomics Data.” Nature Microbiology 9 (2): 336–45. https://doi.org/10.1038/s41564-023-01575-9."
+    "text": "References\n\nGaudry, Arnaud, Marco Pagni, Florence Mehl, Sébastien Moretti, Luis-Manuel Quiros-Guerrero, Luca Cappelletti, Adriano Rutz, et al. 2024. “A Sample-Centric and Knowledge-Driven Computational Framework for Natural Products Drug Discovery.” ACS Central Science 10 (3): 494–510. https://doi.org/10.1021/acscentsci.3c00800."
   },
   {
-    "objectID": "articles/co/2023-03-09_alzatea.html",
-    "href": "articles/co/2023-03-09_alzatea.html",
-    "title": "Phytochemical study of Alzatea verticillata, the sole species belonging to the Alzateaceae family",
+    "objectID": "articles/co/2023-12-19_astrocaryum.html",
+    "href": "articles/co/2023-12-19_astrocaryum.html",
+    "title": "Comparative metabolomics of fungal foliar endophytes and their long-lived host Astrocaryum sciophilum: a model for exploring the chemodiversity of host-microbe interactions",
     "section": "",
-    "text": "References\n\nFerreira Queiroz, Marcos Marçal, Robin Huber, Laurence Marcourt, Laure Guénée, Pierre-Marie Allard, Adriano Rutz, Louis-Félix Nothias, et al. 2023. “Phytochemical Study of Alzatea Verticillata, the Sole Species Belonging to the Alzateaceae Family.” Frontiers in Natural Products 2 (March). https://doi.org/10.3389/fntpr.2023.1147195."
+    "text": "References\n\nPellissier, Leonie, Arnaud Gaudry, Salomé Vilette, Nicole Lecoultre, Adriano Rutz, Pierre-Marie Allard, Laurence Marcourt, et al. 2023. “Comparative Metabolomic Study of Fungal Foliar Endophytes and Their Long-Lived Host Astrocaryum Sciophilum: A Model for Exploring the Chemodiversity of Host-Microbe Interactions.” Frontiers in Plant Science 14 (December). https://doi.org/10.3389/fpls.2023.1278745."
   },
   {
-    "objectID": "articles/co/2022-11-30_chimia.html",
-    "href": "articles/co/2022-11-30_chimia.html",
-    "title": "Metabolomics in Ecology and Bioactive Natural Products Discovery: Challenges and Prospects for a Comprehensive Study of the Specialised Metabolome",
+    "objectID": "articles/co/2023-01-18_pf1600.html",
+    "href": "articles/co/2023-01-18_pf1600.html",
+    "title": "Open and reusable annotated mass spectrometry dataset of a chemodiverse collection of 1,600 plant extracts",
     "section": "",
-    "text": "References\n\nWolfender, Jean-Luc, Arnaud Gaudry, Adriano Rutz, Luis-Manuel Quiros-Guerrero, Louis-Félix Nothias, Emerson Ferreira Queiroz, Emmanuel Defossez, and Pierre-Marie Allard. 2022. “Metabolomics in Ecology and Bioactive Natural Products Discovery: Challenges and Prospects for a Comprehensive Study of the Specialised Metabolome.” CHIMIA 76 (11): 954. https://doi.org/10.2533/chimia.2022.954."
+    "text": "References\n\nAllard, Pierre-Marie, Arnaud Gaudry, Luis-Manuel Quirós-Guerrero, Adriano Rutz, Miwa Dounoue-Kubo, Tom W N Walker, Emmanuel Defossez, et al. 2022. “Open and Reusable Annotated Mass Spectrometry Dataset of a Chemodiverse Collection of 1, 600 Plant Extracts.” GigaScience 12 (December). https://doi.org/10.1093/gigascience/giac124."
   },
   {
-    "objectID": "articles/co/2022-11-19_bioregistry.html",
-    "href": "articles/co/2022-11-19_bioregistry.html",
-    "title": "Unifying the identification of biomedical entities with the Bioregistry",
+    "objectID": "articles/co/2022-11-21_inventa.html",
+    "href": "articles/co/2022-11-21_inventa.html",
+    "title": "Inventa: A computational tool to discover structural novelty in natural extracts libraries",
     "section": "",
-    "text": "References\n\nHoyt, Charles Tapley, Meghan Balk, Tiffany J. Callahan, Daniel Domingo-Fernández, Melissa A. Haendel, Harshad B. Hegde, Daniel S. Himmelstein, et al. 2022. “Unifying the Identification of Biomedical Entities with the Bioregistry.” Scientific Data 9 (1). https://doi.org/10.1038/s41597-022-01807-3."
+    "text": "References\n\nQuiros-Guerrero, Luis-Manuel, Louis-Félix Nothias, Arnaud Gaudry, Laurence Marcourt, Pierre-Marie Allard, Adriano Rutz, Bruno David, Emerson Ferreira Queiroz, and Jean-Luc Wolfender. 2022. “Inventa: A Computational Tool to Discover Structural Novelty in Natural Extracts Libraries.” Frontiers in Molecular Biosciences 9 (November). https://doi.org/10.3389/fmolb.2022.1028334."
   },
   {
-    "objectID": "articles/co/2021-11-19_cortinarius.html",
-    "href": "articles/co/2021-11-19_cortinarius.html",
-    "title": "Feature-Based Molecular Networking—An Exciting Tool to Spot Species of the Genus Cortinarius with Hidden Photosensitizers",
+    "objectID": "articles/co/2022-01-22_biphyscion.html",
+    "href": "articles/co/2022-01-22_biphyscion.html",
+    "title": "Targeted isolation of photoactive pigments from mushrooms yielded a highly potent new photosensitizer: 7,7′-biphyscion",
     "section": "",
-    "text": "References\n\nHammerle, Fabian, Luis Quirós-Guerrero, Adriano Rutz, Jean-Luc Wolfender, Harald Schöbel, Ursula Peintner, and Bianka Siewert. 2021. “Feature-Based Molecular Networking—an Exciting Tool to Spot Species of the Genus Cortinarius with Hidden Photosensitizers.” Metabolites 11 (11): 791. https://doi.org/10.3390/metabo11110791."
+    "text": "References\n\nHammerle, Fabian, Isabella Bingger, Andrea Pannwitz, Alexander Magnutzki, Ronald Gstir, Adriano Rutz, Jean-Luc Wolfender, Ursula Peintner, and Bianka Siewert. 2022. “Targeted Isolation of Photoactive Pigments from Mushrooms Yielded a Highly Potent New Photosensitizer: 7, 7′-Biphyscion.” Scientific Reports 12 (1). https://doi.org/10.1038/s41598-022-04975-9."
   },
   {
-    "objectID": "articles/co/2021-06-16_sunitinib.html",
-    "href": "articles/co/2021-06-16_sunitinib.html",
-    "title": "Molecular and Functional Analysis of Sunitinib-Resistance Induction in Human Renal Cell Carcinoma Cells",
+    "objectID": "articles/co/2021-08-06_repurposing.html",
+    "href": "articles/co/2021-08-06_repurposing.html",
+    "title": "Drug Repurposing to Identify a Synergistic High-Order Drug Combination to Treat Sunitinib-Resistant Renal Cell Carcinoma",
     "section": "",
-    "text": "References\n\nRausch, Magdalena, Adriano Rutz, Pierre-Marie Allard, Céline Delucinge-Vivier, Mylène Docquier, Olivier Dormond, Jean-Luc Wolfender, and Patrycja Nowak-Sliwinska. 2021. “Molecular and Functional Analysis of Sunitinib-Resistance Induction in Human Renal Cell Carcinoma Cells.” International Journal of Molecular Sciences 22 (12): 6467. https://doi.org/10.3390/ijms22126467."
+    "text": "References\n\nRausch, Magdalena, Adriano Rutz, Pierre-Marie Allard, Céline Delucinge-Vivier, Mylène Docquier, Olivier Dormond, Paul J. Dyson, Jean-Luc Wolfender, and Patrycja Nowak-Sliwinska. 2021. “Drug Repurposing to Identify a Synergistic High-Order Drug Combination to Treat Sunitinib-Resistant Renal Cell Carcinoma.” Cancers 13 (16): 3978. https://doi.org/10.3390/cancers13163978."
   },
   {
-    "objectID": "articles/co/2020-08-20_solanum.html",
-    "href": "articles/co/2020-08-20_solanum.html",
-    "title": "Insights on the Structural and Metabolic Resistance of Potato (Solanum tuberosum) Cultivars to Tuber Black Dot (Colletotrichum coccodes)",
+    "objectID": "articles/co/2020-09-15_helleborus.html",
+    "href": "articles/co/2020-09-15_helleborus.html",
+    "title": "Antiseizure potential of the ancient Greek medicinal plant Helleborus odorus subsp. cyclophyllus and identification of its main active principles",
     "section": "",
-    "text": "References\n\nMassana-Codina, Josep, Sylvain Schnee, Pierre-Marie Allard, Adriano Rutz, Julien Boccard, Emilie Michellod, Marilyn Cléroux, Stéphanie Schürch, Katia Gindro, and Jean-Luc Wolfender. 2020. “Insights on the Structural and Metabolic Resistance of Potato (Solanum Tuberosum) Cultivars to Tuber Black Dot (Colletotrichum Coccodes).” Frontiers in Plant Science 11 (August). https://doi.org/10.3389/fpls.2020.01287."
+    "text": "References\n\nBrillatz, Théo, Maxime Jacmin, Konstantina Vougogiannopoulou, Eleftherios A. Petrakis, Eleftherios Kalpoutzakis, Joëlle Houriet, Léonie Pellissier, et al. 2020. “Antiseizure Potential of the Ancient Greek Medicinal Plant Helleborus Odorus Subsp. Cyclophyllus and Identification of Its Main Active Principles.” Journal of Ethnopharmacology 259 (September): 112954. https://doi.org/10.1016/j.jep.2020.112954."
   },
   {
-    "objectID": "articles/co/2019-03-00_cordia.html",
-    "href": "articles/co/2019-03-00_cordia.html",
-    "title": "Identification of Antifungal Compounds from the Root Bark of Cordia anisophylla J.S. Mill.",
+    "objectID": "articles/co/2020-06-01_niedenzuella.html",
+    "href": "articles/co/2020-06-01_niedenzuella.html",
+    "title": "Phytochemical analysis of the methanolic leaves extract of Niedenzuella multiglandulosa (Malpighiaceae), a plant species toxic to cattle in Brazil",
     "section": "",
-    "text": "References\n\nFavre-Godal, Quentin, Sébastien Pinto, Stephane Dorsaz, Adriano Rutz, Laurence Marcourt, Mahabir Gupta, Dominique Sanglard, Emerson Queiroz, and Jean-Luc Wolfender. 2018. “Identification of Antifungal Compounds from the Root Bark of Cordia Anisophylla j.s. Mill.” Journal of the Brazilian Chemical Society. https://doi.org/10.21577/0103-5053.20180221."
-  },
-  {
-    "objectID": "cv.html",
-    "href": "cv.html",
-    "title": "Adriano Rutz",
-    "section": "",
-    "text": "Adriano Rutz is a postdoctoral researcher at ETH Zürich, where he develops computational and analytical methods for metabolomics. With a background in pharmaceutical sciences and phytochemistry, he combines mass spectrometry, cheminformatics, and open science to explore the chemical diversity of life. Following industry experience at Tradall SA (Bacardi Group), he completed his PhD at the University of Geneva. At ETH Zürich, he creates scalable, open-source tools for molecular annotation and metabolite discovery. He is a core contributor to the LOTUS initiative, a global, FAIR, community-driven knowledge base for natural products. His research fosters interdisciplinary collaboration across data science, chemistry, and biology, driving innovation in metabolomics and beyond."
-  },
-  {
-    "objectID": "cv.html#bio",
-    "href": "cv.html#bio",
-    "title": "Adriano Rutz",
-    "section": "",
-    "text": "Adriano Rutz is a postdoctoral researcher at ETH Zürich, where he develops computational and analytical methods for metabolomics. With a background in pharmaceutical sciences and phytochemistry, he combines mass spectrometry, cheminformatics, and open science to explore the chemical diversity of life. Following industry experience at Tradall SA (Bacardi Group), he completed his PhD at the University of Geneva. At ETH Zürich, he creates scalable, open-source tools for molecular annotation and metabolite discovery. He is a core contributor to the LOTUS initiative, a global, FAIR, community-driven knowledge base for natural products. His research fosters interdisciplinary collaboration across data science, chemistry, and biology, driving innovation in metabolomics and beyond."
-  },
-  {
-    "objectID": "cv.html#professional-experience",
-    "href": "cv.html#professional-experience",
-    "title": "Adriano Rutz",
-    "section": "Professional Experience",
-    "text": "Professional Experience\n\nPostdoctoral Researcher, ETH Zürich, Zürich (2022 - present)\nComputational metabolomics at the Institute of Molecular Systems Biology.\n\n\nResearch and Teaching Assistant, UNIGE, Geneva (2017 - 2022)\nDevelopment of LC-HRMS/MS based approaches for comprehensive composition assessment of complex plant extracts.\nIn depth annotation using Spectral Networking.\nPlant metabolomics.\nTeaching activities with Bachelor and Master students.\nMaintenance and optimization of analytical instruments (LC).\n\n\nJunior Research Chemist, Tradall SA, Meyrin (2016 - 2017)\nWorking in analytical research and Research and Development laboratories following ISO norms.\nNew products development, analytical and sensory characterization.\nIn depth analysis of impact compounds, compounds evolution understanding.\nMaintenance and optimization of analytical instruments (GC).\n\n\nAssistant Pharmacist, Pharmacie de la Terrassière, Geneva (2015 - 2016)\nInternship in the frame of Master’s degree."
-  },
-  {
-    "objectID": "cv.html#education",
-    "href": "cv.html#education",
-    "title": "Adriano Rutz",
-    "section": "Education",
-    "text": "Education\n\nPhD in Pharmaceutical Sciences, UNIGE (2017 - 2022)\nThesis entitled Integrative Analytical and Computational Strategies for Qualitative and Semi-quantitative Plant Metabolome Characterization\n\n\nB.Sc. and M.Sc. in Pharmaceutical Sciences, UNIGE (2011 - 2016)\nMention excellent for Master’s thesis GC chiral separation of main enantiomeric compounds as a tool of Quality Control of some botanicals and related specific final product"
-  },
-  {
-    "objectID": "cv.html#awards",
-    "href": "cv.html#awards",
-    "title": "Adriano Rutz",
-    "section": "Awards",
-    "text": "Awards\n\nSwiss National ORD Prize (2023): Awarded for the LOTUS initiative. See more at https://akademien-schweiz.ch/en/medien/press-releases/2023/adriano-rutz-gewinnt-ersten-schweizer-ord-preis/.\nDr Willmar-Schwabe-Young-Talent-Prize (2023): Awarded for the LOTUS initiative. See more at https://ga-online.org/dr-willmar-schwabe-young-talent-prize-2023-for-adriano-rutz/."
-  },
-  {
-    "objectID": "cv.html#sports",
-    "href": "cv.html#sports",
-    "title": "Adriano Rutz",
-    "section": "Sports",
-    "text": "Sports\n\nArtistic gymnastics trainer, Ecole de Gymnastique Artistique Genève (2009 - 2022)\nArtistic gymnastics trainer, with kids from 5 to 12 years\nFederal recognition “Moniteur Jeunesse+Sport” (re-assessed each 2 years)\n\n\nArtistic gymnastics judge, Schweizerischer Turnverband (2009 - present)\nFederal recognition “National judge N3” (re-assessed each 2 years)"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Adriano Rutz",
-    "section": "",
-    "text": "Adriano Rutz is a postdoctoral researcher at ETH Zürich, where he develops computational and analytical methods for metabolomics. With a background in pharmaceutical sciences and phytochemistry, he combines mass spectrometry, cheminformatics, and open science to explore the chemical diversity of life. Following industry experience at Tradall SA (Bacardi Group), he completed his PhD at the University of Geneva. At ETH Zürich, he creates scalable, open-source tools for molecular annotation and metabolite discovery. He is a core contributor to the LOTUS initiative, a global, FAIR, community-driven knowledge base for natural products. His research fosters interdisciplinary collaboration across data science, chemistry, and biology, driving innovation in metabolomics and beyond."
-  },
-  {
-    "objectID": "index.html#bio",
-    "href": "index.html#bio",
-    "title": "Adriano Rutz",
-    "section": "",
-    "text": "Adriano Rutz is a postdoctoral researcher at ETH Zürich, where he develops computational and analytical methods for metabolomics. With a background in pharmaceutical sciences and phytochemistry, he combines mass spectrometry, cheminformatics, and open science to explore the chemical diversity of life. Following industry experience at Tradall SA (Bacardi Group), he completed his PhD at the University of Geneva. At ETH Zürich, he creates scalable, open-source tools for molecular annotation and metabolite discovery. He is a core contributor to the LOTUS initiative, a global, FAIR, community-driven knowledge base for natural products. His research fosters interdisciplinary collaboration across data science, chemistry, and biology, driving innovation in metabolomics and beyond."
+    "text": "References\n\nMannochio Russo, Helena, Emerson Ferreira Queiroz, Laurence Marcourt, Adriano Rutz, Pierre-Marie Allard, Rafael Felipe de Almeida, Nilton Marques Carvalho, Jean-Luc Wolfender, and Vanderlan da Silva Bolzani. 2020. “Phytochemical Analysis of the Methanolic Leaves Extract of Niedenzuella Multiglandulosa (Malpighiaceae), a Plant Species Toxic to Cattle in Brazil.” Phytochemistry Letters 37 (June): 10–16. https://doi.org/10.1016/j.phytol.2020.02.005."
   },
   {
     "objectID": "articles.html",
@@ -238,102 +182,158 @@
     "text": "Doctoral thesis\n\n\n\n\n\n\nDate\n\n\n\nTitle\n\n\n\nvenue\n\n\n\nurl\n\n\n\n\n\n\n\n\n2021-10-06\n\n\nIntegrative Analytical and Computational Strategies for Qualitative and Semi-quantitative Plant Metabolome Characterization\n\n\nUniversité de Genève\n\n\nhttps://doi.org/10.13097/archive-ouverte/unige:165668\n\n\n\n\n\n\nNo matching items"
   },
   {
-    "objectID": "articles/co/2020-06-01_niedenzuella.html",
-    "href": "articles/co/2020-06-01_niedenzuella.html",
-    "title": "Phytochemical analysis of the methanolic leaves extract of Niedenzuella multiglandulosa (Malpighiaceae), a plant species toxic to cattle in Brazil",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Adriano Rutz",
     "section": "",
-    "text": "References\n\nMannochio Russo, Helena, Emerson Ferreira Queiroz, Laurence Marcourt, Adriano Rutz, Pierre-Marie Allard, Rafael Felipe de Almeida, Nilton Marques Carvalho, Jean-Luc Wolfender, and Vanderlan da Silva Bolzani. 2020. “Phytochemical Analysis of the Methanolic Leaves Extract of Niedenzuella Multiglandulosa (Malpighiaceae), a Plant Species Toxic to Cattle in Brazil.” Phytochemistry Letters 37 (June): 10–16. https://doi.org/10.1016/j.phytol.2020.02.005."
+    "text": "Adriano Rutz is a postdoctoral researcher at ETH Zürich, where he develops computational and analytical methods for metabolomics. With a background in pharmaceutical sciences and phytochemistry, he combines mass spectrometry, cheminformatics, and open science to explore the chemical diversity of life. Following industry experience at Tradall SA (Bacardi Group), he completed his PhD at the University of Geneva. At ETH Zürich, he creates scalable, open-source tools for molecular annotation and metabolite discovery. He is a core contributor to the LOTUS initiative, a global, FAIR, community-driven knowledge base for natural products. His research fosters interdisciplinary collaboration across data science, chemistry, and biology, driving innovation in metabolomics and beyond."
   },
   {
-    "objectID": "articles/co/2020-09-15_helleborus.html",
-    "href": "articles/co/2020-09-15_helleborus.html",
-    "title": "Antiseizure potential of the ancient Greek medicinal plant Helleborus odorus subsp. cyclophyllus and identification of its main active principles",
+    "objectID": "index.html#bio",
+    "href": "index.html#bio",
+    "title": "Adriano Rutz",
     "section": "",
-    "text": "References\n\nBrillatz, Théo, Maxime Jacmin, Konstantina Vougogiannopoulou, Eleftherios A. Petrakis, Eleftherios Kalpoutzakis, Joëlle Houriet, Léonie Pellissier, et al. 2020. “Antiseizure Potential of the Ancient Greek Medicinal Plant Helleborus Odorus Subsp. Cyclophyllus and Identification of Its Main Active Principles.” Journal of Ethnopharmacology 259 (September): 112954. https://doi.org/10.1016/j.jep.2020.112954."
+    "text": "Adriano Rutz is a postdoctoral researcher at ETH Zürich, where he develops computational and analytical methods for metabolomics. With a background in pharmaceutical sciences and phytochemistry, he combines mass spectrometry, cheminformatics, and open science to explore the chemical diversity of life. Following industry experience at Tradall SA (Bacardi Group), he completed his PhD at the University of Geneva. At ETH Zürich, he creates scalable, open-source tools for molecular annotation and metabolite discovery. He is a core contributor to the LOTUS initiative, a global, FAIR, community-driven knowledge base for natural products. His research fosters interdisciplinary collaboration across data science, chemistry, and biology, driving innovation in metabolomics and beyond."
   },
   {
-    "objectID": "articles/co/2021-08-06_repurposing.html",
-    "href": "articles/co/2021-08-06_repurposing.html",
-    "title": "Drug Repurposing to Identify a Synergistic High-Order Drug Combination to Treat Sunitinib-Resistant Renal Cell Carcinoma",
+    "objectID": "cv.html",
+    "href": "cv.html",
+    "title": "Adriano Rutz",
     "section": "",
-    "text": "References\n\nRausch, Magdalena, Adriano Rutz, Pierre-Marie Allard, Céline Delucinge-Vivier, Mylène Docquier, Olivier Dormond, Paul J. Dyson, Jean-Luc Wolfender, and Patrycja Nowak-Sliwinska. 2021. “Drug Repurposing to Identify a Synergistic High-Order Drug Combination to Treat Sunitinib-Resistant Renal Cell Carcinoma.” Cancers 13 (16): 3978. https://doi.org/10.3390/cancers13163978."
+    "text": "Adriano Rutz is a postdoctoral researcher at ETH Zürich, where he develops computational and analytical methods for metabolomics. With a background in pharmaceutical sciences and phytochemistry, he combines mass spectrometry, cheminformatics, and open science to explore the chemical diversity of life. Following industry experience at Tradall SA (Bacardi Group), he completed his PhD at the University of Geneva. At ETH Zürich, he creates scalable, open-source tools for molecular annotation and metabolite discovery. He is a core contributor to the LOTUS initiative, a global, FAIR, community-driven knowledge base for natural products. His research fosters interdisciplinary collaboration across data science, chemistry, and biology, driving innovation in metabolomics and beyond."
   },
   {
-    "objectID": "articles/co/2022-01-22_biphyscion.html",
-    "href": "articles/co/2022-01-22_biphyscion.html",
-    "title": "Targeted isolation of photoactive pigments from mushrooms yielded a highly potent new photosensitizer: 7,7′-biphyscion",
+    "objectID": "cv.html#bio",
+    "href": "cv.html#bio",
+    "title": "Adriano Rutz",
     "section": "",
-    "text": "References\n\nHammerle, Fabian, Isabella Bingger, Andrea Pannwitz, Alexander Magnutzki, Ronald Gstir, Adriano Rutz, Jean-Luc Wolfender, Ursula Peintner, and Bianka Siewert. 2022. “Targeted Isolation of Photoactive Pigments from Mushrooms Yielded a Highly Potent New Photosensitizer: 7, 7′-Biphyscion.” Scientific Reports 12 (1). https://doi.org/10.1038/s41598-022-04975-9."
+    "text": "Adriano Rutz is a postdoctoral researcher at ETH Zürich, where he develops computational and analytical methods for metabolomics. With a background in pharmaceutical sciences and phytochemistry, he combines mass spectrometry, cheminformatics, and open science to explore the chemical diversity of life. Following industry experience at Tradall SA (Bacardi Group), he completed his PhD at the University of Geneva. At ETH Zürich, he creates scalable, open-source tools for molecular annotation and metabolite discovery. He is a core contributor to the LOTUS initiative, a global, FAIR, community-driven knowledge base for natural products. His research fosters interdisciplinary collaboration across data science, chemistry, and biology, driving innovation in metabolomics and beyond."
   },
   {
-    "objectID": "articles/co/2022-11-21_inventa.html",
-    "href": "articles/co/2022-11-21_inventa.html",
-    "title": "Inventa: A computational tool to discover structural novelty in natural extracts libraries",
-    "section": "",
-    "text": "References\n\nQuiros-Guerrero, Luis-Manuel, Louis-Félix Nothias, Arnaud Gaudry, Laurence Marcourt, Pierre-Marie Allard, Adriano Rutz, Bruno David, Emerson Ferreira Queiroz, and Jean-Luc Wolfender. 2022. “Inventa: A Computational Tool to Discover Structural Novelty in Natural Extracts Libraries.” Frontiers in Molecular Biosciences 9 (November). https://doi.org/10.3389/fmolb.2022.1028334."
+    "objectID": "cv.html#professional-experience",
+    "href": "cv.html#professional-experience",
+    "title": "Adriano Rutz",
+    "section": "Professional Experience",
+    "text": "Professional Experience\n\nPostdoctoral Researcher, ETH Zürich, Zürich (2022 - present)\nComputational metabolomics at the Institute of Molecular Systems Biology.\n\n\nResearch and Teaching Assistant, UNIGE, Geneva (2017 - 2022)\nDevelopment of LC-HRMS/MS based approaches for comprehensive composition assessment of complex plant extracts.\nIn depth annotation using Spectral Networking.\nPlant metabolomics.\nTeaching activities with Bachelor and Master students.\nMaintenance and optimization of analytical instruments (LC).\n\n\nJunior Research Chemist, Tradall SA, Meyrin (2016 - 2017)\nWorking in analytical research and Research and Development laboratories following ISO norms.\nNew products development, analytical and sensory characterization.\nIn depth analysis of impact compounds, compounds evolution understanding.\nMaintenance and optimization of analytical instruments (GC).\n\n\nAssistant Pharmacist, Pharmacie de la Terrassière, Geneva (2015 - 2016)\nInternship in the frame of Master’s degree."
   },
   {
-    "objectID": "articles/co/2023-01-18_pf1600.html",
-    "href": "articles/co/2023-01-18_pf1600.html",
-    "title": "Open and reusable annotated mass spectrometry dataset of a chemodiverse collection of 1,600 plant extracts",
-    "section": "",
-    "text": "References\n\nAllard, Pierre-Marie, Arnaud Gaudry, Luis-Manuel Quirós-Guerrero, Adriano Rutz, Miwa Dounoue-Kubo, Tom W N Walker, Emmanuel Defossez, et al. 2022. “Open and Reusable Annotated Mass Spectrometry Dataset of a Chemodiverse Collection of 1, 600 Plant Extracts.” GigaScience 12 (December). https://doi.org/10.1093/gigascience/giac124."
+    "objectID": "cv.html#education",
+    "href": "cv.html#education",
+    "title": "Adriano Rutz",
+    "section": "Education",
+    "text": "Education\n\nPhD in Pharmaceutical Sciences, UNIGE (2017 - 2022)\nThesis entitled Integrative Analytical and Computational Strategies for Qualitative and Semi-quantitative Plant Metabolome Characterization\n\n\nB.Sc. and M.Sc. in Pharmaceutical Sciences, UNIGE (2011 - 2016)\nMention excellent for Master’s thesis GC chiral separation of main enantiomeric compounds as a tool of Quality Control of some botanicals and related specific final product"
   },
   {
-    "objectID": "articles/co/2023-12-19_astrocaryum.html",
-    "href": "articles/co/2023-12-19_astrocaryum.html",
-    "title": "Comparative metabolomics of fungal foliar endophytes and their long-lived host Astrocaryum sciophilum: a model for exploring the chemodiversity of host-microbe interactions",
-    "section": "",
-    "text": "References\n\nPellissier, Leonie, Arnaud Gaudry, Salomé Vilette, Nicole Lecoultre, Adriano Rutz, Pierre-Marie Allard, Laurence Marcourt, et al. 2023. “Comparative Metabolomic Study of Fungal Foliar Endophytes and Their Long-Lived Host Astrocaryum Sciophilum: A Model for Exploring the Chemodiversity of Host-Microbe Interactions.” Frontiers in Plant Science 14 (December). https://doi.org/10.3389/fpls.2023.1278745."
+    "objectID": "cv.html#awards",
+    "href": "cv.html#awards",
+    "title": "Adriano Rutz",
+    "section": "Awards",
+    "text": "Awards\n\nSwiss National ORD Prize (2023): Awarded for the LOTUS initiative. See more at https://akademien-schweiz.ch/en/medien/press-releases/2023/adriano-rutz-gewinnt-ersten-schweizer-ord-preis/.\nDr Willmar-Schwabe-Young-Talent-Prize (2023): Awarded for the LOTUS initiative. See more at https://ga-online.org/dr-willmar-schwabe-young-talent-prize-2023-for-adriano-rutz/."
   },
   {
-    "objectID": "articles/co/2024-02-20_enpkg.html",
-    "href": "articles/co/2024-02-20_enpkg.html",
-    "title": "A Sample-Centric and Knowledge-Driven Computational Framework for Natural Products Drug Discovery",
-    "section": "",
-    "text": "References\n\nGaudry, Arnaud, Marco Pagni, Florence Mehl, Sébastien Moretti, Luis-Manuel Quiros-Guerrero, Luca Cappelletti, Adriano Rutz, et al. 2024. “A Sample-Centric and Knowledge-Driven Computational Framework for Natural Products Drug Discovery.” ACS Central Science 10 (3): 494–510. https://doi.org/10.1021/acscentsci.3c00800."
+    "objectID": "cv.html#sports",
+    "href": "cv.html#sports",
+    "title": "Adriano Rutz",
+    "section": "Sports",
+    "text": "Sports\n\nArtistic gymnastics trainer, Ecole de Gymnastique Artistique Genève (2009 - 2022)\nArtistic gymnastics trainer, with kids from 5 to 12 years\nFederal recognition “Moniteur Jeunesse+Sport” (re-assessed each 2 years)\n\n\nArtistic gymnastics judge, Schweizerischer Turnverband (2009 - present)\nFederal recognition “National judge N3” (re-assessed each 2 years)"
   },
   {
-    "objectID": "articles/co/2024-12-15_sweetwine.html",
-    "href": "articles/co/2024-12-15_sweetwine.html",
-    "title": "Untargeted metabolomics analyses to identify a new sweet compound released during post-fermentation maceration of wine.",
+    "objectID": "articles/co/2019-03-00_cordia.html",
+    "href": "articles/co/2019-03-00_cordia.html",
+    "title": "Identification of Antifungal Compounds from the Root Bark of Cordia anisophylla J.S. Mill.",
     "section": "",
-    "text": "References\n\nLe Scanff, Marie, Laurence Marcourt, Adriano Rutz, Warren Albertin, Jean-Luc Wolfender, and Axel Marchal. 2024. “Untargeted Metabolomics Analyses to Identify a New Sweet Compound Released During Post-Fermentation Maceration of Wine.” Food Chemistry 461 (December): 140801. https://doi.org/10.1016/j.foodchem.2024.140801."
+    "text": "References\n\nFavre-Godal, Quentin, Sébastien Pinto, Stephane Dorsaz, Adriano Rutz, Laurence Marcourt, Mahabir Gupta, Dominique Sanglard, Emerson Queiroz, and Jean-Luc Wolfender. 2018. “Identification of Antifungal Compounds from the Root Bark of Cordia Anisophylla j.s. Mill.” Journal of the Brazilian Chemical Society. https://doi.org/10.21577/0103-5053.20180221."
   },
   {
-    "objectID": "articles/first/2022-05-26_lotus.html",
-    "href": "articles/first/2022-05-26_lotus.html",
-    "title": "The LOTUS initiative for open knowledge management in natural products research",
+    "objectID": "articles/co/2020-08-20_solanum.html",
+    "href": "articles/co/2020-08-20_solanum.html",
+    "title": "Insights on the Structural and Metabolic Resistance of Potato (Solanum tuberosum) Cultivars to Tuber Black Dot (Colletotrichum coccodes)",
     "section": "",
-    "text": "References\n\nRutz, Adriano, Maria Sorokina, Jakub Galgonek, Daniel Mietchen, Egon Willighagen, Arnaud Gaudry, James G Graham, et al. 2022. “The LOTUS Initiative for Open Knowledge Management in Natural Products Research.” eLife 11 (May). https://doi.org/10.7554/elife.70780."
+    "text": "References\n\nMassana-Codina, Josep, Sylvain Schnee, Pierre-Marie Allard, Adriano Rutz, Julien Boccard, Emilie Michellod, Marilyn Cléroux, Stéphanie Schürch, Katia Gindro, and Jean-Luc Wolfender. 2020. “Insights on the Structural and Metabolic Resistance of Potato (Solanum Tuberosum) Cultivars to Tuber Black Dot (Colletotrichum Coccodes).” Frontiers in Plant Science 11 (August). https://doi.org/10.3389/fpls.2020.01287."
   },
   {
-    "objectID": "articles/first/2025-04-05_sapid.html",
-    "href": "articles/first/2025-04-05_sapid.html",
-    "title": "SAPID: a Strategy to Analyze Plant Extracts Taste In Depth. Application to the complex taste of Swertia chirayita (Roxb.) H.Karst.",
+    "objectID": "articles/co/2021-06-16_sunitinib.html",
+    "href": "articles/co/2021-06-16_sunitinib.html",
+    "title": "Molecular and Functional Analysis of Sunitinib-Resistance Induction in Human Renal Cell Carcinoma Cells",
     "section": "",
-    "text": "References\n\nRutz, Adriano, Pascale Deneulin, Ivano Tonutti, Benoît Bach, and Jean-Luc Wolfender. 2025. “SAPID: A Strategy to Analyze Plant Extracts Taste in Depth. Application to the Complex Taste of Swertia Chirayita (Roxb.) h.karst.” Current Research in Food Science 10: 101043. https://doi.org/10.1016/j.crfs.2025.101043."
+    "text": "References\n\nRausch, Magdalena, Adriano Rutz, Pierre-Marie Allard, Céline Delucinge-Vivier, Mylène Docquier, Olivier Dormond, Jean-Luc Wolfender, and Patrycja Nowak-Sliwinska. 2021. “Molecular and Functional Analysis of Sunitinib-Resistance Induction in Human Renal Cell Carcinoma Cells.” International Journal of Molecular Sciences 22 (12): 6467. https://doi.org/10.3390/ijms22126467."
   },
   {
-    "objectID": "articles/shared/2022-05-31_melanoma.html",
-    "href": "articles/shared/2022-05-31_melanoma.html",
-    "title": "Combining Activity Profiling with Advanced Annotation to Accelerate the Discovery of Natural Products Targeting Oncogenic Signaling in Melanoma",
+    "objectID": "articles/co/2021-11-19_cortinarius.html",
+    "href": "articles/co/2021-11-19_cortinarius.html",
+    "title": "Feature-Based Molecular Networking—An Exciting Tool to Spot Species of the Genus Cortinarius with Hidden Photosensitizers",
     "section": "",
-    "text": "References\n\nHell, Tanja, Adriano Rutz, Lara Dürr, Maciej Dobrzyński, Jakob K. Reinhardt, Timo Lehner, Morris Keller, et al. 2022. “Combining Activity Profiling with Advanced Annotation to Accelerate the Discovery of Natural Products Targeting Oncogenic Signaling in Melanoma.” Journal of Natural Products 85 (6): 1540–54. https://doi.org/10.1021/acs.jnatprod.2c00146."
+    "text": "References\n\nHammerle, Fabian, Luis Quirós-Guerrero, Adriano Rutz, Jean-Luc Wolfender, Harald Schöbel, Ursula Peintner, and Bianka Siewert. 2021. “Feature-Based Molecular Networking—an Exciting Tool to Spot Species of the Genus Cortinarius with Hidden Photosensitizers.” Metabolites 11 (11): 791. https://doi.org/10.3390/metabo11110791."
   },
   {
-    "objectID": "articles/shared/2025-04-28-miadb2.html",
-    "href": "articles/shared/2025-04-28-miadb2.html",
-    "title": "Translating community-wide spectral library into actionable chemical knowledge: a proof of concept with monoterpene indole alkaloids",
+    "objectID": "articles/co/2022-11-19_bioregistry.html",
+    "href": "articles/co/2022-11-19_bioregistry.html",
+    "title": "Unifying the identification of biomedical entities with the Bioregistry",
     "section": "",
-    "text": "References\n\nSzwarc, Sarah, Adriano Rutz, Kyungha Lee, Yassine Mejri, Olivier Bonnet, Hazrina Hazni, Adrien Jagora, et al. 2025. “Translating Community-Wide Spectral Library into Actionable Chemical Knowledge: A Proof of Concept with Monoterpene Indole Alkaloids.” Journal of Cheminformatics 17 (1). https://doi.org/10.1186/s13321-025-01009-0."
+    "text": "References\n\nHoyt, Charles Tapley, Meghan Balk, Tiffany J. Callahan, Daniel Domingo-Fernández, Melissa A. Haendel, Harshad B. Hegde, Daniel S. Himmelstein, et al. 2022. “Unifying the Identification of Biomedical Entities with the Bioregistry.” Scientific Data 9 (1). https://doi.org/10.1038/s41597-022-01807-3."
   },
   {
-    "objectID": "posts/2025-08-04_rogue_scholar.html",
-    "href": "posts/2025-08-04_rogue_scholar.html",
-    "title": "Open Science Upgrade: Now Adding DOIs through Rogue Scholar",
+    "objectID": "articles/co/2022-11-30_chimia.html",
+    "href": "articles/co/2022-11-30_chimia.html",
+    "title": "Metabolomics in Ecology and Bioactive Natural Products Discovery: Challenges and Prospects for a Comprehensive Study of the Specialised Metabolome",
     "section": "",
-    "text": "I have finally set up Rogue Scholar on my Quarto-based website! Every post should now automatically get a DOI.\nThis is something I have wanted to do for a long time, largely inspired by the tireless and consistent example set by Egon Willighagen (Willighagen 2024a, 2024b, 2025).\nIt was today’s post of (Fenner 2025) that finally motivated me to look into it again. That led me down a productive rabbit hole: first landing on (Csefalvay 2023)’s excellent guide, and then (Fruehwald 2025)’s clear write-up, both of which made the process of integrating Rogue Scholar into a Quarto-based site surprisingly smooth.\nAll the changes are documented in the following commit:\nhttps://github.com/Adafede/adafede.github.io/commit/bc2dfe6f\nIf you’re using Quarto and care about attribution, long-term archiving, and DOIs and metadata, I highly recommend looking into Rogue Scholar.\n\n\n\n\nReferences\n\nCsefalvay, Chris von. 2023. “Auto-DOI for Quarto Posts via Rogue Scholar.” http://dx.doi.org/10.59350/5hxdg-fz574.\n\n\nFenner, Martin. 2025. “Rogue Scholar Citation Tracking Launches to Production.” http://dx.doi.org/10.53731/zyg15-qv911.\n\n\nFruehwald, Josef. 2025. “Setting up Rogue Scholar.” http://dx.doi.org/10.59350/3fp6d-e6z90.\n\n\nWillighagen, Egon. 2024a. “GoatCounter, Rogue Scholar and More New Things.” http://dx.doi.org/10.59350/8x2f1-h6d21.\n\n\n———. 2024b. “FAIR Blog-to-Blog Citations.” http://dx.doi.org/10.59350/er1mn-m5q69.\n\n\n———. 2025. “Blog Updates.” http://dx.doi.org/10.59350/cf885-kee54.\n\nReuseCC BY-SA 4.0CitationBibTeX citation:@online{rutz2025,\n  author = {Rutz, Adriano},\n  title = {Open {Science} {Upgrade:} {Now} {Adding} {DOIs} Through\n    {Rogue} {Scholar}},\n  date = {2025-08-04},\n  url = {https://adafede.github.io/posts/2025-08-04_rogue_scholar.html},\n  doi = {10.59350/38tz1-47k08},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nRutz, Adriano. 2025. “Open Science Upgrade: Now Adding DOIs\nThrough Rogue Scholar.” August 4, 2025. https://doi.org/10.59350/38tz1-47k08."
+    "text": "References\n\nWolfender, Jean-Luc, Arnaud Gaudry, Adriano Rutz, Luis-Manuel Quiros-Guerrero, Louis-Félix Nothias, Emerson Ferreira Queiroz, Emmanuel Defossez, and Pierre-Marie Allard. 2022. “Metabolomics in Ecology and Bioactive Natural Products Discovery: Challenges and Prospects for a Comprehensive Study of the Specialised Metabolome.” CHIMIA 76 (11): 954. https://doi.org/10.2533/chimia.2022.954."
+  },
+  {
+    "objectID": "articles/co/2023-03-09_alzatea.html",
+    "href": "articles/co/2023-03-09_alzatea.html",
+    "title": "Phytochemical study of Alzatea verticillata, the sole species belonging to the Alzateaceae family",
+    "section": "",
+    "text": "References\n\nFerreira Queiroz, Marcos Marçal, Robin Huber, Laurence Marcourt, Laure Guénée, Pierre-Marie Allard, Adriano Rutz, Louis-Félix Nothias, et al. 2023. “Phytochemical Study of Alzatea Verticillata, the Sole Species Belonging to the Alzateaceae Family.” Frontiers in Natural Products 2 (March). https://doi.org/10.3389/fntpr.2023.1147195."
+  },
+  {
+    "objectID": "articles/co/2024-02-05_microbemasst.html",
+    "href": "articles/co/2024-02-05_microbemasst.html",
+    "title": "microbeMASST: a taxonomically informed mass spectrometry search tool for microbial metabolomics data",
+    "section": "",
+    "text": "References\n\nZuffa, Simone, Robin Schmid, Anelize Bauermeister, Paulo Wender P. Gomes, Andres M. Caraballo-Rodriguez, Yasin El Abiead, Allegra T. Aron, et al. 2024. “microbeMASST: A Taxonomically Informed Mass Spectrometry Search Tool for Microbial Metabolomics Data.” Nature Microbiology 9 (2): 336–45. https://doi.org/10.1038/s41564-023-01575-9."
+  },
+  {
+    "objectID": "articles/co/2024-12-09_mibig4.html",
+    "href": "articles/co/2024-12-09_mibig4.html",
+    "title": "MIBiG 4.0: advancing biosynthetic gene cluster curation through global collaboration",
+    "section": "",
+    "text": "References\n\nZdouc, Mitja M, Kai Blin, Nico L L Louwen, Jorge Navarro, Catarina Loureiro, Chantal D Bader, Constance B Bailey, et al. 2024. “MIBiG 4.0: Advancing Biosynthetic Gene Cluster Curation Through Global Collaboration.” Nucleic Acids Research 53 (D1): D678–90. https://doi.org/10.1093/nar/gkae1115."
+  },
+  {
+    "objectID": "articles/co/2025-07-29_eps.html",
+    "href": "articles/co/2025-07-29_eps.html",
+    "title": "Degradation of extracellular polymeric substances shapes microbial community diversity",
+    "section": "",
+    "text": "References\n\nPontrelli, Sammy, Kian Bigovic Villi, Andreas Sichert, Julian Trouillon, Adriano Rutz, Zachary C. Landry, Simon H. Rüdisser, Roman Stocker, and Uwe Sauer. 2025. “Degradation of Extracellular Polymeric Substances Shapes Microbial Community Diversity.” Edited by Wenying Shou. PLOS Biology 23 (7): e3003287. https://doi.org/10.1371/journal.pbio.3003287."
+  },
+  {
+    "objectID": "articles/first/2023-11-10_cascade.html",
+    "href": "articles/first/2023-11-10_cascade.html",
+    "title": "Automated Composition Assessment of Natural Extracts: Untargeted Mass Spectrometry-Based Metabolite Profiling Integrating Semiquantitative Detection",
+    "section": "",
+    "text": "References\n\nRutz, Adriano, and Jean-Luc Wolfender. 2023. “Automated Composition Assessment of Natural Extracts: Untargeted Mass Spectrometry-Based Metabolite Profiling Integrating Semiquantitative Detection.” Journal of Agricultural and Food Chemistry 71 (46): 18010–23. https://doi.org/10.1021/acs.jafc.3c03099."
+  },
+  {
+    "objectID": "articles/shared/2019-10-25_tima.html",
+    "href": "articles/shared/2019-10-25_tima.html",
+    "title": "Taxonomically Informed Scoring Enhances Confidence in Natural Products Annotation",
+    "section": "",
+    "text": "References\n\nRutz, Adriano, Miwa Dounoue-Kubo, Simon Ollivier, Jonathan Bisson, Mohsen Bagheri, Tongchai Saesong, Samad Nejad Ebrahimi, Kornkanok Ingkaninan, Jean-Luc Wolfender, and Pierre-Marie Allard. 2019. “Taxonomically Informed Scoring Enhances Confidence in Natural Products Annotation.” Frontiers in Plant Science 10 (October). https://doi.org/10.3389/fpls.2019.01329."
+  },
+  {
+    "objectID": "articles/shared/2025-02-28_isf.html",
+    "href": "articles/shared/2025-02-28_isf.html",
+    "title": "Discovery of metabolites prevails amid in-source fragmentation",
+    "section": "",
+    "text": "References\n\nEl Abiead, Yasin, Adriano Rutz, Simone Zuffa, Bashar Amer, Shipei Xing, Corinna Brungs, Robin Schmid, et al. 2025. “Discovery of Metabolites Prevails Amid in-Source Fragmentation.” Nature Metabolism 7 (3): 435–37. https://doi.org/10.1038/s42255-025-01239-4."
+  },
+  {
+    "objectID": "articles/thesis.html",
+    "href": "articles/thesis.html",
+    "title": "Integrative Analytical and Computational Strategies for Qualitative and Semi-quantitative Plant Metabolome Characterization",
+    "section": "",
+    "text": "References\n\nRutz, Adriano. 2022. “Integrative Analytical and Computational Strategies for Qualitative and Semi-Quantitative Plant Metabolome Characterization.” PhD thesis, Université de Genève. https://doi.org/10.13097/ARCHIVE-OUVERTE/UNIGE:165668."
   },
   {
     "objectID": "teaching.html",

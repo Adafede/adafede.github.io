@@ -1,6 +1,38 @@
 [
   {
-    "listing": "/index.html",
+    "listing": "/articles.html",
+    "items": [
+      "/articles/first/2025-04-05_sapid.html",
+      "/articles/first/2023-11-10_cascade.html",
+      "/articles/first/2022-05-26_lotus.html",
+      "/articles/shared/2025-04-28-miadb2.html",
+      "/articles/shared/2025-02-28_isf.html",
+      "/articles/shared/2022-05-31_melanoma.html",
+      "/articles/shared/2019-10-25_tima.html",
+      "/articles/co/2025-07-29_eps.html",
+      "/articles/co/2024-12-15_sweetwine.html",
+      "/articles/co/2024-12-09_mibig4.html",
+      "/articles/co/2024-02-20_enpkg.html",
+      "/articles/co/2024-02-05_microbemasst.html",
+      "/articles/co/2023-12-19_astrocaryum.html",
+      "/articles/co/2023-03-09_alzatea.html",
+      "/articles/co/2023-01-18_pf1600.html",
+      "/articles/co/2022-11-30_chimia.html",
+      "/articles/co/2022-11-21_inventa.html",
+      "/articles/co/2022-11-19_bioregistry.html",
+      "/articles/co/2021-11-19_cortinarius.html",
+      "/articles/co/2021-08-06_repurposing.html",
+      "/articles/co/2021-06-16_sunitinib.html",
+      "/articles/co/2022-01-22_biphyscion.html",
+      "/articles/co/2020-09-15_helleborus.html",
+      "/articles/co/2020-08-20_solanum.html",
+      "/articles/co/2020-06-01_niedenzuella.html",
+      "/articles/co/2019-03-00_cordia.html",
+      "/articles/thesis.html"
+    ]
+  },
+  {
+    "listing": "/rss.html",
     "items": [
       "/varia/adafede/cascade.html",
       "/varia/adafede/sapid.html",
@@ -9,6 +41,7 @@
       "/articles/co/2022-11-21_inventa.html",
       "/talks/2023-07-03_GA.html",
       "/articles/co/2024-02-20_enpkg.html",
+      "/index.html",
       "/talks/2019-10-01_NAPOLI.html",
       "/teaching/2019_advanced_course_mass_spec.html",
       "/articles/co/2020-09-15_helleborus.html",
@@ -74,38 +107,6 @@
       "/articles/co/2024-02-05_microbemasst.html",
       "/cv.html",
       "/teaching.html"
-    ]
-  },
-  {
-    "listing": "/articles.html",
-    "items": [
-      "/articles/first/2025-04-05_sapid.html",
-      "/articles/first/2023-11-10_cascade.html",
-      "/articles/first/2022-05-26_lotus.html",
-      "/articles/shared/2025-04-28-miadb2.html",
-      "/articles/shared/2025-02-28_isf.html",
-      "/articles/shared/2022-05-31_melanoma.html",
-      "/articles/shared/2019-10-25_tima.html",
-      "/articles/co/2025-07-29_eps.html",
-      "/articles/co/2024-12-15_sweetwine.html",
-      "/articles/co/2024-12-09_mibig4.html",
-      "/articles/co/2024-02-20_enpkg.html",
-      "/articles/co/2024-02-05_microbemasst.html",
-      "/articles/co/2023-12-19_astrocaryum.html",
-      "/articles/co/2023-03-09_alzatea.html",
-      "/articles/co/2023-01-18_pf1600.html",
-      "/articles/co/2022-11-30_chimia.html",
-      "/articles/co/2022-11-21_inventa.html",
-      "/articles/co/2022-11-19_bioregistry.html",
-      "/articles/co/2021-11-19_cortinarius.html",
-      "/articles/co/2021-08-06_repurposing.html",
-      "/articles/co/2021-06-16_sunitinib.html",
-      "/articles/co/2022-01-22_biphyscion.html",
-      "/articles/co/2020-09-15_helleborus.html",
-      "/articles/co/2020-08-20_solanum.html",
-      "/articles/co/2020-06-01_niedenzuella.html",
-      "/articles/co/2019-03-00_cordia.html",
-      "/articles/thesis.html"
     ]
   },
   {
