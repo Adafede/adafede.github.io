@@ -2,11 +2,5 @@
 title: Adriano Rutz's website
 search: false
 listing:
-  sort: date desc
-  feed:
-    title: Adriano Rutz's website
-    description: Adriano Rutz's website
-    items: 60
-    type: partial
-    language: en
+  feed: true
 ---

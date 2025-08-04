@@ -13,6 +13,7 @@ project:
     - articles/shared/*.qmd
     - articles/thesis.qmd
     - posts/*.qmd
+    - rss.qmd
     - talks.qmd
     - talks/*.qmd
     - teaching.qmd
@@ -51,7 +52,7 @@ website:
         href: varia.qmd
     right:
       - icon: rss
-        href: index.xml
+        href: rss.xml
 
 format:
   html:
