@@ -19,9 +19,10 @@ affiliations:
     postal-code: 8093
     ror: https://ror.org/03j5gm982
 categories:
-- Open Science
+  - Open Science
 citation: true
-# description: TODO
+date: 2025-08-04
+doi: 10.59350/38tz1-47k08
 filters:
   - cito
 format: html
