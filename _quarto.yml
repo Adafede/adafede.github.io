@@ -1,6 +1,8 @@
 ---
 project:
   type: website
+  post-render:
+    - scripts/postrender.py
   pre-render:
     - scripts/prerender.py
   render:
