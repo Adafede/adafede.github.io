@@ -9,7 +9,7 @@ citation_pattern = re.compile(r"\[@([^\]]+)\]")
 
 def parse_citos_from_qmd(qmd_path):
     citos = defaultdict(set)
-    with open(qmd_path, "r", encoding="utf-8") as f:
+    with open(qmd_path, encoding="utf-8") as f:
         content = f.read()
 
     matches = citation_pattern.findall(content)
@@ -41,7 +41,7 @@ def merge_citos(cito_dicts):
 
 
 def inject_cito_annotations_in_html(html_path, citation_properties):
-    with open(html_path, "r", encoding="utf-8") as f:
+    with open(html_path, encoding="utf-8") as f:
         soup = BeautifulSoup(f, "html.parser")
 
     refs_container = soup.find("div", id="refs")
