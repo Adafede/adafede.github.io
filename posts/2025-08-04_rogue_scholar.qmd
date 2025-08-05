@@ -21,13 +21,14 @@ affiliations:
 categories:
   - Open Science
 citation: true
+creative_commons: CC BY
 date: 2025-08-04
 doi: 10.59350/38tz1-47k08
 filters:
   - cito
 format: html
 google-scholar: true
-license: CC BY-SA
+license: CC BY
 title: "Open Science Upgrade: Now Adding DOIs through Rogue Scholar"
 bibliography: references.bib
 ---
