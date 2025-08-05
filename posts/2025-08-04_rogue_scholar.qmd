@@ -32,7 +32,7 @@ title: "Open Science Upgrade: Now Adding DOIs through Rogue Scholar"
 bibliography: references.bib
 ---
 
-I have finally set up **Rogue Scholar** on my Quarto-based website!
+I have finally set up Rogue Scholar on my website!
 Every post should now automatically get a DOI.
 
 This is something I have wanted to do for a long time, largely inspired by the tireless and consistent example set by [Egon Willighagen](https://scholia.toolforge.org/author/Q20895241) [@cites:willighagen2024; @cites:willighagen2024a; @cites:willighagen2025].
@@ -44,4 +44,4 @@ All the changes are documented in the following commit:
 
 <https://github.com/Adafede/adafede.github.io/commit/bc2dfe6f>
 
-If you're using Quarto and care about attribution, long-term archiving, and DOIs and metadata, I highly recommend looking into [Rogue Scholar](https://rogue-scholar.org/).
+If you care about attribution, long-term archiving, DOIs and metadata, I highly recommend looking into [Rogue Scholar](https://rogue-scholar.org/).
