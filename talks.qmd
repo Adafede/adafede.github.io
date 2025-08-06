@@ -1,11 +1,11 @@
 ---
-title: Talks
 listing:
-  - id: talks
+  - id: talks_list
     contents: talks/*.qmd
     sort: date desc
     categories: true
     sort-ui: true
+    feed: true
     filter-ui: true
     fields:
       - title
@@ -18,13 +18,11 @@ listing:
       - image-alt
       - doi
       - date
-format:
-  html:
-    embed-resources: true
-    self-contained: true
 ---
 
-:::{#talks}
+## Talks
+
+:::{#talks_list}
 :::
 
 ## 🌍 Talk Locations Map

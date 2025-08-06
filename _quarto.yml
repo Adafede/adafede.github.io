@@ -14,6 +14,7 @@ project:
     - articles/first/*.qmd
     - articles/shared/*.qmd
     - articles/thesis.qmd
+    - posts.qmd
     - posts/*.qmd
     - rss.qmd
     - talks.qmd
@@ -43,6 +44,9 @@ website:
       - text: CV
         aria-label: Curriculum vitæ
         href: cv.qmd
+      - text: Posts
+        aria-label: Posts
+        href: posts.qmd
       - text: Talks
         aria-label: Talks
         href: talks.qmd

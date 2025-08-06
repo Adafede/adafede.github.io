@@ -1,10 +1,9 @@
 ---
 listing:
   - id: teaching
-    contents: teaching/*.qmd
-    sort: date desc
     categories: true
-    sort-ui: true
+    contents: teaching/*.qmd
+    feed: true
     filter-ui: true
     fields:
       - title
@@ -13,4 +12,6 @@ listing:
       - image
       - image-alt
       - date
+    sort: date desc
+    sort-ui: true
 ---
