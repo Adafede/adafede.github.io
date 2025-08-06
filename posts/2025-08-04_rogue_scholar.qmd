@@ -32,6 +32,7 @@ format:
     filters:
       - cito
   markdown: default
+format-links: [pdf]
 google-scholar: true
 license: CC BY
 link-citations: true
