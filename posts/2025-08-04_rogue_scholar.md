@@ -78,10 +78,11 @@ If you care about attribution, long-term archiving, DOIs and metadata, I
 highly recommend looking into [Rogue
 Scholar](https://rogue-scholar.org/).
 
-**EDIT**: I thought bringing in
-[CiTO](https://sparontologies.github.io/cito/current/cito.html) would be
-a huge plus. I managed to handle the HTML and PDF outputs (again thanks
-to Egon )[@uses_method_in:willighagen2023] but the feed probably still
-does not contain annotations.
+**Edit:** I realized that integrating
+[CiTO](https://sparontologies.github.io/cito/current/cito.html) could be
+a significant enhancement. With some effort (and thanks again to Egon),
+I managed to implement a working solution for the HTML and PDF outputs,
+see [@uses_method_in:willighagen2023]. However, the solution for the XML
+feed still feels suboptimal.
 
 ### References
