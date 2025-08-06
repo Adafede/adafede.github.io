@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>Adriano Rutz</title>
+<link>https://adafede.github.io/talks.html</link>
+<atom:link href="https://adafede.github.io/talks.xml" rel="self" type="application/rss+xml"/>
+<description>Personal website of Adriano Rutz</description>
+<generator>quarto-1.7.32</generator>
+<lastBuildDate>Sun, 22 Jun 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Data-Independent Analysis for Deep Metabolome Profiling of Plant Extracts</title>
+  <dc:creator>Adriano Rutz</dc:creator>
+  <dc:creator>Vincen Wu</dc:creator>
+  <dc:creator>Nicola Zamboni</dc:creator>
+  <link>https://adafede.github.io/talks/2025-06-22_METSOC.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+
+
+ ]]></description>
+  <category>Poster</category>
+  <guid>https://adafede.github.io/talks/2025-06-22_METSOC.html</guid>
+  <pubDate>Sun, 22 Jun 2025 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Traitement de Données et Outils d’Annotation MS/MS</title>
+  <dc:creator>Adriano Rutz</dc:creator>
+  <link>https://adafede.github.io/talks/2024-06-19_METABIODIVEX.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+
+
+ ]]></description>
+  <category>Talk</category>
+  <category>Workshop</category>
+  <guid>https://adafede.github.io/talks/2024-06-19_METABIODIVEX.html</guid>
+  <pubDate>Wed, 19 Jun 2024 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Where is the “L” in “ORD”?</title>
+  <dc:creator>Adriano Rutz</dc:creator>
+  <link>https://adafede.github.io/talks/2024-05-31_SCNAT.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+
+
+ ]]></description>
+  <category>Talk</category>
+  <guid>https://adafede.github.io/talks/2024-05-31_SCNAT.html</guid>
+  <pubDate>Fri, 31 May 2024 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Introduction to Linked Open Data for Computational Mass Spectrometry</title>
+  <dc:creator>Adriano Rutz</dc:creator>
+  <link>https://adafede.github.io/talks/2024-04-17_PRAGUE.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+
+
+ ]]></description>
+  <category>Talk</category>
+  <category>Workshop</category>
+  <guid>https://adafede.github.io/talks/2024-04-17_PRAGUE.html</guid>
+  <pubDate>Wed, 17 Apr 2024 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Lotus: A Living Knowledge Base for Modern Pharmacognosy</title>
+  <dc:creator>Adriano Rutz</dc:creator>
+  <link>https://adafede.github.io/talks/2023-10-16_INNSBRUCK.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+
+
+ ]]></description>
+  <category>Talk</category>
+  <guid>https://adafede.github.io/talks/2023-10-16_INNSBRUCK.html</guid>
+  <pubDate>Mon, 16 Oct 2023 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Prior Knowledge as a Compass Guiding Untargeted Metabolomics</title>
+  <dc:creator>Adriano Rutz</dc:creator>
+  <dc:creator>Nicola Zamboni</dc:creator>
+  <link>https://adafede.github.io/talks/2023-09-15_SWISSMETABO.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+
+
+ ]]></description>
+  <category>Poster</category>
+  <guid>https://adafede.github.io/talks/2023-09-15_SWISSMETABO.html</guid>
+  <pubDate>Fri, 15 Sep 2023 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Deep Metabolome Annotation</title>
+  <dc:creator>Adriano Rutz</dc:creator>
+  <link>https://adafede.github.io/talks/2023-07-18_SACLAY.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+
+
+ ]]></description>
+  <category>Talk</category>
+  <category>Workshop</category>
+  <guid>https://adafede.github.io/talks/2023-07-18_SACLAY.html</guid>
+  <pubDate>Tue, 18 Jul 2023 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>A Distillate of the LOTUS Initiative in Natural Products Research: Sharing Information, Building Knowledge, Extracting Wisdom</title>
+  <dc:creator>Adriano Rutz</dc:creator>
+  <link>https://adafede.github.io/talks/2023-07-03_GA.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+
+
+ ]]></description>
+  <category>Talk</category>
+  <guid>https://adafede.github.io/talks/2023-07-03_GA.html</guid>
+  <pubDate>Mon, 03 Jul 2023 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Metabolomics Workshop</title>
+  <dc:creator>Adriano Rutz</dc:creator>
+  <link>https://adafede.github.io/talks/2023-06-13_METAOMICS.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+
+
+ ]]></description>
+  <category>Talk</category>
+  <guid>https://adafede.github.io/talks/2023-06-13_METAOMICS.html</guid>
+  <pubDate>Tue, 13 Jun 2023 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Prior Knowledge as a Compass Guiding Untargeted Metabolomics</title>
+  <dc:creator>Adriano Rutz</dc:creator>
+  <link>https://adafede.github.io/talks/2023-02-02_JENA.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+
+
+ ]]></description>
+  <category>Talk</category>
+  <guid>https://adafede.github.io/talks/2023-02-02_JENA.html</guid>
+  <pubDate>Sun, 12 Feb 2023 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>The LOTUS Initiative: Integrating Natural Products to the Wikidata Knowledge Base</title>
+  <dc:creator>Adriano Rutz</dc:creator>
+  <link>https://adafede.github.io/talks/2022-04-22_LS2_1.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+
+
+ ]]></description>
+  <category>Talk</category>
+  <guid>https://adafede.github.io/talks/2022-04-22_LS2_1.html</guid>
+  <pubDate>Fri, 22 Apr 2022 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>The LOTUS Initiative: Integrating Natural Products to the Wikidata Knowledge Base</title>
+  <dc:creator>Adriano Rutz</dc:creator>
+  <link>https://adafede.github.io/talks/2022-04-22_LS2_2.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+
+
+ ]]></description>
+  <category>Poster</category>
+  <guid>https://adafede.github.io/talks/2022-04-22_LS2_2.html</guid>
+  <pubDate>Fri, 22 Apr 2022 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>The LOTUS Initiative for Open Natural Products Research: Knowledge Management through Wikidata</title>
+  <dc:creator>Adriano Rutz</dc:creator>
+  <link>https://adafede.github.io/talks/2021-10-04_INPCHEM.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+
+
+ ]]></description>
+  <category>Talk</category>
+  <guid>https://adafede.github.io/talks/2021-10-04_INPCHEM.html</guid>
+  <pubDate>Mon, 04 Oct 2021 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>The LOTUS Initiative for Knowledge Sharing in Natural Products Research</title>
+  <dc:creator>Adriano Rutz</dc:creator>
+  <link>https://adafede.github.io/talks/2021-09-08_GA_1.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+
+
+ ]]></description>
+  <category>Talk</category>
+  <guid>https://adafede.github.io/talks/2021-09-08_GA_1.html</guid>
+  <pubDate>Wed, 08 Sep 2021 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Untargeted Chemical and Sensory Characterization of Swertia chirayita: a Bitter Case Study</title>
+  <dc:creator>Adriano Rutz</dc:creator>
+  <link>https://adafede.github.io/talks/2021-09-08_GA_2.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+
+
+ ]]></description>
+  <category>Poster</category>
+  <guid>https://adafede.github.io/talks/2021-09-08_GA_2.html</guid>
+  <pubDate>Wed, 08 Sep 2021 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>LOTUS, a Wikidata hosted open naturaL prOducTs occUrrences databaSe</title>
+  <dc:creator>Adriano Rutz</dc:creator>
+  <link>https://adafede.github.io/talks/2021-04-01_RFMF.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+
+
+ ]]></description>
+  <category>Talk</category>
+  <guid>https://adafede.github.io/talks/2021-04-01_RFMF.html</guid>
+  <pubDate>Thu, 01 Apr 2021 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Taxonomically Informed Scoring Enhances Confidence in Natural Products Annotation</title>
+  <dc:creator>Adriano Rutz</dc:creator>
+  <link>https://adafede.github.io/talks/2020-08-01_GNPS.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+
+
+ ]]></description>
+  <category>Talk</category>
+  <guid>https://adafede.github.io/talks/2020-08-01_GNPS.html</guid>
+  <pubDate>Sat, 01 Aug 2020 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Advanced Course on Mass Spectrometry</title>
+  <dc:creator>Adriano Rutz</dc:creator>
+  <link>https://adafede.github.io/talks/2019-10-01_NAPOLI.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+
+
+ ]]></description>
+  <category>Talk</category>
+  <category>Workshop</category>
+  <guid>https://adafede.github.io/talks/2019-10-01_NAPOLI.html</guid>
+  <pubDate>Tue, 01 Oct 2019 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Strategy for Exhaustive Plant Metabolomes Characterization from a Qualitative and Quantitative Perspective</title>
+  <dc:creator>Adriano Rutz</dc:creator>
+  <link>https://adafede.github.io/talks/2019-09-01_GA.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+
+
+ ]]></description>
+  <category>Poster</category>
+  <guid>https://adafede.github.io/talks/2019-09-01_GA.html</guid>
+  <pubDate>Sun, 01 Sep 2019 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Development of a Generic Method for a Comprehensive Composition Assessment for Plants of Industrial Interest – Quali/quantitative profiling by UHPLC-PDA-HRMS-ELSD</title>
+  <dc:creator>Adriano Rutz</dc:creator>
+  <link>https://adafede.github.io/talks/2019-01-01_SEEFELD.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+
+
+ ]]></description>
+  <category>Talk</category>
+  <guid>https://adafede.github.io/talks/2019-01-01_SEEFELD.html</guid>
+  <pubDate>Tue, 01 Jan 2019 00:00:00 GMT</pubDate>
+</item>
+</channel>
+</rss>

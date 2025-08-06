@@ -6,74 +6,11 @@
       version="2.0">
 <channel>
 <title>Adriano Rutz</title>
-<link>https://adafede.github.io/rss.html</link>
-<atom:link href="https://adafede.github.io/rss.xml" rel="self" type="application/rss+xml"/>
+<link>https://adafede.github.io/articles.html</link>
+<atom:link href="https://adafede.github.io/articles.xml" rel="self" type="application/rss+xml"/>
 <description>Personal website of Adriano Rutz</description>
 <generator>quarto-1.7.32</generator>
-<lastBuildDate>Mon, 04 Aug 2025 00:00:00 GMT</lastBuildDate>
-<item>
-  <title>Open Science Upgrade: Adding Blog Posts to my Website and Linking to Rogue Scholar</title>
-  <dc:creator>Adriano Rutz</dc:creator>
-  <link>https://adafede.github.io/posts/2025-08-04_rogue_scholar.html</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>I have finally opened a <code>Posts</code> section on my website! Every post should now automatically get a DOI.</p>
-<p>This is something I have wanted to do for a long time, largely inspired by the tireless and consistent example set by <a href="https://scholia.toolforge.org/author/Q20895241">Egon Willighagen</a> <span class="citation" data-cites="willighagen2024a willighagen2024b willighagen2025">(Willighagen 2024a, 2024b, 2025)</span>.</p>
-<p>It was today’s post of <span class="citation" data-cites="fenner2025">(Fenner 2025)</span> that finally motivated me to look into it again. That led me down a productive rabbit hole to set up Rogue Scholar: first landing on <span class="citation" data-cites="voncsefalvay2023">(Csefalvay 2023)</span>’s excellent guide, and then <span class="citation" data-cites="fruehwald2025">(Fruehwald 2025)</span>’s clear write-up, both of which made the process of integrating Rogue Scholar into a Quarto-based site surprisingly smooth.</p>
-<p>All the changes are documented in the following commit:</p>
-<p><a href="https://github.com/Adafede/adafede.github.io/commit/bc2dfe6f" class="uri">https://github.com/Adafede/adafede.github.io/commit/bc2dfe6f</a></p>
-<p>If you care about attribution, long-term archiving, DOIs and metadata, I highly recommend looking into <a href="https://rogue-scholar.org/">Rogue Scholar</a>.</p>
-<p><strong>EDIT</strong>: I thought bringing in <a href="https://sparontologies.github.io/cito/current/cito.html">CiTO</a> would be a huge plus. I managed to handle the HTML and PDF outputs (again thanks to Egon )<span class="citation" data-cites="willighagen2023">(Willighagen 2023)</span> but the feed probably still does not contain annotations.</p>
-<section id="references" class="level3">
-<h3 class="anchored" data-anchor-id="references">References</h3>
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
-<div id="ref-voncsefalvay2023" class="csl-entry">
-Csefalvay, Chris von. 2023. <span>“Auto-DOI for Quarto Posts via Rogue Scholar.”</span> <a href="http://dx.doi.org/10.59350/5hxdg-fz574">http://dx.doi.org/10.59350/5hxdg-fz574</a>.
-</div>
-<div id="ref-fenner2025" class="csl-entry">
-Fenner, Martin. 2025. <span>“Rogue Scholar Citation Tracking Launches to Production.”</span> <a href="http://dx.doi.org/10.53731/zyg15-qv911">http://dx.doi.org/10.53731/zyg15-qv911</a>.
-</div>
-<div id="ref-fruehwald2025" class="csl-entry">
-Fruehwald, Josef. 2025. <span>“Setting up Rogue Scholar.”</span> <a href="http://dx.doi.org/10.59350/3fp6d-e6z90">http://dx.doi.org/10.59350/3fp6d-e6z90</a>.
-</div>
-<div id="ref-willighagen2023" class="csl-entry">
-Willighagen, Egon. 2023. <span>“Two Years of Explicit CiTO Annotations.”</span> <em>Journal of Cheminformatics</em> 15 (1). <a href="https://doi.org/10.1186/s13321-023-00683-2">https://doi.org/10.1186/s13321-023-00683-2</a>.
-</div>
-<div id="ref-willighagen2024a" class="csl-entry">
-———. 2024a. <span>“GoatCounter, Rogue Scholar and More New Things.”</span> <a href="http://dx.doi.org/10.59350/8x2f1-h6d21">http://dx.doi.org/10.59350/8x2f1-h6d21</a>.
-</div>
-<div id="ref-willighagen2024b" class="csl-entry">
-———. 2024b. <span>“FAIR Blog-to-Blog Citations.”</span> <a href="http://dx.doi.org/10.59350/er1mn-m5q69">http://dx.doi.org/10.59350/er1mn-m5q69</a>.
-</div>
-<div id="ref-willighagen2025" class="csl-entry">
-———. 2025. <span>“Blog Updates.”</span> <a href="http://dx.doi.org/10.59350/cf885-kee54">http://dx.doi.org/10.59350/cf885-kee54</a>.
-</div>
-</div>
-
-
-</section>
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{rutz2025,
-  author = {Rutz, Adriano},
-  title = {Open {Science} {Upgrade:} {Adding} {Blog} {Posts} to My
-    {Website} and {Linking} to {Rogue} {Scholar}},
-  date = {2025-08-04},
-  url = {https://adafede.github.io/posts/2025-08-04_rogue_scholar.html},
-  doi = {10.59350/38tz1-47k08},
-  langid = {en}
-}
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-rutz2025" class="csl-entry quarto-appendix-citeas">
-Rutz, Adriano. 2025. <span>“Open Science Upgrade: Adding Blog Posts to
-My Website and Linking to Rogue Scholar.”</span> August 4, 2025. <a href="https://doi.org/10.59350/38tz1-47k08">https://doi.org/10.59350/38tz1-47k08</a>.
-</div></div></section></div> ]]></description>
-  <category>Open Science</category>
-  <guid>https://adafede.github.io/posts/2025-08-04_rogue_scholar.html</guid>
-  <pubDate>Mon, 04 Aug 2025 00:00:00 GMT</pubDate>
-</item>
+<lastBuildDate>Tue, 29 Jul 2025 00:00:00 GMT</lastBuildDate>
 <item>
   <title>Degradation of extracellular polymeric substances shapes microbial community diversity</title>
   <link>https://adafede.github.io/articles/co/2025-07-29_eps.html</link>
@@ -97,26 +34,6 @@ Pontrelli, Sammy, Kian Bigovic Villi, Andreas Sichert, Julian Trouillon, Adriano
 </div></section></div> ]]></description>
   <guid>https://adafede.github.io/articles/co/2025-07-29_eps.html</guid>
   <pubDate>Tue, 29 Jul 2025 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Data-Independent Analysis for Deep Metabolome Profiling of Plant Extracts</title>
-  <dc:creator>Adriano Rutz</dc:creator>
-  <dc:creator>Vincen Wu</dc:creator>
-  <dc:creator>Nicola Zamboni</dc:creator>
-  <link>https://adafede.github.io/talks/2025-06-22_METSOC.html</link>
-  <description><![CDATA[ 
-
-
-
-
-
-
-
-
- ]]></description>
-  <category>Poster</category>
-  <guid>https://adafede.github.io/talks/2025-06-22_METSOC.html</guid>
-  <pubDate>Sun, 22 Jun 2025 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Translating community-wide spectral library into actionable chemical knowledge: a proof of concept with monoterpene indole alkaloids</title>
@@ -246,62 +163,6 @@ Zdouc, Mitja M, Kai Blin, Nico L L Louwen, Jorge Navarro, Catarina Loureiro, Cha
   <pubDate>Mon, 09 Dec 2024 00:00:00 GMT</pubDate>
 </item>
 <item>
-  <title>Traitement de Données et Outils d’Annotation MS/MS</title>
-  <dc:creator>Adriano Rutz</dc:creator>
-  <link>https://adafede.github.io/talks/2024-06-19_METABIODIVEX.html</link>
-  <description><![CDATA[ 
-
-
-
-
-
-
-
-
- ]]></description>
-  <category>Talk</category>
-  <category>Workshop</category>
-  <guid>https://adafede.github.io/talks/2024-06-19_METABIODIVEX.html</guid>
-  <pubDate>Wed, 19 Jun 2024 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Where is the “L” in “ORD”?</title>
-  <dc:creator>Adriano Rutz</dc:creator>
-  <link>https://adafede.github.io/talks/2024-05-31_SCNAT.html</link>
-  <description><![CDATA[ 
-
-
-
-
-
-
-
-
- ]]></description>
-  <category>Talk</category>
-  <guid>https://adafede.github.io/talks/2024-05-31_SCNAT.html</guid>
-  <pubDate>Fri, 31 May 2024 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Introduction to Linked Open Data for Computational Mass Spectrometry</title>
-  <dc:creator>Adriano Rutz</dc:creator>
-  <link>https://adafede.github.io/talks/2024-04-17_PRAGUE.html</link>
-  <description><![CDATA[ 
-
-
-
-
-
-
-
-
- ]]></description>
-  <category>Talk</category>
-  <category>Workshop</category>
-  <guid>https://adafede.github.io/talks/2024-04-17_PRAGUE.html</guid>
-  <pubDate>Wed, 17 Apr 2024 00:00:00 GMT</pubDate>
-</item>
-<item>
   <title>A Sample-Centric and Knowledge-Driven Computational Framework for Natural Products Drug Discovery</title>
   <link>https://adafede.github.io/articles/co/2024-02-20_enpkg.html</link>
   <description><![CDATA[ 
@@ -398,96 +259,238 @@ Rutz, Adriano, and Jean-Luc Wolfender. 2023. <span>“Automated Composition Asse
   <media:content url="https://raw.githubusercontent.com/Adafede/cascade/refs/heads/main/man/figures/cascade-workflow.svg" medium="image" type="image/svg+xml"/>
 </item>
 <item>
-  <title>Lotus: A Living Knowledge Base for Modern Pharmacognosy</title>
-  <dc:creator>Adriano Rutz</dc:creator>
-  <link>https://adafede.github.io/talks/2023-10-16_INNSBRUCK.html</link>
+  <title>Phytochemical study of Alzatea verticillata, the sole species belonging to the Alzateaceae family</title>
+  <link>https://adafede.github.io/articles/co/2023-03-09_alzatea.html</link>
   <description><![CDATA[ 
 
 
 
 
 
+<iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q117039043" title="Scholia entry"></iframe>
 
 
 
- ]]></description>
-  <category>Talk</category>
-  <guid>https://adafede.github.io/talks/2023-10-16_INNSBRUCK.html</guid>
-  <pubDate>Mon, 16 Oct 2023 00:00:00 GMT</pubDate>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="ref-FerreiraQueiroz2023" class="csl-entry">
+Ferreira Queiroz, Marcos Marçal, Robin Huber, Laurence Marcourt, Laure Guénée, Pierre-Marie Allard, Adriano Rutz, Louis-Félix Nothias, et al. 2023. <span>“Phytochemical Study of Alzatea Verticillata, the Sole Species Belonging to the Alzateaceae Family.”</span> <em>Frontiers in Natural Products</em> 2 (March). <a href="https://doi.org/10.3389/fntpr.2023.1147195">https://doi.org/10.3389/fntpr.2023.1147195</a>.
+</div>
+</div></section></div> ]]></description>
+  <guid>https://adafede.github.io/articles/co/2023-03-09_alzatea.html</guid>
+  <pubDate>Thu, 09 Mar 2023 00:00:00 GMT</pubDate>
 </item>
 <item>
-  <title>Prior Knowledge as a Compass Guiding Untargeted Metabolomics</title>
-  <dc:creator>Adriano Rutz</dc:creator>
-  <dc:creator>Nicola Zamboni</dc:creator>
-  <link>https://adafede.github.io/talks/2023-09-15_SWISSMETABO.html</link>
+  <title>Open and reusable annotated mass spectrometry dataset of a chemodiverse collection of 1,600 plant extracts</title>
+  <link>https://adafede.github.io/articles/co/2023-01-18_pf1600.html</link>
   <description><![CDATA[ 
 
 
 
 
 
+<iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q116245417" title="Scholia entry"></iframe>
 
 
 
- ]]></description>
-  <category>Poster</category>
-  <guid>https://adafede.github.io/talks/2023-09-15_SWISSMETABO.html</guid>
-  <pubDate>Fri, 15 Sep 2023 00:00:00 GMT</pubDate>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="ref-Allard2022" class="csl-entry">
+Allard, Pierre-Marie, Arnaud Gaudry, Luis-Manuel Quirós-Guerrero, Adriano Rutz, Miwa Dounoue-Kubo, Tom W N Walker, Emmanuel Defossez, et al. 2022. <span>“Open and Reusable Annotated Mass Spectrometry Dataset of a Chemodiverse Collection of 1, 600 Plant Extracts.”</span> <em>GigaScience</em> 12 (December). <a href="https://doi.org/10.1093/gigascience/giac124">https://doi.org/10.1093/gigascience/giac124</a>.
+</div>
+</div></section></div> ]]></description>
+  <guid>https://adafede.github.io/articles/co/2023-01-18_pf1600.html</guid>
+  <pubDate>Wed, 18 Jan 2023 00:00:00 GMT</pubDate>
 </item>
 <item>
-  <title>Deep Metabolome Annotation</title>
-  <dc:creator>Adriano Rutz</dc:creator>
-  <link>https://adafede.github.io/talks/2023-07-18_SACLAY.html</link>
+  <title>Metabolomics in Ecology and Bioactive Natural Products Discovery: Challenges and Prospects for a Comprehensive Study of the Specialised Metabolome</title>
+  <link>https://adafede.github.io/articles/co/2022-11-30_chimia.html</link>
   <description><![CDATA[ 
 
 
 
 
 
+<iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q115517760" title="Scholia entry"></iframe>
 
 
 
- ]]></description>
-  <category>Talk</category>
-  <category>Workshop</category>
-  <guid>https://adafede.github.io/talks/2023-07-18_SACLAY.html</guid>
-  <pubDate>Tue, 18 Jul 2023 00:00:00 GMT</pubDate>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="ref-Wolfender2022" class="csl-entry">
+Wolfender, Jean-Luc, Arnaud Gaudry, Adriano Rutz, Luis-Manuel Quiros-Guerrero, Louis-Félix Nothias, Emerson Ferreira Queiroz, Emmanuel Defossez, and Pierre-Marie Allard. 2022. <span>“Metabolomics in Ecology and Bioactive Natural Products Discovery: Challenges and Prospects for a Comprehensive Study of the Specialised Metabolome.”</span> <em>CHIMIA</em> 76 (11): 954. <a href="https://doi.org/10.2533/chimia.2022.954">https://doi.org/10.2533/chimia.2022.954</a>.
+</div>
+</div></section></div> ]]></description>
+  <guid>https://adafede.github.io/articles/co/2022-11-30_chimia.html</guid>
+  <pubDate>Wed, 30 Nov 2022 00:00:00 GMT</pubDate>
 </item>
 <item>
-  <title>A Distillate of the LOTUS Initiative in Natural Products Research: Sharing Information, Building Knowledge, Extracting Wisdom</title>
-  <dc:creator>Adriano Rutz</dc:creator>
-  <link>https://adafede.github.io/talks/2023-07-03_GA.html</link>
+  <title>Inventa: A computational tool to discover structural novelty in natural extracts libraries</title>
+  <link>https://adafede.github.io/articles/co/2022-11-21_inventa.html</link>
   <description><![CDATA[ 
 
 
 
 
 
+<iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q115177826" title="Scholia entry"></iframe>
 
 
 
- ]]></description>
-  <category>Talk</category>
-  <guid>https://adafede.github.io/talks/2023-07-03_GA.html</guid>
-  <pubDate>Mon, 03 Jul 2023 00:00:00 GMT</pubDate>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="ref-QuirosGuerrero2022" class="csl-entry">
+Quiros-Guerrero, Luis-Manuel, Louis-Félix Nothias, Arnaud Gaudry, Laurence Marcourt, Pierre-Marie Allard, Adriano Rutz, Bruno David, Emerson Ferreira Queiroz, and Jean-Luc Wolfender. 2022. <span>“Inventa: A Computational Tool to Discover Structural Novelty in Natural Extracts Libraries.”</span> <em>Frontiers in Molecular Biosciences</em> 9 (November). <a href="https://doi.org/10.3389/fmolb.2022.1028334">https://doi.org/10.3389/fmolb.2022.1028334</a>.
+</div>
+</div></section></div> ]]></description>
+  <guid>https://adafede.github.io/articles/co/2022-11-21_inventa.html</guid>
+  <pubDate>Mon, 21 Nov 2022 00:00:00 GMT</pubDate>
 </item>
 <item>
-  <title>Metabolomics Workshop</title>
-  <dc:creator>Adriano Rutz</dc:creator>
-  <link>https://adafede.github.io/talks/2023-06-13_METAOMICS.html</link>
+  <title>Unifying the identification of biomedical entities with the Bioregistry</title>
+  <link>https://adafede.github.io/articles/co/2022-11-19_bioregistry.html</link>
   <description><![CDATA[ 
 
 
 
 
 
+<iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q115317009" title="Scholia entry"></iframe>
 
 
 
- ]]></description>
-  <category>Talk</category>
-  <guid>https://adafede.github.io/talks/2023-06-13_METAOMICS.html</guid>
-  <pubDate>Tue, 13 Jun 2023 00:00:00 GMT</pubDate>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="ref-Hoyt2022" class="csl-entry">
+Hoyt, Charles Tapley, Meghan Balk, Tiffany J. Callahan, Daniel Domingo-Fernández, Melissa A. Haendel, Harshad B. Hegde, Daniel S. Himmelstein, et al. 2022. <span>“Unifying the Identification of Biomedical Entities with the Bioregistry.”</span> <em>Scientific Data</em> 9 (1). <a href="https://doi.org/10.1038/s41597-022-01807-3">https://doi.org/10.1038/s41597-022-01807-3</a>.
+</div>
+</div></section></div> ]]></description>
+  <guid>https://adafede.github.io/articles/co/2022-11-19_bioregistry.html</guid>
+  <pubDate>Sat, 19 Nov 2022 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Combining Activity Profiling with Advanced Annotation to Accelerate the Discovery of Natural Products Targeting Oncogenic Signaling in Melanoma</title>
+  <link>https://adafede.github.io/articles/shared/2022-05-31_melanoma.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q112189007" title="Scholia entry"></iframe>
+
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="ref-Hell2022" class="csl-entry">
+Hell, Tanja, Adriano Rutz, Lara Dürr, Maciej Dobrzyński, Jakob K. Reinhardt, Timo Lehner, Morris Keller, et al. 2022. <span>“Combining Activity Profiling with Advanced Annotation to Accelerate the Discovery of Natural Products Targeting Oncogenic Signaling in Melanoma.”</span> <em>Journal of Natural Products</em> 85 (6): 1540–54. <a href="https://doi.org/10.1021/acs.jnatprod.2c00146">https://doi.org/10.1021/acs.jnatprod.2c00146</a>.
+</div>
+</div></section></div> ]]></description>
+  <category>Bioactivity</category>
+  <category>Charged Aerosol Detector</category>
+  <category>Metabolomics</category>
+  <category>Liquid Chromatography-Tandem Mass Spectrometry</category>
+  <category>Natural Extracts</category>
+  <category>Natural Products</category>
+  <category>Metabolite Annotation</category>
+  <guid>https://adafede.github.io/articles/shared/2022-05-31_melanoma.html</guid>
+  <pubDate>Tue, 31 May 2022 00:00:00 GMT</pubDate>
+  <media:content url="https://pubs.acs.org/cms/10.1021/acs.jnatprod.2c00146/asset/images/medium/np2c00146_0008.gif" medium="image" type="image/gif"/>
+</item>
+<item>
+  <title>The LOTUS initiative for open knowledge management in natural products research</title>
+  <link>https://adafede.github.io/articles/first/2022-05-26_lotus.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q112143478" title="Scholia entry"></iframe>
+
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="ref-Rutz2022" class="csl-entry">
+Rutz, Adriano, Maria Sorokina, Jakub Galgonek, Daniel Mietchen, Egon Willighagen, Arnaud Gaudry, James G Graham, et al. 2022. <span>“The LOTUS Initiative for Open Knowledge Management in Natural Products Research.”</span> <em>eLife</em> 11 (May). <a href="https://doi.org/10.7554/elife.70780">https://doi.org/10.7554/elife.70780</a>.
+</div>
+</div></section></div> ]]></description>
+  <category>LOTUS</category>
+  <category>Natural Products</category>
+  <category>Open Science</category>
+  <category>Wikidata</category>
+  <category>Knowledge Graph</category>
+  <guid>https://adafede.github.io/articles/first/2022-05-26_lotus.html</guid>
+  <pubDate>Thu, 26 May 2022 00:00:00 GMT</pubDate>
+  <media:content url="https://upload.wikimedia.org/wikipedia/commons/f/f1/Lotus_initiative_1_graphical_abstract.svg" medium="image" type="image/svg+xml"/>
+</item>
+<item>
+  <title>Feature-Based Molecular Networking—An Exciting Tool to Spot Species of the Genus Cortinarius with Hidden Photosensitizers</title>
+  <link>https://adafede.github.io/articles/co/2021-11-19_cortinarius.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q109715863" title="Scholia entry"></iframe>
+
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="ref-Hammerle2021" class="csl-entry">
+Hammerle, Fabian, Luis Quirós-Guerrero, Adriano Rutz, Jean-Luc Wolfender, Harald Schöbel, Ursula Peintner, and Bianka Siewert. 2021. <span>“Feature-Based Molecular Networking—an Exciting Tool to Spot Species of the Genus Cortinarius with Hidden Photosensitizers.”</span> <em>Metabolites</em> 11 (11): 791. <a href="https://doi.org/10.3390/metabo11110791">https://doi.org/10.3390/metabo11110791</a>.
+</div>
+</div></section></div> ]]></description>
+  <guid>https://adafede.github.io/articles/co/2021-11-19_cortinarius.html</guid>
+  <pubDate>Fri, 19 Nov 2021 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Integrative Analytical and Computational Strategies for Qualitative and Semi-quantitative Plant Metabolome Characterization</title>
+  <link>https://adafede.github.io/articles/thesis.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q115707320" title="Scholia entry"></iframe>
+
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="ref-https://doi.org/10.13097/archive-ouverte/unige:165668" class="csl-entry">
+Rutz, Adriano. 2022. <span>“Integrative Analytical and Computational Strategies for Qualitative and Semi-Quantitative Plant Metabolome Characterization.”</span> PhD thesis, Université de Genève. <a href="https://doi.org/10.13097/ARCHIVE-OUVERTE/UNIGE:165668">https://doi.org/10.13097/ARCHIVE-OUVERTE/UNIGE:165668</a>.
+</div>
+</div></section></div> ]]></description>
+  <guid>https://adafede.github.io/articles/thesis.html</guid>
+  <pubDate>Wed, 06 Oct 2021 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Drug Repurposing to Identify a Synergistic High-Order Drug Combination to Treat Sunitinib-Resistant Renal Cell Carcinoma</title>
+  <link>https://adafede.github.io/articles/co/2021-08-06_repurposing.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q108003603" title="Scholia entry"></iframe>
+
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="ref-Rausch2021b" class="csl-entry">
+Rausch, Magdalena, Adriano Rutz, Pierre-Marie Allard, Céline Delucinge-Vivier, Mylène Docquier, Olivier Dormond, Paul J. Dyson, Jean-Luc Wolfender, and Patrycja Nowak-Sliwinska. 2021. <span>“Drug Repurposing to Identify a Synergistic High-Order Drug Combination to Treat Sunitinib-Resistant Renal Cell Carcinoma.”</span> <em>Cancers</em> 13 (16): 3978. <a href="https://doi.org/10.3390/cancers13163978">https://doi.org/10.3390/cancers13163978</a>.
+</div>
+</div></section></div> ]]></description>
+  <guid>https://adafede.github.io/articles/co/2021-08-06_repurposing.html</guid>
+  <pubDate>Fri, 06 Aug 2021 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
