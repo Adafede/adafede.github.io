@@ -1,11 +1,10 @@
 ---
 listing:
   # - id: last
-  #   contents: articles/last/*.qmd
-  #   sort: date desc
-  #   date-format: iso
   #   categories: true
-  #   sort-ui: true
+  #   contents: articles/last/*.qmd
+  #   date-format: iso
+  #   feed: true
   #   filter-ui: true
   #   fields:
   #     - title
@@ -16,12 +15,13 @@ listing:
   #     - image-alt
   #     - doi
   #     - date
+  #   sort: date desc
+  #   sort-ui: true
   - id: first
+    categories: true
     contents: articles/first/*.qmd
-    sort: date desc
     date-format: iso
-    categories: true
-    sort-ui: true
+    feed: true
     filter-ui: true
     fields:
       - title
@@ -32,12 +32,13 @@ listing:
       - image-alt
       - doi
       - date
+    sort: date desc
+    sort-ui: true
   - id: shared
-    contents: articles/shared/*.qmd
-    sort: date desc
-    date-format: iso
     categories: true
-    sort-ui: true
+    contents: articles/shared/*.qmd
+    date-format: iso
+    feed: true
     filter-ui: true
     fields:
       - title
@@ -48,12 +49,12 @@ listing:
       - image-alt
       - doi
       - date
-  - id: co
-    contents: articles/co/*.qmd
     sort: date desc
-    date-format: iso
-    categories: true
     sort-ui: true
+  - id: co
+    categories: true
+    contents: articles/co/*.qmd
+    feed: true
     filter-ui:
       - date
       - link
@@ -64,19 +65,23 @@ listing:
       - title
       - venue
       - url
-    type: table
-  - id: thesis
-    contents: articles/thesis.qmd
     sort: date desc
     date-format: iso
+    sort-ui: true
+    type: table
+  - id: thesis
     categories: true
-    sort-ui: false
+    contents: articles/thesis.qmd
+    date-format: iso
+    feed: true
     filter-ui: false
     fields:
       - date
       - title
       - venue
       - url
+    sort: date desc
+    sort-ui: false
     type: table
 ---
 

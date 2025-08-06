@@ -1,0 +1,15 @@
+---
+listing:
+  - id: posts_list
+    categories: true
+    contents: posts/*.qmd
+    feed: true
+    filter-ui: true
+    sort: date desc
+    sort-ui: true
+---
+
+## Posts
+
+:::{#posts_list}
+:::

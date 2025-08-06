@@ -1,10 +1,9 @@
 ---
 listing:
   - id: varia_adafede
-    contents: varia/adafede/*.qmd
-    sort: date desc
     categories: true
-    sort-ui: false
+    contents: varia/adafede/*.qmd
+    feed: true
     filter-ui: true
     fields:
       - title
@@ -12,12 +11,13 @@ listing:
       - image
       - image-alt
       - description
+    sort: date desc
+    sort-ui: false
     type: grid
   - id: varia_lotus
-    contents: varia/lotus/*.qmd
-    sort: date desc
     categories: true
-    sort-ui: false
+    contents: varia/lotus/*.qmd
+    feed: true
     filter-ui: true
     fields:
       - title
@@ -25,12 +25,13 @@ listing:
       - image
       - image-alt
       - description
+    sort: date desc
+    sort-ui: false
     type: grid
   - id: varia_tima
-    contents: varia/taxonomicallyinformedannotation/*.qmd
-    sort: date desc
     categories: true
-    sort-ui: false
+    contents: varia/taxonomicallyinformedannotation/*.qmd
+    feed: true
     filter-ui: true
     fields:
       - title
@@ -38,12 +39,13 @@ listing:
       - image
       - image-alt
       - description
+    sort: date desc
+    sort-ui: false
     type: grid
   - id: varia_contribs
     contents: varia/additional_contributions/*.qmd
-    sort: date desc
     categories: true
-    sort-ui: false
+    feed: true
     filter-ui: true
     fields:
       - title
@@ -51,6 +53,8 @@ listing:
       - image
       - image-alt
       - description
+    sort: date desc
+    sort-ui: false
     type: grid
 ---
 
