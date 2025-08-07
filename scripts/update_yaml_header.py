@@ -18,15 +18,19 @@ def update_yaml_header(post_path: Path) -> None:
         data = {}
         body = content
 
+    # Only proceed if no DOI is assigned
+    if "doi" in data:
+        return
+
     changed = False
     date_str = make_date(post_path)
     if data.get("date") != date_str:
         data["date"] = date_str
         changed = True
 
-    if "doi" not in data:
-        data["doi"] = make_doi()
-        changed = True
+    # Add DOI since it doesn't exist
+    data["doi"] = make_doi()
+    changed = True
 
     if changed:
         # Custom YAML dumper to maintain proper indentation
@@ -44,7 +48,6 @@ def update_yaml_header(post_path: Path) -> None:
             width=float("inf"),
             Dumper=CustomDumper,
         )
-
         # Replace single quotes with double quotes, but not for date values
         lines = new_front.split("\n")
         for i, line in enumerate(lines):

@@ -2,6 +2,7 @@ import os
 import json
 from bs4 import BeautifulSoup
 from lxml import etree
+from datetime import datetime
 
 
 # Centralized author mapping
@@ -84,6 +85,117 @@ def extract_feed_metadata(channel):
     return metadata
 
 
+def get_qmd_modification_time(item_url, base_url=None):
+    """Extract .qmd file path from item URL and get its modification time."""
+    if not item_url:
+        return None
+
+    try:
+        if base_url and item_url.startswith(base_url):
+            # Remove base URL to get relative path
+            relative_path = item_url[len(base_url) :].strip("/")
+        else:
+            # Try to extract path from URL
+            from urllib.parse import urlparse
+
+            parsed = urlparse(item_url)
+            relative_path = parsed.path.strip("/")
+
+        # Remove .html extension if present
+        if relative_path.endswith(".html"):
+            relative_path = relative_path[:-5]
+
+        # Common .qmd file patterns to check
+        qmd_candidates = [
+            f"{relative_path}/index.qmd",
+            f"{relative_path}.qmd",
+            f"posts/{relative_path}/index.qmd",
+            f"posts/{relative_path}.qmd",
+        ]
+
+        for candidate in qmd_candidates:
+            if os.path.isfile(candidate):
+                # Check if file has been modified (uncommitted changes)
+                if is_file_modified(candidate):
+                    # Use file system modification time for modified files
+                    mod_timestamp = os.path.getmtime(candidate)
+                    return datetime.fromtimestamp(mod_timestamp).isoformat()
+                else:
+                    # Use Git commit date for unmodified files
+                    return get_git_commit_date(candidate)
+
+        # If no .qmd file found, return None
+        return None
+
+    except Exception as e:
+        print(f"Warning: Could not get .qmd modification time for {item_url}: {e}")
+        return None
+
+
+def is_file_modified(file_path):
+    """Check if a file has uncommitted changes."""
+    try:
+        import subprocess
+
+        result = subprocess.run(
+            [
+                "git",
+                "diff",
+                "--quiet",
+                "HEAD",
+                "--",
+                file_path,
+            ],
+            cwd=os.path.dirname(file_path) or ".",
+            capture_output=True,
+        )
+        # git diff --quiet returns 0 if no differences, 1 if differences exist
+        return result.returncode != 0
+    except Exception:
+        # If git command fails, assume file is modified to be safe
+        return True
+
+
+def get_git_commit_date(file_path):
+    """Get the last commit date for a file."""
+    try:
+        import subprocess
+
+        full_path = os.path.abspath(file_path)
+
+        result = subprocess.run(
+            [
+                "git",
+                "log",
+                "-1",
+                "--format=%ai",
+                "--",
+                full_path,
+            ],
+            capture_output=True,
+            text=True,
+            cwd=os.path.dirname(file_path) or ".",
+        )
+
+        if result.returncode == 0 and result.stdout.strip():
+            # Parse the git date and convert to ISO format
+            git_date = result.stdout.strip()
+            # Git date format is like "2024-01-15 10:30:45 +0100"
+            from datetime import datetime
+            import re
+
+            # Extract just the datetime part (ignore timezone for simplicity)
+            match = re.match(r"(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})", git_date)
+            if match:
+                dt = datetime.strptime(match.group(1), "%Y-%m-%d %H:%M:%S")
+                return dt.isoformat()
+
+        return None
+    except Exception as e:
+        print(f"Warning: Could not get Git commit date for {file_path}: {e}")
+        return None
+
+
 def extract_item_data(item, base_url=None):
     item_data = {}
 
@@ -126,9 +238,25 @@ def extract_item_data(item, base_url=None):
             dt = parsedate_to_datetime(pubdate)
             iso_date = dt.isoformat()
             item_data["date_published"] = iso_date
-            item_data["date_modified"] = iso_date
         except Exception:
             item_data["date_published"] = pubdate
+
+    # Get .qmd file modification time for this item
+    item_url = item_data.get("url")
+    qmd_mod_time = get_qmd_modification_time(item_url, base_url)
+
+    if qmd_mod_time:
+        item_data["date_modified"] = qmd_mod_time
+    elif pubdate:
+        # Fallback to publication date if .qmd file not found
+        try:
+            from email.utils import parsedate_to_datetime
+
+            dt = parsedate_to_datetime(pubdate)
+            iso_date = dt.isoformat()
+            item_data["date_modified"] = iso_date
+        except Exception:
+            item_data["date_modified"] = pubdate
 
     # Handle categories/tags
     categories = item.findall("category")
@@ -144,41 +272,47 @@ def extract_item_data(item, base_url=None):
         if author_info:
             item_data["authors"] = [author_info]
 
-    # Handle item references
-    refs_div = soup.find("div", class_="references")
-    references = []
-    if refs_div:
-        entries = refs_div.find_all("div", class_="csl-entry")
-        for entry in entries:
-            ref = {}
-            link = entry.find("a", href=True)
-            if link:
-                url = link["href"]
-                if url.startswith("http://dx.doi.org/") or url.startswith(
-                    "https://doi.org/",
-                ):
-                    doi = url.split("doi.org/")[-1]
-                    ref["url"] = url.replace("http://dx.doi.org/", "https://doi.org/")
-                    ref["doi"] = doi
-            # Find all cito annotations
-            cito_spans = entry.find_all("span", class_="cito")
-            cito_relations = []
-            for span in cito_spans:
-                text = span.get_text(strip=True)
-                if text.startswith("[cito:") and text.endswith("]"):
-                    cito_relations.append(text[6:-1])  # remove [cito:] and trailing ]
-            if ref.get("doi") and cito_relations:
-                ref["cito"] = cito_relations
-                references.append(ref)
-    if references:
-        item_data["_references"] = references
+    # Handle item references (need to parse description again for this)
+    if description:
+        soup = BeautifulSoup(description, "html.parser")
+        refs_div = soup.find("div", class_="references")
+        references = []
+        if refs_div:
+            entries = refs_div.find_all("div", class_="csl-entry")
+            for entry in entries:
+                ref = {}
+                link = entry.find("a", href=True)
+                if link:
+                    url = link["href"]
+                    if url.startswith("http://dx.doi.org/") or url.startswith(
+                        "https://doi.org/",
+                    ):
+                        doi = url.split("doi.org/")[-1]
+                        ref["url"] = url.replace(
+                            "http://dx.doi.org/",
+                            "https://doi.org/",
+                        )
+                        ref["doi"] = doi
+                # Find all cito annotations
+                cito_spans = entry.find_all("span", class_="cito")
+                cito_relations = []
+                for span in cito_spans:
+                    text = span.get_text(strip=True)
+                    if text.startswith("[cito:") and text.endswith("]"):
+                        cito_relations.append(
+                            text[6:-1],
+                        )  # remove [cito:] and trailing ]
+                if ref.get("doi") and cito_relations:
+                    ref["cito"] = cito_relations
+                    references.append(ref)
+        if references:
+            item_data["_references"] = references
 
     # Handle DOI
     ## After discussion with Martin Fenner about where the DOI should be in comparison to Atom/RSS
     doi = get_element_text(item, "doi")
     if doi:
         item_data["id"] = doi
-        item
 
     # Placeholder for funding info (TODO not there yet, return an empty one)
     # item_data["_funding"] = []
@@ -244,4 +378,4 @@ def convert_rss_to_json_feed(rss_path, json_feed_path):
 
 
 if __name__ == "__main__":
-    convert_rss_to_json_feed("posts.xml", "feed.json")
+    convert_rss_to_json_feed("_site/posts.xml", "_site/posts.json")
