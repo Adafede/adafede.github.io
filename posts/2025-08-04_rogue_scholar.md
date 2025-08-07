@@ -42,7 +42,7 @@ citation:
     raw: 2025-08-04
 creative_commons: CC BY
 date: 2025-08-04
-doi: 10.59350/38tz1-47k08
+doi: 10.59350/yckwd-9vm79
 google-scholar: true
 kernel: ../.venv
 license:
