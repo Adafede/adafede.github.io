@@ -173,6 +173,13 @@ def extract_item_data(item, base_url=None):
     if references:
         item_data["_references"] = references
 
+    # Handle DOI
+    ## After discussion with Martin Fenner about where the DOI should be in comparison to Atom/RSS
+    doi = get_element_text(item, "doi")
+    if doi:
+        item_data["id"] = doi
+        item
+
     # Placeholder for funding info (TODO not there yet, return an empty one)
     # item_data["_funding"] = []
     # TODO TO GET SOMETHING LIKE
