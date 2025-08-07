@@ -5,7 +5,7 @@
     <link>https://adafede.github.io/posts.html</link>
     <atom:link href="https://adafede.github.io/posts.xml" rel="self" type="application/rss+xml"/>
     <description>Personal website of Adriano Rutz</description>
-    <generator>quarto-1.7.32</generator>
+    <generator>quarto-1.7.33</generator>
     <lastBuildDate>Mon, 04 Aug 2025 00:00:00 GMT</lastBuildDate>
     <item>
       <title>Open Science Upgrade: Adding Blog Posts to my Website and Linking to Rogue Scholar</title>
@@ -18,22 +18,23 @@
 <p>All the changes are documented in the following commit:</p>
 <p><a class="uri" href="https://github.com/Adafede/adafede.github.io/commit/bc2dfe6f">https://github.com/Adafede/adafede.github.io/commit/bc2dfe6f</a></p>
 <p>If you care about attribution, long-term archiving, DOIs and metadata, I highly recommend looking into <a href="https://rogue-scholar.org/">Rogue Scholar</a>.</p>
-<p><strong>Edit:</strong> I realized that integrating <a href="https://sparontologies.github.io/cito/current/cito.html">CiTO</a> could be a significant enhancement. With some effort (and thanks again to Egon), I managed to implement a working solution for the HTML and PDF outputs, see <span class="citation" data-cites="willighagen2023">(Willighagen 2023)</span>. However, the solution for the XML feed still feels suboptimal.</p>
+<p><strong>Edit (1):</strong> I realized that integrating <a href="https://sparontologies.github.io/cito/current/cito.html">CiTO</a> could be a significant enhancement. With some effort (and thanks again to Egon), I managed to implement a working solution for the HTML and PDF outputs, see <span class="citation" data-cites="willighagen2023">(Willighagen 2023)</span>. However, the solution for the XML feed still feels suboptimal.</p>
+<p><strong>Edit (2):</strong> After some help from Egon and <a href="https://scholia.toolforge.org/author/Q30532925">Martin</a>, I could improve my feed with correct CiTO annotations and their cool custom <code>json</code> feed!</p>
 <section class="level3" id="references">
 <h3 class="anchored" data-anchor-id="references">References</h3>
 <div class="references csl-bib-body hanging-indent" data-entry-spacing="0" id="refs">
 <div class="csl-entry" id="ref-voncsefalvay2023">
 Csefalvay, Chris von. 2023. <span>“Auto-DOI for Quarto Posts via Rogue Scholar.”</span> <a href="http://dx.doi.org/10.59350/5hxdg-fz574">http://dx.doi.org/10.59350/5hxdg-fz574</a>.
-<span class="cito"> [cito:obtains_background_from]</span></div>
+<span class="cito"> [cito:obtainsBackgroundFrom]</span></div>
 <div class="csl-entry" id="ref-fenner2025">
 Fenner, Martin. 2025. <span>“Rogue Scholar Citation Tracking Launches to Production.”</span> <a href="http://dx.doi.org/10.53731/zyg15-qv911">http://dx.doi.org/10.53731/zyg15-qv911</a>.
-<span class="cito"> [cito:obtains_background_from]</span></div>
+<span class="cito"> [cito:obtainsBackgroundFrom]</span></div>
 <div class="csl-entry" id="ref-fruehwald2025">
 Fruehwald, Josef. 2025. <span>“Setting up Rogue Scholar.”</span> <a href="http://dx.doi.org/10.59350/3fp6d-e6z90">http://dx.doi.org/10.59350/3fp6d-e6z90</a>.
-<span class="cito"> [cito:uses_method_in]</span></div>
+<span class="cito"> [cito:usesMethodIn]</span></div>
 <div class="csl-entry" id="ref-willighagen2023">
 Willighagen, Egon. 2023. <span>“Two Years of Explicit CiTO Annotations.”</span> <em>Journal of Cheminformatics</em> 15 (1). <a href="https://doi.org/10.1186/s13321-023-00683-2">https://doi.org/10.1186/s13321-023-00683-2</a>.
-<span class="cito"> [cito:uses_method_in]</span></div>
+<span class="cito"> [cito:usesMethodIn]</span></div>
 <div class="csl-entry" id="ref-willighagen2024a">
 ———. 2024a. <span>“GoatCounter, Rogue Scholar and More New Things.”</span> <a href="http://dx.doi.org/10.59350/8x2f1-h6d21">http://dx.doi.org/10.59350/8x2f1-h6d21</a>.
 <span class="cito"> [cito:cites]</span></div>

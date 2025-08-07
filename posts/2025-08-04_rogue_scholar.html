@@ -2,7 +2,7 @@
 
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml"><head>
 <meta charset="utf-8"/>
-<meta content="quarto-1.7.32" name="generator"/>
+<meta content="quarto-1.7.33" name="generator"/>
 <meta content="width=device-width, initial-scale=1.0, user-scalable=yes" name="viewport"/>
 <meta content="Adriano Rutz" name="author"/>
 <meta content="2025-08-04" name="dcterms.date"/>
@@ -54,9 +54,9 @@ div.csl-indent {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet"/>
-<link class="quarto-color-scheme" href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" id="quarto-text-highlighting-styles" rel="stylesheet"/>
-<link class="quarto-color-scheme quarto-color-alternate" href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-2fef5ea3f8957b3e4ecc936fc74692ca.css" id="quarto-text-highlighting-styles" rel="stylesheet"/>
-<link class="quarto-color-scheme-extra" href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" id="quarto-text-highlighting-styles" rel="stylesheet"/>
+<link class="quarto-color-scheme" href="../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" id="quarto-text-highlighting-styles" rel="stylesheet"/>
+<link class="quarto-color-scheme quarto-color-alternate" href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-bc185b5c5bdbcb35c2eb49d8a876ef70.css" id="quarto-text-highlighting-styles" rel="stylesheet"/>
+<link class="quarto-color-scheme-extra" href="../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" id="quarto-text-highlighting-styles" rel="stylesheet"/>
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet"/>
 <link append-hash="true" class="quarto-color-scheme" data-mode="light" href="../site_libs/bootstrap/bootstrap-3fcdac5c210409f150b47f077779fc15.min.css" id="quarto-bootstrap" rel="stylesheet"/>
@@ -387,22 +387,23 @@ div.csl-indent {
 <p>All the changes are documented in the following commit:</p>
 <p><a class="uri" href="https://github.com/Adafede/adafede.github.io/commit/bc2dfe6f">https://github.com/Adafede/adafede.github.io/commit/bc2dfe6f</a></p>
 <p>If you care about attribution, long-term archiving, DOIs and metadata, I highly recommend looking into <a href="https://rogue-scholar.org/">Rogue Scholar</a>.</p>
-<p><strong>Edit:</strong> I realized that integrating <a href="https://sparontologies.github.io/cito/current/cito.html">CiTO</a> could be a significant enhancement. With some effort (and thanks again to Egon), I managed to implement a working solution for the HTML and PDF outputs, see <span class="citation" data-cites="willighagen2023">(<a href="#ref-willighagen2023" role="doc-biblioref">Willighagen 2023</a>)</span>. However, the solution for the XML feed still feels suboptimal.</p>
+<p><strong>Edit (1):</strong> I realized that integrating <a href="https://sparontologies.github.io/cito/current/cito.html">CiTO</a> could be a significant enhancement. With some effort (and thanks again to Egon), I managed to implement a working solution for the HTML and PDF outputs, see <span class="citation" data-cites="willighagen2023">(<a href="#ref-willighagen2023" role="doc-biblioref">Willighagen 2023</a>)</span>. However, the solution for the XML feed still feels suboptimal.</p>
+<p><strong>Edit (2):</strong> After some help from Egon and <a href="https://scholia.toolforge.org/author/Q30532925">Martin</a>, I could improve my feed with correct CiTO annotations and their cool custom <code>json</code> feed!</p>
 <section class="level3" id="references">
 <h3 class="anchored" data-anchor-id="references">References</h3>
 <div class="references csl-bib-body hanging-indent" data-entry-spacing="0" id="refs" role="list">
 <div class="csl-entry" id="ref-voncsefalvay2023" role="listitem">
 Csefalvay, Chris von. 2023. <span>“Auto-DOI for Quarto Posts via Rogue Scholar.”</span> <a href="http://dx.doi.org/10.59350/5hxdg-fz574">http://dx.doi.org/10.59350/5hxdg-fz574</a>.
-<span class="cito"> [cito:obtains_background_from]</span></div>
+<span class="cito"> [cito:obtainsBackgroundFrom]</span></div>
 <div class="csl-entry" id="ref-fenner2025" role="listitem">
 Fenner, Martin. 2025. <span>“Rogue Scholar Citation Tracking Launches to Production.”</span> <a href="http://dx.doi.org/10.53731/zyg15-qv911">http://dx.doi.org/10.53731/zyg15-qv911</a>.
-<span class="cito"> [cito:obtains_background_from]</span></div>
+<span class="cito"> [cito:obtainsBackgroundFrom]</span></div>
 <div class="csl-entry" id="ref-fruehwald2025" role="listitem">
 Fruehwald, Josef. 2025. <span>“Setting up Rogue Scholar.”</span> <a href="http://dx.doi.org/10.59350/3fp6d-e6z90">http://dx.doi.org/10.59350/3fp6d-e6z90</a>.
-<span class="cito"> [cito:uses_method_in]</span></div>
+<span class="cito"> [cito:usesMethodIn]</span></div>
 <div class="csl-entry" id="ref-willighagen2023" role="listitem">
 Willighagen, Egon. 2023. <span>“Two Years of Explicit CiTO Annotations.”</span> <em>Journal of Cheminformatics</em> 15 (1). <a href="https://doi.org/10.1186/s13321-023-00683-2">https://doi.org/10.1186/s13321-023-00683-2</a>.
-<span class="cito"> [cito:uses_method_in]</span></div>
+<span class="cito"> [cito:usesMethodIn]</span></div>
 <div class="csl-entry" id="ref-willighagen2024a" role="listitem">
 ———. 2024a. <span>“GoatCounter, Rogue Scholar and More New Things.”</span> <a href="http://dx.doi.org/10.59350/8x2f1-h6d21">http://dx.doi.org/10.59350/8x2f1-h6d21</a>.
 <span class="cito"> [cito:cites]</span></div>
