@@ -59,7 +59,7 @@ If you care about attribution, long-term archiving, DOIs and metadata, I highly 
 With some effort (and thanks again to Egon), I managed to implement a working solution for the HTML and PDF outputs, see [@uses_method_in:willighagen2023].
 However, the solution for the XML feed still feels suboptimal.
 
-**Edit (2):** After some help from Egon and [Martin](https://scholia.toolforge.org/author/Q30532925), I could improve my feed with correct CiTO annotations and their cool custom `json` feed!
+**Edit (2):** After some help from Egon and [Martin](https://scholia.toolforge.org/author/Q30532925), I could improve my feed with correct CiTO annotations and their cool custom json feed, see: <https://adafede.github.io/posts.json>!
 
 ### References
 
