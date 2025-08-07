@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:media="http://search.yahoo.com/mrss/" version="2.0">
   <channel>
     <title>Adriano Rutz</title>
     <link>https://adafede.github.io/posts.html</link>
@@ -62,6 +62,7 @@ My Website and Linking to Rogue Scholar.”</span> August 4, 2025. <a href="http
       <category>Open Science</category>
       <guid>https://adafede.github.io/posts/2025-08-04_rogue_scholar.html</guid>
       <pubDate>Mon, 04 Aug 2025 00:00:00 GMT</pubDate>
+      <doi>https://doi.org/10.59350/38tz1-47k08</doi>
     </item>
   </channel>
 </rss>
