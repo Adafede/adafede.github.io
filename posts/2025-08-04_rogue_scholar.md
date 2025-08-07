@@ -87,7 +87,7 @@ feed still feels suboptimal.
 
 **Edit (2):** After some help from Egon and
 [Martin](https://scholia.toolforge.org/author/Q30532925), I could
-improve my feed with correct CiTO annotations and their cool custom
-`json` feed!
+improve my feed with correct CiTO annotations and their cool custom json
+feed, see: <https://adafede.github.io/posts.json>!
 
 ### References
