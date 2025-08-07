@@ -55,9 +55,11 @@ All the changes are documented in the following commit:
 
 If you care about attribution, long-term archiving, DOIs and metadata, I highly recommend looking into [Rogue Scholar](https://rogue-scholar.org/).
 
-**Edit:** I realized that integrating [CiTO](https://sparontologies.github.io/cito/current/cito.html) could be a significant enhancement.
-With some effort (and thanks again to Egon), I managed to implement a working solution for the HTML and PDF outputs, see [@uses_method_in:willighagen2023]. 
+**Edit (1):** I realized that integrating [CiTO](https://sparontologies.github.io/cito/current/cito.html) could be a significant enhancement.
+With some effort (and thanks again to Egon), I managed to implement a working solution for the HTML and PDF outputs, see [@uses_method_in:willighagen2023].
 However, the solution for the XML feed still feels suboptimal.
+
+**Edit (2):** After some help from Egon and [Martin](https://scholia.toolforge.org/author/Q30532925), I could improve my feed with correct CiTO annotations and their cool custom `json` feed!
 
 ### References
 
