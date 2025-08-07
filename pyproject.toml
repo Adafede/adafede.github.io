@@ -8,14 +8,18 @@ dependencies = [
     "commonmeta-py>=0.146,<1",
     "folium>=0.20.0,<1",
     "geopy>=2.4.1,<3",
+    "lxml>=6.0.0,<7",
     "markdown>=3.8.2,<4",
     "pyyaml>=6.0.2",
     "pre-commit>=4.2.0,<5",
     "quarto>=0.1.0,<1",
 ]
 
+[tool.deptry]
+known_first_party = ["scripts"]
+
 [tool.deptry.per_rule_ignores]
-DEP002 = ["pre-commit","quarto"]
+DEP002 = ["deptry", "pre-commit","quarto"]
 
 [tool.ty.rules]
 unresolved-import = "ignore"
