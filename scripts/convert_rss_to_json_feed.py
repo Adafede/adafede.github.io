@@ -1,9 +1,10 @@
 import os
 import json
+import subprocess
 from bs4 import BeautifulSoup
 from lxml import etree
 from datetime import datetime
-
+from urllib.parse import urlparse
 
 # Centralized author mapping
 AUTHOR_MAPPINGS = {
@@ -86,26 +87,19 @@ def extract_feed_metadata(channel):
 
 
 def get_qmd_modification_time(item_url, base_url=None):
-    """Extract .qmd file path from item URL and get its modification time."""
     if not item_url:
         return None
 
     try:
         if base_url and item_url.startswith(base_url):
-            # Remove base URL to get relative path
-            relative_path = item_url[len(base_url) :].strip("/")
+            relative_path = item_url[len(base_url):].strip("/")
         else:
-            # Try to extract path from URL
-            from urllib.parse import urlparse
-
             parsed = urlparse(item_url)
             relative_path = parsed.path.strip("/")
 
-        # Remove .html extension if present
         if relative_path.endswith(".html"):
             relative_path = relative_path[:-5]
 
-        # Common .qmd file patterns to check
         qmd_candidates = [
             f"{relative_path}/index.qmd",
             f"{relative_path}.qmd",
@@ -115,16 +109,13 @@ def get_qmd_modification_time(item_url, base_url=None):
 
         for candidate in qmd_candidates:
             if os.path.isfile(candidate):
-                # Check if file has been modified (uncommitted changes)
-                if is_file_modified(candidate):
-                    # Use file system modification time for modified files
+                git_date = get_git_commit_date(candidate)
+                if git_date:
+                    return git_date
+                else:
                     mod_timestamp = os.path.getmtime(candidate)
                     return datetime.fromtimestamp(mod_timestamp).isoformat()
-                else:
-                    # Use Git commit date for unmodified files
-                    return get_git_commit_date(candidate)
 
-        # If no .qmd file found, return None
         return None
 
     except Exception as e:
@@ -157,42 +148,16 @@ def is_file_modified(file_path):
 
 
 def get_git_commit_date(file_path):
-    """Get the last commit date for a file."""
     try:
-        import subprocess
-
-        full_path = os.path.abspath(file_path)
-
         result = subprocess.run(
-            [
-                "git",
-                "log",
-                "-1",
-                "--format=%ai",
-                "--",
-                full_path,
-            ],
-            capture_output=True,
+            ["git", "log", "-1", "--format=%cI", "--", file_path],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
             text=True,
-            cwd=os.path.dirname(file_path) or ".",
+            check=True,
         )
-
-        if result.returncode == 0 and result.stdout.strip():
-            # Parse the git date and convert to ISO format
-            git_date = result.stdout.strip()
-            # Git date format is like "2024-01-15 10:30:45 +0100"
-            from datetime import datetime
-            import re
-
-            # Extract just the datetime part (ignore timezone for simplicity)
-            match = re.match(r"(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})", git_date)
-            if match:
-                dt = datetime.strptime(match.group(1), "%Y-%m-%d %H:%M:%S")
-                return dt.isoformat()
-
-        return None
-    except Exception as e:
-        print(f"Warning: Could not get Git commit date for {file_path}: {e}")
+        return result.stdout.strip() or None
+    except subprocess.CalledProcessError:
         return None
 
 
