@@ -212,8 +212,7 @@ def extract_item_data(item, base_url=None):
 
     if qmd_mod_time:
         item_data["date_modified"] = qmd_mod_time
-    elif pubdate:
-        # Fallback to publication date if .qmd file not found
+    else:
         try:
             from email.utils import parsedate_to_datetime
 
