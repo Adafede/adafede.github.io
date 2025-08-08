@@ -40,6 +40,11 @@ citation:
     iso-8601: 2025-08-04
     literal: 2025-08-04
     raw: 2025-08-04
+comments:
+  giscus:
+    repo: adafede/adafede.github.io
+  hypothesis:
+    showHighlights: always
 creative_commons: CC BY
 date: 2025-08-04
 doi: 10.59350/yckwd-9vm79
