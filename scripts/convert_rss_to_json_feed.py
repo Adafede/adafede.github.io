@@ -92,7 +92,7 @@ def get_qmd_modification_time(item_url, base_url=None):
 
     try:
         if base_url and item_url.startswith(base_url):
-            relative_path = item_url[len(base_url):].strip("/")
+            relative_path = item_url[len(base_url) :].strip("/")
         else:
             parsed = urlparse(item_url)
             relative_path = parsed.path.strip("/")
