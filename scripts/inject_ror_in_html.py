@@ -45,7 +45,7 @@ def inject_ror_in_html(qmd_path: Path, html_path: Path):
             )
             return new_tag
         else:
-            print(f"[!] Affiliation not found in YAML: {aff_text}")
+            print(f"[!] ROR ID not found in YAML: {aff_text}")
             return full_tag
 
     html = affiliation_patt.sub(repl, html)
