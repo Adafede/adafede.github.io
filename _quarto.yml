@@ -59,6 +59,9 @@ website:
     right:
       - icon: rss
         href: rss.xml
+  body-header: |
+    <!-- 100% privacy-first analytics -->
+    <script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
 
 format:
   html:
