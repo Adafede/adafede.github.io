@@ -21,7 +21,7 @@
 
 
 
-<p>I have finally opened a <code>Posts</code> section on my website! Every post should now automatically get a DOI.</p>
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script><p>I have finally opened a <code>Posts</code> section on my website! Every post should now automatically get a DOI.</p>
 <p>This is something I have wanted to do for a long time, largely inspired by the tireless and consistent example set by <a href="https://scholia.toolforge.org/author/Q20895241">Egon Willighagen</a> <span class="citation" data-cites="willighagen2024a willighagen2024b willighagen2025">(Willighagen 2024a, 2024b, 2025)</span>.</p>
 <p>It was today’s post of <span class="citation" data-cites="fenner2025">(Fenner 2025)</span> that finally motivated me to look into it again. That led me down a productive rabbit hole to set up Rogue Scholar: first landing on <span class="citation" data-cites="voncsefalvay2023">(Csefalvay 2023)</span>’s excellent guide, and then <span class="citation" data-cites="fruehwald2025">(Fruehwald 2025)</span>’s clear write-up, both of which made the process of integrating Rogue Scholar into a Quarto-based site surprisingly smooth.</p>
 <p>All the changes are documented in the following commit:</p>
@@ -88,7 +88,7 @@ My Website and Linking to Rogue Scholar.”</span> August 4, 2025. <a href="http
 <!-- <iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/TODO" title="Scholia entry"></iframe> -->
 <!-- ``` -->
 
-
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
 
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
@@ -112,7 +112,7 @@ Pontrelli, Sammy, Kian Bigovic Villi, Andreas Sichert, Julian Trouillon, Adriano
 
 
 
-
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
 
  ]]></description>
   <category>Poster</category>
@@ -128,7 +128,7 @@ Pontrelli, Sammy, Kian Bigovic Villi, Andreas Sichert, Julian Trouillon, Adriano
 
 
 
-<iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q134267957" title="Scholia entry"></iframe>
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script><iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q134267957" title="Scholia entry"></iframe>
 
 
 
@@ -158,7 +158,7 @@ Szwarc, Sarah, Adriano Rutz, Kyungha Lee, Yassine Mejri, Olivier Bonnet, Hazrina
 <!-- <iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/TODO" title="Scholia entry"></iframe> -->
 <!-- ``` -->
 
-
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
 
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
@@ -187,7 +187,7 @@ Rutz, Adriano, Pascale Deneulin, Ivano Tonutti, Benoît Bach, and Jean-Luc Wolfe
 <!-- <iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/TODO" title="Scholia entry"></iframe> -->
 <!-- ``` -->
 
-
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
 
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
@@ -211,7 +211,7 @@ El Abiead, Yasin, Adriano Rutz, Simone Zuffa, Bashar Amer, Shipei Xing, Corinna 
 
 
 
-<iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q128896351" title="Scholia entry"></iframe>
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script><iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q128896351" title="Scholia entry"></iframe>
 
 
 
@@ -233,7 +233,7 @@ Le Scanff, Marie, Laurence Marcourt, Adriano Rutz, Warren Albertin, Jean-Luc Wol
 
 
 
-<iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q131432378" title="Scholia entry"></iframe>
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script><iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q131432378" title="Scholia entry"></iframe>
 
 
 
@@ -257,7 +257,7 @@ Zdouc, Mitja M, Kai Blin, Nico L L Louwen, Jorge Navarro, Catarina Loureiro, Cha
 
 
 
-
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
 
  ]]></description>
   <category>Talk</category>
@@ -276,7 +276,7 @@ Zdouc, Mitja M, Kai Blin, Nico L L Louwen, Jorge Navarro, Catarina Loureiro, Cha
 
 
 
-
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
 
  ]]></description>
   <category>Talk</category>
@@ -294,7 +294,7 @@ Zdouc, Mitja M, Kai Blin, Nico L L Louwen, Jorge Navarro, Catarina Loureiro, Cha
 
 
 
-
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
 
  ]]></description>
   <category>Talk</category>
@@ -311,7 +311,7 @@ Zdouc, Mitja M, Kai Blin, Nico L L Louwen, Jorge Navarro, Catarina Loureiro, Cha
 
 
 
-<iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q124670540" title="Scholia entry"></iframe>
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script><iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q124670540" title="Scholia entry"></iframe>
 
 
 
@@ -333,7 +333,7 @@ Gaudry, Arnaud, Marco Pagni, Florence Mehl, Sébastien Moretti, Luis-Manuel Quir
 
 
 
-<iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q124670541" title="Scholia entry"></iframe>
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script><iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q124670541" title="Scholia entry"></iframe>
 
 
 
@@ -355,7 +355,7 @@ Zuffa, Simone, Robin Schmid, Anelize Bauermeister, Paulo Wender P. Gomes, Andres
 
 
 
-<iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q123938372" title="Scholia entry"></iframe>
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script><iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q123938372" title="Scholia entry"></iframe>
 
 
 
@@ -377,7 +377,7 @@ Pellissier, Leonie, Arnaud Gaudry, Salomé Vilette, Nicole Lecoultre, Adriano Ru
 
 
 
-<iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q123938369" title="Scholia entry"></iframe>
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script><iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q123938369" title="Scholia entry"></iframe>
 
 
 
@@ -409,7 +409,7 @@ Rutz, Adriano, and Jean-Luc Wolfender. 2023. <span>“Automated Composition Asse
 
 
 
-
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
 
  ]]></description>
   <category>Talk</category>
@@ -428,7 +428,7 @@ Rutz, Adriano, and Jean-Luc Wolfender. 2023. <span>“Automated Composition Asse
 
 
 
-
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
 
  ]]></description>
   <category>Poster</category>
@@ -446,7 +446,7 @@ Rutz, Adriano, and Jean-Luc Wolfender. 2023. <span>“Automated Composition Asse
 
 
 
-
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
 
  ]]></description>
   <category>Talk</category>
@@ -465,7 +465,7 @@ Rutz, Adriano, and Jean-Luc Wolfender. 2023. <span>“Automated Composition Asse
 
 
 
-
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
 
  ]]></description>
   <category>Talk</category>
@@ -483,7 +483,7 @@ Rutz, Adriano, and Jean-Luc Wolfender. 2023. <span>“Automated Composition Asse
 
 
 
-
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
 
  ]]></description>
   <category>Talk</category>
