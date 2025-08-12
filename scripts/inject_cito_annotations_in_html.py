@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 
-from .snake_to_camel_case import snake_to_camel_case
+from snake_to_camel_case import snake_to_camel_case
 
 
 def inject_cito_annotations_in_html(html_path, citation_properties):

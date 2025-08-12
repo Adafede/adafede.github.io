@@ -2,7 +2,7 @@ import glob
 import os
 from pathlib import Path
 
-from .inject_ror_in_html import inject_ror_in_html
+from inject_ror_in_html import inject_ror_in_html
 
 
 def process_qmd_directory(qmd_glob: str):
