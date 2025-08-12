@@ -2,15 +2,15 @@ import glob
 import os
 from pathlib import Path
 
-from convert_rss_to_json_feed import convert_rss_to_json_feed
-from inject_cito_annotations_in_html import inject_cito_annotations_in_html
-from inject_cito_annotations_in_rss import inject_cito_annotations_in_rss
-from inject_doi_in_rss import inject_doi_in_rss
-from inject_ror_in_html import inject_ror_in_html
-from merge_citos import merge_citos
-from parse_citos_from_qmd import parse_citos_from_qmd
-from process_qmd_directory import process_qmd_directory
-from run_pandoc_for_all_qmds import run_pandoc_for_all_qmds
+from .convert_rss_to_json_feed import convert_rss_to_json_feed
+from .inject_cito_annotations_in_html import inject_cito_annotations_in_html
+from .inject_cito_annotations_in_rss import inject_cito_annotations_in_rss
+from .inject_doi_in_rss import inject_doi_in_rss
+from .inject_ror_in_html import inject_ror_in_html
+from .merge_citos import merge_citos
+from .parse_citos_from_qmd import parse_citos_from_qmd
+from .process_qmd_directory import process_qmd_directory
+from .run_pandoc_for_all_qmds import run_pandoc_for_all_qmds
 
 
 def postrender():

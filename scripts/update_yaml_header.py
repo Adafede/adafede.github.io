@@ -2,8 +2,8 @@ import re
 import yaml
 from pathlib import Path
 
-from make_date import make_date
-from make_doi import make_doi
+from .make_date import make_date
+from .make_doi import make_doi
 
 
 def update_yaml_header(post_path: Path) -> None:
