@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 from lxml import etree
 
-from .snake_to_camel_case import snake_to_camel_case
+from snake_to_camel_case import snake_to_camel_case
 
 
 def inject_cito_annotations_in_rss(rss_path, citation_properties):
