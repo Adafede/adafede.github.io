@@ -4,7 +4,7 @@ title: Degradation of extracellular polymeric substances shapes microbial commun
 type: article
 venue: PLOS Biology
 date: 2025-07-29
-doi: https://doi.org/10.1371/journal.pbio.3003287
+doi: 10.1371/journal.pbio.3003287
 url: <https://doi.org/10.1371/journal.pbio.3003287>
 # categories:
 #   - TODO

@@ -5,7 +5,7 @@ title: Open and reusable annotated mass spectrometry dataset of a chemodiverse
 type: article
 venue: GigaScience
 date: 2023-01-18
-doi: https://doi.org/10.1093/gigascience/giac124
+doi: 10.1093/gigascience/giac124
 url: <https://doi.org/10.1093/gigascience/giac124>
 # categories:
 #   - TODO

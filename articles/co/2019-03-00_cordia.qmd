@@ -5,7 +5,7 @@ title: Identification of Antifungal Compounds from the Root Bark of *Cordia
 type: article
 venue: Journal of the Brazilian Chemical Society
 date: 2019-03
-doi: https://doi.org/10.21577/0103-5053.20180221
+doi: 10.21577/0103-5053.20180221
 url: <https://doi.org/10.21577/0103-5053.20180221>
 # categories:
 #   - TODO

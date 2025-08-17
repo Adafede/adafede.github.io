@@ -5,7 +5,7 @@ title: Drug Repurposing to Identify a Synergistic High-Order Drug Combination to
 type: article
 venue: Cancers
 date: 2021-08-06
-doi: https://doi.org/10.3390/cancers13163978
+doi: 10.3390/cancers13163978
 url: <https://doi.org/10.3390/cancers13163978>
 # categories:
 #   - TODO

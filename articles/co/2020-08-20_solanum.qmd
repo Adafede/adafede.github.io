@@ -5,7 +5,7 @@ title: Insights on the Structural and Metabolic Resistance of Potato (*Solanum
 type: article
 venue: Frontiers in Plant Science
 date: 2020-08-20
-doi: https://doi.org/10.3389/fpls.2020.01287
+doi: 10.3389/fpls.2020.01287
 url: <https://doi.org/10.3389/fpls.2020.01287>
 # categories:
 #   - TODO

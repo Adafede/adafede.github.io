@@ -5,7 +5,7 @@ title: "microbeMASST: a taxonomically informed mass spectrometry search tool for
 type: article
 venue: Nature Microbiology
 date: 2024-02-05
-doi: https://doi.org/10.1038/s41564-023-01575-9
+doi: 10.1038/s41564-023-01575-9
 url: <https://doi.org/10.1038/s41564-023-01575-9>
 # categories:
 #   - TODO

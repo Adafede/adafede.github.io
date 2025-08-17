@@ -5,7 +5,7 @@ title: Antiseizure potential of the ancient Greek medicinal plant *Helleborus
 type: article
 venue: Journal of Ethnopharmacology
 date: 2020-09-15
-doi: https://doi.org/10.1016/j.jep.2020.112954
+doi: 10.1016/j.jep.2020.112954
 url: <https://doi.org/10.1016/j.jep.2020.112954>
 # categories:
 #   - TODO

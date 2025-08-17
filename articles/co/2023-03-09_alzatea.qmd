@@ -5,7 +5,7 @@ title: Phytochemical study of *Alzatea verticillata*, the sole species belonging
 type: article
 venue: Frontiers in Natural Products
 date: 2023-03-09
-doi: https://doi.org/10.3389/fntpr.2023.1147195
+doi: 10.3389/fntpr.2023.1147195
 url: <https://doi.org/10.3389/fntpr.2023.1147195>
 # categories:
 #   - TODO

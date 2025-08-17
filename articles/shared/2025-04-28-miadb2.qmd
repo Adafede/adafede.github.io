@@ -5,7 +5,7 @@ title: "Translating community-wide spectral library into actionable chemical
 type: article
 venue: Journal of Cheminformatics
 date: 2025-04-28
-doi: https://doi.org/10.1186/s13321-025-01009-0
+doi: 10.1186/s13321-025-01009-0
 image: https://media.springernature.com/lw685/springer-static/image/art%3A10.1186%2Fs13321-025-01009-0/MediaObjects/13321_2025_1009_Figa_HTML.png
 image-alt: Article's Graphical Abstract
 categories:
