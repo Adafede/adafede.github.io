@@ -5,7 +5,7 @@ title: Untargeted metabolomics analyses to identify a new sweet compound
 type: article
 venue: Food Chemistry
 date: 2024-12-15
-doi: https://doi.org/10.1016/j.foodchem.2024.140801
+doi: 10.1016/j.foodchem.2024.140801
 url: <https://doi.org/10.1016/j.foodchem.2024.140801>
 # categories:
 #   - TODO

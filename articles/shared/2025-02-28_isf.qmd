@@ -4,7 +4,7 @@ title: Discovery of metabolites prevails amid in-source fragmentation
 type: correspondence
 venue: Nature Metabolism
 date: 2025-02-28
-doi: https://doi.org/10.1038/s42255-025-01239-4
+doi: 10.1038/s42255-025-01239-4
 image: https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs42255-025-01239-4/MediaObjects/42255_2025_1239_Fig1_HTML.png
 image-alt: Article's Graphical Abstract
 categories:

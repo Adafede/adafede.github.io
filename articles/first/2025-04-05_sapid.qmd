@@ -6,7 +6,7 @@ title: "**SAPID**: a **S**trategy to **A**nalyze **P**lant Extracts Taste **I**n
 type: article
 venue: Current Research in Food Science
 date: 2025-04-05
-doi: https://doi.org/10.1016/j.crfs.2025.101043
+doi: 10.1016/j.crfs.2025.101043
 image: https://raw.githubusercontent.com/Adafede/sapid/refs/heads/main/man/figures/sapid-workflow.svg
 image-alt: SAPID's Workflow
 categories:

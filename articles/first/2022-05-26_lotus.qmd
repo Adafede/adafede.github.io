@@ -4,7 +4,7 @@ title: The LOTUS initiative for open knowledge management in natural products re
 type: article
 venue: eLife
 date: 2022-05-26
-doi: https://doi.org/10.7554/eLife.70780
+doi: 10.7554/eLife.70780
 image: https://upload.wikimedia.org/wikipedia/commons/f/f1/Lotus_initiative_1_graphical_abstract.svg
 image-alt: Logo of the LOTUS initiative
 categories:

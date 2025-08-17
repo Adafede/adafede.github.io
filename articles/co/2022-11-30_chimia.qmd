@@ -6,7 +6,7 @@ title: "Metabolomics in Ecology and Bioactive Natural Products Discovery:
 type: article
 venue: CHIMIA
 date: 2022-11-30
-doi: https://doi.org/10.2533/chimia.2022.954
+doi: 10.2533/chimia.2022.954
 url: <https://doi.org/10.2533/chimia.2022.954>
 # categories:
 #   - TODO

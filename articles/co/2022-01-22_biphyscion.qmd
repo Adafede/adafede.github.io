@@ -5,7 +5,7 @@ title: "Targeted isolation of photoactive pigments from mushrooms yielded a
 type: article
 venue: Scientific Reports
 date: 2021-01-22
-doi: https://doi.org/10.1038/s41598-022-04975-9
+doi: 10.1038/s41598-022-04975-9
 url: <https://doi.org/10.1038/s41598-022-04975-9>
 # categories:
 #   - TODO

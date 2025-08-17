@@ -5,7 +5,7 @@ title: Combining Activity Profiling with Advanced Annotation to Accelerate the
 type: article
 venue: Journal of Natural Products
 date: 2022-05-31
-doi: https://doi.org/10.1021/acs.jnatprod.2c00146
+doi: 10.1021/acs.jnatprod.2c00146
 image: https://pubs.acs.org/cms/10.1021/acs.jnatprod.2c00146/asset/images/medium/np2c00146_0008.gif
 image-alt: Article's Graphical Abstract
 categories:
