@@ -10,7 +10,29 @@
 <atom:link href="https://adafede.github.io/rss.xml" rel="self" type="application/rss+xml"/>
 <description>Personal website of Adriano Rutz</description>
 <generator>quarto-1.7.33</generator>
-<lastBuildDate>Mon, 04 Aug 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Fri, 15 Aug 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Genkwanin glycosides are major active compounds in Phaleria nisidai extract mediating improved glucose homeostasis by stimulating glucose uptake into adipose tissues</title>
+  <link>https://adafede.github.io/articles/co/2025-08-15_phaleria.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script><iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q135917754" title="Scholia entry"></iframe>
+
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="ref-Horvath2025" class="csl-entry">
+Horvath, Carla, Joëlle Houriet, Alexandra Kellenberger, Caroline Moser, Lucia Balazova, Miroslav Balaz, Hua Dong, et al. 2025. <span>“Genkwanin Glycosides Are Major Active Compounds in Phaleria Nisidai Extract Mediating Improved Glucose Homeostasis by Stimulating Glucose Uptake into Adipose Tissues.”</span> <em>Nature Communications</em> 16 (1). <a href="https://doi.org/10.1038/s41467-025-62689-8">https://doi.org/10.1038/s41467-025-62689-8</a>.
+</div>
+</div></section></div> ]]></description>
+  <guid>https://adafede.github.io/articles/co/2025-08-15_phaleria.html</guid>
+  <pubDate>Fri, 15 Aug 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Open Science Upgrade: Adding Blog Posts to my Website and Linking to Rogue Scholar</title>
   <dc:creator>Adriano Rutz</dc:creator>
@@ -471,24 +493,6 @@ Rutz, Adriano, and Jean-Luc Wolfender. 2023. <span>“Automated Composition Asse
   <category>Talk</category>
   <guid>https://adafede.github.io/talks/2023-07-03_GA.html</guid>
   <pubDate>Mon, 03 Jul 2023 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Metabolomics Workshop</title>
-  <dc:creator>Adriano Rutz</dc:creator>
-  <link>https://adafede.github.io/talks/2023-06-13_METAOMICS.html</link>
-  <description><![CDATA[ 
-
-
-
-
-
-
-<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
-
- ]]></description>
-  <category>Talk</category>
-  <guid>https://adafede.github.io/talks/2023-06-13_METAOMICS.html</guid>
-  <pubDate>Tue, 13 Jun 2023 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>

@@ -10,7 +10,29 @@
 <atom:link href="https://adafede.github.io/articles.xml" rel="self" type="application/rss+xml"/>
 <description>Personal website of Adriano Rutz</description>
 <generator>quarto-1.7.33</generator>
-<lastBuildDate>Tue, 29 Jul 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Fri, 15 Aug 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Genkwanin glycosides are major active compounds in Phaleria nisidai extract mediating improved glucose homeostasis by stimulating glucose uptake into adipose tissues</title>
+  <link>https://adafede.github.io/articles/co/2025-08-15_phaleria.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script><iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q135917754" title="Scholia entry"></iframe>
+
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="ref-Horvath2025" class="csl-entry">
+Horvath, Carla, Joëlle Houriet, Alexandra Kellenberger, Caroline Moser, Lucia Balazova, Miroslav Balaz, Hua Dong, et al. 2025. <span>“Genkwanin Glycosides Are Major Active Compounds in Phaleria Nisidai Extract Mediating Improved Glucose Homeostasis by Stimulating Glucose Uptake into Adipose Tissues.”</span> <em>Nature Communications</em> 16 (1). <a href="https://doi.org/10.1038/s41467-025-62689-8">https://doi.org/10.1038/s41467-025-62689-8</a>.
+</div>
+</div></section></div> ]]></description>
+  <guid>https://adafede.github.io/articles/co/2025-08-15_phaleria.html</guid>
+  <pubDate>Fri, 15 Aug 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Degradation of extracellular polymeric substances shapes microbial community diversity</title>
   <link>https://adafede.github.io/articles/co/2025-07-29_eps.html</link>
@@ -469,28 +491,6 @@ Rutz, Adriano. 2022. <span>“Integrative Analytical and Computational Strategie
 </div></section></div> ]]></description>
   <guid>https://adafede.github.io/articles/thesis.html</guid>
   <pubDate>Wed, 06 Oct 2021 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Drug Repurposing to Identify a Synergistic High-Order Drug Combination to Treat Sunitinib-Resistant Renal Cell Carcinoma</title>
-  <link>https://adafede.github.io/articles/co/2021-08-06_repurposing.html</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script><iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q108003603" title="Scholia entry"></iframe>
-
-
-
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
-<div id="ref-Rausch2021b" class="csl-entry">
-Rausch, Magdalena, Adriano Rutz, Pierre-Marie Allard, Céline Delucinge-Vivier, Mylène Docquier, Olivier Dormond, Paul J. Dyson, Jean-Luc Wolfender, and Patrycja Nowak-Sliwinska. 2021. <span>“Drug Repurposing to Identify a Synergistic High-Order Drug Combination to Treat Sunitinib-Resistant Renal Cell Carcinoma.”</span> <em>Cancers</em> 13 (16): 3978. <a href="https://doi.org/10.3390/cancers13163978">https://doi.org/10.3390/cancers13163978</a>.
-</div>
-</div></section></div> ]]></description>
-  <guid>https://adafede.github.io/articles/co/2021-08-06_repurposing.html</guid>
-  <pubDate>Fri, 06 Aug 2021 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
