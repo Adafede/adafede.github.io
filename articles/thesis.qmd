@@ -10,6 +10,7 @@ url: <https://doi.org/10.13097/archive-ouverte/unige:165668>
 categories:
   - Charged Aerosol Detector
   - Chemical Composition
+  - Chemotaxonomy
   - Liquid Chromatography-Tandem Mass Spectrometry
   - LOTUS
   - Metabolite Annotation
