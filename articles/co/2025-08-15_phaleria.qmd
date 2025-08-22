@@ -7,7 +7,11 @@ date: 2025-08-15
 doi: 10.1038/s41467-025-62689-8
 url: <https://doi.org/10.1038/s41467-025-62689-8>
 # categories:
-#   - TODO
+#   - Bioactivity
+#   - Charged Aerosol Detector
+#   - Liquid Chromatography-Tandem Mass Spectrometry
+#   - Natural Extracts
+#   - Reverse Pharmacology
 # abstract: |
 #  TODO
 nocite: |

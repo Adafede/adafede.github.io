@@ -9,11 +9,11 @@ doi: 10.3389/fpls.2019.01329
 image: https://raw.githubusercontent.com/taxonomicallyinformedannotation/tima/refs/heads/main/man/figures/tima.svg
 image-alt: TIMA's Workflow
 categories:
+  - Chemotaxonomy
   - Metabolomics
   - Liquid Chromatography-Tandem Mass Spectrometry
   - Natural Products
   - Metabolite Annotation
-  - Taxonomy
 # authors:
 #   - name: Adriano Rutz
 #     orcid: 0000-0003-0443-9902
