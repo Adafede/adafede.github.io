@@ -27,7 +27,7 @@ nocite: |
 
 ## Abstract
 
-::: {.panel-tabset .small}
+::: {.panel-tabset}
 
 ### English
 
