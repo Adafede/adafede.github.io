@@ -10,7 +10,25 @@
 <atom:link href="https://adafede.github.io/talks.xml" rel="self" type="application/rss+xml"/>
 <description>Personal website of Adriano Rutz</description>
 <generator>quarto-1.7.33</generator>
-<lastBuildDate>Sun, 22 Jun 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Fri, 29 Aug 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>The LOTUS initiative and its links to WikiCite</title>
+  <dc:creator>Adriano Rutz</dc:creator>
+  <link>https://adafede.github.io/talks/2025-08-29_WIKICITE.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+
+ ]]></description>
+  <category>Talk</category>
+  <guid>https://adafede.github.io/talks/2025-08-29_WIKICITE.html</guid>
+  <pubDate>Fri, 29 Aug 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Data-Independent Analysis for Deep Metabolome Profiling of Plant Extracts</title>
   <dc:creator>Adriano Rutz</dc:creator>
@@ -359,24 +377,6 @@
   <category>Poster</category>
   <guid>https://adafede.github.io/talks/2019-09-01_GA.html</guid>
   <pubDate>Sun, 01 Sep 2019 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Development of a Generic Method for a Comprehensive Composition Assessment for Plants of Industrial Interest – Quali/quantitative profiling by UHPLC-PDA-HRMS-ELSD</title>
-  <dc:creator>Adriano Rutz</dc:creator>
-  <link>https://adafede.github.io/talks/2019-01-01_SEEFELD.html</link>
-  <description><![CDATA[ 
-
-
-
-
-
-
-<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
-
- ]]></description>
-  <category>Talk</category>
-  <guid>https://adafede.github.io/talks/2019-01-01_SEEFELD.html</guid>
-  <pubDate>Tue, 01 Jan 2019 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
