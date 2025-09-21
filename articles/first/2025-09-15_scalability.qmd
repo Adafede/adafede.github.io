@@ -1,0 +1,123 @@
+---
+bibliography: ../../references.bib
+title: "Scalability of mass spectrometry-based metabolomics for natural extracts libraries exploration: current status, challenges, and opportunities"
+type: article
+venue: Natural Product Reports
+date: 2025-09-15
+doi: 10.1039/D5NP00034C
+image: https://pubs.rsc.org/en/Image/Get?imageInfo.ImageType=GA&imageInfo.ImageIdentifier.ManuscriptID=D5NP00034C&imageInfo.ImageIdentifier.Year=2025
+image-alt: Graphical abstract
+categories:
+  - Metabolomics
+  - Liquid Chromatography-Tandem Mass Spectrometry
+  - Natural Extracts
+authors:
+  - name: Adriano Rutz
+    orcid: 0000-0003-0443-9902
+    number: 1
+    email: rutz@imsb.biol.ethz.ch
+    affiliations:
+      - ref: imsb
+    correspondence: true
+  - name: Wout Bittremieux
+    orcid: 0000-0002-3105-1359
+    number: 2
+    affiliations:
+      - ref: antwerp
+  - name: Robin Schmid
+    orcid: 0000-0003-0922-3887
+    number: 3
+    affiliations:
+      - ref: iocb
+      - ref: mzio
+  - name: Olivier Cailloux
+    orcid: 0000-0003-3244-1081
+    number: 4
+    affiliations:
+      - ref: lamsade
+  - name: Justin J. J. van der Hooft
+    orcid: 0000-0002-9340-5511
+    number: 5
+    affiliations:
+      - ref: wageningen
+      - ref: johannesburg
+  - name: Mehdi A. Beniddir
+    orcid: 0000-0003-2153-4290
+    number: 6
+    email: mehdi.beniddir@universite-paris-saclay.fr
+    affiliations:
+      - ref: biocis
+    correspondence: true
+affiliations:
+  - id: imsb
+    number: 1
+    name: ETH Zürich
+    department: Institute for Molecular Systems Biology
+    group: Zamboni
+    address: Otto-Stern-Weg, 3
+    city: Zürich
+    country: Switzerland
+    postal-code: 8093
+    ror: https://ror.org/03j5gm982
+  - id: antwerp
+    number: 2
+    name: University of Antwerp
+    department: Department of Computer Science
+    city: Antwerp
+    country: Belgium
+    ror: https://ror.org/008x57b05
+  - id: iocb
+    number: 3
+    name: Institute of Organic Chemistry and Biochemistry of the Czech Academy of Sciences
+    city: Prague
+    country: Czechia
+    ror: https://ror.org/04nfjn472
+  - id: mzio
+    number: 4
+    name: mzio GmbH
+    city: Bremen
+    country: Germany
+  - id: lamsade
+    number: 5
+    name: Université Paris-Dauphine, Université PSL
+    department: LAMSADE, CNRS
+    city: Paris
+    country: France
+    postal-code: 75016
+    ror: https://ror.org/03pnp1a74
+  - id: wageningen
+    number: 6
+    name: Wageningen University & Research
+    department: Bioinformatics Group
+    city: Wageningen
+    country: The Netherlands
+    ror: https://ror.org/04qw24q55
+  - id: johannesburg
+    number: 7
+    name: University of Johannesburg
+    department: Department of Biochemistry
+    city: Johannesburg
+    country: South Africa
+    postal-code: 2006
+    ror: https://ror.org/04z6c2n17
+  - id: biocis
+    number: 8
+    name: Université Paris-Saclay
+    department: CNRS, BioCIS
+    address: 17 Avenue des Sciences
+    city: Orsay
+    country: France
+    postal-code: 91400
+    ror: https://ror.org/053t9n429
+abstract: >
+  This review explores the potential of bioinformatics and chemoinformatics tools to advance the exploration of natural extracts libraries (NELs).
+  Although metabolomics has become a term used routinely in natural product (NP) research, the field remains focused on individual molecules or small sets of compounds, which restricts scalability.
+  This narrow focus is mirrored in the computational handling of generated data, limiting broader insights.
+  By challenging the traditional molecule-first paradigm—a framework historically shaped by practical constraints—we present our vision of using computational approaches to unlock the full potential of NELs, now and in the future.
+nocite: |
+  @Rutz2025b
+---
+
+<!-- ```{=html} -->
+<!-- <iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/TODO" title="Scholia entry"></iframe> -->
+<!-- ``` -->

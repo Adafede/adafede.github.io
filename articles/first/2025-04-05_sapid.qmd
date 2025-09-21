@@ -34,7 +34,7 @@ authors:
       - ref: bacardi
   - name: Benoît Bach
     orcid: 0000-0001-8677-4506
-    number: 2
+    number: 4
     affiliations:
       - ref: changins
   - name: Jean-Luc Wolfender
@@ -93,7 +93,7 @@ abstract: >
   Our results confirmed the attribution of bitterness to iridoids and highlighted the role of other important compounds in the overall taste.
   This method provides a systematic approach for analyzing and potentially enhancing the taste profiles of plant-based beverages.
 nocite: |
-  @Rutz2025
+  @Rutz2025a
 ---
 
 <!-- ```{=html} -->
