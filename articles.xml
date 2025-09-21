@@ -9,7 +9,7 @@
 <link>https://adafede.github.io/articles.html</link>
 <atom:link href="https://adafede.github.io/articles.xml" rel="self" type="application/rss+xml"/>
 <description>Personal website of Adriano Rutz</description>
-<generator>quarto-1.7.33</generator>
+<generator>quarto-1.8.24</generator>
 <lastBuildDate>Fri, 15 Aug 2025 00:00:00 GMT</lastBuildDate>
 <item>
   <title>Genkwanin glycosides are major active compounds in Phaleria nisidai extract mediating improved glucose homeostasis by stimulating glucose uptake into adipose tissues</title>
@@ -482,7 +482,7 @@ Hammerle, Fabian, Luis Quirós-Guerrero, Adriano Rutz, Jean-Luc Wolfender, Haral
 <script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script><section id="abstract" class="level2">
 <h2 class="anchored" data-anchor-id="abstract">Abstract</h2>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs"><li class="nav-item"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" aria-controls="tabset-1-1" aria-selected="true">English</a></li><li class="nav-item"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" aria-controls="tabset-1-2" aria-selected="false">Français</a></li><li class="nav-item"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" aria-controls="tabset-1-3" aria-selected="false">Deutsch</a></li><li class="nav-item"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" aria-controls="tabset-1-4" aria-selected="false">Italiano</a></li></ul>
+<ul class="nav nav-tabs"><li class="nav-item"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" aria-controls="tabset-1-1" aria-selected="true" href="">English</a></li><li class="nav-item"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" aria-controls="tabset-1-2" aria-selected="false" href="">Français</a></li><li class="nav-item"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" aria-controls="tabset-1-3" aria-selected="false" href="">Deutsch</a></li><li class="nav-item"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" aria-controls="tabset-1-4" aria-selected="false" href="">Italiano</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" aria-labelledby="tabset-1-1-tab">
 <p>The detailed assessment of the composition of plant-derived products is of primary interest. The metabolites in natural extracts (NE) constitute the metabolome, which can be divided into the core and the specialized metabolome. Plants produce specialized metabolites to ensure their survival in a competitive environment. To assess the composition of NEs, currently validated methods for rigorous annotation and quantification of metabolites require standards. However, among the known metabolites, the availability of commercial reference standards is heavily restricted. Given this limitation, common analytical methods for NE composition assessment focus on studying a few specific and often non-bioactive markers.</p>
