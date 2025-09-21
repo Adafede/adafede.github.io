@@ -10,7 +10,35 @@
 <atom:link href="https://adafede.github.io/rss.xml" rel="self" type="application/rss+xml"/>
 <description>Personal website of Adriano Rutz</description>
 <generator>quarto-1.8.24</generator>
-<lastBuildDate>Fri, 29 Aug 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Mon, 15 Sep 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Scalability of mass spectrometry-based metabolomics for natural extracts libraries exploration: current status, challenges, and opportunities</title>
+  <link>https://adafede.github.io/articles/first/2025-09-15_scalability.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<!-- ```{=html} -->
+<!-- <iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/TODO" title="Scholia entry"></iframe> -->
+<!-- ``` -->
+
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="ref-Rutz2025b" class="csl-entry">
+Rutz, Adriano, Wout Bittremieux, Robin Schmid, Olivier Cailloux, Justin J. J. van der Hooft, and Mehdi A. Beniddir. 2025. <span>“Scalability of Mass Spectrometry-Based Metabolomics for Natural Extracts Libraries Exploration: Current Status, Challenges, and Opportunities.”</span> <em>Natural Product Reports</em>. <a href="https://doi.org/10.1039/d5np00034c">https://doi.org/10.1039/d5np00034c</a>.
+</div>
+</div></section></div> ]]></description>
+  <category>Metabolomics</category>
+  <category>Liquid Chromatography-Tandem Mass Spectrometry</category>
+  <category>Natural Extracts</category>
+  <guid>https://adafede.github.io/articles/first/2025-09-15_scalability.html</guid>
+  <pubDate>Mon, 15 Sep 2025 00:00:00 GMT</pubDate>
+  <media:content url="https://pubs.rsc.org/en/Image/Get?imageInfo.ImageType=GA&amp;imageInfo.ImageIdentifier.ManuscriptID=D5NP00034C&amp;imageInfo.ImageIdentifier.Year=2025" medium="image"/>
+</item>
 <item>
   <title>The LOTUS initiative and its links to WikiCite</title>
   <dc:creator>Adriano Rutz</dc:creator>
@@ -202,7 +230,7 @@ Szwarc, Sarah, Adriano Rutz, Kyungha Lee, Yassine Mejri, Olivier Bonnet, Hazrina
 
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
-<div id="ref-Rutz2025" class="csl-entry">
+<div id="ref-Rutz2025a" class="csl-entry">
 Rutz, Adriano, Pascale Deneulin, Ivano Tonutti, Benoît Bach, and Jean-Luc Wolfender. 2025. <span>“SAPID: A Strategy to Analyze Plant Extracts Taste in Depth. Application to the Complex Taste of Swertia Chirayita (Roxb.) h.karst.”</span> <em>Current Research in Food Science</em> 10: 101043. <a href="https://doi.org/10.1016/j.crfs.2025.101043">https://doi.org/10.1016/j.crfs.2025.101043</a>.
 </div>
 </div></section></div> ]]></description>
@@ -474,25 +502,6 @@ Rutz, Adriano, and Jean-Luc Wolfender. 2023. <span>“Automated Composition Asse
   <category>Poster</category>
   <guid>https://adafede.github.io/talks/2023-09-15_SWISSMETABO.html</guid>
   <pubDate>Fri, 15 Sep 2023 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Deep Metabolome Annotation</title>
-  <dc:creator>Adriano Rutz</dc:creator>
-  <link>https://adafede.github.io/talks/2023-07-18_SACLAY.html</link>
-  <description><![CDATA[ 
-
-
-
-
-
-
-<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
-
- ]]></description>
-  <category>Talk</category>
-  <category>Workshop</category>
-  <guid>https://adafede.github.io/talks/2023-07-18_SACLAY.html</guid>
-  <pubDate>Tue, 18 Jul 2023 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>

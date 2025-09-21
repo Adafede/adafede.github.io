@@ -55,6 +55,7 @@
       "/talks/2023-09-15_SWISSMETABO.html",
       "/varia/additional_contributions/smartclass.html",
       "/varia/adafede/sparql-examples.html",
+      "/articles/first/2025-09-15_scalability.html",
       "/varia/additional_contributions/SpectraToQueries.html",
       "/talks/2019-09-01_GA.html",
       "/talks.html",
@@ -89,6 +90,7 @@
   {
     "listing": "/articles.html",
     "items": [
+      "/articles/first/2025-09-15_scalability.html",
       "/articles/first/2025-04-05_sapid.html",
       "/articles/first/2023-11-10_cascade.html",
       "/articles/first/2022-05-26_lotus.html",
