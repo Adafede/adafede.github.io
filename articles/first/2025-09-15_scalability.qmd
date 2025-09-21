@@ -87,7 +87,7 @@ affiliations:
     ror: https://ror.org/03pnp1a74
   - id: wageningen
     number: 6
-    name: Wageningen University & Research
+    name: "Wageningen University & Research"
     department: Bioinformatics Group
     city: Wageningen
     country: The Netherlands
