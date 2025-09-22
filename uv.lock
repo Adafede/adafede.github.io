@@ -21,12 +21,12 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "bs4", specifier = ">=0.0.2,<1" },
-    { name = "commonmeta-py", specifier = ">=0.146,<1" },
+    { name = "commonmeta-py", specifier = ">=0.170,<1" },
     { name = "folium", specifier = ">=0.20.0,<1" },
     { name = "geopy", specifier = ">=2.4.1,<3" },
     { name = "lxml", specifier = ">=6.0.0,<7" },
-    { name = "markdown", specifier = ">=3.8.2,<4" },
-    { name = "pre-commit", specifier = ">=4.2.0,<5" },
+    { name = "markdown", specifier = ">=3.9,<4" },
+    { name = "pre-commit", specifier = ">=4.3.0,<5" },
     { name = "quarto", specifier = ">=0.1.0,<1" },
     { name = "ruamel-yaml", specifier = ">=0.18.15,<1" },
 ]
@@ -287,7 +287,7 @@ wheels = [
 
 [[package]]
 name = "commonmeta-py"
-version = "0.146"
+version = "0.170"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "base32-lib" },
@@ -300,6 +300,7 @@ dependencies = [
     { name = "dateparser" },
     { name = "edtf" },
     { name = "furl" },
+    { name = "isbnlib" },
     { name = "jsonschema" },
     { name = "lxml" },
     { name = "marshmallow-utils" },
@@ -309,7 +310,6 @@ dependencies = [
     { name = "orjsonl" },
     { name = "pikepdf" },
     { name = "pycountry" },
-    { name = "pydash" },
     { name = "pyjwt" },
     { name = "python-dateutil" },
     { name = "pyyaml" },
@@ -324,9 +324,9 @@ dependencies = [
     { name = "xmlschema" },
     { name = "xmltodict" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/46/4b/1083512a13960660a375d3d7fc3cbb1e002bda39fde17b6ebdf1baa33729/commonmeta_py-0.146.tar.gz", hash = "sha256:47979f8a3856c9350477442d4dee1ea5b7184f9250bf5fd35f50ef6971fa4ef0", size = 287003, upload-time = "2025-08-01T10:38:46.618Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/c1/c7/ad02cf947d352e1d30b5a1ddd2ed77b19088af13dd84646ee2fcda1c907f/commonmeta_py-0.170.tar.gz", hash = "sha256:987e470195828ec664dfe7518563c9c04dcaa2be467c7590fa4ce0163d26d050", size = 290494, upload-time = "2025-09-09T16:47:49.049Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/2f/88/ff0e1218b69be2f04cd37da27255d5278c621bcfac03d193d3b7528cb5d8/commonmeta_py-0.146-py3-none-any.whl", hash = "sha256:92bcadf27d8d2313640e7d29b40eb378442d02d1cd231a949c77aeb86938b114", size = 346544, upload-time = "2025-08-01T10:38:44.746Z" },
+    { url = "https://files.pythonhosted.org/packages/3a/3f/c161f5e992c71973705ca263cb8c52913290697d8bce9ee03262b265df03/commonmeta_py-0.170-py3-none-any.whl", hash = "sha256:487d7ce2d4f25ab86d188c5e8a34696f586cb6d3c4cf14f0c159521dc30413ab", size = 350856, upload-time = "2025-09-09T16:47:46.947Z" },
 ]
 
 [[package]]
@@ -753,11 +753,11 @@ wheels = [
 
 [[package]]
 name = "markdown"
-version = "3.8.2"
+version = "3.9"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/d7/c2/4ab49206c17f75cb08d6311171f2d65798988db4360c4d1485bd0eedd67c/markdown-3.8.2.tar.gz", hash = "sha256:247b9a70dd12e27f67431ce62523e675b866d254f900c4fe75ce3dda62237c45", size = 362071, upload-time = "2025-06-19T17:12:44.483Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/8d/37/02347f6d6d8279247a5837082ebc26fc0d5aaeaf75aa013fcbb433c777ab/markdown-3.9.tar.gz", hash = "sha256:d2900fe1782bd33bdbbd56859defef70c2e78fc46668f8eb9df3128138f2cb6a", size = 364585, upload-time = "2025-09-04T20:25:22.885Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/96/2b/34cc11786bc00d0f04d0f5fdc3a2b1ae0b6239eef72d3d345805f9ad92a1/markdown-3.8.2-py3-none-any.whl", hash = "sha256:5c83764dbd4e00bdd94d85a19b8d55ccca20fe35b2e678a1422b380324dd5f24", size = 106827, upload-time = "2025-06-19T17:12:42.994Z" },
+    { url = "https://files.pythonhosted.org/packages/70/ae/44c4a6a4cbb496d93c6257954260fe3a6e91b7bed2240e5dad2a717f5111/markdown-3.9-py3-none-any.whl", hash = "sha256:9f4d91ed810864ea88a6f32c07ba8bee1346c0cc1f6b1f9f6c822f2a9667d280", size = 107441, upload-time = "2025-09-04T20:25:21.784Z" },
 ]
 
 [[package]]
@@ -1166,7 +1166,7 @@ wheels = [
 
 [[package]]
 name = "pre-commit"
-version = "4.2.0"
+version = "4.3.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "cfgv" },
@@ -1175,9 +1175,9 @@ dependencies = [
     { name = "pyyaml" },
     { name = "virtualenv" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/08/39/679ca9b26c7bb2999ff122d50faa301e49af82ca9c066ec061cfbc0c6784/pre_commit-4.2.0.tar.gz", hash = "sha256:601283b9757afd87d40c4c4a9b2b5de9637a8ea02eaff7adc2d0fb4e04841146", size = 193424, upload-time = "2025-03-18T21:35:20.987Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/ff/29/7cf5bbc236333876e4b41f56e06857a87937ce4bf91e117a6991a2dbb02a/pre_commit-4.3.0.tar.gz", hash = "sha256:499fe450cc9d42e9d58e606262795ecb64dd05438943c62b66f6a8673da30b16", size = 193792, upload-time = "2025-08-09T18:56:14.651Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/88/74/a88bf1b1efeae488a0c0b7bdf71429c313722d1fc0f377537fbe554e6180/pre_commit-4.2.0-py2.py3-none-any.whl", hash = "sha256:a009ca7205f1eb497d10b845e52c838a98b6cdd2102a6c8e4540e94ee75c58bd", size = 220707, upload-time = "2025-03-18T21:35:19.343Z" },
+    { url = "https://files.pythonhosted.org/packages/5b/a5/987a405322d78a73b66e39e4a90e4ef156fd7141bf71df987e50717c321b/pre_commit-4.3.0-py2.py3-none-any.whl", hash = "sha256:2b0747ad7e6e967169136edffee14c16e148a778a54e4f967921aa1ebf2308d8", size = 220965, upload-time = "2025-08-09T18:56:13.192Z" },
 ]
 
 [[package]]
@@ -1241,18 +1241,6 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/1d/b2/31537cf4b1ca988837256c910a668b553fceb8f069bedc4b1c826024b52c/pycparser-2.22.tar.gz", hash = "sha256:491c8be9c040f5390f5bf44a5b07752bd07f56edf992381b05c701439eec10f6", size = 172736, upload-time = "2024-03-30T13:22:22.564Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/13/a3/a812df4e2dd5696d1f351d58b8fe16a405b234ad2886a0dab9183fb78109/pycparser-2.22-py3-none-any.whl", hash = "sha256:c3702b6d3dd8c7abc1afa565d7e63d53a1d0bd86cdc24edd75470f4de499cfcc", size = 117552, upload-time = "2024-03-30T13:22:20.476Z" },
-]
-
-[[package]]
-name = "pydash"
-version = "8.0.5"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "typing-extensions" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/2f/24/91c037f47e434172c2112d65c00c84d475a6715425e3315ba2cbb7a87e66/pydash-8.0.5.tar.gz", hash = "sha256:7cc44ebfe5d362f4f5f06c74c8684143c5ac481376b059ff02570705523f9e2e", size = 164861, upload-time = "2025-01-17T16:08:50.562Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/2c/86/e74c978800131c657fc5145f2c1c63e0cea01a49b6216f729cf77a2e1edf/pydash-8.0.5-py3-none-any.whl", hash = "sha256:b2625f8981862e19911daa07f80ed47b315ce20d9b5eb57aaf97aaf570c3892f", size = 102077, upload-time = "2025-01-17T16:08:47.91Z" },
 ]
 
 [[package]]
