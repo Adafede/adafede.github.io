@@ -1,13 +1,12 @@
 ---
 title: Minimum Information about a Tailoring Enzyme
-url: https://mite.bioinformatics.nl/
+url: https://mite.bioinformatics.nl
 image: https://raw.githubusercontent.com/mite-standard/mite_web/refs/heads/main/mite_web/mite_web/static/images/mite_logo.svg
 image-alt: Logo of MITE
 categories:
-  - Chemical classes
   - Enzymes
   - SMARTS
   - Python
 description: |
-  <https://mite.bioinformatics.nl/>
+  <https://mite.bioinformatics.nl>
 ---
