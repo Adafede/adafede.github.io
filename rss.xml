@@ -10,7 +10,36 @@
 <atom:link href="https://adafede.github.io/rss.xml" rel="self" type="application/rss+xml"/>
 <description>Personal website of Adriano Rutz</description>
 <generator>quarto-1.8.24</generator>
-<lastBuildDate>Mon, 15 Sep 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Fri, 26 Sep 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>MITE: the Minimum Information about a Tailoring Enzyme database for capturing specialized metabolite biosynthesis</title>
+  <link>https://adafede.github.io/articles/first/2025-09-26_mite.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<!-- ```{=html} -->
+<!-- <iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/TODO" title="Scholia entry"></iframe> -->
+<!-- ``` -->
+
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="ref-Rutz2025c" class="csl-entry">
+Rutz, Adriano, Daniel Probst, César Aguilar, Daniel Y Akiyama, Fabrizio Alberti, Hannah E Augustijn, Nicole E Avalon, et al. 2025. <span>“MITE: The Minimum Information about a Tailoring Enzyme Database for Capturing Specialized Metabolite Biosynthesis.”</span> <em>Nucleic Acids Research</em>, September. <a href="https://doi.org/10.1093/nar/gkaf969">https://doi.org/10.1093/nar/gkaf969</a>.
+</div>
+</div></section></div> ]]></description>
+  <category>Biosynthesis</category>
+  <category>Database</category>
+  <category>Natural Products</category>
+  <category>SMARTS</category>
+  <guid>https://adafede.github.io/articles/first/2025-09-26_mite.html</guid>
+  <pubDate>Fri, 26 Sep 2025 00:00:00 GMT</pubDate>
+  <media:content url="https://academic.oup.com/view-large/figure/533817786/gkaf969figgra1.jpg" medium="image" type="image/jpeg"/>
+</item>
 <item>
   <title>Scalability of mass spectrometry-based metabolomics for natural extracts libraries exploration: current status, challenges, and opportunities</title>
   <link>https://adafede.github.io/articles/first/2025-09-15_scalability.html</link>
@@ -483,25 +512,6 @@ Rutz, Adriano, and Jean-Luc Wolfender. 2023. <span>“Automated Composition Asse
   <category>Talk</category>
   <guid>https://adafede.github.io/talks/2023-10-16_INNSBRUCK.html</guid>
   <pubDate>Mon, 16 Oct 2023 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Prior Knowledge as a Compass Guiding Untargeted Metabolomics</title>
-  <dc:creator>Adriano Rutz</dc:creator>
-  <dc:creator>Nicola Zamboni</dc:creator>
-  <link>https://adafede.github.io/talks/2023-09-15_SWISSMETABO.html</link>
-  <description><![CDATA[ 
-
-
-
-
-
-
-<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
-
- ]]></description>
-  <category>Poster</category>
-  <guid>https://adafede.github.io/talks/2023-09-15_SWISSMETABO.html</guid>
-  <pubDate>Fri, 15 Sep 2023 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>

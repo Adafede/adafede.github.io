@@ -10,7 +10,36 @@
 <atom:link href="https://adafede.github.io/articles.xml" rel="self" type="application/rss+xml"/>
 <description>Personal website of Adriano Rutz</description>
 <generator>quarto-1.8.24</generator>
-<lastBuildDate>Mon, 15 Sep 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Fri, 26 Sep 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>MITE: the Minimum Information about a Tailoring Enzyme database for capturing specialized metabolite biosynthesis</title>
+  <link>https://adafede.github.io/articles/first/2025-09-26_mite.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<!-- ```{=html} -->
+<!-- <iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/TODO" title="Scholia entry"></iframe> -->
+<!-- ``` -->
+
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="ref-Rutz2025c" class="csl-entry">
+Rutz, Adriano, Daniel Probst, César Aguilar, Daniel Y Akiyama, Fabrizio Alberti, Hannah E Augustijn, Nicole E Avalon, et al. 2025. <span>“MITE: The Minimum Information about a Tailoring Enzyme Database for Capturing Specialized Metabolite Biosynthesis.”</span> <em>Nucleic Acids Research</em>, September. <a href="https://doi.org/10.1093/nar/gkaf969">https://doi.org/10.1093/nar/gkaf969</a>.
+</div>
+</div></section></div> ]]></description>
+  <category>Biosynthesis</category>
+  <category>Database</category>
+  <category>Natural Products</category>
+  <category>SMARTS</category>
+  <guid>https://adafede.github.io/articles/first/2025-09-26_mite.html</guid>
+  <pubDate>Fri, 26 Sep 2025 00:00:00 GMT</pubDate>
+  <media:content url="https://academic.oup.com/view-large/figure/533817786/gkaf969figgra1.jpg" medium="image" type="image/jpeg"/>
+</item>
 <item>
   <title>Scalability of mass spectrometry-based metabolomics for natural extracts libraries exploration: current status, challenges, and opportunities</title>
   <link>https://adafede.github.io/articles/first/2025-09-15_scalability.html</link>
@@ -475,28 +504,6 @@ Rutz, Adriano, Maria Sorokina, Jakub Galgonek, Daniel Mietchen, Egon Willighagen
   <guid>https://adafede.github.io/articles/first/2022-05-26_lotus.html</guid>
   <pubDate>Thu, 26 May 2022 00:00:00 GMT</pubDate>
   <media:content url="https://upload.wikimedia.org/wikipedia/commons/f/f1/Lotus_initiative_1_graphical_abstract.svg" medium="image" type="image/svg+xml"/>
-</item>
-<item>
-  <title>Feature-Based Molecular Networking—An Exciting Tool to Spot Species of the Genus Cortinarius with Hidden Photosensitizers</title>
-  <link>https://adafede.github.io/articles/co/2021-11-19_cortinarius.html</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script><iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q109715863" title="Scholia entry"></iframe>
-
-
-
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
-<div id="ref-Hammerle2021" class="csl-entry">
-Hammerle, Fabian, Luis Quirós-Guerrero, Adriano Rutz, Jean-Luc Wolfender, Harald Schöbel, Ursula Peintner, and Bianka Siewert. 2021. <span>“Feature-Based Molecular Networking—an Exciting Tool to Spot Species of the Genus Cortinarius with Hidden Photosensitizers.”</span> <em>Metabolites</em> 11 (11): 791. <a href="https://doi.org/10.3390/metabo11110791">https://doi.org/10.3390/metabo11110791</a>.
-</div>
-</div></section></div> ]]></description>
-  <guid>https://adafede.github.io/articles/co/2021-11-19_cortinarius.html</guid>
-  <pubDate>Fri, 19 Nov 2021 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
