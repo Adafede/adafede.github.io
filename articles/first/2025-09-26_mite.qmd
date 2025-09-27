@@ -5,8 +5,8 @@ type: article
 venue: Nucleic Acids Research
 date: 2025-09-26
 doi: 10.1093/nar/gkaf969
-image: https://academic.oup.com/view-large/figure/533817786/gkaf969figgra1.jpg
-image-alt: Graphical abstract
+image: https://mite.bioinformatics.nl/static/images/mite_logo.svg
+image-alt: MITE logo
 categories:
   - Biosynthesis
   - Database
