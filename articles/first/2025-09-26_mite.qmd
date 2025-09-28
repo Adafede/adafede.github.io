@@ -24,6 +24,7 @@ authors:
     affiliations:
       - ref: wageningen
   - name: César Aguilar
+    orcid: 0000-0001-7044-2419
     number: 3
     affiliations:
       - ref: monterrey
@@ -104,6 +105,7 @@ authors:
     affiliations:
       - ref: hannover
   - name: Karina Gutiérrez García
+    orcid: 0000-0002-6077-7490
     number: 18
     affiliations:
       - ref: carnegie
@@ -114,6 +116,7 @@ authors:
     affiliations:
       - ref: sintef
   - name: Ji-Yeon Hwang
+    orcid: 0009-0005-0157-5724
     number: 20
     affiliations:
       - ref: frederick
@@ -128,6 +131,7 @@ authors:
     affiliations:
       - ref: unicamp
   - name: Navneet Kaur
+    orcid: 0000-0003-4392-4484
     number: 23
     affiliations:
       - ref: nabi
@@ -187,6 +191,7 @@ authors:
     affiliations:
       - ref: sintef
   - name: Sunaina Paliyal
+    orcid: 0009-0003-1714-1678
     number: 35
     affiliations:
       - ref: nabi
