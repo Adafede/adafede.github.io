@@ -43,7 +43,7 @@ jobs:
       - name: Install system dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y build-essential gcc nasm libqpdf-dev libxml2-dev libxslt1-dev make
+          sudo apt-get install -y gcc nasm libqpdf-dev libxslt1-dev make
       - uses: astral-sh/setup-uv@v7
       - uses: pandoc/actions/setup@v1
       - uses: r-lib/actions/setup-tinytex@v2
