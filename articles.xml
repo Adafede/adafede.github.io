@@ -9,7 +9,7 @@
 <link>https://adafede.github.io/articles.html</link>
 <atom:link href="https://adafede.github.io/articles.xml" rel="self" type="application/rss+xml"/>
 <description>Personal website of Adriano Rutz</description>
-<generator>quarto-1.8.24</generator>
+<generator>quarto-1.8.25</generator>
 <lastBuildDate>Fri, 26 Sep 2025 00:00:00 GMT</lastBuildDate>
 <item>
   <title>MITE: the Minimum Information about a Tailoring Enzyme database for capturing specialized metabolite biosynthesis</title>
