@@ -10,7 +10,27 @@
 <atom:link href="https://adafede.github.io/talks.xml" rel="self" type="application/rss+xml"/>
 <description>Personal website of Adriano Rutz</description>
 <generator>quarto-1.8.25</generator>
-<lastBuildDate>Fri, 29 Aug 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Fri, 10 Oct 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Data-Independent Analysis for Deep Metabolome Profiling of Plant Extracts</title>
+  <dc:creator>Adriano Rutz</dc:creator>
+  <dc:creator>Vincen Wu</dc:creator>
+  <dc:creator>Nicola Zamboni</dc:creator>
+  <link>https://adafede.github.io/talks/2025-10-10_SWISSMETABO.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+
+ ]]></description>
+  <category>Talk</category>
+  <guid>https://adafede.github.io/talks/2025-10-10_SWISSMETABO.html</guid>
+  <pubDate>Fri, 10 Oct 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>The LOTUS initiative and its links to WikiCite</title>
   <dc:creator>Adriano Rutz</dc:creator>
@@ -359,24 +379,6 @@
   <category>Workshop</category>
   <guid>https://adafede.github.io/talks/2019-10-01_NAPOLI.html</guid>
   <pubDate>Tue, 01 Oct 2019 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Strategy for Exhaustive Plant Metabolomes Characterization from a Qualitative and Quantitative Perspective</title>
-  <dc:creator>Adriano Rutz</dc:creator>
-  <link>https://adafede.github.io/talks/2019-09-01_GA.html</link>
-  <description><![CDATA[ 
-
-
-
-
-
-
-<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
-
- ]]></description>
-  <category>Poster</category>
-  <guid>https://adafede.github.io/talks/2019-09-01_GA.html</guid>
-  <pubDate>Sun, 01 Sep 2019 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>

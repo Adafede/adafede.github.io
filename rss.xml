@@ -10,7 +10,27 @@
 <atom:link href="https://adafede.github.io/rss.xml" rel="self" type="application/rss+xml"/>
 <description>Personal website of Adriano Rutz</description>
 <generator>quarto-1.8.25</generator>
-<lastBuildDate>Fri, 26 Sep 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Fri, 10 Oct 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Data-Independent Analysis for Deep Metabolome Profiling of Plant Extracts</title>
+  <dc:creator>Adriano Rutz</dc:creator>
+  <dc:creator>Vincen Wu</dc:creator>
+  <dc:creator>Nicola Zamboni</dc:creator>
+  <link>https://adafede.github.io/talks/2025-10-10_SWISSMETABO.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+
+ ]]></description>
+  <category>Talk</category>
+  <guid>https://adafede.github.io/talks/2025-10-10_SWISSMETABO.html</guid>
+  <pubDate>Fri, 10 Oct 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>MITE: the Minimum Information about a Tailoring Enzyme database for capturing specialized metabolite biosynthesis</title>
   <link>https://adafede.github.io/articles/first/2025-09-26_mite.html</link>
@@ -494,24 +514,6 @@ Rutz, Adriano, and Jean-Luc Wolfender. 2023. <span>“Automated Composition Asse
   <guid>https://adafede.github.io/articles/first/2023-11-10_cascade.html</guid>
   <pubDate>Fri, 10 Nov 2023 00:00:00 GMT</pubDate>
   <media:content url="https://raw.githubusercontent.com/Adafede/cascade/refs/heads/main/man/figures/cascade-workflow.svg" medium="image" type="image/svg+xml"/>
-</item>
-<item>
-  <title>Lotus: A Living Knowledge Base for Modern Pharmacognosy</title>
-  <dc:creator>Adriano Rutz</dc:creator>
-  <link>https://adafede.github.io/talks/2023-10-16_INNSBRUCK.html</link>
-  <description><![CDATA[ 
-
-
-
-
-
-
-<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
-
- ]]></description>
-  <category>Talk</category>
-  <guid>https://adafede.github.io/talks/2023-10-16_INNSBRUCK.html</guid>
-  <pubDate>Mon, 16 Oct 2023 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
