@@ -10,7 +10,25 @@
 <atom:link href="https://adafede.github.io/talks.xml" rel="self" type="application/rss+xml"/>
 <description>Personal website of Adriano Rutz</description>
 <generator>quarto-1.8.25</generator>
-<lastBuildDate>Fri, 10 Oct 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Tue, 14 Oct 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Chemical Compounds and Their Links to Taxa on Wikidata</title>
+  <dc:creator>Adriano Rutz</dc:creator>
+  <link>https://adafede.github.io/talks/2025-10-14_WAGENINGEN.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+
+ ]]></description>
+  <category>Talk</category>
+  <guid>https://adafede.github.io/talks/2025-10-14_WAGENINGEN.html</guid>
+  <pubDate>Tue, 14 Oct 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Data-Independent Analysis for Deep Metabolome Profiling of Plant Extracts</title>
   <dc:creator>Adriano Rutz</dc:creator>
@@ -360,25 +378,6 @@
   <category>Talk</category>
   <guid>https://adafede.github.io/talks/2020-08-01_GNPS.html</guid>
   <pubDate>Sat, 01 Aug 2020 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Advanced Course on Mass Spectrometry</title>
-  <dc:creator>Adriano Rutz</dc:creator>
-  <link>https://adafede.github.io/talks/2019-10-01_NAPOLI.html</link>
-  <description><![CDATA[ 
-
-
-
-
-
-
-<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
-
- ]]></description>
-  <category>Talk</category>
-  <category>Workshop</category>
-  <guid>https://adafede.github.io/talks/2019-10-01_NAPOLI.html</guid>
-  <pubDate>Tue, 01 Oct 2019 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>

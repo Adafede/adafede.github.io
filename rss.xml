@@ -10,7 +10,25 @@
 <atom:link href="https://adafede.github.io/rss.xml" rel="self" type="application/rss+xml"/>
 <description>Personal website of Adriano Rutz</description>
 <generator>quarto-1.8.25</generator>
-<lastBuildDate>Fri, 10 Oct 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Tue, 14 Oct 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Chemical Compounds and Their Links to Taxa on Wikidata</title>
+  <dc:creator>Adriano Rutz</dc:creator>
+  <link>https://adafede.github.io/talks/2025-10-14_WAGENINGEN.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+
+ ]]></description>
+  <category>Talk</category>
+  <guid>https://adafede.github.io/talks/2025-10-14_WAGENINGEN.html</guid>
+  <pubDate>Tue, 14 Oct 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Data-Independent Analysis for Deep Metabolome Profiling of Plant Extracts</title>
   <dc:creator>Adriano Rutz</dc:creator>
@@ -484,36 +502,6 @@ Pellissier, Leonie, Arnaud Gaudry, Salomé Vilette, Nicole Lecoultre, Adriano Ru
 </div></section></div> ]]></description>
   <guid>https://adafede.github.io/articles/co/2023-12-19_astrocaryum.html</guid>
   <pubDate>Tue, 19 Dec 2023 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Automated Composition Assessment of Natural Extracts: Untargeted Mass Spectrometry-Based Metabolite Profiling Integrating Semiquantitative Detection</title>
-  <link>https://adafede.github.io/articles/first/2023-11-10_cascade.html</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script><iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q123938369" title="Scholia entry"></iframe>
-
-
-
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
-<div id="ref-Rutz2023" class="csl-entry">
-Rutz, Adriano, and Jean-Luc Wolfender. 2023. <span>“Automated Composition Assessment of Natural Extracts: Untargeted Mass Spectrometry-Based Metabolite Profiling Integrating Semiquantitative Detection.”</span> <em>Journal of Agricultural and Food Chemistry</em> 71 (46): 18010–23. <a href="https://doi.org/10.1021/acs.jafc.3c03099">https://doi.org/10.1021/acs.jafc.3c03099</a>.
-</div>
-</div></section></div> ]]></description>
-  <category>Metabolomics</category>
-  <category>Charged Aerosol Detector</category>
-  <category>Chemical Composition</category>
-  <category>Liquid Chromatography-Tandem Mass Spectrometry</category>
-  <category>Natural Extracts</category>
-  <category>Natural Products</category>
-  <category>Metabolite Annotation</category>
-  <guid>https://adafede.github.io/articles/first/2023-11-10_cascade.html</guid>
-  <pubDate>Fri, 10 Nov 2023 00:00:00 GMT</pubDate>
-  <media:content url="https://raw.githubusercontent.com/Adafede/cascade/refs/heads/main/man/figures/cascade-workflow.svg" medium="image" type="image/svg+xml"/>
 </item>
 </channel>
 </rss>
