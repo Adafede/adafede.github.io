@@ -10,7 +10,31 @@
 <atom:link href="https://adafede.github.io/rss.xml" rel="self" type="application/rss+xml"/>
 <description>Personal website of Adriano Rutz</description>
 <generator>quarto-1.8.26</generator>
-<lastBuildDate>Tue, 14 Oct 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Mon, 01 Dec 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>A Perspective on Unintentional Fragments and Their Impact on the Dark Metabolome, Untargeted Profiling, Molecular Networking, Public Data, and Repository Scale Analysis</title>
+  <link>https://adafede.github.io/articles/co/2025-12-01_dark_isf.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<!-- ```{=html} -->
+<!-- <iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/TODO" title="Scholia entry"></iframe> -->
+<!-- ``` -->
+
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="ref-ElAbiead2025b" class="csl-entry">
+El Abiead, Yasin, Ipsita Mohanty, Shipei Xing, Adriano Rutz, Vincent Charron-Lamoureux, Tito Damiani, Wenyun Lu, et al. 2025. <span>“A Perspective on Unintentional Fragments and Their Impact on the Dark Metabolome, Untargeted Profiling, Molecular Networking, Public Data, and Repository Scale Analysis.”</span> <em>JACS Au</em>, December. <a href="https://doi.org/10.1021/jacsau.5c01063">https://doi.org/10.1021/jacsau.5c01063</a>.
+</div>
+</div></section></div> ]]></description>
+  <guid>https://adafede.github.io/articles/co/2025-12-01_dark_isf.html</guid>
+  <pubDate>Mon, 01 Dec 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Chemical Compounds and Their Links to Taxa on Wikidata</title>
   <dc:creator>Adriano Rutz</dc:creator>
@@ -326,7 +350,7 @@ Rutz, Adriano, Pascale Deneulin, Ivano Tonutti, Benoît Bach, and Jean-Luc Wolfe
 
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
-<div id="ref-ElAbiead2025" class="csl-entry">
+<div id="ref-ElAbiead2025a" class="csl-entry">
 El Abiead, Yasin, Adriano Rutz, Simone Zuffa, Bashar Amer, Shipei Xing, Corinna Brungs, Robin Schmid, et al. 2025. <span>“Discovery of Metabolites Prevails Amid in-Source Fragmentation.”</span> <em>Nature Metabolism</em> 7 (3): 435–37. <a href="https://doi.org/10.1038/s42255-025-01239-4">https://doi.org/10.1038/s42255-025-01239-4</a>.
 </div>
 </div></section></div> ]]></description>
@@ -480,28 +504,6 @@ Zuffa, Simone, Robin Schmid, Anelize Bauermeister, Paulo Wender P. Gomes, Andres
 </div></section></div> ]]></description>
   <guid>https://adafede.github.io/articles/co/2024-02-05_microbemasst.html</guid>
   <pubDate>Mon, 05 Feb 2024 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Comparative metabolomics of fungal foliar endophytes and their long-lived host Astrocaryum sciophilum: a model for exploring the chemodiversity of host-microbe interactions</title>
-  <link>https://adafede.github.io/articles/co/2023-12-19_astrocaryum.html</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script><iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q123938372" title="Scholia entry"></iframe>
-
-
-
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
-<div id="ref-Pellissier2023" class="csl-entry">
-Pellissier, Leonie, Arnaud Gaudry, Salomé Vilette, Nicole Lecoultre, Adriano Rutz, Pierre-Marie Allard, Laurence Marcourt, et al. 2023. <span>“Comparative Metabolomic Study of Fungal Foliar Endophytes and Their Long-Lived Host Astrocaryum Sciophilum: A Model for Exploring the Chemodiversity of Host-Microbe Interactions.”</span> <em>Frontiers in Plant Science</em> 14 (December). <a href="https://doi.org/10.3389/fpls.2023.1278745">https://doi.org/10.3389/fpls.2023.1278745</a>.
-</div>
-</div></section></div> ]]></description>
-  <guid>https://adafede.github.io/articles/co/2023-12-19_astrocaryum.html</guid>
-  <pubDate>Tue, 19 Dec 2023 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>

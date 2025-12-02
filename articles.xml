@@ -10,7 +10,31 @@
 <atom:link href="https://adafede.github.io/articles.xml" rel="self" type="application/rss+xml"/>
 <description>Personal website of Adriano Rutz</description>
 <generator>quarto-1.8.26</generator>
-<lastBuildDate>Fri, 26 Sep 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Mon, 01 Dec 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>A Perspective on Unintentional Fragments and Their Impact on the Dark Metabolome, Untargeted Profiling, Molecular Networking, Public Data, and Repository Scale Analysis</title>
+  <link>https://adafede.github.io/articles/co/2025-12-01_dark_isf.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<!-- ```{=html} -->
+<!-- <iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/TODO" title="Scholia entry"></iframe> -->
+<!-- ``` -->
+
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="ref-ElAbiead2025b" class="csl-entry">
+El Abiead, Yasin, Ipsita Mohanty, Shipei Xing, Adriano Rutz, Vincent Charron-Lamoureux, Tito Damiani, Wenyun Lu, et al. 2025. <span>“A Perspective on Unintentional Fragments and Their Impact on the Dark Metabolome, Untargeted Profiling, Molecular Networking, Public Data, and Repository Scale Analysis.”</span> <em>JACS Au</em>, December. <a href="https://doi.org/10.1021/jacsau.5c01063">https://doi.org/10.1021/jacsau.5c01063</a>.
+</div>
+</div></section></div> ]]></description>
+  <guid>https://adafede.github.io/articles/co/2025-12-01_dark_isf.html</guid>
+  <pubDate>Mon, 01 Dec 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>MITE: the Minimum Information about a Tailoring Enzyme database for capturing specialized metabolite biosynthesis</title>
   <link>https://adafede.github.io/articles/first/2025-09-26_mite.html</link>
@@ -186,7 +210,7 @@ Rutz, Adriano, Pascale Deneulin, Ivano Tonutti, Benoît Bach, and Jean-Luc Wolfe
 
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
-<div id="ref-ElAbiead2025" class="csl-entry">
+<div id="ref-ElAbiead2025a" class="csl-entry">
 El Abiead, Yasin, Adriano Rutz, Simone Zuffa, Bashar Amer, Shipei Xing, Corinna Brungs, Robin Schmid, et al. 2025. <span>“Discovery of Metabolites Prevails Amid in-Source Fragmentation.”</span> <em>Nature Metabolism</em> 7 (3): 435–37. <a href="https://doi.org/10.1038/s42255-025-01239-4">https://doi.org/10.1038/s42255-025-01239-4</a>.
 </div>
 </div></section></div> ]]></description>
@@ -476,34 +500,6 @@ Hell, Tanja, Adriano Rutz, Lara Dürr, Maciej Dobrzyński, Jakob K. Reinhardt, T
   <guid>https://adafede.github.io/articles/shared/2022-05-31_melanoma.html</guid>
   <pubDate>Tue, 31 May 2022 00:00:00 GMT</pubDate>
   <media:content url="https://pubs.acs.org/cms/10.1021/acs.jnatprod.2c00146/asset/images/medium/np2c00146_0008.gif" medium="image" type="image/gif"/>
-</item>
-<item>
-  <title>The LOTUS initiative for open knowledge management in natural products research</title>
-  <link>https://adafede.github.io/articles/first/2022-05-26_lotus.html</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script><iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q112143478" title="Scholia entry"></iframe>
-
-
-
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
-<div id="ref-Rutz2022" class="csl-entry">
-Rutz, Adriano, Maria Sorokina, Jakub Galgonek, Daniel Mietchen, Egon Willighagen, Arnaud Gaudry, James G Graham, et al. 2022. <span>“The LOTUS Initiative for Open Knowledge Management in Natural Products Research.”</span> <em>eLife</em> 11 (May). <a href="https://doi.org/10.7554/elife.70780">https://doi.org/10.7554/elife.70780</a>.
-</div>
-</div></section></div> ]]></description>
-  <category>LOTUS</category>
-  <category>Natural Products</category>
-  <category>Open Science</category>
-  <category>Wikidata</category>
-  <category>Knowledge Graph</category>
-  <guid>https://adafede.github.io/articles/first/2022-05-26_lotus.html</guid>
-  <pubDate>Thu, 26 May 2022 00:00:00 GMT</pubDate>
-  <media:content url="https://upload.wikimedia.org/wikipedia/commons/f/f1/Lotus_initiative_1_graphical_abstract.svg" medium="image" type="image/svg+xml"/>
 </item>
 </channel>
 </rss>
