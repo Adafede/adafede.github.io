@@ -2,7 +2,7 @@
 name = "adafede-github-io"
 version = "0.0.1"
 description = "My personal website"
-requires-python = ">=3.14,<4"
+requires-python = ">=3.13,<4"
 dependencies = [
     "bs4>=0.0.2,<1",
     "commonmeta-py>=0.191,<1",
@@ -22,7 +22,7 @@ known_first_party = ["scripts"]
 commonmeta-py = ["commonmeta"]
 
 [tool.deptry.per_rule_ignores]
-DEP002 = ["deptry", "pre-commit","quarto"]
+DEP002 = ["deptry", "pre-commit", "quarto"]
 
 [tool.ty.rules]
 unresolved-import = "ignore"

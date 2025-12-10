@@ -65,8 +65,13 @@ website:
 
 format:
   html:
+    anchor-sections: true
+    axe: true
     grid:
       body-width: 1200px
+    # include-in-header: _includes/dokieli.html
+    # minimal: true
+    link-external-icon: false
     link-external-newwindow: true
     theme:
       light: flatly
