@@ -1,0 +1,20 @@
+---
+bibliography: ../../references.bib
+title: "Strategies for community-sourced biocuration in bioinformatics: a case study on MIBiG 4.0"
+type: article
+venue: Briefings In Bioinformatics
+date: 2025-12-11
+doi: 10.1093/bib/bbaf659
+url: <https://doi.org/10.1093/bib/bbaf659>
+# categories:
+#   - Biocuration
+#   - Bioinformatics
+# abstract: |
+#  TODO
+nocite: |
+  @Blin2025
+---
+
+<!-- ```{=html} -->
+<!-- <iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/TODO" title="Scholia entry"></iframe> -->
+<!-- ``` -->
