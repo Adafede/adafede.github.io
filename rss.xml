@@ -10,7 +10,31 @@
 <atom:link href="https://adafede.github.io/rss.xml" rel="self" type="application/rss+xml"/>
 <description>Personal website of Adriano Rutz</description>
 <generator>quarto-1.8.26</generator>
-<lastBuildDate>Mon, 01 Dec 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Thu, 11 Dec 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Strategies for community-sourced biocuration in bioinformatics: a case study on MIBiG 4.0</title>
+  <link>https://adafede.github.io/articles/co/2025-12-11_biocuration.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<!-- ```{=html} -->
+<!-- <iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/TODO" title="Scholia entry"></iframe> -->
+<!-- ``` -->
+
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="ref-Blin2025" class="csl-entry">
+Blin, Kai, Catarina Loureiro, Nico L L Louwen, Jorge C Navarro-Muñoz, Hans Gerstmans, Serina L Robinson, Adriano Rutz, et al. 2025. <span>“Strategies for Community-Sourced Biocuration in Bioinformatics: A Case Study on MIBiG 4.0.”</span> <em>Briefings in Bioinformatics</em> 26 (6). <a href="https://doi.org/10.1093/bib/bbaf659">https://doi.org/10.1093/bib/bbaf659</a>.
+</div>
+</div></section></div> ]]></description>
+  <guid>https://adafede.github.io/articles/co/2025-12-11_biocuration.html</guid>
+  <pubDate>Thu, 11 Dec 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>A Perspective on Unintentional Fragments and Their Impact on the Dark Metabolome, Untargeted Profiling, Molecular Networking, Public Data, and Repository Scale Analysis</title>
   <link>https://adafede.github.io/articles/co/2025-12-01_dark_isf.html</link>
@@ -482,28 +506,6 @@ Gaudry, Arnaud, Marco Pagni, Florence Mehl, Sébastien Moretti, Luis-Manuel Quir
 </div></section></div> ]]></description>
   <guid>https://adafede.github.io/articles/co/2024-02-20_enpkg.html</guid>
   <pubDate>Wed, 27 Mar 2024 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>microbeMASST: a taxonomically informed mass spectrometry search tool for microbial metabolomics data</title>
-  <link>https://adafede.github.io/articles/co/2024-02-05_microbemasst.html</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script><iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q124670541" title="Scholia entry"></iframe>
-
-
-
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
-<div id="ref-Zuffa2024" class="csl-entry">
-Zuffa, Simone, Robin Schmid, Anelize Bauermeister, Paulo Wender P. Gomes, Andres M. Caraballo-Rodriguez, Yasin El Abiead, Allegra T. Aron, et al. 2024. <span>“microbeMASST: A Taxonomically Informed Mass Spectrometry Search Tool for Microbial Metabolomics Data.”</span> <em>Nature Microbiology</em> 9 (2): 336–45. <a href="https://doi.org/10.1038/s41564-023-01575-9">https://doi.org/10.1038/s41564-023-01575-9</a>.
-</div>
-</div></section></div> ]]></description>
-  <guid>https://adafede.github.io/articles/co/2024-02-05_microbemasst.html</guid>
-  <pubDate>Mon, 05 Feb 2024 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>

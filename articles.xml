@@ -10,7 +10,31 @@
 <atom:link href="https://adafede.github.io/articles.xml" rel="self" type="application/rss+xml"/>
 <description>Personal website of Adriano Rutz</description>
 <generator>quarto-1.8.26</generator>
-<lastBuildDate>Mon, 01 Dec 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Thu, 11 Dec 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Strategies for community-sourced biocuration in bioinformatics: a case study on MIBiG 4.0</title>
+  <link>https://adafede.github.io/articles/co/2025-12-11_biocuration.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<!-- ```{=html} -->
+<!-- <iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/TODO" title="Scholia entry"></iframe> -->
+<!-- ``` -->
+
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="ref-Blin2025" class="csl-entry">
+Blin, Kai, Catarina Loureiro, Nico L L Louwen, Jorge C Navarro-Muñoz, Hans Gerstmans, Serina L Robinson, Adriano Rutz, et al. 2025. <span>“Strategies for Community-Sourced Biocuration in Bioinformatics: A Case Study on MIBiG 4.0.”</span> <em>Briefings in Bioinformatics</em> 26 (6). <a href="https://doi.org/10.1093/bib/bbaf659">https://doi.org/10.1093/bib/bbaf659</a>.
+</div>
+</div></section></div> ]]></description>
+  <guid>https://adafede.github.io/articles/co/2025-12-11_biocuration.html</guid>
+  <pubDate>Thu, 11 Dec 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>A Perspective on Unintentional Fragments and Their Impact on the Dark Metabolome, Untargeted Profiling, Molecular Networking, Public Data, and Repository Scale Analysis</title>
   <link>https://adafede.github.io/articles/co/2025-12-01_dark_isf.html</link>
@@ -470,36 +494,6 @@ Hoyt, Charles Tapley, Meghan Balk, Tiffany J. Callahan, Daniel Domingo-Fernánde
 </div></section></div> ]]></description>
   <guid>https://adafede.github.io/articles/co/2022-11-19_bioregistry.html</guid>
   <pubDate>Sat, 19 Nov 2022 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Combining Activity Profiling with Advanced Annotation to Accelerate the Discovery of Natural Products Targeting Oncogenic Signaling in Melanoma</title>
-  <link>https://adafede.github.io/articles/shared/2022-05-31_melanoma.html</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script><iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q112189007" title="Scholia entry"></iframe>
-
-
-
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
-<div id="ref-Hell2022" class="csl-entry">
-Hell, Tanja, Adriano Rutz, Lara Dürr, Maciej Dobrzyński, Jakob K. Reinhardt, Timo Lehner, Morris Keller, et al. 2022. <span>“Combining Activity Profiling with Advanced Annotation to Accelerate the Discovery of Natural Products Targeting Oncogenic Signaling in Melanoma.”</span> <em>Journal of Natural Products</em> 85 (6): 1540–54. <a href="https://doi.org/10.1021/acs.jnatprod.2c00146">https://doi.org/10.1021/acs.jnatprod.2c00146</a>.
-</div>
-</div></section></div> ]]></description>
-  <category>Bioactivity</category>
-  <category>Charged Aerosol Detector</category>
-  <category>Metabolomics</category>
-  <category>Liquid Chromatography-Tandem Mass Spectrometry</category>
-  <category>Natural Extracts</category>
-  <category>Natural Products</category>
-  <category>Metabolite Annotation</category>
-  <guid>https://adafede.github.io/articles/shared/2022-05-31_melanoma.html</guid>
-  <pubDate>Tue, 31 May 2022 00:00:00 GMT</pubDate>
-  <media:content url="https://pubs.acs.org/cms/10.1021/acs.jnatprod.2c00146/asset/images/medium/np2c00146_0008.gif" medium="image" type="image/gif"/>
 </item>
 </channel>
 </rss>
