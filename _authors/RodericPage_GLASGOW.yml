@@ -1,0 +1,11 @@
+---
+authors:
+  - id: RodericPage
+    name:
+      given: Roderic D. M.
+      family: Page
+      literal: Roderic D. M. Page
+    orcid: 0000-0002-7101-9767
+    qid: Q7356570
+    affiliations:
+      - ref: glasgow

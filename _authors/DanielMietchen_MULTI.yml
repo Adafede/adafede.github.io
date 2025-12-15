@@ -1,0 +1,13 @@
+---
+authors:
+  - id: DanielMietchen
+    name:
+      given: Daniel
+      family: Mietchen
+      literal: Daniel Mietchen
+    orcid: 0000-0002-7038-544X
+    qid: Q20895785
+    affiliations:
+      - ref: ronin
+      - ref: leibniz
+      - ref: virginia

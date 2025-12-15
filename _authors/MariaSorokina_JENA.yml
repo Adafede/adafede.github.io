@@ -1,0 +1,11 @@
+---
+authors:
+  - id: MariaSorokina
+    name:
+      given: Maria
+      family: Sorokina
+      literal: Maria Sorokina
+    orcid: 0000-0001-9359-7149
+    qid: Q63759728
+    affiliations:
+      - ref: fsu_jena

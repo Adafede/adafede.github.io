@@ -1,0 +1,11 @@
+---
+authors:
+  - id: RalfStephan
+    name:
+      given: Ralf
+      family: Stephan
+      literal: Ralf Stephan
+    orcid: 0000-0002-4650-631X
+    qid: Q67363620
+    affiliations:
+      - ref: oicr

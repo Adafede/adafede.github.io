@@ -1,0 +1,14 @@
+---
+authors:
+  - id: PierreMarieAllard
+    name:
+      given: Pierre-Marie
+      family: Allard
+      literal: Pierre-Marie Allard
+    orcid: 0000-0003-3389-2191
+    qid: Q56451301
+    corresponding: true
+    email: pierre-marie.allard@unifr.ch
+    affiliations:
+      - ref: unige
+      - ref: unifr
