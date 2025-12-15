@@ -1,5 +1,4 @@
 ---
-bibliography: ../../references.bib
 title: "Automated Composition Assessment of Natural Extracts: Untargeted Mass
   Spectrometry-Based Metabolite Profiling Integrating Semiquantitative
   Detection"

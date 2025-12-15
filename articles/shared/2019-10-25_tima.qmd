@@ -1,5 +1,4 @@
 ---
-bibliography: ../../references.bib
 title: Taxonomically Informed Scoring Enhances Confidence in Natural Products
   Annotation
 type: article

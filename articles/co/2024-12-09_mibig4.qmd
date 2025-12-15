@@ -1,5 +1,4 @@
 ---
-bibliography: ../../references.bib
 title: "MIBiG 4.0: advancing biosynthetic gene cluster curation through global
   collaboration"
 type: article

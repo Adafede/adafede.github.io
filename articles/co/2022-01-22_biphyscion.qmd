@@ -1,5 +1,4 @@
 ---
-bibliography: ../../references.bib
 title: "Targeted isolation of photoactive pigments from mushrooms yielded a
   highly potent new photosensitizer: 7,7′-biphyscion"
 type: article

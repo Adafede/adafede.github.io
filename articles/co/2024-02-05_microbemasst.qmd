@@ -1,5 +1,4 @@
 ---
-bibliography: ../../references.bib
 title: "microbeMASST: a taxonomically informed mass spectrometry search tool for
   microbial metabolomics data"
 type: article

@@ -1,5 +1,5 @@
 ---
-bibliography: ../references.bib
+bibliography: references.bib
 title: Integrative Analytical and Computational Strategies for Qualitative and
   Semi-quantitative Plant Metabolome Characterization
 type: thesis

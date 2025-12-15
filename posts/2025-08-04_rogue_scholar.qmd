@@ -43,7 +43,6 @@ google-scholar: true
 license: CC BY
 link-citations: true
 title: "Open Science Upgrade: Adding Blog Posts to my Website and Linking to Rogue Scholar"
-bibliography: references.bib
 ---
 
 I have finally opened a `Posts` section on my website!

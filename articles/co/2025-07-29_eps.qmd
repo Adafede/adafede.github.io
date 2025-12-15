@@ -1,5 +1,4 @@
 ---
-bibliography: ../../references.bib
 title: Degradation of extracellular polymeric substances shapes microbial community diversity
 type: article
 venue: PLOS Biology

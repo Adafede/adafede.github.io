@@ -1,5 +1,4 @@
 ---
-bibliography: ../../references.bib
 title: A Sample-Centric and Knowledge-Driven Computational Framework for Natural
   Products Drug Discovery
 type: article

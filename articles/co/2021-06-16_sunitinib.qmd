@@ -1,5 +1,4 @@
 ---
-bibliography: ../../references.bib
 title: Molecular and Functional Analysis of Sunitinib-Resistance Induction in
   Human Renal Cell Carcinoma Cells
 type: article

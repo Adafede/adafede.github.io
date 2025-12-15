@@ -1,5 +1,4 @@
 ---
-bibliography: ../../references.bib
 title: Identification of Antifungal Compounds from the Root Bark of *Cordia
   anisophylla* J.S. Mill.
 type: article

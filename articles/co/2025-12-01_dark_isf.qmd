@@ -1,5 +1,4 @@
 ---
-bibliography: ../../references.bib
 title: A Perspective on Unintentional Fragments and Their Impact on the Dark Metabolome, Untargeted Profiling, Molecular Networking, Public Data, and Repository Scale Analysis
 type: article
 venue: JACS Au

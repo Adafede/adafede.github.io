@@ -1,5 +1,4 @@
 ---
-bibliography: ../../references.bib
 title: "Metabolomics in Ecology and Bioactive Natural Products Discovery:
   Challenges and Prospects for a Comprehensive Study of the Specialised
   Metabolome"

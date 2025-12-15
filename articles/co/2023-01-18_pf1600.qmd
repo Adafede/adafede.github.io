@@ -1,5 +1,4 @@
 ---
-bibliography: ../../references.bib
 title: Open and reusable annotated mass spectrometry dataset of a chemodiverse
   collection of 1,600 plant extracts
 type: article

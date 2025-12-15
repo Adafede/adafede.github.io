@@ -1,5 +1,4 @@
 ---
-bibliography: ../../references.bib
 title: Genkwanin glycosides are major active compounds in *Phaleria nisidai* extract mediating improved glucose homeostasis by stimulating glucose uptake into adipose tissues
 type: article
 venue: Nature Communications

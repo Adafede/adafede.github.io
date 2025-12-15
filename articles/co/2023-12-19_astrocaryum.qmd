@@ -1,5 +1,4 @@
 ---
-bibliography: ../../references.bib
 title: "Comparative metabolomics of fungal foliar endophytes and their
   long-lived host *Astrocaryum sciophilum*: a model for exploring the
   chemodiversity of host-microbe interactions"

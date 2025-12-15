@@ -1,5 +1,4 @@
 ---
-bibliography: ../../references.bib
 title: "MITE: the Minimum Information about a Tailoring Enzyme database for capturing specialized metabolite biosynthesis"
 type: article
 venue: Nucleic Acids Research
