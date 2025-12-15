@@ -42,8 +42,8 @@ vocabularies:
 :::{#hero-heading}
 {{< include cv/_bio.qmd >}}
 
-[text]{data-vocab="wd" data-property="Q123"}
-[lala]{data-vocab="wdt" data-property="P123"}
+<!-- [text]{data-vocab="wd" data-property="Q123"} -->
+<!-- [lala]{data-vocab="wdt" data-property="P123"} -->
 
 {{< include expertise.qmd >}}
 :::

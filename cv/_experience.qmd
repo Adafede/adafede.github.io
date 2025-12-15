@@ -1,5 +1,9 @@
 ## Professional Experience
 
+{{< include cv/experience/_2022_ethz.qmd >}}
 
+{{< include cv/experience/_2017_unige.qmd >}}
 
+{{< include cv/experience/_2016_bacardi.qmd >}}
 
+{{< include cv/experience/_2015_terrassiere.qmd >}}
