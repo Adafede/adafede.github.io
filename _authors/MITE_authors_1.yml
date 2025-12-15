@@ -1,0 +1,378 @@
+---
+# TODO split later
+authors:
+  - id: DanielProbst
+    name:
+      given: Daniel
+      family: Probst
+      literal: Daniel Probst
+    orcid: 0000-0003-1737-4407
+    affiliations:
+      - ref: wageningen
+  - id: CesarAguilar
+    name:
+      given: César
+      family: Aguilar
+      literal: César Aguilar
+    orcid: 0000-0001-7044-2419
+    affiliations:
+      - ref: monterrey
+  - id: DanielAkiyama
+    name:
+      given: Daniel Y.
+      family: Akiyama
+      literal: Daniel Y. Akiyama
+    orcid: 0000-0003-2859-1992
+    affiliations:
+      - ref: unicamp
+  - id: FabrizioAlberti
+    name:
+      given: Fabrizio
+      family: Alberti
+      literal: Fabrizio Alberti
+    orcid: 0000-0001-6585-0696
+    affiliations:
+      - ref: warwick
+  - id: HannahAugustijn
+    name:
+      given: Hannah E.
+      family: Augustijn
+      literal: Hannah E. Augustijn
+    orcid: 0000-0002-1862-6699
+    affiliations:
+      - ref: wageningen
+      - ref: leiden
+  - id: NicoleAvalon
+    name:
+      given: Nicole E.
+      family: Avalon
+      literal: Nicole E. Avalon
+    orcid: 0000-0003-3588-892X
+    affiliations:
+      - ref: irvine
+      - ref: scripps
+  - id: ChristineBeemelmanns
+    name:
+      given: Christine
+      family: Beemelmanns
+      literal: Christine Beemelmanns
+    orcid: 0000-0002-9747-3423
+    affiliations:
+      - ref: helmholtz
+  - id: HellenBertoletiBarbie ri
+    name:
+      given: Hellen
+      family: Bertoletti Barbieri
+      literal: Hellen Bertoletti Barbieri
+    orcid: 0000-0002-6270-3874
+    affiliations:
+      - ref: unicamp
+  - id: FriederikeBiermann
+    name:
+      given: Friederike
+      family: Biermann
+      literal: Friederike Biermann
+    orcid: 0000-0002-9152-2562
+    affiliations:
+      - ref: wageningen
+      - ref: frankfurt
+      - ref: loewe
+  - id: AlanBridge
+    name:
+      given: Alan J.
+      family: Bridge
+      literal: Alan J. Bridge
+    orcid: 0000-0003-2148-9135
+    affiliations:
+      - ref: sib
+  - id: EstebanCharriaGiron
+    name:
+      given: Esteban
+      family: Charria Girón
+      literal: Esteban Charria Girón
+    orcid: 0000-0002-3823-1416
+    affiliations:
+      - ref: wageningen
+      - ref: helmholtz
+  - id: RussellCox
+    name:
+      given: Russell
+      family: Cox
+      literal: Russell Cox
+    orcid: 0000-0002-1844-0157
+    affiliations:
+      - ref: hannover
+  - id: MaxCrusemann
+    name:
+      given: Max
+      family: Crüsemann
+      literal: Max Crüsemann
+    orcid: 0000-0001-6660-2715
+    affiliations:
+      - ref: bonn
+      - ref: frankfurt2
+  - id: PaulMichaelDAgostino
+    name:
+      given: Paul Michael
+      family: D'Agostino
+      literal: Paul Michael D'Agostino
+    orcid: 0000-0002-8323-5416
+    affiliations:
+      - ref: helmholtz
+  - id: MarcFeuermann
+    name:
+      given: Marc
+      family: Feuermann
+      literal: Marc Feuermann
+    orcid: 0000-0002-4187-2863
+    affiliations:
+      - ref: sib
+  - id: JenniferGerke
+    name:
+      given: Jennifer
+      family: Gerke
+      literal: Jennifer Gerke
+    orcid: 0000-0001-7301-2676
+    affiliations:
+      - ref: hannover
+  - id: KarinaGutierrezGarcía
+    name:
+      given: Karina
+      family: Gutiérrez García
+      literal: Karina Gutiérrez García
+    orcid: 0000-0002-6077-7490
+    affiliations:
+      - ref: carnegie
+      - ref: arizona
+  - id: JonathanHolme
+    name:
+      given: Jonathan
+      family: Holme
+      literal: Jonathan Holme
+    orcid: 0009-0007-1652-9477
+    affiliations:
+      - ref: sintef
+  - id: JiYeonHwang
+    name:
+      given: Ji-Yeon
+      family: Hwang
+      literal: Ji-Yeon Hwang
+    orcid: 0009-0005-0157-5724
+    affiliations:
+      - ref: frederick
+  - id: RiccardoIacovelli
+    name:
+      given: Riccardo
+      family: Iacovelli
+      literal: Riccardo Iacovelli
+    orcid: 0000-0003-4819-2251
+    affiliations:
+      - ref: vtt
+  - id: JulioCesarJeronimoBarbosa
+    name:
+      given: Júlio César
+      family: Jeronimo Barbosa
+      literal: Júlio César Jeronimo Barbosa
+    orcid: 0000-0001-8831-831X
+    affiliations:
+      - ref: unicamp
+  - id: NavneetKaur
+    name:
+      given: Navneet
+      family: Kaur
+      literal: Navneet Kaur
+    orcid: 0000-0003-4392-4484
+    affiliations:
+      - ref: nabi
+  - id: MartinKlapper
+    name:
+      given: Martin
+      family: Klapper
+      literal: Martin Klapper
+    orcid: 0000-0002-4977-2541
+    affiliations:
+      - ref: hki
+  - id: AnnaMMöhler
+    name:
+      given: Anna M.
+      family: Köhler
+      literal: Anna M. Köhler
+    orcid: 0000-0002-2715-8954
+    affiliations:
+      - ref: hannover
+  - id: AleksandraKorenskaia
+    name:
+      given: Aleksandra
+      family: Korenskaia
+      literal: Aleksandra Korenskaia
+    orcid: 0000-0003-3002-6458
+    affiliations:
+      - ref: tübingen
+  - id: NoelKubach
+    name:
+      given: Noel
+      family: Kubach
+      literal: Noel Kubach
+    orcid: 0009-0008-7609-4484
+    affiliations:
+      - ref: tübingen
+  - id: ByungTaeLee
+    name:
+      given: Byung Tae
+      family: Lee
+      literal: Byung Tae Lee
+    orcid: 0009-0008-3623-3734
+    affiliations:
+      - ref: kaist
+  - id: CatarinaLoureiro
+    name:
+      given: Catarina
+      family: Loureiro
+      literal: Catarina Loureiro
+    orcid: 0000-0002-6258-2080
+    affiliations:
+      - ref: wageningen
+  - id: ShrikantMantri
+    name:
+      given: Shrikant
+      family: Mantri
+      literal: Shrikant Mantri
+    orcid: 0000-0002-7493-459X
+    affiliations:
+      - ref: nabi
+  - id: SimranNarula
+    name:
+      given: Simran
+      family: Narula
+      literal: Simran Narula
+    orcid: 0009-0001-9399-9671
+    affiliations:
+      - ref: nabi
+  - id: DavidMeijer
+    name:
+      given: David
+      family: Meijer
+      literal: David Meijer
+    orcid: 0000-0001-6406-4394
+    affiliations:
+      - ref: wageningen
+  - id: JorgeNavarroMunoz
+    name:
+      given: Jorge C.
+      family: Navarro-Muñoz
+      literal: Jorge C. Navarro-Muñoz
+    orcid: 0000-0003-2992-1607
+    affiliations:
+      - ref: wageningen
+  - id: GiangSonNguyen
+    name:
+      given: Giang-Son
+      family: Nguyen
+      literal: Giang-Son Nguyen
+    orcid: 0000-0001-5730-3326
+    affiliations:
+      - ref: sintef
+  - id: SunainaPaliyal
+    name:
+      given: Sunaina
+      family: Paliyal
+      literal: Sunaina Paliyal
+    orcid: 0009-0003-1714-1678
+    affiliations:
+      - ref: nabi
+  - id: MohitPanghal
+    name:
+      given: Mohit
+      family: Panghal
+      literal: Mohit Panghal
+    orcid: 0009-0001-3436-5302
+    affiliations:
+      - ref: nabi
+  - id: LatikaRao
+    name:
+      given: Latika
+      family: Rao
+      literal: Latika Rao
+    orcid: 0009-0000-2169-0598
+    affiliations:
+      - ref: nabi
+  - id: SimonSieber
+    name:
+      given: Simon
+      family: Sieber
+      literal: Simon Sieber
+    orcid: 0000-0003-1763-2525
+    affiliations:
+      - ref: uzh
+  - id: NikaSokolova
+    name:
+      given: Nika
+      family: Sokolova
+      literal: Nika Sokolova
+    orcid: 0000-0003-4129-2890
+    affiliations:
+      - ref: groningen
+  - id: SvenSowa
+    name:
+      given: Sven T.
+      family: Sowa
+      literal: Sven T. Sowa
+    orcid: 0000-0001-7411-5925
+    affiliations:
+      - ref: basel
+  - id: JudithSzenei
+    name:
+      given: Judith
+      family: Szenei
+      literal: Judith Szenei
+    orcid: 0009-0006-9871-5187
+    affiliations:
+      - ref: dtu
+  - id: BarbaraTerlouw
+    name:
+      given: Barbara
+      family: Terlouw
+      literal: Barbara Terlouw
+    orcid: 0000-0002-4058-6718
+    affiliations:
+      - ref: leiden
+  - id: HeinerWeddeling
+    name:
+      given: Heiner G.
+      family: Weddeling
+      literal: Heiner G. Weddeling
+    orcid: 0009-0003-2819-1486
+    affiliations:
+      - ref: basel
+  - id: JingweiYu
+    name:
+      given: Jingwei
+      family: Yu
+      literal: Jingwei Yu
+    orcid: 0000-0003-4268-436X
+    affiliations:
+      - ref: shenzhen
+  - id: NadineZiemert
+    name:
+      given: Nadine
+      family: Ziemert
+      literal: Nadine Ziemert
+    orcid: 0000-0002-7264-1857
+    affiliations:
+      - ref: tübingen
+  - id: TilmannWeber
+    name:
+      given: Tilmann
+      family: Weber
+      literal: Tilmann Weber
+    orcid: 0000-0002-8260-5120
+    affiliations:
+      - ref: dtu
+  - id: KaiBlin
+    name:
+      given: Kai
+      family: Blin
+      literal: Kai Blin
+    orcid: 0000-0003-3764-6051
+    affiliations:
+      - ref: dtu
