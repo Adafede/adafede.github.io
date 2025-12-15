@@ -34,7 +34,8 @@ REF_ID_PREFIX = "ref-"
 
 
 def inject_cito_annotations_in_html(
-    html_path: Path, citation_properties: Dict[str, List[str]]
+    html_path: Path,
+    citation_properties: Dict[str, List[str]],
 ) -> None:
     """Inject CiTO annotations into HTML bibliography entries.
 

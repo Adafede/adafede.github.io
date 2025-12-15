@@ -7,12 +7,12 @@ injects ROR links into corresponding HTML affiliation paragraphs.
 
 import logging
 from pathlib import Path
-from typing import Dict, Optional
+from typing import Dict
 
 from bs4 import BeautifulSoup
 from ruamel.yaml import YAML
 
-from yaml_utils import extract_yaml_frontmatter, load_yaml, load_metadata_file
+from yaml_utils import extract_yaml_frontmatter, load_metadata_file
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -121,11 +121,12 @@ def load_affiliations(qmd_path: Path) -> Dict[str, Dict[str, str]]:
                 if isinstance(metadata_files, list):
                     for metadata_path in metadata_files:
                         metadata_doc = load_metadata_file(
-                            metadata_path, qmd_path.parent
+                            metadata_path,
+                            qmd_path.parent,
                         )
                         if metadata_doc:
                             merged.update(
-                                _parse_affiliation_defs_from_doc(metadata_doc)
+                                _parse_affiliation_defs_from_doc(metadata_doc),
                             )
 
                 # Then apply any affiliation data from QMD frontmatter itself (overrides)
@@ -165,7 +166,9 @@ def inject_ror_links(soup: BeautifulSoup, aff_dict: Dict[str, Dict[str, str]]) -
     for aff_elem in affiliation_elements:
         # Skip if already has a ROR link
         existing_link = aff_elem.find(
-            "a", class_="uri", href=lambda h: h and "ror.org" in h
+            "a",
+            class_="uri",
+            href=lambda h: h and "ror.org" in h,
         )
         if existing_link:
             continue
@@ -262,7 +265,7 @@ def inject_ror_in_html(qmd_path: Path, html_path: Path) -> None:
         try:
             html_path.write_text(str(soup), encoding="utf-8")
             logger.info(
-                f"✓ Injected ROR links for {enriched_count} affiliation(s) in {html_path.name}"
+                f"✓ Injected ROR links for {enriched_count} affiliation(s) in {html_path.name}",
             )
         except Exception as e:
             logger.error(f"Failed to write {html_path}: {e}")

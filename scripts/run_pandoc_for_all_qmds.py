@@ -137,7 +137,7 @@ def run_pandoc_for_all_qmds() -> None:
 
     # Summary
     logger.info("=" * 60)
-    logger.info(f"PDF Generation Summary:")
+    logger.info("PDF Generation Summary:")
     logger.info(f"  Success: {success_count}")
     logger.info(f"  Skipped: {skip_count} (markdown not found)")
     logger.info(f"  Failed:  {fail_count}")

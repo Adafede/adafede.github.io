@@ -49,14 +49,14 @@
     "latitude": 47.3289241,
     "longitude": 11.1867187
   },
+  "Wageningen, the Netherlands": {
+    "address": "Wageningen, Gelderland, Nederland",
+    "latitude": 51.9685817,
+    "longitude": 5.6682981
+  },
   "Z\u00fcrich, Switzerland": {
     "address": "Z\u00fcrich, Bezirk Z\u00fcrich, Z\u00fcrich, Schweiz/Suisse/Svizzera/Svizra",
     "latitude": 47.3744489,
     "longitude": 8.5410422
-  },
-  "Wageningen, the Netherlands": {
-    "latitude": 51.9685817,
-    "longitude": 5.6682981,
-    "address": "Wageningen, Gelderland, Nederland"
   }
 }
