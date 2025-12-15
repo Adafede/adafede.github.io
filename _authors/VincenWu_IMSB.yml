@@ -1,0 +1,11 @@
+---
+authors:
+  - id: VincenWu
+    name:
+      given: Vincen
+      family: Wu
+      literal: Vincen Wu
+    orcid: 0000-0002-5292-9941
+    qid: Q118489353
+    affiliations:
+      - ref: imsb

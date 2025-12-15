@@ -5,25 +5,10 @@ date: 2019-10-14
 location: Napoli, Italy
 categories:
   - Teaching
-authors:
-  - name:
-      given: Adriano
-      family: Rutz
-    orcid: 0000-0003-0443-9902
-    qid: Q97455964
-    number: 1
-    affiliations:
-      - ref: unige
-  - name:
-      given: Jean-Luc
-      family: Wolfender
-    orcid: 0000-0002-0125-952X
-    qid: Q56084663
-    number: 2
-    corresponding: true
-    email: jean-luc.wolfender@unige.ch
-    affiliations:
-      - ref: unige
+metadata-files:
+  - ../_authors/AdrianoRutz_UNIGE.yml
+  - ../_authors/JeanLucWolfender_UNIGE_corr.yml
+  - ../_affiliations/UNIGE_Wolfender.yml
 ---
 
 ## Topics

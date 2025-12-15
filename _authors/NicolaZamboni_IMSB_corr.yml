@@ -1,0 +1,13 @@
+---
+authors:
+  - id: NicolaZamboni
+    name:
+      given: Nicola
+      family: Zamboni
+      literal: Nicola Zamboni
+    orcid: 0000-0003-1271-1021
+    qid: Q73400060
+    corresponding: true
+    email: nzamboni@ethz.ch
+    affiliations:
+      - ref: imsb
