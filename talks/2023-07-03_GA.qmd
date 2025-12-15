@@ -8,15 +8,9 @@ location: Dublin, Ireland
 categories:
   - Talk
 doi: https://doi.org/10.1055/s-0043-1773831
-author:
-  - name:
-      given: Adriano
-      family: Rutz
-    orcid: 0000-0003-0443-9902
-    qid: Q97455964
-    number: 1
-    affiliations:
-      - ref: imsb
+metadata-files:
+  - ../_authors/AdrianoRutz_IMSB.yml
+  - ../_affiliations/IMSB_Zamboni.yml
 description: >
   [Dr. Willmar Schwabe Young Talent Award](https://ga-online.org/about-ga/awards/dr-willmar-schwabe-young-talent-prize/) lecture for the [LOTUS initiative](https://lotus.nprod.net/).
 

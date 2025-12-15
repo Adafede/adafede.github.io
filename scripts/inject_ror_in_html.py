@@ -1,17 +1,18 @@
 """
 ROR (Research Organization Registry) affiliation injector.
 
-Extracts ROR IDs from QMD YAML frontmatter and injects ROR links into
-corresponding HTML affiliation paragraphs.
+Extracts ROR IDs from _authors/*.yml files and QMD YAML frontmatter and
+injects ROR links into corresponding HTML affiliation paragraphs.
 """
 
-import html as html_module
 import logging
-import re
 from pathlib import Path
 from typing import Dict, Optional
 
+from bs4 import BeautifulSoup
 from ruamel.yaml import YAML
+
+from yaml_utils import extract_yaml_frontmatter, load_yaml, load_metadata_file
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -27,43 +28,10 @@ ROR_ICON_URL = (
     "refs/heads/main/ror-icon-rgb-transparent.svg"
 )
 
-YAML_FRONTMATTER_PATTERN = re.compile(r"^---\n(.*?)\n---\n", re.DOTALL)
-# Match <p> with class attribute containing 'affiliation' or 'affiliations' (possibly among others)
-AFFILIATION_PATTERN = re.compile(
-    r'(<p class="([^\"]*?(?:\baffiliation\b|\baffiliations\b)[^\"]*)">\s*(.*?)\s*</p>)',
-    re.DOTALL,
-)
-
-REPO_ROOT = Path(__file__).resolve().parents[1]
-
 
 # ============================================================================
 # YAML PROCESSING
 # ============================================================================
-
-
-def extract_yaml_frontmatter(qmd_content: str) -> Optional[str]:
-    """Extract YAML frontmatter from QMD content.
-
-    Args:
-        qmd_content: Content of QMD file
-
-    Returns:
-        YAML frontmatter string or None if not found
-    """
-    match = YAML_FRONTMATTER_PATTERN.match(qmd_content)
-    return match.group(1) if match else None
-
-
-def _load_yaml(path: Path) -> Optional[dict]:
-    if not path.exists():
-        return None
-    yaml_loader = YAML(typ="safe")
-    try:
-        return yaml_loader.load(path.read_text(encoding="utf-8"))
-    except Exception as e:
-        logger.warning(f"Failed to parse YAML at {path}: {e}")
-        return None
 
 
 def _parse_affiliation_defs_from_doc(doc: dict) -> Dict[str, str]:
@@ -99,39 +67,44 @@ def _parse_affiliation_defs_from_doc(doc: dict) -> Dict[str, str]:
 
 
 def load_affiliations(qmd_path: Path) -> Dict[str, str]:
-    """Load and merge affiliation definitions from repo _metadata.yaml, folder _metadata.yaml, and QMD frontmatter.
+    """Load and merge affiliation definitions from metadata-files in QMD frontmatter.
 
-    Precedence: repo root -> folder -> QMD frontmatter (QMD overrides folder overrides repo).
+    Precedence: metadata-files (in order) -> QMD frontmatter (QMD overrides).
+
+    Args:
+        qmd_path: Path to QMD file
+
+    Returns:
+        Dictionary mapping affiliation names to ROR URLs
     """
     merged: Dict[str, str] = {}
 
-    # repo root _metadata.yaml
-    root_meta = REPO_ROOT / "_metadata.yaml"
-    root_doc = _load_yaml(root_meta)
-    if root_doc:
-        merged.update(_parse_affiliation_defs_from_doc(root_doc))
-
-    # folder-level _metadata.yaml
-    folder_meta = qmd_path.parent / "_metadata.yaml"
-    folder_doc = _load_yaml(folder_meta)
-    if folder_doc:
-        merged.update(_parse_affiliation_defs_from_doc(folder_doc))
-
-    # QMD frontmatter (overrides)
     try:
         content = qmd_path.read_text(encoding="utf-8")
-    except Exception:
-        # no QMD available; return merged metadata only
-        return merged
+        yaml_str = extract_yaml_frontmatter(content)
+        if yaml_str:
+            yaml_loader = YAML(typ="safe")
+            try:
+                qmd_doc = yaml_loader.load(yaml_str) or {}
 
-    yaml_str = extract_yaml_frontmatter(content)
-    if yaml_str:
-        yaml_loader = YAML(typ="safe")
-        try:
-            qdoc = yaml_loader.load(yaml_str) or {}
-            merged.update(_parse_affiliation_defs_from_doc(qdoc))
-        except Exception as e:
-            logger.debug(f"Failed to parse QMD YAML frontmatter: {e}")
+                # Load all metadata-files referenced in the frontmatter
+                metadata_files = qmd_doc.get("metadata-files", [])
+                if isinstance(metadata_files, list):
+                    for metadata_path in metadata_files:
+                        metadata_doc = load_metadata_file(
+                            metadata_path, qmd_path.parent
+                        )
+                        if metadata_doc:
+                            merged.update(
+                                _parse_affiliation_defs_from_doc(metadata_doc)
+                            )
+
+                # Then apply any affiliation data from QMD frontmatter itself (overrides)
+                merged.update(_parse_affiliation_defs_from_doc(qmd_doc))
+            except Exception as e:
+                logger.debug(f"Failed to parse QMD YAML frontmatter: {e}")
+    except Exception:
+        pass
 
     return merged
 
@@ -141,53 +114,66 @@ def load_affiliations(qmd_path: Path) -> Dict[str, str]:
 # ============================================================================
 
 
-def create_affiliation_replacement(p_class: str, inner_html: str, ror_url: str) -> str:
-    return (
-        f'<p class="{p_class}">{inner_html} '
-        f'<a class="uri" href="{ror_url}">'
-        f'<img src="{ROR_ICON_URL}" style="height:14px; vertical-align:middle;" alt="ROR logo">'
-        f"</a></p>"
-    )
-
-
-def inject_ror_links(html_content: str, aff_dict: Dict[str, str]) -> str:
+def inject_ror_links(soup: BeautifulSoup, aff_dict: Dict[str, str]) -> int:
     """Inject ROR links into HTML affiliation paragraphs.
 
     Args:
-        html_content: HTML content
+        soup: BeautifulSoup object
         aff_dict: mapping affiliation name -> ror url
+
     Returns:
-        Modified HTML content
+        Number of affiliations enriched with ROR links
     """
+    enriched_count = 0
 
-    def replace_affiliation(match: re.Match) -> str:
-        full_tag = match.group(1)
-        p_class = match.group(2)
-        inner = match.group(3).strip()
+    # Find all paragraphs with 'affiliation' or 'affiliations' class
+    affiliation_elements = []
+    for p in soup.find_all("p"):
+        classes = p.get("class", [])
+        if any("affiliation" in str(cls).lower() for cls in classes):
+            affiliation_elements.append(p)
 
-        # Skip if already contains ROR link
-        if 'class="uri"' in full_tag or 'href="https://ror.org/' in full_tag:
-            return full_tag
+    for aff_elem in affiliation_elements:
+        # Skip if already has a ROR link
+        existing_link = aff_elem.find(
+            "a", class_="uri", href=lambda h: h and "ror.org" in h
+        )
+        if existing_link:
+            continue
 
-        # Extract plain text (remove HTML tags)
-        plain = re.sub(r"<[^>]+>", "", inner).strip()
-        plain_unescaped = html_module.unescape(plain)
+        # Get the text content
+        aff_text = aff_elem.get_text().strip()
 
-        # Try exact match then case-insensitive
-        ror_url = aff_dict.get(plain_unescaped)
+        # Try to find matching ROR URL
+        ror_url = aff_dict.get(aff_text)
         if not ror_url:
+            # Try case-insensitive match
             for name, url in aff_dict.items():
-                if name.lower() == plain_unescaped.lower():
+                if name.lower() == aff_text.lower():
                     ror_url = url
                     break
 
         if ror_url:
-            return create_affiliation_replacement(p_class, inner, ror_url)
-        else:
-            logger.debug(f"ROR ID not found for affiliation: {plain_unescaped}")
-            return full_tag
+            # Create ROR link
+            ror_link = soup.new_tag("a", **{"class": "uri", "href": ror_url})
+            ror_img = soup.new_tag(
+                "img",
+                src=ROR_ICON_URL,
+                alt="ROR logo",
+                style="height:14px; vertical-align:middle;",
+            )
+            ror_link.append(ror_img)
 
-    return AFFILIATION_PATTERN.sub(replace_affiliation, html_content)
+            # Add a space before the link
+            aff_elem.append(" ")
+            aff_elem.append(ror_link)
+
+            enriched_count += 1
+            logger.debug(f"Added ROR link for affiliation: {aff_text}")
+        else:
+            logger.debug(f"ROR ID not found for affiliation: {aff_text}")
+
+    return enriched_count
 
 
 # ============================================================================
@@ -196,9 +182,13 @@ def inject_ror_links(html_content: str, aff_dict: Dict[str, str]) -> str:
 
 
 def inject_ror_in_html(qmd_path: Path, html_path: Path) -> None:
-    """Inject ROR links into HTML file based on _metadata.yaml and QMD frontmatter.
+    """Inject ROR links into HTML file based on _authors/ files and QMD frontmatter.
 
-    Only affiliation paragraphs are modified (not author paragraphs).
+    Only affiliation paragraphs are modified.
+
+    Args:
+        qmd_path: Path to QMD file
+        html_path: Path to HTML file
     """
     if not qmd_path.exists():
         logger.warning(f"QMD file not found: {qmd_path}")
@@ -208,7 +198,7 @@ def inject_ror_in_html(qmd_path: Path, html_path: Path) -> None:
         logger.warning(f"HTML file not found: {html_path}")
         return
 
-    # Load affiliation definitions from metadata + QMD
+    # Load affiliation definitions
     aff_dict = load_affiliations(qmd_path)
     if not aff_dict:
         logger.debug(f"No affiliation definitions found for {qmd_path.name}")
@@ -217,22 +207,25 @@ def inject_ror_in_html(qmd_path: Path, html_path: Path) -> None:
     # Read HTML content
     try:
         html_content = html_path.read_text(encoding="utf-8")
+        soup = BeautifulSoup(html_content, "html.parser")
     except Exception as e:
         logger.error(f"Failed to read {html_path}: {e}")
         return
 
-    # Inject into affiliation paragraphs only
-    new_html = inject_ror_links(html_content, aff_dict)
+    # Inject ROR links into affiliation paragraphs
+    enriched_count = inject_ror_links(soup, aff_dict)
 
     # Write back if changed
-    if new_html != html_content:
+    if enriched_count > 0:
         try:
-            html_path.write_text(new_html, encoding="utf-8")
-            logger.info(f"Injected ROR links into {html_path.name}")
+            html_path.write_text(str(soup), encoding="utf-8")
+            logger.info(
+                f"✓ Injected ROR links for {enriched_count} affiliation(s) in {html_path.name}"
+            )
         except Exception as e:
             logger.error(f"Failed to write {html_path}: {e}")
     else:
-        logger.debug(f"No changes made to {html_path.name}")
+        logger.debug(f"No ROR links added to {html_path.name}")
 
 
 if __name__ == "__main__":

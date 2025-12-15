@@ -1,0 +1,13 @@
+---
+authors:
+  - id: JeanLucWolfender
+    name:
+      given: Jean-Luc
+      family: Wolfender
+      literal: Jean-Luc Wolfender
+    orcid: 0000-0002-0125-952X
+    qid: Q56084663
+    corresponding: true
+    email: jean-luc.wolfender@unige.ch
+    affiliations:
+      - ref: unige
