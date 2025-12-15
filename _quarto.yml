@@ -26,24 +26,6 @@ project:
     - scripts/postrender.py
   pre-render:
     - scripts/prerender.py
-  render:
-    - 404.qmd
-    - index.qmd
-    - cv.qmd
-    - articles.qmd
-    - articles/co/*.qmd
-    - articles/first/*.qmd
-    - articles/shared/*.qmd
-    - articles/thesis.qmd
-    - posts.qmd
-    - posts/*.qmd
-    - rss.qmd
-    - talks.qmd
-    - talks/*.qmd
-    - teaching.qmd
-    - teaching/*.qmd
-    - varia.qmd
-    - varia/**/*.qmd
 
 website:
   title: Adriano Rutz
