@@ -1,0 +1,13 @@
+---
+affiliations:
+  - id: fsu_jena
+    name: Friedrich-Schiller-University Jena
+    department:
+      - Institute for Inorganic and Analytical Chemistry
+    group: Steinbeck
+    address: Lessingstraße, 8
+    city: Jena
+    country: Germany
+    postal-code: 7732
+    ror: https://ror.org/05qpz1x62
+    qid: Q154561

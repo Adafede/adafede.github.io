@@ -1,0 +1,11 @@
+---
+authors:
+  - id: JiriVrondasek
+    name:
+      given: Jiří
+      family: Vondrášek
+      literal: Jiří Vondrášek
+    orcid: 0000-0002-6066-973X
+    qid: Q60961322
+    affiliations:
+      - ref: iocb

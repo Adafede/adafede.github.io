@@ -1,0 +1,13 @@
+---
+affiliations:
+  - id: unifr
+    name: University of Fribourg
+    department:
+      - Department of Biology
+    group: Allard
+    address: Chemin du Musée 10
+    city: Fribourg
+    country: Switzerland
+    postal-code: 1700
+    ror: https://ror.org/022fs9h90
+    qid: Q36188

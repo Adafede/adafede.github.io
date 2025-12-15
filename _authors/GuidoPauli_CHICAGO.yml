@@ -1,0 +1,11 @@
+---
+authors:
+  - id: GuidoPauli
+    name:
+      given: Guido F.
+      family: Pauli
+      literal: Guido F. Pauli
+    orcid: 0000-0003-1022-4326
+    qid: Q40259636
+    affiliations:
+      - ref: chicago

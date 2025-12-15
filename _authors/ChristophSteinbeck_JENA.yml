@@ -1,0 +1,11 @@
+---
+authors:
+  - id: ChristophSteinbeck
+    name:
+      given: Christoph
+      family: Steinbeck
+      literal: Christoph Steinbeck
+    orcid: 0000-0001-6966-0814
+    qid: Q5111731
+    affiliations:
+      - ref: fsu_jena

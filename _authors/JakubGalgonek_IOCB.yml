@@ -1,0 +1,11 @@
+---
+authors:
+  - id: JakubGalgonek
+    name:
+      given: Jakub
+      family: Galgonek
+      literal: Jakub Galgonek
+    orcid: 0000-0002-7038-544X
+    qid: Q43370892
+    affiliations:
+      - ref: iocb

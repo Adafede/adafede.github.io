@@ -1,0 +1,11 @@
+---
+affiliations:
+  - id: glasgow
+    name: University of Glasgow
+    department:
+      - IBAHCM
+      - MVLS
+    city: Glasgow
+    country: United Kingdom
+    ror: https://ror.org/00vtgdb53
+    qid: Q192775

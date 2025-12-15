@@ -1,0 +1,11 @@
+---
+authors:
+  - id: JamesGraham
+    name:
+      given: James G.
+      family: Graham
+      literal: James G. Graham
+    orcid: 0000-0002-7114-8921
+    qid: Q63375718
+    affiliations:
+      - ref: chicago

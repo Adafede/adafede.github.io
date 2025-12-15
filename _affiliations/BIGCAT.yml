@@ -1,0 +1,13 @@
+---
+affiliations:
+  - id: bigcat
+    name: Maastricht University
+    department:
+      - Dept of Bioinformatics-BiGCaT
+      - NUTRIM
+    address: Universiteitssingel 50
+    city: Maastricht
+    country: The Netherlands
+    postal-code: 6229
+    ror: https://ror.org/02jz4aj89
+    qid: Q19845644

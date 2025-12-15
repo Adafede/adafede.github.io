@@ -1,0 +1,11 @@
+---
+authors:
+  - id: EgonWillighagen
+    name:
+      given: Egon
+      family: Willighagen
+      literal: Egon Willighagen
+    orcid: 0000-0001-7542-0286
+    qid: Q20895241
+    affiliations:
+      - ref: bigcat

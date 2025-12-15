@@ -1,0 +1,13 @@
+---
+affiliations:
+  - id: iocb
+    name: Czech Academy of Sciences
+    department:
+      - Institute for Inorganic and Analytical Chemistry
+    group: Vondrášek
+    address: Flemingovo náměstí 2, 166 10
+    city: Prague
+    country: Czech Republic
+    postal-code: 16000
+    ror: https://ror.org/04nfjn472
+    qid: Q11087613

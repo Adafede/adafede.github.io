@@ -1,0 +1,11 @@
+---
+authors:
+  - id: ArnaudGaudry
+    name:
+      given: Arnaud
+      family: Gaudry
+      literal: Arnaud Gaudry
+    orcid: 0000-0002-3648-7362
+    qid: Q55085984
+    affiliations:
+      - ref: unige

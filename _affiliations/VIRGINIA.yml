@@ -1,0 +1,12 @@
+---
+affiliations:
+  - id: virginia
+    name: University of Virginia
+    department:
+      - School of Data Science
+    address: Dell 1 Building
+    city: Charlottesville
+    country: United States
+    postal-code: 22904
+    ror: https://ror.org/0153tk833
+    qid: Q213439
