@@ -24,10 +24,11 @@
 <!-- <iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/TODO" title="Scholia entry"></iframe> -->
 <!-- ``` -->
 
-<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js">
+</script>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
 <div id="ref-Blin2025" class="csl-entry">
 Blin, Kai, Catarina Loureiro, Nico L L Louwen, Jorge C Navarro-Muñoz, Hans Gerstmans, Serina L Robinson, Adriano Rutz, et al. 2025. <span>“Strategies for Community-Sourced Biocuration in Bioinformatics: A Case Study on MIBiG 4.0.”</span> <em>Briefings in Bioinformatics</em> 26 (6). <a href="https://doi.org/10.1093/bib/bbaf659">https://doi.org/10.1093/bib/bbaf659</a>.
 </div>
@@ -48,10 +49,11 @@ Blin, Kai, Catarina Loureiro, Nico L L Louwen, Jorge C Navarro-Muñoz, Hans Gers
 <!-- <iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/TODO" title="Scholia entry"></iframe> -->
 <!-- ``` -->
 
-<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js">
+</script>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
 <div id="ref-ElAbiead2025b" class="csl-entry">
 El Abiead, Yasin, Ipsita Mohanty, Shipei Xing, Adriano Rutz, Vincent Charron-Lamoureux, Tito Damiani, Wenyun Lu, et al. 2025. <span>“A Perspective on Unintentional Fragments and Their Impact on the Dark Metabolome, Untargeted Profiling, Molecular Networking, Public Data, and Repository Scale Analysis.”</span> <em>JACS Au</em>, December. <a href="https://doi.org/10.1021/jacsau.5c01063">https://doi.org/10.1021/jacsau.5c01063</a>.
 </div>
@@ -72,10 +74,11 @@ El Abiead, Yasin, Ipsita Mohanty, Shipei Xing, Adriano Rutz, Vincent Charron-Lam
 <!-- <iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/TODO" title="Scholia entry"></iframe> -->
 <!-- ``` -->
 
-<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js">
+</script>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
 <div id="ref-Rutz2025c" class="csl-entry">
 Rutz, Adriano, Daniel Probst, César Aguilar, Daniel Y Akiyama, Fabrizio Alberti, Hannah E Augustijn, Nicole E Avalon, et al. 2025. <span>“MITE: The Minimum Information about a Tailoring Enzyme Database for Capturing Specialized Metabolite Biosynthesis.”</span> <em>Nucleic Acids Research</em>, September. <a href="https://doi.org/10.1093/nar/gkaf969">https://doi.org/10.1093/nar/gkaf969</a>.
 </div>
@@ -101,10 +104,11 @@ Rutz, Adriano, Daniel Probst, César Aguilar, Daniel Y Akiyama, Fabrizio Alberti
 <!-- <iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/TODO" title="Scholia entry"></iframe> -->
 <!-- ``` -->
 
-<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js">
+</script>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
 <div id="ref-Rutz2025b" class="csl-entry">
 Rutz, Adriano, Wout Bittremieux, Robin Schmid, Olivier Cailloux, Justin J. J. van der Hooft, and Mehdi A. Beniddir. 2025. <span>“Scalability of Mass Spectrometry-Based Metabolomics for Natural Extracts Libraries Exploration: Current Status, Challenges, and Opportunities.”</span> <em>Natural Product Reports</em>. <a href="https://doi.org/10.1039/d5np00034c">https://doi.org/10.1039/d5np00034c</a>.
 </div>
@@ -125,12 +129,13 @@ Rutz, Adriano, Wout Bittremieux, Robin Schmid, Olivier Cailloux, Justin J. J. va
 
 
 
-<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script><iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q135917754" title="Scholia entry"></iframe>
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js">
+</script><iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q135917754" title="Scholia entry"></iframe>
 
 
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
 <div id="ref-Horvath2025" class="csl-entry">
 Horvath, Carla, Joëlle Houriet, Alexandra Kellenberger, Caroline Moser, Lucia Balazova, Miroslav Balaz, Hua Dong, et al. 2025. <span>“Genkwanin Glycosides Are Major Active Compounds in Phaleria Nisidai Extract Mediating Improved Glucose Homeostasis by Stimulating Glucose Uptake into Adipose Tissues.”</span> <em>Nature Communications</em> 16 (1). <a href="https://doi.org/10.1038/s41467-025-62689-8">https://doi.org/10.1038/s41467-025-62689-8</a>.
 </div>
@@ -151,10 +156,11 @@ Horvath, Carla, Joëlle Houriet, Alexandra Kellenberger, Caroline Moser, Lucia B
 <!-- <iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/TODO" title="Scholia entry"></iframe> -->
 <!-- ``` -->
 
-<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js">
+</script>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
 <div id="ref-Pontrelli2025" class="csl-entry">
 Pontrelli, Sammy, Kian Bigovic Villi, Andreas Sichert, Julian Trouillon, Adriano Rutz, Zachary C. Landry, Simon H. Rüdisser, Roman Stocker, and Uwe Sauer. 2025. <span>“Degradation of Extracellular Polymeric Substances Shapes Microbial Community Diversity.”</span> Edited by Wenying Shou. <em>PLOS Biology</em> 23 (7): e3003287. <a href="https://doi.org/10.1371/journal.pbio.3003287">https://doi.org/10.1371/journal.pbio.3003287</a>.
 </div>
@@ -171,12 +177,13 @@ Pontrelli, Sammy, Kian Bigovic Villi, Andreas Sichert, Julian Trouillon, Adriano
 
 
 
-<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script><iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q134267957" title="Scholia entry"></iframe>
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js">
+</script><iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q134267957" title="Scholia entry"></iframe>
 
 
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
 <div id="ref-Szwarc2025" class="csl-entry">
 Szwarc, Sarah, Adriano Rutz, Kyungha Lee, Yassine Mejri, Olivier Bonnet, Hazrina Hazni, Adrien Jagora, et al. 2025. <span>“Translating Community-Wide Spectral Library into Actionable Chemical Knowledge: A Proof of Concept with Monoterpene Indole Alkaloids.”</span> <em>Journal of Cheminformatics</em> 17 (1). <a href="https://doi.org/10.1186/s13321-025-01009-0">https://doi.org/10.1186/s13321-025-01009-0</a>.
 </div>
@@ -201,10 +208,11 @@ Szwarc, Sarah, Adriano Rutz, Kyungha Lee, Yassine Mejri, Olivier Bonnet, Hazrina
 <!-- <iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/TODO" title="Scholia entry"></iframe> -->
 <!-- ``` -->
 
-<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js">
+</script>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
 <div id="ref-Rutz2025a" class="csl-entry">
 Rutz, Adriano, Pascale Deneulin, Ivano Tonutti, Benoît Bach, and Jean-Luc Wolfender. 2025. <span>“SAPID: A Strategy to Analyze Plant Extracts Taste in Depth. Application to the Complex Taste of Swertia Chirayita (Roxb.) h.karst.”</span> <em>Current Research in Food Science</em> 10: 101043. <a href="https://doi.org/10.1016/j.crfs.2025.101043">https://doi.org/10.1016/j.crfs.2025.101043</a>.
 </div>
@@ -230,10 +238,11 @@ Rutz, Adriano, Pascale Deneulin, Ivano Tonutti, Benoît Bach, and Jean-Luc Wolfe
 <!-- <iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/TODO" title="Scholia entry"></iframe> -->
 <!-- ``` -->
 
-<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js">
+</script>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
 <div id="ref-ElAbiead2025a" class="csl-entry">
 El Abiead, Yasin, Adriano Rutz, Simone Zuffa, Bashar Amer, Shipei Xing, Corinna Brungs, Robin Schmid, et al. 2025. <span>“Discovery of Metabolites Prevails Amid in-Source Fragmentation.”</span> <em>Nature Metabolism</em> 7 (3): 435–37. <a href="https://doi.org/10.1038/s42255-025-01239-4">https://doi.org/10.1038/s42255-025-01239-4</a>.
 </div>
@@ -254,12 +263,13 @@ El Abiead, Yasin, Adriano Rutz, Simone Zuffa, Bashar Amer, Shipei Xing, Corinna 
 
 
 
-<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script><iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q128896351" title="Scholia entry"></iframe>
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js">
+</script><iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q128896351" title="Scholia entry"></iframe>
 
 
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
 <div id="ref-LeScanff2024" class="csl-entry">
 Le Scanff, Marie, Laurence Marcourt, Adriano Rutz, Warren Albertin, Jean-Luc Wolfender, and Axel Marchal. 2024. <span>“Untargeted Metabolomics Analyses to Identify a New Sweet Compound Released During Post-Fermentation Maceration of Wine.”</span> <em>Food Chemistry</em> 461 (December): 140801. <a href="https://doi.org/10.1016/j.foodchem.2024.140801">https://doi.org/10.1016/j.foodchem.2024.140801</a>.
 </div>
@@ -276,12 +286,13 @@ Le Scanff, Marie, Laurence Marcourt, Adriano Rutz, Warren Albertin, Jean-Luc Wol
 
 
 
-<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script><iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q131432378" title="Scholia entry"></iframe>
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js">
+</script><iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q131432378" title="Scholia entry"></iframe>
 
 
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
 <div id="ref-Zdouc2024" class="csl-entry">
 Zdouc, Mitja M, Kai Blin, Nico L L Louwen, Jorge Navarro, Catarina Loureiro, Chantal D Bader, Constance B Bailey, et al. 2024. <span>“MIBiG 4.0: Advancing Biosynthetic Gene Cluster Curation Through Global Collaboration.”</span> <em>Nucleic Acids Research</em> 53 (D1): D678–90. <a href="https://doi.org/10.1093/nar/gkae1115">https://doi.org/10.1093/nar/gkae1115</a>.
 </div>
@@ -298,12 +309,13 @@ Zdouc, Mitja M, Kai Blin, Nico L L Louwen, Jorge Navarro, Catarina Loureiro, Cha
 
 
 
-<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script><iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q124670540" title="Scholia entry"></iframe>
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js">
+</script><iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q124670540" title="Scholia entry"></iframe>
 
 
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
 <div id="ref-Gaudry2024" class="csl-entry">
 Gaudry, Arnaud, Marco Pagni, Florence Mehl, Sébastien Moretti, Luis-Manuel Quiros-Guerrero, Luca Cappelletti, Adriano Rutz, et al. 2024. <span>“A Sample-Centric and Knowledge-Driven Computational Framework for Natural Products Drug Discovery.”</span> <em>ACS Central Science</em> 10 (3): 494–510. <a href="https://doi.org/10.1021/acscentsci.3c00800">https://doi.org/10.1021/acscentsci.3c00800</a>.
 </div>
@@ -320,12 +332,13 @@ Gaudry, Arnaud, Marco Pagni, Florence Mehl, Sébastien Moretti, Luis-Manuel Quir
 
 
 
-<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script><iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q124670541" title="Scholia entry"></iframe>
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js">
+</script><iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q124670541" title="Scholia entry"></iframe>
 
 
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
 <div id="ref-Zuffa2024" class="csl-entry">
 Zuffa, Simone, Robin Schmid, Anelize Bauermeister, Paulo Wender P. Gomes, Andres M. Caraballo-Rodriguez, Yasin El Abiead, Allegra T. Aron, et al. 2024. <span>“microbeMASST: A Taxonomically Informed Mass Spectrometry Search Tool for Microbial Metabolomics Data.”</span> <em>Nature Microbiology</em> 9 (2): 336–45. <a href="https://doi.org/10.1038/s41564-023-01575-9">https://doi.org/10.1038/s41564-023-01575-9</a>.
 </div>
@@ -342,12 +355,13 @@ Zuffa, Simone, Robin Schmid, Anelize Bauermeister, Paulo Wender P. Gomes, Andres
 
 
 
-<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script><iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q123938372" title="Scholia entry"></iframe>
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js">
+</script><iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q123938372" title="Scholia entry"></iframe>
 
 
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
 <div id="ref-Pellissier2023" class="csl-entry">
 Pellissier, Leonie, Arnaud Gaudry, Salomé Vilette, Nicole Lecoultre, Adriano Rutz, Pierre-Marie Allard, Laurence Marcourt, et al. 2023. <span>“Comparative Metabolomic Study of Fungal Foliar Endophytes and Their Long-Lived Host Astrocaryum Sciophilum: A Model for Exploring the Chemodiversity of Host-Microbe Interactions.”</span> <em>Frontiers in Plant Science</em> 14 (December). <a href="https://doi.org/10.3389/fpls.2023.1278745">https://doi.org/10.3389/fpls.2023.1278745</a>.
 </div>
@@ -364,12 +378,13 @@ Pellissier, Leonie, Arnaud Gaudry, Salomé Vilette, Nicole Lecoultre, Adriano Ru
 
 
 
-<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script><iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q123938369" title="Scholia entry"></iframe>
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js">
+</script><iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q123938369" title="Scholia entry"></iframe>
 
 
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
 <div id="ref-Rutz2023" class="csl-entry">
 Rutz, Adriano, and Jean-Luc Wolfender. 2023. <span>“Automated Composition Assessment of Natural Extracts: Untargeted Mass Spectrometry-Based Metabolite Profiling Integrating Semiquantitative Detection.”</span> <em>Journal of Agricultural and Food Chemistry</em> 71 (46): 18010–23. <a href="https://doi.org/10.1021/acs.jafc.3c03099">https://doi.org/10.1021/acs.jafc.3c03099</a>.
 </div>
@@ -394,12 +409,13 @@ Rutz, Adriano, and Jean-Luc Wolfender. 2023. <span>“Automated Composition Asse
 
 
 
-<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script><iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q117039043" title="Scholia entry"></iframe>
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js">
+</script><iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q117039043" title="Scholia entry"></iframe>
 
 
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
 <div id="ref-FerreiraQueiroz2023" class="csl-entry">
 Ferreira Queiroz, Marcos Marçal, Robin Huber, Laurence Marcourt, Laure Guénée, Pierre-Marie Allard, Adriano Rutz, Louis-Félix Nothias, et al. 2023. <span>“Phytochemical Study of Alzatea Verticillata, the Sole Species Belonging to the Alzateaceae Family.”</span> <em>Frontiers in Natural Products</em> 2 (March). <a href="https://doi.org/10.3389/fntpr.2023.1147195">https://doi.org/10.3389/fntpr.2023.1147195</a>.
 </div>
@@ -416,12 +432,13 @@ Ferreira Queiroz, Marcos Marçal, Robin Huber, Laurence Marcourt, Laure Guénée
 
 
 
-<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script><iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q116245417" title="Scholia entry"></iframe>
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js">
+</script><iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q116245417" title="Scholia entry"></iframe>
 
 
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
 <div id="ref-Allard2022" class="csl-entry">
 Allard, Pierre-Marie, Arnaud Gaudry, Luis-Manuel Quirós-Guerrero, Adriano Rutz, Miwa Dounoue-Kubo, Tom W N Walker, Emmanuel Defossez, et al. 2022. <span>“Open and Reusable Annotated Mass Spectrometry Dataset of a Chemodiverse Collection of 1, 600 Plant Extracts.”</span> <em>GigaScience</em> 12 (December). <a href="https://doi.org/10.1093/gigascience/giac124">https://doi.org/10.1093/gigascience/giac124</a>.
 </div>
@@ -438,12 +455,13 @@ Allard, Pierre-Marie, Arnaud Gaudry, Luis-Manuel Quirós-Guerrero, Adriano Rutz,
 
 
 
-<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script><iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q115517760" title="Scholia entry"></iframe>
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js">
+</script><iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q115517760" title="Scholia entry"></iframe>
 
 
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
 <div id="ref-Wolfender2022" class="csl-entry">
 Wolfender, Jean-Luc, Arnaud Gaudry, Adriano Rutz, Luis-Manuel Quiros-Guerrero, Louis-Félix Nothias, Emerson Ferreira Queiroz, Emmanuel Defossez, and Pierre-Marie Allard. 2022. <span>“Metabolomics in Ecology and Bioactive Natural Products Discovery: Challenges and Prospects for a Comprehensive Study of the Specialised Metabolome.”</span> <em>CHIMIA</em> 76 (11): 954. <a href="https://doi.org/10.2533/chimia.2022.954">https://doi.org/10.2533/chimia.2022.954</a>.
 </div>
@@ -460,12 +478,13 @@ Wolfender, Jean-Luc, Arnaud Gaudry, Adriano Rutz, Luis-Manuel Quiros-Guerrero, L
 
 
 
-<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script><iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q115177826" title="Scholia entry"></iframe>
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js">
+</script><iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q115177826" title="Scholia entry"></iframe>
 
 
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
 <div id="ref-QuirosGuerrero2022" class="csl-entry">
 Quiros-Guerrero, Luis-Manuel, Louis-Félix Nothias, Arnaud Gaudry, Laurence Marcourt, Pierre-Marie Allard, Adriano Rutz, Bruno David, Emerson Ferreira Queiroz, and Jean-Luc Wolfender. 2022. <span>“Inventa: A Computational Tool to Discover Structural Novelty in Natural Extracts Libraries.”</span> <em>Frontiers in Molecular Biosciences</em> 9 (November). <a href="https://doi.org/10.3389/fmolb.2022.1028334">https://doi.org/10.3389/fmolb.2022.1028334</a>.
 </div>
@@ -482,12 +501,13 @@ Quiros-Guerrero, Luis-Manuel, Louis-Félix Nothias, Arnaud Gaudry, Laurence Marc
 
 
 
-<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script><iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q115317009" title="Scholia entry"></iframe>
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js">
+</script><iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q115317009" title="Scholia entry"></iframe>
 
 
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
 <div id="ref-Hoyt2022" class="csl-entry">
 Hoyt, Charles Tapley, Meghan Balk, Tiffany J. Callahan, Daniel Domingo-Fernández, Melissa A. Haendel, Harshad B. Hegde, Daniel S. Himmelstein, et al. 2022. <span>“Unifying the Identification of Biomedical Entities with the Bioregistry.”</span> <em>Scientific Data</em> 9 (1). <a href="https://doi.org/10.1038/s41597-022-01807-3">https://doi.org/10.1038/s41597-022-01807-3</a>.
 </div>
