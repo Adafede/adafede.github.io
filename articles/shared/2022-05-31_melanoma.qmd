@@ -1,5 +1,4 @@
 ---
-bibliography: ../../references.bib
 title: Combining Activity Profiling with Advanced Annotation to Accelerate the
   Discovery of Natural Products Targeting Oncogenic Signaling in Melanoma
 type: article

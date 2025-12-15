@@ -1,5 +1,4 @@
 ---
-bibliography: ../../references.bib
 title: Insights on the Structural and Metabolic Resistance of Potato (*Solanum
   tuberosum*) Cultivars to Tuber Black Dot (*Colletotrichum coccodes*)
 type: article

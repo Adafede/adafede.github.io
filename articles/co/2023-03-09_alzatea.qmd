@@ -1,5 +1,4 @@
 ---
-bibliography: ../../references.bib
 title: Phytochemical study of *Alzatea verticillata*, the sole species belonging
   to the Alzateaceae family
 type: article

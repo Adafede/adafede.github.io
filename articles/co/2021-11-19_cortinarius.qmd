@@ -1,5 +1,4 @@
 ---
-bibliography: ../../references.bib
 title: Feature-Based Molecular Networking—An Exciting Tool to Spot Species of
   the Genus *Cortinarius* with Hidden Photosensitizers
 type: article

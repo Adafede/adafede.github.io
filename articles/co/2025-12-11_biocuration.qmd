@@ -1,5 +1,4 @@
 ---
-bibliography: ../../references.bib
 title: "Strategies for community-sourced biocuration in bioinformatics: a case study on MIBiG 4.0"
 type: article
 venue: Briefings In Bioinformatics

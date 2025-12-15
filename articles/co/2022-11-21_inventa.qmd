@@ -1,5 +1,4 @@
 ---
-bibliography: ../../references.bib
 title: "*Inventa*: A computational tool to discover structural novelty in
   natural extracts libraries"
 type: article

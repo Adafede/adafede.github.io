@@ -1,5 +1,4 @@
 ---
-bibliography: ../../references.bib
 title: Drug Repurposing to Identify a Synergistic High-Order Drug Combination to
   Treat Sunitinib-Resistant Renal Cell Carcinoma
 type: article

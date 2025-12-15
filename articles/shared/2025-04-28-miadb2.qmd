@@ -1,5 +1,4 @@
 ---
-bibliography: ../../references.bib
 title: "Translating community-wide spectral library into actionable chemical
   knowledge: a proof of concept with monoterpene indole alkaloids"
 type: article

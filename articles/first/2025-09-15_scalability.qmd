@@ -1,5 +1,4 @@
 ---
-bibliography: ../../references.bib
 title: "Scalability of mass spectrometry-based metabolomics for natural extracts libraries exploration: current status, challenges, and opportunities"
 type: article
 venue: Natural Product Reports

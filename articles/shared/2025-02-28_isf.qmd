@@ -1,5 +1,4 @@
 ---
-bibliography: ../../references.bib
 title: Discovery of metabolites prevails amid in-source fragmentation
 type: correspondence
 venue: Nature Metabolism

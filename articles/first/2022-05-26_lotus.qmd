@@ -1,5 +1,4 @@
 ---
-bibliography: ../../references.bib
 title: The LOTUS initiative for open knowledge management in natural products research
 type: article
 venue: eLife

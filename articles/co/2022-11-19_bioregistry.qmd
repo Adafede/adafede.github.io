@@ -1,5 +1,4 @@
 ---
-bibliography: ../../references.bib
 title: Unifying the identification of biomedical entities with the Bioregistry
 type: article
 venue: Scientific Data
