@@ -61,7 +61,6 @@ El Abiead, Yasin, Ipsita Mohanty, Shipei Xing, Adriano Rutz, Vincent Charron-Lam
 </item>
 <item>
   <title>Chemical Compounds and Their Links to Taxa on Wikidata</title>
-  <dc:creator>Adriano Rutz</dc:creator>
   <link>https://adafede.github.io/talks/2025-10-14_WAGENINGEN.html</link>
   <description><![CDATA[ 
 
@@ -79,9 +78,6 @@ El Abiead, Yasin, Ipsita Mohanty, Shipei Xing, Adriano Rutz, Vincent Charron-Lam
 </item>
 <item>
   <title>Data-Independent Analysis for Deep Metabolome Profiling of Plant Extracts</title>
-  <dc:creator>Adriano Rutz</dc:creator>
-  <dc:creator>Vincen Wu</dc:creator>
-  <dc:creator>Nicola Zamboni</dc:creator>
   <link>https://adafede.github.io/talks/2025-10-10_SWISSMETABO.html</link>
   <description><![CDATA[ 
 
@@ -156,7 +152,6 @@ Rutz, Adriano, Wout Bittremieux, Robin Schmid, Olivier Cailloux, Justin J. J. va
 </item>
 <item>
   <title>The LOTUS initiative and its links to WikiCite</title>
-  <dc:creator>Adriano Rutz</dc:creator>
   <link>https://adafede.github.io/talks/2025-08-29_WIKICITE.html</link>
   <description><![CDATA[ 
 
@@ -284,9 +279,6 @@ Pontrelli, Sammy, Kian Bigovic Villi, Andreas Sichert, Julian Trouillon, Adriano
 </item>
 <item>
   <title>Data-Independent Analysis for Deep Metabolome Profiling of Plant Extracts</title>
-  <dc:creator>Adriano Rutz</dc:creator>
-  <dc:creator>Vincen Wu</dc:creator>
-  <dc:creator>Nicola Zamboni</dc:creator>
   <link>https://adafede.github.io/talks/2025-06-22_METSOC.html</link>
   <description><![CDATA[ 
 
@@ -431,7 +423,6 @@ Zdouc, Mitja M, Kai Blin, Nico L L Louwen, Jorge Navarro, Catarina Loureiro, Cha
 </item>
 <item>
   <title>Traitement de Données et Outils d’Annotation MS/MS</title>
-  <dc:creator>Adriano Rutz</dc:creator>
   <link>https://adafede.github.io/talks/2024-06-19_METABIODIVEX.html</link>
   <description><![CDATA[ 
 
@@ -450,7 +441,6 @@ Zdouc, Mitja M, Kai Blin, Nico L L Louwen, Jorge Navarro, Catarina Loureiro, Cha
 </item>
 <item>
   <title>Where is the “L” in “ORD”?</title>
-  <dc:creator>Adriano Rutz</dc:creator>
   <link>https://adafede.github.io/talks/2024-05-31_SCNAT.html</link>
   <description><![CDATA[ 
 
@@ -468,7 +458,6 @@ Zdouc, Mitja M, Kai Blin, Nico L L Louwen, Jorge Navarro, Catarina Loureiro, Cha
 </item>
 <item>
   <title>Introduction to Linked Open Data for Computational Mass Spectrometry</title>
-  <dc:creator>Adriano Rutz</dc:creator>
   <link>https://adafede.github.io/talks/2024-04-17_PRAGUE.html</link>
   <description><![CDATA[ 
 

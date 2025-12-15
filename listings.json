@@ -1,5 +1,11 @@
 [
   {
+    "listing": "/posts.html",
+    "items": [
+      "/posts/2025-08-04_rogue_scholar.html"
+    ]
+  },
+  {
     "listing": "/rss.html",
     "items": [
       "/varia/adafede/cascade.html",
@@ -14,6 +20,7 @@
       "/talks/2019-10-01_NAPOLI.html",
       "/teaching/2019_advanced_course_mass_spec.html",
       "/articles/co/2020-09-15_helleborus.html",
+      "/expertise.html",
       "/articles.html",
       "/articles/first/2023-11-10_cascade.html",
       "/varia/adafede/CentroidR.html",
@@ -57,6 +64,7 @@
       "/posts.html",
       "/talks/2023-02-02_JENA.html",
       "/talks/2023-09-15_SWISSMETABO.html",
+      "/articles/profiles.html",
       "/varia/additional_contributions/smartclass.html",
       "/varia/adafede/sparql-examples.html",
       "/articles/first/2025-09-15_scalability.html",
@@ -69,8 +77,8 @@
       "/talks/2020-08-01_GNPS.html",
       "/talks/2021-09-08_GA_1.html",
       "/talks/2021-10-04_INPCHEM.html",
-      "/talks/2022-04-22_LS2_1.html",
       "/talks/2022-04-22_LS2_2.html",
+      "/talks/2022-04-22_LS2_1.html",
       "/talks/2025-08-29_WIKICITE.html",
       "/articles/first/2022-05-26_lotus.html",
       "/talks/2024-06-19_METABIODIVEX.html",
@@ -82,14 +90,44 @@
       "/varia/adafede/wd-np-up-to-date.html",
       "/varia/adafede/wd-taxon-names.html",
       "/articles/co/2024-02-05_microbemasst.html",
-      "/cv.html",
-      "/teaching.html"
+      "/teaching.html",
+      "/cv.html"
     ]
   },
   {
-    "listing": "/posts.html",
+    "listing": "/teaching.html",
     "items": [
-      "/posts/2025-08-04_rogue_scholar.html"
+      "/teaching/2023_blockcourse.html",
+      "/teaching/2019_advanced_course_mass_spec.html",
+      "/teaching/2017_practicals.html"
+    ]
+  },
+  {
+    "listing": "/talks.html",
+    "items": [
+      "/talks/2025-10-14_WAGENINGEN.html",
+      "/talks/2025-10-10_SWISSMETABO.html",
+      "/talks/2025-08-29_WIKICITE.html",
+      "/talks/2025-06-22_METSOC.html",
+      "/talks/2024-06-19_METABIODIVEX.html",
+      "/talks/2024-05-31_SCNAT.html",
+      "/talks/2024-04-17_PRAGUE.html",
+      "/talks/2023-10-16_INNSBRUCK.html",
+      "/talks/2023-09-15_SWISSMETABO.html",
+      "/talks/2023-07-18_SACLAY.html",
+      "/talks/2023-07-03_GA.html",
+      "/talks/2023-06-13_METAOMICS.html",
+      "/talks/2023-02-02_JENA.html",
+      "/talks/2022-04-22_LS2_1.html",
+      "/talks/2022-04-22_LS2_2.html",
+      "/talks/2021-10-04_INPCHEM.html",
+      "/talks/2021-09-08_GA_1.html",
+      "/talks/2021-09-08_GA_2.html",
+      "/talks/2021-04-01_RFMF.html",
+      "/talks/2020-08-01_GNPS.html",
+      "/talks/2019-10-01_NAPOLI.html",
+      "/talks/2019-09-01_GA.html",
+      "/talks/2019-01-01_SEEFELD.html"
     ]
   },
   {
@@ -127,42 +165,6 @@
       "/articles/co/2020-06-01_niedenzuella.html",
       "/articles/co/2019-03-00_cordia.html",
       "/articles/thesis.html"
-    ]
-  },
-  {
-    "listing": "/talks.html",
-    "items": [
-      "/talks/2025-10-14_WAGENINGEN.html",
-      "/talks/2025-10-10_SWISSMETABO.html",
-      "/talks/2025-08-29_WIKICITE.html",
-      "/talks/2025-06-22_METSOC.html",
-      "/talks/2024-06-19_METABIODIVEX.html",
-      "/talks/2024-05-31_SCNAT.html",
-      "/talks/2024-04-17_PRAGUE.html",
-      "/talks/2023-10-16_INNSBRUCK.html",
-      "/talks/2023-09-15_SWISSMETABO.html",
-      "/talks/2023-07-18_SACLAY.html",
-      "/talks/2023-07-03_GA.html",
-      "/talks/2023-06-13_METAOMICS.html",
-      "/talks/2023-02-02_JENA.html",
-      "/talks/2022-04-22_LS2_1.html",
-      "/talks/2022-04-22_LS2_2.html",
-      "/talks/2021-10-04_INPCHEM.html",
-      "/talks/2021-09-08_GA_1.html",
-      "/talks/2021-09-08_GA_2.html",
-      "/talks/2021-04-01_RFMF.html",
-      "/talks/2020-08-01_GNPS.html",
-      "/talks/2019-10-01_NAPOLI.html",
-      "/talks/2019-09-01_GA.html",
-      "/talks/2019-01-01_SEEFELD.html"
-    ]
-  },
-  {
-    "listing": "/teaching.html",
-    "items": [
-      "/teaching/2023_blockcourse.html",
-      "/teaching/2019_advanced_course_mass_spec.html",
-      "/teaching/2017_practicals.html"
     ]
   },
   {

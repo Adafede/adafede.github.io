@@ -1,13 +1,10 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
-<meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-<meta name="dcterms.date" content="2025-09-15">
-
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta charset="utf-8"/>
+<meta content="quarto-1.8.26" name="generator"/>
+<meta content="width=device-width, initial-scale=1.0, user-scalable=yes" name="viewport"/>
+<meta content="2025-09-15" name="dcterms.date"/>
 <title>Scalability of mass spectrometry-based metabolomics for natural extracts libraries exploration: current status, challenges, and opportunities – Adriano Rutz</title>
 <style>
 code{white-space: pre-wrap;}
@@ -42,31 +39,29 @@ div.csl-right-inline {
 div.csl-indent {
   margin-left: 2em;
 }</style>
-
-
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<link href="../../images/favicon/favicon.ico" rel="icon">
+<meta content="../../" name="quarto:offset"/>
+<link href="../../images/favicon/favicon.ico" rel="icon"/>
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet"/>
+<link class="quarto-color-scheme" href="../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" id="quarto-text-highlighting-styles" rel="stylesheet"/>
+<link class="quarto-color-scheme quarto-color-alternate" href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" id="quarto-text-highlighting-styles" rel="stylesheet"/>
+<link class="quarto-color-scheme-extra" href="../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" id="quarto-text-highlighting-styles" rel="stylesheet"/>
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-6bdd42198a8a37b23ee85cc287d11ae5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-5268d9e97950a1a43955edc982b28abe.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-6bdd42198a8a37b23ee85cc287d11ae5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet"/>
+<link append-hash="true" class="quarto-color-scheme" data-mode="light" href="../../site_libs/bootstrap/bootstrap-6bdd42198a8a37b23ee85cc287d11ae5.min.css" id="quarto-bootstrap" rel="stylesheet"/>
+<link append-hash="true" class="quarto-color-scheme quarto-color-alternate" data-mode="dark" href="../../site_libs/bootstrap/bootstrap-dark-5268d9e97950a1a43955edc982b28abe.min.css" id="quarto-bootstrap" rel="stylesheet"/>
+<link append-hash="true" class="quarto-color-scheme-extra" data-mode="light" href="../../site_libs/bootstrap/bootstrap-6bdd42198a8a37b23ee85cc287d11ae5.min.css" id="quarto-bootstrap" rel="stylesheet"/>
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -95,16 +90,13 @@ div.csl-indent {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 <script id="quarto-axe-checker-options" type="text/plain">dHJ1ZQ==</script>
-
-
-<meta property="og:title" content="Scalability of mass spectrometry-based metabolomics for natural extracts libraries exploration: current status, challenges, and opportunities – Adriano Rutz">
-<meta property="og:description" content="This review explores the potential of bioinformatics and chemoinformatics tools to advance the exploration of natural extracts libraries (NELs). Although metabolomics has become a term used routinely in natural product (NP) research, the field remains focused on individual molecules or small sets of compounds, which restricts scalability. This narrow focus is mirrored in the computational handling of generated data, limiting broader insights. By challenging the traditional molecule-first paradigm—a framework historically shaped by practical constraints—we present our vision of using computational approaches to unlock the full potential of NELs, now and in the future.">
-<meta property="og:image" content="https://pubs.rsc.org/en/Image/Get?imageInfo.ImageType=GA&amp;imageInfo.ImageIdentifier.ManuscriptID=D5NP00034C&amp;imageInfo.ImageIdentifier.Year=2025">
-<meta property="og:site_name" content="https://adafede.github.io">
-<meta property="og:locale" content="en">
-<meta property="og:image:alt" content="Graphical abstract">
+<meta content="Scalability of mass spectrometry-based metabolomics for natural extracts libraries exploration: current status, challenges, and opportunities – Adriano Rutz" property="og:title"/>
+<meta content="This review explores the potential of bioinformatics and chemoinformatics tools to advance the exploration of natural extracts libraries (NELs). Although metabolomics has become a term used routinely in natural product (NP) research, the field remains focused on individual molecules or small sets of compounds, which restricts scalability. This narrow focus is mirrored in the computational handling of generated data, limiting broader insights. By challenging the traditional molecule-first paradigm—a framework historically shaped by practical constraints—we present our vision of using computational approaches to unlock the full potential of NELs, now and in the future." property="og:description"/>
+<meta content="https://pubs.rsc.org/en/Image/Get?imageInfo.ImageType=GA&amp;imageInfo.ImageIdentifier.ManuscriptID=D5NP00034C&amp;imageInfo.ImageIdentifier.Year=2025" property="og:image"/>
+<meta content="https://adafede.github.io" property="og:site_name"/>
+<meta content="en" property="og:locale"/>
+<meta content="Graphical abstract" property="og:image:alt"/>
 </head>
-
 <body class="nav-fixed fullcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
@@ -277,168 +269,162 @@ div.csl-indent {
       toggleColorMode(false);
     }
   </script>
-
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
-      <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../index.html">
-    <span class="navbar-title">Adriano Rutz</span>
-    </a>
-  </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-  <span class="navbar-toggler-icon"></span>
-</button>
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="../../articles.html"> 
-<span class="menu-text">Articles</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../cv.html"> 
-<span class="menu-text">CV</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../posts.html"> 
-<span class="menu-text">Posts</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../talks.html"> 
-<span class="menu-text">Talks</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../teaching.html"> 
-<span class="menu-text">Teaching</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../varia.html"> 
-<span class="menu-text">Varia</span></a>
-  </li>  
-</ul>
-            <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item compact">
-    <a class="nav-link" href="../../rss.xml"> <i class="bi bi-rss" role="img">
-</i> 
-<span class="menu-text"></span></a>
-  </li>  
-</ul>
-          </div> <!-- /navcollapse -->
-            <div class="quarto-navbar-tools">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+<header class="headroom fixed-top" id="quarto-header">
+<nav class="navbar navbar-expand-lg" data-bs-theme="dark">
+<div class="navbar-container container-fluid">
+<div class="navbar-brand-container mx-auto">
+<a class="navbar-brand" href="../../index.html">
+<span class="navbar-title">Adriano Rutz</span>
+</a>
 </div>
-      </div> <!-- /container-fluid -->
-    </nav>
+<div class="" id="quarto-search" title="Search"></div>
+<button aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-bs-target="#navbarCollapse" data-bs-toggle="collapse" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }" role="menu" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarCollapse">
+<ul class="navbar-nav navbar-nav-scroll me-auto">
+<li class="nav-item">
+<a class="nav-link" href="../../articles.html">
+<span class="menu-text">Articles</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../cv.html">
+<span class="menu-text">CV</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../posts.html">
+<span class="menu-text">Posts</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../talks.html">
+<span class="menu-text">Talks</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../teaching.html">
+<span class="menu-text">Teaching</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../varia.html">
+<span class="menu-text">Varia</span></a>
+</li>
+</ul>
+<ul class="navbar-nav navbar-nav-scroll ms-auto">
+<li class="nav-item compact">
+<a class="nav-link" href="../../rss.xml"> <i class="bi bi-rss" role="img">
+</i>
+<span class="menu-text"></span></a>
+</li>
+</ul>
+</div> <!-- /navcollapse -->
+<div class="quarto-navbar-tools">
+<a class="quarto-color-scheme-toggle quarto-navigation-tool px-1" href="" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+</div> <!-- /container-fluid -->
+</nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div class="quarto-container page-columns page-rows-contents page-layout-article page-navbar" id="quarto-content">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
 <!-- main -->
 <main class="content" id="quarto-document-content">
-
-
-<header id="title-block-header" class="quarto-title-block default">
+<header class="quarto-title-block default" id="title-block-header">
 <div class="quarto-title">
 <h1 class="title">Scalability of mass spectrometry-based metabolomics for natural extracts libraries exploration: current status, challenges, and opportunities</h1>
-  <div class="quarto-categories">
-    <div class="quarto-category">Metabolomics</div>
-    <div class="quarto-category">Liquid Chromatography-Tandem Mass Spectrometry</div>
-    <div class="quarto-category">Natural Extracts</div>
-  </div>
-  </div>
-
-
+<div class="quarto-categories">
+<div class="quarto-category">Metabolomics</div>
+<div class="quarto-category">Liquid Chromatography-Tandem Mass Spectrometry</div>
+<div class="quarto-category">Natural Extracts</div>
+</div>
+</div>
 <div class="quarto-title-meta-author">
-  <div class="quarto-title-meta-heading">Authors</div>
-  <div class="quarto-title-meta-heading">Affiliations</div>
-  
-    <div class="quarto-title-meta-contents">
-    <p class="author">Adriano Rutz <a href="mailto:rutz@imsb.biol.ethz.ch" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0003-0443-9902" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
-  </div>
-  <div class="quarto-title-meta-contents">
-        <p class="affiliation">ETH Zürich <a class="uri" href="https://ror.org/03j5gm982"><img src="https://raw.githubusercontent.com/ror-community/ror-logos/refs/heads/main/ror-icon-rgb-transparent.svg" style="height:14px; vertical-align:middle;" alt="ROR logo"></a></p>
-      </div>
-    <div class="quarto-title-meta-contents">
-    <p class="author">Wout Bittremieux <a href="https://orcid.org/0000-0002-3105-1359" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
-  </div>
-  <div class="quarto-title-meta-contents">
-        <p class="affiliation">University of Antwerp <a class="uri" href="https://ror.org/008x57b05"><img src="https://raw.githubusercontent.com/ror-community/ror-logos/refs/heads/main/ror-icon-rgb-transparent.svg" style="height:14px; vertical-align:middle;" alt="ROR logo"></a></p>
-      </div>
-    <div class="quarto-title-meta-contents">
-    <p class="author">Robin Schmid <a href="https://orcid.org/0000-0003-0922-3887" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
-  </div>
-  <div class="quarto-title-meta-contents">
-        <p class="affiliation">Institute of Organic Chemistry and Biochemistry of the Czech Academy of Sciences <a class="uri" href="https://ror.org/04nfjn472"><img src="https://raw.githubusercontent.com/ror-community/ror-logos/refs/heads/main/ror-icon-rgb-transparent.svg" style="height:14px; vertical-align:middle;" alt="ROR logo"></a></p>
-        <p class="affiliation">
+<div class="quarto-title-meta-heading">Authors</div>
+<div class="quarto-title-meta-heading">Affiliations</div>
+<div class="quarto-title-meta-contents">
+<p class="author">Adriano Rutz <a class="quarto-title-author-email" href="mailto:rutz@imsb.biol.ethz.ch"><i class="bi bi-envelope"></i></a> <a class="quarto-title-author-orcid orcid-link" href="https://orcid.org/0000-0003-0443-9902" rel="noopener noreferrer" target="_blank" title="ORCID: 0000-0003-0443-9902"> <img alt="ORCID" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/orcid.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
+</div>
+<div class="quarto-title-meta-contents">
+<p class="affiliation">
+            ETH Zürich
+           <a class="uri" href="https://ror.org/03j5gm982"><img alt="ROR logo" src="https://raw.githubusercontent.com/ror-community/ror-logos/refs/heads/main/ror-icon-rgb-transparent.svg" style="height:14px; vertical-align:middle;"/></a></p>
+</div>
+<div class="quarto-title-meta-contents">
+<p class="author">Wout Bittremieux <a class="quarto-title-author-orcid orcid-link" href="https://orcid.org/0000-0002-3105-1359" rel="noopener noreferrer" target="_blank" title="ORCID: 0000-0002-3105-1359"> <img alt="ORCID" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/orcid.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
+</div>
+<div class="quarto-title-meta-contents">
+<p class="affiliation">
+            University of Antwerp
+           <a class="uri" href="https://ror.org/008x57b05"><img alt="ROR logo" src="https://raw.githubusercontent.com/ror-community/ror-logos/refs/heads/main/ror-icon-rgb-transparent.svg" style="height:14px; vertical-align:middle;"/></a></p>
+</div>
+<div class="quarto-title-meta-contents">
+<p class="author">Robin Schmid <a class="quarto-title-author-orcid orcid-link" href="https://orcid.org/0000-0003-0922-3887" rel="noopener noreferrer" target="_blank" title="ORCID: 0000-0003-0922-3887"> <img alt="ORCID" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/orcid.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
+</div>
+<div class="quarto-title-meta-contents">
+<p class="affiliation">
+            Institute of Organic Chemistry and Biochemistry of the Czech Academy of Sciences
+           <a class="uri" href="https://ror.org/04nfjn472"><img alt="ROR logo" src="https://raw.githubusercontent.com/ror-community/ror-logos/refs/heads/main/ror-icon-rgb-transparent.svg" style="height:14px; vertical-align:middle;"/></a></p>
+<p class="affiliation">
             mzio GmbH
           </p>
-      </div>
-    <div class="quarto-title-meta-contents">
-    <p class="author">Olivier Cailloux <a href="https://orcid.org/0000-0003-3244-1081" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
-  </div>
-  <div class="quarto-title-meta-contents">
-        <p class="affiliation">Université Paris-Dauphine, Université PSL <a class="uri" href="https://ror.org/03pnp1a74"><img src="https://raw.githubusercontent.com/ror-community/ror-logos/refs/heads/main/ror-icon-rgb-transparent.svg" style="height:14px; vertical-align:middle;" alt="ROR logo"></a></p>
-      </div>
-    <div class="quarto-title-meta-contents">
-    <p class="author">Justin J. J. van der Hooft <a href="https://orcid.org/0000-0002-9340-5511" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
-  </div>
-  <div class="quarto-title-meta-contents">
-        <p class="affiliation">Wageningen University &amp; Research <a class="uri" href="https://ror.org/04qw24q55"><img src="https://raw.githubusercontent.com/ror-community/ror-logos/refs/heads/main/ror-icon-rgb-transparent.svg" style="height:14px; vertical-align:middle;" alt="ROR logo"></a></p>
-        <p class="affiliation">University of Johannesburg <a class="uri" href="https://ror.org/04z6c2n17"><img src="https://raw.githubusercontent.com/ror-community/ror-logos/refs/heads/main/ror-icon-rgb-transparent.svg" style="height:14px; vertical-align:middle;" alt="ROR logo"></a></p>
-      </div>
-    <div class="quarto-title-meta-contents">
-    <p class="author">Mehdi A. Beniddir <a href="mailto:mehdi.beniddir@universite-paris-saclay.fr" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0003-2153-4290" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
-  </div>
-  <div class="quarto-title-meta-contents">
-        <p class="affiliation">Université Paris-Saclay <a class="uri" href="https://ror.org/053t9n429"><img src="https://raw.githubusercontent.com/ror-community/ror-logos/refs/heads/main/ror-icon-rgb-transparent.svg" style="height:14px; vertical-align:middle;" alt="ROR logo"></a></p>
-      </div>
-  </div>
-
-<div class="quarto-title-meta">
-
-      
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">September 15, 2025</p>
-    </div>
-  </div>
-  
-    
-    <div>
-    <div class="quarto-title-meta-heading">Doi</div>
-    <div class="quarto-title-meta-contents">
-      <p class="doi">
-        <a href="https://doi.org/10.1039/D5NP00034C">10.1039/D5NP00034C</a>
-      </p>
-    </div>
-  </div>
-  </div>
-  
-<div>
-  <div class="abstract">
-    <div class="block-title">Abstract</div>
-    <p>This review explores the potential of bioinformatics and chemoinformatics tools to advance the exploration of natural extracts libraries (NELs). Although metabolomics has become a term used routinely in natural product (NP) research, the field remains focused on individual molecules or small sets of compounds, which restricts scalability. This narrow focus is mirrored in the computational handling of generated data, limiting broader insights. By challenging the traditional molecule-first paradigm—a framework historically shaped by practical constraints—we present our vision of using computational approaches to unlock the full potential of NELs, now and in the future.</p>
-  </div>
 </div>
-
-
+<div class="quarto-title-meta-contents">
+<p class="author">Olivier Cailloux <a class="quarto-title-author-orcid orcid-link" href="https://orcid.org/0000-0003-3244-1081" rel="noopener noreferrer" target="_blank" title="ORCID: 0000-0003-3244-1081"> <img alt="ORCID" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/orcid.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
+</div>
+<div class="quarto-title-meta-contents">
+<p class="affiliation">
+            Université Paris-Dauphine, Université PSL
+           <a class="uri" href="https://ror.org/03pnp1a74"><img alt="ROR logo" src="https://raw.githubusercontent.com/ror-community/ror-logos/refs/heads/main/ror-icon-rgb-transparent.svg" style="height:14px; vertical-align:middle;"/></a></p>
+</div>
+<div class="quarto-title-meta-contents">
+<p class="author">Justin J. J. van der Hooft <a class="quarto-title-author-orcid orcid-link" href="https://orcid.org/0000-0002-9340-5511" rel="noopener noreferrer" target="_blank" title="ORCID: 0000-0002-9340-5511"> <img alt="ORCID" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/orcid.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
+</div>
+<div class="quarto-title-meta-contents">
+<p class="affiliation">
+            Wageningen University &amp; Research
+           <a class="uri" href="https://ror.org/04qw24q55"><img alt="ROR logo" src="https://raw.githubusercontent.com/ror-community/ror-logos/refs/heads/main/ror-icon-rgb-transparent.svg" style="height:14px; vertical-align:middle;"/></a></p>
+<p class="affiliation">
+            University of Johannesburg
+           <a class="uri" href="https://ror.org/04z6c2n17"><img alt="ROR logo" src="https://raw.githubusercontent.com/ror-community/ror-logos/refs/heads/main/ror-icon-rgb-transparent.svg" style="height:14px; vertical-align:middle;"/></a></p>
+</div>
+<div class="quarto-title-meta-contents">
+<p class="author">Mehdi A. Beniddir <a class="quarto-title-author-email" href="mailto:mehdi.beniddir@universite-paris-saclay.fr"><i class="bi bi-envelope"></i></a> <a class="quarto-title-author-orcid orcid-link" href="https://orcid.org/0000-0003-2153-4290" rel="noopener noreferrer" target="_blank" title="ORCID: 0000-0003-2153-4290"> <img alt="ORCID" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/orcid.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
+</div>
+<div class="quarto-title-meta-contents">
+<p class="affiliation">
+            Université Paris-Saclay
+           <a class="uri" href="https://ror.org/053t9n429"><img alt="ROR logo" src="https://raw.githubusercontent.com/ror-community/ror-logos/refs/heads/main/ror-icon-rgb-transparent.svg" style="height:14px; vertical-align:middle;"/></a></p>
+</div>
+</div>
+<div class="quarto-title-meta">
+<div>
+<div class="quarto-title-meta-heading">Published</div>
+<div class="quarto-title-meta-contents">
+<p class="date">September 15, 2025</p>
+</div>
+</div>
+<div>
+<div class="quarto-title-meta-heading">Doi</div>
+<div class="quarto-title-meta-contents">
+<p class="doi">
+<a href="https://doi.org/10.1039/D5NP00034C">10.1039/D5NP00034C</a>
+</p>
+</div>
+</div>
+</div>
+<div>
+<div class="abstract">
+<div class="block-title">Abstract</div>
+<p>This review explores the potential of bioinformatics and chemoinformatics tools to advance the exploration of natural extracts libraries (NELs). Although metabolomics has become a term used routinely in natural product (NP) research, the field remains focused on individual molecules or small sets of compounds, which restricts scalability. This narrow focus is mirrored in the computational handling of generated data, limiting broader insights. By challenging the traditional molecule-first paradigm—a framework historically shaped by practical constraints—we present our vision of using computational approaches to unlock the full potential of NELs, now and in the future.</p>
+</div>
+</div>
 </header>
-
-
 <!-- ```{=html} -->
 <!-- <iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/TODO" title="Scholia entry"></iframe> -->
 <!-- ``` -->
-
 <script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
-
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-Rutz2025b" class="csl-entry" role="listitem">
+<div class="default" id="quarto-appendix"><section class="quarto-appendix-contents" id="quarto-bibliography" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div class="references csl-bib-body hanging-indent" data-entry-spacing="0" id="refs" role="list">
+<div class="csl-entry" id="ref-Rutz2025b" role="listitem">
 Rutz, Adriano, Wout Bittremieux, Robin Schmid, Olivier Cailloux, Justin J. J. van der Hooft, and Mehdi A. Beniddir. 2025. <span>“Scalability of Mass Spectrometry-Based Metabolomics for Natural Extracts Libraries Exploration: Current Status, Challenges, and Opportunities.”</span> <em>Natural Product Reports</em>. <a href="https://doi.org/10.1039/d5np00034c">https://doi.org/10.1039/d5np00034c</a>.
 </div>
 </div></section></div></main> <!-- /main -->
@@ -861,9 +847,5 @@ Rutz, Adriano, Wout Bittremieux, Robin Schmid, Olivier Cailloux, Justin J. J. va
   });
   </script>
 </div> <!-- /content -->
-
-
-
-
 <script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>

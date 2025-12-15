@@ -1,13 +1,10 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
-<meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-<meta name="dcterms.date" content="2023-11-10">
-
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta charset="utf-8"/>
+<meta content="quarto-1.8.26" name="generator"/>
+<meta content="width=device-width, initial-scale=1.0, user-scalable=yes" name="viewport"/>
+<meta content="2023-11-10" name="dcterms.date"/>
 <title>Automated Composition Assessment of Natural Extracts: Untargeted Mass Spectrometry-Based Metabolite Profiling Integrating Semiquantitative Detection – Adriano Rutz</title>
 <style>
 code{white-space: pre-wrap;}
@@ -42,31 +39,29 @@ div.csl-right-inline {
 div.csl-indent {
   margin-left: 2em;
 }</style>
-
-
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<link href="../../images/favicon/favicon.ico" rel="icon">
+<meta content="../../" name="quarto:offset"/>
+<link href="../../images/favicon/favicon.ico" rel="icon"/>
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet"/>
+<link class="quarto-color-scheme" href="../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" id="quarto-text-highlighting-styles" rel="stylesheet"/>
+<link class="quarto-color-scheme quarto-color-alternate" href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" id="quarto-text-highlighting-styles" rel="stylesheet"/>
+<link class="quarto-color-scheme-extra" href="../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" id="quarto-text-highlighting-styles" rel="stylesheet"/>
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-6bdd42198a8a37b23ee85cc287d11ae5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-5268d9e97950a1a43955edc982b28abe.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-6bdd42198a8a37b23ee85cc287d11ae5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet"/>
+<link append-hash="true" class="quarto-color-scheme" data-mode="light" href="../../site_libs/bootstrap/bootstrap-6bdd42198a8a37b23ee85cc287d11ae5.min.css" id="quarto-bootstrap" rel="stylesheet"/>
+<link append-hash="true" class="quarto-color-scheme quarto-color-alternate" data-mode="dark" href="../../site_libs/bootstrap/bootstrap-dark-5268d9e97950a1a43955edc982b28abe.min.css" id="quarto-bootstrap" rel="stylesheet"/>
+<link append-hash="true" class="quarto-color-scheme-extra" data-mode="light" href="../../site_libs/bootstrap/bootstrap-6bdd42198a8a37b23ee85cc287d11ae5.min.css" id="quarto-bootstrap" rel="stylesheet"/>
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -95,16 +90,13 @@ div.csl-indent {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 <script id="quarto-axe-checker-options" type="text/plain">dHJ1ZQ==</script>
-
-
-<meta property="og:title" content="Automated Composition Assessment of Natural Extracts: Untargeted Mass Spectrometry-Based Metabolite Profiling Integrating Semiquantitative Detection – Adriano Rutz">
-<meta property="og:description" content="Recent developments in mass spectrometry-based metabolite profiling allow unprecedented qualitative coverage of complex biological extract composition. However, the electrospray ionization used in metabolite profiling generates multiple artifactual signals for a single analyte. This leads to thousands of signals per analysis without satisfactory means of filtering those corresponding to abundant constituents. Generic approaches are therefore needed for the qualitative and quantitative annotation of a broad range of relevant constituents. For this, we used an analytical platform combining liquid chromatography–mass spectrometry (LC–MS) with Charged Aerosol Detection (CAD). We established a generic metabolite profiling for the concomitant recording of qualitative MS data and semiquantitative CAD profiles. The MS features (recorded in high-resolution tandem MS) are grouped and annotated using state-of-the-art tools. To efficiently attribute features to their corresponding extracted and integrated CAD peaks, a custom signal pretreatment and peak-shape comparison workflow is built. This strategy allows us to automatically contextualize features at both major and minor metabolome levels, together with a detailed reporting of their annotation including relevant orthogonal information (taxonomy, retention time). Signals not attributed to CAD peaks are considered minor metabolites. Results are illustrated on an ethanolic extract of Swertia chirayita (Roxb.) H. Karst., a bitter plant of industrial interest, exhibiting the typical complexity of plant extracts as a proof of concept. This generic qualitative and quantitative approach paves the way to automatically assess the composition of single natural extracts of interest or broader collections, thus facilitating new ingredient registrations or natural-extracts-based drug discovery campaigns.">
-<meta property="og:image" content="https://raw.githubusercontent.com/Adafede/cascade/refs/heads/main/man/figures/cascade-workflow.svg">
-<meta property="og:site_name" content="https://adafede.github.io">
-<meta property="og:locale" content="en">
-<meta property="og:image:alt" content="CASCADE's Workflow">
+<meta content="Automated Composition Assessment of Natural Extracts: Untargeted Mass Spectrometry-Based Metabolite Profiling Integrating Semiquantitative Detection – Adriano Rutz" property="og:title"/>
+<meta content="Recent developments in mass spectrometry-based metabolite profiling allow unprecedented qualitative coverage of complex biological extract composition. However, the electrospray ionization used in metabolite profiling generates multiple artifactual signals for a single analyte. This leads to thousands of signals per analysis without satisfactory means of filtering those corresponding to abundant constituents. Generic approaches are therefore needed for the qualitative and quantitative annotation of a broad range of relevant constituents. For this, we used an analytical platform combining liquid chromatography–mass spectrometry (LC–MS) with Charged Aerosol Detection (CAD). We established a generic metabolite profiling for the concomitant recording of qualitative MS data and semiquantitative CAD profiles. The MS features (recorded in high-resolution tandem MS) are grouped and annotated using state-of-the-art tools. To efficiently attribute features to their corresponding extracted and integrated CAD peaks, a custom signal pretreatment and peak-shape comparison workflow is built. This strategy allows us to automatically contextualize features at both major and minor metabolome levels, together with a detailed reporting of their annotation including relevant orthogonal information (taxonomy, retention time). Signals not attributed to CAD peaks are considered minor metabolites. Results are illustrated on an ethanolic extract of Swertia chirayita (Roxb.) H. Karst., a bitter plant of industrial interest, exhibiting the typical complexity of plant extracts as a proof of concept. This generic qualitative and quantitative approach paves the way to automatically assess the composition of single natural extracts of interest or broader collections, thus facilitating new ingredient registrations or natural-extracts-based drug discovery campaigns." property="og:description"/>
+<meta content="https://raw.githubusercontent.com/Adafede/cascade/refs/heads/main/man/figures/cascade-workflow.svg" property="og:image"/>
+<meta content="https://adafede.github.io" property="og:site_name"/>
+<meta content="en" property="og:locale"/>
+<meta content="CASCADE's Workflow" property="og:image:alt"/>
 </head>
-
 <body class="nav-fixed fullcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
@@ -277,143 +269,128 @@ div.csl-indent {
       toggleColorMode(false);
     }
   </script>
-
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
-      <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../index.html">
-    <span class="navbar-title">Adriano Rutz</span>
-    </a>
-  </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-  <span class="navbar-toggler-icon"></span>
-</button>
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="../../articles.html"> 
-<span class="menu-text">Articles</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../cv.html"> 
-<span class="menu-text">CV</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../posts.html"> 
-<span class="menu-text">Posts</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../talks.html"> 
-<span class="menu-text">Talks</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../teaching.html"> 
-<span class="menu-text">Teaching</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../varia.html"> 
-<span class="menu-text">Varia</span></a>
-  </li>  
-</ul>
-            <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item compact">
-    <a class="nav-link" href="../../rss.xml"> <i class="bi bi-rss" role="img">
-</i> 
-<span class="menu-text"></span></a>
-  </li>  
-</ul>
-          </div> <!-- /navcollapse -->
-            <div class="quarto-navbar-tools">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+<header class="headroom fixed-top" id="quarto-header">
+<nav class="navbar navbar-expand-lg" data-bs-theme="dark">
+<div class="navbar-container container-fluid">
+<div class="navbar-brand-container mx-auto">
+<a class="navbar-brand" href="../../index.html">
+<span class="navbar-title">Adriano Rutz</span>
+</a>
 </div>
-      </div> <!-- /container-fluid -->
-    </nav>
+<div class="" id="quarto-search" title="Search"></div>
+<button aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-bs-target="#navbarCollapse" data-bs-toggle="collapse" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }" role="menu" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarCollapse">
+<ul class="navbar-nav navbar-nav-scroll me-auto">
+<li class="nav-item">
+<a class="nav-link" href="../../articles.html">
+<span class="menu-text">Articles</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../cv.html">
+<span class="menu-text">CV</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../posts.html">
+<span class="menu-text">Posts</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../talks.html">
+<span class="menu-text">Talks</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../teaching.html">
+<span class="menu-text">Teaching</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../varia.html">
+<span class="menu-text">Varia</span></a>
+</li>
+</ul>
+<ul class="navbar-nav navbar-nav-scroll ms-auto">
+<li class="nav-item compact">
+<a class="nav-link" href="../../rss.xml"> <i class="bi bi-rss" role="img">
+</i>
+<span class="menu-text"></span></a>
+</li>
+</ul>
+</div> <!-- /navcollapse -->
+<div class="quarto-navbar-tools">
+<a class="quarto-color-scheme-toggle quarto-navigation-tool px-1" href="" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+</div> <!-- /container-fluid -->
+</nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div class="quarto-container page-columns page-rows-contents page-layout-article page-navbar" id="quarto-content">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
 <!-- main -->
 <main class="content" id="quarto-document-content">
-
-
-<header id="title-block-header" class="quarto-title-block default">
+<header class="quarto-title-block default" id="title-block-header">
 <div class="quarto-title">
 <h1 class="title">Automated Composition Assessment of Natural Extracts: Untargeted Mass Spectrometry-Based Metabolite Profiling Integrating Semiquantitative Detection</h1>
-  <div class="quarto-categories">
-    <div class="quarto-category">Metabolomics</div>
-    <div class="quarto-category">Charged Aerosol Detector</div>
-    <div class="quarto-category">Chemical Composition</div>
-    <div class="quarto-category">Liquid Chromatography-Tandem Mass Spectrometry</div>
-    <div class="quarto-category">Natural Extracts</div>
-    <div class="quarto-category">Natural Products</div>
-    <div class="quarto-category">Metabolite Annotation</div>
-  </div>
-  </div>
-
-
-<div class="quarto-title-meta-author">
-  <div class="quarto-title-meta-heading">Authors</div>
-  <div class="quarto-title-meta-heading">Affiliations</div>
-  
-    <div class="quarto-title-meta-contents">
-    <p class="author">Adriano Rutz <a href="mailto:rutz@imsb.biol.ethz.ch" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0003-0443-9902" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
-  </div>
-  <div class="quarto-title-meta-contents">
-        <p class="affiliation">University of Geneva <a class="uri" href="https://ror.org/01swzsf04"><img src="https://raw.githubusercontent.com/ror-community/ror-logos/refs/heads/main/ror-icon-rgb-transparent.svg" style="height:14px; vertical-align:middle;" alt="ROR logo"></a></p>
-        <p class="affiliation">ETH Zürich <a class="uri" href="https://ror.org/03j5gm982"><img src="https://raw.githubusercontent.com/ror-community/ror-logos/refs/heads/main/ror-icon-rgb-transparent.svg" style="height:14px; vertical-align:middle;" alt="ROR logo"></a></p>
-      </div>
-    <div class="quarto-title-meta-contents">
-    <p class="author">Jean-Luc Wolfender <a href="mailto:jean-luc.wolfender@unige.ch" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0002-0125-952X" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
-  </div>
-  <div class="quarto-title-meta-contents">
-        <p class="affiliation">University of Geneva <a class="uri" href="https://ror.org/01swzsf04"><img src="https://raw.githubusercontent.com/ror-community/ror-logos/refs/heads/main/ror-icon-rgb-transparent.svg" style="height:14px; vertical-align:middle;" alt="ROR logo"></a></p>
-      </div>
-  </div>
-
-<div class="quarto-title-meta">
-
-      
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">November 10, 2023</p>
-    </div>
-  </div>
-  
-    
-    <div>
-    <div class="quarto-title-meta-heading">Doi</div>
-    <div class="quarto-title-meta-contents">
-      <p class="doi">
-        <a href="https://doi.org/10.1021/acs.jafc.3c03099">10.1021/acs.jafc.3c03099</a>
-      </p>
-    </div>
-  </div>
-  </div>
-  
-<div>
-  <div class="abstract">
-    <div class="block-title">Abstract</div>
-    <p>Recent developments in mass spectrometry-based metabolite profiling allow unprecedented qualitative coverage of complex biological extract composition. However, the electrospray ionization used in metabolite profiling generates multiple artifactual signals for a single analyte. This leads to thousands of signals per analysis without satisfactory means of filtering those corresponding to abundant constituents. Generic approaches are therefore needed for the qualitative and quantitative annotation of a broad range of relevant constituents. For this, we used an analytical platform combining liquid chromatography–mass spectrometry (LC–MS) with Charged Aerosol Detection (CAD). We established a generic metabolite profiling for the concomitant recording of qualitative MS data and semiquantitative CAD profiles. The MS features (recorded in high-resolution tandem MS) are grouped and annotated using state-of-the-art tools. To efficiently attribute features to their corresponding extracted and integrated CAD peaks, a custom signal pretreatment and peak-shape comparison workflow is built. This strategy allows us to automatically contextualize features at both major and minor metabolome levels, together with a detailed reporting of their annotation including relevant orthogonal information (taxonomy, retention time). Signals not attributed to CAD peaks are considered minor metabolites. Results are illustrated on an ethanolic extract of <em>Swertia chirayita</em> (Roxb.) H. Karst., a bitter plant of industrial interest, exhibiting the typical complexity of plant extracts as a proof of concept. This generic qualitative and quantitative approach paves the way to automatically assess the composition of single natural extracts of interest or broader collections, thus facilitating new ingredient registrations or natural-extracts-based drug discovery campaigns.</p>
-  </div>
+<div class="quarto-categories">
+<div class="quarto-category">Metabolomics</div>
+<div class="quarto-category">Charged Aerosol Detector</div>
+<div class="quarto-category">Chemical Composition</div>
+<div class="quarto-category">Liquid Chromatography-Tandem Mass Spectrometry</div>
+<div class="quarto-category">Natural Extracts</div>
+<div class="quarto-category">Natural Products</div>
+<div class="quarto-category">Metabolite Annotation</div>
 </div>
-
-
+</div>
+<div class="quarto-title-meta-author">
+<div class="quarto-title-meta-heading">Authors</div>
+<div class="quarto-title-meta-heading">Affiliations</div>
+<div class="quarto-title-meta-contents">
+<p class="author">Adriano Rutz <a class="quarto-title-author-email" href="mailto:rutz@imsb.biol.ethz.ch"><i class="bi bi-envelope"></i></a> <a class="quarto-title-author-orcid orcid-link" href="https://orcid.org/0000-0003-0443-9902" rel="noopener noreferrer" target="_blank" title="ORCID: 0000-0003-0443-9902"> <img alt="ORCID" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/orcid.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
+</div>
+<div class="quarto-title-meta-contents">
+<p class="affiliation">
+            University of Geneva
+           <a class="uri" href="https://ror.org/01swzsf04"><img alt="ROR logo" src="https://raw.githubusercontent.com/ror-community/ror-logos/refs/heads/main/ror-icon-rgb-transparent.svg" style="height:14px; vertical-align:middle;"/></a></p>
+<p class="affiliation">
+            ETH Zürich
+           <a class="uri" href="https://ror.org/03j5gm982"><img alt="ROR logo" src="https://raw.githubusercontent.com/ror-community/ror-logos/refs/heads/main/ror-icon-rgb-transparent.svg" style="height:14px; vertical-align:middle;"/></a></p>
+</div>
+<div class="quarto-title-meta-contents">
+<p class="author">Jean-Luc Wolfender <a class="quarto-title-author-email" href="mailto:jean-luc.wolfender@unige.ch"><i class="bi bi-envelope"></i></a> <a class="quarto-title-author-orcid orcid-link" href="https://orcid.org/0000-0002-0125-952X" rel="noopener noreferrer" target="_blank" title="ORCID: 0000-0002-0125-952X"> <img alt="ORCID" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/orcid.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
+</div>
+<div class="quarto-title-meta-contents">
+<p class="affiliation">
+            University of Geneva
+           <a class="uri" href="https://ror.org/01swzsf04"><img alt="ROR logo" src="https://raw.githubusercontent.com/ror-community/ror-logos/refs/heads/main/ror-icon-rgb-transparent.svg" style="height:14px; vertical-align:middle;"/></a></p>
+</div>
+</div>
+<div class="quarto-title-meta">
+<div>
+<div class="quarto-title-meta-heading">Published</div>
+<div class="quarto-title-meta-contents">
+<p class="date">November 10, 2023</p>
+</div>
+</div>
+<div>
+<div class="quarto-title-meta-heading">Doi</div>
+<div class="quarto-title-meta-contents">
+<p class="doi">
+<a href="https://doi.org/10.1021/acs.jafc.3c03099">10.1021/acs.jafc.3c03099</a>
+</p>
+</div>
+</div>
+</div>
+<div>
+<div class="abstract">
+<div class="block-title">Abstract</div>
+<p>Recent developments in mass spectrometry-based metabolite profiling allow unprecedented qualitative coverage of complex biological extract composition. However, the electrospray ionization used in metabolite profiling generates multiple artifactual signals for a single analyte. This leads to thousands of signals per analysis without satisfactory means of filtering those corresponding to abundant constituents. Generic approaches are therefore needed for the qualitative and quantitative annotation of a broad range of relevant constituents. For this, we used an analytical platform combining liquid chromatography–mass spectrometry (LC–MS) with Charged Aerosol Detection (CAD). We established a generic metabolite profiling for the concomitant recording of qualitative MS data and semiquantitative CAD profiles. The MS features (recorded in high-resolution tandem MS) are grouped and annotated using state-of-the-art tools. To efficiently attribute features to their corresponding extracted and integrated CAD peaks, a custom signal pretreatment and peak-shape comparison workflow is built. This strategy allows us to automatically contextualize features at both major and minor metabolome levels, together with a detailed reporting of their annotation including relevant orthogonal information (taxonomy, retention time). Signals not attributed to CAD peaks are considered minor metabolites. Results are illustrated on an ethanolic extract of <em>Swertia chirayita</em> (Roxb.) H. Karst., a bitter plant of industrial interest, exhibiting the typical complexity of plant extracts as a proof of concept. This generic qualitative and quantitative approach paves the way to automatically assess the composition of single natural extracts of interest or broader collections, thus facilitating new ingredient registrations or natural-extracts-based drug discovery campaigns.</p>
+</div>
+</div>
 </header>
-
-
-<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script><iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q123938369" title="Scholia entry"></iframe>
-
-
-
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-Rutz2023" class="csl-entry" role="listitem">
+<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script><iframe height="100%" src="https://scholia.toolforge.org/work/Q123938369" title="Scholia entry" width="100%"></iframe>
+<div class="default" id="quarto-appendix"><section class="quarto-appendix-contents" id="quarto-bibliography" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div class="references csl-bib-body hanging-indent" data-entry-spacing="0" id="refs" role="list">
+<div class="csl-entry" id="ref-Rutz2023" role="listitem">
 Rutz, Adriano, and Jean-Luc Wolfender. 2023. <span>“Automated Composition Assessment of Natural Extracts: Untargeted Mass Spectrometry-Based Metabolite Profiling Integrating Semiquantitative Detection.”</span> <em>Journal of Agricultural and Food Chemistry</em> 71 (46): 18010–23. <a href="https://doi.org/10.1021/acs.jafc.3c03099">https://doi.org/10.1021/acs.jafc.3c03099</a>.
 </div>
 </div></section></div></main> <!-- /main -->
@@ -836,9 +813,5 @@ Rutz, Adriano, and Jean-Luc Wolfender. 2023. <span>“Automated Composition Asse
   });
   </script>
 </div> <!-- /content -->
-
-
-
-
 <script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>

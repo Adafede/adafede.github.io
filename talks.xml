@@ -13,7 +13,6 @@
 <lastBuildDate>Tue, 14 Oct 2025 00:00:00 GMT</lastBuildDate>
 <item>
   <title>Chemical Compounds and Their Links to Taxa on Wikidata</title>
-  <dc:creator>Adriano Rutz</dc:creator>
   <link>https://adafede.github.io/talks/2025-10-14_WAGENINGEN.html</link>
   <description><![CDATA[ 
 
@@ -31,9 +30,6 @@
 </item>
 <item>
   <title>Data-Independent Analysis for Deep Metabolome Profiling of Plant Extracts</title>
-  <dc:creator>Adriano Rutz</dc:creator>
-  <dc:creator>Vincen Wu</dc:creator>
-  <dc:creator>Nicola Zamboni</dc:creator>
   <link>https://adafede.github.io/talks/2025-10-10_SWISSMETABO.html</link>
   <description><![CDATA[ 
 
@@ -51,7 +47,6 @@
 </item>
 <item>
   <title>The LOTUS initiative and its links to WikiCite</title>
-  <dc:creator>Adriano Rutz</dc:creator>
   <link>https://adafede.github.io/talks/2025-08-29_WIKICITE.html</link>
   <description><![CDATA[ 
 
@@ -69,9 +64,6 @@
 </item>
 <item>
   <title>Data-Independent Analysis for Deep Metabolome Profiling of Plant Extracts</title>
-  <dc:creator>Adriano Rutz</dc:creator>
-  <dc:creator>Vincen Wu</dc:creator>
-  <dc:creator>Nicola Zamboni</dc:creator>
   <link>https://adafede.github.io/talks/2025-06-22_METSOC.html</link>
   <description><![CDATA[ 
 
@@ -89,7 +81,6 @@
 </item>
 <item>
   <title>Traitement de Données et Outils d’Annotation MS/MS</title>
-  <dc:creator>Adriano Rutz</dc:creator>
   <link>https://adafede.github.io/talks/2024-06-19_METABIODIVEX.html</link>
   <description><![CDATA[ 
 
@@ -108,7 +99,6 @@
 </item>
 <item>
   <title>Where is the “L” in “ORD”?</title>
-  <dc:creator>Adriano Rutz</dc:creator>
   <link>https://adafede.github.io/talks/2024-05-31_SCNAT.html</link>
   <description><![CDATA[ 
 
@@ -126,7 +116,6 @@
 </item>
 <item>
   <title>Introduction to Linked Open Data for Computational Mass Spectrometry</title>
-  <dc:creator>Adriano Rutz</dc:creator>
   <link>https://adafede.github.io/talks/2024-04-17_PRAGUE.html</link>
   <description><![CDATA[ 
 
@@ -145,7 +134,6 @@
 </item>
 <item>
   <title>Lotus: A Living Knowledge Base for Modern Pharmacognosy</title>
-  <dc:creator>Adriano Rutz</dc:creator>
   <link>https://adafede.github.io/talks/2023-10-16_INNSBRUCK.html</link>
   <description><![CDATA[ 
 
@@ -163,8 +151,6 @@
 </item>
 <item>
   <title>Prior Knowledge as a Compass Guiding Untargeted Metabolomics</title>
-  <dc:creator>Adriano Rutz</dc:creator>
-  <dc:creator>Nicola Zamboni</dc:creator>
   <link>https://adafede.github.io/talks/2023-09-15_SWISSMETABO.html</link>
   <description><![CDATA[ 
 
@@ -182,7 +168,6 @@
 </item>
 <item>
   <title>Deep Metabolome Annotation</title>
-  <dc:creator>Adriano Rutz</dc:creator>
   <link>https://adafede.github.io/talks/2023-07-18_SACLAY.html</link>
   <description><![CDATA[ 
 
@@ -201,7 +186,6 @@
 </item>
 <item>
   <title>A Distillate of the LOTUS Initiative in Natural Products Research: Sharing Information, Building Knowledge, Extracting Wisdom</title>
-  <dc:creator>Adriano Rutz</dc:creator>
   <link>https://adafede.github.io/talks/2023-07-03_GA.html</link>
   <description><![CDATA[ 
 
@@ -219,7 +203,6 @@
 </item>
 <item>
   <title>Metabolomics Workshop</title>
-  <dc:creator>Adriano Rutz</dc:creator>
   <link>https://adafede.github.io/talks/2023-06-13_METAOMICS.html</link>
   <description><![CDATA[ 
 
@@ -237,7 +220,6 @@
 </item>
 <item>
   <title>Prior Knowledge as a Compass Guiding Untargeted Metabolomics</title>
-  <dc:creator>Adriano Rutz</dc:creator>
   <link>https://adafede.github.io/talks/2023-02-02_JENA.html</link>
   <description><![CDATA[ 
 
@@ -255,7 +237,6 @@
 </item>
 <item>
   <title>The LOTUS Initiative: Integrating Natural Products to the Wikidata Knowledge Base</title>
-  <dc:creator>Adriano Rutz</dc:creator>
   <link>https://adafede.github.io/talks/2022-04-22_LS2_1.html</link>
   <description><![CDATA[ 
 
@@ -273,7 +254,6 @@
 </item>
 <item>
   <title>The LOTUS Initiative: Integrating Natural Products to the Wikidata Knowledge Base</title>
-  <dc:creator>Adriano Rutz</dc:creator>
   <link>https://adafede.github.io/talks/2022-04-22_LS2_2.html</link>
   <description><![CDATA[ 
 
@@ -291,7 +271,6 @@
 </item>
 <item>
   <title>The LOTUS Initiative for Open Natural Products Research: Knowledge Management through Wikidata</title>
-  <dc:creator>Adriano Rutz</dc:creator>
   <link>https://adafede.github.io/talks/2021-10-04_INPCHEM.html</link>
   <description><![CDATA[ 
 
@@ -309,7 +288,6 @@
 </item>
 <item>
   <title>The LOTUS Initiative for Knowledge Sharing in Natural Products Research</title>
-  <dc:creator>Adriano Rutz</dc:creator>
   <link>https://adafede.github.io/talks/2021-09-08_GA_1.html</link>
   <description><![CDATA[ 
 
@@ -327,7 +305,6 @@
 </item>
 <item>
   <title>Untargeted Chemical and Sensory Characterization of Swertia chirayita: a Bitter Case Study</title>
-  <dc:creator>Adriano Rutz</dc:creator>
   <link>https://adafede.github.io/talks/2021-09-08_GA_2.html</link>
   <description><![CDATA[ 
 
@@ -345,7 +322,6 @@
 </item>
 <item>
   <title>LOTUS, a Wikidata hosted open naturaL prOducTs occUrrences databaSe</title>
-  <dc:creator>Adriano Rutz</dc:creator>
   <link>https://adafede.github.io/talks/2021-04-01_RFMF.html</link>
   <description><![CDATA[ 
 
@@ -363,7 +339,6 @@
 </item>
 <item>
   <title>Taxonomically Informed Scoring Enhances Confidence in Natural Products Annotation</title>
-  <dc:creator>Adriano Rutz</dc:creator>
   <link>https://adafede.github.io/talks/2020-08-01_GNPS.html</link>
   <description><![CDATA[ 
 

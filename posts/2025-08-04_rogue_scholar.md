@@ -7,8 +7,8 @@ affiliations:
   group: Zamboni
   id: imsb
   name: ETH Zürich
-  number: 1
   postal-code: 8093
+  qid: Q115117760
   ror: "https://ror.org/03j5gm982"
 author:
 - Adriano Rutz
@@ -20,6 +20,7 @@ authors:
     given: Adriano
   number: 1
   orcid: 0000-0003-0443-9902
+  qid: Q97455964
 bibliography:
 - references.bib
 categories:
