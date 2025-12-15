@@ -28,19 +28,34 @@ ROR_ICON_URL = (
     "refs/heads/main/ror-icon-rgb-transparent.svg"
 )
 
+ROR_IMG_TAG = (
+    f'<img src="{ROR_ICON_URL}" alt="ROR logo" '
+    f'style="height:14px; vertical-align:middle;" />'
+)
+
+SCHOLIA_SVG_URL = (
+    "https://raw.githubusercontent.com/WDscholia/scholia/main/"
+    "scholia/app/static/images/scholia_logo.svg"
+)
+
+SCHOLIA_IMG_TAG = (
+    f'<img src="{SCHOLIA_SVG_URL}" alt="Scholia" '
+    f'style="height:1em; vertical-align:middle; margin-left:0.25em;" />'
+)
+
 
 # ============================================================================
 # YAML PROCESSING
 # ============================================================================
 
 
-def _parse_affiliation_defs_from_doc(doc: dict) -> Dict[str, str]:
+def _parse_affiliation_defs_from_doc(doc: dict) -> Dict[str, Dict[str, str]]:
     """Parse affiliation definitions from a YAML document.
 
     Accepts both 'affiliations' (list) and 'affiliation' (singular) forms.
-    Returns mapping: affiliation name -> ror url
+    Returns mapping: affiliation name -> {ror: url, qid: qid}
     """
-    out: Dict[str, str] = {}
+    out: Dict[str, Dict[str, str]] = {}
     if not doc or not isinstance(doc, dict):
         return out
 
@@ -51,22 +66,36 @@ def _parse_affiliation_defs_from_doc(doc: dict) -> Dict[str, str]:
             if not isinstance(aff, dict):
                 continue
             name = aff.get("name")
-            ror = aff.get("ror")
-            if name and ror:
-                out[str(name).strip()] = str(ror).strip()
+            if name:
+                aff_data = {}
+                ror = aff.get("ror")
+                if ror:
+                    aff_data["ror"] = str(ror).strip()
+                qid = aff.get("qid")
+                if qid:
+                    aff_data["qid"] = str(qid).strip()
+                if aff_data:
+                    out[str(name).strip()] = aff_data
 
     # singular
     aff_single = doc.get("affiliation")
     if isinstance(aff_single, dict):
         name = aff_single.get("name")
-        ror = aff_single.get("ror")
-        if name and ror:
-            out[str(name).strip()] = str(ror).strip()
+        if name:
+            aff_data = {}
+            ror = aff_single.get("ror")
+            if ror:
+                aff_data["ror"] = str(ror).strip()
+            qid = aff_single.get("qid")
+            if qid:
+                aff_data["qid"] = str(qid).strip()
+            if aff_data:
+                out[str(name).strip()] = aff_data
 
     return out
 
 
-def load_affiliations(qmd_path: Path) -> Dict[str, str]:
+def load_affiliations(qmd_path: Path) -> Dict[str, Dict[str, str]]:
     """Load and merge affiliation definitions from metadata-files in QMD frontmatter.
 
     Precedence: metadata-files (in order) -> QMD frontmatter (QMD overrides).
@@ -75,9 +104,9 @@ def load_affiliations(qmd_path: Path) -> Dict[str, str]:
         qmd_path: Path to QMD file
 
     Returns:
-        Dictionary mapping affiliation names to ROR URLs
+        Dictionary mapping affiliation names to {ror: url, qid: qid}
     """
-    merged: Dict[str, str] = {}
+    merged: Dict[str, Dict[str, str]] = {}
 
     try:
         content = qmd_path.read_text(encoding="utf-8")
@@ -114,15 +143,15 @@ def load_affiliations(qmd_path: Path) -> Dict[str, str]:
 # ============================================================================
 
 
-def inject_ror_links(soup: BeautifulSoup, aff_dict: Dict[str, str]) -> int:
-    """Inject ROR links into HTML affiliation paragraphs.
+def inject_ror_links(soup: BeautifulSoup, aff_dict: Dict[str, Dict[str, str]]) -> int:
+    """Inject ROR and Scholia links into HTML affiliation paragraphs.
 
     Args:
         soup: BeautifulSoup object
-        aff_dict: mapping affiliation name -> ror url
+        aff_dict: mapping affiliation name -> {ror: url, qid: qid}
 
     Returns:
-        Number of affiliations enriched with ROR links
+        Number of affiliations enriched with ROR/Scholia links
     """
     enriched_count = 0
 
@@ -144,34 +173,47 @@ def inject_ror_links(soup: BeautifulSoup, aff_dict: Dict[str, str]) -> int:
         # Get the text content
         aff_text = aff_elem.get_text().strip()
 
-        # Try to find matching ROR URL
-        ror_url = aff_dict.get(aff_text)
-        if not ror_url:
+        # Try to find matching affiliation data
+        aff_data = aff_dict.get(aff_text)
+        if not aff_data:
             # Try case-insensitive match
-            for name, url in aff_dict.items():
+            for name, data in aff_dict.items():
                 if name.lower() == aff_text.lower():
-                    ror_url = url
+                    aff_data = data
                     break
 
-        if ror_url:
-            # Create ROR link
-            ror_link = soup.new_tag("a", **{"class": "uri", "href": ror_url})
-            ror_img = soup.new_tag(
-                "img",
-                src=ROR_ICON_URL,
-                alt="ROR logo",
-                style="height:14px; vertical-align:middle;",
-            )
-            ror_link.append(ror_img)
+        if aff_data:
+            # Add ROR link if available
+            ror_url = aff_data.get("ror")
+            if ror_url:
+                ror_link = soup.new_tag("a", **{"class": "uri", "href": ror_url})
+                ror_link.append(BeautifulSoup(ROR_IMG_TAG, "html.parser"))
+                aff_elem.append(" ")
+                aff_elem.append(ror_link)
+                enriched_count += 1
+                logger.debug(f"Added ROR link for affiliation: {aff_text}")
 
-            # Add a space before the link
-            aff_elem.append(" ")
-            aff_elem.append(ror_link)
-
-            enriched_count += 1
-            logger.debug(f"Added ROR link for affiliation: {aff_text}")
+            # Add Scholia link if QID available
+            qid = aff_data.get("qid")
+            if qid:
+                scholia_url = f"https://scholia.toolforge.org/organization/{qid}"
+                scholia_link = soup.new_tag(
+                    "a",
+                    href=scholia_url,
+                    **{
+                        "class": "scholia-link",
+                        "target": "_blank",
+                        "rel": "noopener noreferrer",
+                        "title": f"Scholia profile: {qid}",
+                    },
+                )
+                scholia_link.append(BeautifulSoup(SCHOLIA_IMG_TAG, "html.parser"))
+                aff_elem.append(" ")
+                aff_elem.append(scholia_link)
+                enriched_count += 1
+                logger.debug(f"Added Scholia link for affiliation: {aff_text}")
         else:
-            logger.debug(f"ROR ID not found for affiliation: {aff_text}")
+            logger.debug(f"Affiliation data not found for: {aff_text}")
 
     return enriched_count
 
