@@ -1,0 +1,13 @@
+---
+authors:
+  - id: MehdiBeniddir
+    name:
+      given: Mehdi A.
+      family: Beniddir
+      literal: Mehdi A. Beniddir
+    orcid: 0000-0003-2153-4290
+    qid: Q57858606
+    email: mehdi.beniddir@universite-paris-saclay.fr
+    correspondence: true
+    affiliations:
+      - ref: biocis

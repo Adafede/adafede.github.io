@@ -1,0 +1,13 @@
+---
+authors:
+  - id: AdrianoRutz
+    name:
+      given: Adriano
+      family: Rutz
+      literal: Adriano Rutz
+    orcid: 0000-0003-0443-9902
+    qid: Q97455964
+    email: rutz@imsb.biol.ethz.ch
+    correspondence: true
+    affiliations:
+      - ref: imsb
