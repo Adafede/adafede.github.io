@@ -1,0 +1,11 @@
+---
+authors:
+  - id: WoutBittremieux
+    name:
+      given: Wout
+      family: Bittremieux
+      literal: Wout Bittremieux
+    orcid: 0000-0002-3105-1359
+    qid: Q57065344
+    affiliations:
+      - ref: antwerp

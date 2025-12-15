@@ -1,0 +1,12 @@
+---
+authors:
+  - id: RobinSchmid
+    name:
+      given: Robin
+      family: Schmid
+      literal: Robin Schmid
+    orcid: 0000-0003-0922-3887
+    qid: Q118122846
+    affiliations:
+      - ref: iocb
+      - ref: mzio

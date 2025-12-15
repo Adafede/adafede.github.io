@@ -1,0 +1,13 @@
+---
+authors:
+  - id: JustinVanDerHooft
+    name:
+      given: Justin J. J.
+      dropping-particle: van der
+      family: Hooft
+      literal: Justin J. J. van der Hooft
+    orcid: 0000-0002-9340-5511
+    qid: Q50726922
+    affiliations:
+      - ref: wageningen
+      - ref: johannesburg
