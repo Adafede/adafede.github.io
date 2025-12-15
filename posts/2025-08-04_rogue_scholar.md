@@ -20,7 +20,8 @@ authors:
     given: Adriano
   number: 1
   orcid: 0000-0003-0443-9902
-bibliography: references.bib
+bibliography:
+- references.bib
 categories:
 - Open Science
 citation:
