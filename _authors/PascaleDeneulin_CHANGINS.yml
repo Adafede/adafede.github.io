@@ -1,0 +1,11 @@
+---
+authors:
+  - id: PascaleDeneulin
+    name:
+      given: Pascale
+      family: Deneulin
+      literal: Pascale Deneulin
+    orcid: 0000-0002-5292-9941
+    qid: Q131781623
+    affiliations:
+      - ref: changins

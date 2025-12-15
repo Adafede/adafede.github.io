@@ -1,0 +1,10 @@
+---
+authors:
+  - id: IvanoTonutti
+    name:
+      given: Ivano
+      family: Tonutti
+      literal: Ivano Tonutti
+    qid: Q111578444
+    affiliations:
+      - ref: tradall

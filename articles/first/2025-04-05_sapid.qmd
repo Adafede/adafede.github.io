@@ -13,76 +13,16 @@ categories:
   - Liquid Chromatography-Tandem Mass Spectrometry
   - Natural Extracts
   - Taste
-authors:
-  - name: Adriano Rutz
-    orcid: 0000-0003-0443-9902
-    number: 1
-    email: rutz@imsb.biol.ethz.ch
-    affiliations:
-      - ref: unige
-      - ref: imsb
-    correspondence: true
-  - name: Pascale Deneulin
-    orcid: 0000-0001-5398-4419
-    number: 2
-    affiliations:
-      - ref: changins
-  - name: Ivano Tonutti
-    number: 3
-    affiliations:
-      - ref: bacardi
-  - name: Benoît Bach
-    orcid: 0000-0001-8677-4506
-    number: 4
-    affiliations:
-      - ref: changins
-  - name: Jean-Luc Wolfender
-    orcid: 0000-0002-0125-952X
-    number: 5
-    email: jean-luc.wolfender@unige.ch
-    affiliations:
-      - ref: unige
-    correspondence: true
-affiliations:
-  - id: unige
-    number: 1
-    name: University of Geneva
-    department:
-      - School of Pharmaceutical Sciences
-      - Institute of Pharmaceutical Sciences of Western Switzerland
-    group: Wolfender
-    address: Rue Michel-Servet, 1
-    city: Geneva
-    country: Switzerland
-    postal-code: 1211
-    ror: https://ror.org/01swzsf04
-  - id: imsb
-    number: 2
-    name: ETH Zürich
-    department: Institute for Molecular Systems Biology
-    group: Zamboni
-    address: Otto-Stern-Weg, 3
-    city: Zürich
-    country: Switzerland
-    postal-code: 8093
-    ror: https://ror.org/03j5gm982
-  - id: changins
-    number: 3
-    name: University of Applied Sciences and Arts Western Switzerland
-    department: Changins – Viticulture and Oenology
-    group: Bach
-    address: Route de Duillier, 50
-    city: Nyon
-    country: Switzerland
-    postal-code: 1260
-    ror: https://ror.org/03nf8d138
-  - id: bacardi
-    number: 4
-    name: TRADALL S.A. (Bacardi Group)
-    address: Route de Meyrin, 265
-    city: Meyrin
-    country: Switzerland
-    postal-code: 1217
+metadata-files:
+  - ../../_authors/AdrianoRutz_UNIGEIMSB_corr.yml
+  - ../../_authors/PascaleDeneulin_CHANGINS.yml
+  - ../../_authors/IvanoTonutti_TRADALL.yml
+  - ../../_authors/BenoitBach_CHANGINS.yml
+  - ../../_authors/JeanLucWolfender_UNIGE_corr.yml
+  - ../../_affiliations/UNIGE_Wolfender.yml
+  - ../../_affiliations/IMSB_Zamboni.yml
+  - ../../_affiliations/CHANGINS_Bach.yml
+  - ../../_affiliations/TRADALL.yml
 abstract: >
   Analyzing bitterness is challenging because of the diverse range of bitter compounds, the variability in sensory perception, and its complex interaction with other tastes.
   To address this, we developed an untargeted approach to deconvolute the taste and molecular composition of complex plant extracts.
