@@ -1,0 +1,49 @@
+---
+authors:
+  - id: MiwaDounoueKubo
+    name:
+      given: Miwa
+      family: Dounoue-Kubo
+      literal: Miwa Dounoue-Kubo
+    affiliations:
+      - ref: unige
+    equal-contributor: true
+  - id: SimonOllivier
+    name:
+      given: Simon
+      family: Ollivier
+      literal: Simon Ollivier
+    affiliations:
+      - ref: unige
+  - id: MohsenBagheri
+    name:
+      given: Mohsen
+      family: Bagheri
+      literal: Mohsen Bagheri
+    affiliations:
+      - ref: unige
+      - ref: shahid
+  - id: TongchaiSaesong
+    name:
+      given: Tongchai
+      family: Saesong
+      literal: Tongchai Saesong
+    affiliations:
+      - ref: naresuan
+  - id: SamadNejadEbrahimi
+    name:
+      given: Samad Nejad
+      family: Ebrahimi
+      literal: Samad Nejad Ebrahimi
+    orcid: 0000-0003-2167-8032
+    affiliations:
+      - ref: shahid
+  - id: KornkanokIngkaninan
+    name:
+      given: Kornkanok
+      family: Ingkaninan
+      literal: Kornkanok Ingkaninan
+    orcid: 0000-0002-4415-8489
+    affiliations:
+      - ref: shahid
+

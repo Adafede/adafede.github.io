@@ -1,0 +1,36 @@
+---
+# TODO split later
+affiliations:
+  - id: basel
+    number: 1
+    name: University of Basel
+    department:
+      - Division of Pharmaceutical Biology, Department of Pharmaceutical Sciences
+    group: Hamburger
+    address: Klingelbergstrasse, 50
+    city: Basel
+    country: Switzerland
+    postal-code: 4056
+    ror: https://ror.org/02s6k3f65
+  - id: bern
+    number: 3
+    name: University of Bern
+    department:
+      - Institute of Cell Biology
+    group: Pertz
+    address: Baltzerstrasse, 4
+    city: Bern
+    country: Switzerland
+    postal-code: 3012
+    ror: https://ror.org/01t7x0n33
+  - id: panama
+    number: 4
+    name: University of Panama
+    department:
+      - Center for Pharmacognostic Research and Panamanian Flora, Faculty of Pharmacy
+    group: Pertz
+    city: Panama City
+    country: Republic of Panama
+    postal-code: 824
+    ror: https://ror.org/00g2y4z88
+
