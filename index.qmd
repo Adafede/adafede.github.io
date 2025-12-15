@@ -40,7 +40,7 @@ vocabularies:
 ---
 
 :::{#hero-heading}
-{{< include cv/bio.qmd >}}
+{{< include cv/_bio.qmd >}}
 
 [text]{data-vocab="wd" data-property="Q123"}
 [lala]{data-vocab="wdt" data-property="P123"}

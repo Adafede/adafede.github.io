@@ -1,5 +1,0 @@
-## Education
-
-{{< include cv/education/2017_unige.qmd >}}
-
-{{< include cv/education/2011_unige.qmd >}}
