@@ -12,22 +12,10 @@ author:
       given: Adriano
       family: Rutz
     orcid: 0000-0003-0443-9902
+    qid: Q97455964
     number: 1
     affiliations:
       - ref: unige
-affiliations:
-  - id: unige
-    number: 1
-    name: University of Geneva
-    department:
-      - School of Pharmaceutical Sciences
-      - Institute of Pharmaceutical Sciences of Western Switzerland
-    group: Wolfender
-    address: Rue Michel-Servet, 1
-    city: Geneva
-    country: Switzerland
-    postal-code: 1211
-    ror: https://ror.org/01swzsf04
 description: |
   My first academic talk. Great experience!
 ---

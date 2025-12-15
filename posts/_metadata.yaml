@@ -1,2 +1,14 @@
 ---
+affiliations:
+  - id: imsb
+    name: ETH Zürich
+    department: Institute for Molecular Systems Biology
+    group: Zamboni
+    address: Otto-Stern-Weg, 3
+    city: Zürich
+    country: Switzerland
+    postal-code: 8093
+    ror: https://ror.org/03j5gm982
+    qid: Q115117760
+
 bibliography: references.bib

@@ -1,0 +1,24 @@
+---
+affiliations:
+  - id: unige
+    name: University of Geneva
+    department:
+      - School of Pharmaceutical Sciences
+      - Institute of Pharmaceutical Sciences of Western Switzerland
+    group: Wolfender
+    address: Rue Michel-Servet, 1
+    city: Geneva
+    country: Switzerland
+    postal-code: 1211
+    ror: https://ror.org/01swzsf04
+    qid: Q503473
+  - id: imsb
+    name: ETH Zürich
+    department: Institute for Molecular Systems Biology
+    group: Zamboni
+    address: Otto-Stern-Weg, 3
+    city: Zürich
+    country: Switzerland
+    postal-code: 8093
+    ror: https://ror.org/03j5gm982
+    qid: Q115117760

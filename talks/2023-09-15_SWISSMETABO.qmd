@@ -5,11 +5,12 @@ date: 2023-09-15
 location: Zürich, Switzerland
 categories:
   - Poster
-author:
+authors:
   - name:
       given: Adriano
       family: Rutz
     orcid: 0000-0003-0443-9902
+    qid: Q97455964
     number: 1
     affiliations:
       - ref: imsb
@@ -17,22 +18,12 @@ author:
       given: Nicola
       family: Zamboni
     orcid: 0000-0003-1271-1021
+    qid: Q73400060
     number: 2
     corresponding: true
     email: nzamboni@ethz.ch
     affiliations:
       - ref: imsb
-affiliations:
-  - id: imsb
-    number: 1
-    name: ETH Zürich
-    department: Institute for Molecular Systems Biology
-    group: Zamboni
-    address: Otto-Stern-Weg, 3
-    city: Zürich
-    country: Switzerland
-    postal-code: 8093
-    ror: https://ror.org/03j5gm982
 description: >
   Poster presented at the [Swiss Metabolomics Society Annual Meeting](https://swiss-metabolomics.ch/annual-meeting).
 ---
