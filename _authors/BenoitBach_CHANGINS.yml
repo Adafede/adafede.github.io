@@ -1,0 +1,11 @@
+---
+authors:
+  - id: BenoitBach
+    name:
+      given: Benoit
+      family: Bach
+      literal: Benoit Bach
+    orcid: 0000-0001-8677-4506
+    qid: Q60730259
+    affiliations:
+      - ref: changins
