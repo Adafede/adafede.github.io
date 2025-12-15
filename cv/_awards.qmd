@@ -1,0 +1,5 @@
+## Awards
+
+{{< include cv/awards/_2023_ORD.qmd >}}
+
+{{< include cv/awards/_2023_Willmar_Schwabe.qmd >}}
