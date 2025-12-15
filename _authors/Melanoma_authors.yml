@@ -1,0 +1,103 @@
+---
+# TODO split later
+authors:
+  - id: TanjaHell
+    name:
+      given: Tanja
+      family: Hell
+      literal: Tanja Hell
+    orcid: 0000-0002-8867-2412
+    number: 1
+    affiliations:
+      - ref: basel
+    equal-contributor: true
+  - id: LaraDurr
+    name:
+      given: Lara
+      family: Dürr
+      literal: Lara Dürr
+    orcid: 0000-0001-6551-1854
+    number: 3
+    affiliations:
+      - ref: basel
+  - id: MaciejDobrzyński
+    name:
+      given: Maciej
+      family: Dobrzyński
+      literal: Maciej Dobrzyński
+    orcid: 0000-0002-0208-7758
+    number: 4
+    affiliations:
+      - ref: bern
+  - id: JakobReinhardt
+    name:
+      given: Jakob K.
+      family: Reinhardt
+      literal: Jakob K. Reinhardt
+    orcid: 0000-0002-8675-1029
+    number: 5
+    affiliations:
+      - ref: basel
+  - id: TimoLehner
+    name:
+      given: Timo
+      family: Lehner
+      literal: Timo Lehner
+    number: 6
+    affiliations:
+      - ref: basel
+  - id: MorisKeller
+    name:
+      given: Moris
+      family: Keller
+      literal: Moris Keller
+    orcid: 0000-0002-4316-6591
+    number: 7
+    affiliations:
+      - ref: basel
+  - id: AnikaJohn
+    name:
+      given: Anika
+      family: John
+      literal: Anika John
+    number: 8
+    affiliations:
+      - ref: bern
+  - id: MahabirGupta
+    name:
+      given: Mahabir
+      family: Gupta
+      literal: Mahabir Gupta
+    number: 9
+    affiliations:
+      - ref: panama
+    deceased: true
+  - id: OlivierPertz
+    name:
+      given: Olivier
+      family: Pertz
+      literal: Olivier Pertz
+    number: 10
+    affiliations:
+      - ref: bern
+  - id: MatthiasHamburger
+    name:
+      given: Matthias
+      family: Hamburger
+      literal: Matthias Hamburger
+    orcid: 0000-0001-9331-273X
+    number: 11
+    affiliations:
+      - ref: basel
+  - id: ElianeGaro
+    name:
+      given: Eliane
+      family: Garo
+      literal: Eliane Garo
+    orcid: 0000-0002-3497-2524
+    email: eliane.garo@unibas.ch
+    number: 13
+    affiliations:
+      - ref: basel
+    correspondence: true
+
