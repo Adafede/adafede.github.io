@@ -13,20 +13,10 @@ author:
       given: Adriano
       family: Rutz
     orcid: 0000-0003-0443-9902
+    qid: Q97455964
     number: 1
     affiliations:
       - ref: imsb
-affiliations:
-  - id: imsb
-    number: 1
-    name: ETH Zürich
-    department: Institute for Molecular Systems Biology
-    group: Zamboni
-    address: Otto-Stern-Weg, 3
-    city: Zürich
-    country: Switzerland
-    postal-code: 8093
-    ror: https://ror.org/03j5gm982
 description: >
   [Dr. Willmar Schwabe Young Talent Award](https://ga-online.org/about-ga/awards/dr-willmar-schwabe-young-talent-prize/) lecture for the [LOTUS initiative](https://lotus.nprod.net/).
 

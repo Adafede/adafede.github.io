@@ -94,9 +94,12 @@ def extract_author_metadata(qmd_path: Path) -> List[Dict[str, str]]:
         return []
 
     authors_data = []
-    author_field = metadata.get("author", [])
+    # Accept either 'author' (singular) or 'authors' (plural) fields.
+    author_field = metadata.get("author")
+    if author_field is None:
+        author_field = metadata.get("authors", [])
 
-    # Handle both single author and list of authors
+    # Handle single-author dict -> list normalization; if it's not a list or dict, bail out
     if isinstance(author_field, dict):
         author_field = [author_field]
     elif not isinstance(author_field, list):
