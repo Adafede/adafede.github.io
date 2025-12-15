@@ -1,0 +1,25 @@
+---
+# TODO split later
+authors:
+  - id: MarnixHMedema
+    name:
+      given: Marnix H.
+      family: Medema
+      literal: Marnix H. Medema
+    orcid: 0000-0002-2191-2821
+    number: 49
+    email: marnix.medema@wur.nl
+    affiliations:
+      - ref: wageningen
+    correspondence: true
+  - id: MitjaMZdouc
+    name:
+      given: Mitja M.
+      family: Zdouc
+      literal: Mitja M. Zdouc
+    orcid: 0000-0001-6534-6609
+    number: 50
+    email: mitja.zdouc@wur.nl
+    affiliations:
+      - ref: wageningen
+    correspondence: true

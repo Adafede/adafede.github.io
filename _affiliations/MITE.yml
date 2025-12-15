@@ -1,0 +1,163 @@
+---
+# TODO split later
+affiliations:
+  - id: monterrey
+    name: Tecnológico de Monterrey
+    department: "Industrial Genomics Laboratory, Centro de Biotecnología FEMSA, Escuela de Ingeniería y Ciencias"
+    city: Nuevo Leon
+    country: México
+    ror: https://ror.org/03ayjn504
+  - id: unicamp
+    name: Universidade Estadual de Campinas (UNICAMP)
+    department: Department of Organic Chemistry, Institute of Chemistry
+    city: São Paulo
+    country: Brazil
+    ror: https://ror.org/04wffgt70
+  - id: warwick
+    name: University of Warwick
+    department: School of Life Sciences
+    city: Coventry
+    country: United Kingdom
+    ror: https://ror.org/01a77tt86
+  - id: leiden
+    name: Leiden University
+    department: Institute of Biology
+    city: Leiden
+    country: The Netherlands
+    ror: https://ror.org/027bh9e22
+  - id: irvine
+    name: University of California, Irvine
+    department: Department of Pharmaceutical Sciences
+    city: Irvine
+    country: United States
+    ror: https://ror.org/04gyf1771
+  - id: scripps
+    name: Scripps Institution of Oceanography
+    department: Center for Marine Biotechnology and Biomedicine
+    city: La Jolla
+    country: United States
+    ror: https://ror.org/04v7hvq31
+  - id: helmholtz
+    name: Helmholtz Centre for Infection Research
+    department: Helmholtz Institute for Pharmaceutical Research Saarland
+    city: Saarbrücken
+    country: Germany
+    ror: https://ror.org/042dsac10
+  - id: frankfurt
+    name: Goethe University Frankfurt
+    department: Institute of Molecular Bio Science
+    city: Frankfurt am Main
+    country: Germany
+    ror: https://ror.org/04cvxnb49
+  - id: loewe
+    name: LOEWE Centre for Translational Biodiversity Genomics
+    city: Frankfurt am Main
+    country: Germany
+    ror: https://ror.org/0396gab88
+  - id: sib
+    name: SIB Swiss Institute of Bioinformatics
+    city: Geneva
+    country: Switzerland
+    ror: https://ror.org/002n09z45
+  - id: hannover
+    name: Leibniz Universität Hannover
+    department: Institute for Organic Chemistry and BMWZ
+    city: Hanover
+    country: Germany
+    ror: https://ror.org/0304hq317
+  - id: bonn
+    name: University of Bonn
+    department: Institute of Pharmaceutical Biology
+    city: Bonn
+    country: Germany
+    ror: https://ror.org/041nas322
+  - id: frankfurt2
+    name: Goethe University Frankfurt
+    department: Institute of Pharmaceutical Biology
+    city: Frankfurt am Main
+    country: Germany
+    ror: https://ror.org/04cvxnb49
+  - id: carnegie
+    name: Carnegie Institution for Science
+    department: Biosphere Sciences and Engineering Division
+    city: Baltimore
+    country: United States
+    ror: https://ror.org/04jr01610
+  - id: arizona
+    name: University of Arizona
+    department: Department of Ecology and Evolutionary Biology
+    city: Tucson
+    country: United States
+    ror: https://ror.org/03m2x1q45
+  - id: sintef
+    name: SINTEF Industry
+    department: Department of Biotechnology and Nanomedicine
+    city: Trondheim
+    country: Norway
+    ror: https://ror.org/0422tvz87
+  - id: frederick
+    name: Frederick National Laboratory for Cancer Research
+    department: Molecular Targets Program
+    city: Frederick
+    country: United States
+    ror: https://ror.org/03v6m3209
+  - id: vtt
+    name: VTT Technical Research Centre of Finland
+    department: Production Host Engineering Team
+    city: Espoo
+    country: Finland
+    ror: https://ror.org/04b181w54
+  - id: nabi
+    name: National Agri-Food Biotechnology Institute
+    department: Computational Biology Lab
+    city: Mohali
+    country: India
+    ror: https://ror.org/05nnsek89
+  - id: hki
+    name: "Leibniz-Institut für Naturstoff-Forschung und Infektionsbiologie e. V. - Hans-Knöll-Institut (HKI)"
+    department: Department of Paleobiotechnology
+    city: Jena
+    country: Germany
+    ror: https://ror.org/055s37c97
+  - id: tübingen
+    name: University of Tübingen
+    department: "Interfaculty Institute of Microbiology and Infection Medicine Tübingen (IMIT), Interfaculty Institute for Biomedical Informatics (IBMI)"
+    city: Tübingen
+    country: Germany
+    ror: https://ror.org/03a1kwz48
+  - id: kaist
+    name: Korea Advanced Institute of Science and Technology
+    department: Institute of Applied Sciences
+    city: Daejeon
+    country: South Korea
+    ror: https://ror.org/05apxxy63
+  - id: uzh
+    name: University of Zürich
+    department: Department of Chemistry
+    city: Zürich
+    country: Switzerland
+    ror: https://ror.org/02crff812
+  - id: groningen
+    name: University of Groningen
+    department: Department of Chemical and Pharmaceutical Biology
+    city: Groningen
+    country: The Netherlands
+    ror: https://ror.org/012p63287
+  - id: basel
+    name: University of Basel
+    department: Department of Pharmaceutical Sciences
+    city: Basel
+    country: Switzerland
+    ror: https://ror.org/02s6k3f65
+  - id: dtu
+    name: Technical University of Denmark
+    department: The Novo Nordisk Foundation Center for Biosustainability
+    city: Lyngby
+    country: Denmark
+    ror: https://ror.org/04qtj9h94
+  - id: shenzhen
+    name: Southern University of Science and Technology
+    department: "Institute of Plant and Food Science, Department of Biology, School of Life Sciences"
+    city: Shenzhen
+    country: China
+    ror: https://ror.org/049tv2d57
