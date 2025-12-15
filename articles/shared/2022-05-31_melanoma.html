@@ -1,13 +1,10 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
-<meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-<meta name="dcterms.date" content="2022-05-31">
-
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta charset="utf-8"/>
+<meta content="quarto-1.8.26" name="generator"/>
+<meta content="width=device-width, initial-scale=1.0, user-scalable=yes" name="viewport"/>
+<meta content="2022-05-31" name="dcterms.date"/>
 <title>Combining Activity Profiling with Advanced Annotation to Accelerate the Discovery of Natural Products Targeting Oncogenic Signaling in Melanoma – Adriano Rutz</title>
 <style>
 code{white-space: pre-wrap;}
@@ -42,31 +39,29 @@ div.csl-right-inline {
 div.csl-indent {
   margin-left: 2em;
 }</style>
-
-
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<link href="../../images/favicon/favicon.ico" rel="icon">
+<meta content="../../" name="quarto:offset"/>
+<link href="../../images/favicon/favicon.ico" rel="icon"/>
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet"/>
+<link class="quarto-color-scheme" href="../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" id="quarto-text-highlighting-styles" rel="stylesheet"/>
+<link class="quarto-color-scheme quarto-color-alternate" href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" id="quarto-text-highlighting-styles" rel="stylesheet"/>
+<link class="quarto-color-scheme-extra" href="../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" id="quarto-text-highlighting-styles" rel="stylesheet"/>
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-6bdd42198a8a37b23ee85cc287d11ae5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-5268d9e97950a1a43955edc982b28abe.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-6bdd42198a8a37b23ee85cc287d11ae5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet"/>
+<link append-hash="true" class="quarto-color-scheme" data-mode="light" href="../../site_libs/bootstrap/bootstrap-6bdd42198a8a37b23ee85cc287d11ae5.min.css" id="quarto-bootstrap" rel="stylesheet"/>
+<link append-hash="true" class="quarto-color-scheme quarto-color-alternate" data-mode="dark" href="../../site_libs/bootstrap/bootstrap-dark-5268d9e97950a1a43955edc982b28abe.min.css" id="quarto-bootstrap" rel="stylesheet"/>
+<link append-hash="true" class="quarto-color-scheme-extra" data-mode="light" href="../../site_libs/bootstrap/bootstrap-6bdd42198a8a37b23ee85cc287d11ae5.min.css" id="quarto-bootstrap" rel="stylesheet"/>
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -95,16 +90,13 @@ div.csl-indent {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 <script id="quarto-axe-checker-options" type="text/plain">dHJ1ZQ==</script>
-
-
-<meta property="og:title" content="Combining Activity Profiling with Advanced Annotation to Accelerate the Discovery of Natural Products Targeting Oncogenic Signaling in Melanoma – Adriano Rutz">
-<meta property="og:description" content="The discovery of bioactive natural products remains a time-consuming and challenging task. The ability to link high-confidence metabolite annotations in crude extracts with activity would be highly beneficial to the drug discovery process. To address this challenge, HPLC-based activity profiling and advanced UHPLC-HRMS/MS metabolite profiling for annotation were combined to leverage the information obtained from both approaches on a crude extract scaled down to the submilligram level. This strategy was applied to a subset of an extract library screening aiming to identify natural products inhibiting oncogenic signaling in melanoma. Advanced annotation and data organization enabled the identification of compounds that were likely responsible for the activity in the extracts. These compounds belonged to two different natural product scaffolds, namely, brevipolides from a Hyptis brevipes extract and methoxylated flavonoids identified in three different extracts of Hyptis and Artemisia spp. Targeted isolation of these prioritized compounds led to five brevipolides and seven methoxylated flavonoids. Brevipolide A (1) and 6-methoxytricin (9) were the most potent compounds from each chemical class and displayed AKT activity inhibition with an IC50 of 17.6 ± 1.6 and 4.9 ± 0.2 μM, respectively.">
-<meta property="og:image" content="https://pubs.acs.org/cms/10.1021/acs.jnatprod.2c00146/asset/images/medium/np2c00146_0008.gif">
-<meta property="og:site_name" content="https://adafede.github.io">
-<meta property="og:locale" content="en">
-<meta property="og:image:alt" content="Article's Graphical Abstract">
+<meta content="Combining Activity Profiling with Advanced Annotation to Accelerate the Discovery of Natural Products Targeting Oncogenic Signaling in Melanoma – Adriano Rutz" property="og:title"/>
+<meta content="The discovery of bioactive natural products remains a time-consuming and challenging task. The ability to link high-confidence metabolite annotations in crude extracts with activity would be highly beneficial to the drug discovery process. To address this challenge, HPLC-based activity profiling and advanced UHPLC-HRMS/MS metabolite profiling for annotation were combined to leverage the information obtained from both approaches on a crude extract scaled down to the submilligram level. This strategy was applied to a subset of an extract library screening aiming to identify natural products inhibiting oncogenic signaling in melanoma. Advanced annotation and data organization enabled the identification of compounds that were likely responsible for the activity in the extracts. These compounds belonged to two different natural product scaffolds, namely, brevipolides from a Hyptis brevipes extract and methoxylated flavonoids identified in three different extracts of Hyptis and Artemisia spp. Targeted isolation of these prioritized compounds led to five brevipolides and seven methoxylated flavonoids. Brevipolide A (1) and 6-methoxytricin (9) were the most potent compounds from each chemical class and displayed AKT activity inhibition with an IC50 of 17.6 ± 1.6 and 4.9 ± 0.2 μM, respectively." property="og:description"/>
+<meta content="https://pubs.acs.org/cms/10.1021/acs.jnatprod.2c00146/asset/images/medium/np2c00146_0008.gif" property="og:image"/>
+<meta content="https://adafede.github.io" property="og:site_name"/>
+<meta content="en" property="og:locale"/>
+<meta content="Article's Graphical Abstract" property="og:image:alt"/>
 </head>
-
 <body class="nav-fixed fullcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
@@ -277,126 +269,214 @@ div.csl-indent {
       toggleColorMode(false);
     }
   </script>
-
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
-      <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../index.html">
-    <span class="navbar-title">Adriano Rutz</span>
-    </a>
-  </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-  <span class="navbar-toggler-icon"></span>
-</button>
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="../../articles.html"> 
-<span class="menu-text">Articles</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../cv.html"> 
-<span class="menu-text">CV</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../posts.html"> 
-<span class="menu-text">Posts</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../talks.html"> 
-<span class="menu-text">Talks</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../teaching.html"> 
-<span class="menu-text">Teaching</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../varia.html"> 
-<span class="menu-text">Varia</span></a>
-  </li>  
-</ul>
-            <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item compact">
-    <a class="nav-link" href="../../rss.xml"> <i class="bi bi-rss" role="img">
-</i> 
-<span class="menu-text"></span></a>
-  </li>  
-</ul>
-          </div> <!-- /navcollapse -->
-            <div class="quarto-navbar-tools">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+<header class="headroom fixed-top" id="quarto-header">
+<nav class="navbar navbar-expand-lg" data-bs-theme="dark">
+<div class="navbar-container container-fluid">
+<div class="navbar-brand-container mx-auto">
+<a class="navbar-brand" href="../../index.html">
+<span class="navbar-title">Adriano Rutz</span>
+</a>
 </div>
-      </div> <!-- /container-fluid -->
-    </nav>
+<div class="" id="quarto-search" title="Search"></div>
+<button aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-bs-target="#navbarCollapse" data-bs-toggle="collapse" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }" role="menu" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarCollapse">
+<ul class="navbar-nav navbar-nav-scroll me-auto">
+<li class="nav-item">
+<a class="nav-link" href="../../articles.html">
+<span class="menu-text">Articles</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../cv.html">
+<span class="menu-text">CV</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../posts.html">
+<span class="menu-text">Posts</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../talks.html">
+<span class="menu-text">Talks</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../teaching.html">
+<span class="menu-text">Teaching</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../../varia.html">
+<span class="menu-text">Varia</span></a>
+</li>
+</ul>
+<ul class="navbar-nav navbar-nav-scroll ms-auto">
+<li class="nav-item compact">
+<a class="nav-link" href="../../rss.xml"> <i class="bi bi-rss" role="img">
+</i>
+<span class="menu-text"></span></a>
+</li>
+</ul>
+</div> <!-- /navcollapse -->
+<div class="quarto-navbar-tools">
+<a class="quarto-color-scheme-toggle quarto-navigation-tool px-1" href="" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+</div> <!-- /container-fluid -->
+</nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div class="quarto-container page-columns page-rows-contents page-layout-article page-navbar" id="quarto-content">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
 <!-- main -->
 <main class="content" id="quarto-document-content">
-
-
-<header id="title-block-header" class="quarto-title-block default">
+<header class="quarto-title-block default" id="title-block-header">
 <div class="quarto-title">
 <h1 class="title">Combining Activity Profiling with Advanced Annotation to Accelerate the Discovery of Natural Products Targeting Oncogenic Signaling in Melanoma</h1>
-  <div class="quarto-categories">
-    <div class="quarto-category">Bioactivity</div>
-    <div class="quarto-category">Charged Aerosol Detector</div>
-    <div class="quarto-category">Metabolomics</div>
-    <div class="quarto-category">Liquid Chromatography-Tandem Mass Spectrometry</div>
-    <div class="quarto-category">Natural Extracts</div>
-    <div class="quarto-category">Natural Products</div>
-    <div class="quarto-category">Metabolite Annotation</div>
-  </div>
-  </div>
-
-
-
-<div class="quarto-title-meta">
-
-    
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">May 31, 2022</p>
-    </div>
-  </div>
-  
-    
-    <div>
-    <div class="quarto-title-meta-heading">Doi</div>
-    <div class="quarto-title-meta-contents">
-      <p class="doi">
-        <a href="https://doi.org/10.1021/acs.jnatprod.2c00146">10.1021/acs.jnatprod.2c00146</a>
-      </p>
-    </div>
-  </div>
-  </div>
-  
-<div>
-  <div class="abstract">
-    <div class="block-title">Abstract</div>
-    <p>The discovery of bioactive natural products remains a time-consuming and challenging task. The ability to link high-confidence metabolite annotations in crude extracts with activity would be highly beneficial to the drug discovery process. To address this challenge, HPLC-based activity profiling and advanced UHPLC-HRMS/MS metabolite profiling for annotation were combined to leverage the information obtained from both approaches on a crude extract scaled down to the submilligram level. This strategy was applied to a subset of an extract library screening aiming to identify natural products inhibiting oncogenic signaling in melanoma. Advanced annotation and data organization enabled the identification of compounds that were likely responsible for the activity in the extracts. These compounds belonged to two different natural product scaffolds, namely, brevipolides from a <em>Hyptis brevipes</em> extract and methoxylated flavonoids identified in three different extracts of <em>Hyptis</em> and <em>Artemisia</em> spp. Targeted isolation of these prioritized compounds led to five brevipolides and seven methoxylated flavonoids. Brevipolide A (<strong>1</strong>) and 6-methoxytricin (<strong>9</strong>) were the most potent compounds from each chemical class and displayed AKT activity inhibition with an IC50 of 17.6 ± 1.6 and 4.9 ± 0.2 <em>μ</em>M, respectively.</p>
-  </div>
+<div class="quarto-categories">
+<div class="quarto-category">Bioactivity</div>
+<div class="quarto-category">Charged Aerosol Detector</div>
+<div class="quarto-category">Metabolomics</div>
+<div class="quarto-category">Liquid Chromatography-Tandem Mass Spectrometry</div>
+<div class="quarto-category">Natural Extracts</div>
+<div class="quarto-category">Natural Products</div>
+<div class="quarto-category">Metabolite Annotation</div>
 </div>
-
-
+</div>
+<div class="quarto-title-meta-author">
+<div class="quarto-title-meta-heading">Authors</div>
+<div class="quarto-title-meta-heading">Affiliations</div>
+<div class="quarto-title-meta-contents">
+<p class="author">Adriano Rutz <a class="quarto-title-author-orcid orcid-link" href="https://orcid.org/0000-0003-0443-9902" rel="noopener noreferrer" target="_blank" title="ORCID: 0000-0003-0443-9902"> <img alt="ORCID" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/orcid.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a><a class="scholia-link" href="https://scholia.toolforge.org/author/Q97455964" rel="noopener noreferrer" target="_blank" title="Scholia profile: Q97455964"><img alt="Scholia" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/scholia_logo.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
+</div>
+<div class="quarto-title-meta-contents">
+<p class="affiliation">
+            University of Geneva
+           <a class="uri" href="https://ror.org/01swzsf04"><img alt="ROR logo" src="https://raw.githubusercontent.com/ror-community/ror-logos/refs/heads/main/ror-icon-rgb-transparent.svg" style="height:14px; vertical-align:middle;"/></a> <a class="scholia-link" href="https://scholia.toolforge.org/organization/Q503473" rel="noopener noreferrer" target="_blank" title="Scholia profile: Q503473"><img alt="Scholia" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/scholia_logo.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
+</div>
+<div class="quarto-title-meta-contents">
+<p class="author">Tanja Hell <a class="quarto-title-author-orcid orcid-link" href="https://orcid.org/0000-0002-8867-2412" rel="noopener noreferrer" target="_blank" title="ORCID: 0000-0002-8867-2412"> <img alt="ORCID" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/orcid.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
+</div>
+<div class="quarto-title-meta-contents">
+<p class="affiliation">
+            University of Basel
+           <a class="uri" href="https://ror.org/02s6k3f65"><img alt="ROR logo" src="https://raw.githubusercontent.com/ror-community/ror-logos/refs/heads/main/ror-icon-rgb-transparent.svg" style="height:14px; vertical-align:middle;"/></a></p>
+</div>
+<div class="quarto-title-meta-contents">
+<p class="author">Lara Dürr <a class="quarto-title-author-orcid orcid-link" href="https://orcid.org/0000-0001-6551-1854" rel="noopener noreferrer" target="_blank" title="ORCID: 0000-0001-6551-1854"> <img alt="ORCID" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/orcid.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
+</div>
+<div class="quarto-title-meta-contents">
+<p class="affiliation">
+            University of Basel
+           <a class="uri" href="https://ror.org/02s6k3f65"><img alt="ROR logo" src="https://raw.githubusercontent.com/ror-community/ror-logos/refs/heads/main/ror-icon-rgb-transparent.svg" style="height:14px; vertical-align:middle;"/></a></p>
+</div>
+<div class="quarto-title-meta-contents">
+<p class="author">Maciej Dobrzyński <a class="quarto-title-author-orcid orcid-link" href="https://orcid.org/0000-0002-0208-7758" rel="noopener noreferrer" target="_blank" title="ORCID: 0000-0002-0208-7758"> <img alt="ORCID" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/orcid.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
+</div>
+<div class="quarto-title-meta-contents">
+<p class="affiliation">
+            University of Bern
+           <a class="uri" href="https://ror.org/01t7x0n33"><img alt="ROR logo" src="https://raw.githubusercontent.com/ror-community/ror-logos/refs/heads/main/ror-icon-rgb-transparent.svg" style="height:14px; vertical-align:middle;"/></a></p>
+</div>
+<div class="quarto-title-meta-contents">
+<p class="author">Jakob K. Reinhardt <a class="quarto-title-author-orcid orcid-link" href="https://orcid.org/0000-0002-8675-1029" rel="noopener noreferrer" target="_blank" title="ORCID: 0000-0002-8675-1029"> <img alt="ORCID" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/orcid.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
+</div>
+<div class="quarto-title-meta-contents">
+<p class="affiliation">
+            University of Basel
+           <a class="uri" href="https://ror.org/02s6k3f65"><img alt="ROR logo" src="https://raw.githubusercontent.com/ror-community/ror-logos/refs/heads/main/ror-icon-rgb-transparent.svg" style="height:14px; vertical-align:middle;"/></a></p>
+</div>
+<div class="quarto-title-meta-contents">
+<p class="author">Timo Lehner </p>
+</div>
+<div class="quarto-title-meta-contents">
+<p class="affiliation">
+            University of Basel
+           <a class="uri" href="https://ror.org/02s6k3f65"><img alt="ROR logo" src="https://raw.githubusercontent.com/ror-community/ror-logos/refs/heads/main/ror-icon-rgb-transparent.svg" style="height:14px; vertical-align:middle;"/></a></p>
+</div>
+<div class="quarto-title-meta-contents">
+<p class="author">Moris Keller <a class="quarto-title-author-orcid orcid-link" href="https://orcid.org/0000-0002-4316-6591" rel="noopener noreferrer" target="_blank" title="ORCID: 0000-0002-4316-6591"> <img alt="ORCID" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/orcid.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
+</div>
+<div class="quarto-title-meta-contents">
+<p class="affiliation">
+            University of Basel
+           <a class="uri" href="https://ror.org/02s6k3f65"><img alt="ROR logo" src="https://raw.githubusercontent.com/ror-community/ror-logos/refs/heads/main/ror-icon-rgb-transparent.svg" style="height:14px; vertical-align:middle;"/></a></p>
+</div>
+<div class="quarto-title-meta-contents">
+<p class="author">Anika John </p>
+</div>
+<div class="quarto-title-meta-contents">
+<p class="affiliation">
+            University of Bern
+           <a class="uri" href="https://ror.org/01t7x0n33"><img alt="ROR logo" src="https://raw.githubusercontent.com/ror-community/ror-logos/refs/heads/main/ror-icon-rgb-transparent.svg" style="height:14px; vertical-align:middle;"/></a></p>
+</div>
+<div class="quarto-title-meta-contents">
+<p class="author">Mahabir Gupta </p>
+</div>
+<div class="quarto-title-meta-contents">
+<p class="affiliation">
+            University of Panama
+           <a class="uri" href="https://ror.org/00g2y4z88"><img alt="ROR logo" src="https://raw.githubusercontent.com/ror-community/ror-logos/refs/heads/main/ror-icon-rgb-transparent.svg" style="height:14px; vertical-align:middle;"/></a></p>
+</div>
+<div class="quarto-title-meta-contents">
+<p class="author">Olivier Pertz </p>
+</div>
+<div class="quarto-title-meta-contents">
+<p class="affiliation">
+            University of Bern
+           <a class="uri" href="https://ror.org/01t7x0n33"><img alt="ROR logo" src="https://raw.githubusercontent.com/ror-community/ror-logos/refs/heads/main/ror-icon-rgb-transparent.svg" style="height:14px; vertical-align:middle;"/></a></p>
+</div>
+<div class="quarto-title-meta-contents">
+<p class="author">Matthias Hamburger <a class="quarto-title-author-orcid orcid-link" href="https://orcid.org/0000-0001-9331-273X" rel="noopener noreferrer" target="_blank" title="ORCID: 0000-0001-9331-273X"> <img alt="ORCID" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/orcid.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
+</div>
+<div class="quarto-title-meta-contents">
+<p class="affiliation">
+            University of Basel
+           <a class="uri" href="https://ror.org/02s6k3f65"><img alt="ROR logo" src="https://raw.githubusercontent.com/ror-community/ror-logos/refs/heads/main/ror-icon-rgb-transparent.svg" style="height:14px; vertical-align:middle;"/></a></p>
+</div>
+<div class="quarto-title-meta-contents">
+<p class="author">Eliane Garo <a class="quarto-title-author-email" href="mailto:eliane.garo@unibas.ch"><i class="bi bi-envelope"></i></a> <a class="quarto-title-author-orcid orcid-link" href="https://orcid.org/0000-0002-3497-2524" rel="noopener noreferrer" target="_blank" title="ORCID: 0000-0002-3497-2524"> <img alt="ORCID" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/orcid.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
+</div>
+<div class="quarto-title-meta-contents">
+<p class="affiliation">
+            University of Basel
+           <a class="uri" href="https://ror.org/02s6k3f65"><img alt="ROR logo" src="https://raw.githubusercontent.com/ror-community/ror-logos/refs/heads/main/ror-icon-rgb-transparent.svg" style="height:14px; vertical-align:middle;"/></a></p>
+</div>
+<div class="quarto-title-meta-contents">
+<p class="author">Jean-Luc Wolfender <a class="quarto-title-author-orcid orcid-link" href="https://orcid.org/0000-0002-0125-952X" rel="noopener noreferrer" target="_blank" title="ORCID: 0000-0002-0125-952X"> <img alt="ORCID" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/orcid.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a><a class="scholia-link" href="https://scholia.toolforge.org/author/Q56084663" rel="noopener noreferrer" target="_blank" title="Scholia profile: Q56084663"><img alt="Scholia" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/scholia_logo.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
+</div>
+<div class="quarto-title-meta-contents">
+<p class="affiliation">
+            University of Geneva
+           <a class="uri" href="https://ror.org/01swzsf04"><img alt="ROR logo" src="https://raw.githubusercontent.com/ror-community/ror-logos/refs/heads/main/ror-icon-rgb-transparent.svg" style="height:14px; vertical-align:middle;"/></a> <a class="scholia-link" href="https://scholia.toolforge.org/organization/Q503473" rel="noopener noreferrer" target="_blank" title="Scholia profile: Q503473"><img alt="Scholia" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/scholia_logo.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
+</div>
+</div>
+<div class="quarto-title-meta">
+<div>
+<div class="quarto-title-meta-heading">Published</div>
+<div class="quarto-title-meta-contents">
+<p class="date">May 31, 2022</p>
+</div>
+</div>
+<div>
+<div class="quarto-title-meta-heading">Doi</div>
+<div class="quarto-title-meta-contents">
+<p class="doi">
+<a href="https://doi.org/10.1021/acs.jnatprod.2c00146">10.1021/acs.jnatprod.2c00146</a>
+</p>
+</div>
+</div>
+</div>
+<div>
+<div class="abstract">
+<div class="block-title">Abstract</div>
+<p>The discovery of bioactive natural products remains a time-consuming and challenging task. The ability to link high-confidence metabolite annotations in crude extracts with activity would be highly beneficial to the drug discovery process. To address this challenge, HPLC-based activity profiling and advanced UHPLC-HRMS/MS metabolite profiling for annotation were combined to leverage the information obtained from both approaches on a crude extract scaled down to the submilligram level. This strategy was applied to a subset of an extract library screening aiming to identify natural products inhibiting oncogenic signaling in melanoma. Advanced annotation and data organization enabled the identification of compounds that were likely responsible for the activity in the extracts. These compounds belonged to two different natural product scaffolds, namely, brevipolides from a <em>Hyptis brevipes</em> extract and methoxylated flavonoids identified in three different extracts of <em>Hyptis</em> and <em>Artemisia</em> spp. Targeted isolation of these prioritized compounds led to five brevipolides and seven methoxylated flavonoids. Brevipolide A (<strong>1</strong>) and 6-methoxytricin (<strong>9</strong>) were the most potent compounds from each chemical class and displayed AKT activity inhibition with an IC50 of 17.6 ± 1.6 and 4.9 ± 0.2 <em>μ</em>M, respectively.</p>
+</div>
+</div>
 </header>
-
-
 <script async="" src="https://scripts.simpleanalyticscdn.com/latest.js">
-</script><iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q112189007" title="Scholia entry"></iframe>
-
-
-
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-Hell2022" class="csl-entry" role="listitem">
+</script><iframe height="100%" src="https://scholia.toolforge.org/work/Q112189007" title="Scholia entry" width="100%"></iframe>
+<div class="default" id="quarto-appendix"><section class="quarto-appendix-contents" id="quarto-bibliography" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div class="references csl-bib-body hanging-indent" data-entry-spacing="0" id="refs" role="list">
+<div class="csl-entry" id="ref-Hell2022" role="listitem">
 Hell, Tanja, Adriano Rutz, Lara Dürr, Maciej Dobrzyński, Jakob K. Reinhardt, Timo Lehner, Morris Keller, et al. 2022. <span>“Combining Activity Profiling with Advanced Annotation to Accelerate the Discovery of Natural Products Targeting Oncogenic Signaling in Melanoma.”</span> <em>Journal of Natural Products</em> 85 (6): 1540–54. <a href="https://doi.org/10.1021/acs.jnatprod.2c00146">https://doi.org/10.1021/acs.jnatprod.2c00146</a>.
 </div>
 </div></section></div></main> <!-- /main -->
@@ -819,9 +899,5 @@ Hell, Tanja, Adriano Rutz, Lara Dürr, Maciej Dobrzyński, Jakob K. Reinhardt, T
   });
   </script>
 </div> <!-- /content -->
-
-
-
-
 <script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>
