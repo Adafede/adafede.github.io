@@ -15,6 +15,7 @@ from pathlib import Path
 from typing import List
 
 from convert_rss_to_json_feed import convert_rss_to_json_feed
+from inject_author_links import inject_author_links
 from inject_cito_annotations_in_html import inject_cito_annotations_in_html
 from inject_cito_annotations_in_rss import inject_cito_annotations_in_rss
 from inject_doi_in_rss import inject_doi_in_rss
@@ -127,6 +128,12 @@ def inject_html_annotations(post_qmds: List[Path], citation_properties: dict) ->
 
             # Inject ROR affiliations
             inject_ror_in_html(
+                qmd_path=qmd_file,
+                html_path=html_file,
+            )
+
+            # Inject author ORCID icons and Scholia links
+            inject_author_links(
                 qmd_path=qmd_file,
                 html_path=html_file,
             )

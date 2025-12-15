@@ -24,6 +24,7 @@ scripts/
 ├── HTML Injection
 │   ├── inject_cito_annotations_in_html.py  # CiTO → HTML
 │   ├── inject_ror_in_html.py               # ROR → HTML
+│   ├── inject_author_links.py              # Author ORCID/Scholia → HTML
 │   └── clean_content_extraction.py         # Semantic markup (WIP)
 │
 ├── RSS/Feed Processing
