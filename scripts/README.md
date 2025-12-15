@@ -15,7 +15,7 @@ scripts/
 ├── prerender.py                            # Pre-render orchestration
 ├── postrender.py                           # Post-render orchestration
 │
-├── Core Processing                    
+├── Core Processing
 │   ├── parse_citos_from_qmd.py             # Extract CiTO from QMD
 │   ├── merge_citos.py                      # Merge citation properties
 │   ├── process_qmd_directory.py            # Batch QMD processing

@@ -35,7 +35,8 @@ REF_ID_PREFIX = "ref-"
 
 
 def inject_cito_annotations_in_rss(
-    rss_path: Path, citation_properties: Dict[str, List[str]]
+    rss_path: Path,
+    citation_properties: Dict[str, List[str]],
 ) -> None:
     """Inject CiTO annotations into RSS feed bibliography entries.
 
@@ -127,7 +128,10 @@ def inject_cito_annotations_in_rss(
     if modified:
         try:
             tree.write(
-                str(rss_path), pretty_print=True, encoding="utf-8", xml_declaration=True
+                str(rss_path),
+                pretty_print=True,
+                encoding="utf-8",
+                xml_declaration=True,
             )
             logger.info(f"Injected CiTO annotations into {rss_path.name}")
         except Exception as e:

@@ -13,7 +13,7 @@ from typing import Dict, List, Optional
 from bs4 import BeautifulSoup
 from ruamel.yaml import YAML
 
-from yaml_utils import extract_yaml_frontmatter, load_yaml, load_metadata_file
+from yaml_utils import extract_yaml_frontmatter, load_metadata_file
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -144,7 +144,8 @@ def extract_author_metadata(qmd_path: Path) -> List[Dict[str, str]]:
                 if isinstance(metadata_files, list):
                     for metadata_path in metadata_files:
                         metadata_doc = load_metadata_file(
-                            metadata_path, qmd_path.parent
+                            metadata_path,
+                            qmd_path.parent,
                         )
                         if metadata_doc:
                             file_authors = _parse_author_metadata_from_doc(metadata_doc)
@@ -257,7 +258,8 @@ def inject_orcid_icon(soup: BeautifulSoup, orcid: str, author_elem) -> bool:
 def inject_scholia_link(soup: BeautifulSoup, qid: str, author_elem) -> bool:
     """Inject Scholia profile link next to author name using official SVG."""
     existing_link = author_elem.find(
-        "a", href=lambda h: h and "scholia.toolforge.org" in h
+        "a",
+        href=lambda h: h and "scholia.toolforge.org" in h,
     )
     if existing_link:
         logger.debug(f"Scholia link already exists for {qid}")
@@ -281,7 +283,8 @@ def inject_scholia_link(soup: BeautifulSoup, qid: str, author_elem) -> bool:
 
 
 def enrich_authors_in_html(
-    soup: BeautifulSoup, authors_metadata: List[Dict[str, str]]
+    soup: BeautifulSoup,
+    authors_metadata: List[Dict[str, str]],
 ) -> int:
     """Enrich author elements with ORCID and Scholia links."""
     if not authors_metadata:
@@ -364,7 +367,7 @@ def inject_author_links(qmd_path: Path, html_path: Path) -> None:
         try:
             html_path.write_text(str(soup), encoding="utf-8")
             logger.info(
-                f"✓ Enriched {enriched_count} author elements in {html_path.name}"
+                f"✓ Enriched {enriched_count} author elements in {html_path.name}",
             )
         except Exception as e:
             logger.error(f"Failed to write HTML {html_path}: {e}")

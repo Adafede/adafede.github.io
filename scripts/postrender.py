@@ -139,7 +139,8 @@ def inject_html_annotations(post_qmds: List[Path], citation_properties: dict) ->
             )
         except Exception as e:
             logger.error(
-                f"Failed to inject annotations for {qmd_file.name}: {e}", exc_info=True
+                f"Failed to inject annotations for {qmd_file.name}: {e}",
+                exc_info=True,
             )
 
 
