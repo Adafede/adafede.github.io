@@ -1,8 +1,8 @@
 """
 QMD directory processor.
 
-Processes QMD files in a directory pattern and injects ROR links into
-corresponding HTML files.
+Processes QMD files in a directory pattern and injects ROR links and
+author metadata (ORCID icons, Scholia links) into corresponding HTML files.
 """
 
 import glob
@@ -10,6 +10,7 @@ import logging
 from pathlib import Path
 
 from inject_ror_in_html import inject_ror_in_html
+from inject_author_links import inject_author_links
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -20,7 +21,7 @@ def process_qmd_directory(qmd_glob: str) -> None:
     """Process QMD files matching a glob pattern.
 
     For each QMD file, finds the corresponding HTML file in _site directory
-    and injects ROR links.
+    and injects ROR links and author metadata.
 
     Args:
         qmd_glob: Glob pattern for QMD files (e.g., "articles/**/*.qmd")
@@ -54,7 +55,12 @@ def process_qmd_directory(qmd_glob: str) -> None:
 
         if html_path.exists():
             try:
+                # Inject ROR affiliations
                 inject_ror_in_html(qmd_path, html_path)
+
+                # Inject author ORCID icons and Scholia links
+                inject_author_links(qmd_path, html_path)
+
                 processed += 1
             except Exception as e:
                 logger.error(f"Failed to process {qmd_file}: {e}", exc_info=True)

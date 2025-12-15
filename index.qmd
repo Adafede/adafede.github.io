@@ -34,10 +34,16 @@ format:
   html:
     css: assets/about-widths.css
     page-layout: full
+vocabularies:
+  wd: <http://www.wikidata.org/entity/>
+  wdt: <http://www.wikidata.org/prop/direct/>
 ---
 
 :::{#hero-heading}
 {{< include cv/bio.qmd >}}
+
+[text]{data-vocab="wd" data-property="Q123"}
+[lala]{data-vocab="wdt" data-property="P123"}
 
 {{< include expertise.qmd >}}
 :::
