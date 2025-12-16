@@ -4,6 +4,7 @@ type: article
 venue: eLife
 date: 2022-05-26
 doi: 10.7554/eLife.70780
+qid: Q112143478
 image: https://upload.wikimedia.org/wikipedia/commons/f/f1/Lotus_initiative_1_graphical_abstract.svg
 image-alt: Logo of the LOTUS initiative
 categories:
@@ -54,5 +55,9 @@ nocite: |
 ---
 
 ```{=html}
-<iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q112143478" title="Scholia entry"></iframe>
+<iframe width="100%"
+        height="100%"
+        src="https://scholia.toolforge.org/work/{{< meta qid >}}"
+        title="Scholia entry">
+</iframe>
 ```

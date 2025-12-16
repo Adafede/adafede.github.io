@@ -5,6 +5,7 @@ type: article
 venue: Scientific Reports
 date: 2021-01-22
 doi: 10.1038/s41598-022-04975-9
+qid: Q110656312
 url: <https://doi.org/10.1038/s41598-022-04975-9>
 # categories:
 #   - TODO
@@ -15,5 +16,9 @@ nocite: |
 ---
 
 ```{=html}
-<iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q110656312" title="Scholia entry"></iframe>
+<iframe width="100%"
+        height="100%"
+        src="https://scholia.toolforge.org/work/{{< meta qid >}}"
+        title="Scholia entry">
+</iframe>
 ```

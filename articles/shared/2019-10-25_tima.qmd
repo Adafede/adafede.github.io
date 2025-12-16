@@ -5,6 +5,7 @@ type: article
 venue: Frontiers in Plant Science
 date: 2019-10-25
 doi: 10.3389/fpls.2019.01329
+qid: Q91218352
 image: https://raw.githubusercontent.com/taxonomicallyinformedannotation/tima/refs/heads/main/man/figures/tima.svg
 image-alt: TIMA's Workflow
 categories:
@@ -47,5 +48,9 @@ nocite: |
 ---
 
 ```{=html}
-<iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q91218352" title="Scholia entry"></iframe>
+<iframe width="100%"
+        height="100%"
+        src="https://scholia.toolforge.org/work/{{< meta qid >}}"
+        title="Scholia entry">
+</iframe>
 ```

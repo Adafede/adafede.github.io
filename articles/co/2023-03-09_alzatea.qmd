@@ -5,6 +5,7 @@ type: article
 venue: Frontiers in Natural Products
 date: 2023-03-09
 doi: 10.3389/fntpr.2023.1147195
+qid: Q117039043
 url: <https://doi.org/10.3389/fntpr.2023.1147195>
 # categories:
 #   - TODO
@@ -15,5 +16,9 @@ nocite: |
 ---
 
 ```{=html}
-<iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q117039043" title="Scholia entry"></iframe>
+<iframe width="100%"
+        height="100%"
+        src="https://scholia.toolforge.org/work/{{< meta qid >}}"
+        title="Scholia entry">
+</iframe>
 ```
