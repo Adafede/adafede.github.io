@@ -1,0 +1,11 @@
+---
+authors:
+  - id: AnikaJohn
+    name:
+      given: Anika
+      family: John
+      literal: Anika John
+    orcid: 0009-0000-0902-2183
+    qid: Q130394968
+    affiliations:
+      - ref: bern

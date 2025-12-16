@@ -1,0 +1,13 @@
+---
+authors:
+  - id: MitjaZdouc
+    name:
+      given: Mitja M.
+      family: Zdouc
+      literal: Mitja M. Zdouc
+    orcid: 0000-0001-6534-6609
+    qid: Q111804041
+    email: mitja.zdouc@wur.nl
+    correspondence: true
+    affiliations:
+      - ref: wageningen

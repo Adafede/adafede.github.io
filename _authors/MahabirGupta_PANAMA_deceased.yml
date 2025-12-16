@@ -1,0 +1,12 @@
+---
+authors:
+  - id: MahabirGupta
+    name:
+      given: Mahabir
+      family: Gupta
+      literal: Mahabir Gupta
+    orcid: 0000-0002-9302-7864
+    qid: Q40070347
+    affiliations:
+      - ref: panama
+    deceased: true

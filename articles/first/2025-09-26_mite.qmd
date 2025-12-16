@@ -15,7 +15,8 @@ metadata-files:
   - ../../_authors/AdrianoRutz_IMSB.yml
   - ../../_authors/MITE_authors_1.yml
   - ../../_authors/JustinVanDerHooft_MULTI.yml
-  - ../../_authors/MITE_authors_corr.yml
+  - ../../_authors/MarnixMedema_WAGENINGEN_corr.yml
+  - ../../_authors/MitjaZdouc_WAGENINGEN_corr.yml
   - ../../_affiliations/IMSB_Zamboni.yml
   - ../../_affiliations/WAGENINGEN.yml
   - ../../_affiliations/JOHANNESBURG.yml

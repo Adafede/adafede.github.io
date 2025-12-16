@@ -1,0 +1,11 @@
+---
+authors:
+  - id: MatthiasHamburger
+    name:
+      given: Matthias
+      family: Hamburger
+      literal: Matthias Hamburger
+    orcid: 0000-0001-9331-273X
+    qid: Q38805779
+    affiliations:
+      - ref: basel

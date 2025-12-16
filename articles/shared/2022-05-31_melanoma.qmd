@@ -5,6 +5,7 @@ type: article
 venue: Journal of Natural Products
 date: 2022-05-31
 doi: 10.1021/acs.jnatprod.2c00146
+qid: Q112189007
 image: https://pubs.acs.org/cms/10.1021/acs.jnatprod.2c00146/asset/images/medium/np2c00146_0008.gif
 image-alt: Article's Graphical Abstract
 categories:
@@ -16,11 +17,23 @@ categories:
   - Natural Products
   - Metabolite Annotation
 metadata-files:
+  - ../../_authors/TanjaHell_BASEL_eq.yml
   - ../../_authors/AdrianoRutz_UNIGE_eq.yml
-  - ../../_authors/Melanoma_authors.yml
+  - ../../_authors/LaraDurr_BASEL.yml
+  - ../../_authors/MaciejDobrzynski_BERN.yml
+  - ../../_authors/JakobReinhardt_BASEL.yml
+  - ../../_authors/TimoLehner_BASEL.yml
+  - ../../_authors/MorisKeller_BASEL.yml
+  - ../../_authors/AnikaJohn_BERN.yml
+  - ../../_authors/MahabirGupta_PANAMA_deceased.yml
+  - ../../_authors/OlivierPertz_BERN.yml
+  - ../../_authors/MatthiasHamburger_BASEL.yml
   - ../../_authors/JeanLucWolfender_UNIGE.yml
-  - ../../_affiliations/Melanoma.yml
+  - ../../_authors/ElianeGaro_BASEL_corr.yml
+  - ../../_affiliations/BASEL_Hamburger.yml
   - ../../_affiliations/UNIGE_Wolfender.yml
+  - ../../_affiliations/BERN_Pertz.yml
+  - ../../_affiliations/Panama.yml
 abstract: >
   The discovery of bioactive natural products remains a time-consuming and challenging task.
   The ability to link high-confidence metabolite annotations in crude extracts with activity would be highly beneficial to the drug discovery process.
@@ -35,5 +48,5 @@ nocite: |
 ---
 
 ```{=html}
-<iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q112189007" title="Scholia entry"></iframe>
+<iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/{{< meta qid >}}" title="Scholia entry"></iframe>
 ```

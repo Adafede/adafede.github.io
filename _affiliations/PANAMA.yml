@@ -1,0 +1,13 @@
+---
+affiliations:
+  - id: panama
+    number: 4
+    name: University of Panama
+    department:
+      - Center for Pharmacognostic Research and Panamanian Flora
+      - Faculty of Pharmacy
+    city: Panama City
+    country: Republic of Panama
+    postal-code: 824
+    ror: https://ror.org/0070j0q91
+    qid: Q7896059
