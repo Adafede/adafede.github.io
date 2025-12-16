@@ -7,6 +7,7 @@ date: 2021-10-06
 doi: 10.13097/archive-ouverte/unige:165668
 qid: Q115707320
 url: <https://doi.org/10.13097/archive-ouverte/unige:165668>
+bibliography: references.bib
 categories:
   - Charged Aerosol Detector
   - Chemical Composition
@@ -95,7 +96,7 @@ Oltre all'annotazione, gli aspetti semiquantitativi sono fondamentali per la val
 
 ```{=html}
 <iframe width="100%"
-        height="100%"
+        height="700px"
         src="https://scholia.toolforge.org/work/{{< meta qid >}}"
         title="Scholia entry">
 </iframe>
