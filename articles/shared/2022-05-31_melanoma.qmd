@@ -33,7 +33,7 @@ metadata-files:
   - ../../_affiliations/BASEL_Hamburger.yml
   - ../../_affiliations/UNIGE_Wolfender.yml
   - ../../_affiliations/BERN_Pertz.yml
-  - ../../_affiliations/Panama.yml
+  - ../../_affiliations/PANAMA.yml
 abstract: >
   The discovery of bioactive natural products remains a time-consuming and challenging task.
   The ability to link high-confidence metabolite annotations in crude extracts with activity would be highly beneficial to the drug discovery process.
