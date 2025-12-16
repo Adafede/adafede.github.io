@@ -1,0 +1,11 @@
+---
+authors:
+  - id: KornkanokIngkaninan
+    name:
+      given: Kornkanok
+      family: Ingkaninan
+      literal: Kornkanok Ingkaninan
+    orcid: 0000-0002-4415-8489
+    qid: Q90969868
+    affiliations:
+      - ref: naresuan

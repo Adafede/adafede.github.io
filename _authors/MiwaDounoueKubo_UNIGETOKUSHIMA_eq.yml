@@ -1,0 +1,13 @@
+---
+authors:
+  - id: MiwaDounoueKubo
+    name:
+      given: Miwa
+      family: Dounoue-Kubo
+      literal: Miwa Dounoue-Kubo
+    orcid: 0000-0002-7271-3128
+    qid: Q104381952
+    equal-contributor: true
+    affiliations:
+      - ref: unige
+      - ref: tokushima

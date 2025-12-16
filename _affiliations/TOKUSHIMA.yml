@@ -1,0 +1,10 @@
+---
+affiliations:
+  - id: tokushima
+    name: Tokushima Bunri University
+    department:
+      - Faculty of Pharmaceutical Sciences
+    city: Tokushima
+    country: Japan
+    ror: https://ror.org/00smwky98
+    qid: Q581252
