@@ -1,0 +1,11 @@
+---
+authors:
+  - id: SimonOllivier
+    name:
+      given: Simon
+      family: Ollivier
+      literal: Simon Ollivier
+    orcid: 0000-0002-7671-1736
+    qid: Q104381950
+    affiliations:
+      - ref: unige

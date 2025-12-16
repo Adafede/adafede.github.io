@@ -47,7 +47,7 @@ jobs:
       - uses: astral-sh/setup-uv@v7
         with:
           enable-cache: true
-          cache-dependency-glob: "uv.lock"
+          cache-dependency-glob: uv.lock
       - uses: pandoc/actions/setup@v1
       - uses: r-lib/actions/setup-tinytex@v2
       - uses: quarto-dev/quarto-actions/setup@v2

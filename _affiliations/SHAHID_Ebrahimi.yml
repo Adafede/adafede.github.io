@@ -1,0 +1,12 @@
+---
+affiliations:
+  - id: shahid
+    name: Shahid Beheshti University
+    department:
+      - Department of Phytochemistry
+      - Medicinal Plants and Drugs Research Institute
+    group: Ebrahimi
+    city: Tehran
+    country: Iran
+    ror: https://ror.org/0091vmj44
+    qid: Q609586

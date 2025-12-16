@@ -1,0 +1,10 @@
+---
+authors:
+  - id: TongchaiSaesong
+    name:
+      given: Tongchai
+      family: Saesong
+      literal: Tongchai Saesong
+    qid: Q104381954
+    affiliations:
+      - ref: naresuan

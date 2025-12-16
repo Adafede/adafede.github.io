@@ -1,0 +1,11 @@
+---
+authors:
+  - id: SamadEbrahimi
+    name:
+      given: Samad Nejad
+      family: Ebrahimi
+      literal: Samad Nejad Ebrahimi
+    orcid: 0000-0003-2167-8032
+    qid: Q38805791
+    affiliations:
+      - ref: shahid

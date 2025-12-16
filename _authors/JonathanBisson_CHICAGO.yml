@@ -1,0 +1,11 @@
+---
+authors:
+  - id: JonathanBisson
+    name:
+      given: Jonathan
+      family: Bisson
+      literal: Jonathan Bisson
+    orcid: 0000-0003-1640-9989
+    qid: Q57678148
+    affiliations:
+      - ref: chicago
