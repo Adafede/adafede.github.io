@@ -15,10 +15,11 @@ author:
 authors:
 - affiliations:
   - ref: imsb
+  id: AdrianoRutz
   name:
     family: Rutz
     given: Adriano
-  number: 1
+    literal: Adriano Rutz
   orcid: 0000-0003-0443-9902
   qid: Q97455964
 bibliography:
