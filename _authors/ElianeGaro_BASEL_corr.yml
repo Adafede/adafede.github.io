@@ -1,0 +1,13 @@
+---
+authors:
+  - id: ElianeGaro
+    name:
+      given: Eliane
+      family: Garo
+      literal: Eliane Garo
+    orcid: 0000-0002-3497-2524
+    qid: Q112189035
+    email: eliane.garo@unibas.ch
+    correspondence: true
+    affiliations:
+      - ref: basel

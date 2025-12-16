@@ -1,0 +1,14 @@
+---
+affiliations:
+  - id: basel
+    name: University of Basel
+    department:
+      - Division of Pharmaceutical Biology
+      - Department of Pharmaceutical Sciences
+    group: Hamburger
+    address: Klingelbergstrasse 50
+    city: Basel
+    country: Switzerland
+    postal-code: 4056
+    ror: https://ror.org/02s6k3f65
+    qid: Q372608

@@ -1,0 +1,11 @@
+---
+authors:
+  - id: OlivierPertz
+    name:
+      given: Olivier
+      family: Pertz
+      literal: Olivier Pertz
+    orcid: 0000-0001-8579-4919
+    qid: Q63866898
+    affiliations:
+      - ref: bern

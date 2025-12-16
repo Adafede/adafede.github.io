@@ -1,0 +1,12 @@
+---
+authors:
+  - id: TanjaHell
+    name:
+      given: Tanja
+      family: Hell
+      literal: Tanja Hell
+    orcid: 0000-0002-8867-2412
+    qid: Q112189019
+    equal-contributor: true
+    affiliations:
+      - ref: basel

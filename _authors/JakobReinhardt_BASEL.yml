@@ -1,0 +1,11 @@
+---
+authors:
+  - id: JakobReinhardt
+    name:
+      given: Jakob K.
+      family: Reinhardt
+      literal: Jakob K. Reinhardt
+    orcid: 0000-0002-8675-1029
+    qid: Q112189023
+    affiliations:
+      - ref: basel

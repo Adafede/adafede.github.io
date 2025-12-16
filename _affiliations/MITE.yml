@@ -3,7 +3,8 @@
 affiliations:
   - id: monterrey
     name: Tecnológico de Monterrey
-    department: "Industrial Genomics Laboratory, Centro de Biotecnología FEMSA, Escuela de Ingeniería y Ciencias"
+    department: Industrial Genomics Laboratory, Centro de Biotecnología FEMSA,
+      Escuela de Ingeniería y Ciencias
     city: Nuevo Leon
     country: México
     ror: https://ror.org/03ayjn504
@@ -114,14 +115,16 @@ affiliations:
     country: India
     ror: https://ror.org/05nnsek89
   - id: hki
-    name: "Leibniz-Institut für Naturstoff-Forschung und Infektionsbiologie e. V. - Hans-Knöll-Institut (HKI)"
+    name: Leibniz-Institut für Naturstoff-Forschung und Infektionsbiologie e. V. -
+      Hans-Knöll-Institut (HKI)
     department: Department of Paleobiotechnology
     city: Jena
     country: Germany
     ror: https://ror.org/055s37c97
   - id: tübingen
     name: University of Tübingen
-    department: "Interfaculty Institute of Microbiology and Infection Medicine Tübingen (IMIT), Interfaculty Institute for Biomedical Informatics (IBMI)"
+    department: Interfaculty Institute of Microbiology and Infection Medicine
+      Tübingen (IMIT), Interfaculty Institute for Biomedical Informatics (IBMI)
     city: Tübingen
     country: Germany
     ror: https://ror.org/03a1kwz48
@@ -157,7 +160,8 @@ affiliations:
     ror: https://ror.org/04qtj9h94
   - id: shenzhen
     name: Southern University of Science and Technology
-    department: "Institute of Plant and Food Science, Department of Biology, School of Life Sciences"
+    department: Institute of Plant and Food Science, Department of Biology, School
+      of Life Sciences
     city: Shenzhen
     country: China
     ror: https://ror.org/049tv2d57

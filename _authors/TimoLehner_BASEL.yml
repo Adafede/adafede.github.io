@@ -1,0 +1,11 @@
+---
+authors:
+  - id: TimoLehner
+    name:
+      given: Timo
+      family: Lehner
+      literal: Timo Lehner
+    orcid: 0009-0009-7143-3202
+    qid: Q130394981
+    affiliations:
+      - ref: basel

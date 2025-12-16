@@ -1,0 +1,11 @@
+---
+authors:
+  - id: MorisKeller
+    name:
+      given: Moris
+      family: Keller
+      literal: Moris Keller
+    orcid: 0000-0002-4316-6591
+    qid: Q112189027
+    affiliations:
+      - ref: basel

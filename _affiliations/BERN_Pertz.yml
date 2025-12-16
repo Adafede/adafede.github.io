@@ -1,0 +1,13 @@
+---
+affiliations:
+  - id: bern
+    name: University of Bern
+    department:
+      - Institute of Cell Biology
+    group: Pertz
+    address: Baltzerstrasse 4
+    city: Bern
+    country: Switzerland
+    postal-code: 3012
+    ror: https://ror.org/02k7v4d05
+    qid: Q6039997
