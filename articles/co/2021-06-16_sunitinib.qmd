@@ -5,6 +5,7 @@ type: article
 venue: International Journal of Molecular Sciences
 date: 2021-06-16
 doi: 10.3390/ijms22126467
+qid: Q107270365
 url: <https://doi.org/10.3390/ijms22126467>
 # categories:
 #   - TODO
@@ -15,5 +16,9 @@ nocite: |
 ---
 
 ```{=html}
-<iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q107270365" title="Scholia entry"></iframe>
+<iframe width="100%"
+        height="100%"
+        src="https://scholia.toolforge.org/work/{{< meta qid >}}"
+        title="Scholia entry">
+</iframe>
 ```

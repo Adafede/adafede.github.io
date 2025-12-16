@@ -6,6 +6,7 @@ type: article
 venue: Frontiers in Plant Science
 date: 2023-12-19
 doi: 10.3389/fpls.2023.1278745
+qid: Q123938372
 url: <https://doi.org/10.3389/fpls.2023.1278745>
 # categories:
 #   - TODO
@@ -16,5 +17,9 @@ nocite: |
 ---
 
 ```{=html}
-<iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q123938372" title="Scholia entry"></iframe>
+<iframe width="100%"
+        height="100%"
+        src="https://scholia.toolforge.org/work/{{< meta qid >}}"
+        title="Scholia entry">
+</iframe>
 ```

@@ -5,6 +5,7 @@ type: article
 venue: Journal of the Brazilian Chemical Society
 date: 2019-03
 doi: 10.21577/0103-5053.20180221
+qid: Q106516421
 url: <https://doi.org/10.21577/0103-5053.20180221>
 # categories:
 #   - TODO
@@ -15,5 +16,9 @@ nocite: |
 ---
 
 ```{=html}
-<iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q106516421" title="Scholia entry"></iframe>
+<iframe width="100%"
+        height="100%"
+        src="https://scholia.toolforge.org/work/{{< meta qid >}}"
+        title="Scholia entry">
+</iframe>
 ```

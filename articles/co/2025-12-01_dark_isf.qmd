@@ -4,6 +4,7 @@ type: article
 venue: JACS Au
 date: 2025-12-01
 doi: 10.1021/jacsau.5c01063
+# qid: TODO
 url: <https://doi.org/10.1021/jacsau.5c01063>
 # categories:
   # - Dark Matter
@@ -17,5 +18,9 @@ nocite: |
 ---
 
 <!-- ```{=html} -->
-<!-- <iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/TODO" title="Scholia entry"></iframe> -->
+<!-- <iframe width="100%" -->
+<!--         height="100%" -->
+<!--         src="https://scholia.toolforge.org/work/{{< meta qid >}}" -->
+<!--         title="Scholia entry"> -->
+<!-- </iframe> -->
 <!-- ``` -->

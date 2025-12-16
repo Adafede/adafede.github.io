@@ -4,6 +4,7 @@ type: correspondence
 venue: Nature Metabolism
 date: 2025-02-28
 doi: 10.1038/s42255-025-01239-4
+# qid: TODO
 image: https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs42255-025-01239-4/MediaObjects/42255_2025_1239_Fig1_HTML.png
 image-alt: Article's Graphical Abstract
 categories:
@@ -33,12 +34,14 @@ categories:
 #     country: Switzerland
 #     postal-code: 8093
 #     ror: https://ror.org/03j5gm982
-# abstract: |
-#  TODO
 nocite: |
   @ElAbiead2025a
 ---
 
 <!-- ```{=html} -->
-<!-- <iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/TODO" title="Scholia entry"></iframe> -->
+<!-- <iframe width="100%" -->
+<!--         height="100%" -->
+<!--         src="https://scholia.toolforge.org/work/{{< meta qid >}}" -->
+<!--         title="Scholia entry"> -->
+<!-- </iframe> -->
 <!-- ``` -->

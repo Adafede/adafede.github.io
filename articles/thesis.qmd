@@ -1,11 +1,11 @@
 ---
-bibliography: references.bib
 title: Integrative Analytical and Computational Strategies for Qualitative and
   Semi-quantitative Plant Metabolome Characterization
 type: thesis
 venue: Université de Genève
 date: 2021-10-06
-doi: https://doi.org/10.13097/archive-ouverte/unige:165668
+doi: 10.13097/archive-ouverte/unige:165668
+qid: Q115707320
 url: <https://doi.org/10.13097/archive-ouverte/unige:165668>
 categories:
   - Charged Aerosol Detector
@@ -94,5 +94,9 @@ Oltre all'annotazione, gli aspetti semiquantitativi sono fondamentali per la val
 :::
 
 ```{=html}
-<iframe width="100%" height="700px" src="https://scholia.toolforge.org/work/Q115707320" title="Scholia entry"></iframe>
+<iframe width="100%"
+        height="100%"
+        src="https://scholia.toolforge.org/work/{{< meta qid >}}"
+        title="Scholia entry">
+</iframe>
 ```

@@ -5,6 +5,7 @@ type: article
 venue: Journal of Ethnopharmacology
 date: 2020-09-15
 doi: 10.1016/j.jep.2020.112954
+qid: Q95643469
 url: <https://doi.org/10.1016/j.jep.2020.112954>
 # categories:
 #   - TODO
@@ -15,5 +16,9 @@ nocite: |
 ---
 
 ```{=html}
-<iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q95643469" title="Scholia entry"></iframe>
+<iframe width="100%"
+        height="100%"
+        src="https://scholia.toolforge.org/work/{{< meta qid >}}"
+        title="Scholia entry">
+</iframe>
 ```

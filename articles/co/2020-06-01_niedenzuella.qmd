@@ -5,6 +5,7 @@ type: article
 venue: Phytochemistry Letters
 date: 2020-06-01
 doi: 10.1016/j.phytol.2020.02.005
+qid: Q104590856
 url: <https://doi.org/10.1016/j.phytol.2020.02.005>
 # categories:
 #   - TODO
@@ -15,5 +16,9 @@ nocite: |
 ---
 
 ```{=html}
-<iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q104590856" title="Scholia entry"></iframe>
+<iframe width="100%"
+        height="100%"
+        src="https://scholia.toolforge.org/work/{{< meta qid >}}"
+        title="Scholia entry">
+</iframe>
 ```

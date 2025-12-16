@@ -4,6 +4,7 @@ type: article
 venue: PLOS Biology
 date: 2025-07-29
 doi: 10.1371/journal.pbio.3003287
+# qid: TODO
 url: <https://doi.org/10.1371/journal.pbio.3003287>
 # categories:
 #   - TODO
@@ -14,5 +15,9 @@ nocite: |
 ---
 
 <!-- ```{=html} -->
-<!-- <iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/TODO" title="Scholia entry"></iframe> -->
+<!-- <iframe width="100%" -->
+<!--         height="100%" -->
+<!--         src="https://scholia.toolforge.org/work/{{< meta qid >}}" -->
+<!--         title="Scholia entry"> -->
+<!-- </iframe> -->
 <!-- ``` -->

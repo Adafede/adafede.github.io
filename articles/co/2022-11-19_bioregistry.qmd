@@ -4,6 +4,7 @@ type: article
 venue: Scientific Data
 date: 2022-11-19
 doi: 10.1038/s41597-022-01807-3
+qid: Q115317009
 url: <https://doi.org/10.1038/s41597-022-01807-3>
 # categories:
 #   - TODO
@@ -14,5 +15,9 @@ nocite: |
 ---
 
 ```{=html}
-<iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q115317009" title="Scholia entry"></iframe>
+<iframe width="100%"
+        height="100%"
+        src="https://scholia.toolforge.org/work/{{< meta qid >}}"
+        title="Scholia entry">
+</iframe>
 ```
