@@ -20,7 +20,7 @@ cvmeta:
     right: "phone: +41 76 521 45 40 - email: adriano.rutz@ik.me"
   - title: Languages
     left: French (C2), English (C1), German (C1), Italian (C1)
-    right: "address: Langgrütstrasse, 25, 8047 Zürich, Switzerland"
+    right: "address: Wydäckerring, 63, 8047 Zürich, Switzerland"
 ---
 
 {{< include cv/_bio.qmd >}}
