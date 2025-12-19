@@ -34,10 +34,10 @@ def extract_yaml_frontmatter(qmd_content: str) -> Optional[str]:
 
 
 def load_yaml(path: Path) -> Optional[dict]:
-    """Load and parse a YAML file.
+    """Load and parse a YAML file or QMD frontmatter.
 
     Args:
-        path: Path to YAML file
+        path: Path to YAML file (.yml) or QMD file (.qmd)
 
     Returns:
         Parsed YAML dict or None if file doesn't exist or can't be parsed
@@ -46,7 +46,18 @@ def load_yaml(path: Path) -> Optional[dict]:
         return None
     yaml_loader = YAML(typ="safe")
     try:
-        return yaml_loader.load(path.read_text(encoding="utf-8"))
+        content = path.read_text(encoding="utf-8")
+
+        # If it's a QMD file, extract frontmatter first
+        if path.suffix == ".qmd":
+            yaml_str = extract_yaml_frontmatter(content)
+            if yaml_str is None:
+                logger.warning(f"No YAML frontmatter found in {path}")
+                return None
+            return yaml_loader.load(yaml_str)
+        else:
+            # For .yml files, load directly
+            return yaml_loader.load(content)
     except Exception as e:
         logger.warning(f"Failed to parse YAML at {path}: {e}")
         return None

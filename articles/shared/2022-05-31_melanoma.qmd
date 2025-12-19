@@ -17,23 +17,23 @@ categories:
   - Natural Products
   - Metabolite Annotation
 metadata-files:
-  - ../../_authors/TanjaHell_BASEL_eq.yml
-  - ../../_authors/AdrianoRutz_UNIGE_eq.yml
-  - ../../_authors/LaraDurr_BASEL.yml
-  - ../../_authors/MaciejDobrzynski_BERN.yml
-  - ../../_authors/JakobReinhardt_BASEL.yml
-  - ../../_authors/TimoLehner_BASEL.yml
-  - ../../_authors/MorisKeller_BASEL.yml
-  - ../../_authors/AnikaJohn_BERN.yml
-  - ../../_authors/MahabirGupta_PANAMA_deceased.yml
-  - ../../_authors/OlivierPertz_BERN.yml
-  - ../../_authors/MatthiasHamburger_BASEL.yml
-  - ../../_authors/JeanLucWolfender_UNIGE.yml
-  - ../../_authors/ElianeGaro_BASEL_corr.yml
-  - ../../_affiliations/BASEL_Hamburger.yml
-  - ../../_affiliations/UNIGE_Wolfender.yml
-  - ../../_affiliations/BERN_Pertz.yml
-  - ../../_affiliations/PANAMA.yml
+  - ../../_includes/entities/authors/TanjaHell_BASEL_eq.yml
+  - ../../_includes/entities/authors/AdrianoRutz_UNIGE_eq.yml
+  - ../../_includes/entities/authors/LaraDurr_BASEL.yml
+  - ../../_includes/entities/authors/MaciejDobrzynski_BERN.yml
+  - ../../_includes/entities/authors/JakobReinhardt_BASEL.yml
+  - ../../_includes/entities/authors/TimoLehner_BASEL.yml
+  - ../../_includes/entities/authors/MorisKeller_BASEL.yml
+  - ../../_includes/entities/authors/AnikaJohn_BERN.yml
+  - ../../_includes/entities/authors/MahabirGupta_PANAMA_deceased.yml
+  - ../../_includes/entities/authors/OlivierPertz_BERN.yml
+  - ../../_includes/entities/authors/MatthiasHamburger_BASEL.yml
+  - ../../_includes/entities/authors/JeanLucWolfender_UNIGE.yml
+  - ../../_includes/entities/authors/ElianeGaro_BASEL_corr.yml
+  - ../../_includes/entities/affiliations/BASEL_Hamburger.yml
+  - ../../_includes/entities/affiliations/UNIGE_Wolfender.yml
+  - ../../_includes/entities/affiliations/BERN_Pertz.yml
+  - ../../_includes/entities/affiliations/PANAMA.yml
 abstract: >
   The discovery of bioactive natural products remains a time-consuming and challenging task.
   The ability to link high-confidence metabolite annotations in crude extracts with activity would be highly beneficial to the drug discovery process.

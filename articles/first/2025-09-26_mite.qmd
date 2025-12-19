@@ -13,15 +13,15 @@ categories:
   - Natural Products
   - SMARTS
 metadata-files:
-  - ../../_authors/AdrianoRutz_IMSB.yml
-  - ../../_authors/MITE_authors_1.yml
-  - ../../_authors/JustinVanDerHooft_MULTI.yml
-  - ../../_authors/MarnixMedema_WAGENINGEN_corr.yml
-  - ../../_authors/MitjaZdouc_WAGENINGEN_corr.yml
-  - ../../_affiliations/IMSB_Zamboni.yml
-  - ../../_affiliations/WAGENINGEN.yml
-  - ../../_affiliations/JOHANNESBURG.yml
-  - ../../_affiliations/MITE.yml
+  - ../../_includes/entities/authors/AdrianoRutz_IMSB.yml
+  - ../../_includes/entities/authors/MITE_authors_1.yml
+  - ../../_includes/entities/authors/JustinVanDerHooft_MULTI.yml
+  - ../../_includes/entities/authors/MarnixMedema_WAGENINGEN_corr.yml
+  - ../../_includes/entities/authors/MitjaZdouc_WAGENINGEN_corr.yml
+  - ../../_includes/entities/affiliations/IMSB_Zamboni.yml
+  - ../../_includes/entities/affiliations/WAGENINGEN.yml
+  - ../../_includes/entities/affiliations/JOHANNESBURG.yml
+  - ../../_includes/entities/affiliations/MITE.yml
 abstract: >
   Secondary or specialized metabolites show extraordinary structural diversity and potent biological activities relevant for clinical and industrial applications.
   The biosynthesis of these metabolites usually starts with the assembly of a core ‘scaffold’, which is subsequently modified by tailoring enzymes to define the molecule’s final structure and, in turn, its biological activity profile.

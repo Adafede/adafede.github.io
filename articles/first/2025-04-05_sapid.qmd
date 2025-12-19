@@ -15,15 +15,15 @@ categories:
   - Natural Extracts
   - Taste
 metadata-files:
-  - ../../_authors/AdrianoRutz_UNIGEIMSB_corr.yml
-  - ../../_authors/PascaleDeneulin_CHANGINS.yml
-  - ../../_authors/IvanoTonutti_TRADALL.yml
-  - ../../_authors/BenoitBach_CHANGINS.yml
-  - ../../_authors/JeanLucWolfender_UNIGE_corr.yml
-  - ../../_affiliations/UNIGE_Wolfender.yml
-  - ../../_affiliations/IMSB_Zamboni.yml
-  - ../../_affiliations/CHANGINS_Bach.yml
-  - ../../_affiliations/TRADALL.yml
+  - ../../_includes/entities/authors/AdrianoRutz_UNIGEIMSB_corr.yml
+  - ../../_includes/entities/authors/PascaleDeneulin_CHANGINS.yml
+  - ../../_includes/entities/authors/IvanoTonutti_TRADALL.yml
+  - ../../_includes/entities/authors/BenoitBach_CHANGINS.yml
+  - ../../_includes/entities/authors/JeanLucWolfender_UNIGE_corr.yml
+  - ../../_includes/entities/affiliations/UNIGE_Wolfender.yml
+  - ../../_includes/entities/affiliations/IMSB_Zamboni.yml
+  - ../../_includes/entities/affiliations/CHANGINS_Bach.yml
+  - ../../_includes/entities/affiliations/TRADALL.yml
 abstract: >
   Analyzing bitterness is challenging because of the diverse range of bitter compounds, the variability in sensory perception, and its complex interaction with other tastes.
   To address this, we developed an untargeted approach to deconvolute the taste and molecular composition of complex plant extracts.

@@ -14,32 +14,32 @@ categories:
   - Wikidata
   - Knowledge Graph
 metadata-files:
-  - ../../_authors/AdrianoRutz_UNIGE.yml
-  - ../../_authors/MariaSorokina_JENA.yml
-  - ../../_authors/JakubGalgonek_IOCB.yml
-  - ../../_authors/DanielMietchen_MULTI.yml
-  - ../../_authors/EgonWillighagen_BIGCAT.yml
-  - ../../_authors/ArnaudGaudry_UNIGE.yml
-  - ../../_authors/JamesGraham_CHICAGO.yml
-  - ../../_authors/RalfStephan_OICR.yml
-  - ../../_authors/RodericPage_GLASGOW.yml
-  - ../../_authors/JiriVrondasek_IOCB.yml
-  - ../../_authors/ChristophSteinbeck_JENA.yml
-  - ../../_authors/GuidoPauli_CHICAGO.yml
-  - ../../_authors/JeanLucWolfender_UNIGE.yml
-  - ../../_authors/JonathanBisson_CHICAGO_corr.yml
-  - ../../_authors/PierreMarieAllard_UNIGEFR_corr.yml
-  - ../../_affiliations/UNIGE_Wolfender.yml
-  - ../../_affiliations/JENA_Steinbeck.yml
-  - ../../_affiliations/IOCB_Vrondasek.yml
-  - ../../_affiliations/LEIBNIZ.yml
-  - ../../_affiliations/RONIN.yml
-  - ../../_affiliations/VIRGINIA.yml
-  - ../../_affiliations/BIGCAT.yml
-  - ../../_affiliations/CHICAGO_Pauli.yml
-  - ../../_affiliations/OICR.yml
-  - ../../_affiliations/GLASGOW.yml
-  - ../../_affiliations/UNIFR_Allard.yml
+  - ../../_includes/entities/authors/AdrianoRutz_UNIGE.yml
+  - ../../_includes/entities/authors/MariaSorokina_JENA.yml
+  - ../../_includes/entities/authors/JakubGalgonek_IOCB.yml
+  - ../../_includes/entities/authors/DanielMietchen_MULTI.yml
+  - ../../_includes/entities/authors/EgonWillighagen_BIGCAT.yml
+  - ../../_includes/entities/authors/ArnaudGaudry_UNIGE.yml
+  - ../../_includes/entities/authors/JamesGraham_CHICAGO.yml
+  - ../../_includes/entities/authors/RalfStephan_OICR.yml
+  - ../../_includes/entities/authors/RodericPage_GLASGOW.yml
+  - ../../_includes/entities/authors/JiriVrondasek_IOCB.yml
+  - ../../_includes/entities/authors/ChristophSteinbeck_JENA.yml
+  - ../../_includes/entities/authors/GuidoPauli_CHICAGO.yml
+  - ../../_includes/entities/authors/JeanLucWolfender_UNIGE.yml
+  - ../../_includes/entities/authors/JonathanBisson_CHICAGO_corr.yml
+  - ../../_includes/entities/authors/PierreMarieAllard_UNIGEFR_corr.yml
+  - ../../_includes/entities/affiliations/UNIGE_Wolfender.yml
+  - ../../_includes/entities/affiliations/JENA_Steinbeck.yml
+  - ../../_includes/entities/affiliations/IOCB_Vrondasek.yml
+  - ../../_includes/entities/affiliations/LEIBNIZ.yml
+  - ../../_includes/entities/affiliations/RONIN.yml
+  - ../../_includes/entities/affiliations/VIRGINIA.yml
+  - ../../_includes/entities/affiliations/BIGCAT.yml
+  - ../../_includes/entities/affiliations/CHICAGO_Pauli.yml
+  - ../../_includes/entities/affiliations/OICR.yml
+  - ../../_includes/entities/affiliations/GLASGOW.yml
+  - ../../_includes/entities/affiliations/UNIFR_Allard.yml
 abstract: >
   Contemporary bioinformatic and chemoinformatic capabilities hold promise to reshape knowledge management, analysis and interpretation of data in natural products research.
   Currently, reliance on a disparate set of non-standardized, insular, and specialized databases presents a series of challenges for data access, both within the discipline and for integration and interoperability between related fields.
