@@ -9,8 +9,8 @@ categories:
   - Talk
 doi: https://doi.org/10.1055/s-0043-1773831
 metadata-files:
-  - ../_authors/AdrianoRutz_IMSB.yml
-  - ../_affiliations/IMSB_Zamboni.yml
+  - ../_includes/entities/authors/AdrianoRutz_IMSB.yml
+  - ../_includes/entities/affiliations/IMSB_Zamboni.yml
 description: >
   [Dr. Willmar Schwabe Young Talent Award](https://ga-online.org/about-ga/awards/dr-willmar-schwabe-young-talent-prize/) lecture for the [LOTUS initiative](https://lotus.nprod.net/).
 

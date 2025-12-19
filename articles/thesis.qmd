@@ -24,8 +24,8 @@ categories:
   - Taste
   - Wikidata
 metadata-files:
-  - ../_authors/AdrianoRutz_UNIGE.yml
-  - ../_affiliations/UNIGE_Wolfender.yml
+  - ../_includes/entities/authors/AdrianoRutz_UNIGE.yml
+  - ../_includes/entities/affiliations/UNIGE_Wolfender.yml
 nocite: |
   @https://doi.org/10.13097/archive-ouverte/unige:165668
 ---
