@@ -10,7 +10,7 @@ format:
       body-width: 1200px
     # include-in-header:
     #   - _includes/dokieli.html
-    minimal: true
+    # minimal: true
     link-external-icon: false
     link-external-newwindow: true
     theme:
