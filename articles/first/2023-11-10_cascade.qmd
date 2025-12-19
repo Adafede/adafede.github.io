@@ -18,10 +18,10 @@ categories:
   - Natural Products
   - Metabolite Annotation
 metadata-files:
-  - ../../_authors/AdrianoRutz_UNIGEIMSB_corr.yml
-  - ../../_authors/JeanLucWolfender_UNIGE_corr.yml
-  - ../../_affiliations/UNIGE_Wolfender.yml
-  - ../../_affiliations/IMSB_Zamboni.yml
+  - ../../_includes/entities/authors/AdrianoRutz_UNIGEIMSB_corr.yml
+  - ../../_includes/entities/authors/JeanLucWolfender_UNIGE_corr.yml
+  - ../../_includes/entities/affiliations/UNIGE_Wolfender.yml
+  - ../../_includes/entities/affiliations/IMSB_Zamboni.yml
 abstract: >
   Recent developments in mass spectrometry-based metabolite profiling allow unprecedented qualitative coverage of complex biological extract
   composition.

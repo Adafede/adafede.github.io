@@ -12,20 +12,20 @@ categories:
   - Liquid Chromatography-Tandem Mass Spectrometry
   - Natural Extracts
 metadata-files:
-  - ../../_authors/AdrianoRutz_IMSB_corr.yml
-  - ../../_authors/WoutBittremieux_ANTWERP.yml
-  - ../../_authors/RobinSchmid_IOCBMZIO.yml
-  - ../../_authors/OlivierCailloux_LAMSADE.yml
-  - ../../_authors/JustinVanDerHooft_MULTI.yml
-  - ../../_authors/MehdiBeniddir_BIOCIS_corr.yml
-  - ../../_affiliations/IMSB_Zamboni.yml
-  - ../../_affiliations/ANTWERP.yml
-  - ../../_affiliations/IOCB_Pluskal.yml
-  - ../../_affiliations/MZIO.yml
-  - ../../_affiliations/LAMSADE.yml
-  - ../../_affiliations/WAGENINGEN.yml
-  - ../../_affiliations/JOHANNESBURG.yml
-  - ../../_affiliations/BIOCIS.yml
+  - ../../_includes/entities/authors/AdrianoRutz_IMSB_corr.yml
+  - ../../_includes/entities/authors/WoutBittremieux_ANTWERP.yml
+  - ../../_includes/entities/authors/RobinSchmid_IOCBMZIO.yml
+  - ../../_includes/entities/authors/OlivierCailloux_LAMSADE.yml
+  - ../../_includes/entities/authors/JustinVanDerHooft_MULTI.yml
+  - ../../_includes/entities/authors/MehdiBeniddir_BIOCIS_corr.yml
+  - ../../_includes/entities/affiliations/IMSB_Zamboni.yml
+  - ../../_includes/entities/affiliations/ANTWERP.yml
+  - ../../_includes/entities/affiliations/IOCB_Pluskal.yml
+  - ../../_includes/entities/affiliations/MZIO.yml
+  - ../../_includes/entities/affiliations/LAMSADE.yml
+  - ../../_includes/entities/affiliations/WAGENINGEN.yml
+  - ../../_includes/entities/affiliations/JOHANNESBURG.yml
+  - ../../_includes/entities/affiliations/BIOCIS.yml
 abstract: >
   This review explores the potential of bioinformatics and chemoinformatics tools to advance the exploration of natural extracts libraries (NELs).
   Although metabolomics has become a term used routinely in natural product (NP) research, the field remains focused on individual molecules or small sets of compounds, which restricts scalability.
