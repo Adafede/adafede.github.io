@@ -6,10 +6,10 @@ location: Zürich, Switzerland
 categories:
   - Poster
 metadata-files:
-  - ../_authors/AdrianoRutz_IMSB.yml
-  - ../_authors/VincenWu_IMSB.yml
-  - ../_authors/NicolaZamboni_IMSB_corr.yml
-  - ../_affiliations/IMSB_Zamboni.yml
+  - ../_includes/entities/authors/AdrianoRutz_IMSB.yml
+  - ../_includes/entities/authors/VincenWu_IMSB.yml
+  - ../_includes/entities/authors/NicolaZamboni_IMSB_corr.yml
+  - ../_includes/entities/affiliations/IMSB_Zamboni.yml
 description: >
   Poster presented at the [Swiss Metabolomics Society Annual Meeting](https://swiss-metabolomics.ch/annual-meeting).
 ---

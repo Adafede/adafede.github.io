@@ -8,8 +8,8 @@ location: Innsbruck, Austria
 categories:
   - Poster
 metadata-files:
-  - ../_authors/AdrianoRutz_UNIGE.yml
-  - ../_affiliations/UNIGE_Wolfender.yml
+  - ../_includes/entities/authors/AdrianoRutz_UNIGE.yml
+  - ../_includes/entities/affiliations/UNIGE_Wolfender.yml
 description: |
   My first academic poster.
 ---

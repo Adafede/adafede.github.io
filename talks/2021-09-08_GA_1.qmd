@@ -7,8 +7,8 @@ date: 2021-09-08
 categories:
   - Talk
 metadata-files:
-  - ../_authors/AdrianoRutz_UNIGE.yml
-  - ../_affiliations/UNIGE_Wolfender.yml
+  - ../_includes/entities/authors/AdrianoRutz_UNIGE.yml
+  - ../_includes/entities/affiliations/UNIGE_Wolfender.yml
 description: >
   Advocating to the Medicinal Plant and Natural Product community for the [LOTUS initiative](https://lotus.nprod.net/).
 

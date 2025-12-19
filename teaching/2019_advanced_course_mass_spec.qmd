@@ -6,9 +6,9 @@ location: Napoli, Italy
 categories:
   - Teaching
 metadata-files:
-  - ../_authors/AdrianoRutz_UNIGE.yml
-  - ../_authors/JeanLucWolfender_UNIGE_corr.yml
-  - ../_affiliations/UNIGE_Wolfender.yml
+  - ../_includes/entities/authors/AdrianoRutz_UNIGE.yml
+  - ../_includes/entities/authors/JeanLucWolfender_UNIGE_corr.yml
+  - ../_includes/entities/affiliations/UNIGE_Wolfender.yml
 ---
 
 ## Topics

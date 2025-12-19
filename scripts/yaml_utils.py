@@ -83,7 +83,7 @@ def load_metadata_file(relative_path: str, qmd_dir: Path) -> Optional[dict]:
     """Load a metadata file referenced from QMD frontmatter.
 
     Args:
-        relative_path: Relative path from QMD file (e.g., '../_authors/AdrianoRutz_IMSB.yml')
+        relative_path: Relative path from QMD file ('../_includes/entities/...')
         qmd_dir: Directory containing the QMD file
 
     Returns:

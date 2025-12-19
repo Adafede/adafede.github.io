@@ -6,8 +6,8 @@ location: Wageningen, the Netherlands
 categories:
   - Talk
 metadata-files:
-  - ../_authors/AdrianoRutz_IMSB.yml
-  - ../_affiliations/IMSB_Zamboni.yml
+  - ../_includes/entities/authors/AdrianoRutz_IMSB.yml
+  - ../_includes/entities/affiliations/IMSB_Zamboni.yml
 description: >
   Talk given in the frame of the “Knowledge Graphs for Plant and Microbiome Multiomics” Symposium.
 

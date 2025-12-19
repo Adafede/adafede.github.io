@@ -1,7 +1,7 @@
 ---
 metadata-files:
-  - ../_authors/AdrianoRutz_IMSB.yml
-  - ../_affiliations/IMSB_Zamboni.yml
+  - ../_includes/entities/authors/AdrianoRutz_IMSB.yml
+  - ../_includes/entities/affiliations/IMSB_Zamboni.yml
 categories:
   - Open Science
 citation: true
