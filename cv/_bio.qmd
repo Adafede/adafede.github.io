@@ -1,6 +1,14 @@
 ## Bio
 
-*Adriano Rutz* is a postdoctoral researcher at ETH Zürich, where he develops computational and analytical methods for metabolomics.
+*[Adriano Rutz]{about="wd:Q97455964" property="wdt:P31" resource="wd:Q5" typeof="schema:Person"}*
+is a
+[postdoctoral researcher]{about="wd:Q1125292" property="wdt:P31" resource="wd:Q28640" typeof="schema:Occupation"}
+at
+[ETH Zürich]{about="wd:Q11942" property="wdt:P31" resource="wd:Q875538" typeof="schema:CollegeOrUniversity"},
+where he develops
+[computational]{about="wd:Q104595152"} and
+[analytical methods]{about="wd:Q4751159"} for
+[metabolomics]{about="wd:Q12149006"}.
 With a background in pharmaceutical sciences and phytochemistry, he combines mass spectrometry, cheminformatics, and open science to explore the chemical diversity of life.
 Following industry experience at Tradall SA (Bacardi Group), he completed his PhD at the University of Geneva.
 At ETH Zürich, he creates scalable, open-source tools for molecular annotation and metabolite discovery.
