@@ -107,17 +107,16 @@ def process_posts(
             author_service.inject_into_html(qmd_file, html_file)
 
         except Exception as e:
-            logger.error(f"Failed to inject annotations for {qmd_file.name}: {e}",
-                        exc_info=True)
+            logger.error(
+                f"Failed to inject annotations for {qmd_file.name}: {e}", exc_info=True
+            )
 
     # Process RSS and feeds
     process_rss_and_feeds(post_qmds, citation_properties, yaml_loader)
 
 
 def process_rss_and_feeds(
-    post_qmds: List[Path],
-    citation_properties: dict,
-    yaml_loader: YamlLoader
+    post_qmds: List[Path], citation_properties: dict, yaml_loader: YamlLoader
 ) -> None:
     """Process RSS feed and convert to JSON feed.
 
