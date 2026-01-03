@@ -2,20 +2,21 @@
 DOI injector for RSS feeds.
 
 Extracts DOIs from QMD file metadata and injects them into corresponding
-RSS feed items.
+RSS feed items. Uses the refactored infrastructure layer.
 """
 
-import logging
-import re
+import sys
 from pathlib import Path
 from typing import Dict, List, Union
 
 from bs4 import BeautifulSoup
-from ruamel.yaml import YAML
 
-# Configure logging
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+# Add parent directory to path for infrastructure imports
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+from infrastructure import YamlLoader, get_logger
+
+logger = get_logger(__name__)
 
 
 # ============================================================================
@@ -23,52 +24,27 @@ logger = logging.getLogger(__name__)
 # ============================================================================
 
 DOI_URL_PREFIX = "https://doi.org/"
-YAML_FRONTMATTER_PATTERN = re.compile(r"^---\n(.*?)\n---\n", re.DOTALL)
 
 
 # ============================================================================
-# YAML PROCESSING
+# DOI EXTRACTION
 # ============================================================================
 
 
-def extract_yaml_frontmatter(qmd_content: str) -> str:
-    """Extract YAML frontmatter from QMD content.
-
-    Args:
-        qmd_content: Content of QMD file
-
-    Returns:
-        YAML frontmatter string or empty string if not found
-    """
-    match = YAML_FRONTMATTER_PATTERN.match(qmd_content)
-    return match.group(1) if match else ""
-
-
-def extract_doi_from_qmd(qmd_path: Path) -> Dict[str, str]:
+def extract_doi_from_qmd(qmd_path: Path, yaml_loader: YamlLoader) -> Dict[str, str]:
     """Extract title and DOI from QMD file metadata.
 
     Args:
         qmd_path: Path to QMD file
+        yaml_loader: YamlLoader instance
 
     Returns:
         Dictionary with title and DOI, or empty dict if not found
     """
     try:
-        qmd_content = qmd_path.read_text(encoding="utf-8")
+        metadata = yaml_loader.load_from_path(qmd_path)
     except Exception as e:
-        logger.warning(f"Failed to read {qmd_path}: {e}")
-        return {}
-
-    yaml_str = extract_yaml_frontmatter(qmd_content)
-    if not yaml_str:
-        logger.debug(f"No YAML frontmatter found in {qmd_path}")
-        return {}
-
-    yaml_loader = YAML(typ="safe")
-    try:
-        metadata = yaml_loader.load(yaml_str)
-    except Exception as e:
-        logger.warning(f"Failed to parse YAML in {qmd_path}: {e}")
+        logger.warning(f"Failed to load metadata from {qmd_path}: {e}")
         return {}
 
     if not metadata:
@@ -88,11 +64,14 @@ def extract_doi_from_qmd(qmd_path: Path) -> Dict[str, str]:
     return {"title": title.strip(), "doi": doi}
 
 
-def build_doi_mapping(qmd_files: List[Union[str, Path]]) -> Dict[str, str]:
+def build_doi_mapping(
+    qmd_files: List[Union[str, Path]], yaml_loader: YamlLoader
+) -> Dict[str, str]:
     """Build mapping from titles to DOIs from QMD files.
 
     Args:
         qmd_files: List of QMD file paths
+        yaml_loader: YamlLoader instance
 
     Returns:
         Dictionary mapping titles to DOI URLs
@@ -101,8 +80,7 @@ def build_doi_mapping(qmd_files: List[Union[str, Path]]) -> Dict[str, str]:
 
     for qmd_file in qmd_files:
         qmd_path = Path(qmd_file)
-        result = extract_doi_from_qmd(qmd_path)
-
+        result = extract_doi_from_qmd(qmd_path, yaml_loader)
         if result:
             doi_mapping[result["title"]] = result["doi"]
 
@@ -115,15 +93,19 @@ def build_doi_mapping(qmd_files: List[Union[str, Path]]) -> Dict[str, str]:
 # ============================================================================
 
 
-def inject_doi_in_rss(rss_path: Path, qmd_files: List[Union[str, Path]]) -> None:
+def inject_doi_in_rss(
+    rss_path: Path, qmd_files: List[Union[str, Path]], yaml_loader: YamlLoader = None
+) -> None:
     """Inject DOIs into RSS feed items.
 
     Args:
         rss_path: Path to RSS XML file
         qmd_files: List of QMD file paths to extract DOIs from
+        yaml_loader: YamlLoader instance (creates new one if not provided)
 
     Example:
-        >>> inject_doi_in_rss(Path('posts.xml'), [Path('posts/my-post.qmd')])
+        >>> yaml_loader = YamlLoader()
+        >>> inject_doi_in_rss(Path('posts.xml'), [Path('posts/my-post.qmd')], yaml_loader)
     """
     rss_path = Path(rss_path)
 
@@ -131,8 +113,12 @@ def inject_doi_in_rss(rss_path: Path, qmd_files: List[Union[str, Path]]) -> None
         logger.warning(f"RSS file not found: {rss_path}")
         return
 
+    # Create yaml_loader if not provided
+    if yaml_loader is None:
+        yaml_loader = YamlLoader()
+
     # Build title -> DOI mapping
-    doi_mapping = build_doi_mapping(qmd_files)
+    doi_mapping = build_doi_mapping(qmd_files, yaml_loader)
     if not doi_mapping:
         logger.warning("No DOIs found in QMD files")
         return

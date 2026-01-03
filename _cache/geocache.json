@@ -5,17 +5,17 @@
     "longitude": 7.4521749
   },
   "Dublin, Ireland": {
-    "address": "Dublin, County Dublin, Leinster, \u00c9ire / Ireland",
+    "address": "Dublin, County Dublin, Leinster, Éire / Ireland",
     "latitude": 53.3493795,
     "longitude": -6.2605593
   },
   "Innsbruck, Austria": {
-    "address": "Innsbruck, Tirol, \u00d6sterreich",
+    "address": "Innsbruck, Tirol, Österreich",
     "latitude": 47.2654296,
     "longitude": 11.3927685
   },
   "Jena, Germany": {
-    "address": "Jena, Th\u00fcringen, Deutschland",
+    "address": "Jena, Thüringen, Deutschland",
     "latitude": 50.9281717,
     "longitude": 11.5879359
   },
@@ -25,27 +25,27 @@
     "longitude": 14.2487679
   },
   "Prague, Czech Republic": {
-    "address": "Hlavn\u00ed m\u011bsto Praha, Praha, \u010cesko",
+    "address": "Hlavní město Praha, Praha, Česko",
     "latitude": 50.0874654,
     "longitude": 14.4212535
   },
   "Prague, Czech Republic\"": {
-    "address": "Hlavn\u00ed m\u011bsto Praha, Praha, \u010cesko",
+    "address": "Hlavní město Praha, Praha, Česko",
     "latitude": 50.0874654,
     "longitude": 14.4212535
   },
   "Saclay, France": {
-    "address": "Saclay, Palaiseau, Essonne, \u00cele-de-France, France m\u00e9tropolitaine, 91400, France",
+    "address": "Saclay, Palaiseau, Essonne, Île-de-France, France métropolitaine, 91400, France",
     "latitude": 48.7305162,
     "longitude": 2.172576
   },
-  "Saint-R\u00e9my-l\u00e8s-Chevreuse, France": {
-    "address": "Saint-R\u00e9my-l\u00e8s-Chevreuse, Rambouillet, Yvelines, \u00cele-de-France, France m\u00e9tropolitaine, 78470, France",
+  "Saint-Rémy-lès-Chevreuse, France": {
+    "address": "Saint-Rémy-lès-Chevreuse, Rambouillet, Yvelines, Île-de-France, France métropolitaine, 78470, France",
     "latitude": 48.7054888,
     "longitude": 2.071109
   },
   "Seefeld, Austria": {
-    "address": "Seefeld in Tirol, Bezirk Innsbruck-Land, Tirol, 6100, \u00d6sterreich",
+    "address": "Seefeld in Tirol, Bezirk Innsbruck-Land, Tirol, 6100, Österreich",
     "latitude": 47.3289241,
     "longitude": 11.1867187
   },
@@ -54,8 +54,8 @@
     "latitude": 51.9685817,
     "longitude": 5.6682981
   },
-  "Z\u00fcrich, Switzerland": {
-    "address": "Z\u00fcrich, Bezirk Z\u00fcrich, Z\u00fcrich, Schweiz/Suisse/Svizzera/Svizra",
+  "Zürich, Switzerland": {
+    "address": "Zürich, Bezirk Zürich, Zürich, Schweiz/Suisse/Svizzera/Svizra",
     "latitude": 47.3744489,
     "longitude": 8.5410422
   }
