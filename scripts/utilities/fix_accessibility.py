@@ -63,6 +63,18 @@ class AccessibilityFixer:
         # Fix 5: Ensure heading hierarchy
         modified |= self._fix_heading_hierarchy(soup)
 
+        # Fix 6: Add titles to iframes
+        modified |= self._fix_iframe_titles(soup)
+
+        # Fix 7: Fix incorrect ARIA roles
+        modified |= self._fix_aria_roles(soup)
+
+        # Fix 8: Fix icon-only links in navigation
+        modified |= self._fix_nav_icon_links(soup)
+
+        # Fix 9: Fix search inputs without labels
+        modified |= self._fix_search_inputs(soup)
+
         # Save if modified
         if modified:
             self.fs.write_text(html_path, str(soup))
@@ -227,6 +239,162 @@ class AccessibilityFixer:
             prev_level = level
 
         return False
+
+    def _fix_iframe_titles(self, soup) -> bool:
+        """Add title attributes to iframes for screen readers."""
+        modified = False
+        iframes = soup.find_all("iframe")
+
+        for iframe in iframes:
+            if not iframe.get("title"):
+                # Generate title from src or context
+                title = self._generate_iframe_title(iframe)
+                if title:
+                    iframe["title"] = title
+                    modified = True
+                    logger.debug(f"Added title to iframe: {title}")
+
+        return modified
+
+    def _generate_iframe_title(self, iframe) -> str:
+        """Generate a descriptive title for an iframe.
+
+        Args:
+            iframe: BeautifulSoup iframe element
+
+        Returns:
+            Generated title
+        """
+        src = iframe.get("src", "")
+
+        # Check for common embed patterns
+        if "wikidata-query" in src or "scholia" in src:
+            return "Interactive data visualization from Wikidata"
+        elif "youtube.com" in src or "youtu.be" in src:
+            return "Embedded YouTube video"
+        elif "vimeo.com" in src:
+            return "Embedded Vimeo video"
+        elif "twitter.com" in src or "x.com" in src:
+            return "Embedded Twitter/X content"
+        elif "maps.google" in src or "openstreetmap" in src:
+            return "Embedded map"
+
+        # Try to infer from parent headings
+        parent = iframe.parent
+        while parent:
+            heading = parent.find(["h1", "h2", "h3", "h4", "h5", "h6"])
+            if heading:
+                return f"Embedded content for {heading.get_text(strip=True)}"
+            parent = parent.parent
+
+        return "Embedded content"
+
+    def _fix_aria_roles(self, soup) -> bool:
+        """Fix incorrect ARIA role attributes."""
+        modified = False
+
+        # Fix buttons with role="menu" (should be "button")
+        buttons = soup.find_all("button", role="menu")
+        for button in buttons:
+            button["role"] = "button"
+            modified = True
+            logger.debug("Fixed button role from 'menu' to 'button'")
+
+        return modified
+
+    def _fix_nav_icon_links(self, soup) -> bool:
+        """Fix icon-only links in navigation (like RSS feeds)."""
+        modified = False
+
+        # Find nav links with icons but no text
+        nav_links = soup.find_all("a", class_="nav-link")
+        for link in nav_links:
+            # Check if link has icon but no meaningful text
+            text = link.get_text(strip=True)
+            icon = link.find("i")
+
+            if icon and not text and not link.get("aria-label"):
+                # Generate label from icon class or href
+                label = self._generate_icon_link_label(icon, link)
+                if label:
+                    link["aria-label"] = label
+                    modified = True
+                    logger.debug(f"Added aria-label to nav icon link: {label}")
+
+        return modified
+
+    def _generate_icon_link_label(self, icon, link) -> str:
+        """Generate label for icon-only link.
+
+        Args:
+            icon: BeautifulSoup icon element
+            link: BeautifulSoup link element
+
+        Returns:
+            Generated label
+        """
+        # Check icon classes
+        classes = " ".join(icon.get("class", []))
+
+        if "rss" in classes.lower():
+            return "RSS Feed"
+        elif "atom" in classes.lower():
+            return "Atom Feed"
+
+        # Check link href
+        href = link.get("href", "").lower()
+        if "rss.xml" in href or "/rss" in href:
+            return "RSS Feed"
+        elif "atom.xml" in href or "/atom" in href:
+            return "Atom Feed"
+
+        return ""
+
+    def _fix_search_inputs(self, soup) -> bool:
+        """Fix search input elements without associated labels."""
+        modified = False
+        search_inputs = soup.find_all("input", {"type": "search"})
+
+        for input_tag in search_inputs:
+            if not input_tag.get("aria-label") and not input_tag.get("id"):
+                # Generate an ID for the input
+                input_id = f"search-{id(input_tag)}"
+                input_tag["id"] = input_id
+                modified = True
+                logger.debug(f"Added ID to search input: {input_id}")
+
+            if not input_tag.get("aria-label"):
+                # Try to find an associated label
+                label = self._find_associated_label(input_tag)
+                if label:
+                    input_tag["aria-label"] = label
+                    modified = True
+                    logger.debug(
+                        f"Added aria-label to search input from label: {label}"
+                    )
+
+        return modified
+
+    def _find_associated_label(self, input_tag) -> str:
+        """Find an associated label for an input element.
+
+        Args:
+            input_tag: BeautifulSoup input element
+
+        Returns:
+            Associated label text, or empty string if none found
+        """
+        # Check for <label> elements with for attribute matching the input ID
+        label = input_tag.find_previous("label", for_=input_tag.get("id"))
+        if label and label.get_text(strip=True):
+            return label.get_text(strip=True)
+
+        # Check for nearby <label> elements
+        label = input_tag.find_previous("label")
+        if label and label.get_text(strip=True):
+            return label.get_text(strip=True)
+
+        return ""
 
 
 def fix_accessibility(html_files: List[Path]) -> None:
