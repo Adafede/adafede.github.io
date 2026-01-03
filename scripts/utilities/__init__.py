@@ -1,6 +1,7 @@
 """Utility scripts for post-processing."""
 
 from .convert_rss_to_json_feed import convert_rss_to_json_feed
+from .fix_accessibility import fix_accessibility
 from .inject_cito_annotations_in_rss import inject_cito_annotations_in_rss
 from .inject_doi_in_rss import inject_doi_in_rss
 from .process_qmd_directory import process_qmd_directory
@@ -9,6 +10,7 @@ from .talkmap import talkmap
 
 __all__ = [
     "convert_rss_to_json_feed",
+    "fix_accessibility",
     "inject_cito_annotations_in_rss",
     "inject_doi_in_rss",
     "process_qmd_directory",

@@ -17,6 +17,7 @@ from infrastructure import (
 from services import AuthorService, CitoService, RorService
 from utilities import (
     convert_rss_to_json_feed,
+    fix_accessibility,
     inject_cito_annotations_in_rss,
     inject_doi_in_rss,
     process_qmd_directory,
@@ -182,6 +183,11 @@ def postrender() -> None:
         # Step 3: Process posts
         logger.info("Step 3: Processing posts")
         process_posts(fs, cito_service, author_service, ror_service, yaml_loader)
+
+        # Step 4: Fix accessibility issues
+        logger.info("Step 4: Fixing accessibility issues")
+        html_files = list(SITE_DIR.glob("**/*.html"))
+        fix_accessibility(html_files)
 
         logger.info("=" * 80)
         logger.info("Post-render processing completed successfully")
