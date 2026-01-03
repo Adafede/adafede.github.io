@@ -69,14 +69,10 @@ div.csl-indent {
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet"/>
-<link class="quarto-color-scheme" href="../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" id="quarto-text-highlighting-styles" rel="stylesheet"/>
-<link class="quarto-color-scheme quarto-color-alternate" href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" id="quarto-text-highlighting-styles" rel="stylesheet"/>
-<link class="quarto-color-scheme-extra" href="../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" id="quarto-text-highlighting-styles" rel="stylesheet"/>
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" id="quarto-text-highlighting-styles" rel="stylesheet"/>
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet"/>
-<link append-hash="true" class="quarto-color-scheme" data-mode="light" href="../../site_libs/bootstrap/bootstrap-6bdd42198a8a37b23ee85cc287d11ae5.min.css" id="quarto-bootstrap" rel="stylesheet"/>
-<link append-hash="true" class="quarto-color-scheme quarto-color-alternate" data-mode="dark" href="../../site_libs/bootstrap/bootstrap-dark-5268d9e97950a1a43955edc982b28abe.min.css" id="quarto-bootstrap" rel="stylesheet"/>
-<link append-hash="true" class="quarto-color-scheme-extra" data-mode="light" href="../../site_libs/bootstrap/bootstrap-6bdd42198a8a37b23ee85cc287d11ae5.min.css" id="quarto-bootstrap" rel="stylesheet"/>
+<link append-hash="true" data-mode="light" href="../../site_libs/bootstrap/bootstrap-1ce9ea1765f0802086d4286a46c87950.min.css" id="quarto-bootstrap" rel="stylesheet"/>
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -112,178 +108,7 @@ div.csl-indent {
 <meta content="en" property="og:locale"/>
 <meta content="Logo of the LOTUS initiative" property="og:image:alt"/>
 </head>
-<body class="nav-fixed fullcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
-    const toggleBodyColorMode = (bsSheetEl) => {
-      const mode = bsSheetEl.getAttribute("data-mode");
-      const bodyEl = window.document.querySelector("body");
-      if (mode === "dark") {
-        bodyEl.classList.add("quarto-dark");
-        bodyEl.classList.remove("quarto-light");
-      } else {
-        bodyEl.classList.add("quarto-light");
-        bodyEl.classList.remove("quarto-dark");
-      }
-    }
-    const toggleBodyColorPrimary = () => {
-      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
-      if (bsSheetEl) {
-        toggleBodyColorMode(bsSheetEl);
-      }
-    }
-    const setColorSchemeToggle = (alternate) => {
-      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
-      for (let i=0; i < toggles.length; i++) {
-        const toggle = toggles[i];
-        if (toggle) {
-          if (alternate) {
-            toggle.classList.add("alternate");
-          } else {
-            toggle.classList.remove("alternate");
-          }
-        }
-      }
-    };
-    const toggleColorMode = (alternate) => {
-      // Switch the stylesheets
-      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
-      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
-      manageTransitions('#quarto-margin-sidebar .nav-link', false);
-      if (alternate) {
-        // note: dark is layered on light, we don't disable primary!
-        enableStylesheet(alternateStylesheets);
-        for (const sheetNode of alternateStylesheets) {
-          if (sheetNode.id === "quarto-bootstrap") {
-            toggleBodyColorMode(sheetNode);
-          }
-        }
-      } else {
-        disableStylesheet(alternateStylesheets);
-        enableStylesheet(primaryStylesheets)
-        toggleBodyColorPrimary();
-      }
-      manageTransitions('#quarto-margin-sidebar .nav-link', true);
-      // Switch the toggles
-      setColorSchemeToggle(alternate)
-      // Hack to workaround the fact that safari doesn't
-      // properly recolor the scrollbar when toggling (#1455)
-      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
-        manageTransitions("body", false);
-        window.scrollTo(0, 1);
-        setTimeout(() => {
-          window.scrollTo(0, 0);
-          manageTransitions("body", true);
-        }, 40);
-      }
-    }
-    const disableStylesheet = (stylesheets) => {
-      for (let i=0; i < stylesheets.length; i++) {
-        const stylesheet = stylesheets[i];
-        stylesheet.rel = 'disabled-stylesheet';
-      }
-    }
-    const enableStylesheet = (stylesheets) => {
-      for (let i=0; i < stylesheets.length; i++) {
-        const stylesheet = stylesheets[i];
-        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
-          stylesheet.rel = 'stylesheet';
-        }
-      }
-    }
-    const manageTransitions = (selector, allowTransitions) => {
-      const els = window.document.querySelectorAll(selector);
-      for (let i=0; i < els.length; i++) {
-        const el = els[i];
-        if (allowTransitions) {
-          el.classList.remove('notransition');
-        } else {
-          el.classList.add('notransition');
-        }
-      }
-    }
-    const isFileUrl = () => {
-      return window.location.protocol === 'file:';
-    }
-    const hasAlternateSentinel = () => {
-      let styleSentinel = getColorSchemeSentinel();
-      if (styleSentinel !== null) {
-        return styleSentinel === "alternate";
-      } else {
-        return false;
-      }
-    }
-    const setStyleSentinel = (alternate) => {
-      const value = alternate ? "alternate" : "default";
-      if (!isFileUrl()) {
-        window.localStorage.setItem("quarto-color-scheme", value);
-      } else {
-        localAlternateSentinel = value;
-      }
-    }
-    const getColorSchemeSentinel = () => {
-      if (!isFileUrl()) {
-        const storageValue = window.localStorage.getItem("quarto-color-scheme");
-        return storageValue != null ? storageValue : localAlternateSentinel;
-      } else {
-        return localAlternateSentinel;
-      }
-    }
-    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
-      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
-      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
-      let newTheme = '';
-      if(authorPrefersDark) {
-        newTheme = isAlternate ? baseTheme : alternateTheme;
-      } else {
-        newTheme = isAlternate ? alternateTheme : baseTheme;
-      }
-      const changeGiscusTheme = () => {
-        // From: https://github.com/giscus/giscus/issues/336
-        const sendMessage = (message) => {
-          const iframe = document.querySelector('iframe.giscus-frame');
-          if (!iframe) return;
-          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
-        }
-        sendMessage({
-          setConfig: {
-            theme: newTheme
-          }
-        });
-      }
-      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
-      if (isGiscussLoaded) {
-        changeGiscusTheme();
-      }
-    };
-    const authorPrefersDark = false;
-    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-    const darkModeDefault = queryPrefersDark.matches;
-      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
-      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
-    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
-    // Dark / light mode switch
-    window.quartoToggleColorScheme = () => {
-      // Read the current dark / light value
-      let toAlternate = !hasAlternateSentinel();
-      toggleColorMode(toAlternate);
-      setStyleSentinel(toAlternate);
-      toggleGiscusIfUsed(toAlternate, darkModeDefault);
-      window.dispatchEvent(new Event('resize'));
-    };
-    queryPrefersDark.addEventListener("change", e => {
-      if(window.localStorage.getItem("quarto-color-scheme") !== null)
-        return;
-      const alternate = e.matches
-      toggleColorMode(alternate);
-      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
-      toggleGiscusIfUsed(alternate, darkModeDefault);
-    });
-    // Switch to dark mode if need be
-    if (hasAlternateSentinel()) {
-      toggleColorMode(true);
-    } else {
-      toggleColorMode(false);
-    }
-  </script>
+<body class="nav-fixed fullcontent quarto-light">
 <div id="quarto-search-results"></div>
 <header class="headroom fixed-top" id="quarto-header">
 <nav class="navbar navbar-expand-lg" data-bs-theme="dark">
@@ -333,7 +158,6 @@ div.csl-indent {
 </ul>
 </div> <!-- /navcollapse -->
 <div class="quarto-navbar-tools">
-<a class="quarto-color-scheme-toggle quarto-navigation-tool px-1" href="" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
 </div> <!-- /container-fluid -->
 </nav>
@@ -359,7 +183,7 @@ div.csl-indent {
 <div class="quarto-title-meta-heading">Authors</div>
 <div class="quarto-title-meta-heading">Affiliations</div>
 <div class="quarto-title-meta-contents">
-<p class="author">Adriano Rutz <a class="quarto-title-author-orcid orcid-link" href="https://orcid.org/0000-0003-0443-9902" rel="noopener noreferrer" target="_blank" title="ORCID: 0000-0003-0443-9902"> <img alt="ORCID" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/orcid.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a><a class="scholia-link" href="https://scholia.toolforge.org/author/Q97455964" rel="noopener noreferrer" target="_blank" title="Scholia profile: Q97455964"><img alt="Scholia" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/scholia_logo.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
+<p class="author">Adriano Rutz <a class="quarto-title-author-orcid orcid-link" href="https://orcid.org/0000-0003-0443-9902" rel="noopener noreferrer" target="_blank" title="ORCID: 0000-0003-0443-9902"><img alt="ORCID" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/orcid.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a> <a class="scholia-link" href="https://scholia.toolforge.org/author/Q97455964" rel="noopener noreferrer" target="_blank" title="Scholia profile: Q97455964"><img alt="Scholia" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/scholia_logo.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
 </div>
 <div class="quarto-title-meta-contents">
 <p class="affiliation">
@@ -367,7 +191,7 @@ div.csl-indent {
            <a class="uri" href="https://ror.org/01swzsf04"><img alt="ROR logo" src="https://raw.githubusercontent.com/ror-community/ror-logos/refs/heads/main/ror-icon-rgb-transparent.svg" style="height:14px; vertical-align:middle;"/></a> <a class="scholia-link" href="https://scholia.toolforge.org/organization/Q503473" rel="noopener noreferrer" target="_blank" title="Scholia profile: Q503473"><img alt="Scholia" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/scholia_logo.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
 </div>
 <div class="quarto-title-meta-contents">
-<p class="author">Maria Sorokina <a class="quarto-title-author-orcid orcid-link" href="https://orcid.org/0000-0001-9359-7149" rel="noopener noreferrer" target="_blank" title="ORCID: 0000-0001-9359-7149"> <img alt="ORCID" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/orcid.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a><a class="scholia-link" href="https://scholia.toolforge.org/author/Q63759728" rel="noopener noreferrer" target="_blank" title="Scholia profile: Q63759728"><img alt="Scholia" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/scholia_logo.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
+<p class="author">Maria Sorokina <a class="quarto-title-author-orcid orcid-link" href="https://orcid.org/0000-0001-9359-7149" rel="noopener noreferrer" target="_blank" title="ORCID: 0000-0001-9359-7149"><img alt="ORCID" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/orcid.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a> <a class="scholia-link" href="https://scholia.toolforge.org/author/Q63759728" rel="noopener noreferrer" target="_blank" title="Scholia profile: Q63759728"><img alt="Scholia" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/scholia_logo.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
 </div>
 <div class="quarto-title-meta-contents">
 <p class="affiliation">
@@ -375,7 +199,7 @@ div.csl-indent {
            <a class="uri" href="https://ror.org/05qpz1x62"><img alt="ROR logo" src="https://raw.githubusercontent.com/ror-community/ror-logos/refs/heads/main/ror-icon-rgb-transparent.svg" style="height:14px; vertical-align:middle;"/></a> <a class="scholia-link" href="https://scholia.toolforge.org/organization/Q154561" rel="noopener noreferrer" target="_blank" title="Scholia profile: Q154561"><img alt="Scholia" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/scholia_logo.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
 </div>
 <div class="quarto-title-meta-contents">
-<p class="author">Jakub Galgonek <a class="quarto-title-author-orcid orcid-link" href="https://orcid.org/0000-0002-7038-544X" rel="noopener noreferrer" target="_blank" title="ORCID: 0000-0002-7038-544X"> <img alt="ORCID" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/orcid.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a><a class="scholia-link" href="https://scholia.toolforge.org/author/Q43370892" rel="noopener noreferrer" target="_blank" title="Scholia profile: Q43370892"><img alt="Scholia" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/scholia_logo.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
+<p class="author">Jakub Galgonek <a class="quarto-title-author-orcid orcid-link" href="https://orcid.org/0000-0002-7038-544X" rel="noopener noreferrer" target="_blank" title="ORCID: 0000-0002-7038-544X"><img alt="ORCID" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/orcid.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a> <a class="scholia-link" href="https://scholia.toolforge.org/author/Q43370892" rel="noopener noreferrer" target="_blank" title="Scholia profile: Q43370892"><img alt="Scholia" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/scholia_logo.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
 </div>
 <div class="quarto-title-meta-contents">
 <p class="affiliation">
@@ -383,7 +207,7 @@ div.csl-indent {
            <a class="uri" href="https://ror.org/04nfjn472"><img alt="ROR logo" src="https://raw.githubusercontent.com/ror-community/ror-logos/refs/heads/main/ror-icon-rgb-transparent.svg" style="height:14px; vertical-align:middle;"/></a> <a class="scholia-link" href="https://scholia.toolforge.org/organization/Q11087613" rel="noopener noreferrer" target="_blank" title="Scholia profile: Q11087613"><img alt="Scholia" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/scholia_logo.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
 </div>
 <div class="quarto-title-meta-contents">
-<p class="author">Daniel Mietchen <a class="quarto-title-author-orcid orcid-link" href="https://orcid.org/0000-0002-7038-544X" rel="noopener noreferrer" target="_blank" title="ORCID: 0000-0002-7038-544X"> <img alt="ORCID" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/orcid.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a><a class="scholia-link" href="https://scholia.toolforge.org/author/Q20895785" rel="noopener noreferrer" target="_blank" title="Scholia profile: Q20895785"><img alt="Scholia" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/scholia_logo.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
+<p class="author">Daniel Mietchen <a class="quarto-title-author-orcid orcid-link" href="https://orcid.org/0000-0002-7038-544X" rel="noopener noreferrer" target="_blank" title="ORCID: 0000-0002-7038-544X"><img alt="ORCID" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/orcid.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a> <a class="scholia-link" href="https://scholia.toolforge.org/author/Q20895785" rel="noopener noreferrer" target="_blank" title="Scholia profile: Q20895785"><img alt="Scholia" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/scholia_logo.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
 </div>
 <div class="quarto-title-meta-contents">
 <p class="affiliation">
@@ -397,7 +221,7 @@ div.csl-indent {
            <a class="uri" href="https://ror.org/0153tk833"><img alt="ROR logo" src="https://raw.githubusercontent.com/ror-community/ror-logos/refs/heads/main/ror-icon-rgb-transparent.svg" style="height:14px; vertical-align:middle;"/></a> <a class="scholia-link" href="https://scholia.toolforge.org/organization/Q213439" rel="noopener noreferrer" target="_blank" title="Scholia profile: Q213439"><img alt="Scholia" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/scholia_logo.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
 </div>
 <div class="quarto-title-meta-contents">
-<p class="author">Egon Willighagen <a class="quarto-title-author-orcid orcid-link" href="https://orcid.org/0000-0001-7542-0286" rel="noopener noreferrer" target="_blank" title="ORCID: 0000-0001-7542-0286"> <img alt="ORCID" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/orcid.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a><a class="scholia-link" href="https://scholia.toolforge.org/author/Q20895241" rel="noopener noreferrer" target="_blank" title="Scholia profile: Q20895241"><img alt="Scholia" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/scholia_logo.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
+<p class="author">Egon Willighagen <a class="quarto-title-author-orcid orcid-link" href="https://orcid.org/0000-0001-7542-0286" rel="noopener noreferrer" target="_blank" title="ORCID: 0000-0001-7542-0286"><img alt="ORCID" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/orcid.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a> <a class="scholia-link" href="https://scholia.toolforge.org/author/Q20895241" rel="noopener noreferrer" target="_blank" title="Scholia profile: Q20895241"><img alt="Scholia" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/scholia_logo.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
 </div>
 <div class="quarto-title-meta-contents">
 <p class="affiliation">
@@ -405,7 +229,7 @@ div.csl-indent {
            <a class="uri" href="https://ror.org/02jz4aj89"><img alt="ROR logo" src="https://raw.githubusercontent.com/ror-community/ror-logos/refs/heads/main/ror-icon-rgb-transparent.svg" style="height:14px; vertical-align:middle;"/></a> <a class="scholia-link" href="https://scholia.toolforge.org/organization/Q19845644" rel="noopener noreferrer" target="_blank" title="Scholia profile: Q19845644"><img alt="Scholia" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/scholia_logo.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
 </div>
 <div class="quarto-title-meta-contents">
-<p class="author">Arnaud Gaudry <a class="quarto-title-author-orcid orcid-link" href="https://orcid.org/0000-0002-3648-7362" rel="noopener noreferrer" target="_blank" title="ORCID: 0000-0002-3648-7362"> <img alt="ORCID" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/orcid.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a><a class="scholia-link" href="https://scholia.toolforge.org/author/Q55085984" rel="noopener noreferrer" target="_blank" title="Scholia profile: Q55085984"><img alt="Scholia" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/scholia_logo.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
+<p class="author">Arnaud Gaudry <a class="quarto-title-author-orcid orcid-link" href="https://orcid.org/0000-0002-3648-7362" rel="noopener noreferrer" target="_blank" title="ORCID: 0000-0002-3648-7362"><img alt="ORCID" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/orcid.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a> <a class="scholia-link" href="https://scholia.toolforge.org/author/Q55085984" rel="noopener noreferrer" target="_blank" title="Scholia profile: Q55085984"><img alt="Scholia" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/scholia_logo.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
 </div>
 <div class="quarto-title-meta-contents">
 <p class="affiliation">
@@ -413,7 +237,7 @@ div.csl-indent {
            <a class="uri" href="https://ror.org/01swzsf04"><img alt="ROR logo" src="https://raw.githubusercontent.com/ror-community/ror-logos/refs/heads/main/ror-icon-rgb-transparent.svg" style="height:14px; vertical-align:middle;"/></a> <a class="scholia-link" href="https://scholia.toolforge.org/organization/Q503473" rel="noopener noreferrer" target="_blank" title="Scholia profile: Q503473"><img alt="Scholia" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/scholia_logo.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
 </div>
 <div class="quarto-title-meta-contents">
-<p class="author">James G. Graham <a class="quarto-title-author-orcid orcid-link" href="https://orcid.org/0000-0002-7114-8921" rel="noopener noreferrer" target="_blank" title="ORCID: 0000-0002-7114-8921"> <img alt="ORCID" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/orcid.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a><a class="scholia-link" href="https://scholia.toolforge.org/author/Q63375718" rel="noopener noreferrer" target="_blank" title="Scholia profile: Q63375718"><img alt="Scholia" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/scholia_logo.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
+<p class="author">James G. Graham <a class="quarto-title-author-orcid orcid-link" href="https://orcid.org/0000-0002-7114-8921" rel="noopener noreferrer" target="_blank" title="ORCID: 0000-0002-7114-8921"><img alt="ORCID" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/orcid.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a> <a class="scholia-link" href="https://scholia.toolforge.org/author/Q63375718" rel="noopener noreferrer" target="_blank" title="Scholia profile: Q63375718"><img alt="Scholia" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/scholia_logo.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
 </div>
 <div class="quarto-title-meta-contents">
 <p class="affiliation">
@@ -421,7 +245,7 @@ div.csl-indent {
            <a class="uri" href="https://ror.org/02mpq6x41"><img alt="ROR logo" src="https://raw.githubusercontent.com/ror-community/ror-logos/refs/heads/main/ror-icon-rgb-transparent.svg" style="height:14px; vertical-align:middle;"/></a> <a class="scholia-link" href="https://scholia.toolforge.org/organization/Q955764" rel="noopener noreferrer" target="_blank" title="Scholia profile: Q955764"><img alt="Scholia" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/scholia_logo.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
 </div>
 <div class="quarto-title-meta-contents">
-<p class="author">Ralf Stephan <a class="quarto-title-author-orcid orcid-link" href="https://orcid.org/0000-0002-4650-631X" rel="noopener noreferrer" target="_blank" title="ORCID: 0000-0002-4650-631X"> <img alt="ORCID" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/orcid.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a><a class="scholia-link" href="https://scholia.toolforge.org/author/Q67363620" rel="noopener noreferrer" target="_blank" title="Scholia profile: Q67363620"><img alt="Scholia" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/scholia_logo.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
+<p class="author">Ralf Stephan <a class="quarto-title-author-orcid orcid-link" href="https://orcid.org/0000-0002-4650-631X" rel="noopener noreferrer" target="_blank" title="ORCID: 0000-0002-4650-631X"><img alt="ORCID" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/orcid.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a> <a class="scholia-link" href="https://scholia.toolforge.org/author/Q67363620" rel="noopener noreferrer" target="_blank" title="Scholia profile: Q67363620"><img alt="Scholia" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/scholia_logo.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
 </div>
 <div class="quarto-title-meta-contents">
 <p class="affiliation">
@@ -429,7 +253,7 @@ div.csl-indent {
            <a class="uri" href="https://ror.org/043q8yx54"><img alt="ROR logo" src="https://raw.githubusercontent.com/ror-community/ror-logos/refs/heads/main/ror-icon-rgb-transparent.svg" style="height:14px; vertical-align:middle;"/></a> <a class="scholia-link" href="https://scholia.toolforge.org/organization/Q1377857" rel="noopener noreferrer" target="_blank" title="Scholia profile: Q1377857"><img alt="Scholia" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/scholia_logo.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
 </div>
 <div class="quarto-title-meta-contents">
-<p class="author">Roderic D. M. Page <a class="quarto-title-author-orcid orcid-link" href="https://orcid.org/0000-0002-7101-9767" rel="noopener noreferrer" target="_blank" title="ORCID: 0000-0002-7101-9767"> <img alt="ORCID" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/orcid.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a><a class="scholia-link" href="https://scholia.toolforge.org/author/Q7356570" rel="noopener noreferrer" target="_blank" title="Scholia profile: Q7356570"><img alt="Scholia" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/scholia_logo.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
+<p class="author">Roderic D. M. Page <a class="quarto-title-author-orcid orcid-link" href="https://orcid.org/0000-0002-7101-9767" rel="noopener noreferrer" target="_blank" title="ORCID: 0000-0002-7101-9767"><img alt="ORCID" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/orcid.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a> <a class="scholia-link" href="https://scholia.toolforge.org/author/Q7356570" rel="noopener noreferrer" target="_blank" title="Scholia profile: Q7356570"><img alt="Scholia" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/scholia_logo.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
 </div>
 <div class="quarto-title-meta-contents">
 <p class="affiliation">
@@ -437,7 +261,7 @@ div.csl-indent {
            <a class="uri" href="https://ror.org/00vtgdb53"><img alt="ROR logo" src="https://raw.githubusercontent.com/ror-community/ror-logos/refs/heads/main/ror-icon-rgb-transparent.svg" style="height:14px; vertical-align:middle;"/></a> <a class="scholia-link" href="https://scholia.toolforge.org/organization/Q192775" rel="noopener noreferrer" target="_blank" title="Scholia profile: Q192775"><img alt="Scholia" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/scholia_logo.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
 </div>
 <div class="quarto-title-meta-contents">
-<p class="author">Jiří Vondrášek <a class="quarto-title-author-orcid orcid-link" href="https://orcid.org/0000-0002-6066-973X" rel="noopener noreferrer" target="_blank" title="ORCID: 0000-0002-6066-973X"> <img alt="ORCID" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/orcid.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a><a class="scholia-link" href="https://scholia.toolforge.org/author/Q60961322" rel="noopener noreferrer" target="_blank" title="Scholia profile: Q60961322"><img alt="Scholia" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/scholia_logo.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
+<p class="author">Jiří Vondrášek <a class="quarto-title-author-orcid orcid-link" href="https://orcid.org/0000-0002-6066-973X" rel="noopener noreferrer" target="_blank" title="ORCID: 0000-0002-6066-973X"><img alt="ORCID" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/orcid.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a> <a class="scholia-link" href="https://scholia.toolforge.org/author/Q60961322" rel="noopener noreferrer" target="_blank" title="Scholia profile: Q60961322"><img alt="Scholia" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/scholia_logo.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
 </div>
 <div class="quarto-title-meta-contents">
 <p class="affiliation">
@@ -445,7 +269,7 @@ div.csl-indent {
            <a class="uri" href="https://ror.org/04nfjn472"><img alt="ROR logo" src="https://raw.githubusercontent.com/ror-community/ror-logos/refs/heads/main/ror-icon-rgb-transparent.svg" style="height:14px; vertical-align:middle;"/></a> <a class="scholia-link" href="https://scholia.toolforge.org/organization/Q11087613" rel="noopener noreferrer" target="_blank" title="Scholia profile: Q11087613"><img alt="Scholia" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/scholia_logo.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
 </div>
 <div class="quarto-title-meta-contents">
-<p class="author">Christoph Steinbeck <a class="quarto-title-author-orcid orcid-link" href="https://orcid.org/0000-0001-6966-0814" rel="noopener noreferrer" target="_blank" title="ORCID: 0000-0001-6966-0814"> <img alt="ORCID" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/orcid.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a><a class="scholia-link" href="https://scholia.toolforge.org/author/Q5111731" rel="noopener noreferrer" target="_blank" title="Scholia profile: Q5111731"><img alt="Scholia" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/scholia_logo.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
+<p class="author">Christoph Steinbeck <a class="quarto-title-author-orcid orcid-link" href="https://orcid.org/0000-0001-6966-0814" rel="noopener noreferrer" target="_blank" title="ORCID: 0000-0001-6966-0814"><img alt="ORCID" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/orcid.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a> <a class="scholia-link" href="https://scholia.toolforge.org/author/Q5111731" rel="noopener noreferrer" target="_blank" title="Scholia profile: Q5111731"><img alt="Scholia" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/scholia_logo.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
 </div>
 <div class="quarto-title-meta-contents">
 <p class="affiliation">
@@ -453,7 +277,7 @@ div.csl-indent {
            <a class="uri" href="https://ror.org/05qpz1x62"><img alt="ROR logo" src="https://raw.githubusercontent.com/ror-community/ror-logos/refs/heads/main/ror-icon-rgb-transparent.svg" style="height:14px; vertical-align:middle;"/></a> <a class="scholia-link" href="https://scholia.toolforge.org/organization/Q154561" rel="noopener noreferrer" target="_blank" title="Scholia profile: Q154561"><img alt="Scholia" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/scholia_logo.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
 </div>
 <div class="quarto-title-meta-contents">
-<p class="author">Guido F. Pauli <a class="quarto-title-author-orcid orcid-link" href="https://orcid.org/0000-0003-1022-4326" rel="noopener noreferrer" target="_blank" title="ORCID: 0000-0003-1022-4326"> <img alt="ORCID" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/orcid.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a><a class="scholia-link" href="https://scholia.toolforge.org/author/Q40259636" rel="noopener noreferrer" target="_blank" title="Scholia profile: Q40259636"><img alt="Scholia" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/scholia_logo.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
+<p class="author">Guido F. Pauli <a class="quarto-title-author-orcid orcid-link" href="https://orcid.org/0000-0003-1022-4326" rel="noopener noreferrer" target="_blank" title="ORCID: 0000-0003-1022-4326"><img alt="ORCID" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/orcid.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a> <a class="scholia-link" href="https://scholia.toolforge.org/author/Q40259636" rel="noopener noreferrer" target="_blank" title="Scholia profile: Q40259636"><img alt="Scholia" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/scholia_logo.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
 </div>
 <div class="quarto-title-meta-contents">
 <p class="affiliation">
@@ -461,7 +285,7 @@ div.csl-indent {
            <a class="uri" href="https://ror.org/02mpq6x41"><img alt="ROR logo" src="https://raw.githubusercontent.com/ror-community/ror-logos/refs/heads/main/ror-icon-rgb-transparent.svg" style="height:14px; vertical-align:middle;"/></a> <a class="scholia-link" href="https://scholia.toolforge.org/organization/Q955764" rel="noopener noreferrer" target="_blank" title="Scholia profile: Q955764"><img alt="Scholia" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/scholia_logo.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
 </div>
 <div class="quarto-title-meta-contents">
-<p class="author">Jean-Luc Wolfender <a class="quarto-title-author-orcid orcid-link" href="https://orcid.org/0000-0002-0125-952X" rel="noopener noreferrer" target="_blank" title="ORCID: 0000-0002-0125-952X"> <img alt="ORCID" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/orcid.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a><a class="scholia-link" href="https://scholia.toolforge.org/author/Q56084663" rel="noopener noreferrer" target="_blank" title="Scholia profile: Q56084663"><img alt="Scholia" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/scholia_logo.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
+<p class="author">Jean-Luc Wolfender <a class="quarto-title-author-orcid orcid-link" href="https://orcid.org/0000-0002-0125-952X" rel="noopener noreferrer" target="_blank" title="ORCID: 0000-0002-0125-952X"><img alt="ORCID" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/orcid.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a> <a class="scholia-link" href="https://scholia.toolforge.org/author/Q56084663" rel="noopener noreferrer" target="_blank" title="Scholia profile: Q56084663"><img alt="Scholia" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/scholia_logo.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
 </div>
 <div class="quarto-title-meta-contents">
 <p class="affiliation">
@@ -469,7 +293,7 @@ div.csl-indent {
            <a class="uri" href="https://ror.org/01swzsf04"><img alt="ROR logo" src="https://raw.githubusercontent.com/ror-community/ror-logos/refs/heads/main/ror-icon-rgb-transparent.svg" style="height:14px; vertical-align:middle;"/></a> <a class="scholia-link" href="https://scholia.toolforge.org/organization/Q503473" rel="noopener noreferrer" target="_blank" title="Scholia profile: Q503473"><img alt="Scholia" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/scholia_logo.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
 </div>
 <div class="quarto-title-meta-contents">
-<p class="author">Jonathan Bisson <a class="quarto-title-author-email" href="mailto:research@bjonnh.net"><i class="bi bi-envelope"></i></a> <a class="quarto-title-author-orcid orcid-link" href="https://orcid.org/0000-0003-1640-9989" rel="noopener noreferrer" target="_blank" title="ORCID: 0000-0003-1640-9989"> <img alt="ORCID" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/orcid.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a><a class="scholia-link" href="https://scholia.toolforge.org/author/Q57678148" rel="noopener noreferrer" target="_blank" title="Scholia profile: Q57678148"><img alt="Scholia" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/scholia_logo.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
+<p class="author">Jonathan Bisson <a class="quarto-title-author-email" href="mailto:research@bjonnh.net"><i class="bi bi-envelope"></i></a> <a class="quarto-title-author-orcid orcid-link" href="https://orcid.org/0000-0003-1640-9989" rel="noopener noreferrer" target="_blank" title="ORCID: 0000-0003-1640-9989"><img alt="ORCID" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/orcid.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a> <a class="scholia-link" href="https://scholia.toolforge.org/author/Q57678148" rel="noopener noreferrer" target="_blank" title="Scholia profile: Q57678148"><img alt="Scholia" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/scholia_logo.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
 </div>
 <div class="quarto-title-meta-contents">
 <p class="affiliation">
@@ -477,7 +301,7 @@ div.csl-indent {
            <a class="uri" href="https://ror.org/02mpq6x41"><img alt="ROR logo" src="https://raw.githubusercontent.com/ror-community/ror-logos/refs/heads/main/ror-icon-rgb-transparent.svg" style="height:14px; vertical-align:middle;"/></a> <a class="scholia-link" href="https://scholia.toolforge.org/organization/Q955764" rel="noopener noreferrer" target="_blank" title="Scholia profile: Q955764"><img alt="Scholia" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/scholia_logo.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
 </div>
 <div class="quarto-title-meta-contents">
-<p class="author">Pierre-Marie Allard <a class="quarto-title-author-email" href="mailto:pierre-marie.allard@unifr.ch"><i class="bi bi-envelope"></i></a> <a class="quarto-title-author-orcid orcid-link" href="https://orcid.org/0000-0003-3389-2191" rel="noopener noreferrer" target="_blank" title="ORCID: 0000-0003-3389-2191"> <img alt="ORCID" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/orcid.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a><a class="scholia-link" href="https://scholia.toolforge.org/author/Q56451301" rel="noopener noreferrer" target="_blank" title="Scholia profile: Q56451301"><img alt="Scholia" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/scholia_logo.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
+<p class="author">Pierre-Marie Allard <a class="quarto-title-author-email" href="mailto:pierre-marie.allard@unifr.ch"><i class="bi bi-envelope"></i></a> <a class="quarto-title-author-orcid orcid-link" href="https://orcid.org/0000-0003-3389-2191" rel="noopener noreferrer" target="_blank" title="ORCID: 0000-0003-3389-2191"><img alt="ORCID" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/orcid.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a> <a class="scholia-link" href="https://scholia.toolforge.org/author/Q56451301" rel="noopener noreferrer" target="_blank" title="Scholia profile: Q56451301"><img alt="Scholia" src="https://raw.githubusercontent.com/WDscholia/scholia/main/scholia/app/static/images/scholia_logo.svg" style="height:1em; vertical-align:middle; margin-left:0.25em;"/></a></p>
 </div>
 <div class="quarto-title-meta-contents">
 <p class="affiliation">
@@ -521,19 +345,6 @@ Rutz, Adriano, Maria Sorokina, Jakub Galgonek, Daniel Mietchen, Egon Willighagen
 </div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
-    // Ensure there is a toggle, if there isn't float one in the top right
-    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-      const a = window.document.createElement('a');
-      a.classList.add('top-right');
-      a.classList.add('quarto-color-scheme-toggle');
-      a.href = "";
-      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
-      const i = window.document.createElement("i");
-      i.classList.add('bi');
-      a.appendChild(i);
-      window.document.body.appendChild(a);
-    }
-    setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
     const anchorJS = new window.AnchorJS();
     anchorJS.options = {

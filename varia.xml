@@ -10,12 +10,11 @@
 <atom:link href="https://adafede.github.io/varia.xml" rel="self" type="application/rss+xml"/>
 <description>Personal website of Adriano Rutz</description>
 <generator>quarto-1.8.26</generator>
-<lastBuildDate>Mon, 29 Dec 2025 20:11:03 GMT</lastBuildDate>
+<lastBuildDate>Sat, 03 Jan 2026 22:59:30 GMT</lastBuildDate>
 <item>
   <title>CentroidR</title>
   <link>https://adafede.github.io/varia/adafede/CentroidR.html</link>
   <description><![CDATA[ 
-
 
 
 
@@ -28,14 +27,13 @@
   <category>Mass spectrometry</category>
   <category>R</category>
   <guid>https://adafede.github.io/varia/adafede/CentroidR.html</guid>
-  <pubDate>Mon, 29 Dec 2025 20:11:03 GMT</pubDate>
+  <pubDate>Sat, 03 Jan 2026 22:59:30 GMT</pubDate>
   <media:content url="https://raw.githubusercontent.com/Adafede/CentroidR/refs/heads/main/man/figures/logo.svg" medium="image" type="image/svg+xml"/>
 </item>
 <item>
   <title>CASCADE: Contextualizing untargeted Annotation with Semi-quantitative Charged Aerosol Detection for pertinent characterization of natural Extracts</title>
   <link>https://adafede.github.io/varia/adafede/cascade.html</link>
   <description><![CDATA[ 
-
 
 
 
@@ -50,7 +48,7 @@
   <category>Natural products</category>
   <category>R</category>
   <guid>https://adafede.github.io/varia/adafede/cascade.html</guid>
-  <pubDate>Mon, 29 Dec 2025 20:11:03 GMT</pubDate>
+  <pubDate>Sat, 03 Jan 2026 22:59:30 GMT</pubDate>
   <media:content url="https://raw.githubusercontent.com/Adafede/cascade/refs/heads/main/man/figures/logo.svg" medium="image" type="image/svg+xml"/>
 </item>
 <item>
@@ -62,14 +60,13 @@
 
 
 
-
 <script async="" src="https://scripts.simpleanalyticscdn.com/latest.js">
 </script>
 
  ]]></description>
   <category>Python</category>
   <guid>https://adafede.github.io/varia/adafede/marimo.html</guid>
-  <pubDate>Mon, 29 Dec 2025 20:11:03 GMT</pubDate>
+  <pubDate>Sat, 03 Jan 2026 22:59:30 GMT</pubDate>
   <media:content url="https://raw.githubusercontent.com/marimo-team/marimo/main/docs/_static/marimo-logotype-thick.svg" medium="image" type="image/svg+xml"/>
 </item>
 <item>
@@ -81,21 +78,19 @@
 
 
 
-
 <script async="" src="https://scripts.simpleanalyticscdn.com/latest.js">
 </script>
 
  ]]></description>
   <category>Slides</category>
   <guid>https://adafede.github.io/varia/adafede/my-presentations.html</guid>
-  <pubDate>Mon, 29 Dec 2025 20:11:03 GMT</pubDate>
+  <pubDate>Sat, 03 Jan 2026 22:59:30 GMT</pubDate>
   <media:content url="https://upload.wikimedia.org/wikipedia/commons/e/ee/Ic_slideshow_48px.svg" medium="image" type="image/svg+xml"/>
 </item>
 <item>
   <title>SAPID: A Strategy to Analyze Plant Extracts Taste In Depth</title>
   <link>https://adafede.github.io/varia/adafede/sapid.html</link>
   <description><![CDATA[ 
-
 
 
 
@@ -111,14 +106,13 @@
   <category>Taste</category>
   <category>R</category>
   <guid>https://adafede.github.io/varia/adafede/sapid.html</guid>
-  <pubDate>Mon, 29 Dec 2025 20:11:03 GMT</pubDate>
+  <pubDate>Sat, 03 Jan 2026 22:59:30 GMT</pubDate>
   <media:content url="https://raw.githubusercontent.com/Adafede/sapid/refs/heads/main/man/figures/logo.svg" medium="image" type="image/svg+xml"/>
 </item>
 <item>
   <title>SPARQL Examples</title>
   <link>https://adafede.github.io/varia/adafede/sparql-examples.html</link>
   <description><![CDATA[ 
-
 
 
 
@@ -131,14 +125,13 @@
   <category>SPARQL</category>
   <category>Wikidata</category>
   <guid>https://adafede.github.io/varia/adafede/sparql-examples.html</guid>
-  <pubDate>Mon, 29 Dec 2025 20:11:03 GMT</pubDate>
+  <pubDate>Sat, 03 Jan 2026 22:59:30 GMT</pubDate>
   <media:content url="https://upload.wikimedia.org/wikipedia/commons/9/98/Wikidata_RDF.svg" medium="image" type="image/svg+xml"/>
 </item>
 <item>
   <title>Wikidata Natural Products Up To Date</title>
   <link>https://adafede.github.io/varia/adafede/wd-np-up-to-date.html</link>
   <description><![CDATA[ 
-
 
 
 
@@ -152,14 +145,13 @@
   <category>Natural products</category>
   <category>Wikidata</category>
   <guid>https://adafede.github.io/varia/adafede/wd-np-up-to-date.html</guid>
-  <pubDate>Mon, 29 Dec 2025 20:11:03 GMT</pubDate>
+  <pubDate>Sat, 03 Jan 2026 22:59:30 GMT</pubDate>
   <media:content url="https://upload.wikimedia.org/wikipedia/commons/f/f1/Lotus_initiative_1_graphical_abstract.svg" medium="image" type="image/svg+xml"/>
 </item>
 <item>
   <title>Wikidata Taxon Names</title>
   <link>https://adafede.github.io/varia/adafede/wd-taxon-names.html</link>
   <description><![CDATA[ 
-
 
 
 
@@ -173,14 +165,13 @@
   <category>Taxonomy</category>
   <category>Wikidata</category>
   <guid>https://adafede.github.io/varia/adafede/wd-taxon-names.html</guid>
-  <pubDate>Mon, 29 Dec 2025 20:11:03 GMT</pubDate>
+  <pubDate>Sat, 03 Jan 2026 22:59:30 GMT</pubDate>
   <media:content url="https://raw.githubusercontent.com/Adafede/wd-taxon-names/refs/heads/main/index_files/figure-html/fig-cumul-1.svg" medium="image" type="image/svg+xml"/>
 </item>
 <item>
   <title>LOTUS manuscript</title>
   <link>https://adafede.github.io/varia/lotus/lotus-manuscript.html</link>
   <description><![CDATA[ 
-
 
 
 
@@ -193,14 +184,13 @@
   <category>LOTUS</category>
   <category>Manuscript</category>
   <guid>https://adafede.github.io/varia/lotus/lotus-manuscript.html</guid>
-  <pubDate>Mon, 29 Dec 2025 20:11:03 GMT</pubDate>
+  <pubDate>Sat, 03 Jan 2026 22:59:30 GMT</pubDate>
   <media:content url="https://raw.githubusercontent.com/lotusnprod/lotus-manuscript/refs/heads/main/content/images/workflow.svg" medium="image" type="image/svg+xml"/>
 </item>
 <item>
   <title>LOTUS presentations</title>
   <link>https://adafede.github.io/varia/lotus/lotus-presentations.html</link>
   <description><![CDATA[ 
-
 
 
 
@@ -213,14 +203,13 @@
   <category>LOTUS</category>
   <category>Slides</category>
   <guid>https://adafede.github.io/varia/lotus/lotus-presentations.html</guid>
-  <pubDate>Mon, 29 Dec 2025 20:11:03 GMT</pubDate>
+  <pubDate>Sat, 03 Jan 2026 22:59:30 GMT</pubDate>
   <media:content url="https://upload.wikimedia.org/wikipedia/commons/e/ee/Ic_slideshow_48px.svg" medium="image" type="image/svg+xml"/>
 </item>
 <item>
   <title>LOTUS SPARQL Examples</title>
   <link>https://adafede.github.io/varia/lotus/lotus-sparql-examples.html</link>
   <description><![CDATA[ 
-
 
 
 
@@ -234,14 +223,13 @@
   <category>SPARQL</category>
   <category>Wikidata</category>
   <guid>https://adafede.github.io/varia/lotus/lotus-sparql-examples.html</guid>
-  <pubDate>Mon, 29 Dec 2025 20:11:03 GMT</pubDate>
+  <pubDate>Sat, 03 Jan 2026 22:59:30 GMT</pubDate>
   <media:content url="https://upload.wikimedia.org/wikipedia/commons/9/98/Wikidata_RDF.svg" medium="image" type="image/svg+xml"/>
 </item>
 <item>
   <title>TIMA: Taxonomically Informed Metabolite Annotation</title>
   <link>https://adafede.github.io/varia/taxonomicallyinformedannotation/tima.html</link>
   <description><![CDATA[ 
-
 
 
 
@@ -257,14 +245,13 @@
   <category>Taxonomy</category>
   <category>R</category>
   <guid>https://adafede.github.io/varia/taxonomicallyinformedannotation/tima.html</guid>
-  <pubDate>Mon, 29 Dec 2025 20:11:03 GMT</pubDate>
+  <pubDate>Sat, 03 Jan 2026 22:59:30 GMT</pubDate>
   <media:content url="https://raw.githubusercontent.com/taxonomicallyinformedannotation/tima/refs/heads/main/man/figures/logo.svg" medium="image" type="image/svg+xml"/>
 </item>
 <item>
   <title>Minimum Information about a Tailoring Enzyme</title>
   <link>https://adafede.github.io/varia/additional_contributions/MITE.html</link>
   <description><![CDATA[ 
-
 
 
 
@@ -278,14 +265,13 @@
   <category>SMARTS</category>
   <category>Python</category>
   <guid>https://adafede.github.io/varia/additional_contributions/MITE.html</guid>
-  <pubDate>Mon, 29 Dec 2025 20:11:03 GMT</pubDate>
+  <pubDate>Sat, 03 Jan 2026 22:59:30 GMT</pubDate>
   <media:content url="https://raw.githubusercontent.com/mite-standard/mite_web/refs/heads/main/mite_web/mite_web/static/images/mite_logo.svg" medium="image" type="image/svg+xml"/>
 </item>
 <item>
   <title>SpectraToQueries</title>
   <link>https://adafede.github.io/varia/additional_contributions/SpectraToQueries.html</link>
   <description><![CDATA[ 
-
 
 
 
@@ -300,14 +286,13 @@
   <category>SMARTS</category>
   <category>R</category>
   <guid>https://adafede.github.io/varia/additional_contributions/SpectraToQueries.html</guid>
-  <pubDate>Mon, 29 Dec 2025 20:11:03 GMT</pubDate>
+  <pubDate>Sat, 03 Jan 2026 22:59:30 GMT</pubDate>
   <media:content url="https://raw.githubusercontent.com/spectra-to-knowledge/SpectraToQueries/refs/heads/main/man/figures/logo.svg" medium="image" type="image/svg+xml"/>
 </item>
 <item>
   <title>SMARTCLASS</title>
   <link>https://adafede.github.io/varia/additional_contributions/smartclass.html</link>
   <description><![CDATA[ 
-
 
 
 
@@ -322,7 +307,7 @@
   <category>SMARTS</category>
   <category>Wikidata</category>
   <guid>https://adafede.github.io/varia/additional_contributions/smartclass.html</guid>
-  <pubDate>Mon, 29 Dec 2025 20:11:03 GMT</pubDate>
+  <pubDate>Sat, 03 Jan 2026 22:59:30 GMT</pubDate>
 </item>
 </channel>
 </rss>
