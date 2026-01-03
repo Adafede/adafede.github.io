@@ -75,6 +75,12 @@ class AccessibilityFixer:
         # Fix 9: Fix search inputs without labels
         modified |= self._fix_search_inputs(soup)
 
+        # Fix 10: Fix table accessibility
+        modified |= self._fix_table_accessibility(soup)
+
+        # Fix 11: Fix redundant links
+        modified |= self._fix_redundant_links(soup)
+
         # Save if modified
         if modified:
             self.fs.write_text(html_path, str(soup))
@@ -395,6 +401,90 @@ class AccessibilityFixer:
             return label.get_text(strip=True)
 
         return ""
+
+    def _fix_table_accessibility(self, soup) -> bool:
+        """Fix accessibility issues in tables."""
+        modified = False
+        tables = soup.find_all("table")
+
+        for table in tables:
+            # Ensure table has a caption or aria-label
+            if not table.find("caption") and not table.get("aria-label"):
+                # Try to find a heading before the table
+                prev = table.find_previous(["h1", "h2", "h3", "h4", "h5", "h6"])
+                if prev:
+                    caption_text = prev.get_text(strip=True)
+                    table["aria-label"] = f"Table: {caption_text}"
+                    modified = True
+                    logger.debug(f"Added aria-label to table: {caption_text}")
+                else:
+                    table["aria-label"] = "Data table"
+                    modified = True
+                    logger.debug("Added generic aria-label to table")
+
+            # Check for proper header markup
+            thead = table.find("thead")
+            if not thead:
+                # Look for first row that might be headers
+                first_row = table.find("tr")
+                if first_row:
+                    cells = first_row.find_all("td")
+                    # If first row has only td elements, they might be headers
+                    if cells and not first_row.find_all("th"):
+                        # Check if cells contain header-like content (short text, bold, etc.)
+                        likely_headers = all(
+                            len(cell.get_text(strip=True)) < 50 for cell in cells
+                        )
+                        if likely_headers:
+                            # Convert td to th with scope
+                            for cell in cells:
+                                cell.name = "th"
+                                if not cell.get("scope"):
+                                    cell["scope"] = "col"
+                            modified = True
+                            logger.debug("Converted first row cells to header cells")
+
+        return modified
+
+    def _fix_redundant_links(self, soup) -> bool:
+        """Fix adjacent redundant links (same URL, next to each other)."""
+        modified = False
+
+        # Find all links
+        links = soup.find_all("a")
+
+        # Check for adjacent links with same href
+        for i in range(len(links) - 1):
+            current_link = links[i]
+            next_link = links[i + 1]
+
+            # Check if they're adjacent in the DOM
+            if current_link.next_sibling == next_link or \
+               (current_link.next_sibling and current_link.next_sibling.next_sibling == next_link):
+
+                current_href = current_link.get("href", "")
+                next_href = next_link.get("href", "")
+
+                # If same URL and adjacent, check if one is an image link
+                if current_href == next_href and current_href:
+                    current_has_img = current_link.find("img") is not None
+                    next_has_img = next_link.find("img") is not None
+
+                    # Only flag, don't remove automatically (might be intentional)
+                    if current_has_img and not next_has_img:
+                        # Image link followed by text link - common pattern, add aria-hidden to image
+                        if not current_link.get("aria-hidden"):
+                            current_link["aria-hidden"] = "true"
+                            modified = True
+                            logger.debug(f"Added aria-hidden to redundant image link: {current_href}")
+                    elif not current_has_img and next_has_img:
+                        # Text link followed by image link
+                        if not next_link.get("aria-hidden"):
+                            next_link["aria-hidden"] = "true"
+                            modified = True
+                            logger.debug(f"Added aria-hidden to redundant image link: {current_href}")
+
+        return modified
 
 
 def fix_accessibility(html_files: List[Path]) -> None:

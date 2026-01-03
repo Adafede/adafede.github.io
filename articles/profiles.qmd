@@ -6,11 +6,11 @@ scholar: 8889AMkAAAAJ
 
 ## Publication profile
 
-* **Scholia** ![](https://upload.wikimedia.org/wikipedia/commons/5/5b/Scholia_Logo_Improved.svg){height=20} :
+* **Scholia** ![Scholia logo](https://upload.wikimedia.org/wikipedia/commons/5/5b/Scholia_Logo_Improved.svg){height=20} :
 [https://scholia.toolforge.org/author/{{< meta qid >}}](https://scholia.toolforge.org/author/{{< meta qid >}})
 
-* **ORCID** ![](https://upload.wikimedia.org/wikipedia/commons/0/06/ORCID_iD.svg){height=20} :
+* **ORCID** ![ORCID logo](https://upload.wikimedia.org/wikipedia/commons/0/06/ORCID_iD.svg){height=20} :
 [https://orcid.org/{{< meta orcid >}}](https://orcid.org/{{< meta orcid >}})
 
-* **Google Scholar** ![](https://upload.wikimedia.org/wikipedia/commons/c/c7/Google_Scholar_logo.svg){height=20} :
+* **Google Scholar** ![Google Scholar logo](https://upload.wikimedia.org/wikipedia/commons/c/c7/Google_Scholar_logo.svg){height=20} :
 [https://scholar.google.com/citations?user={{< meta scholar >}}](https://scholar.google.com/citations?user={{< meta scholar >}})
