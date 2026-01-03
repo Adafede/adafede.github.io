@@ -462,9 +462,10 @@ class AccessibilityFixer:
             next_link = links[i + 1]
 
             # Check if they're adjacent in the DOM
-            if current_link.next_sibling == next_link or \
-               (current_link.next_sibling and current_link.next_sibling.next_sibling == next_link):
-
+            if current_link.next_sibling == next_link or (
+                current_link.next_sibling
+                and current_link.next_sibling.next_sibling == next_link
+            ):
                 current_href = current_link.get("href", "")
                 next_href = next_link.get("href", "")
 
@@ -479,13 +480,17 @@ class AccessibilityFixer:
                         if not current_link.get("aria-hidden"):
                             current_link["aria-hidden"] = "true"
                             modified = True
-                            logger.debug(f"Added aria-hidden to redundant image link: {current_href}")
+                            logger.debug(
+                                f"Added aria-hidden to redundant image link: {current_href}"
+                            )
                     elif not current_has_img and next_has_img:
                         # Text link followed by image link
                         if not next_link.get("aria-hidden"):
                             next_link["aria-hidden"] = "true"
                             modified = True
-                            logger.debug(f"Added aria-hidden to redundant image link: {current_href}")
+                            logger.debug(
+                                f"Added aria-hidden to redundant image link: {current_href}"
+                            )
 
         return modified
 
@@ -500,11 +505,15 @@ class AccessibilityFixer:
             # Ensure grid has an aria-label or role="grid"
             if not grid.get("aria-label") and not grid.get("role") == "grid":
                 # Try to find a heading or label for the grid
-                label = grid.find_previous(["h1", "h2", "h3", "h4", "h5", "h6", "label"])
+                label = grid.find_previous(
+                    ["h1", "h2", "h3", "h4", "h5", "h6", "label"]
+                )
                 if label:
                     grid["aria-label"] = f"Listing grid: {label.get_text(strip=True)}"
                     modified = True
-                    logger.debug(f"Added aria-label to listing grid: {label.get_text(strip=True)}")
+                    logger.debug(
+                        f"Added aria-label to listing grid: {label.get_text(strip=True)}"
+                    )
                 else:
                     grid["aria-label"] = "Listing grid"
                     modified = True
@@ -547,3 +556,38 @@ class AccessibilityFixer:
             return f"Image: {img['alt']}"
 
         return ""
+
+
+def fix_accessibility(html_files: List[Path]) -> None:
+    """Fix accessibility issues in HTML files.
+
+    Args:
+        html_files: List of HTML file paths to process
+    """
+    project_root = Path.cwd()
+    fs = FileSystem(project_root)
+    html_processor = HtmlProcessor()
+    fixer = AccessibilityFixer(fs, html_processor)
+
+    fixed_count = 0
+    for html_file in html_files:
+        if fixer.fix_html_file(html_file):
+            fixed_count += 1
+
+    logger.info(f"Fixed accessibility issues in {fixed_count} file(s)")
+
+
+def main():
+    """CLI entry point."""
+    import sys
+
+    if len(sys.argv) < 2:
+        print("Usage: fix_accessibility.py <html_file1> [html_file2 ...]")
+        sys.exit(1)
+
+    html_files = [Path(f) for f in sys.argv[1:]]
+    fix_accessibility(html_files)
+
+
+if __name__ == "__main__":
+    main()
