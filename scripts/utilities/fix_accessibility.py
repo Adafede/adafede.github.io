@@ -81,6 +81,9 @@ class AccessibilityFixer:
         # Fix 11: Fix redundant links
         modified |= self._fix_redundant_links(soup)
 
+        # Fix 12: Fix listing grid accessibility
+        modified |= self._fix_listing_grids(soup)
+
         # Save if modified
         if modified:
             self.fs.write_text(html_path, str(soup))
@@ -486,37 +489,61 @@ class AccessibilityFixer:
 
         return modified
 
+    def _fix_listing_grids(self, soup) -> bool:
+        """Fix accessibility issues in Quarto listing grids."""
+        modified = False
 
-def fix_accessibility(html_files: List[Path]) -> None:
-    """Fix accessibility issues in HTML files.
+        # Find all divs that might be listing grids (based on class or other attributes)
+        grids = soup.find_all("div", class_="listing-grid")
 
-    Args:
-        html_files: List of HTML file paths to process
-    """
-    project_root = Path.cwd()
-    fs = FileSystem(project_root)
-    html_processor = HtmlProcessor()
-    fixer = AccessibilityFixer(fs, html_processor)
+        for grid in grids:
+            # Ensure grid has an aria-label or role="grid"
+            if not grid.get("aria-label") and not grid.get("role") == "grid":
+                # Try to find a heading or label for the grid
+                label = grid.find_previous(["h1", "h2", "h3", "h4", "h5", "h6", "label"])
+                if label:
+                    grid["aria-label"] = f"Listing grid: {label.get_text(strip=True)}"
+                    modified = True
+                    logger.debug(f"Added aria-label to listing grid: {label.get_text(strip=True)}")
+                else:
+                    grid["aria-label"] = "Listing grid"
+                    modified = True
+                    logger.debug("Added generic aria-label to listing grid")
 
-    fixed_count = 0
-    for html_file in html_files:
-        if fixer.fix_html_file(html_file):
-            fixed_count += 1
+            # Ensure all items in the grid have accessible names
+            items = grid.find_all(["a", "button", "div"], recursive=False)
+            for item in items:
+                if not item.get("aria-label") and not item.get("title"):
+                    # Try to generate a label from text content or context
+                    label = self._generate_listing_item_label(item)
+                    if label:
+                        item["aria-label"] = label
+                        modified = True
+                        logger.debug(f"Added aria-label to listing grid item: {label}")
 
-    logger.info(f"Fixed accessibility issues in {fixed_count} file(s)")
+        return modified
 
+    def _generate_listing_item_label(self, item) -> str:
+        """Generate aria-label for a listing grid item.
 
-def main():
-    """CLI entry point."""
-    import sys
+        Args:
+            item: BeautifulSoup item element
 
-    if len(sys.argv) < 2:
-        print("Usage: fix_accessibility.py <html_file1> [html_file2 ...]")
-        sys.exit(1)
+        Returns:
+            Generated label
+        """
+        # Try to get from title
+        if item.get("title"):
+            return item["title"]
 
-    html_files = [Path(f) for f in sys.argv[1:]]
-    fix_accessibility(html_files)
+        # Try to get from surrounding text
+        text = item.get_text(strip=True)
+        if text:
+            return text
 
+        # If item is an image link, describe the image
+        img = item.find("img")
+        if img and img.get("alt"):
+            return f"Image: {img['alt']}"
 
-if __name__ == "__main__":
-    main()
+        return ""

@@ -34,4 +34,4 @@ from scripts.utilities import talkmap
 talkmap()
 ```
 
-<iframe src="talk_map.html" width="100%" height="600" style="border:none;"></iframe>
+<iframe src="talk_map.html" width="100%" height="600" style="border:none;" title="Interactive map showing locations of talks"></iframe>
