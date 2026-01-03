@@ -11,11 +11,11 @@ format:
     # include-in-header:
     #   - _includes/dokieli.html
     # minimal: true
+    linkcolor: "#3377c4"
     link-external-icon: false
     link-external-newwindow: true
-    theme:
-      light: flatly
-      dark: darkly
+    theme: 
+      - none
     respect-user-color-scheme: true
     smooth-scroll: true
 
