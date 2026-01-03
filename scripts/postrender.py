@@ -1,45 +1,36 @@
-"""
-Post-render script for Quarto site generation.
+"""Post-render script for Quarto site generation.
 
-This script runs after Quarto renders the site and performs:
-- Pandoc conversion for PDFs
-- CiTO annotation injection
-- ROR affiliation linking
-- RSS/JSON feed generation
-- Semantic annotation enhancement
+Runs after Quarto renders the site to inject semantic annotations.
 """
 
-import logging
 import sys
 from pathlib import Path
 from typing import List
 
-from convert_rss_to_json_feed import convert_rss_to_json_feed
-from inject_author_links import inject_author_links
-from inject_cito_annotations_in_html import inject_cito_annotations_in_html
-from inject_cito_annotations_in_rss import inject_cito_annotations_in_rss
-from inject_doi_in_rss import inject_doi_in_rss
-from inject_ror_in_html import inject_ror_in_html
-from merge_citos import merge_citos
-from parse_citos_from_qmd import parse_citos_from_qmd
-from process_qmd_directory import process_qmd_directory
-from run_pandoc_for_all_qmds import run_pandoc_for_all_qmds
-
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-    handlers=[logging.StreamHandler(sys.stdout)],
+from infrastructure import (
+    FileSystem,
+    HtmlProcessor,
+    YamlLoader,
+    get_logger,
+    setup_logging,
 )
-logger = logging.getLogger(__name__)
+from services import AuthorService, CitoService, RorService
+from utilities import (
+    convert_rss_to_json_feed,
+    inject_cito_annotations_in_rss,
+    inject_doi_in_rss,
+    process_qmd_directory,
+    run_pandoc_for_all_qmds,
+)
 
+# Setup logging
+setup_logging(level="INFO")
+logger = get_logger(__name__)
 
-# ============================================================================
-# CONSTANTS
-# ============================================================================
-
-SITE_DIR = Path("_site")
-POSTS_DIR = Path("posts")
+# Configuration
+PROJECT_ROOT = Path(__file__).parent.parent
+SITE_DIR = PROJECT_ROOT / "_site"
+POSTS_DIR = PROJECT_ROOT / "posts"
 RSS_FILE = SITE_DIR / "posts.xml"
 JSON_FEED_FILE = SITE_DIR / "posts.json"
 
@@ -49,11 +40,6 @@ QMD_PATTERNS = {
     "talks": "talks/*.qmd",
     "teaching": "teaching/*.qmd",
 }
-
-
-# ============================================================================
-# PROCESSING FUNCTIONS
-# ============================================================================
 
 
 def process_articles_talks_teaching() -> None:
@@ -68,49 +54,40 @@ def process_articles_talks_teaching() -> None:
             logger.error(f"Failed to process {name}: {e}", exc_info=True)
 
 
-def collect_post_qmd_files() -> List[Path]:
-    """Collect all QMD files from posts directory.
-
-    Returns:
-        List of Path objects for post QMD files
-    """
-    qmd_files = list(POSTS_DIR.glob("*.qmd"))
-    logger.info(f"Found {len(qmd_files)} post QMD files")
-    return qmd_files
-
-
-def process_cito_annotations(post_qmds: List[Path]) -> dict:
-    """Parse and merge CiTO annotations from all posts.
+def process_posts(
+    fs: FileSystem,
+    cito_service: CitoService,
+    author_service: AuthorService,
+    ror_service: RorService,
+    yaml_loader: YamlLoader,
+) -> None:
+    """Process all posts with CiTO, author, and ROR annotations.
 
     Args:
-        post_qmds: List of post QMD file paths
-
-    Returns:
-        Dictionary mapping citation IDs to sorted lists of CiTO properties
+        fs: FileSystem instance
+        cito_service: CitoService instance
+        author_service: AuthorService instance
+        ror_service: RorService instance
+        yaml_loader: YamlLoader instance
     """
+    logger.info("Processing posts")
+
+    # Find all post QMD files
+    post_qmds = fs.find_posts("posts")
+    logger.info(f"Found {len(post_qmds)} post QMD files")
+
+    if not post_qmds:
+        logger.warning("No post QMD files found - skipping post processing")
+        return
+
+    # Parse CiTO annotations from all posts
     logger.info("Parsing CiTO annotations from posts")
+    all_citations = [cito_service.parse_citations_from_qmd(qmd) for qmd in post_qmds]
+    citation_properties = cito_service.merge_citations(all_citations)
+    logger.info(f"Merged CiTO annotations for {len(citation_properties)} citations")
 
-    try:
-        all_cito_dicts = [parse_citos_from_qmd(qmd) for qmd in post_qmds]
-        merged = merge_citos(all_cito_dicts)
-        citation_properties = {k: sorted(v) for k, v in merged.items()}
-
-        logger.info(f"Merged CiTO annotations for {len(citation_properties)} citations")
-        return citation_properties
-    except Exception as e:
-        logger.error(f"Failed to process CiTO annotations: {e}", exc_info=True)
-        return {}
-
-
-def inject_html_annotations(post_qmds: List[Path], citation_properties: dict) -> None:
-    """Inject CiTO and ROR annotations into HTML files.
-
-    Args:
-        post_qmds: List of post QMD file paths
-        citation_properties: Dictionary of citation properties
-    """
+    # Inject annotations into HTML files
     logger.info("Injecting annotations into HTML files")
-
     for qmd_file in post_qmds:
         base_name = qmd_file.stem
         html_file = SITE_DIR / "posts" / f"{base_name}.html"
@@ -121,35 +98,33 @@ def inject_html_annotations(post_qmds: List[Path], citation_properties: dict) ->
 
         try:
             # Inject CiTO annotations
-            inject_cito_annotations_in_html(
-                html_path=html_file,
-                citation_properties=citation_properties,
-            )
+            cito_service.inject_into_html(html_file, citation_properties)
 
             # Inject ROR affiliations
-            inject_ror_in_html(
-                qmd_path=qmd_file,
-                html_path=html_file,
-            )
+            ror_service.inject_into_html(qmd_file, html_file)
 
             # Inject author ORCID icons and Scholia links
-            inject_author_links(
-                qmd_path=qmd_file,
-                html_path=html_file,
-            )
+            author_service.inject_into_html(qmd_file, html_file)
+
         except Exception as e:
-            logger.error(
-                f"Failed to inject annotations for {qmd_file.name}: {e}",
-                exc_info=True,
-            )
+            logger.error(f"Failed to inject annotations for {qmd_file.name}: {e}",
+                        exc_info=True)
+
+    # Process RSS and feeds
+    process_rss_and_feeds(post_qmds, citation_properties, yaml_loader)
 
 
-def process_rss_and_feeds(post_qmds: List[Path], citation_properties: dict) -> None:
+def process_rss_and_feeds(
+    post_qmds: List[Path],
+    citation_properties: dict,
+    yaml_loader: YamlLoader
+) -> None:
     """Process RSS feed and convert to JSON feed.
 
     Args:
         post_qmds: List of post QMD file paths
         citation_properties: Dictionary of citation properties
+        yaml_loader: YamlLoader instance for DOI extraction
     """
     if not RSS_FILE.exists():
         logger.warning(f"RSS file not found at {RSS_FILE}")
@@ -159,7 +134,9 @@ def process_rss_and_feeds(post_qmds: List[Path], citation_properties: dict) -> N
 
     try:
         # Inject DOIs into RSS
-        inject_doi_in_rss(rss_path=RSS_FILE, qmd_files=post_qmds)
+        inject_doi_in_rss(
+            rss_path=RSS_FILE, qmd_files=post_qmds, yaml_loader=yaml_loader
+        )
 
         # Inject CiTO annotations into RSS
         inject_cito_annotations_in_rss(
@@ -178,11 +155,6 @@ def process_rss_and_feeds(post_qmds: List[Path], citation_properties: dict) -> N
         logger.error(f"Failed to process feeds: {e}", exc_info=True)
 
 
-# ============================================================================
-# MAIN ORCHESTRATION
-# ============================================================================
-
-
 def postrender() -> None:
     """Main post-render orchestration function."""
     logger.info("=" * 80)
@@ -190,6 +162,16 @@ def postrender() -> None:
     logger.info("=" * 80)
 
     try:
+        # Initialize infrastructure
+        fs = FileSystem(PROJECT_ROOT)
+        html_processor = HtmlProcessor()
+        yaml_loader = YamlLoader()
+
+        # Initialize services
+        cito_service = CitoService(fs, html_processor)
+        author_service = AuthorService(fs, html_processor, yaml_loader)
+        ror_service = RorService(fs, html_processor, yaml_loader)
+
         # Step 1: Run Pandoc conversion for PDFs
         logger.info("Step 1: Running Pandoc conversions")
         run_pandoc_for_all_qmds()
@@ -200,14 +182,7 @@ def postrender() -> None:
 
         # Step 3: Process posts
         logger.info("Step 3: Processing posts")
-        post_qmds = collect_post_qmd_files()
-
-        if not post_qmds:
-            logger.warning("No post QMD files found - skipping post processing")
-        else:
-            citation_properties = process_cito_annotations(post_qmds)
-            inject_html_annotations(post_qmds, citation_properties)
-            process_rss_and_feeds(post_qmds, citation_properties)
+        process_posts(fs, cito_service, author_service, ror_service, yaml_loader)
 
         logger.info("=" * 80)
         logger.info("Post-render processing completed successfully")

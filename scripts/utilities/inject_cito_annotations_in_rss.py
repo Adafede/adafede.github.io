@@ -3,20 +3,22 @@ CiTO annotation injector for RSS feeds.
 
 Injects CiTO (Citation Typing Ontology) annotations into RSS feed item
 descriptions, specifically into bibliography entries.
+Uses the refactored infrastructure layer.
 """
 
-import logging
+import sys
 from pathlib import Path
 from typing import Dict, List
 
 from bs4 import BeautifulSoup
 from lxml import etree
 
-from snake_to_camel_case import snake_to_camel_case
+# Add parent directory to path for infrastructure imports
+sys.path.insert(0, str(Path(__file__).parent.parent))
 
-# Configure logging
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+from infrastructure import get_logger
+
+logger = get_logger(__name__)
 
 
 # ============================================================================
@@ -27,6 +29,24 @@ REFS_CONTAINER_ID = "refs"
 CSL_ENTRY_CLASS = "csl-entry"
 CITO_SPAN_CLASS = "cito"
 REF_ID_PREFIX = "ref-"
+
+
+# ============================================================================
+# UTILITY FUNCTIONS
+# ============================================================================
+
+
+def snake_to_camel_case(snake_str: str) -> str:
+    """Convert snake_case to camelCase.
+
+    Args:
+        snake_str: String in snake_case format
+
+    Returns:
+        String in camelCase format
+    """
+    components = snake_str.split("_")
+    return components[0] + "".join(x.title() for x in components[1:])
 
 
 # ============================================================================
