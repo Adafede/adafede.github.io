@@ -93,6 +93,9 @@ class AccessibilityFixer:
         # Fix 15: Fix missing main landmark
         modified |= self._fix_main_landmark(soup)
 
+        # Fix 16: Fix empty Quarto listing wrapper links
+        modified |= self._fix_quarto_listing_wrappers(soup)
+
         # Save if modified
         if modified:
             self.fs.write_text(html_path, str(soup))
@@ -607,7 +610,6 @@ class AccessibilityFixer:
 
         return ""
 
-
     def _fix_listing_item_links(self, soup) -> bool:
         """Fix accessibility issues with listing item links."""
         modified = False
@@ -688,6 +690,73 @@ class AccessibilityFixer:
             content_div.name = "main"
             modified = True
             logger.debug("Converted content div to main element")
+
+        return modified
+
+    def _fix_quarto_listing_wrappers(self, soup) -> bool:
+        """Fix empty Quarto listing wrapper links that cause accessibility errors."""
+        modified = False
+
+        # Find all delink and grid listing containers
+        delink_containers = soup.find_all(class_="delink")
+
+        for container in delink_containers:
+            # Get all links in this container
+            links = list(container.find_all("a"))
+
+            for link in links:
+                # Skip if already removed
+                if link.parent is None:
+                    continue
+
+                # Check if link directly contains block-level elements
+                direct_children = list(link.children)
+                has_block_child = any(
+                    hasattr(child, "name")
+                    and child.name in ["p", "div", "ul", "ol", "blockquote"]
+                    for child in direct_children
+                )
+
+                if has_block_child:
+                    # This link wraps block elements - unwrap it
+                    link.unwrap()
+                    modified = True
+                    logger.debug("Unwrapped delink wrapper containing block elements")
+                    continue
+
+                # Check if link has no text and no meaningful children (empty wrapper)
+                text = link.get_text(strip=True)
+                meaningful_children = [
+                    child
+                    for child in link.children
+                    if hasattr(child, "name") and child.name
+                ]
+
+                if not text and not meaningful_children:
+                    link.decompose()
+                    modified = True
+                    logger.debug("Removed empty delink wrapper link")
+
+        # Handle ALL quarto-grid-link wrappers (both inside and outside grid items)
+        all_grid_links = soup.find_all("a", class_="quarto-grid-link")
+
+        for link in all_grid_links:
+            # Skip if already removed
+            if link.parent is None:
+                continue
+
+            # Check if this link wraps nothing or only whitespace
+            text = link.get_text(strip=True)
+            meaningful_children = [
+                child
+                for child in link.children
+                if hasattr(child, "name") and child.name
+            ]
+
+            if not text and not meaningful_children:
+                link.decompose()
+                modified = True
+                logger.debug("Removed empty quarto-grid-link wrapper")
 
         return modified
 
