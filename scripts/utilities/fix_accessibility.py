@@ -96,6 +96,9 @@ class AccessibilityFixer:
         # Fix 16: Fix empty Quarto listing wrapper links
         modified |= self._fix_quarto_listing_wrappers(soup)
 
+        # Fix 17: Fix missing form labels on listing filter inputs
+        modified |= self._fix_listing_filter_labels(soup)
+
         # Save if modified
         if modified:
             self.fs.write_text(html_path, str(soup))
@@ -757,6 +760,54 @@ class AccessibilityFixer:
                 link.decompose()
                 modified = True
                 logger.debug("Removed empty quarto-grid-link wrapper")
+
+        return modified
+
+    def _fix_listing_filter_labels(self, soup) -> bool:
+        """Fix missing form labels on Quarto listing filter inputs."""
+        modified = False
+
+        # Find all Quarto listing filter containers
+        filter_containers = soup.find_all(class_="quarto-listing-filter")
+        logger.debug(f"Found {len(filter_containers)} quarto-listing-filter containers")
+
+        for container in filter_containers:
+            # Find the input element within this container
+            input_elem = container.find("input", class_="search")
+            if not input_elem:
+                # Try finding any input element
+                input_elem = container.find("input")
+
+            if not input_elem:
+                logger.debug("No input element found in filter container")
+                continue
+
+            logger.debug(f"Found input element: {input_elem}")
+
+            # Check if input already has accessibility markup
+            if input_elem.get("aria-label"):
+                logger.debug(
+                    f"Input already has aria-label: {input_elem.get('aria-label')}"
+                )
+                continue
+            if input_elem.get("aria-labelledby"):
+                logger.debug(
+                    f"Input already has aria-labelledby: {input_elem.get('aria-labelledby')}"
+                )
+                continue
+
+            # Check for an associated label element
+            input_id = input_elem.get("id")
+            if input_id:
+                label = soup.find("label", attrs={"for": input_id})
+                if label:
+                    logger.debug(f"Input has associated label element")
+                    continue
+
+            # Add aria-label for accessibility
+            input_elem["aria-label"] = "Filter items"
+            modified = True
+            logger.debug(f"Added aria-label 'Filter items' to listing filter input")
 
         return modified
 
