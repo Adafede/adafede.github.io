@@ -84,6 +84,15 @@ class AccessibilityFixer:
         # Fix 12: Fix listing grid accessibility
         modified |= self._fix_listing_grids(soup)
 
+        # Fix 13: Fix listing item links
+        modified |= self._fix_listing_item_links(soup)
+
+        # Fix 14: Fix skip links
+        modified |= self._fix_skip_links(soup)
+
+        # Fix 15: Fix missing main landmark
+        modified |= self._fix_main_landmark(soup)
+
         # Save if modified
         if modified:
             self.fs.write_text(html_path, str(soup))
@@ -230,13 +239,30 @@ class AccessibilityFixer:
         return modified
 
     def _fix_heading_hierarchy(self, soup) -> bool:
-        """Check and log heading hierarchy issues."""
-        # This is more complex and might require manual review
-        # For now, just log warnings
+        """Check and fix heading hierarchy issues."""
+        modified = False
+
+        # Fix specific issue: quarto-listing-category-title should not be h5
+        category_titles = soup.find_all(class_="quarto-listing-category-title")
+        for title in category_titles:
+            if title.name in ["h5", "h4", "h3", "h2"]:
+                # Convert to a strong element with aria-label for screen readers
+                new_tag = soup.new_tag("div")
+                new_tag["class"] = title.get("class", [])
+                new_tag["role"] = "heading"
+                new_tag["aria-level"] = "2"
+                new_tag.string = title.get_text()
+                title.replace_with(new_tag)
+                modified = True
+                logger.debug(
+                    f"Converted {title.name} category title to div with role='heading'"
+                )
+
+        # Check and log remaining heading hierarchy issues
         headings = soup.find_all(["h1", "h2", "h3", "h4", "h5", "h6"])
 
         if not headings:
-            return False
+            return modified
 
         prev_level = 0
         for heading in headings:
@@ -247,7 +273,7 @@ class AccessibilityFixer:
                 )
             prev_level = level
 
-        return False
+        return modified
 
     def _fix_iframe_titles(self, soup) -> bool:
         """Add title attributes to iframes for screen readers."""
@@ -453,10 +479,32 @@ class AccessibilityFixer:
         """Fix adjacent redundant links (same URL, next to each other)."""
         modified = False
 
-        # Find all links
-        links = soup.find_all("a")
+        # Find Quarto listing items with image and text links
+        listing_items = soup.find_all("div", class_="quarto-post")
+        for item in listing_items:
+            # Find image link in thumbnail div
+            thumbnail = item.find("div", class_="thumbnail")
+            if thumbnail:
+                img_link = thumbnail.find("a")
+                if img_link:
+                    img_href = img_link.get("href", "")
 
-        # Check for adjacent links with same href
+                    # Find title link in body div
+                    body = item.find("div", class_="body")
+                    if body:
+                        title_link = body.find("a")
+                        if title_link and title_link.get("href") == img_href:
+                            # Same URL - make image link decorative
+                            if not img_link.get("aria-hidden"):
+                                img_link["aria-hidden"] = "true"
+                                img_link["tabindex"] = "-1"
+                                modified = True
+                                logger.debug(
+                                    f"Hidden redundant image link in listing: {img_href}"
+                                )
+
+        # Also check for traditional adjacent links
+        links = soup.find_all("a")
         for i in range(len(links) - 1):
             current_link = links[i]
             next_link = links[i + 1]
@@ -479,6 +527,7 @@ class AccessibilityFixer:
                         # Image link followed by text link - common pattern, add aria-hidden to image
                         if not current_link.get("aria-hidden"):
                             current_link["aria-hidden"] = "true"
+                            current_link["tabindex"] = "-1"
                             modified = True
                             logger.debug(
                                 f"Added aria-hidden to redundant image link: {current_href}"
@@ -487,6 +536,7 @@ class AccessibilityFixer:
                         # Text link followed by image link
                         if not next_link.get("aria-hidden"):
                             next_link["aria-hidden"] = "true"
+                            next_link["tabindex"] = "-1"
                             modified = True
                             logger.debug(
                                 f"Added aria-hidden to redundant image link: {current_href}"
@@ -556,6 +606,90 @@ class AccessibilityFixer:
             return f"Image: {img['alt']}"
 
         return ""
+
+
+    def _fix_listing_item_links(self, soup) -> bool:
+        """Fix accessibility issues with listing item links."""
+        modified = False
+
+        # Find listing items that have redundant image + text links
+        listing_items = soup.find_all("div", class_="listing-item")
+
+        for item in listing_items:
+            links = item.find_all("a")
+
+            # Check for adjacent image + text links with same href
+            for i in range(len(links) - 1):
+                current = links[i]
+                next_link = links[i + 1]
+
+                if current.get("href") == next_link.get("href"):
+                    current_img = current.find("img")
+                    next_img = next_link.find("img")
+
+                    # If one has image and other has text, hide the image link
+                    if current_img and not next_img:
+                        # Current is image link, next is text link
+                        if not current.get("aria-hidden"):
+                            current["aria-hidden"] = "true"
+                            current["tabindex"] = "-1"
+                            modified = True
+                    elif next_img and not current_img:
+                        # Next is image link, current is text link
+                        if not next_link.get("aria-hidden"):
+                            next_link["aria-hidden"] = "true"
+                            next_link["tabindex"] = "-1"
+                            modified = True
+
+        return modified
+
+    def _fix_skip_links(self, soup) -> bool:
+        """Add skip navigation link if missing."""
+        modified = False
+
+        # Check if skip link already exists
+        skip_link = soup.find("a", href="#quarto-document-content")
+        if skip_link:
+            return False
+
+        # Add skip link at the beginning of body
+        body = soup.find("body")
+        if body:
+            # Create skip link
+            skip_link = soup.new_tag(
+                "a",
+                href="#quarto-document-content",
+                **{
+                    "class": "visually-hidden-focusable",
+                    "style": "position: absolute; top: -40px; left: 0; z-index: 9999;",
+                },
+            )
+            skip_link.string = "Skip to main content"
+
+            # Insert as first child of body
+            body.insert(0, skip_link)
+            modified = True
+            logger.debug("Added skip navigation link")
+
+        return modified
+
+    def _fix_main_landmark(self, soup) -> bool:
+        """Ensure page has a main landmark."""
+        modified = False
+
+        # Check if main element exists
+        main = soup.find("main")
+        if main:
+            return False
+
+        # Look for content div that should be main
+        content_div = soup.find("div", id="quarto-document-content")
+        if content_div and content_div.name != "main":
+            content_div.name = "main"
+            modified = True
+            logger.debug("Converted content div to main element")
+
+        return modified
 
 
 def fix_accessibility(html_files: List[Path]) -> None:

@@ -30,3 +30,30 @@ body {
     flex: unset;
   }
 }
+
+/* Accessibility improvements */
+.visually-hidden-focusable {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  z-index: 9999;
+  padding: 0.5rem 1rem;
+  background: #000;
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.visually-hidden-focusable:focus {
+  top: 0;
+  clip: auto;
+  clip-path: none;
+}
+
+/* Ensure category titles maintain visual hierarchy */
+.quarto-listing-category-title[role="heading"] {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
