@@ -1,8 +1,8 @@
 ---
 title: SMARTCLASS
 url: https://zamboni-lab.github.io/smartclass
-# image: ""
-# image-alt: ""
+image: https://upload.wikimedia.org/wikipedia/commons/1/13/Broken_icon_pink.svg
+image-alt: SMARTCLASS has no icon for now
 categories:
   - Chemical classes
   - Python
