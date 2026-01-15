@@ -4,14 +4,14 @@
     <title>Adriano Rutz</title>
     <link>https://adafede.github.io/posts.html</link>
     <atom:link href="https://adafede.github.io/posts.xml" rel="self" type="application/rss+xml"/>
-    <description>Personal website of Adriano Rutz</description>
+    <description>Personal website of Adriano Rutz - Swiss Pharmaceutical Scientist specializing in metabolomics, mass spectrometry, and natural products research.</description>
     <generator>quarto-1.8.26</generator>
     <lastBuildDate>Mon, 04 Aug 2025 00:00:00 GMT</lastBuildDate>
     <item>
       <title>Open Science Upgrade: Adding Blog Posts to my Website and Linking to Rogue Scholar</title>
       <link>https://adafede.github.io/posts/2025-08-04_rogue_scholar.html</link>
       <description><![CDATA[
-<script async="" src="https://scripts.simpleanalyticscdn.com/latest.js">
+<script async="" crossorigin="anonymous" defer="" src="https://scripts.simpleanalyticscdn.com/latest.js">
 </script><p>I have finally opened a <code>Posts</code> section on my website! Every post should now automatically get a DOI.</p>
 <p>This is something I have wanted to do for a long time, largely inspired by the tireless and consistent example set by <a href="https://scholia.toolforge.org/author/Q20895241">Egon Willighagen</a> <span class="citation" data-cites="willighagen2024a willighagen2024b willighagen2025">(Willighagen 2024a, 2024b, 2025)</span>.</p>
 <p>It was today’s post of <span class="citation" data-cites="fenner2025">(Fenner 2025)</span> that finally motivated me to look into it again. That led me down a productive rabbit hole to set up Rogue Scholar: first landing on <span class="citation" data-cites="voncsefalvay2023">(Csefalvay 2023)</span>’s excellent guide, and then <span class="citation" data-cites="fruehwald2025">(Fruehwald 2025)</span>’s clear write-up, both of which made the process of integrating Rogue Scholar into a Quarto-based site surprisingly smooth.</p>
