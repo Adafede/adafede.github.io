@@ -4,6 +4,8 @@ Talk map generator using Folium.
 Generates an interactive map of talk locations with metadata from QMD files.
 """
 
+from __future__ import annotations
+
 import json
 import sys
 from pathlib import Path
@@ -17,7 +19,7 @@ from geopy import Nominatim
 # Add parent directory to path for infrastructure imports
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from infrastructure import FileSystem, YamlLoader, get_logger
+from infrastructure import YamlLoader, get_logger
 
 logger = get_logger(__name__)
 
@@ -312,7 +314,6 @@ def talkmap(
 
     # Initialize components
     project_root = Path.cwd()
-    fs = FileSystem(project_root)
     yaml_loader = YamlLoader()
     cache = GeoCache(Path(cache_file))
     geocoder = Nominatim(user_agent=user_agent)

@@ -7,6 +7,17 @@ import sys
 from pathlib import Path
 from typing import List
 
+# Add scripts directory to path for imports
+sys.path.insert(0, str(Path(__file__).parent))
+
+from config import (
+    JSON_FEED_FILE,
+    LOG_LEVEL,
+    PROJECT_ROOT,
+    QMD_PATTERNS,
+    RSS_FILE,
+    SITE_DIR,
+)
 from infrastructure import (
     FileSystem,
     HtmlProcessor,
@@ -25,29 +36,19 @@ from utilities import (
 )
 
 # Setup logging
-setup_logging(level="INFO")
+setup_logging(level=LOG_LEVEL)
 logger = get_logger(__name__)
 
-# Configuration
-PROJECT_ROOT = Path(__file__).parent.parent
-SITE_DIR = PROJECT_ROOT / "_site"
-POSTS_DIR = PROJECT_ROOT / "posts"
-RSS_FILE = SITE_DIR / "posts.xml"
-JSON_FEED_FILE = SITE_DIR / "posts.json"
-
-# Directories to process
-QMD_PATTERNS = {
-    "articles": "articles/**/*.qmd",
-    "talks": "talks/*.qmd",
-    "teaching": "teaching/*.qmd",
-}
 
 
 def process_articles_talks_teaching() -> None:
     """Process articles, talks, and teaching directories."""
     logger.info("Processing articles, talks, and teaching directories")
 
+    # Process all QMD patterns except posts (handled separately with CiTO)
     for name, pattern in QMD_PATTERNS.items():
+        if name == "posts":
+            continue  # Posts handled in process_posts() with CiTO annotations
         try:
             logger.info(f"Processing {name}: {pattern}")
             process_qmd_directory(qmd_glob=pattern)

@@ -259,11 +259,20 @@ class RorService:
             ror_url: ROR URL
         """
         ror_img = (
-            f'<img src="{self.ROR_ICON_URL}" alt="ROR logo" '
+            f'<img src="{self.ROR_ICON_URL}" alt="" aria-hidden="true" '
             f'style="height:14px; vertical-align:middle;" />'
         )
 
-        link = soup.new_tag("a", **{"class": "uri", "href": ror_url})
+        link = soup.new_tag(
+            "a",
+            href=ror_url,
+            **{
+                "class": "uri",
+                "aria-label": "View organization in Research Organization Registry (ROR)",
+                "target": "_blank",
+                "rel": "noopener noreferrer",
+            },
+        )
         link.append(BeautifulSoup(ror_img, "html.parser"))
 
         element.append(" ")
@@ -284,7 +293,7 @@ class RorService:
         """
         scholia_url = f"https://scholia.toolforge.org/organization/{qid}"
         scholia_img = (
-            f'<img src="{self.SCHOLIA_SVG_URL}" alt="Scholia" '
+            f'<img src="{self.SCHOLIA_SVG_URL}" alt="" aria-hidden="true" '
             f'style="height:1em; vertical-align:middle; margin-left:0.25em;" />'
         )
 
@@ -296,6 +305,7 @@ class RorService:
                 "target": "_blank",
                 "rel": "noopener noreferrer",
                 "title": f"Scholia profile: {qid}",
+                "aria-label": f"View Scholia profile for {qid}",
             },
         )
         link.append(BeautifulSoup(scholia_img, "html.parser"))
