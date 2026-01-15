@@ -4,17 +4,19 @@ Converts an RSS XML feed to JSON Feed format with additional metadata
 and modification tracking. Uses infrastructure layer for logging.
 """
 
+from __future__ import annotations
+
 import json
 import os
 import subprocess
+import sys
 from datetime import datetime
+from pathlib import Path
 from urllib.parse import urlparse
 
 from bs4 import BeautifulSoup
 from lxml import etree
 
-import sys
-from pathlib import Path
 
 # Add parent directory to path for infrastructure imports
 sys.path.insert(0, str(Path(__file__).parent.parent))

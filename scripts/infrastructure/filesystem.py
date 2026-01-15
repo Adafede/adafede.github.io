@@ -1,7 +1,8 @@
 """File system operations and path utilities."""
 
+from __future__ import annotations
+
 from pathlib import Path
-from typing import Iterable
 
 from .logger import get_logger
 

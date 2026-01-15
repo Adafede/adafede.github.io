@@ -3,17 +3,20 @@
 Runs before Quarto renders the site to update metadata in QMD files.
 """
 
+import sys
 from pathlib import Path
 
-from infrastructure import FileSystem, setup_logging, get_logger
+# Add scripts directory to path for imports
+sys.path.insert(0, str(Path(__file__).parent))
+
+from config import LOG_LEVEL, PROJECT_ROOT
+from infrastructure import FileSystem, get_logger, setup_logging
 from services import MetadataService
 
 # Setup logging
-setup_logging(level="INFO")
+setup_logging(level=LOG_LEVEL)
 logger = get_logger(__name__)
 
-# Configuration
-PROJECT_ROOT = Path(__file__).parent.parent
 
 
 def prerender() -> None:

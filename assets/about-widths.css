@@ -57,3 +57,32 @@ body {
   margin-bottom: 0.5rem;
 }
 
+/* Print styles */
+@media print {
+  body {
+    margin-top: 0;
+  }
+
+  .navbar,
+  .quarto-search,
+  #quarto-back-to-top,
+  .visually-hidden-focusable {
+    display: none !important;
+  }
+
+  .about-entity img {
+    max-width: 150px;
+  }
+
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    word-break: break-all;
+  }
+
+  /* Don't show URL for internal links */
+  a[href^="/"]::after,
+  a[href^="#"]::after {
+    content: "";
+  }
+}

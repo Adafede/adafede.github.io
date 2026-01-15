@@ -23,6 +23,9 @@ kernel: .venv
 
 project:
   type: website
+  resources:
+    - robots.txt
+    - _headers
   post-render:
     - scripts/postrender.py
   pre-render:
@@ -30,7 +33,7 @@ project:
 
 website:
   title: Adriano Rutz
-  description: Personal website of Adriano Rutz
+  description: Personal website of Adriano Rutz - Swiss Pharmaceutical Scientist specializing in metabolomics, mass spectrometry, and natural products research.
   site-path: ./
   site-url: https://adafede.github.io
   favicon: images/favicon/favicon.ico
@@ -62,7 +65,8 @@ website:
         href: varia.qmd
     right:
       - icon: rss
+        aria-label: RSS Feed
         href: rss.xml
   body-header: |
-    <script async src="https://scripts.simpleanalyticscdn.com/latest.js">
+    <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js" crossorigin="anonymous">
     </script>
