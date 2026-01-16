@@ -9,7 +9,7 @@
 <link>https://adafede.github.io/rss.html</link>
 <atom:link href="https://adafede.github.io/rss.xml" rel="self" type="application/rss+xml"/>
 <description>Personal website of Adriano Rutz - Swiss Pharmaceutical Scientist specializing in metabolomics, mass spectrometry, and natural products research.</description>
-<generator>quarto-1.8.26</generator>
+<generator>quarto-1.8.27</generator>
 <lastBuildDate>Thu, 11 Dec 2025 00:00:00 GMT</lastBuildDate>
 <item>
   <title>Strategies for community-sourced biocuration in bioinformatics: a case study on MIBiG 4.0</title>
