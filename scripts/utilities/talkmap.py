@@ -10,7 +10,6 @@ import json
 import sys
 from pathlib import Path
 from time import sleep
-from typing import Dict, List, Tuple
 
 import folium
 import markdown
@@ -50,7 +49,7 @@ class GeoCache:
             cache_path: Path to cache JSON file
         """
         self.cache_path = cache_path
-        self.cache: Dict[str, Dict] = {}
+        self.cache: dict[str, dict] = {}
         self._load()
 
     def _load(self) -> None:
@@ -77,7 +76,7 @@ class GeoCache:
         except Exception as e:
             logger.error(f"Failed to save cache: {e}")
 
-    def get(self, location: str) -> Dict | None:
+    def get(self, location: str) -> dict | None:
         """Get cached geocoding result.
 
         Args:
@@ -89,7 +88,11 @@ class GeoCache:
         return self.cache.get(location)
 
     def set(
-        self, location: str, latitude: float, longitude: float, address: str
+        self,
+        location: str,
+        latitude: float,
+        longitude: float,
+        address: str,
     ) -> None:
         """Cache geocoding result.
 
@@ -111,7 +114,7 @@ def geocode_location(
     geocoder: Nominatim,
     cache: GeoCache,
     sleep_seconds: float = 1.0,
-) -> Tuple[float, float] | None:
+) -> tuple[float, float] | None:
     """Geocode a location string to coordinates.
 
     Args:
@@ -159,7 +162,7 @@ def extract_talks_metadata(
     geocoder: Nominatim,
     cache: GeoCache,
     sleep_seconds: float = 1.0,
-) -> List[Tuple[float, float, Dict]]:
+) -> list[tuple[float, float, dict]]:
     """Extract talk metadata with geocoded locations.
 
     Args:
@@ -206,7 +209,7 @@ def extract_talks_metadata(
 # ============================================================================
 
 
-def calculate_map_center(locations: List[Tuple[float, float, Dict]]) -> List[float]:
+def calculate_map_center(locations: list[tuple[float, float, dict]]) -> list[float]:
     """Calculate center point for map based on all locations.
 
     Args:
@@ -223,7 +226,7 @@ def calculate_map_center(locations: List[Tuple[float, float, Dict]]) -> List[flo
     return [avg_lat, avg_lon]
 
 
-def create_popup_html(meta: Dict) -> str:
+def create_popup_html(meta: dict) -> str:
     """Create HTML popup content from talk metadata.
 
     Args:
@@ -247,14 +250,14 @@ def create_popup_html(meta: Dict) -> str:
     # Combine and clean up
     popup_html = f"{title}<br>{venue}<br>{date}<br><br>{desc}".strip()
     popup_html = "<br>".join(
-        [line for line in popup_html.split("<br>") if line.strip()]
+        [line for line in popup_html.split("<br>") if line.strip()],
     )
 
     return popup_html
 
 
 def generate_map(
-    locations: List[Tuple[float, float, Dict]],
+    locations: list[tuple[float, float, dict]],
     output_path: Path,
 ) -> None:
     """Generate Folium map with talk locations.

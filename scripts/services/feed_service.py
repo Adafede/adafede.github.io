@@ -4,7 +4,6 @@ import json
 from datetime import datetime
 from pathlib import Path
 from typing import Optional
-from urllib.parse import urlparse
 
 from bs4 import BeautifulSoup
 from lxml import etree

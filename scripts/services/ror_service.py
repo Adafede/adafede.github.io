@@ -160,7 +160,7 @@ class RorService:
             self.html.save_to_path(soup, html_path)
             logger.info(
                 f"✓ Injected ROR links for {enriched_count} affiliation(s) "
-                f"in {html_path.name}"
+                f"in {html_path.name}",
             )
 
         return enriched_count
@@ -338,6 +338,6 @@ class RorService:
                 logger.warning(f"HTML not found for {qmd_path.name}")
 
         logger.info(
-            f"Enriched {total_enriched} affiliations across {len(qmd_files)} files"
+            f"Enriched {total_enriched} affiliations across {len(qmd_files)} files",
         )
         return total_enriched

@@ -40,7 +40,6 @@ setup_logging(level=LOG_LEVEL)
 logger = get_logger(__name__)
 
 
-
 def process_articles_talks_teaching() -> None:
     """Process articles, talks, and teaching directories."""
     logger.info("Processing articles, talks, and teaching directories")
@@ -110,7 +109,8 @@ def process_posts(
 
         except Exception as e:
             logger.error(
-                f"Failed to inject annotations for {qmd_file.name}: {e}", exc_info=True
+                f"Failed to inject annotations for {qmd_file.name}: {e}",
+                exc_info=True,
             )
 
     # Process RSS and feeds
@@ -118,7 +118,9 @@ def process_posts(
 
 
 def process_rss_and_feeds(
-    post_qmds: List[Path], citation_properties: dict, yaml_loader: YamlLoader
+    post_qmds: List[Path],
+    citation_properties: dict,
+    yaml_loader: YamlLoader,
 ) -> None:
     """Process RSS feed and convert to JSON feed.
 
@@ -136,7 +138,9 @@ def process_rss_and_feeds(
     try:
         # Inject DOIs into RSS
         inject_doi_in_rss(
-            rss_path=RSS_FILE, qmd_files=post_qmds, yaml_loader=yaml_loader
+            rss_path=RSS_FILE,
+            qmd_files=post_qmds,
+            yaml_loader=yaml_loader,
         )
 
         # Inject CiTO annotations into RSS
