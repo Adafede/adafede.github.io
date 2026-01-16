@@ -18,7 +18,6 @@ setup_logging(level=LOG_LEVEL)
 logger = get_logger(__name__)
 
 
-
 def prerender() -> None:
     """Main pre-render orchestration."""
     logger.info("=" * 80)

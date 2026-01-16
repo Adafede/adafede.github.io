@@ -111,7 +111,7 @@ class Citation:
         if self.cite_id != other.cite_id:
             raise ValueError(
                 f"Cannot merge citations with different IDs: "
-                f"{self.cite_id} != {other.cite_id}"
+                f"{self.cite_id} != {other.cite_id}",
             )
 
         merged_props = self.properties | other.properties

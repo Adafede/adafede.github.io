@@ -1,6 +1,5 @@
 """Author service for ORCID and Scholia link injection."""
 
-import re
 from pathlib import Path
 from typing import Optional
 
@@ -191,7 +190,7 @@ class AuthorService:
             self.html.save_to_path(soup, html_path)
             logger.info(
                 f"✓ Injected author links for {enriched_count} author(s) "
-                f"in {html_path.name}"
+                f"in {html_path.name}",
             )
 
         return enriched_count
@@ -349,7 +348,8 @@ class AuthorService:
         """
         # Check if already has Scholia link
         existing_link = element.find(
-            "a", href=lambda h: h and "scholia.toolforge.org" in h
+            "a",
+            href=lambda h: h and "scholia.toolforge.org" in h,
         )
         if existing_link:
             return False

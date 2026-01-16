@@ -173,7 +173,7 @@ class AccessibilityFixer:
                     link["aria-label"] = aria_label
                     modified = True
                     logger.debug(
-                        f"Added aria-label to empty link: {link.get('href', 'unknown')}"
+                        f"Added aria-label to empty link: {link.get('href', 'unknown')}",
                     )
 
         return modified
@@ -261,7 +261,7 @@ class AccessibilityFixer:
                 title.replace_with(new_tag)
                 modified = True
                 logger.debug(
-                    f"Converted {title.name} category title to div with role='heading'"
+                    f"Converted {title.name} category title to div with role='heading'",
                 )
 
         # Check and log remaining heading hierarchy issues
@@ -275,7 +275,7 @@ class AccessibilityFixer:
             level = int(heading.name[1])
             if prev_level > 0 and level > prev_level + 1:
                 logger.warning(
-                    f"Heading hierarchy skip detected: {heading.name} after h{prev_level}"
+                    f"Heading hierarchy skip detected: {heading.name} after h{prev_level}",
                 )
             prev_level = level
 
@@ -411,7 +411,7 @@ class AccessibilityFixer:
                     input_tag["aria-label"] = label
                     modified = True
                     logger.debug(
-                        f"Added aria-label to search input from label: {label}"
+                        f"Added aria-label to search input from label: {label}",
                     )
 
         return modified
@@ -506,7 +506,7 @@ class AccessibilityFixer:
                                 img_link["tabindex"] = "-1"
                                 modified = True
                                 logger.debug(
-                                    f"Hidden redundant image link in listing: {img_href}"
+                                    f"Hidden redundant image link in listing: {img_href}",
                                 )
 
         # Also check for traditional adjacent links
@@ -536,7 +536,7 @@ class AccessibilityFixer:
                             current_link["tabindex"] = "-1"
                             modified = True
                             logger.debug(
-                                f"Added aria-hidden to redundant image link: {current_href}"
+                                f"Added aria-hidden to redundant image link: {current_href}",
                             )
                     elif not current_has_img and next_has_img:
                         # Text link followed by image link
@@ -545,7 +545,7 @@ class AccessibilityFixer:
                             next_link["tabindex"] = "-1"
                             modified = True
                             logger.debug(
-                                f"Added aria-hidden to redundant image link: {current_href}"
+                                f"Added aria-hidden to redundant image link: {current_href}",
                             )
 
         return modified
@@ -562,13 +562,13 @@ class AccessibilityFixer:
             if not grid.get("aria-label") and not grid.get("role") == "grid":
                 # Try to find a heading or label for the grid
                 label = grid.find_previous(
-                    ["h1", "h2", "h3", "h4", "h5", "h6", "label"]
+                    ["h1", "h2", "h3", "h4", "h5", "h6", "label"],
                 )
                 if label:
                     grid["aria-label"] = f"Listing grid: {label.get_text(strip=True)}"
                     modified = True
                     logger.debug(
-                        f"Added aria-label to listing grid: {label.get_text(strip=True)}"
+                        f"Added aria-label to listing grid: {label.get_text(strip=True)}",
                     )
                 else:
                     grid["aria-label"] = "Listing grid"
@@ -700,10 +700,10 @@ class AccessibilityFixer:
         """Fix empty Quarto listing wrapper links that cause accessibility errors."""
         modified = False
 
-        # Find all delink and grid listing containers
-        delink_containers = soup.find_all(class_="delink")
+        # Find all unlink and grid listing containers
+        unlink_containers = soup.find_all(class_="unlink")
 
-        for container in delink_containers:
+        for container in unlink_containers:
             # Get all links in this container
             links = list(container.find_all("a"))
 
@@ -724,7 +724,7 @@ class AccessibilityFixer:
                     # This link wraps block elements - unwrap it
                     link.unwrap()
                     modified = True
-                    logger.debug("Unwrapped delink wrapper containing block elements")
+                    logger.debug("Unwrapped unlink wrapper containing block elements")
                     continue
 
                 # Check if link has no text and no meaningful children (empty wrapper)
@@ -738,7 +738,7 @@ class AccessibilityFixer:
                 if not text and not meaningful_children:
                     link.decompose()
                     modified = True
-                    logger.debug("Removed empty delink wrapper link")
+                    logger.debug("Removed empty unlink wrapper link")
 
         # Handle ALL quarto-grid-link wrappers (both inside and outside grid items)
         all_grid_links = soup.find_all("a", class_="quarto-grid-link")
@@ -787,12 +787,12 @@ class AccessibilityFixer:
             # Check if input already has accessibility markup
             if input_elem.get("aria-label"):
                 logger.debug(
-                    f"Input already has aria-label: {input_elem.get('aria-label')}"
+                    f"Input already has aria-label: {input_elem.get('aria-label')}",
                 )
                 continue
             if input_elem.get("aria-labelledby"):
                 logger.debug(
-                    f"Input already has aria-labelledby: {input_elem.get('aria-labelledby')}"
+                    f"Input already has aria-labelledby: {input_elem.get('aria-labelledby')}",
                 )
                 continue
 
@@ -801,13 +801,13 @@ class AccessibilityFixer:
             if input_id:
                 label = soup.find("label", attrs={"for": input_id})
                 if label:
-                    logger.debug(f"Input has associated label element")
+                    logger.debug("Input has associated label element")
                     continue
 
             # Add aria-label for accessibility
             input_elem["aria-label"] = "Filter items"
             modified = True
-            logger.debug(f"Added aria-label 'Filter items' to listing filter input")
+            logger.debug("Added aria-label 'Filter items' to listing filter input")
 
         return modified
 

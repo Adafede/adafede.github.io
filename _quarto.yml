@@ -14,7 +14,7 @@ format:
     linkcolor: "#3377c4"
     link-external-icon: false
     link-external-newwindow: true
-    theme: 
+    theme:
       - none
     respect-user-color-scheme: true
     smooth-scroll: true

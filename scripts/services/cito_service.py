@@ -2,11 +2,9 @@
 
 import re
 from pathlib import Path
-from typing import Optional
 
 from bs4 import Tag
 
-from domain.citation import Citation, CitationRegistry
 from infrastructure.filesystem import FileSystem
 from infrastructure.html_processor import HtmlProcessor
 from infrastructure.logger import get_logger
@@ -272,7 +270,7 @@ class CitoService:
 
         logger.info(
             f"Merged {len(citation_properties)} unique citations "
-            f"with {sum(len(v) for v in citation_properties.values())} properties"
+            f"with {sum(len(v) for v in citation_properties.values())} properties",
         )
 
         # Inject into HTML files

@@ -65,7 +65,8 @@ def extract_doi_from_qmd(qmd_path: Path, yaml_loader: YamlLoader) -> Dict[str, s
 
 
 def build_doi_mapping(
-    qmd_files: List[Union[str, Path]], yaml_loader: YamlLoader
+    qmd_files: List[Union[str, Path]],
+    yaml_loader: YamlLoader,
 ) -> Dict[str, str]:
     """Build mapping from titles to DOIs from QMD files.
 
@@ -94,7 +95,9 @@ def build_doi_mapping(
 
 
 def inject_doi_in_rss(
-    rss_path: Path, qmd_files: List[Union[str, Path]], yaml_loader: YamlLoader = None
+    rss_path: Path,
+    qmd_files: List[Union[str, Path]],
+    yaml_loader: YamlLoader = None,
 ) -> None:
     """Inject DOIs into RSS feed items.
 

@@ -72,7 +72,7 @@ class FeedItem:
 
         if self.description:
             parts.append(
-                f"  <description>{self._escape_xml(self.description)}</description>"
+                f"  <description>{self._escape_xml(self.description)}</description>",
             )
 
         if self.pub_date:
