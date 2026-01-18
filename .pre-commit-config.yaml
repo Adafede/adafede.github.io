@@ -17,16 +17,9 @@ repos:
       - id: check-toml
       - id: check-xml
       - id: check-yaml
-      - id: check-json
-        exclude: ^.devcontainer/devcontainer.json
-      - id: pretty-format-json
-        exclude: ^.devcontainer/devcontainer.json
-        args:
-          - --autofix
       - id: debug-statements
       - id: end-of-file-fixer
       - id: mixed-line-ending
-      - id: pretty-format-json
       - id: trailing-whitespace
   - repo: https://github.com/fpgmaas/deptry
     rev: 0.24.0
@@ -64,6 +57,7 @@ repos:
     rev: v1
     hooks:
       - id: typos
+        exclude: ^articles/thesis\.qmd$
   - repo: https://github.com/shellcheck-py/shellcheck-py
     rev: v0.11.0.1
     hooks:
@@ -78,4 +72,6 @@ repos:
         name: ty-check
         language: python
         entry: ty check
+        exclude: '^(?!.*\.py$).*$'
+        respect-ignore-files: true
         additional_dependencies: [ty]

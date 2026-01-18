@@ -78,7 +78,7 @@ def convert_md_to_pdf(md_path: Path, pdf_path: Path) -> bool:
     logger.debug(f"Running: {' '.join(cmd)}")
 
     try:
-        result = subprocess.run(
+        subprocess.run(
             cmd,
             check=True,
             capture_output=True,

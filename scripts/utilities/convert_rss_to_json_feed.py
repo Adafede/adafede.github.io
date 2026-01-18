@@ -12,6 +12,7 @@ import subprocess
 import sys
 from datetime import datetime
 from pathlib import Path
+from typing import TypedDict, Any
 from urllib.parse import urlparse
 
 from bs4 import BeautifulSoup
@@ -305,6 +306,17 @@ def extract_item_data(item, base_url=None):
     return item_data
 
 
+class JsonFeed(TypedDict, total=False):
+    version: str
+    title: str
+    description: str
+    home_page_url: str
+    feed_url: str
+    language: str
+    items: list[dict[str, Any]]
+    authors: list[dict[str, Any]]
+
+
 def convert_rss_to_json_feed(rss_path, json_feed_path):
     """Convert RSS XML to JSON Feed format."""
     if not os.path.isfile(rss_path):
@@ -321,8 +333,8 @@ def convert_rss_to_json_feed(rss_path, json_feed_path):
             print(f"No channel found in RSS file {rss_path}")
             return
 
-        # Build JSON Feed structure
-        json_feed = {
+        # Build JSON Feed structure with proper typing
+        json_feed: JsonFeed = {
             "version": "https://jsonfeed.org/version/1.1",
             "title": "",
             "description": "",

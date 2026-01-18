@@ -175,9 +175,10 @@ def inject_doi_in_rss(
 
 if __name__ == "__main__":
     import sys
+    from typing import cast
 
     if len(sys.argv) < 3:
         print("Usage: inject_doi_in_rss.py <rss_file> <qmd_file1> [qmd_file2 ...]")
         sys.exit(1)
 
-    inject_doi_in_rss(Path(sys.argv[1]), sys.argv[2:])
+    inject_doi_in_rss(Path(sys.argv[1]), cast(List[Union[str, Path]], sys.argv[2:]))

@@ -56,7 +56,7 @@ class PdfService:
         logger.debug(f"Running: {' '.join(str(c) for c in cmd)}")
 
         try:
-            result = subprocess.run(
+            subprocess.run(
                 cmd,
                 check=True,
                 capture_output=True,
@@ -160,7 +160,7 @@ class PdfService:
         self,
         cv_qmd_path: Path,
         output_pdf_path: Path,
-        template: Optional[Path] = None,
+        template: Path | None = None,
     ) -> bool:
         """Process CV QMD file with custom template.
 
