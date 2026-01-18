@@ -4,7 +4,7 @@ version = "0.0.1"
 description = "My personal website"
 requires-python = "==3.14.*"
 dependencies = [
-  "PyYAML>=6.0",
+  "pyyaml>=6.0.3",
   "bs4>=0.0.2",
   "commonmeta-py>=0.199",
   "folium>=0.20.0",
