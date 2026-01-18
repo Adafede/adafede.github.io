@@ -72,6 +72,7 @@ class GeoCache:
         try:
             with self.cache_path.open("w", encoding="utf-8") as f:
                 json.dump(self.cache, f, indent=2, ensure_ascii=False)
+                f.write("\n")
             logger.info(f"Saved geocache with {len(self.cache)} locations")
         except Exception as e:
             logger.error(f"Failed to save cache: {e}")

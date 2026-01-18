@@ -4,6 +4,7 @@ version = "0.0.1"
 description = "My personal website"
 requires-python = "==3.14.*"
 dependencies = [
+  "PyYAML>=6.0",
   "bs4>=0.0.2",
   "commonmeta-py>=0.199",
   "folium>=0.20.0",
@@ -13,14 +14,28 @@ dependencies = [
   "pre-commit>=4.5.1",
   "quarto>=0.1.0",
   "ruamel-yaml>=0.19.1",
-  "yamllint>=1.38.0",
 ]
 
 [tool.deptry]
-known_first_party = ["scripts"]
+known_first_party = [
+  "config",
+  "infrastructure",
+  "scripts",
+  "services",
+  "utilities",
+]
 
 [tool.deptry.package_module_name_map]
-commonmeta-py = ["commonmeta"]
+commonmeta-py = [
+  "commonmeta",
+]
+PyYAML = [
+  "yaml",
+]
+ruamel-yaml = [
+  "ruamel",
+  "ruamel.yaml",
+]
 
 [tool.deptry.per_rule_ignores]
 DEP002 = ["deptry", "pre-commit", "quarto"]
