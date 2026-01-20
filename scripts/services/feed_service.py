@@ -233,18 +233,39 @@ class FeedService:
             logger.error("No channel found in RSS")
             return False
 
-        # Build JSON Feed
+        # Compute authors early so they appear near the top of the JSON feed
+        feed_authors = []
+        try:
+            feed_authors = self._load_feed_authors()
+            # if no authors found in _quarto.yml, try DC creator fallback
+            if not feed_authors:
+                try:
+                    creator_elem = channel.find(
+                        "{http://purl.org/dc/elements/1.1/}creator"
+                    )
+                    if creator_elem is not None and creator_elem.text:
+                        feed_authors = [{"name": creator_elem.text.strip()}]
+                except Exception:
+                    pass
+        except Exception:
+            feed_authors = []
+
+        # Build JSON Feed with desired key order: version, title, description,
+        # home_page_url, feed_url, language, authors, items
+        description = self._get_element_text(channel, "description")
+        language = self._get_element_text(channel, "language") or "en"
+
         json_feed = {
             "version": "https://jsonfeed.org/version/1.1",
             "title": self._get_element_text(channel, "title", ""),
+            "description": description,
             "home_page_url": self._get_element_text(channel, "link", ""),
-            "feed_url": str(json_feed_path),
+            "feed_url": feed_url_value,
+            "language": language,
         }
 
-        # Add description if present
-        description = self._get_element_text(channel, "description")
-        if description:
-            json_feed["description"] = description
+        if feed_authors:
+            json_feed["authors"] = feed_authors
 
         # Convert items
         items = []
@@ -252,6 +273,38 @@ class FeedService:
             item = self._convert_rss_item_to_json(item_elem)
             if item:
                 items.append(item)
+
+        # Ensure item IDs are present and unique. JSON Feed requires stable IDs;
+        # some RSS feeds may contain identical GUIDs (e.g., duplicated DOIs) which
+        # would make items indistinguishable. Normalize IDs by preferring GUID,
+        # falling back to the item URL, and finally appending a unique fragment
+        # if necessary.
+        seen_ids: set[str] = set()
+        for idx, itm in enumerate(items):
+            iid = itm.get("id")
+            url = itm.get("url")
+
+            # If no id, use url as id
+            if not iid and url:
+                iid = url
+                itm["id"] = iid
+
+            # If id is already used, try to disambiguate
+            if iid in seen_ids:
+                # Prefer URL if it differs
+                if url and url != iid:
+                    itm["id"] = url
+                    iid = url
+                else:
+                    # Append a fragment to make it unique
+                    frag = f"#item-{idx}"
+                    base = url or iid or str(json_feed.get("feed_url", ""))
+                    itm["id"] = f"{base}{frag}"
+                    iid = itm["id"]
+
+            # Record the id
+            if iid:
+                seen_ids.add(iid)
 
         json_feed["items"] = items
 
@@ -342,6 +395,65 @@ class FeedService:
         """
         parts = snake_str.split("_")
         return parts[0] + "".join(word.capitalize() for word in parts[1:])
+
+    def _load_feed_authors(self) -> list[dict]:
+        """Load feed authors from _quarto.yml.
+
+        Returns:
+            List of author objects with name/url/avatar
+        """
+        authors = []
+
+        # Attempt to load _quarto.yml from the root directory
+        try:
+            quarto_path = self.fs.root / "_quarto.yml"
+            if not self.fs.exists(quarto_path):
+                logger.warning(f"_quarto.yml not found: {quarto_path}")
+                return authors
+
+            # Load metadata from _quarto.yml
+            metadata = self.yaml.load_from_path(quarto_path)
+            if not metadata:
+                logger.warning(f"No metadata found in _quarto.yml: {quarto_path}")
+                return authors
+
+            # Extract authors
+            authors_data = metadata.get("authors", [])
+            for author in authors_data:
+                # Normalize dict-style authors
+                if isinstance(author, dict):
+                    # name may be a string or a nested object with 'literal' / given/family
+                    raw_name = author.get("name")
+                    name = None
+                    if isinstance(raw_name, str):
+                        name = raw_name
+                    elif isinstance(raw_name, dict):
+                        # prefer literal, else assemble from given + family
+                        name = raw_name.get("literal")
+                        if not name:
+                            given = raw_name.get("given") or ""
+                            family = raw_name.get("family") or ""
+                            name = (given + " " + family).strip() or None
+
+                    url = author.get("url")
+                    avatar = author.get("avatar")
+
+                    if name:
+                        obj = {"name": name}
+                        if url:
+                            obj["url"] = url
+                        if avatar:
+                            obj["avatar"] = avatar
+                        authors.append(obj)
+                elif isinstance(author, str):
+                    # Author is a string, use as name
+                    authors.append({"name": author})
+
+        except Exception as e:
+            logger.error(f"Failed to load authors from _quarto.yml: {e}")
+
+        logger.debug(f"Loaded {len(authors)} authors from _quarto.yml")
+        return authors
 
     def process_feeds(
         self,

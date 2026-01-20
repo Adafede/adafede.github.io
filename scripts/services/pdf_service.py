@@ -234,7 +234,11 @@ class PdfService:
 
         try:
             subprocess.run(
-                cmd, check=True, capture_output=True, text=True, cwd=str(self.fs.root)
+                cmd,
+                check=True,
+                capture_output=True,
+                text=True,
+                cwd=str(self.fs.root),
             )
             logger.info(f"✓ Generated CV PDF: {output_pdf_path.name}")
             return True
