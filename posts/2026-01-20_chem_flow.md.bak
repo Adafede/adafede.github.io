@@ -13,15 +13,14 @@ affiliations:
 author:
 - Adriano Rutz
 authors:
-- affiliations:
-  - ref: imsb
-  id: AdrianoRutz
+- id: AdrianoRutz
   name:
     family: Rutz
     given: Adriano
     literal: Adriano Rutz
   orcid: 0000-0003-0443-9902
   qid: Q97455964
+  url: "https://adafede.github.io"
 bibliography:
 - references.bib
 categories:
@@ -53,7 +52,7 @@ comments:
     showHighlights: always
 creative_commons: CC BY
 date: 2026-01-20
-doi: 10.59350/yckwd-9vm79
+doi: 10.59350/sk00y-3gh44
 google-scholar: true
 kernel: ../.venv
 license:
