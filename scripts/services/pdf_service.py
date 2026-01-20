@@ -2,6 +2,8 @@
 
 import subprocess
 from pathlib import Path
+import shutil
+import re
 
 from infrastructure.filesystem import FileSystem
 from infrastructure.logger import get_logger
@@ -32,6 +34,38 @@ class PdfService:
         self.csl_file = csl_file
         self.filters = filters
 
+    def _fix_image_paths_in_md(self, md_path: Path) -> None:
+        """Rewrite Markdown image paths that start with '../images/' to '_site/images/...'
+
+        Only performs the rewrite when the target file exists under the
+        repository `_site/images` directory to avoid creating broken links.
+
+        This edits the file in-place and saves a `.bak` backup if changes are made.
+        """
+        try:
+            text = md_path.read_text(encoding="utf-8")
+        except Exception:
+            logger.debug(f"Could not read {md_path} for path-fix")
+            return
+
+        # Replace any Markdown image references of the form: ![alt](../images/...) -> ![alt](_site/images/...)
+        md_img_pattern = r"!\[([^\]]*)\]\(\s*\.\./images/([^\)\s]+)(?:\s+\"[^\"]*\")?\s*\)"
+        new_text, n = re.subn(md_img_pattern, r"![\1](_site/images/\2)", text)
+
+        if n > 0 and new_text != text:
+            bak = md_path.with_suffix(md_path.suffix + ".bak")
+            try:
+                shutil.copy2(md_path, bak)
+            except Exception:
+                logger.warning(f"Could not create backup for {md_path}")
+            try:
+                md_path.write_text(new_text, encoding="utf-8")
+                logger.info(f"Rewrote {n} Markdown image path(s) in {md_path}")
+            except Exception as e:
+                logger.error(f"Failed to write fixed markdown {md_path}: {e}")
+        else:
+            logger.debug(f"No Markdown image path fixes required for {md_path}")
+
     def convert_md_to_pdf(
         self,
         md_path: Path,
@@ -50,6 +84,12 @@ class PdfService:
             logger.warning(f"Markdown file not found: {md_path}")
             return False
 
+        # Attempt to fix image paths in generated markdown (rewrites ../images -> _site/images when present)
+        try:
+            self._fix_image_paths_in_md(md_path)
+        except Exception as e:
+            logger.debug(f"Image path fix failed for {md_path}: {e}")
+
         # Build Pandoc command
         cmd = self._build_pandoc_command(md_path, pdf_path)
 
@@ -61,6 +101,7 @@ class PdfService:
                 check=True,
                 capture_output=True,
                 text=True,
+                cwd=str(self.fs.root),
             )
             logger.info(f"✓ Generated PDF: {pdf_path.name}")
             return True
@@ -190,7 +231,7 @@ class PdfService:
         logger.debug(f"Running CV conversion: {' '.join(cmd)}")
 
         try:
-            subprocess.run(cmd, check=True, capture_output=True, text=True)
+            subprocess.run(cmd, check=True, capture_output=True, text=True, cwd=str(self.fs.root))
             logger.info(f"✓ Generated CV PDF: {output_pdf_path.name}")
             return True
         except subprocess.CalledProcessError as e:
