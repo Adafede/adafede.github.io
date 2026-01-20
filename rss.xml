@@ -10,7 +10,393 @@
 <atom:link href="https://adafede.github.io/rss.xml" rel="self" type="application/rss+xml"/>
 <description>Personal website of Adriano Rutz - Swiss Pharmaceutical Scientist specializing in metabolomics, mass spectrometry, and natural products research.</description>
 <generator>quarto-1.8.27</generator>
-<lastBuildDate>Thu, 11 Dec 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Tue, 20 Jan 2026 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Cultivating Knowledge Flow in Open Chemistry</title>
+  <link>https://adafede.github.io/posts/2026-01-20_chem_flow.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<script async="" defer="" src="https://scripts.simpleanalyticscdn.com/latest.js" crossorigin="anonymous">
+</script><p>Five years ago, <a href="https://www.wikidata.org/wiki/Q104225190" about="wd:Q104225190">LOTUS</a> <span class="citation" data-cites="Rutz2022">(Rutz et al. 2022)</span> started as a small attempt to cultivate the flow of chemical knowledge, in the same way we study how metabolites flow through living systems, rather than to build <em>yet another database</em>.</p>
+<p>The idea was simple. Natural products data should be open, structured, reusable, and belong to everyone.</p>
+<p>Like many community-driven efforts, LOTUS had bursts of activity, long pauses, and years of invisible maintenance. From the outside, silence can look like disappearance. From the inside, it usually means people are still doing the work; slowly, carefully, and often without announcements.</p>
+<section id="from-isolated-datasets-to-global-outreach" class="level2">
+<h2 class="anchored" data-anchor-id="from-isolated-datasets-to-global-outreach">From isolated datasets to global outreach</h2>
+<p>The early focus of LOTUS was necessarily inward: assembling data, cleaning records, releasing versions. We built a website, curated entries, and archived releases.</p>
+<p>But we slowly realized something uncomfortable: data stored in a repository, even a good one, does not automatically live.</p>
+<p>Archiving on <a href="https://www.wikidata.org/wiki/Q22661177" about="wd:Q22661177">Zenodo</a> (<a href="https://zenodo.org/communities/the-lotus-initiative" class="uri">https://zenodo.org/communities/the-lotus-initiative</a>) was the right thing to do, but archived data is mostly silent data. It waits to be discovered, and versioning remains labor-intensive.</p>
+<p>What we really needed were entry points where people already were.</p>
+<p><a href="https://www.wikidata.org/wiki/Q52" about="wd:Q52">Wikipedia</a> , <a href="https://www.wikidata.org/wiki/Q2013" about="wd:Q2013">Wikidata</a> , and <a href="https://www.wikidata.org/wiki/Q45340488" about="wd:Q45340488">Scholia</a> building on top of it are not dissemination platforms in the classical sense. They are circulatory systems. They persist because communities maintain them.</p>
+<p>The <a href="https://www.wikidata.org/wiki/Q134520857" about="wd:Q134520857">Scholia Chemistry preprint</a> <span class="citation" data-cites="Willighagen2025b">(Willighagen et al. 2025)</span> co-authored with <a href="https://www.wikidata.org/wiki/Q20895241" about="wd:Q20895241">Egon</a> , <a href="https://www.wikidata.org/wiki/Q43744369" about="wd:Q43744369">Denise</a> , <a href="https://www.wikidata.org/wiki/Q20895785" about="wd:Q20895785">Daniel</a> , and <a href="https://www.wikidata.org/wiki/Q20980928" about="wd:Q20980928">Finn</a> belongs to this continuity. It does not introduce a new platform. It offers a lens for communities to see what they already collectively know.</p>
+<section id="making-knowledge-visible-the-wikipedia-p703-module" class="level3">
+<h3 class="anchored" data-anchor-id="making-knowledge-visible-the-wikipedia-p703-module">Making knowledge visible: the Wikipedia P703 module</h3>
+<blockquote class="blockquote">
+<p>Knowledge needs channels, not just reservoirs.</p>
+</blockquote>
+<p>One important step was enabling Wikipedia articles and <a href="https://www.wikidata.org/wiki/Q15515987" about="wd:Q15515987">infoboxes</a> to directly access <em>found in taxon</em> (<a href="https://www.wikidata.org/wiki/Property:P703" about="wd:Property:P703">P703</a>) relationships from Wikidata in an efficient way.</p>
+<p>This sounds like a small technical detail. It is not.</p>
+<p>The idea had circulated quietly for years, in hallway conversations, chats, and conferences. I also mentioned it during the <a href="https://www.wikidata.org/wiki/Q133846580" about="wd:Q133846580">WikiCite 2025</a> conference last August, but it took time before conditions were right. Infrastructure work rarely happens on schedule. It almost never happens on stage. It happens in version histories, talk pages, and tiny edits that fix one Lua bug, enabling thousands of articles to improve forever.</p>
+<p>Once data is in Wikidata, it can flow into thousands of chemical articles, in dozens of languages, without duplication or translation overhead. It becomes visible to non-experts, students, and readers who will never see a database interface. This is how open data becomes public knowledge.</p>
+<p>These <a href="https://www.wikidata.org/wiki/Q15184295" about="wd:Q15184295">modules</a> are now available on multiple Wikipedias:</p>
+<ul>
+<li><a href="https://www.wikidata.org/wiki/Q328" about="wd:Q328">English</a> : <a href="https://en.wikipedia.org/wiki/Module:P703">Module:P703</a></li>
+<li><a href="https://www.wikidata.org/wiki/Q8447" about="wd:Q8447">French</a> : <a href="https://fr.wikipedia.org/wiki/Module:P703">Module:P703</a></li>
+<li><a href="https://www.wikidata.org/wiki/Q48183" about="wd:Q48183">German</a> : <a href="https://de.wikipedia.org/wiki/Modul:P703">Modul:P703</a></li>
+<li><a href="https://www.wikidata.org/wiki/Q11920" about="wd:Q11920">Italian</a> : <a href="https://it.wikipedia.org/wiki/Modulo:P703">Modulo:P703</a></li>
+</ul>
+<p>If you speak another language, feel free to copy them and increase their use.</p>
+<p>Initially, I tried to reuse existing modules, and quickly learned why module reuse across Wikipedias is famously difficult. Each wiki evolves its own ecosystem of dependencies, conventions, and technical debt. So the modules were written fully contained, independent of language-specific infrastructure. Only lines that need to be changed are the language-specific translations at the top of the module, trying to follow <a href="https://www.wikidata.org/wiki/Q3141064" about="wd:Q3141064">18n</a>.</p>
+<p>These modules are not a new website or a new interface. They are simply better plumbing.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://adafede.github.io/images/screenshots/screenshot_p703_module.png" class="img-fluid figure-img"></p>
+<figcaption>Screenshot of the P703 module on English Wikipedia</figcaption>
+</figure>
+</div>
+<p>By default, only <code>5</code> <a href="https://www.wikidata.org/wiki/Q16521" about="wd:Q16521">organisms</a> are shown, keeping the text clean and readable. But the magic is in how the module handles the rest: each taxon links to its Wikipedia article, and if no article exists in the current language, the module gracefully redirects to an equivalent page in another wiki. A beautiful example of this is <code>war</code> for <a href="https://war.wikipedia.org/wiki/Quassia_africana">Quassia africana</a>.</p>
+</section>
+<section id="reaching-non-experts" class="level3">
+<h3 class="anchored" data-anchor-id="reaching-non-experts">Reaching non-experts</h3>
+<blockquote class="blockquote">
+<p>Not everyone wants to learn SPARQL.</p>
+</blockquote>
+<p>I have heard this sentiment countless times. Regardless of personal preferences, if we want the data to truly live, it must reach as many people as possible.</p>
+<p>Small tools like the <a href="https://adafede.github.io/marimo/apps/lotus_wikidata_explorer.html">LOTUS Wikidata Explorer</a> help lower that barrier. It is imperfect. It is still growing. But it already allows chemists, curators, and students to access and export data in formats they can actually use.</p>
+<p>The principle is simple: knowledge only flows when it reaches people. The data must be seen, explored, and reused. Only then does it fulfill its purpose.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://adafede.github.io/images/screenshots/screenshot_lotus_wikidata_explorer.png" class="img-fluid figure-img"></p>
+<figcaption>Screenshot of the LOTUS Wikidata Explorer interface</figcaption>
+</figure>
+</div>
+<p>On a more technical note, the LOTUS Wikidata Explorer leverages the powerful <a href="https://www.wikidata.org/wiki/Q101200819" about="wd:Q101200819">IDSM</a> endpoint <span class="citation" data-cites="Galgonek2021">(Galgonek and Vondrášek 2021)</span>, which allows for chemical similarity searches thanks to <a href="https://www.wikidata.org/wiki/Q55016200" about="wd:Q55016200">Sachem</a> <span class="citation" data-cites="Kratochvl2018">(Kratochvíl, Vondrášek, and Galgonek 2018)</span>. Its speed for large-scale queries could never have been reached without <a href="https://www.wikidata.org/wiki/Q111016295" about="wd:Q111016295">QLever</a> <span class="citation" data-cites="Bast2017">(Bast and Buchhold 2017)</span>, and chemical depictions come from <a href="https://www.wikidata.org/wiki/Q137800121" about="wd:Q137800121">CDK Depict</a>.</p>
+<p>It returns structured metadata for traceability and reproducibility, together with hashes that uniquely identify the query and its results. It can be queried programmatically via simple API calls, for example <code>?taxon=Gentianaceae</code> or <code>?smiles=c1ccccc1&amp;formula_filter=true&amp;f_state=required</code>. It works directly in the browser without requiring heavy dependencies, almost everything works out of the box.</p>
+<p>Alternatively, users can take advantage of a local version, for example to extract a small, personal <a href="https://www.wikidata.org/wiki/Q33002955" about="wd:Q33002955">knowledge graph</a> in <a href="https://www.wikidata.org/wiki/Q114409" about="wd:Q114409">TTL</a> format, or to export all or selected LOTUS data in more chemistry-friendly formats such as <a href="https://www.wikidata.org/wiki/Q2063" about="wd:Q2063">JSON</a> or <a href="https://www.wikidata.org/wiki/Q935809" about="wd:Q935809">CSV</a>, ready for analysis, visualization, or integration into other workflows.</p>
+<p>For example, to export a complete or filtered snapshot locally:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">uvx \</span>
+<span id="cb1-2">  <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">--</span>from \</span>
+<span id="cb1-3">  git<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span>https<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">//</span>github.com<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>adafede<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>marimo \</span>
+<span id="cb1-4">  lotus_wikidata_explorer \</span>
+<span id="cb1-5">  export \</span>
+<span id="cb1-6">  <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">--</span>taxon <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"*"</span> \   <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># to get all taxa, else "Gentianaceae", for example</span></span>
+<span id="cb1-7">  <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">--</span>format csv \  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># also supports json, ttl</span></span>
+<span id="cb1-8">  <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">--</span>output <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">20260119</span>_lotus.csv.gz \</span>
+<span id="cb1-9">  <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">--</span>compress \</span>
+<span id="cb1-10">  <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">--</span>verbose</span></code></pre></div></div>
+</div>
+<p>And if you are curious where halogenated compounds appear most often, you can simply ask:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">xan dedup <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">20260119</span>_lotus.csv.gz \</span>
+<span id="cb2-2">  <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">--</span>select compound_inchikey,molecular_formula,taxon_name <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|</span> \</span>
+<span id="cb2-3">  xan select compound_inchikey,molecular_formula,taxon_name <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|</span> \</span>
+<span id="cb2-4">  xan filter <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"contains(molecular_formula, 'Br') or</span></span>
+<span id="cb2-5"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">              contains(molecular_formula, 'Cl') or</span></span>
+<span id="cb2-6"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">              contains(molecular_formula, 'F') or</span></span>
+<span id="cb2-7"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">              contains(molecular_formula, 'I')"</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|</span> \</span>
+<span id="cb2-8">  xan filter <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'!contains(molecular_formula, "Fe")'</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|</span> \</span>
+<span id="cb2-9">  xan freq <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>s taxon_name <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|</span> \</span>
+<span id="cb2-10">  xan hist <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>l value <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>R</span></code></pre></div></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">Histogram <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">taxon_name</span> (bars<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">11</span>, sum<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">11</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">604</span>, max<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">060</span>)<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="cb3-2"></span>
+<span id="cb3-3">Streptomyces            <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|</span>   <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">374</span>   <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3.22</span>%<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|</span>■■■■                                                                                                   <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|</span></span>
+<span id="cb3-4">Laurencia dendroidea    <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|</span>   <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">314</span>   <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2.71</span>%<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|</span>■■■■                                                                                                   <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|</span></span>
+<span id="cb3-5">Laurencia obtusa        <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|</span>   <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">184</span>   <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.59</span>%<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|</span>■■                                                                                                     <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|</span></span>
+<span id="cb3-6">Pseudoceratina purpurea <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|</span>   <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">112</span>   <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.97</span>%<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|</span>■■                                                                                                     <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|</span></span>
+<span id="cb3-7">Aplysia dactylomela     <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|</span>    <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">99</span>   <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.85</span>%<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|</span>■■                                                                                                     <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|</span></span>
+<span id="cb3-8">Nostoc                  <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|</span>    <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">99</span>   <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.85</span>%<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|</span>■■                                                                                                     <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|</span></span>
+<span id="cb3-9">Laurencia nipponica     <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|</span>    <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">95</span>   <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.82</span>%<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|</span>■                                                                                                      <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|</span></span>
+<span id="cb3-10">Portieria hornemannii   <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|</span>    <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">94</span>   <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.81</span>%<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|</span>■                                                                                                      <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|</span></span>
+<span id="cb3-11">Lyngbya majuscula       <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|</span>    <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">88</span>   <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.76</span>%<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|</span>■                                                                                                      <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|</span></span>
+<span id="cb3-12">Chaetomium globosum     <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|</span>    <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">85</span>   <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.73</span>%<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|</span>■                                                                                                      <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|</span></span>
+<span id="cb3-13"><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">&lt;</span>rest<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span>                  <span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">|</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">060</span>  <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">86.69</span>%<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|</span>■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|</span></span></code></pre></div></div>
+</div>
+</section>
+</section>
+<section id="making-flow-reliable-curation-and-standards" class="level2">
+<h2 class="anchored" data-anchor-id="making-flow-reliable-curation-and-standards">Making flow reliable: curation and standards</h2>
+<blockquote class="blockquote">
+<p>At some point, flow only runs if it is maintained.</p>
+</blockquote>
+<p>As I do not post as often as I probably should, here are some other pointers to related work and discussions from the past months, for those who want to follow the flow a bit further:</p>
+<section id="blue-obelisk" class="level3">
+<h3 class="anchored" data-anchor-id="blue-obelisk">Blue Obelisk</h3>
+<ul>
+<li>Following some ideas he had to improve Scholia Chemistry, Egon initiated the Blue Obelisk Wikidata Chemistry Curation project: <a href="https://blueobelisk.github.io/wikidata-chemistry-curation/" class="uri">https://blueobelisk.github.io/wikidata-chemistry-curation/</a>. I then joined and contributed to some parts, maybe you will find out which ones!</li>
+<li>Contributions were also made to the Blue Obelisk IUPAC Names project (also led by Egon): <a href="https://github.com/BlueObelisk/iupac-names" class="uri">https://github.com/BlueObelisk/iupac-names</a>, integrating Wikidata-derived name-compound pairs. See <a href="https://github.com/Adafede/wd-labels-to-iupac" class="uri">https://github.com/Adafede/wd-labels-to-iupac</a> and <a href="https://chem-bla-ics.linkedchemistry.info/2025/08/09/one-million-iupac-names-4.html" class="uri">https://chem-bla-ics.linkedchemistry.info/2025/08/09/one-million-iupac-names-4.html</a> <span class="citation" data-cites="Willighagen2025c">(Willighagen 2025)</span> These bridges allow names and identifiers to circulate consistently across systems.</li>
+</ul>
+</section>
+<section id="reactions-flow" class="level3">
+<h3 class="anchored" data-anchor-id="reactions-flow">Reactions flow</h3>
+<p>Recently, I also contributed to improving how <a href="https://www.wikidata.org/wiki/Q36534" about="wd:Q36534">chemical reactions</a> are modeled in Wikidata.</p>
+<p>Previously, many reactions were modeled as <a href="https://www.wikidata.org/wiki/Property:P31" about="wd:Property:P31">instances of</a> “chemical reaction”, which violated disjointness, see <span class="citation" data-cites="Doan2025">(Doǧan and Patel-Schneider 2025)</span>.</p>
+<p>The introduction of <a href="https://www.wikidata.org/wiki/Q137796968" about="wd:Q137796968">type of chemical reaction</a> now allows reactions to be classified more precisely, while preserving their hierarchy using <a href="https://www.wikidata.org/wiki/Property:P279" about="wd:Property:P279">subclass of</a>.</p>
+</section>
+<section id="wikifunctions" class="level3">
+<h3 class="anchored" data-anchor-id="wikifunctions">Wikifunctions</h3>
+<p>Out of curiosity, I also made a small contribution to chemistry-related functions in <a href="https://www.wikidata.org/wiki/Q104587954" about="wd:Q104587954">Wikifunctions</a>: <a href="https://www.wikifunctions.org/view/en/Z30950">Z30950</a>. It validates <a href="https://www.wikidata.org/wiki/Q102507" about="wd:Q102507">CAS Registry Numbers</a>. It does one thing, and it does it reliably.</p>
+<p>It is tiny. But it is a seed.</p>
+</section>
+</section>
+<section id="looking-forward-flowing-knowledge-flowing-metabolites" class="level2">
+<h2 class="anchored" data-anchor-id="looking-forward-flowing-knowledge-flowing-metabolites">Looking forward: flowing knowledge, flowing metabolites</h2>
+<p>Projects like Wikifunctions and <a href="https://www.wikidata.org/wiki/Q96807071" about="wd:Q96807071">Abstract Wikipedia</a> point to the next phase of open knowledge: knowledge that is not only stored, but executed, reused, and recombined.</p>
+<p>A global, open <a href="https://www.wikidata.org/wiki/Q12149006" about="wd:Q12149006">metabolomics</a> knowledge graph is slowly taking shape, one where chemical structures, organisms, reactions, and evidence can finally be traced together.</p>
+<p>LOTUS is no longer an initiative. It is one contributor among many in that graph.</p>
+<p>If you edit Wikipedia, curate Wikidata, maintain a SPARQL endpoint, write a template, review a module, or fix a tiny detail no one will notice, <em>thank you</em>. <strong>This work only matters because you are here</strong>.</p>
+<section id="references" class="level3">
+<h3 class="anchored" data-anchor-id="references">References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="ref-Bast2017" class="csl-entry">
+Bast, Hannah, and Björn Buchhold. 2017. <span>“QLever: A Query Engine for Efficient SPARQL+text Search.”</span> In <em>Proceedings of the 2017 ACM on Conference on Information and Knowledge Management</em>, 647–56. CIKM ’17. ACM. <a href="https://doi.org/10.1145/3132847.3132921">https://doi.org/10.1145/3132847.3132921</a>.
+</div>
+<div id="ref-Doan2025" class="csl-entry">
+Doǧan, Ege Atacan, and Peter F. Patel-Schneider. 2025. <span>“Disjointness Violations in Wikidata.”</span> In <em>Knowledge Graphs and Semantic Web</em>, 259–74. Springer Nature Switzerland. <a href="https://doi.org/10.1007/978-3-031-81221-7_18">https://doi.org/10.1007/978-3-031-81221-7_18</a>.
+</div>
+<div id="ref-Galgonek2021" class="csl-entry">
+Galgonek, Jakub, and Jiří Vondrášek. 2021. <span>“IDSM ChemWebRDF: SPARQLing Small-Molecule Datasets.”</span> <em>Journal of Cheminformatics</em> 13 (1). <a href="https://doi.org/10.1186/s13321-021-00515-1">https://doi.org/10.1186/s13321-021-00515-1</a>.
+</div>
+<div id="ref-Kratochvl2018" class="csl-entry">
+Kratochvíl, Miroslav, Jiří Vondrášek, and Jakub Galgonek. 2018. <span>“Sachem: A Chemical Cartridge for High-Performance Substructure Search.”</span> <em>Journal of Cheminformatics</em> 10 (1). <a href="https://doi.org/10.1186/s13321-018-0282-y">https://doi.org/10.1186/s13321-018-0282-y</a>.
+</div>
+<div id="ref-Rutz2022" class="csl-entry">
+Rutz, Adriano, Maria Sorokina, Jakub Galgonek, Daniel Mietchen, Egon Willighagen, Arnaud Gaudry, James G Graham, et al. 2022. <span>“The LOTUS Initiative for Open Knowledge Management in Natural Products Research.”</span> <em>eLife</em> 11 (May). <a href="https://doi.org/10.7554/elife.70780">https://doi.org/10.7554/elife.70780</a>.
+</div>
+<div id="ref-Willighagen2025c" class="csl-entry">
+Willighagen, Egon. 2025, August. <a href="https://doi.org/10.59350/krw9n-dv417">https://doi.org/10.59350/krw9n-dv417</a>.
+</div>
+<div id="ref-Willighagen2025b" class="csl-entry">
+Willighagen, Egon, Denise Slenter, Adriano Rutz, Daniel Mietchen, and Finn Nielsen. 2025. <span>“Scholia Chemistry: Access to Chemistry in Wikidata,”</span> May. <a href="https://doi.org/10.26434/chemrxiv-2025-53n0w">https://doi.org/10.26434/chemrxiv-2025-53n0w</a>.
+</div>
+</div>
+
+
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{rutz2026,
+  author = {{Adriano Rutz}},
+  title = {Cultivating {Knowledge} {Flow} in {Open} {Chemistry}},
+  date = {2026-01-20},
+  url = {https://adafede.github.io/posts/2026-01-20_chem_flow.html},
+  doi = {10.59350/yckwd-9vm79},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-rutz2026" class="csl-entry quarto-appendix-citeas">
+Adriano Rutz. 2026. <span>“Cultivating Knowledge Flow in Open
+Chemistry.”</span> January 20, 2026. <a href="https://doi.org/10.59350/yckwd-9vm79">https://doi.org/10.59350/yckwd-9vm79</a>.
+</div></div></section></div> ]]></description>
+  <category>Chemistry</category>
+  <category>LOTUS</category>
+  <category>Open Science</category>
+  <category>Wikidata</category>
+  <guid>https://adafede.github.io/posts/2026-01-20_chem_flow.html</guid>
+  <pubDate>Tue, 20 Jan 2026 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Strategies for community-sourced biocuration in bioinformatics: a case study on MIBiG 4.0</title>
   <link>https://adafede.github.io/articles/co/2025-12-11_biocuration.html</link>
@@ -504,29 +890,6 @@ Zdouc, Mitja M, Kai Blin, Nico L L Louwen, Jorge Navarro, Catarina Loureiro, Cha
   <category>Workshop</category>
   <guid>https://adafede.github.io/talks/2024-04-17_PRAGUE.html</guid>
   <pubDate>Wed, 17 Apr 2024 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>A Sample-Centric and Knowledge-Driven Computational Framework for Natural Products Drug Discovery</title>
-  <link>https://adafede.github.io/articles/co/2024-02-20_enpkg.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<script async="" defer="" src="https://scripts.simpleanalyticscdn.com/latest.js" crossorigin="anonymous">
-</script><iframe width="100%" height="100%" src="https://scholia.toolforge.org/work/Q124670540" title="Scholia entry">
-</iframe>
-
-
-
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
-<div id="ref-Gaudry2024" class="csl-entry">
-Gaudry, Arnaud, Marco Pagni, Florence Mehl, Sébastien Moretti, Luis-Manuel Quiros-Guerrero, Luca Cappelletti, Adriano Rutz, et al. 2024. <span>“A Sample-Centric and Knowledge-Driven Computational Framework for Natural Products Drug Discovery.”</span> <em>ACS Central Science</em> 10 (3): 494–510. <a href="https://doi.org/10.1021/acscentsci.3c00800">https://doi.org/10.1021/acscentsci.3c00800</a>.
-</div>
-</div></section></div> ]]></description>
-  <guid>https://adafede.github.io/articles/co/2024-02-20_enpkg.html</guid>
-  <pubDate>Wed, 27 Mar 2024 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>

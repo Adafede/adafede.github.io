@@ -5,8 +5,8 @@
 <meta content="quarto-1.8.27" name="generator"/>
 <meta content="width=device-width, initial-scale=1.0, user-scalable=yes" name="viewport"/>
 <meta content="Adriano Rutz" name="author"/>
-<meta content="2025-08-04" name="dcterms.date"/>
-<title>Open Science Upgrade: Adding Blog Posts to my Website and Linking to Rogue Scholar – Adriano Rutz</title>
+<meta content="2026-01-20" name="dcterms.date"/>
+<title>Cultivating Knowledge Flow in Open Chemistry – Adriano Rutz</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -18,6 +18,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 /* CSS for citations */
 div.csl-bib-body { }
@@ -98,18 +133,18 @@ div.csl-indent {
   });
 </script>
 <script id="quarto-axe-checker-options" type="text/plain">dHJ1ZQ==</script>
-<meta content="Open Science Upgrade: Adding Blog Posts to my Website and Linking to Rogue Scholar – Adriano Rutz" property="og:title"/>
+<meta content="Cultivating Knowledge Flow in Open Chemistry – Adriano Rutz" property="og:title"/>
 <meta content="Personal website of Adriano Rutz - Swiss Pharmaceutical Scientist specializing in metabolomics, mass spectrometry, and natural products research." property="og:description"/>
 <meta content="https://adafede.github.io/posts/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==" property="og:image"/>
 <meta content="https://adafede.github.io" property="og:site_name"/>
 <meta content="en" property="og:locale"/>
-<meta content="Open Science Upgrade: Adding Blog Posts to my Website and Linking to Rogue Scholar" name="citation_title"/>
+<meta content="Cultivating Knowledge Flow in Open Chemistry" name="citation_title"/>
 <meta content="Adriano Rutz" name="citation_author"/>
-<meta content="2025-08-04" name="citation_publication_date"/>
-<meta content="2025-08-04" name="citation_cover_date"/>
-<meta content="2025" name="citation_year"/>
-<meta content="2025-08-04" name="citation_online_date"/>
-<meta content="https://adafede.github.io/posts/2025-08-04_rogue_scholar.html" name="citation_fulltext_html_url"/>
+<meta content="2026-01-20" name="citation_publication_date"/>
+<meta content="2026-01-20" name="citation_cover_date"/>
+<meta content="2026" name="citation_year"/>
+<meta content="2026-01-20" name="citation_online_date"/>
+<meta content="https://adafede.github.io/posts/2026-01-20_chem_flow.html" name="citation_fulltext_html_url"/>
 <meta content="10.59350/yckwd-9vm79" name="citation_doi"/>
 <meta content="en" name="citation_language"/>
 <meta content="citation_title=QLever: A query engine for efficient SPARQL+text search;,citation_author=Hannah Bast;,citation_author=Björn Buchhold;,citation_publication_date=2017-11;,citation_cover_date=2017-11;,citation_year=2017;,citation_fulltext_html_url=http://dx.doi.org/10.1145/3132847.3132921;,citation_doi=10.1145/3132847.3132921;,citation_conference_title=Proceedings of the 2017 ACM on conference on information and knowledge management;,citation_conference=ACM;,citation_series_title=CIKM ’17;" name="citation_reference"/>
@@ -187,14 +222,17 @@ div.csl-indent {
 <!-- sidebar -->
 <!-- margin-sidebar -->
 <div class="sidebar margin-sidebar" id="quarto-margin-sidebar">
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="2025-08-04_rogue_scholar.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="2026-01-20_chem_flow.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 <header class="quarto-title-block default" id="title-block-header">
 <div class="quarto-title">
-<h1 class="title">Open Science Upgrade: Adding Blog Posts to my Website and Linking to Rogue Scholar</h1>
+<h1 class="title">Cultivating Knowledge Flow in Open Chemistry</h1>
 <div class="quarto-categories">
+<div class="quarto-category">Chemistry</div>
+<div class="quarto-category">LOTUS</div>
 <div class="quarto-category">Open Science</div>
+<div class="quarto-category">Wikidata</div>
 </div>
 </div>
 <div class="quarto-title-meta-author">
@@ -213,7 +251,7 @@ div.csl-indent {
 <div>
 <div class="quarto-title-meta-heading">Published</div>
 <div class="quarto-title-meta-contents">
-<p class="date">August 4, 2025</p>
+<p class="date">January 20, 2026</p>
 </div>
 </div>
 <div>
@@ -227,52 +265,173 @@ div.csl-indent {
 </div>
 </header>
 <script async="" crossorigin="anonymous" defer="" src="https://scripts.simpleanalyticscdn.com/latest.js">
-</script><p>I have finally opened a <code>Posts</code> section on my website! Every post should now automatically get a DOI.</p>
-<p>This is something I have wanted to do for a long time, largely inspired by the tireless and consistent example set by <a href="https://scholia.toolforge.org/author/Q20895241">Egon Willighagen</a> <span class="citation" data-cites="willighagen2024a willighagen2024b willighagen2025">(<a href="#ref-willighagen2024a" role="doc-biblioref">Willighagen 2024a</a>, <a href="#ref-willighagen2024b" role="doc-biblioref">2024b</a>, <a href="#ref-willighagen2025" role="doc-biblioref">2025</a>)</span>.</p>
-<p>It was today’s post of <span class="citation" data-cites="fenner2025">(<a href="#ref-fenner2025" role="doc-biblioref">Fenner 2025</a>)</span> that finally motivated me to look into it again. That led me down a productive rabbit hole to set up Rogue Scholar: first landing on <span class="citation" data-cites="voncsefalvay2023">(<a href="#ref-voncsefalvay2023" role="doc-biblioref">Csefalvay 2023</a>)</span>’s excellent guide, and then <span class="citation" data-cites="fruehwald2025">(<a href="#ref-fruehwald2025" role="doc-biblioref">Fruehwald 2025</a>)</span>’s clear write-up, both of which made the process of integrating Rogue Scholar into a Quarto-based site surprisingly smooth.</p>
-<p>All the changes are documented in the following commit:</p>
-<p><a class="uri" href="https://github.com/Adafede/adafede.github.io/commit/bc2dfe6f">https://github.com/Adafede/adafede.github.io/commit/bc2dfe6f</a></p>
-<p>If you care about attribution, long-term archiving, DOIs and metadata, I highly recommend looking into <a href="https://rogue-scholar.org/">Rogue Scholar</a>.</p>
-<p><strong>Edit (1):</strong> I realized that integrating <a href="https://sparontologies.github.io/cito/current/cito.html">CiTO</a> could be a significant enhancement. With some effort (and thanks again to Egon), I managed to implement a working solution for the HTML and PDF outputs, see <span class="citation" data-cites="willighagen2023">(<a href="#ref-willighagen2023" role="doc-biblioref">Willighagen 2023</a>)</span>. However, the solution for the XML feed still feels suboptimal.</p>
-<p><strong>Edit (2):</strong> After some help from Egon and <a href="https://scholia.toolforge.org/author/Q30532925">Martin</a>, I could improve my feed with correct CiTO annotations and their cool custom json feed, see: <a class="uri" href="https://adafede.github.io/posts.json">https://adafede.github.io/posts.json</a>!</p>
+</script><p>Five years ago, <a about="wd:Q104225190" href="https://www.wikidata.org/wiki/Q104225190">LOTUS</a> <span class="citation" data-cites="Rutz2022">(<a href="#ref-Rutz2022" role="doc-biblioref">Rutz et al. 2022</a>)</span> started as a small attempt to cultivate the flow of chemical knowledge, in the same way we study how metabolites flow through living systems, rather than to build <em>yet another database</em>.</p>
+<p>The idea was simple. Natural products data should be open, structured, reusable, and belong to everyone.</p>
+<p>Like many community-driven efforts, LOTUS had bursts of activity, long pauses, and years of invisible maintenance. From the outside, silence can look like disappearance. From the inside, it usually means people are still doing the work; slowly, carefully, and often without announcements.</p>
+<section class="level2" id="from-isolated-datasets-to-global-outreach">
+<h2 class="anchored" data-anchor-id="from-isolated-datasets-to-global-outreach">From isolated datasets to global outreach</h2>
+<p>The early focus of LOTUS was necessarily inward: assembling data, cleaning records, releasing versions. We built a website, curated entries, and archived releases.</p>
+<p>But we slowly realized something uncomfortable: data stored in a repository, even a good one, does not automatically live.</p>
+<p>Archiving on <a about="wd:Q22661177" href="https://www.wikidata.org/wiki/Q22661177">Zenodo</a> (<a class="uri" href="https://zenodo.org/communities/the-lotus-initiative">https://zenodo.org/communities/the-lotus-initiative</a>) was the right thing to do, but archived data is mostly silent data. It waits to be discovered, and versioning remains labor-intensive.</p>
+<p>What we really needed were entry points where people already were.</p>
+<p><a about="wd:Q52" href="https://www.wikidata.org/wiki/Q52">Wikipedia</a> , <a about="wd:Q2013" href="https://www.wikidata.org/wiki/Q2013">Wikidata</a> , and <a about="wd:Q45340488" href="https://www.wikidata.org/wiki/Q45340488">Scholia</a> building on top of it are not dissemination platforms in the classical sense. They are circulatory systems. They persist because communities maintain them.</p>
+<p>The <a about="wd:Q134520857" href="https://www.wikidata.org/wiki/Q134520857">Scholia Chemistry preprint</a> <span class="citation" data-cites="Willighagen2025b">(<a href="#ref-Willighagen2025b" role="doc-biblioref">Willighagen et al. 2025</a>)</span> co-authored with <a about="wd:Q20895241" href="https://www.wikidata.org/wiki/Q20895241">Egon</a> , <a about="wd:Q43744369" href="https://www.wikidata.org/wiki/Q43744369">Denise</a> , <a about="wd:Q20895785" href="https://www.wikidata.org/wiki/Q20895785">Daniel</a> , and <a about="wd:Q20980928" href="https://www.wikidata.org/wiki/Q20980928">Finn</a> belongs to this continuity. It does not introduce a new platform. It offers a lens for communities to see what they already collectively know.</p>
+<section class="level3" id="making-knowledge-visible-the-wikipedia-p703-module">
+<h3 class="anchored" data-anchor-id="making-knowledge-visible-the-wikipedia-p703-module">Making knowledge visible: the Wikipedia P703 module</h3>
+<blockquote class="blockquote">
+<p>Knowledge needs channels, not just reservoirs.</p>
+</blockquote>
+<p>One important step was enabling Wikipedia articles and <a about="wd:Q15515987" href="https://www.wikidata.org/wiki/Q15515987">infoboxes</a> to directly access <em>found in taxon</em> (<a about="wd:Property:P703" href="https://www.wikidata.org/wiki/Property:P703">P703</a>) relationships from Wikidata in an efficient way.</p>
+<p>This sounds like a small technical detail. It is not.</p>
+<p>The idea had circulated quietly for years, in hallway conversations, chats, and conferences. I also mentioned it during the <a about="wd:Q133846580" href="https://www.wikidata.org/wiki/Q133846580">WikiCite 2025</a> conference last August, but it took time before conditions were right. Infrastructure work rarely happens on schedule. It almost never happens on stage. It happens in version histories, talk pages, and tiny edits that fix one Lua bug, enabling thousands of articles to improve forever.</p>
+<p>Once data is in Wikidata, it can flow into thousands of chemical articles, in dozens of languages, without duplication or translation overhead. It becomes visible to non-experts, students, and readers who will never see a database interface. This is how open data becomes public knowledge.</p>
+<p>These <a about="wd:Q15184295" href="https://www.wikidata.org/wiki/Q15184295">modules</a> are now available on multiple Wikipedias:</p>
+<ul>
+<li><a about="wd:Q328" href="https://www.wikidata.org/wiki/Q328">English</a> : <a href="https://en.wikipedia.org/wiki/Module:P703">Module:P703</a></li>
+<li><a about="wd:Q8447" href="https://www.wikidata.org/wiki/Q8447">French</a> : <a href="https://fr.wikipedia.org/wiki/Module:P703">Module:P703</a></li>
+<li><a about="wd:Q48183" href="https://www.wikidata.org/wiki/Q48183">German</a> : <a href="https://de.wikipedia.org/wiki/Modul:P703">Modul:P703</a></li>
+<li><a about="wd:Q11920" href="https://www.wikidata.org/wiki/Q11920">Italian</a> : <a href="https://it.wikipedia.org/wiki/Modulo:P703">Modulo:P703</a></li>
+</ul>
+<p>If you speak another language, feel free to copy them and increase their use.</p>
+<p>Initially, I tried to reuse existing modules, and quickly learned why module reuse across Wikipedias is famously difficult. Each wiki evolves its own ecosystem of dependencies, conventions, and technical debt. So the modules were written fully contained, independent of language-specific infrastructure. Only lines that need to be changed are the language-specific translations at the top of the module, trying to follow <a about="wd:Q3141064" href="https://www.wikidata.org/wiki/Q3141064">18n</a>.</p>
+<p>These modules are not a new website or a new interface. They are simply better plumbing.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img alt="Screenshot P703 Module" class="img-fluid figure-img" src="../images/screenshots/screenshot_p703_module.png"/></p>
+<figcaption>Screenshot of the P703 module on English Wikipedia</figcaption>
+</figure>
+</div>
+<p>By default, only <code>5</code> <a about="wd:Q16521" href="https://www.wikidata.org/wiki/Q16521">organisms</a> are shown, keeping the text clean and readable. But the magic is in how the module handles the rest: each taxon links to its Wikipedia article, and if no article exists in the current language, the module gracefully redirects to an equivalent page in another wiki. A beautiful example of this is <code>war</code> for <a href="https://war.wikipedia.org/wiki/Quassia_africana">Quassia africana</a>.</p>
+</section>
+<section class="level3" id="reaching-non-experts">
+<h3 class="anchored" data-anchor-id="reaching-non-experts">Reaching non-experts</h3>
+<blockquote class="blockquote">
+<p>Not everyone wants to learn SPARQL.</p>
+</blockquote>
+<p>I have heard this sentiment countless times. Regardless of personal preferences, if we want the data to truly live, it must reach as many people as possible.</p>
+<p>Small tools like the <a href="https://adafede.github.io/marimo/apps/lotus_wikidata_explorer.html">LOTUS Wikidata Explorer</a> help lower that barrier. It is imperfect. It is still growing. But it already allows chemists, curators, and students to access and export data in formats they can actually use.</p>
+<p>The principle is simple: knowledge only flows when it reaches people. The data must be seen, explored, and reused. Only then does it fulfill its purpose.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img alt="Screenshot Lotus Wikidata Explorer" class="img-fluid figure-img" src="../images/screenshots/screenshot_lotus_wikidata_explorer.png"/></p>
+<figcaption>Screenshot of the LOTUS Wikidata Explorer interface</figcaption>
+</figure>
+</div>
+<p>On a more technical note, the LOTUS Wikidata Explorer leverages the powerful <a about="wd:Q101200819" href="https://www.wikidata.org/wiki/Q101200819">IDSM</a> endpoint <span class="citation" data-cites="Galgonek2021">(<a href="#ref-Galgonek2021" role="doc-biblioref">Galgonek and Vondrášek 2021</a>)</span>, which allows for chemical similarity searches thanks to <a about="wd:Q55016200" href="https://www.wikidata.org/wiki/Q55016200">Sachem</a> <span class="citation" data-cites="Kratochvl2018">(<a href="#ref-Kratochvl2018" role="doc-biblioref">Kratochvíl, Vondrášek, and Galgonek 2018</a>)</span>. Its speed for large-scale queries could never have been reached without <a about="wd:Q111016295" href="https://www.wikidata.org/wiki/Q111016295">QLever</a> <span class="citation" data-cites="Bast2017">(<a href="#ref-Bast2017" role="doc-biblioref">Bast and Buchhold 2017</a>)</span>, and chemical depictions come from <a about="wd:Q137800121" href="https://www.wikidata.org/wiki/Q137800121">CDK Depict</a>.</p>
+<p>It returns structured metadata for traceability and reproducibility, together with hashes that uniquely identify the query and its results. It can be queried programmatically via simple API calls, for example <code>?taxon=Gentianaceae</code> or <code>?smiles=c1ccccc1&amp;formula_filter=true&amp;f_state=required</code>. It works directly in the browser without requiring heavy dependencies, almost everything works out of the box.</p>
+<p>Alternatively, users can take advantage of a local version, for example to extract a small, personal <a about="wd:Q33002955" href="https://www.wikidata.org/wiki/Q33002955">knowledge graph</a> in <a about="wd:Q114409" href="https://www.wikidata.org/wiki/Q114409">TTL</a> format, or to export all or selected LOTUS data in more chemistry-friendly formats such as <a about="wd:Q2063" href="https://www.wikidata.org/wiki/Q2063">JSON</a> or <a about="wd:Q935809" href="https://www.wikidata.org/wiki/Q935809">CSV</a>, ready for analysis, visualization, or integration into other workflows.</p>
+<p>For example, to export a complete or filtered snapshot locally:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-hidden="true" href="#cb1-1" tabindex="-1"></a>uvx \</span>
+<span id="cb1-2"><a aria-hidden="true" href="#cb1-2" tabindex="-1"></a>  <span class="sc">--</span>from \</span>
+<span id="cb1-3"><a aria-hidden="true" href="#cb1-3" tabindex="-1"></a>  git<span class="sc">+</span>https<span class="sc">:</span><span class="er">//</span>github.com<span class="sc">/</span>adafede<span class="sc">/</span>marimo \</span>
+<span id="cb1-4"><a aria-hidden="true" href="#cb1-4" tabindex="-1"></a>  lotus_wikidata_explorer \</span>
+<span id="cb1-5"><a aria-hidden="true" href="#cb1-5" tabindex="-1"></a>  export \</span>
+<span id="cb1-6"><a aria-hidden="true" href="#cb1-6" tabindex="-1"></a>  <span class="sc">--</span>taxon <span class="st">"*"</span> \   <span class="co"># to get all taxa, else "Gentianaceae", for example</span></span>
+<span id="cb1-7"><a aria-hidden="true" href="#cb1-7" tabindex="-1"></a>  <span class="sc">--</span>format csv \  <span class="co"># also supports json, ttl</span></span>
+<span id="cb1-8"><a aria-hidden="true" href="#cb1-8" tabindex="-1"></a>  <span class="sc">--</span>output <span class="dv">20260119</span>_lotus.csv.gz \</span>
+<span id="cb1-9"><a aria-hidden="true" href="#cb1-9" tabindex="-1"></a>  <span class="sc">--</span>compress \</span>
+<span id="cb1-10"><a aria-hidden="true" href="#cb1-10" tabindex="-1"></a>  <span class="sc">--</span>verbose</span></code></pre></div><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<p>And if you are curious where halogenated compounds appear most often, you can simply ask:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-hidden="true" href="#cb2-1" tabindex="-1"></a>xan dedup <span class="dv">20260119</span>_lotus.csv.gz \</span>
+<span id="cb2-2"><a aria-hidden="true" href="#cb2-2" tabindex="-1"></a>  <span class="sc">--</span>select compound_inchikey,molecular_formula,taxon_name <span class="sc">|</span> \</span>
+<span id="cb2-3"><a aria-hidden="true" href="#cb2-3" tabindex="-1"></a>  xan select compound_inchikey,molecular_formula,taxon_name <span class="sc">|</span> \</span>
+<span id="cb2-4"><a aria-hidden="true" href="#cb2-4" tabindex="-1"></a>  xan filter <span class="st">"contains(molecular_formula, 'Br') or</span></span>
+<span id="cb2-5"><a aria-hidden="true" href="#cb2-5" tabindex="-1"></a><span class="st">              contains(molecular_formula, 'Cl') or</span></span>
+<span id="cb2-6"><a aria-hidden="true" href="#cb2-6" tabindex="-1"></a><span class="st">              contains(molecular_formula, 'F') or</span></span>
+<span id="cb2-7"><a aria-hidden="true" href="#cb2-7" tabindex="-1"></a><span class="st">              contains(molecular_formula, 'I')"</span> <span class="sc">|</span> \</span>
+<span id="cb2-8"><a aria-hidden="true" href="#cb2-8" tabindex="-1"></a>  xan filter <span class="st">'!contains(molecular_formula, "Fe")'</span> <span class="sc">|</span> \</span>
+<span id="cb2-9"><a aria-hidden="true" href="#cb2-9" tabindex="-1"></a>  xan freq <span class="sc">-</span>s taxon_name <span class="sc">|</span> \</span>
+<span id="cb2-10"><a aria-hidden="true" href="#cb2-10" tabindex="-1"></a>  xan hist <span class="sc">-</span>l value <span class="sc">-</span>R</span></code></pre></div><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-hidden="true" href="#cb3-1" tabindex="-1"></a>Histogram <span class="cf">for</span> <span class="fu">taxon_name</span> (bars<span class="sc">:</span> <span class="dv">11</span>, sum<span class="sc">:</span> <span class="dv">11</span>,<span class="dv">604</span>, max<span class="sc">:</span> <span class="dv">10</span>,<span class="dv">060</span>)<span class="sc">:</span></span>
+<span id="cb3-2"><a aria-hidden="true" href="#cb3-2" tabindex="-1"></a></span>
+<span id="cb3-3"><a aria-hidden="true" href="#cb3-3" tabindex="-1"></a>Streptomyces            <span class="sc">|</span>   <span class="dv">374</span>   <span class="fl">3.22</span>%<span class="sc">|</span>■■■■                                                                                                   <span class="sc">|</span></span>
+<span id="cb3-4"><a aria-hidden="true" href="#cb3-4" tabindex="-1"></a>Laurencia dendroidea    <span class="sc">|</span>   <span class="dv">314</span>   <span class="fl">2.71</span>%<span class="sc">|</span>■■■■                                                                                                   <span class="sc">|</span></span>
+<span id="cb3-5"><a aria-hidden="true" href="#cb3-5" tabindex="-1"></a>Laurencia obtusa        <span class="sc">|</span>   <span class="dv">184</span>   <span class="fl">1.59</span>%<span class="sc">|</span>■■                                                                                                     <span class="sc">|</span></span>
+<span id="cb3-6"><a aria-hidden="true" href="#cb3-6" tabindex="-1"></a>Pseudoceratina purpurea <span class="sc">|</span>   <span class="dv">112</span>   <span class="fl">0.97</span>%<span class="sc">|</span>■■                                                                                                     <span class="sc">|</span></span>
+<span id="cb3-7"><a aria-hidden="true" href="#cb3-7" tabindex="-1"></a>Aplysia dactylomela     <span class="sc">|</span>    <span class="dv">99</span>   <span class="fl">0.85</span>%<span class="sc">|</span>■■                                                                                                     <span class="sc">|</span></span>
+<span id="cb3-8"><a aria-hidden="true" href="#cb3-8" tabindex="-1"></a>Nostoc                  <span class="sc">|</span>    <span class="dv">99</span>   <span class="fl">0.85</span>%<span class="sc">|</span>■■                                                                                                     <span class="sc">|</span></span>
+<span id="cb3-9"><a aria-hidden="true" href="#cb3-9" tabindex="-1"></a>Laurencia nipponica     <span class="sc">|</span>    <span class="dv">95</span>   <span class="fl">0.82</span>%<span class="sc">|</span>■                                                                                                      <span class="sc">|</span></span>
+<span id="cb3-10"><a aria-hidden="true" href="#cb3-10" tabindex="-1"></a>Portieria hornemannii   <span class="sc">|</span>    <span class="dv">94</span>   <span class="fl">0.81</span>%<span class="sc">|</span>■                                                                                                      <span class="sc">|</span></span>
+<span id="cb3-11"><a aria-hidden="true" href="#cb3-11" tabindex="-1"></a>Lyngbya majuscula       <span class="sc">|</span>    <span class="dv">88</span>   <span class="fl">0.76</span>%<span class="sc">|</span>■                                                                                                      <span class="sc">|</span></span>
+<span id="cb3-12"><a aria-hidden="true" href="#cb3-12" tabindex="-1"></a>Chaetomium globosum     <span class="sc">|</span>    <span class="dv">85</span>   <span class="fl">0.73</span>%<span class="sc">|</span>■                                                                                                      <span class="sc">|</span></span>
+<span id="cb3-13"><a aria-hidden="true" href="#cb3-13" tabindex="-1"></a><span class="er">&lt;</span>rest<span class="sc">&gt;</span>                  <span class="er">|</span><span class="dv">10</span>,<span class="dv">060</span>  <span class="fl">86.69</span>%<span class="sc">|</span>■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■<span class="sc">|</span></span></code></pre></div><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+<section class="level2" id="making-flow-reliable-curation-and-standards">
+<h2 class="anchored" data-anchor-id="making-flow-reliable-curation-and-standards">Making flow reliable: curation and standards</h2>
+<blockquote class="blockquote">
+<p>At some point, flow only runs if it is maintained.</p>
+</blockquote>
+<p>As I do not post as often as I probably should, here are some other pointers to related work and discussions from the past months, for those who want to follow the flow a bit further:</p>
+<section class="level3" id="blue-obelisk">
+<h3 class="anchored" data-anchor-id="blue-obelisk">Blue Obelisk</h3>
+<ul>
+<li>Following some ideas he had to improve Scholia Chemistry, Egon initiated the Blue Obelisk Wikidata Chemistry Curation project: <a class="uri" href="https://blueobelisk.github.io/wikidata-chemistry-curation/">https://blueobelisk.github.io/wikidata-chemistry-curation/</a>. I then joined and contributed to some parts, maybe you will find out which ones!</li>
+<li>Contributions were also made to the Blue Obelisk IUPAC Names project (also led by Egon): <a class="uri" href="https://github.com/BlueObelisk/iupac-names">https://github.com/BlueObelisk/iupac-names</a>, integrating Wikidata-derived name-compound pairs. See <a class="uri" href="https://github.com/Adafede/wd-labels-to-iupac">https://github.com/Adafede/wd-labels-to-iupac</a> and <a class="uri" href="https://chem-bla-ics.linkedchemistry.info/2025/08/09/one-million-iupac-names-4.html">https://chem-bla-ics.linkedchemistry.info/2025/08/09/one-million-iupac-names-4.html</a> <span class="citation" data-cites="Willighagen2025c">(<a href="#ref-Willighagen2025c" role="doc-biblioref">Willighagen 2025</a>)</span> These bridges allow names and identifiers to circulate consistently across systems.</li>
+</ul>
+</section>
+<section class="level3" id="reactions-flow">
+<h3 class="anchored" data-anchor-id="reactions-flow">Reactions flow</h3>
+<p>Recently, I also contributed to improving how <a about="wd:Q36534" href="https://www.wikidata.org/wiki/Q36534">chemical reactions</a> are modeled in Wikidata.</p>
+<p>Previously, many reactions were modeled as <a about="wd:Property:P31" href="https://www.wikidata.org/wiki/Property:P31">instances of</a> “chemical reaction”, which violated disjointness, see <span class="citation" data-cites="Doan2025">(<a href="#ref-Doan2025" role="doc-biblioref">Doǧan and Patel-Schneider 2025</a>)</span>.</p>
+<p>The introduction of <a about="wd:Q137796968" href="https://www.wikidata.org/wiki/Q137796968">type of chemical reaction</a> now allows reactions to be classified more precisely, while preserving their hierarchy using <a about="wd:Property:P279" href="https://www.wikidata.org/wiki/Property:P279">subclass of</a>.</p>
+</section>
+<section class="level3" id="wikifunctions">
+<h3 class="anchored" data-anchor-id="wikifunctions">Wikifunctions</h3>
+<p>Out of curiosity, I also made a small contribution to chemistry-related functions in <a about="wd:Q104587954" href="https://www.wikidata.org/wiki/Q104587954">Wikifunctions</a>: <a href="https://www.wikifunctions.org/view/en/Z30950">Z30950</a>. It validates <a about="wd:Q102507" href="https://www.wikidata.org/wiki/Q102507">CAS Registry Numbers</a>. It does one thing, and it does it reliably.</p>
+<p>It is tiny. But it is a seed.</p>
+</section>
+</section>
+<section class="level2" id="looking-forward-flowing-knowledge-flowing-metabolites">
+<h2 class="anchored" data-anchor-id="looking-forward-flowing-knowledge-flowing-metabolites">Looking forward: flowing knowledge, flowing metabolites</h2>
+<p>Projects like Wikifunctions and <a about="wd:Q96807071" href="https://www.wikidata.org/wiki/Q96807071">Abstract Wikipedia</a> point to the next phase of open knowledge: knowledge that is not only stored, but executed, reused, and recombined.</p>
+<p>A global, open <a about="wd:Q12149006" href="https://www.wikidata.org/wiki/Q12149006">metabolomics</a> knowledge graph is slowly taking shape, one where chemical structures, organisms, reactions, and evidence can finally be traced together.</p>
+<p>LOTUS is no longer an initiative. It is one contributor among many in that graph.</p>
+<p>If you edit Wikipedia, curate Wikidata, maintain a SPARQL endpoint, write a template, review a module, or fix a tiny detail no one will notice, <em>thank you</em>. <strong>This work only matters because you are here</strong>.</p>
 <section class="level3" id="references">
 <h3 class="anchored" data-anchor-id="references">References</h3>
 <div class="references csl-bib-body hanging-indent" data-entry-spacing="0" id="refs" role="list">
-<div class="csl-entry" id="ref-voncsefalvay2023" role="listitem">
-Csefalvay, Chris von. 2023. <span>“Auto-DOI for Quarto Posts via Rogue Scholar.”</span> <a href="http://dx.doi.org/10.59350/5hxdg-fz574">http://dx.doi.org/10.59350/5hxdg-fz574</a>.
-<span class="cito"> [cito:obtainsBackgroundFrom]</span></div>
-<div class="csl-entry" id="ref-fenner2025" role="listitem">
-Fenner, Martin. 2025. <span>“Rogue Scholar Citation Tracking Launches to Production.”</span> <a href="http://dx.doi.org/10.53731/zyg15-qv911">http://dx.doi.org/10.53731/zyg15-qv911</a>.
-<span class="cito"> [cito:obtainsBackgroundFrom]</span></div>
-<div class="csl-entry" id="ref-fruehwald2025" role="listitem">
-Fruehwald, Josef. 2025. <span>“Setting up Rogue Scholar.”</span> <a href="http://dx.doi.org/10.59350/3fp6d-e6z90">http://dx.doi.org/10.59350/3fp6d-e6z90</a>.
+<div class="csl-entry" id="ref-Bast2017" role="listitem">
+Bast, Hannah, and Björn Buchhold. 2017. <span>“QLever: A Query Engine for Efficient SPARQL+text Search.”</span> In <em>Proceedings of the 2017 ACM on Conference on Information and Knowledge Management</em>, 647–56. CIKM ’17. ACM. <a href="https://doi.org/10.1145/3132847.3132921">https://doi.org/10.1145/3132847.3132921</a>.
 <span class="cito"> [cito:usesMethodIn]</span></div>
-<div class="csl-entry" id="ref-willighagen2023" role="listitem">
-Willighagen, Egon. 2023. <span>“Two Years of Explicit CiTO Annotations.”</span> <em>Journal of Cheminformatics</em> 15 (1). <a href="https://doi.org/10.1186/s13321-023-00683-2">https://doi.org/10.1186/s13321-023-00683-2</a>.
+<div class="csl-entry" id="ref-Doan2025" role="listitem">
+Doǧan, Ege Atacan, and Peter F. Patel-Schneider. 2025. <span>“Disjointness Violations in Wikidata.”</span> In <em>Knowledge Graphs and Semantic Web</em>, 259–74. Springer Nature Switzerland. <a href="https://doi.org/10.1007/978-3-031-81221-7_18">https://doi.org/10.1007/978-3-031-81221-7_18</a>.
+<span class="cito"> [cito:citesAsRecommendedReading]</span></div>
+<div class="csl-entry" id="ref-Galgonek2021" role="listitem">
+Galgonek, Jakub, and Jiří Vondrášek. 2021. <span>“IDSM ChemWebRDF: SPARQLing Small-Molecule Datasets.”</span> <em>Journal of Cheminformatics</em> 13 (1). <a href="https://doi.org/10.1186/s13321-021-00515-1">https://doi.org/10.1186/s13321-021-00515-1</a>.
 <span class="cito"> [cito:usesMethodIn]</span></div>
-<div class="csl-entry" id="ref-willighagen2024a" role="listitem">
-———. 2024a. <span>“GoatCounter, Rogue Scholar and More New Things.”</span> <a href="http://dx.doi.org/10.59350/8x2f1-h6d21">http://dx.doi.org/10.59350/8x2f1-h6d21</a>.
+<div class="csl-entry" id="ref-Kratochvl2018" role="listitem">
+Kratochvíl, Miroslav, Jiří Vondrášek, and Jakub Galgonek. 2018. <span>“Sachem: A Chemical Cartridge for High-Performance Substructure Search.”</span> <em>Journal of Cheminformatics</em> 10 (1). <a href="https://doi.org/10.1186/s13321-018-0282-y">https://doi.org/10.1186/s13321-018-0282-y</a>.
+<span class="cito"> [cito:usesMethodIn]</span></div>
+<div class="csl-entry" id="ref-Rutz2022" role="listitem">
+Rutz, Adriano, Maria Sorokina, Jakub Galgonek, Daniel Mietchen, Egon Willighagen, Arnaud Gaudry, James G Graham, et al. 2022. <span>“The LOTUS Initiative for Open Knowledge Management in Natural Products Research.”</span> <em>eLife</em> 11 (May). <a href="https://doi.org/10.7554/elife.70780">https://doi.org/10.7554/elife.70780</a>.
 <span class="cito"> [cito:cites]</span></div>
-<div class="csl-entry" id="ref-willighagen2024b" role="listitem">
-———. 2024b. <span>“FAIR Blog-to-Blog Citations.”</span> <a href="http://dx.doi.org/10.59350/er1mn-m5q69">http://dx.doi.org/10.59350/er1mn-m5q69</a>.
-<span class="cito"> [cito:cites]</span></div>
-<div class="csl-entry" id="ref-willighagen2025" role="listitem">
-———. 2025. <span>“Blog Updates.”</span> <a href="http://dx.doi.org/10.59350/cf885-kee54">http://dx.doi.org/10.59350/cf885-kee54</a>.
+<div class="csl-entry" id="ref-Willighagen2025c" role="listitem">
+Willighagen, Egon. 2025, August. <a href="https://doi.org/10.59350/krw9n-dv417">https://doi.org/10.59350/krw9n-dv417</a>.
+<span class="cito"> [cito:citesAsRecommendedReading]</span></div>
+<div class="csl-entry" id="ref-Willighagen2025b" role="listitem">
+Willighagen, Egon, Denise Slenter, Adriano Rutz, Daniel Mietchen, and Finn Nielsen. 2025. <span>“Scholia Chemistry: Access to Chemistry in Wikidata,”</span> May. <a href="https://doi.org/10.26434/chemrxiv-2025-53n0w">https://doi.org/10.26434/chemrxiv-2025-53n0w</a>.
 <span class="cito"> [cito:cites]</span></div>
 </div>
 </section>
-<div class="default" id="quarto-appendix"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{rutz2025,
+</section>
+<div class="default" id="quarto-appendix"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{rutz2026,
   author = {{Adriano Rutz}},
-  title = {Open {Science} {Upgrade:} {Adding} {Blog} {Posts} to My
-    {Website} and {Linking} to {Rogue} {Scholar}},
-  date = {2025-08-04},
-  url = {https://adafede.github.io/posts/2025-08-04_rogue_scholar.html},
+  title = {Cultivating {Knowledge} {Flow} in {Open} {Chemistry}},
+  date = {2026-01-20},
+  url = {https://adafede.github.io/posts/2026-01-20_chem_flow.html},
   doi = {10.59350/yckwd-9vm79},
   langid = {en}
 }
-</code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div class="csl-entry quarto-appendix-citeas" id="ref-rutz2025" role="listitem">
-Adriano Rutz. 2025. <span>“Open Science Upgrade: Adding Blog Posts to My
-Website and Linking to Rogue Scholar.”</span> August 4, 2025. <a href="https://doi.org/10.59350/yckwd-9vm79">https://doi.org/10.59350/yckwd-9vm79</a>.
+</code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div class="csl-entry quarto-appendix-citeas" id="ref-rutz2026" role="listitem">
+Adriano Rutz. 2026. <span>“Cultivating Knowledge Flow in Open
+Chemistry.”</span> January 20, 2026. <a href="https://doi.org/10.59350/yckwd-9vm79">https://doi.org/10.59350/yckwd-9vm79</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
