@@ -14,6 +14,7 @@ from typing import List
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from infrastructure import FileSystem, get_logger
+from services.pdf_service import PdfService
 
 logger = get_logger(__name__)
 
@@ -126,6 +127,9 @@ def run_pandoc_for_all_qmds() -> None:
     skip_count = 0
     fail_count = 0
 
+    # instantiate PdfService to apply in-pipeline fixes to generated markdown
+    pdf_svc = PdfService(fs, BIBLIOGRAPHY_FILE, CSL_FILE, PANDOC_FILTERS)
+
     for qmd_file in qmd_files:
         base_name = qmd_file.stem
         md_path = SITE_POSTS_DIR / f"{base_name}.md"
@@ -136,6 +140,12 @@ def run_pandoc_for_all_qmds() -> None:
             logger.debug(f"Skipping {qmd_file.name}: markdown not found at {md_path}")
             skip_count += 1
             continue
+
+        # Fix any ../images/... links that should point to _site/images/ before converting
+        try:
+            pdf_svc._fix_image_paths_in_md(md_path)
+        except Exception:
+            logger.debug(f"Image path fixer failed for {md_path}, continuing...")
 
         # Convert to PDF
         if convert_md_to_pdf(md_path, pdf_path):
