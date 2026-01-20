@@ -64,13 +64,13 @@ What we really needed were entry points where people already were.
 <a href="https://www.wikidata.org/wiki/Q52" about="wd:Q52">Wikipedia</a>
 ,
 <a href="https://www.wikidata.org/wiki/Q2013" about="wd:Q2013">Wikidata</a>
-, and 
+, and
 <a href="https://www.wikidata.org/wiki/Q45340488" about="wd:Q45340488">Scholia</a>
 building on top of it are not dissemination platforms in the classical sense.
 They are circulatory systems.
 They persist because communities maintain them.
 
-The 
+The
 <a href="https://www.wikidata.org/wiki/Q134520857" about="wd:Q134520857">Scholia Chemistry preprint</a>
 [@cites:Willighagen2025b]
 co-authored with
@@ -98,7 +98,7 @@ This sounds like a small technical detail.
 It is not.
 
 The idea had circulated quietly for years, in hallway conversations, chats, and conferences.
-I also mentioned it during the 
+I also mentioned it during the
 <a href="https://www.wikidata.org/wiki/Q133846580" about="wd:Q133846580">WikiCite 2025</a>
 conference last August, but it took time before conditions were right.
 Infrastructure work rarely happens on schedule.
@@ -111,7 +111,7 @@ This is how open data becomes public knowledge.
 
 These
 <a href="https://www.wikidata.org/wiki/Q15184295" about="wd:Q15184295">modules</a>
-are now available on multiple Wikipedias: 
+are now available on multiple Wikipedias:
 
 - <a href="https://www.wikidata.org/wiki/Q328" about="wd:Q328">English</a> : [Module:P703](https://en.wikipedia.org/wiki/Module:P703)
 - <a href="https://www.wikidata.org/wiki/Q8447" about="wd:Q8447">French</a> : [Module:P703](https://fr.wikipedia.org/wiki/Module:P703)
@@ -175,7 +175,7 @@ Alternatively, users can take advantage of a local version, for example to extra
 in
 <a href="https://www.wikidata.org/wiki/Q114409" about="wd:Q114409">TTL</a>
 format,
-or to export all or selected LOTUS data in more chemistry-friendly formats such as 
+or to export all or selected LOTUS data in more chemistry-friendly formats such as
 <a href="https://www.wikidata.org/wiki/Q2063" about="wd:Q2063">JSON</a>
 or
 <a href="https://www.wikidata.org/wiki/Q935809" about="wd:Q935809">CSV</a>,
@@ -206,9 +206,9 @@ And if you are curious where halogenated compounds appear most often, you can si
 xan dedup 20260119_lotus.csv.gz \
   --select compound_inchikey,molecular_formula,taxon_name | \
   xan select compound_inchikey,molecular_formula,taxon_name | \
-  xan filter "contains(molecular_formula, 'Br') or 
-              contains(molecular_formula, 'Cl') or 
-              contains(molecular_formula, 'F') or 
+  xan filter "contains(molecular_formula, 'Br') or
+              contains(molecular_formula, 'Cl') or
+              contains(molecular_formula, 'F') or
               contains(molecular_formula, 'I')" | \
   xan filter '!contains(molecular_formula, "Fe")' | \
   xan freq -s taxon_name | \
@@ -265,10 +265,10 @@ now allows reactions to be classified more precisely, while preserving their hie
 
 ### Wikifunctions
 
-Out of curiosity, I also made a small contribution to chemistry-related functions in 
+Out of curiosity, I also made a small contribution to chemistry-related functions in
 <a href="https://www.wikidata.org/wiki/Q104587954" about="wd:Q104587954">Wikifunctions</a>:
 [Z30950](https://www.wikifunctions.org/view/en/Z30950).
-It validates 
+It validates
 <a href="https://www.wikidata.org/wiki/Q102507" about="wd:Q102507">CAS Registry Numbers</a>.
 It does one thing, and it does it reliably.
 
@@ -282,7 +282,7 @@ Projects like Wikifunctions and
 point to the next phase of open knowledge:
 knowledge that is not only stored, but executed, reused, and recombined.
 
-A global, open 
+A global, open
 <a href="https://www.wikidata.org/wiki/Q12149006" about="wd:Q12149006">metabolomics</a>
 knowledge graph is slowly taking shape,
 one where chemical structures, organisms, reactions, and evidence can finally be traced together.
