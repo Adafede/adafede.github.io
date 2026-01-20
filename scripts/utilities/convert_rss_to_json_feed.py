@@ -23,6 +23,8 @@ from lxml import etree
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from infrastructure import get_logger
+from infrastructure.filesystem import FileSystem
+from infrastructure.yaml_loader import YamlLoader
 
 logger = get_logger(__name__)
 
@@ -346,12 +348,54 @@ def convert_rss_to_json_feed(rss_path, json_feed_path):
 
         # Extract and apply feed metadata
         metadata = extract_feed_metadata(channel)
-        json_feed.update(metadata)
 
-        # Extract and add author information
-        author_info = extract_author_info(channel)
-        if author_info:
-            json_feed["authors"] = [author_info]
+        # Prefer authors defined in _quarto.yml (site-level). Fall back to
+        # DC creator extraction from the RSS channel/item if not present.
+        authors_list = []
+        try:
+            fs = FileSystem(Path.cwd())
+            yaml = YamlLoader()
+            quarto_path = fs.root / "_quarto.yml"
+            if quarto_path.exists():
+                meta = yaml.load_from_path(quarto_path)
+                authors_data = meta.get("authors", []) if meta else []
+                for a in authors_data:
+                    if isinstance(a, dict):
+                        raw_name = a.get("name")
+                        name = None
+                        if isinstance(raw_name, str):
+                            name = raw_name
+                        elif isinstance(raw_name, dict):
+                            name = raw_name.get("literal") or (
+                                (
+                                    raw_name.get("given", "")
+                                    + " "
+                                    + raw_name.get("family", "")
+                                ).strip()
+                                or None
+                            )
+
+                        if name:
+                            obj = {"name": name}
+                            if a.get("url"):
+                                obj["url"] = a.get("url")
+                            if a.get("avatar"):
+                                obj["avatar"] = a.get("avatar")
+                            authors_list.append(obj)
+                    elif isinstance(a, str):
+                        authors_list.append({"name": a})
+        except Exception:
+            authors_list = []
+
+        # Build JSON with preferred ordering: version, title, description,
+        # home_page_url, feed_url, language, authors, items
+        json_feed.update(metadata)
+        if authors_list:
+            json_feed["authors"] = authors_list
+        else:
+            author_info = extract_author_info(channel)
+            if author_info:
+                json_feed["authors"] = [author_info]
 
         # Extract items
         items = channel.findall("item")

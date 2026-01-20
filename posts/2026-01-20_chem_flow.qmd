@@ -15,7 +15,7 @@ comments:
     showHighlights: always
 creative_commons: CC BY
 date: 2026-01-20
-doi: 10.59350/yckwd-9vm79
+doi: 10.59350/sk00y-3gh44
 format:
   html:
     filters:
