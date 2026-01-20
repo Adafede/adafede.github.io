@@ -49,7 +49,9 @@ class PdfService:
             return
 
         # Replace any Markdown image references of the form: ![alt](../images/...) -> ![alt](_site/images/...)
-        md_img_pattern = r"!\[([^\]]*)\]\(\s*\.\./images/([^\)\s]+)(?:\s+\"[^\"]*\")?\s*\)"
+        md_img_pattern = (
+            r"!\[([^\]]*)\]\(\s*\.\./images/([^\)\s]+)(?:\s+\"[^\"]*\")?\s*\)"
+        )
         new_text, n = re.subn(md_img_pattern, r"![\1](_site/images/\2)", text)
 
         if n > 0 and new_text != text:
@@ -231,7 +233,9 @@ class PdfService:
         logger.debug(f"Running CV conversion: {' '.join(cmd)}")
 
         try:
-            subprocess.run(cmd, check=True, capture_output=True, text=True, cwd=str(self.fs.root))
+            subprocess.run(
+                cmd, check=True, capture_output=True, text=True, cwd=str(self.fs.root)
+            )
             logger.info(f"✓ Generated CV PDF: {output_pdf_path.name}")
             return True
         except subprocess.CalledProcessError as e:
