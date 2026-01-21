@@ -13,6 +13,16 @@ affiliations:
 author:
 - Adriano Rutz
 authors:
+- affiliations:
+  - ref: imsb
+  id: AdrianoRutz
+  name:
+    family: Rutz
+    given: Adriano
+    literal: Adriano Rutz
+  orcid: 0000-0003-0443-9902
+  qid: Q97455964
+authors_for_feed:
 - id: AdrianoRutz
   name:
     family: Rutz
