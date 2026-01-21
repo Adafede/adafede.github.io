@@ -418,7 +418,7 @@ class FeedService:
                 return authors
 
             # Extract authors
-            authors_data = metadata.get("authors", [])
+            authors_data = metadata.get("authors_for_feed", [])
             for author in authors_data:
                 # Normalize dict-style authors
                 if isinstance(author, dict):
