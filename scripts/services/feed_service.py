@@ -241,7 +241,7 @@ class FeedService:
             if not feed_authors:
                 try:
                     creator_elem = channel.find(
-                        "{http://purl.org/dc/elements/1.1/}creator"
+                        "{http://purl.org/dc/elements/1.1/}creator",
                     )
                     if creator_elem is not None and creator_elem.text:
                         feed_authors = [{"name": creator_elem.text.strip()}]
@@ -254,12 +254,22 @@ class FeedService:
         # home_page_url, feed_url, language, authors, items
         description = self._get_element_text(channel, "description")
         language = self._get_element_text(channel, "language") or "en"
+        home_page_url = self._get_element_text(channel, "link", "")
+
+        # Compute feed_url: try atom:link with rel="self", else derive from home_page_url
+        feed_url_value = ""
+        atom_link = channel.find("{http://www.w3.org/2005/Atom}link")
+        if atom_link is not None:
+            feed_url_value = atom_link.get("href", "")
+        if not feed_url_value and home_page_url:
+            # Derive JSON feed URL from home page URL
+            feed_url_value = home_page_url.rstrip("/") + "/" + json_feed_path.name
 
         json_feed = {
             "version": "https://jsonfeed.org/version/1.1",
             "title": self._get_element_text(channel, "title", ""),
             "description": description,
-            "home_page_url": self._get_element_text(channel, "link", ""),
+            "home_page_url": home_page_url,
             "feed_url": feed_url_value,
             "language": language,
         }
