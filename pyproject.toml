@@ -10,10 +10,14 @@ dependencies = [
   "geopy>=2.4.1",
   "lxml>=6.0.2",
   "markdown>=3.10.1",
-  "pre-commit>=4.5.1",
   "pyyaml>=6.0.3",
   "quarto>=0.1.0",
   "ruamel-yaml>=0.19.1",
+]
+
+[dependency-groups]
+dev = [
+  "prek>=0.3.1",
 ]
 
 [tool.deptry]
@@ -29,6 +33,9 @@ known_first_party = [
 commonmeta-py = [
   "commonmeta",
 ]
+pyyaml = [
+  "yaml",
+]
 PyYAML = [
   "yaml",
 ]
@@ -38,7 +45,7 @@ ruamel-yaml = [
 ]
 
 [tool.deptry.per_rule_ignores]
-DEP002 = ["deptry", "pre-commit", "quarto"]
+DEP002 = ["quarto"]
 
 [tool.ty.rules]
 unresolved-import = "ignore"
