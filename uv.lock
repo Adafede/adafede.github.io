@@ -26,11 +26,11 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "bs4", specifier = ">=0.0.2" },
-    { name = "commonmeta-py", specifier = ">=0.201" },
+    { name = "commonmeta-py", specifier = ">=0.203" },
     { name = "folium", specifier = ">=0.20.0" },
     { name = "geopy", specifier = ">=2.4.1" },
     { name = "lxml", specifier = ">=6.0.2" },
-    { name = "markdown", specifier = ">=3.10.1" },
+    { name = "markdown", specifier = ">=3.10.2" },
     { name = "pyyaml", specifier = ">=6.0.3" },
     { name = "quarto", specifier = ">=0.1.0" },
     { name = "ruamel-yaml", specifier = ">=0.19.1" },
@@ -300,7 +300,7 @@ wheels = [
 
 [[package]]
 name = "commonmeta-py"
-version = "0.201"
+version = "0.203"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "base32-lib" },
@@ -334,9 +334,9 @@ dependencies = [
     { name = "xmlschema" },
     { name = "xmltodict" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/c7/99/1b53503662c3c2b59896d68636e849b04abddee6be7564b1f2fd6844256d/commonmeta_py-0.201.tar.gz", hash = "sha256:ff8297a409ec7987c9aff235aae6377d2e93e14111582324e2d3d8811caed1d0", size = 393528 }
+sdist = { url = "https://files.pythonhosted.org/packages/10/43/dc7476b2d6281be26526e8010e1281327a56ee07a9ea71168399d3ca4685/commonmeta_py-0.203.tar.gz", hash = "sha256:b5860b78742aac3c533c0d35bd0e9f1f1bb24d647adaaeb36418dee2356bb7a5", size = 393776 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/03/64/6b94621c2e28c67592c53cf4e9840787cb61cbbed539c02261dd65184f38/commonmeta_py-0.201-py3-none-any.whl", hash = "sha256:597e567cbc3bf1267651d8507816d1abfe9118c65523623f0344bafded1cfc87", size = 457380 },
+    { url = "https://files.pythonhosted.org/packages/8f/37/1b2377cebff63453e0c3974da4c793ab520b1ffef26258011b507118e835/commonmeta_py-0.203-py3-none-any.whl", hash = "sha256:e67ec23ac47b66be0f21e72638ac933c1985f1dae7d02ad7cf8b176ff8459b79", size = 457633 },
 ]
 
 [[package]]
@@ -750,11 +750,11 @@ wheels = [
 
 [[package]]
 name = "markdown"
-version = "3.10.1"
+version = "3.10.2"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/b7/b1/af95bcae8549f1f3fd70faacb29075826a0d689a27f232e8cee315efa053/markdown-3.10.1.tar.gz", hash = "sha256:1c19c10bd5c14ac948c53d0d762a04e2fa35a6d58a6b7b1e6bfcbe6fefc0001a", size = 365402 }
+sdist = { url = "https://files.pythonhosted.org/packages/2b/f4/69fa6ed85ae003c2378ffa8f6d2e3234662abd02c10d216c0ba96081a238/markdown-3.10.2.tar.gz", hash = "sha256:994d51325d25ad8aa7ce4ebaec003febcce822c3f8c911e3b17c52f7f589f950", size = 368805 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/59/1b/6ef961f543593969d25b2afe57a3564200280528caa9bd1082eecdd7b3bc/markdown-3.10.1-py3-none-any.whl", hash = "sha256:867d788939fe33e4b736426f5b9f651ad0c0ae0ecf89df0ca5d1176c70812fe3", size = 107684 },
+    { url = "https://files.pythonhosted.org/packages/de/1f/77fa3081e4f66ca3576c896ae5d31c3002ac6607f9747d2e3aa49227e464/markdown-3.10.2-py3-none-any.whl", hash = "sha256:e91464b71ae3ee7afd3017d9f358ef0baf158fd9a298db92f1d4761133824c36", size = 108180 },
 ]
 
 [[package]]
@@ -1006,11 +1006,11 @@ wheels = [
 
 [[package]]
 name = "parso"
-version = "0.8.5"
+version = "0.8.6"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/d4/de/53e0bcf53d13e005bd8c92e7855142494f41171b34c2536b86187474184d/parso-0.8.5.tar.gz", hash = "sha256:034d7354a9a018bdce352f48b2a8a450f05e9d6ee85db84764e9b6bd96dafe5a", size = 401205 }
+sdist = { url = "https://files.pythonhosted.org/packages/81/76/a1e769043c0c0c9fe391b702539d594731a4362334cdf4dc25d0c09761e7/parso-0.8.6.tar.gz", hash = "sha256:2b9a0332696df97d454fa67b81618fd69c35a7b90327cbe6ba5c92d2c68a7bfd", size = 401621 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/16/32/f8e3c85d1d5250232a5d3477a2a28cc291968ff175caeadaf3cc19ce0e4a/parso-0.8.5-py2.py3-none-any.whl", hash = "sha256:646204b5ee239c396d040b90f9e272e9a8017c630092bf59980beb62fd033887", size = 106668 },
+    { url = "https://files.pythonhosted.org/packages/b6/61/fae042894f4296ec49e3f193aff5d7c18440da9e48102c3315e1bc4519a7/parso-0.8.6-py2.py3-none-any.whl", hash = "sha256:2c549f800b70a5c4952197248825584cb00f033b29c692671d3bf08bf380baff", size = 106894 },
 ]
 
 [[package]]
@@ -1461,11 +1461,11 @@ wheels = [
 
 [[package]]
 name = "types-dateparser"
-version = "1.3.0.20260206"
+version = "1.3.0.20260211"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/f5/e0/72045089c4503d22f21f53f04898eb0cf48ee7fad3d80187e32069f9593b/types_dateparser-1.3.0.20260206.tar.gz", hash = "sha256:8d2ee287aa33f0b26fe8cc48cd8e28f958ada839b2db5a4e3f54371dfe77a696", size = 16516 }
+sdist = { url = "https://files.pythonhosted.org/packages/f2/fa/c8a44879b180c8a7554c1e47f83bfc377bc3f4ad2903b4b20901aa3a0c74/types_dateparser-1.3.0.20260211.tar.gz", hash = "sha256:c56832fb1e2da5d41d88abc91d6218e014d07cbeda7ea33fe5b87d6988d8afa9", size = 17495 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/ec/31/2d8b6c693f015349885092173e604af2e480c3fd0a16cdb5ca97024238b0/types_dateparser-1.3.0.20260206-py3-none-any.whl", hash = "sha256:d6e5d33101b46d9cc14866f105806c80c9b8826492c75e9b323c8fc45ceb1390", size = 22963 },
+    { url = "https://files.pythonhosted.org/packages/e8/a4/e52f7331a29deacf1edad1c161c3e33e924a69643a10889a9364371d1655/types_dateparser-1.3.0.20260211-py3-none-any.whl", hash = "sha256:d525bfcc79cbef1e414e2c5ad2c4b6f6bc495058dfd2966cfde8e2405450b8cb", size = 24924 },
 ]
 
 [[package]]
@@ -1557,11 +1557,11 @@ wheels = [
 
 [[package]]
 name = "wcwidth"
-version = "0.5.3"
+version = "0.6.0"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/c2/62/a7c072fbfefb2980a00f99ca994279cb9ecf310cb2e6b2a4d2a28fe192b3/wcwidth-0.5.3.tar.gz", hash = "sha256:53123b7af053c74e9fe2e92ac810301f6139e64379031f7124574212fb3b4091", size = 157587 }
+sdist = { url = "https://files.pythonhosted.org/packages/35/a2/8e3becb46433538a38726c948d3399905a4c7cabd0df578ede5dc51f0ec2/wcwidth-0.6.0.tar.gz", hash = "sha256:cdc4e4262d6ef9a1a57e018384cbeb1208d8abbc64176027e2c2455c81313159", size = 159684 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/3c/c1/d73f12f8cdb1891334a2ccf7389eed244d3941e74d80dd220badb937f3fb/wcwidth-0.5.3-py3-none-any.whl", hash = "sha256:d584eff31cd4753e1e5ff6c12e1edfdb324c995713f75d26c29807bb84bf649e", size = 92981 },
+    { url = "https://files.pythonhosted.org/packages/68/5a/199c59e0a824a3db2b89c5d2dade7ab5f9624dbf6448dc291b46d5ec94d3/wcwidth-0.6.0-py3-none-any.whl", hash = "sha256:1a3a1e510b553315f8e146c54764f4fb6264ffad731b3d78088cdb1478ffbdad", size = 94189 },
 ]
 
 [[package]]
