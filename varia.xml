@@ -10,7 +10,7 @@
 <atom:link href="https://adafede.github.io/varia.xml" rel="self" type="application/rss+xml"/>
 <description>Personal website of Adriano Rutz - Swiss Pharmaceutical Scientist specializing in metabolomics, mass spectrometry, and natural products research.</description>
 <generator>quarto-1.8.27</generator>
-<lastBuildDate>Wed, 11 Feb 2026 16:54:18 GMT</lastBuildDate>
+<lastBuildDate>Wed, 11 Feb 2026 19:15:55 GMT</lastBuildDate>
 <item>
   <title>CentroidR</title>
   <link>https://adafede.github.io/varia/adafede/CentroidR.html</link>
@@ -27,7 +27,7 @@
   <category>Mass spectrometry</category>
   <category>R</category>
   <guid>https://adafede.github.io/varia/adafede/CentroidR.html</guid>
-  <pubDate>Wed, 11 Feb 2026 16:54:18 GMT</pubDate>
+  <pubDate>Wed, 11 Feb 2026 19:15:55 GMT</pubDate>
   <media:content url="https://raw.githubusercontent.com/Adafede/CentroidR/refs/heads/main/man/figures/logo.svg" medium="image" type="image/svg+xml"/>
 </item>
 <item>
@@ -48,7 +48,7 @@
   <category>Natural products</category>
   <category>R</category>
   <guid>https://adafede.github.io/varia/adafede/cascade.html</guid>
-  <pubDate>Wed, 11 Feb 2026 16:54:18 GMT</pubDate>
+  <pubDate>Wed, 11 Feb 2026 19:15:55 GMT</pubDate>
   <media:content url="https://raw.githubusercontent.com/Adafede/cascade/refs/heads/main/man/figures/logo.svg" medium="image" type="image/svg+xml"/>
 </item>
 <item>
@@ -66,7 +66,7 @@
  ]]></description>
   <category>Python</category>
   <guid>https://adafede.github.io/varia/adafede/marimo.html</guid>
-  <pubDate>Wed, 11 Feb 2026 16:54:18 GMT</pubDate>
+  <pubDate>Wed, 11 Feb 2026 19:15:55 GMT</pubDate>
   <media:content url="https://raw.githubusercontent.com/marimo-team/marimo/main/docs/_static/marimo-logotype-thick.svg" medium="image" type="image/svg+xml"/>
 </item>
 <item>
@@ -84,7 +84,7 @@
  ]]></description>
   <category>Slides</category>
   <guid>https://adafede.github.io/varia/adafede/my-presentations.html</guid>
-  <pubDate>Wed, 11 Feb 2026 16:54:18 GMT</pubDate>
+  <pubDate>Wed, 11 Feb 2026 19:15:55 GMT</pubDate>
   <media:content url="https://upload.wikimedia.org/wikipedia/commons/e/ee/Ic_slideshow_48px.svg" medium="image" type="image/svg+xml"/>
 </item>
 <item>
@@ -106,7 +106,7 @@
   <category>Taste</category>
   <category>R</category>
   <guid>https://adafede.github.io/varia/adafede/sapid.html</guid>
-  <pubDate>Wed, 11 Feb 2026 16:54:18 GMT</pubDate>
+  <pubDate>Wed, 11 Feb 2026 19:15:55 GMT</pubDate>
   <media:content url="https://raw.githubusercontent.com/Adafede/sapid/refs/heads/main/man/figures/logo.svg" medium="image" type="image/svg+xml"/>
 </item>
 <item>
@@ -125,7 +125,7 @@
   <category>SPARQL</category>
   <category>Wikidata</category>
   <guid>https://adafede.github.io/varia/adafede/sparql-examples.html</guid>
-  <pubDate>Wed, 11 Feb 2026 16:54:18 GMT</pubDate>
+  <pubDate>Wed, 11 Feb 2026 19:15:55 GMT</pubDate>
   <media:content url="https://upload.wikimedia.org/wikipedia/commons/9/98/Wikidata_RDF.svg" medium="image" type="image/svg+xml"/>
 </item>
 <item>
@@ -145,7 +145,7 @@
   <category>Natural products</category>
   <category>Wikidata</category>
   <guid>https://adafede.github.io/varia/adafede/wd-np-up-to-date.html</guid>
-  <pubDate>Wed, 11 Feb 2026 16:54:18 GMT</pubDate>
+  <pubDate>Wed, 11 Feb 2026 19:15:55 GMT</pubDate>
   <media:content url="https://upload.wikimedia.org/wikipedia/commons/f/f1/Lotus_initiative_1_graphical_abstract.svg" medium="image" type="image/svg+xml"/>
 </item>
 <item>
@@ -165,7 +165,7 @@
   <category>Taxonomy</category>
   <category>Wikidata</category>
   <guid>https://adafede.github.io/varia/adafede/wd-taxon-names.html</guid>
-  <pubDate>Wed, 11 Feb 2026 16:54:18 GMT</pubDate>
+  <pubDate>Wed, 11 Feb 2026 19:15:55 GMT</pubDate>
   <media:content url="https://raw.githubusercontent.com/Adafede/wd-taxon-names/refs/heads/main/index_files/figure-html/fig-cumul-1.svg" medium="image" type="image/svg+xml"/>
 </item>
 <item>
@@ -184,7 +184,7 @@
   <category>LOTUS</category>
   <category>Manuscript</category>
   <guid>https://adafede.github.io/varia/lotus/lotus-manuscript.html</guid>
-  <pubDate>Wed, 11 Feb 2026 16:54:18 GMT</pubDate>
+  <pubDate>Wed, 11 Feb 2026 19:15:55 GMT</pubDate>
   <media:content url="https://raw.githubusercontent.com/lotusnprod/lotus-manuscript/refs/heads/main/content/images/workflow.svg" medium="image" type="image/svg+xml"/>
 </item>
 <item>
@@ -203,7 +203,7 @@
   <category>LOTUS</category>
   <category>Slides</category>
   <guid>https://adafede.github.io/varia/lotus/lotus-presentations.html</guid>
-  <pubDate>Wed, 11 Feb 2026 16:54:18 GMT</pubDate>
+  <pubDate>Wed, 11 Feb 2026 19:15:55 GMT</pubDate>
   <media:content url="https://upload.wikimedia.org/wikipedia/commons/e/ee/Ic_slideshow_48px.svg" medium="image" type="image/svg+xml"/>
 </item>
 <item>
@@ -223,7 +223,7 @@
   <category>SPARQL</category>
   <category>Wikidata</category>
   <guid>https://adafede.github.io/varia/lotus/lotus-sparql-examples.html</guid>
-  <pubDate>Wed, 11 Feb 2026 16:54:18 GMT</pubDate>
+  <pubDate>Wed, 11 Feb 2026 19:15:55 GMT</pubDate>
   <media:content url="https://upload.wikimedia.org/wikipedia/commons/9/98/Wikidata_RDF.svg" medium="image" type="image/svg+xml"/>
 </item>
 <item>
@@ -245,7 +245,7 @@
   <category>Taxonomy</category>
   <category>R</category>
   <guid>https://adafede.github.io/varia/taxonomicallyinformedannotation/tima.html</guid>
-  <pubDate>Wed, 11 Feb 2026 16:54:18 GMT</pubDate>
+  <pubDate>Wed, 11 Feb 2026 19:15:55 GMT</pubDate>
   <media:content url="https://raw.githubusercontent.com/taxonomicallyinformedannotation/tima/refs/heads/main/man/figures/logo.svg" medium="image" type="image/svg+xml"/>
 </item>
 <item>
@@ -265,7 +265,7 @@
   <category>SMARTS</category>
   <category>Python</category>
   <guid>https://adafede.github.io/varia/additional_contributions/MITE.html</guid>
-  <pubDate>Wed, 11 Feb 2026 16:54:18 GMT</pubDate>
+  <pubDate>Wed, 11 Feb 2026 19:15:55 GMT</pubDate>
   <media:content url="https://raw.githubusercontent.com/mite-standard/mite_web/refs/heads/main/mite_web/mite_web/static/images/mite_logo.svg" medium="image" type="image/svg+xml"/>
 </item>
 <item>
@@ -286,7 +286,7 @@
   <category>SMARTS</category>
   <category>R</category>
   <guid>https://adafede.github.io/varia/additional_contributions/SpectraToQueries.html</guid>
-  <pubDate>Wed, 11 Feb 2026 16:54:18 GMT</pubDate>
+  <pubDate>Wed, 11 Feb 2026 19:15:55 GMT</pubDate>
   <media:content url="https://raw.githubusercontent.com/spectra-to-knowledge/SpectraToQueries/refs/heads/main/man/figures/logo.svg" medium="image" type="image/svg+xml"/>
 </item>
 <item>
@@ -307,7 +307,7 @@
   <category>SMARTS</category>
   <category>Wikidata</category>
   <guid>https://adafede.github.io/varia/additional_contributions/smartclass.html</guid>
-  <pubDate>Wed, 11 Feb 2026 16:54:18 GMT</pubDate>
+  <pubDate>Wed, 11 Feb 2026 19:15:55 GMT</pubDate>
   <media:content url="https://upload.wikimedia.org/wikipedia/commons/1/13/Broken_icon_pink.svg" medium="image" type="image/svg+xml"/>
 </item>
 </channel>
