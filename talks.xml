@@ -10,7 +10,24 @@
 <atom:link href="https://adafede.github.io/talks.xml" rel="self" type="application/rss+xml"/>
 <description>Personal website of Adriano Rutz - Swiss Pharmaceutical Scientist specializing in metabolomics, mass spectrometry, and natural products research.</description>
 <generator>quarto-1.8.27</generator>
-<lastBuildDate>Tue, 14 Oct 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Wed, 11 Feb 2026 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Building Knowledge Together: How Open Curation is Transforming Natural Products Research</title>
+  <link>https://adafede.github.io/talks/2026-02-11_LEUVEN.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<script async="" defer="" src="https://scripts.simpleanalyticscdn.com/latest.js" crossorigin="anonymous">
+</script>
+
+ ]]></description>
+  <category>Talk</category>
+  <guid>https://adafede.github.io/talks/2026-02-11_LEUVEN.html</guid>
+  <pubDate>Wed, 11 Feb 2026 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Chemical Compounds and Their Links to Taxa on Wikidata</title>
   <link>https://adafede.github.io/talks/2025-10-14_WAGENINGEN.html</link>
@@ -336,23 +353,6 @@
   <category>Talk</category>
   <guid>https://adafede.github.io/talks/2021-04-01_RFMF.html</guid>
   <pubDate>Thu, 01 Apr 2021 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Taxonomically Informed Scoring Enhances Confidence in Natural Products Annotation</title>
-  <link>https://adafede.github.io/talks/2020-08-01_GNPS.html</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<script async="" defer="" src="https://scripts.simpleanalyticscdn.com/latest.js" crossorigin="anonymous">
-</script>
-
- ]]></description>
-  <category>Talk</category>
-  <guid>https://adafede.github.io/talks/2020-08-01_GNPS.html</guid>
-  <pubDate>Sat, 01 Aug 2020 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>

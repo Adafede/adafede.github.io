@@ -10,7 +10,24 @@
 <atom:link href="https://adafede.github.io/rss.xml" rel="self" type="application/rss+xml"/>
 <description>Personal website of Adriano Rutz - Swiss Pharmaceutical Scientist specializing in metabolomics, mass spectrometry, and natural products research.</description>
 <generator>quarto-1.8.27</generator>
-<lastBuildDate>Tue, 20 Jan 2026 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Wed, 11 Feb 2026 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Building Knowledge Together: How Open Curation is Transforming Natural Products Research</title>
+  <link>https://adafede.github.io/talks/2026-02-11_LEUVEN.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<script async="" defer="" src="https://scripts.simpleanalyticscdn.com/latest.js" crossorigin="anonymous">
+</script>
+
+ ]]></description>
+  <category>Talk</category>
+  <guid>https://adafede.github.io/talks/2026-02-11_LEUVEN.html</guid>
+  <pubDate>Wed, 11 Feb 2026 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Cultivating Knowledge Flow in Open Chemistry</title>
   <link>https://adafede.github.io/posts/2026-01-20_chem_flow.html</link>
@@ -872,24 +889,6 @@ Zdouc, Mitja M, Kai Blin, Nico L L Louwen, Jorge Navarro, Catarina Loureiro, Cha
   <category>Talk</category>
   <guid>https://adafede.github.io/talks/2024-05-31_SCNAT.html</guid>
   <pubDate>Fri, 31 May 2024 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Introduction to Linked Open Data for Computational Mass Spectrometry</title>
-  <link>https://adafede.github.io/talks/2024-04-17_PRAGUE.html</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<script async="" defer="" src="https://scripts.simpleanalyticscdn.com/latest.js" crossorigin="anonymous">
-</script>
-
- ]]></description>
-  <category>Talk</category>
-  <category>Workshop</category>
-  <guid>https://adafede.github.io/talks/2024-04-17_PRAGUE.html</guid>
-  <pubDate>Wed, 17 Apr 2024 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
