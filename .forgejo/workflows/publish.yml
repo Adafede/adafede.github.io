@@ -49,8 +49,8 @@ jobs:
       - name: Install LaTeX dependencies
         run: |
           sudo tlmgr update --self
-          sudo tlmgr install caption koma-script xifthen
-      - name: Install required R packages
+          sudo tlmgr install caption koma-script wrapfig xifthen
+      - name: Install R dependencies
         run: |
           Rscript -e "install.packages('pak', repos = 'https://r-lib.github.io/p/pak/stable/')"
           Rscript -e "pak::pkg_install(c('rmarkdown', 'knitr'))"
