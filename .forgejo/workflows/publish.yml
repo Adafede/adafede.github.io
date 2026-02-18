@@ -39,6 +39,9 @@ jobs:
     permissions:
       contents: write
     steps:
+      - name: Init
+        run: |
+          ./init-env.sh -w all
       - uses: actions/checkout@v6
         with:
           fetch-depth: 0
@@ -46,9 +49,6 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y nasm libqpdf-dev libxslt1-dev
-      - name: Init
-        run: |
-          ./init-env.sh -w all
       - name: Build site
         run: |
           uv run quarto render
