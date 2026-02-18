@@ -51,7 +51,7 @@ jobs:
             texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended
           # Update tlmgr and install packages via TeX Live manager
           sudo tlmgr update --self
-          sudo tlmgr install xifthen koma-script ifthen
+          sudo tlmgr install koma-script xifthen
       - name: Install required R packages
         run: |
           Rscript -e "install.packages('pak', repos = 'https://r-lib.github.io/p/pak/stable/')"
