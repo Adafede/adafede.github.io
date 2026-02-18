@@ -49,9 +49,8 @@ jobs:
             build-essential nasm libqpdf-dev libxslt1-dev \
             libcurl4-openssl-dev libssl-dev libxml2-dev \
             texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended
-          # Update tlmgr and install packages via TeX Live manager
           sudo tlmgr update --self
-          sudo tlmgr install koma-script xifthen
+          sudo tlmgr install caption koma-script xifthen
       - name: Install required R packages
         run: |
           Rscript -e "install.packages('pak', repos = 'https://r-lib.github.io/p/pak/stable/')"
