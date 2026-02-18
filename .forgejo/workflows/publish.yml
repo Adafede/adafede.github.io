@@ -29,7 +29,7 @@ permissions:
   statuses: read
 jobs:
   publish:
-    runs-on: codeberg-small
+    runs-on: codeberg-medium
     container:
       image: ghcr.io/mcanouil/quarto-codespaces:latest
     concurrency:
@@ -45,10 +45,9 @@ jobs:
       - name: Install system dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y \
-            build-essential nasm libqpdf-dev libxslt1-dev \
-            libcurl4-openssl-dev libssl-dev libxml2-dev \
-            texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended
+          sudo apt-get install -y nasm libqpdf-dev libxslt1-dev
+      - name: Install LaTeX dependencies
+        run: |
           sudo tlmgr update --self
           sudo tlmgr install caption koma-script xifthen
       - name: Install required R packages
