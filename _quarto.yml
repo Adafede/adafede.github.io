@@ -74,6 +74,9 @@ website:
         aria-label: Varia
         href: varia.qmd
     right:
+      - text: "![](https://codeberg.org/Codeberg/Design/raw/branch/main/logo/icon/svg/codeberg-logo_icon_white.svg)"
+        aria-label: Codeberg
+        href: https://codeberg.org/adafede
       - icon: rss
         aria-label: RSS Feed
         href: rss.xml
