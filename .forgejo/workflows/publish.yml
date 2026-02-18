@@ -50,14 +50,17 @@ jobs:
         run: curl -LsSf https://astral.sh/uv/install.sh | sh
       - name: setup uv
         run: uv sync
-      - uses: r-lib/actions/setup-r@v2
-      - uses: r-lib/actions/setup-r-dependencies@v2
+      - uses: https://github.com/r-lib/actions/setup-r@v2
+      - uses: https://github.com/r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: |
             any::knitr
             any::rmarkdown
-      - uses: r-lib/actions/setup-pandoc@v1
-      - uses: r-lib/actions/setup-tinytex@v2
+      - uses: https://github.com/pandoc/actions/setup@v1
+      - uses: https://github.com/r-lib/actions/setup-tinytex@v2
+      - uses: https://github.com/quarto-dev/quarto-actions/setup@v2
+        with:
+          tinytex: true
       - name: Build site
         run: |
           uv run quarto render
