@@ -49,7 +49,7 @@ jobs:
       - name: Install LaTeX dependencies
         run: |
           sudo tlmgr update --self
-          sudo tlmgr install caption koma-script wrapfig xifthen
+          sudo tlmgr install caption fancyhdr ifmtarg koma-script moresize multirow wrapfig xifthen
       - name: Install R dependencies
         run: |
           Rscript -e "install.packages('pak', repos = 'https://r-lib.github.io/p/pak/stable/')"
