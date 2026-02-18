@@ -1,11 +1,11 @@
 ---
 title: SPARQL Examples
-url: https://adafede.github.io/sparql-examples
+url: https://adafede.codeberg.page/sparql-examples
 image: https://upload.wikimedia.org/wikipedia/commons/9/98/Wikidata_RDF.svg
 image-alt: Illustration of Wikidata's RDF
 categories:
   - SPARQL
   - Wikidata
 description: |
-  <https://adafede.github.io/sparql-examples>
+  <https://adafede.codeberg.page/sparql-examples>
 ---

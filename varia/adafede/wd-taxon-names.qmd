@@ -1,6 +1,6 @@
 ---
 title: Wikidata Taxon Names
-url: https://adafede.github.io/wd-taxon-names
+url: https://adafede.codeberg.page/wd-taxon-names
 image: https://raw.githubusercontent.com/Adafede/wd-taxon-names/refs/heads/main/index_files/figure-html/fig-cumul-1.svg
 image-alt: A Cumulative Frequency Curve Illustrating The Number of Epithets
   (X-axis) Covered by Number of Taxa (Y-Axis)
@@ -9,5 +9,5 @@ categories:
   - Taxonomy
   - Wikidata
 description: |
-  <https://adafede.github.io/wd-taxon-names>
+  <https://adafede.codeberg.page/wd-taxon-names>
 ---
