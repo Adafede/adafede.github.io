@@ -9,7 +9,7 @@ metadata-files:
   - ../_includes/entities/authors/AdrianoRutz_IMSB.yml
   - ../_includes/entities/affiliations/IMSB_Zamboni.yml
 description: >
-  Invited talk given in the frame of the “[Natural Products in the 21st Century](https://magic-molfun.dtu.dk/np21c-conference)” conference organized by [MAGic-MOLFUN(]https://magic-molfun.dtu.dk/)
+  Invited talk given in the frame of the “[Natural Products in the 21st Century](https://magic-molfun.dtu.dk/np21c-conference)” conference organized by [MAGic-MOLFUN](https://magic-molfun.dtu.dk)
 
 
   Available [here](https://adafede.github.io/my-presentations/20260211_leuven/20260211_leuven.pdf).
