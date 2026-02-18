@@ -46,21 +46,6 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y nasm libqpdf-dev libxslt1-dev
-      - name: install uv
-        run: curl -LsSf https://astral.sh/uv/install.sh | sh
-      - name: setup uv
-        run: uv sync
-      - uses: https://github.com/r-lib/actions/setup-r@v2
-      - uses: https://github.com/r-lib/actions/setup-r-dependencies@v2
-        with:
-          extra-packages: |
-            any::knitr
-            any::rmarkdown
-      - uses: https://github.com/pandoc/actions/setup@v1
-      - uses: https://github.com/r-lib/actions/setup-tinytex@v2
-      - uses: https://github.com/quarto-dev/quarto-actions/setup@v2
-        with:
-          tinytex: true
       - name: Build site
         run: |
           uv run quarto render
