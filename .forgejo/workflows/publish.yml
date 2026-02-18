@@ -49,6 +49,10 @@ jobs:
             build-essential nasm libqpdf-dev libxslt1-dev \
             libcurl4-openssl-dev libssl-dev libxml2-dev \
             texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended
+          # Ensure tlmgr is up-to-date
+          sudo tlmgr update --self
+          # Install KOMA-Script for scrartcl.cls
+          sudo tlmgr install koma-script
       - name: Install required R packages
         run: |
           Rscript -e "install.packages('pak', repos = 'https://r-lib.github.io/p/pak/stable/')"
