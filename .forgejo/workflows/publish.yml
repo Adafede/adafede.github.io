@@ -48,7 +48,7 @@ jobs:
           sudo apt-get install -y nasm libqpdf-dev libxslt1-dev
       - name: Install LaTeX dependencies
         run: |
-          sudo tlmgr update --self
+          # sudo tlmgr update --self
           sudo tlmgr install caption fancyhdr ifmtarg koma-script moresize multirow wrapfig xifthen
       - name: Install R dependencies
         run: |
