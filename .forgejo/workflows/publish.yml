@@ -39,6 +39,7 @@ jobs:
           wget https://mirror.ctan.org/systems/texlive/tlnet/update-tlmgr-latest.sh
           sudo sh update-tlmgr-latest.sh --accept
           # Update tlmgr itself and all installed packages
+          sudo tlmgr option repository http://mirror.ctan.org/systems/texlive/tlnet
           sudo tlmgr update --self --all
           sudo apt-get install -y \
             nasm \
