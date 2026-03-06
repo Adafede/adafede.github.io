@@ -16,7 +16,7 @@ jobs:
   publish:
     runs-on: codeberg-medium
     container:
-      image: ghcr.io/quarto-dev/quarto:latest
+      image: ghcr.io/mcanouil/quarto-codespaces:latest
     concurrency:
       group: altdoc-${{ github.event_name != 'pull_request' || github.run_id }}
     env:
@@ -35,6 +35,11 @@ jobs:
       - name: Install system dependencies
         run: |
           sudo apt-get update
+          # Download the latest tlmgr updater
+          wget https://mirror.ctan.org/systems/texlive/tlnet/update-tlmgr-latest.sh
+          sudo sh update-tlmgr-latest.sh --accept
+          # Update tlmgr itself and all installed packages
+          sudo tlmgr update --self --all
           sudo apt-get install -y \
             nasm \
             libqpdf-dev \
