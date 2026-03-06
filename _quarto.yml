@@ -9,6 +9,9 @@ authors_for_feed:
     qid: Q97455964
     url: https://adafede.github.io
 
+execute:
+  freeze: auto
+
 filters:
   - filters/expand-prefixes.lua
 
