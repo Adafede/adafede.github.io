@@ -58,11 +58,6 @@ jobs:
           Rscript -e "install.packages('pak', repos='https://r-lib.github.io/p/pak/stable/')"
           Rscript -e "pak::pkg_install(c('rmarkdown','knitr'))"
 
-      # Setup Quarto (no TinyTeX)
-      - uses: quarto-dev/quarto-actions/setup@v2
-        with:
-          tinytex: false
-
       # Build the site
       - name: Build site
         run: uv run quarto render
