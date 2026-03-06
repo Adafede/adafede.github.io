@@ -1,32 +1,17 @@
----
+name: Publish
+
 on:
   push:
-    branches:
-      - main
-      - master
+    branches: [main, master]
   pull_request:
-    branches:
-      - main
-      - master
+    branches: [main, master]
   release:
-    types:
-      - published
+    types: [published]
   workflow_dispatch: null
-name: Publish
+
 permissions:
-  actions: write
-  checks: write
   contents: write
-  deployments: write
-  id-token: write
-  issues: read
-  discussions: read
-  packages: write
-  pages: write
-  pull-requests: read
-  repository-projects: read
-  security-events: read
-  statuses: read
+
 jobs:
   publish:
     runs-on: codeberg-medium
@@ -36,38 +21,62 @@ jobs:
       group: altdoc-${{ github.event_name != 'pull_request' || github.run_id }}
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      TEXINPUTS: _texlocal:  # Look for local LaTeX packages first
     permissions:
       contents: write
+
     steps:
+      # Checkout repository
       - uses: actions/checkout@v6
         with:
           fetch-depth: 0
+
+      # Install system dependencies
       - name: Install system dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y \
-            nasm libqpdf-dev libxslt1-dev \
-      - name: Install TeX dependencies
+            nasm \
+            libqpdf-dev \
+            libxslt1-dev \
+            texlive-latex-extra \
+            texlive-fonts-recommended \
+            texlive-latex-recommended \
+            texlive-pictures \
+            texlive-science \
+            texlive-luatex
+
+      # Include local moresize.sty
+      - name: Include moresize.sty locally
         run: |
-          # Download the latest tlmgr updater
-          wget https://mirror.ctan.org/systems/texlive/tlnet/update-tlmgr-latest.sh
-          sudo sh update-tlmgr-latest.sh --accept
-          # Update tlmgr itself and all installed packages
-          sudo tlmgr update --self --all
-          # Install your LaTeX packages
-          sudo tlmgr install caption fancyhdr ifmtarg koma-script moresize multirow tikz wrapfig xifthen
+          mkdir -p _texlocal
+          cp _texlocal/moresize.sty _texlocal/
+
+      # Cache R packages
       - uses: actions/cache@v4
         with:
           path: ~/.cache/R
           key: ${{ runner.os }}-r
+
+      # Install R dependencies
       - name: Install R dependencies
         run: |
-          Rscript -e "install.packages('pak', repos = 'https://r-lib.github.io/p/pak/stable/')"
-          Rscript -e "pak::pkg_install(c('rmarkdown', 'knitr'))"
+          Rscript -e "install.packages('pak', repos='https://r-lib.github.io/p/pak/stable/')"
+          Rscript -e "pak::pkg_install(c('rmarkdown','knitr'))"
+
+      # Setup Quarto (no TinyTeX)
+      - uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          tinytex: false
+
+      # Build the site
       - name: Build site
-        run: |
-          uv run quarto render
-      - uses: actions/git-pages@v2
+        run: uv run quarto render
+
+      # Deploy to Codeberg Pages
+      - name: Deploy to Codeberg Pages
+        if: github.event_name != 'pull_request'
+        uses: actions/git-pages@v2
         with:
           site: https://adafede.codeberg.page/
           token: ${{ forge.token }}
