@@ -50,7 +50,7 @@ jobs:
             texlive-latex-extra \
             texlive-fonts-recommended \
             texlive-latex-recommended
-      - uses: actions/cache@v4
+      - uses: actions/cache@v5
         with:
           path: ~/.cache/R
           key: ${{ runner.os }}-r
