@@ -43,7 +43,17 @@ jobs:
       - name: Install system dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y nasm libqpdf-dev libxslt1-dev
+          sudo apt-get install -y \
+            nasm libqpdf-dev libxslt1-dev \
+      - name: Install TeX dependencies
+        run: |
+          # Download the latest tlmgr updater
+          wget https://mirror.ctan.org/systems/texlive/tlnet/update-tlmgr-latest.sh
+          sudo sh update-tlmgr-latest.sh --accept
+          # Update tlmgr itself and all installed packages
+          sudo tlmgr update --self --all
+          # Install your LaTeX packages
+          sudo tlmgr install caption fancyhdr ifmtarg koma-script moresize multirow tikz wrapfig xifthen
       - uses: astral-sh/setup-uv@v7
         with:
           enable-cache: true
