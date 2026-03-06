@@ -55,7 +55,7 @@ jobs:
           # Update tlmgr itself and all installed packages
           sudo tlmgr update --self --all
           # Install your LaTeX packages
-          sudo tlmgr install caption fancyhdr ifmtarg koma-script moresize multirow wrapfig xifthen
+          sudo tlmgr install caption fancyhdr ifmtarg koma-script moresize multirow tikz wrapfig xifthen
       - uses: actions/cache@v4
         with:
           path: ~/.cache/R
