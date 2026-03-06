@@ -43,6 +43,7 @@ jobs:
             texlive-fonts-recommended \
             texlive-latex-recommended \
             texlive-pictures \
+            texlive-pstricks \
             texlive-science \
             texlive-luatex
           # Download the latest tlmgr updater
@@ -58,6 +59,7 @@ jobs:
             koma-script \
             moresize \
             multirow \
+            pgf \
             wrapfig \
             xifthen
 
