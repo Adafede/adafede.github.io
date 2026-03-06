@@ -56,12 +56,6 @@ jobs:
             texlive-science \
             texlive-luatex
 
-      # Include local moresize.sty
-      - name: Include moresize.sty locally
-        run: |
-          mkdir -p _texlocal
-          cp _texlocal/moresize.sty _texlocal/
-
       # Setup UV with caching
       - uses: astral-sh/setup-uv@v7
         with:

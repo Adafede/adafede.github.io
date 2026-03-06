@@ -46,12 +46,6 @@ jobs:
             texlive-science \
             texlive-luatex
 
-      # Include local moresize.sty
-      - name: Include moresize.sty locally
-        run: |
-          mkdir -p _texlocal
-          cp _texlocal/moresize.sty _texlocal/
-
       # Cache R packages
       - uses: actions/cache@v4
         with:
