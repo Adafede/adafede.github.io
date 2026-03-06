@@ -21,7 +21,7 @@ jobs:
       group: altdoc-${{ github.event_name != 'pull_request' || github.run_id }}
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-      TEXINPUTS: _texlocal:  # Look for local LaTeX packages first
+      TEXINPUTS: "_texlocal:"  # Look for local LaTeX packages first
     permissions:
       contents: write
 
