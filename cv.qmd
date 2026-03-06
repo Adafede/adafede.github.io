@@ -4,6 +4,7 @@ format:
   pdf:
     filters:
       - cv/styles.lua
+    keep-tex: true
     template: cv/template.tex
 cvauthor: Adriano Rutz
 cvprofession: Pharmaceutical Scientist
