@@ -44,12 +44,6 @@ jobs:
           sudo tlmgr option repository http://mirror.ctan.org/systems/texlive/tlnet
           sudo tlmgr update --self
           sudo tlmgr install \
-            collection-latexextra \
-            collection-fontsrecommended \
-            latex \
-            latex-bin \
-            lualatex-math \
-            luatex \
             caption \
             fancyhdr \
             ifmtarg \
