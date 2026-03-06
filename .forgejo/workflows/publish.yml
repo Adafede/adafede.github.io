@@ -51,7 +51,7 @@ jobs:
         run: |
           # Download the latest tlmgr updater
           wget https://mirror.ctan.org/systems/texlive/tlnet/update-tlmgr-latest.sh
-          sudo sh update-tlmgr-latest.sh --update
+          sudo ./update-tlmgr-latest.sh --accept
           # Update tlmgr itself and all installed packages
           sudo tlmgr update --self --all
           # Install your LaTeX packages
