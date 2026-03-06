@@ -52,7 +52,14 @@ jobs:
           sudo tlmgr option repository http://mirror.ctan.org/systems/texlive/tlnet
           sudo tlmgr update --self
           sudo tlmgr install \
-            caption
+            caption \
+            fancyhdr \
+            ifmtarg \
+            koma-script \
+            moresize \
+            multirow \
+            wrapfig \
+            xifthen
 
       # Cache R packages
       - uses: actions/cache@v4
