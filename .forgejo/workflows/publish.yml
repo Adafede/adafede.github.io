@@ -38,21 +38,18 @@ jobs:
           sudo apt-get install -y \
             nasm \
             libqpdf-dev \
-            libxslt1-dev \
-            texlive-latex-extra \
-            texlive-fonts-recommended \
-            texlive-latex-recommended \
-            texlive-pictures \
-            texlive-pstricks \
-            texlive-science \
-            texlive-luatex
-          # Download the latest tlmgr updater
+            libxslt1-dev
           wget https://mirror.ctan.org/systems/texlive/tlnet/update-tlmgr-latest.sh
           sudo sh update-tlmgr-latest.sh --accept
-          # Update tlmgr itself and all installed packages
           sudo tlmgr option repository http://mirror.ctan.org/systems/texlive/tlnet
           sudo tlmgr update --self
           sudo tlmgr install \
+            collection-latexextra \
+            collection-fontsrecommended \
+            latex \
+            latex-bin \
+            lualatex-math \
+            luatex \
             caption \
             fancyhdr \
             ifmtarg \
@@ -62,6 +59,7 @@ jobs:
             pgf \
             wrapfig \
             xifthen
+          sudo mktexlsr
 
       # Cache R packages
       - uses: actions/cache@v4
