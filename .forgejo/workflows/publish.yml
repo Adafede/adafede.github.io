@@ -16,7 +16,7 @@ jobs:
   publish:
     runs-on: codeberg-medium
     container:
-      image: ghcr.io/mcanouil/quarto-codespaces:latest
+      image: ghcr.io/quarto-dev/quarto:latest
     concurrency:
       group: altdoc-${{ github.event_name != 'pull_request' || github.run_id }}
     env:
