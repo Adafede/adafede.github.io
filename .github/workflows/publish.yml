@@ -1,18 +1,14 @@
----
+name: Publish
+
 on:
   push:
-    branches:
-      - main
-      - master
+    branches: [main, master]
   pull_request:
-    branches:
-      - main
-      - master
+    branches: [main, master]
   release:
-    types:
-      - published
+    types: [published]
   workflow_dispatch: null
-name: Publish
+
 permissions:
   actions: write
   checks: write
@@ -27,6 +23,7 @@ permissions:
   repository-projects: read
   security-events: read
   statuses: read
+
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -34,47 +31,67 @@ jobs:
       group: altdoc-${{ github.event_name != 'pull_request' || github.run_id }}
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      TEXINPUTS: _texlocal:  # Look for local LaTeX packages first
     permissions:
       contents: write
+
     steps:
+      # Checkout repository
       - uses: actions/checkout@v6
         with:
           fetch-depth: 0
+
+      # Install system dependencies and TeX Live
       - name: Install system dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y \
-            nasm libqpdf-dev libxslt1-dev \
-      - name: Install TeX dependencies
+            nasm \
+            libqpdf-dev \
+            libxslt1-dev \
+            texlive-latex-extra \
+            texlive-fonts-recommended \
+            texlive-latex-recommended \
+            texlive-pictures \
+            texlive-science \
+            texlive-luatex
+
+      # Include local moresize.sty
+      - name: Include moresize.sty locally
         run: |
-          # Download the latest tlmgr updater
-          wget https://mirror.ctan.org/systems/texlive/tlnet/update-tlmgr-latest.sh
-          sudo sh update-tlmgr-latest.sh --accept
-          # Update tlmgr itself and all installed packages
-          sudo tlmgr update --self --all
-          # Install your LaTeX packages
-          sudo tlmgr install caption fancyhdr ifmtarg koma-script moresize multirow tikz wrapfig xifthen
+          mkdir -p _texlocal
+          cp _texlocal/moresize.sty _texlocal/
+
+      # Setup UV with caching
       - uses: astral-sh/setup-uv@v7
         with:
           enable-cache: true
           cache-dependency-glob: uv.lock
+
+      # Setup R
       - uses: r-lib/actions/setup-r@v2
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: |
             any::knitr
             any::rmarkdown
+
+      # Setup Pandoc
       - uses: pandoc/actions/setup@v1
-      - uses: r-lib/actions/setup-tinytex@v2
+
+      # Setup Quarto without TinyTeX (use system TeX Live)
       - uses: quarto-dev/quarto-actions/setup@v2
         with:
-          tinytex: true
+          tinytex: false
+
+      # Build the site
       - name: Build site
-        run: |
-          uv run quarto render
-      - name: Deploy to GitHub pages 🚀
+        run: uv run quarto render
+
+      # Deploy to GitHub Pages
+      - name: Deploy to GitHub pages
         if: github.event_name != 'pull_request'
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
-          folder: _site
+          folder: _site/
