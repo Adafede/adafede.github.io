@@ -2,7 +2,18 @@
 
 from dataclasses import dataclass, field
 from datetime import datetime
-from typing import Optional
+from typing import Optional, TypedDict
+
+
+class JSONFeedItem(TypedDict, total=False):
+    title: str
+    url: str
+    date_published: str
+    date_modified: str
+    summary: str
+    content_html: str
+    tags: list[str]
+    authors: list[dict[str, object]]
 
 
 @dataclass
@@ -18,13 +29,13 @@ class ContentMetadata:
     tags: list[str] = field(default_factory=list)
     authors: list[dict] = field(default_factory=list)
 
-    def to_json_feed_item(self) -> dict:
+    def to_json_feed_item(self) -> JSONFeedItem:
         """Convert to JSON Feed item format.
 
         Returns:
             Dictionary in JSON Feed format
         """
-        item = {
+        item: JSONFeedItem = {
             "title": self.title,
             "url": self.url,
         }
