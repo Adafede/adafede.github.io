@@ -6,7 +6,7 @@ type: article
 venue: Current Research in Food Science
 date: 2025-04-05
 doi: 10.1016/j.crfs.2025.101043
-# qid: TODO
+qid: Q138348705
 image: https://raw.githubusercontent.com/Adafede/sapid/refs/heads/main/man/figures/sapid-workflow.svg
 image-alt: SAPID's Workflow
 categories:
@@ -36,10 +36,10 @@ nocite: |
   @Rutz2025a
 ---
 
-<!-- ```{=html} -->
-<!-- <iframe width="100%" -->
-<!--         height="100%" -->
-<!--         src="https://scholia.toolforge.org/work/{{< meta qid >}}" -->
-<!--         title="Scholia entry"> -->
-<!-- </iframe> -->
-<!-- ``` -->
+```{=html}
+<iframe width="100%"
+        height="100%"
+        src="https://scholia.toolforge.org/work/{{< meta qid >}}"
+        title="Scholia entry">
+</iframe>
+```

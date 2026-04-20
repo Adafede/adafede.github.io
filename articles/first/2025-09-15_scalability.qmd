@@ -4,7 +4,7 @@ type: article
 venue: Natural Product Reports
 date: 2025-09-15
 doi: 10.1039/D5NP00034C
-# qid: TODO
+qid: Q138348592
 image: https://pubs.rsc.org/en/Image/Get?imageInfo.ImageType=GA&imageInfo.ImageIdentifier.ManuscriptID=D5NP00034C&imageInfo.ImageIdentifier.Year=2025
 image-alt: Graphical abstract
 categories:
@@ -35,10 +35,10 @@ nocite: |
   @Rutz2025b
 ---
 
-<!-- ```{=html} -->
-<!-- <iframe width="100%" -->
-<!--         height="100%" -->
-<!--         src="https://scholia.toolforge.org/work/{{< meta qid >}}" -->
-<!--         title="Scholia entry"> -->
-<!-- </iframe> -->
-<!-- ``` -->
+```{=html}
+<iframe width="100%"
+        height="100%"
+        src="https://scholia.toolforge.org/work/{{< meta qid >}}"
+        title="Scholia entry">
+</iframe>
+```
