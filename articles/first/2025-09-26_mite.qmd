@@ -4,7 +4,7 @@ type: article
 venue: Nucleic Acids Research
 date: 2025-09-26
 doi: 10.1093/nar/gkaf969
-# qid: TODO
+qid: Q138348474
 image: https://raw.githubusercontent.com/mite-standard/mite_web/refs/heads/main/app/static/images/workflow.svg
 image-alt: MITE's workflow
 categories:
@@ -35,10 +35,10 @@ nocite: |
   @Rutz2025c
 ---
 
-<!-- ```{=html} -->
-<!-- <iframe width="100%" -->
-<!--         height="100%" -->
-<!--         src="https://scholia.toolforge.org/work/{{< meta qid >}}" -->
-<!--         title="Scholia entry"> -->
-<!-- </iframe> -->
-<!-- ``` -->
+```{=html}
+<iframe width="100%"
+        height="100%"
+        src="https://scholia.toolforge.org/work/{{< meta qid >}}"
+        title="Scholia entry">
+</iframe>
+```
