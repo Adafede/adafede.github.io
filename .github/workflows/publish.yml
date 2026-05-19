@@ -87,7 +87,7 @@ jobs:
       # Upload artifact for Pages
       - name: Upload Pages artifact
         if: github.event_name != 'pull_request'
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: _site/
       # Deploy to GitHub Pages via Actions
