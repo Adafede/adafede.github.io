@@ -31,10 +31,14 @@ jobs:
       group: altdoc-${{ github.event_name != 'pull_request' || github.run_id }}
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-      TEXINPUTS: "_texlocal:"  # Look for local LaTeX packages first
+      TEXINPUTS: "_texlocal:"
     permissions:
-      contents: write
-
+      contents: read
+      id-token: write
+      pages: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       # Checkout repository
       - uses: actions/checkout@v6
@@ -77,15 +81,17 @@ jobs:
       - uses: quarto-dev/quarto-actions/setup@v2
         with:
           tinytex: false
-
       # Build the site
       - name: Build site
         run: uv run quarto render
-
-      # Deploy to GitHub Pages
-      - name: Deploy to GitHub pages
+      # Upload artifact for Pages
+      - name: Upload Pages artifact
         if: github.event_name != 'pull_request'
-        uses: JamesIves/github-pages-deploy-action@v4
+        uses: actions/upload-pages-artifact@v3
         with:
-          branch: gh-pages
-          folder: _site/
+          path: _site/
+      # Deploy to GitHub Pages via Actions
+      - name: Deploy to GitHub Pages
+        if: github.event_name != 'pull_request'
+        id: deployment
+        uses: actions/deploy-pages@v4
