@@ -27,7 +27,7 @@ jobs:
 
     steps:
       # Checkout repository
-      - uses: actions/checkout@v6
+      - uses: https://github.com/actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
         with:
           fetch-depth: 0
 
@@ -56,7 +56,7 @@ jobs:
           sudo mktexlsr
 
       # Cache R packages
-      - uses: actions/cache@v5
+      - uses: https://github.com/actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
         with:
           path: ~/.cache/R
           key: ${{ runner.os }}-r
