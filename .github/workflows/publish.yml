@@ -44,6 +44,7 @@ jobs:
       - uses: actions/checkout@v6
         with:
           fetch-depth: 0
+          persist-credentials: false
 
       # Install system dependencies and TeX Live
       - name: Install system dependencies
@@ -63,7 +64,7 @@ jobs:
       # Setup UV with caching
       - uses: astral-sh/setup-uv@v8.1.0
         with:
-          enable-cache: true
+          enable-cache: false
           cache-dependency-glob: uv.lock
 
       # Setup R
