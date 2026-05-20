@@ -68,18 +68,18 @@ jobs:
           cache-dependency-glob: uv.lock
 
       # Setup R
-      - uses: r-lib/actions/setup-r@v2
-      - uses: r-lib/actions/setup-r-dependencies@v2
+      - uses: r-lib/actions/setup-r@a51a8012b0aab7c32ef9d19bf54da93f3254335e
+      - uses: r-lib/actions/setup-r-dependencies@a51a8012b0aab7c32ef9d19bf54da93f3254335e
         with:
           extra-packages: |
             any::knitr
             any::rmarkdown
 
       # Setup Pandoc
-      - uses: pandoc/actions/setup@v1
+      - uses: pandoc/actions/setup@86321b6dd4675f5014c611e05088e10d4939e09e
 
       # Setup Quarto without TinyTeX (use system TeX Live)
-      - uses: quarto-dev/quarto-actions/setup@v2
+      - uses: quarto-dev/quarto-actions/setup@8a96df13519ee81fd526f2dfca5962811136661b
         with:
           tinytex: false
       # Build the site
@@ -88,11 +88,11 @@ jobs:
       # Upload artifact for Pages
       - name: Upload Pages artifact
         if: github.event_name != 'pull_request'
-        uses: actions/upload-pages-artifact@v5
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9
         with:
           path: _site/
       # Deploy to GitHub Pages via Actions
       - name: Deploy to GitHub Pages
         if: github.event_name != 'pull_request'
         id: deployment
-        uses: actions/deploy-pages@v5
+        uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128
