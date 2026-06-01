@@ -1,0 +1,11 @@
+{
+  "skills": [
+    {
+      "id": "site-navigation",
+      "name": "Website Navigation",
+      "description": "Guides agents to the most important pages and feeds.",
+      "url": "https://adafede.github.io/.well-known/agent-skills/site-navigation/SKILL.md"
+    }
+  ]
+}
+

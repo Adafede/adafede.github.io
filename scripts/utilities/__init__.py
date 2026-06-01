@@ -1,6 +1,7 @@
 """Utility scripts for post-processing."""
 
 from .convert_rss_to_json_feed import convert_rss_to_json_feed
+from .enforce_website_spec import enforce_website_spec
 from .fix_accessibility import fix_accessibility
 from .inject_cito_annotations_in_rss import inject_cito_annotations_in_rss
 from .inject_doi_in_rss import inject_doi_in_rss
@@ -10,6 +11,7 @@ from .talkmap import talkmap
 
 __all__ = [
     "convert_rss_to_json_feed",
+    "enforce_website_spec",
     "fix_accessibility",
     "inject_cito_annotations_in_rss",
     "inject_doi_in_rss",

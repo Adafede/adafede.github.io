@@ -39,6 +39,11 @@ project:
   resources:
     - robots.txt
     - _headers
+    - humans.txt
+    - llms.txt
+    - llms-full.txt
+    - site.webmanifest
+    - .well-known
   post-render:
     - scripts/postrender.py
   pre-render:
@@ -55,7 +60,7 @@ website:
     location: navbar
   open-graph:
     locale: en
-    site-name: https://adafede.github.io
+    site-name: Adriano Rutz
   navbar:
     left:
       - text: Articles

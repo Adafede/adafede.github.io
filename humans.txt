@@ -1,0 +1,14 @@
+/* TEAM */
+Name: Adriano Rutz
+Role: Site owner and author
+Email: rutz@imsb.biol.ethz.ch
+Website: https://adafede.github.io
+GitHub: https://github.com/adafede
+Codeberg: https://codeberg.org/adafede
+
+/* SITE */
+Standards: HTML5, CSS3, Quarto, RDFa, JSON Feed, RSS
+Source: https://github.com/adafede/adafede.github.io
+Language: en
+Updated: 2026-05-31
+

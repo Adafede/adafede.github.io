@@ -1,0 +1,30 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://adafede.github.io/",
+      "item": [
+        {
+          "href": "https://adafede.github.io/sitemap.xml",
+          "rel": "sitemap",
+          "type": "application/xml"
+        },
+        {
+          "href": "https://adafede.github.io/rss.xml",
+          "rel": "alternate",
+          "type": "application/rss+xml"
+        },
+        {
+          "href": "https://adafede.github.io/posts.json",
+          "rel": "alternate",
+          "type": "application/feed+json"
+        },
+        {
+          "href": "https://adafede.github.io/llms.txt",
+          "rel": "alternate",
+          "type": "text/markdown"
+        }
+      ]
+    }
+  ]
+}
+

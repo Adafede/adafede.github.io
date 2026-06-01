@@ -2,6 +2,12 @@
 # Global Security Headers (apply to all pages)
 # =============================================================================
 /*
+  # Force HTTPS in supporting browsers
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+
+  # Baseline CSP for static pages and known third-party embeds
+  Content-Security-Policy: default-src 'self'; img-src 'self' data: https:; script-src 'self' 'unsafe-inline' https://scripts.simpleanalyticscdn.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; connect-src 'self' https:; frame-src https:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; upgrade-insecure-requests
+
   # Prevent MIME type sniffing
   X-Content-Type-Options: nosniff
 
@@ -22,6 +28,9 @@
 
   # Prevent search engines from showing cached versions
   X-Robots-Tag: noai, noimageai
+
+  # Machine-readable discovery links for agents and crawlers
+  Link: </sitemap.xml>; rel="sitemap", </rss.xml>; rel="alternate"; type="application/rss+xml", </llms.txt>; rel="alternate"; type="text/markdown", </humans.txt>; rel="author", </.well-known/api-catalog>; rel="service-desc"; type="application/linkset+json"
 
 # =============================================================================
 # HTML Pages - No cache, fresh content
@@ -147,6 +156,29 @@
 
 /robots.txt
   Cache-Control: public, max-age=86400
+
+/humans.txt
+  Cache-Control: public, max-age=86400
+  Content-Type: text/plain; charset=utf-8
+
+/llms.txt
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+  Content-Type: text/markdown; charset=utf-8
+
+/llms-full.txt
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+  Content-Type: text/markdown; charset=utf-8
+
+/.well-known/security.txt
+  Cache-Control: public, max-age=86400
+  Content-Type: text/plain; charset=utf-8
+
+/.well-known/api-catalog
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+  Content-Type: application/linkset+json; charset=utf-8
+
+/.well-known/agent-skills/*
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
 
 # =============================================================================
 # Talk map (interactive content)

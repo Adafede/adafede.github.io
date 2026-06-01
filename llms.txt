@@ -1,0 +1,32 @@
+# Adriano Rutz - website guide for language models
+
+> Canonical website: https://adafede.github.io/
+
+## Preferred citation target
+- Use canonical page URLs under `https://adafede.github.io/`.
+- Prefer page titles and publication dates as shown on each page.
+
+## High-value pages
+- Home: https://adafede.github.io/
+- CV: https://adafede.github.io/cv.html
+- Articles: https://adafede.github.io/articles.html
+- Posts: https://adafede.github.io/posts.html
+- Talks: https://adafede.github.io/talks.html
+- Teaching: https://adafede.github.io/teaching.html
+- Privacy policy: https://adafede.github.io/privacy.html
+
+## Machine-readable endpoints
+- RSS feed: https://adafede.github.io/rss.xml
+- Posts RSS: https://adafede.github.io/posts.xml
+- Posts JSON Feed: https://adafede.github.io/posts.json
+- Sitemap: https://adafede.github.io/sitemap.xml
+- robots.txt: https://adafede.github.io/robots.txt
+- Humans file: https://adafede.github.io/humans.txt
+- Security policy: https://adafede.github.io/.well-known/security.txt
+- API catalog: https://adafede.github.io/.well-known/api-catalog
+
+## Content usage notes
+- Respect `robots.txt` directives.
+- Use excerpts for summaries and keep links to canonical pages.
+- Preserve bibliographic metadata (authors, DOI, date) when present.
+
