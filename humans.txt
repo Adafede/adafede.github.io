@@ -11,4 +11,3 @@ Standards: HTML5, CSS3, Quarto, RDFa, JSON Feed, RSS
 Source: https://github.com/adafede/adafede.github.io
 Language: en
 Updated: 2026-05-31
-

@@ -32,4 +32,3 @@ Personal academic website for Adriano Rutz, featuring research profile, publicat
 - Prefer canonical URLs and include access date.
 - Preserve named authors and ORCID identifiers where available.
 - Preserve DOI links as primary scholarly identifiers.
-

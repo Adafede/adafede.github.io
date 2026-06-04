@@ -17,7 +17,14 @@ DEFAULT_DESCRIPTION = (
 )
 
 
-def _upsert_meta(soup, *, attr_name: str, attr_value: str, content: str, **extra_attrs) -> bool:
+def _upsert_meta(
+    soup,
+    *,
+    attr_name: str,
+    attr_value: str,
+    content: str,
+    **extra_attrs,
+) -> bool:
     """Create or update a meta tag and return whether it changed."""
     selector = {attr_name: attr_value, **extra_attrs}
     node = soup.find("meta", attrs=selector)
@@ -43,7 +50,9 @@ def _upsert_link(soup, *, rel: str, href: str, **attrs) -> bool:
     node = None
     for candidate in soup.find_all("link"):
         rel_values = candidate.get("rel", [])
-        rel_tokens = rel_values if isinstance(rel_values, list) else str(rel_values).split()
+        rel_tokens = (
+            rel_values if isinstance(rel_values, list) else str(rel_values).split()
+        )
         if rel not in rel_tokens:
             continue
 
@@ -100,7 +109,15 @@ def _title_for_page(soup) -> str:
     return "Adriano Rutz"
 
 
-def _inject_jsonld(soup, *, site_url: str, canonical_url: str, route: str, title: str, description: str) -> bool:
+def _inject_jsonld(
+    soup,
+    *,
+    site_url: str,
+    canonical_url: str,
+    route: str,
+    title: str,
+    description: str,
+) -> bool:
     payload = {
         "@context": "https://schema.org",
         "@type": "WebSite" if route == "/" else "WebPage",
@@ -118,7 +135,10 @@ def _inject_jsonld(soup, *, site_url: str, canonical_url: str, route: str, title
     payload_json = json.dumps(payload, ensure_ascii=True, separators=(",", ":"))
 
     if node is None:
-        node = soup.new_tag("script", attrs={"type": "application/ld+json", "id": script_id})
+        node = soup.new_tag(
+            "script",
+            attrs={"type": "application/ld+json", "id": script_id},
+        )
         node.string = payload_json
         soup.head.append(node)
         return True
@@ -144,10 +164,22 @@ def _ensure_head_basics(soup, *, site_url: str, route: str) -> bool:
         type="application/rss+xml",
         title="Adriano Rutz RSS Feed",
     )
-    changed |= _upsert_link(soup, rel="sitemap", href=f"{site_url.rstrip('/')}/sitemap.xml")
-    changed |= _upsert_link(soup, rel="author", href=f"{site_url.rstrip('/')}/humans.txt")
+    changed |= _upsert_link(
+        soup,
+        rel="sitemap",
+        href=f"{site_url.rstrip('/')}/sitemap.xml",
+    )
+    changed |= _upsert_link(
+        soup,
+        rel="author",
+        href=f"{site_url.rstrip('/')}/humans.txt",
+    )
     changed |= _upsert_link(soup, rel="manifest", href="/site.webmanifest")
-    changed |= _upsert_link(soup, rel="apple-touch-icon", href="/images/favicon/apple-touch-icon.png")
+    changed |= _upsert_link(
+        soup,
+        rel="apple-touch-icon",
+        href="/images/favicon/apple-touch-icon.png",
+    )
 
     changed |= _upsert_meta(
         soup,
@@ -189,28 +221,72 @@ def _ensure_head_basics(soup, *, site_url: str, route: str) -> bool:
         dark_theme_meta["content"] = "#0f172a"
         changed = True
 
-    og_type = "article" if route.startswith("/posts/") or route.startswith("/articles/") else "website"
+    og_type = (
+        "article"
+        if route.startswith("/posts/") or route.startswith("/articles/")
+        else "website"
+    )
     og_image = (
         soup.find("meta", attrs={"property": "og:image"}).get("content", "").strip()
         if soup.find("meta", attrs={"property": "og:image"})
         else f"{site_url.rstrip('/')}/images/favicon/favicon.ico"
     )
 
-    changed |= _upsert_meta(soup, attr_name="property", attr_value="og:title", content=title)
-    changed |= _upsert_meta(soup, attr_name="property", attr_value="og:description", content=description)
-    changed |= _upsert_meta(soup, attr_name="property", attr_value="og:url", content=canonical)
-    changed |= _upsert_meta(soup, attr_name="property", attr_value="og:type", content=og_type)
-    changed |= _upsert_meta(soup, attr_name="property", attr_value="og:image", content=og_image)
+    changed |= _upsert_meta(
+        soup,
+        attr_name="property",
+        attr_value="og:title",
+        content=title,
+    )
+    changed |= _upsert_meta(
+        soup,
+        attr_name="property",
+        attr_value="og:description",
+        content=description,
+    )
+    changed |= _upsert_meta(
+        soup,
+        attr_name="property",
+        attr_value="og:url",
+        content=canonical,
+    )
+    changed |= _upsert_meta(
+        soup,
+        attr_name="property",
+        attr_value="og:type",
+        content=og_type,
+    )
+    changed |= _upsert_meta(
+        soup,
+        attr_name="property",
+        attr_value="og:image",
+        content=og_image,
+    )
 
-    changed |= _upsert_meta(soup, attr_name="name", attr_value="twitter:card", content="summary_large_image")
-    changed |= _upsert_meta(soup, attr_name="name", attr_value="twitter:title", content=title)
+    changed |= _upsert_meta(
+        soup,
+        attr_name="name",
+        attr_value="twitter:card",
+        content="summary_large_image",
+    )
+    changed |= _upsert_meta(
+        soup,
+        attr_name="name",
+        attr_value="twitter:title",
+        content=title,
+    )
     changed |= _upsert_meta(
         soup,
         attr_name="name",
         attr_value="twitter:description",
         content=description,
     )
-    changed |= _upsert_meta(soup, attr_name="name", attr_value="twitter:image", content=og_image)
+    changed |= _upsert_meta(
+        soup,
+        attr_name="name",
+        attr_value="twitter:image",
+        content=og_image,
+    )
 
     changed |= _inject_jsonld(
         soup,
@@ -255,5 +331,3 @@ def enforce_website_spec(html_files: List[Path], site_url: str) -> None:
         fixed_count,
         changed_count,
     )
-
-

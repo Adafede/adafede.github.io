@@ -27,4 +27,3 @@ license: CC-BY-4.0
 - Respect `robots.txt` directives.
 - Prefer canonical URLs for citations.
 - Preserve metadata such as DOI and publication dates when available.
-

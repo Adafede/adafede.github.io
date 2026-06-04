@@ -29,4 +29,3 @@
 - Respect `robots.txt` directives.
 - Use excerpts for summaries and keep links to canonical pages.
 - Preserve bibliographic metadata (authors, DOI, date) when present.
-

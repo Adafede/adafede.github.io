@@ -49,7 +49,7 @@ repos:
           - --fix
       - id: ruff-format
   - repo: https://github.com/astral-sh/uv-pre-commit
-    rev: 0.11.17
+    rev: 0.11.19
     hooks:
       - id: uv-lock
   - repo: https://github.com/tombi-toml/tombi-pre-commit
@@ -59,7 +59,7 @@ repos:
         exclude: ^uv\.lock$
       - id: tombi-lint
   - repo: https://github.com/crate-ci/typos
-    rev: v1.47.0
+    rev: v1.47.2
     hooks:
       - id: typos
         exclude: ^articles/thesis\.qmd$
