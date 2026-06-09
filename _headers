@@ -30,7 +30,7 @@
   X-Robots-Tag: noai, noimageai
 
   # Machine-readable discovery links for agents and crawlers
-  Link: </sitemap.xml>; rel="sitemap", </rss.xml>; rel="alternate"; type="application/rss+xml", </llms.txt>; rel="alternate"; type="text/markdown", </humans.txt>; rel="author", </.well-known/api-catalog>; rel="service-desc"; type="application/linkset+json"
+  Link: </sitemap.xml>; rel="sitemap", </rss.xml>; rel="alternate"; type="application/rss+xml", </posts.json>; rel="alternate"; type="application/feed+json", </llms.txt>; rel="alternate"; type="text/markdown", </humans.txt>; rel="author", </.well-known/api-catalog>; rel="service-desc"; type="application/linkset+json", </robots.txt>; rel="robots"
 
 # =============================================================================
 # HTML Pages - No cache, fresh content

@@ -117,7 +117,11 @@ def _inject_jsonld(
     route: str,
     title: str,
     description: str,
+    author_name: str = None,
+    date_published: str = None,
+    date_modified: str = None,
 ) -> bool:
+    """Create or update a JSON-LD structured data tag and return whether it changed."""
     payload = {
         "@context": "https://schema.org",
         "@type": "WebSite" if route == "/" else "WebPage",
@@ -129,6 +133,16 @@ def _inject_jsonld(
 
     if route != "/":
         payload["isPartOf"] = {"@type": "WebSite", "url": site_url.rstrip("/") + "/"}
+
+    # Add author and dates for article pages
+    if route.startswith("/posts/") or route.startswith("/articles/"):
+        payload["@type"] = "Article"
+        if author_name:
+            payload["author"] = {"@type": "Person", "name": author_name}
+        if date_published:
+            payload["datePublished"] = date_published
+        if date_modified:
+            payload["dateModified"] = date_modified
 
     script_id = "website-spec-jsonld"
     node = soup.find("script", attrs={"id": script_id})
@@ -156,6 +170,26 @@ def _ensure_head_basics(soup, *, site_url: str, route: str) -> bool:
     description = _description_for_page(soup)
     title = _title_for_page(soup)
 
+    # Add preconnect links for performance optimization
+    third_party_domains = [
+        "https://scripts.simpleanalyticscdn.com",
+        "https://cdnjs.cloudflare.com",
+        "https://cdn.jsdelivr.net",
+        "https://www.wikidata.org",
+    ]
+    for domain in third_party_domains:
+        changed |= _upsert_link(soup, rel="preconnect", href=domain)
+
+    # Add DNS-prefetch for CDN and external resources (fallback for browsers not supporting preconnect)
+    dns_prefetch_domains = [
+        "https://cdnjs.cloudflare.com",
+        "https://cdn.jsdelivr.net",
+        "https://www.wikidata.org",
+        "https://hypothes.is",
+    ]
+    for domain in dns_prefetch_domains:
+        changed |= _upsert_link(soup, rel="dns-prefetch", href=domain)
+
     changed |= _upsert_link(soup, rel="canonical", href=canonical)
     changed |= _upsert_link(
         soup,
@@ -163,6 +197,13 @@ def _ensure_head_basics(soup, *, site_url: str, route: str) -> bool:
         href=f"{site_url.rstrip('/')}/rss.xml",
         type="application/rss+xml",
         title="Adriano Rutz RSS Feed",
+    )
+    changed |= _upsert_link(
+        soup,
+        rel="alternate",
+        href=f"{site_url.rstrip('/')}/posts.json",
+        type="application/feed+json",
+        title="Adriano Rutz JSON Feed",
     )
     changed |= _upsert_link(
         soup,
