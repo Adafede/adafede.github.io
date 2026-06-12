@@ -1,0 +1,12 @@
+---
+author:
+  - id: MarioCorreia
+    name:
+      given: Mario S.P.
+      family: Correia
+      literal: Mario S.P. Correia
+    orcid: 0000-0003-2125-4184
+    qid: Q90843848
+    equal-contributor: true
+    affiliations:
+      - ref: imsb

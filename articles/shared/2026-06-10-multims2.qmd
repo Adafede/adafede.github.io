@@ -1,0 +1,46 @@
+---
+title: "MultiMS2: A curated multi-modal,  multi-energy spectral library for metabolomics"
+type: article
+venue: GigaScience
+date: 2026-06-10
+doi: 10.1093/gigascience/giag069
+# qid: TODO
+# image: TODO
+# image-alt: Article's Graphical Abstract
+categories:
+  - Open Science
+  - Spectral Library
+  - Tandem Mass Spectrometry
+metadata-files:
+  - ../../_includes/entities/authors/AdrianoRutz_IMSB_eq.yml
+  - ../../_includes/entities/authors/MarioCorreia_IMSB_eq.yml
+  - ../../_includes/entities/authors/NicolaZamboni_IMSB_corr.yml
+  - ../../_includes/entities/affiliations/IMSB_Zamboni.yml
+abstract: >
+  **Background**
+
+
+  Spectral libraries are essential for mass spectrometry-based metabolomics, enabling accurate metabolite annotation. Collision-induced dissociation (CID) dominates existing public libraries, but is rarely sufficient for structural elucidation. Electron-activated dissociation (EAD) provides complementary, radical-driven fragmentation, but remains sparsely represented. The lack of datasets spanning multiple dissociation mechanisms, energies, and ionization modes limits both analytical workflows and the development of robust machine learning models.
+
+
+  **Findings**
+
+
+  We present MultiMS^2^, a curated metabolomics spectral library comprising 43,728 MS/MS spectra from 2,899 unique compounds. Spectra were acquired using both CID and EAD at three energies each, in positive and negative ionization modes. The dataset substantially expands publicly available EAD coverage while preserving matched acquisition conditions across energies and dissociation types.
+
+
+  **Conclusions**
+
+
+  By systematically combining CID and EAD across multiple energies and polarities, MultiMS^2^ provides a unique resource for metabolite annotation, benchmarking, and machine learning. The library supports energy-aware and dissociation-aware analysis, enabling methodological innovation and improved generalization in computational metabolomics.
+nocite: |
+  @Rutz2026
+---
+
+<!-- ```{=html} -->
+<!-- <iframe width="100%" -->
+<!--         height="100%" -->
+<!--         src="https://scholia.toolforge.org/work/{{< meta qid >}}" -->
+<!--         title="Scholia entry"> -->
+<!-- </iframe> -->
+<!-- ``` -->

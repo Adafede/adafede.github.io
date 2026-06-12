@@ -11,29 +11,36 @@ categories:
   - In Source Fragmentation
   - Metabolomics
   - Liquid Chromatography-Tandem Mass Spectrometry
-# authors:
-#   - name: Adriano Rutz
-#     orcid: 0000-0003-0443-9902
-#     number: 2
-#     affiliations:
-#       - ref: imsb
-#     equal-contributor: true
-#   - name: Nicola Zamboni
-#     orcid: 0000-0003-1271-1021
-#     number: 99
-#     affiliations:
-#       - ref: imsb
-# affiliations:
-#   - id: imsb
-#     number: 1
-#     name: ETH Zürich
-#     department: Institute for Molecular Systems Biology
-#     group: Zamboni
-#     address: Otto-Stern-Weg, 3
-#     city: Zürich
-#     country: Switzerland
-#     postal-code: 8093
-#     ror: https://ror.org/03j5gm982
+# metadata-files:
+#   - ../../_includes/entities/authors/YasinElAbiead_TODO_eq.yml
+#   - ../../_includes/entities/authors/AdrianoRutz_IMSB_eq.yml
+#   - ../../_includes/entities/authors/SimoneZuffa_TODO.yml
+#   - ../../_includes/entities/authors/BasharAmer_TODO.yml
+#   - ../../_includes/entities/authors/ShipeiXing_TODO.yml
+#   - ../../_includes/entities/authors/CorinnaBrungs_TODO.yml
+#   - ../../_includes/entities/authors/RobinSchmid_TODO.yml
+#   - ../../_includes/entities/authors/MarioCorreia_IMSB.yml
+#   - ../../_includes/entities/authors/AndresCarballo_TODO.yml
+#   - ../../_includes/entities/authors/AmirZarrinpar_TODO.yml
+#   - ../../_includes/entities/authors/HelenaManocchio_TODO.yml
+#   - ../../_includes/entities/authors/MichaelWitting_TODO.yml
+#   - ../../_includes/entities/authors/IpsitaMohanty_TODO.yml
+#   - ../../_includes/entities/authors/TomasPluskal_TODO.yml
+#   - ../../_includes/entities/authors/WoutBittremieux_ANTWERP.yml
+#   - ../../_includes/entities/authors/RobKnight_TODO.yml
+#   - ../../_includes/entities/authors/AndrewPatterson_TODO.yml
+#   - ../../_includes/entities/authors/JustinVanDerHooft_MULTI.yml
+#   - ../../_includes/entities/authors/SebastianBoecker_TODO.yml
+#   - ../../_includes/entities/authors/WarwickDunn_TODO.yml
+#   - ../../_includes/entities/authors/RogerLinington_TODO.yml
+#   - ../../_includes/entities/authors/DavidWishart_TODO.yml
+#   - ../../_includes/entities/authors/JeanLucWolfender_UNIGE.yml
+#   - ../../_includes/entities/authors/OliverFiehn_TODO.yml
+#   - ../../_includes/entities/authors/NicolaZamboni_IMSB.yml
+#   - ../../_includes/entities/authors/PieterDorrestein_TODO.yml
+#   - ../../_includes/entities/affiliations/TODO.yml
+#   - ../../_includes/entities/affiliations/IMSB_Zamboni.yml
+#   - ../../_includes/entities/affiliations/TODO.yml
 nocite: |
   @ElAbiead2025a
 ---
