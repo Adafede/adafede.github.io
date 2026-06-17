@@ -4,12 +4,11 @@ Post-processing scripts for Quarto output with semantic web annotations.
 
 ## Overview
 
-This directory contains a **clean 4-layer architecture** for processing Quarto output:
-- **CiTO citations** - Citation typing ontology annotations
-- **ROR affiliations** - Research organization registry links
-- **ORCID integration** - Author identification and Scholia links
-- **DOI metadata** - Digital object identifiers
-- **Semantic markup** - RDFa and Schema.org annotations
+This directory contains a **clean 4-layer architecture** for processing Quarto
+output: - **CiTO citations** - Citation typing ontology annotations - **ROR
+affiliations** - Research organization registry links - **ORCID integration** -
+Author identification and Scholia links - **DOI metadata** - Digital object
+identifiers - **Semantic markup** - RDFa and Schema.org annotations
 
 ## Architecture
 
@@ -72,11 +71,13 @@ scripts/
 ## Quick Start
 
 ### Build Site
+
 ```bash
 uv run quarto render
 ```
 
 ### Use in Code
+
 ```python
 import sys
 sys.path.insert(0, 'scripts')
@@ -109,13 +110,10 @@ project:
 
 ### What Happens
 
-**Pre-render (`prerender.py`):**
-- Updates post metadata (dates, DOIs)
-- Ensures all QMD files have correct frontmatter
+**Pre-render (`prerender.py`):** - Updates post metadata (dates, DOIs) - Ensures
+all QMD files have correct frontmatter
 
-**Post-render (`postrender.py`):**
-1. Generates PDFs with Pandoc
-2. Processes articles, talks, teaching (injects ROR + ORCID)
-3. Processes posts (injects CiTO + ROR + ORCID)
-4. Updates RSS feeds (DOIs + CiTO annotations)
-5. Converts RSS to JSON Feed
+**Post-render (`postrender.py`):** 1. Generates PDFs with Pandoc 2. Processes
+articles, talks, teaching (injects ROR + ORCID) 3. Processes posts (injects CiTO
++ ROR + ORCID) 4. Updates RSS feeds (DOIs + CiTO annotations) 5. Converts RSS to
+JSON Feed

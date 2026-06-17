@@ -22,7 +22,7 @@ listing:
 
 ## Talks
 
-:::{#talks_list}
+::: {#talks_list}
 :::
 
 ## 🌍 Talk Locations Map

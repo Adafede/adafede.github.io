@@ -1,5 +1,6 @@
 ---
-title: The LOTUS initiative for open knowledge management in natural products research
+title: The LOTUS initiative for open knowledge management in natural products
+  research
 type: article
 venue: eLife
 date: 2022-05-26

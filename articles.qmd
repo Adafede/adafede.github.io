@@ -94,20 +94,20 @@ listing:
 
 ## Articles as single first author
 
-:::{#first}
+::: {#first}
 :::
 
 ## Articles as shared first author
 
-:::{#shared}
+::: {#shared}
 :::
 
 ## Articles as co-author
 
-:::{#co}
+::: {#co}
 :::
 
 ## Doctoral thesis
 
-:::{#thesis}
+::: {#thesis}
 :::

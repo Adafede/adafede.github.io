@@ -9,23 +9,32 @@ This privacy policy applies to `https://adafede.github.io`.
 
 ## Data Collection
 
-This website is a static site and does not provide user accounts, comments, or forms.
+This website is a static site and does not provide user accounts, comments, or
+forms.
 
-- Server infrastructure may process standard request logs (IP address, user-agent, timestamp, requested URL) for delivery, caching, and abuse prevention.
-- Aggregated traffic analytics are collected with Simple Analytics (`https://scripts.simpleanalyticscdn.com/latest.js`).
+- Server infrastructure may process standard request logs (IP address,
+  user-agent, timestamp, requested URL) for delivery, caching, and abuse
+  prevention.
+- Aggregated traffic analytics are collected with Simple Analytics
+  (`https://scripts.simpleanalyticscdn.com/latest.js`).
 - This site does not intentionally set tracking cookies for analytics.
 
 ## Third-Party Requests
 
-Some pages include links or embedded resources from external services (for example Wikimedia-hosted images and Wikidata-powered views). When your browser loads those resources, those providers may receive technical request data according to their own privacy policies.
+Some pages include links or embedded resources from external services (for
+example Wikimedia-hosted images and Wikidata-powered views). When your browser
+loads those resources, those providers may receive technical request data
+according to their own privacy policies.
 
 ## AI Crawlers and Training
 
-`robots.txt` includes explicit directives for AI crawler user-agents. These directives are intended to communicate crawling and reuse preferences.
+`robots.txt` includes explicit directives for AI crawler user-agents. These
+directives are intended to communicate crawling and reuse preferences.
 
 ## Your Choices
 
-You can reduce data sharing by using browser privacy controls, content blockers, and DNS/network filtering for third-party domains.
+You can reduce data sharing by using browser privacy controls, content blockers,
+and DNS/network filtering for third-party domains.
 
 ## Contact
 

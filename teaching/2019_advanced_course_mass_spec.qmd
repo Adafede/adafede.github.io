@@ -13,8 +13,8 @@ metadata-files:
 
 ## Topics
 
-* Mass spectrometry data preprocessing: Principle of Multivariate data analysis
+- Mass spectrometry data preprocessing: Principle of Multivariate data analysis
 
-* Efficient visualisation of complex metabolite profiles with molecular networks
+- Efficient visualisation of complex metabolite profiles with molecular networks
 
-* Automated metabolite annotation in combination with molecular networks
+- Automated metabolite annotation in combination with molecular networks

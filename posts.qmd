@@ -11,5 +11,5 @@ listing:
 
 ## Posts
 
-:::{#posts_list}
+::: {#posts_list}
 :::

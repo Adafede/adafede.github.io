@@ -38,7 +38,7 @@ format:
     page-layout: full
 ---
 
-:::{#hero-heading}
+::: {#hero-heading}
 {{< include cv/_bio.qmd >}}
 
 {{< include expertise.qmd >}}

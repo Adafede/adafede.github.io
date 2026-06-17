@@ -9,8 +9,9 @@ categories:
 
 ## Topics
 
-* Extraction of an essential oil according to the European Pharmacopoeia
+- Extraction of an essential oil according to the European Pharmacopoeia
 
-* Gas Chromatography - Flame Ionization Detection analysis as a tool for quality control
+- Gas Chromatography - Flame Ionization Detection analysis as a tool for quality
+  control
 
-* Notions of method optimization
+- Notions of method optimization

@@ -62,20 +62,20 @@ Some other pages of interest
 
 ## Extras
 
-:::{#varia_adafede}
+::: {#varia_adafede}
 :::
 
 ## LOTUS
 
-:::{#varia_lotus}
+::: {#varia_lotus}
 :::
 
 ## Taxonomically Informed Metabolite Annotation
 
-:::{#varia_tima}
+::: {#varia_tima}
 :::
 
 ## Additional contributions
 
-:::{#varia_contribs}
+::: {#varia_contribs}
 :::

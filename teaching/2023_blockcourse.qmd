@@ -9,6 +9,10 @@ categories:
 
 ## Topics
 
-* The course covers all basic aspects of metabolome measurements, from sample sampling to mass spectrometry and data analysis. Participants work in groups and independently perform and interpret metabolomic experiments.
+- The course covers all basic aspects of metabolome measurements, from sample
+  sampling to mass spectrometry and data analysis. Participants work in groups
+  and independently perform and interpret metabolomic experiments.
 
-* Performing and reporting a metabolomic experiment, understanding pro and cons of mass spectrometry based metabolomics. Knowledge of workflows and tools to assist experiment interpretation, and metabolite identification.
+- Performing and reporting a metabolomic experiment, understanding pro and cons
+  of mass spectrometry based metabolomics. Knowledge of workflows and tools to
+  assist experiment interpretation, and metabolite identification.
