@@ -33,7 +33,6 @@ nocite: |
 ## Abstract
 
 ::: {.panel-tabset}
-
 ### English
 
 The detailed assessment of the composition of plant-derived products is of
@@ -234,7 +233,6 @@ piante aromatiche o sapide di interesse industriale come la *Swertia chirayita*
 lavoro presentato, che integra strategie analitiche e computazionali, mira a
 rendere più efficace la ricerca sulla metabolomica vegetale per la salute
 pubblica, la sicurezza di alimenti e bevande e la scienza di base.
-
 :::
 
 ```{=html}

@@ -8,30 +8,30 @@ about:
   image-width: 50%
   template: trestles
   links:
-    # - text: '<i class="ai ai-cv"></i>'
-    #   href: https://adafede.github.io/cv
+  # - text: '<i class="ai ai-cv"></i>'
+  #   href: https://adafede.github.io/cv
     - icon: envelope-at
       href: mailto:rutz@imsb.biol.ethz.ch
     - icon: linkedin
       href: https://www.linkedin.com/in/AdrianoRutz/
-    # - text: '<i class="ai ai-orcid"></i>'
-    #   href: https://orcid.org/0000-0003-0443-9902
+      # - text: '<i class="ai ai-orcid"></i>'
+      #   href: https://orcid.org/0000-0003-0443-9902
     - text: "![](https://codeberg.org/Codeberg/Design/raw/branch/main/logo/icon/svg/codeberg-logo_icon_blue.svg)"
       href: https://codeberg.org/adafede
     - icon: github
       href: https://github.com/adafede
-    # - icon: mastodon
-    #   href: https://mastodon.online/@adafede
-    # - icon: wikipedia
-    #   href: https://en.wikipedia.org/wiki/User:AdrianoRutz
-    # - text: '<i class="ai ai-google-scholar"></i>'
-    #   href: https://scholar.google.com/citations?user=8889AMkAAAAJ
-    # - text: '<i class="ai ai-impactstory"></i>'
-    #   href: https://profiles.impactstory.org/u/0000-0003-0443-9902
-    # - text: '<i class="ai ai-researchgate"></i>'
-    #   href: https://www.researchgate.net/profile/Adriano_Rutz
-    # - text: "![](https://upload.wikimedia.org/wikipedia/commons/5/5b/Scholia_Logo_Improved.svg){height=20}"
-    #   href: https://scholia.toolforge.org/author/Q97455964
+      # - icon: mastodon
+      #   href: https://mastodon.online/@adafede
+      # - icon: wikipedia
+      #   href: https://en.wikipedia.org/wiki/User:AdrianoRutz
+      # - text: '<i class="ai ai-google-scholar"></i>'
+      #   href: https://scholar.google.com/citations?user=8889AMkAAAAJ
+      # - text: '<i class="ai ai-impactstory"></i>'
+      #   href: https://profiles.impactstory.org/u/0000-0003-0443-9902
+      # - text: '<i class="ai ai-researchgate"></i>'
+      #   href: https://www.researchgate.net/profile/Adriano_Rutz
+      # - text: "![](https://upload.wikimedia.org/wikipedia/commons/5/5b/Scholia_Logo_Improved.svg){height=20}"
+      #   href: https://scholia.toolforge.org/author/Q97455964
 format:
   html:
     css: assets/about-widths.css

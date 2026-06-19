@@ -12,11 +12,12 @@ metadata-files:
   - ../_includes/entities/authors/AdrianoRutz_IMSB.yml
   - ../_includes/entities/affiliations/IMSB_Zamboni.yml
 description: >
-  [Dr. Willmar Schwabe Young Talent Award](https://ga-online.org/about-ga/awards/dr-willmar-schwabe-young-talent-prize/) lecture for the [LOTUS initiative](https://lotus.nprod.net/).
+  [Dr. Willmar Schwabe Young Talent
+  Award](https://ga-online.org/about-ga/awards/dr-willmar-schwabe-young-talent-prize/)
+  lecture for the [LOTUS initiative](https://lotus.nprod.net/).
 
-
-  Available [here](https://lotus.nprod.net/lotus-presentations/20230703_ga/20230703_ga.pdf).
-
+  Available
+  [here](https://lotus.nprod.net/lotus-presentations/20230703_ga/20230703_ga.pdf).
 
   Or in the [congress special issue](https://doi.org/10.1055/s-013-58620).
 ---

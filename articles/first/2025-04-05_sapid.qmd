@@ -25,13 +25,21 @@ metadata-files:
   - ../../_includes/entities/affiliations/CHANGINS_Bach.yml
   - ../../_includes/entities/affiliations/TRADALL.yml
 abstract: >
-  Analyzing bitterness is challenging because of the diverse range of bitter compounds, the variability in sensory perception, and its complex interaction with other tastes.
-  To address this, we developed an untargeted approach to deconvolute the taste and molecular composition of complex plant extracts.
-  We applied our methodology to an ethanolic extract of *Swertia chirayita* (Roxb.) H.Karst., a plant recognized for its distinctive bitterness.
-  Chemical characterization was performed through nuclear magnetic resonance spectroscopy experiments together with untargeted liquid chromatography-high resolution tandem mass spectrometry analysis coupled to a charged aerosol detector.
-  After clustering the fractions based on chemical similarity, we performed free sensory analysis and classical descriptive analysis on each cluster.
-  Our results confirmed the attribution of bitterness to iridoids and highlighted the role of other important compounds in the overall taste.
-  This method provides a systematic approach for analyzing and potentially enhancing the taste profiles of plant-based beverages.
+  Analyzing bitterness is challenging because of the diverse range of bitter
+  compounds, the variability in sensory perception, and its complex interaction
+  with other tastes. To address this, we developed an untargeted approach to
+  deconvolute the taste and molecular composition of complex plant extracts. We
+  applied our methodology to an ethanolic extract of *Swertia chirayita* (Roxb.)
+  H.Karst., a plant recognized for its distinctive bitterness. Chemical
+  characterization was performed through nuclear magnetic resonance spectroscopy
+  experiments together with untargeted liquid chromatography-high resolution
+  tandem mass spectrometry analysis coupled to a charged aerosol detector. After
+  clustering the fractions based on chemical similarity, we performed free
+  sensory analysis and classical descriptive analysis on each cluster. Our
+  results confirmed the attribution of bitterness to iridoids and highlighted
+  the role of other important compounds in the overall taste. This method
+  provides a systematic approach for analyzing and potentially enhancing the
+  taste profiles of plant-based beverages.
 nocite: |
   @Rutz2025a
 ---

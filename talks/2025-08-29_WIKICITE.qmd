@@ -11,6 +11,6 @@ metadata-files:
 description: >
   Talk given in the frame of the WikiCite 2025 conference.
 
-
-  Available [here](https://commons.wikimedia.org/wiki/File:WikiCite_2025_-_The_LOTUS_initiative_and_its_links_to_WikiCite.pdf).
+  Available
+  [here](https://commons.wikimedia.org/wiki/File:WikiCite_2025_-_The_LOTUS_initiative_and_its_links_to_WikiCite.pdf).
 ---

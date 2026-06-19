@@ -1,22 +1,22 @@
 ---
 listing:
-  # - id: last
-  #   categories: true
-  #   contents: articles/last/*.qmd
-  #   date-format: iso
-  #   feed: true
-  #   filter-ui: true
-  #   fields:
-  #     - title
-  #     - author
-  #     - venue
-  #     - categories
-  #     - image
-  #     - image-alt
-  #     - doi
-  #     - date
-  #   sort: date desc
-  #   sort-ui: true
+# - id: last
+#   categories: true
+#   contents: articles/last/*.qmd
+#   date-format: iso
+#   feed: true
+#   filter-ui: true
+#   fields:
+#     - title
+#     - author
+#     - venue
+#     - categories
+#     - image
+#     - image-alt
+#     - doi
+#     - date
+#   sort: date desc
+#   sort-ui: true
   - id: first
     categories: true
     contents: articles/first/*.qmd

@@ -10,11 +10,12 @@ metadata-files:
   - ../_includes/entities/authors/AdrianoRutz_IMSB.yml
   - ../_includes/entities/affiliations/IMSB_Zamboni.yml
 description: >
-  Talk given in the frame of the Prague Computational Mass Spectrometry Workshop.
+  Talk given in the frame of the Prague Computational Mass Spectrometry
+  Workshop.
 
+  Available [here
+  (talk)](https://adafede.github.io/my-presentations/20240417_prague/20240417_prague.pdf)
 
-  Available [here (talk)](https://adafede.github.io/my-presentations/20240417_prague/20240417_prague.pdf)
-
-
-  and [here (workshop)](https://adafede.github.io/my-presentations/20240417_prague/20240417_prague_hands_on.pdf).
+  and [here
+  (workshop)](https://adafede.github.io/my-presentations/20240417_prague/20240417_prague_hands_on.pdf).
 ---

@@ -27,10 +27,15 @@ metadata-files:
   - ../../_includes/entities/affiliations/JOHANNESBURG.yml
   - ../../_includes/entities/affiliations/BIOCIS.yml
 abstract: >
-  This review explores the potential of bioinformatics and chemoinformatics tools to advance the exploration of natural extracts libraries (NELs).
-  Although metabolomics has become a term used routinely in natural product (NP) research, the field remains focused on individual molecules or small sets of compounds, which restricts scalability.
-  This narrow focus is mirrored in the computational handling of generated data, limiting broader insights.
-  By challenging the traditional molecule-first paradigm—a framework historically shaped by practical constraints—we present our vision of using computational approaches to unlock the full potential of NELs, now and in the future.
+  This review explores the potential of bioinformatics and chemoinformatics
+  tools to advance the exploration of natural extracts libraries (NELs).
+  Although metabolomics has become a term used routinely in natural product (NP)
+  research, the field remains focused on individual molecules or small sets of
+  compounds, which restricts scalability. This narrow focus is mirrored in the
+  computational handling of generated data, limiting broader insights. By
+  challenging the traditional molecule-first paradigm—a framework historically
+  shaped by practical constraints—we present our vision of using computational
+  approaches to unlock the full potential of NELs, now and in the future.
 nocite: |
   @Rutz2025b
 ---

@@ -9,8 +9,9 @@ metadata-files:
   - ../_includes/entities/authors/AdrianoRutz_IMSB.yml
   - ../_includes/entities/affiliations/IMSB_Zamboni.yml
 description: >
-  Talk given in the frame of the “Knowledge Graphs for Plant and Microbiome Multiomics” Symposium.
+  Talk given in the frame of the “Knowledge Graphs for Plant and Microbiome
+  Multiomics” Symposium.
 
-
-  Available [here](https://adafede.github.io/my-presentations/20251014_wageningen/index.html).
+  Available
+  [here](https://adafede.github.io/my-presentations/20251014_wageningen/index.html).
 ---

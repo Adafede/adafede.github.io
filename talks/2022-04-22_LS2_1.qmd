@@ -11,8 +11,9 @@ metadata-files:
   - ../_includes/entities/authors/AdrianoRutz_UNIGE.yml
   - ../_includes/entities/affiliations/UNIGE_Wolfender.yml
 description: >
-  Advocating to the Life Sciences Switzerland community for the [LOTUS initiative](https://lotus.nprod.net/).
+  Advocating to the Life Sciences Switzerland community for the [LOTUS
+  initiative](https://lotus.nprod.net/).
 
-
-  Available [here](https://lotus.nprod.net/lotus-presentations/20220422_ls2/20220422_ls2-talk.pdf).
+  Available
+  [here](https://lotus.nprod.net/lotus-presentations/20220422_ls2/20220422_ls2-talk.pdf).
 ---

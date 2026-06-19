@@ -10,6 +10,6 @@ metadata-files:
   - ../_includes/entities/authors/AdrianoRutz_UNIGE.yml
   - ../_includes/entities/affiliations/UNIGE_Wolfender.yml
 description: >
-  First academic lecture.
-  Basics of statistics, mass spectrometry data processing, annotation and visualization.
+  First academic lecture. Basics of statistics, mass spectrometry data
+  processing, annotation and visualization.
 ---

@@ -11,5 +11,6 @@ metadata-files:
   - ../_includes/entities/authors/NicolaZamboni_IMSB_corr.yml
   - ../_includes/entities/affiliations/IMSB_Zamboni.yml
 description: >
-  Poster presented at the [Swiss Metabolomics Society Annual Meeting](https://swiss-metabolomics.ch/annual-meeting).
+  Poster presented at the [Swiss Metabolomics Society Annual
+  Meeting](https://swiss-metabolomics.ch/annual-meeting).
 ---
