@@ -4,6 +4,7 @@ Adds missing head tags so generated pages meet modern baseline expectations.
 """
 
 import json
+from datetime import date
 from pathlib import Path
 from typing import List
 
@@ -117,9 +118,9 @@ def _inject_jsonld(
     route: str,
     title: str,
     description: str,
-    author_name: str = None,
-    date_published: str = None,
-    date_modified: str = None,
+    author_name: str | None = None,
+    date_published: date | None = None,
+    date_modified: date | None = None,
 ) -> bool:
     """Create or update a JSON-LD structured data tag and return whether it changed."""
     payload = {
@@ -140,9 +141,9 @@ def _inject_jsonld(
         if author_name:
             payload["author"] = {"@type": "Person", "name": author_name}
         if date_published:
-            payload["datePublished"] = date_published
+            payload["datePublished"] = date_published.isoformat()
         if date_modified:
-            payload["dateModified"] = date_modified
+            payload["dateModified"] = date_modified.isoformat()
 
     script_id = "website-spec-jsonld"
     node = soup.find("script", attrs={"id": script_id})

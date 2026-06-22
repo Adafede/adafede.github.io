@@ -1,0 +1,16 @@
+---
+title: "Open Tools, Broad Knowledge: Empowering Researchers for Contextualized Metabolite Annotation"
+venue: Massa 2026
+date: 2026-06-22
+location: Chieti, Italy
+categories:
+  - Talk
+metadata-files:
+  - ../_includes/entities/authors/AdrianoRutz_IMSB.yml
+  - ../_includes/entities/affiliations/IMSB_Zamboni.yml
+description: >
+  Invited keynote lecture given in the frame of the “[Massa 2026](https://www.spettrometriadimassa.org/conference-2026-MASSA_2026)” conference organized by [Italian Chemical Society](https://www.societachimica.it/).
+  My first talk in Italian!
+
+  Available [here](https://adafede.github.io/my-presentations/20260622_chieti/20260622_massa_chieti.pdf).
+---
