@@ -5,8 +5,8 @@ venue: GigaScience
 date: 2026-06-10
 doi: 10.1093/gigascience/giag069
 # qid: TODO
-# image: TODO
-# image-alt: Article's Graphical Abstract
+image: https://raw.githubusercontent.com/zamboni-lab/MultiMS2/refs/heads/main/figures/tmap.svg
+image-alt: Article's Figure 3
 categories:
   - Open Science
   - Spectral Library
