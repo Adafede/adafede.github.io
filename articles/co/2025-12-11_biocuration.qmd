@@ -1,5 +1,7 @@
 ---
-title: "Strategies for community-sourced biocuration in bioinformatics: a case study on MIBiG 4.0"
+title: >-
+  Strategies for community-sourced biocuration in bioinformatics: a case study
+  on MIBiG 4.0
 type: article
 venue: Briefings In Bioinformatics
 date: 2025-12-11

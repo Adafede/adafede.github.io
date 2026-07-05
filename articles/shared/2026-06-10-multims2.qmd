@@ -1,5 +1,7 @@
 ---
-title: "MultiMS^2^: A curated multi-modal,  multi-energy spectral library for metabolomics"
+title: >-
+  MultiMS^2^: A curated multi-modal,  multi-energy spectral library for
+  metabolomics
 type: article
 venue: GigaScience
 date: 2026-06-10

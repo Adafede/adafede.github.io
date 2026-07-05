@@ -1,5 +1,7 @@
 ---
-title: "Building Knowledge Together: How Open Curation is Transforming Natural Products Research"
+title: >-
+  Building Knowledge Together: How Open Curation is Transforming Natural
+  Products Research
 venue: Natural Products in the 21st Century
 date: 2026-02-11
 location: Leuven, Belgium

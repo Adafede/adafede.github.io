@@ -1,5 +1,7 @@
 ---
-title: "Open Tools, Broad Knowledge: Empowering Researchers for Contextualized Metabolite Annotation"
+title: >-
+  Open Tools, Broad Knowledge: Empowering Researchers for Contextualized
+  Metabolite Annotation
 venue: Massa 2026
 date: 2026-06-22
 location: Chieti, Italy
