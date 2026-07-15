@@ -55,7 +55,7 @@ hooks = [{ id = "add-trailing-comma" }]
 
 [[repos]]
 repo = "https://github.com/astral-sh/ruff-pre-commit"
-rev = "v0.15.20"
+rev = "v0.15.21"
 hooks = [{ id = "ruff-check", args = ["--fix"] }, { id = "ruff-format" }]
 
 [[repos]]
@@ -93,7 +93,7 @@ hooks = [
 
 [[repos]]
 repo = "https://github.com/zizmorcore/zizmor-pre-commit"
-rev = "v1.26.1"
+rev = "v1.27.0"
 hooks = [{ id = "zizmor", entry = "zizmor --fix=all ." }]
 
 [[repos]]
