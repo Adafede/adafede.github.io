@@ -16,6 +16,6 @@ scalable, open-source tools for molecular annotation and metabolite discovery.
 He is a core contributor to the [LOTUS
 initiative](https://doi.org/10.7554/eLife.70780), a global,
 [FAIR](https://www.go-fair.org/fair-principles), community-driven knowledge base
-for natural products. His research fosters interdisciplinary collaboration
+for natural products. His research fosters transdisciplinary collaboration
 across data science, chemistry, and biology, driving innovation in metabolomics
 and beyond.
