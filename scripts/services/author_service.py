@@ -1,10 +1,8 @@
 """Author service for ORCID and Scholia link injection."""
 
 from pathlib import Path
-from typing import Optional
 
 from bs4 import BeautifulSoup
-
 from infrastructure.filesystem import FileSystem
 from infrastructure.html_processor import HtmlProcessor
 from infrastructure.logger import get_logger
@@ -114,7 +112,7 @@ class AuthorService:
 
             # Normalize name field
             name = author.get("name")
-            computed_name: Optional[str] = None
+            computed_name: str | None = None
 
             if isinstance(name, dict):
                 # Prefer explicit literal form
@@ -254,7 +252,7 @@ class AuthorService:
         self,
         author_text: str,
         authors: list[dict[str, str]],
-    ) -> Optional[dict[str, str]]:
+    ) -> dict[str, str] | None:
         """Find author data by name.
 
         Args:

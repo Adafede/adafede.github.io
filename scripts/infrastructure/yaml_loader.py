@@ -2,7 +2,6 @@
 
 import re
 from pathlib import Path
-from typing import Optional
 
 from ruamel.yaml import YAML
 
@@ -21,7 +20,7 @@ class YamlLoader:
         """Initialize YAML loader with safe mode."""
         self._yaml = YAML(typ="safe")
 
-    def extract_frontmatter(self, content: str) -> Optional[str]:
+    def extract_frontmatter(self, content: str) -> str | None:
         """Extract YAML frontmatter from QMD content.
 
         Args:
@@ -33,7 +32,7 @@ class YamlLoader:
         match = YAML_FRONTMATTER_PATTERN.match(content)
         return match.group(1) if match else None
 
-    def load_from_path(self, path: Path) -> Optional[dict]:
+    def load_from_path(self, path: Path) -> dict | None:
         """Load YAML from file or QMD frontmatter.
 
         Args:
@@ -66,7 +65,7 @@ class YamlLoader:
             logger.warning(f"Failed to parse YAML from {path}: {e}")
             return None
 
-    def load_from_string(self, yaml_str: str) -> Optional[dict]:
+    def load_from_string(self, yaml_str: str) -> dict | None:
         """Parse YAML from string.
 
         Args:
@@ -101,7 +100,7 @@ class YamlLoader:
         self,
         relative_path: str,
         base_dir: Path,
-    ) -> Optional[dict]:
+    ) -> dict | None:
         """Load a metadata file referenced from frontmatter.
 
         Args:
@@ -114,7 +113,7 @@ class YamlLoader:
         full_path = (base_dir / relative_path).resolve()
         return self.load_from_path(full_path)
 
-    def load_author_file(self, author_id: str, root_dir: Path) -> Optional[dict]:
+    def load_author_file(self, author_id: str, root_dir: Path) -> dict | None:
         """Load author metadata from _authors/_<id>.yml file.
 
         Args:

@@ -1,10 +1,8 @@
 """ROR (Research Organization Registry) service for affiliation linking."""
 
 from pathlib import Path
-from typing import Optional
 
 from bs4 import BeautifulSoup
-
 from infrastructure.filesystem import FileSystem
 from infrastructure.html_processor import HtmlProcessor
 from infrastructure.logger import get_logger
@@ -223,7 +221,7 @@ class RorService:
         self,
         aff_text: str,
         aff_dict: dict[str, dict[str, str]],
-    ) -> Optional[dict[str, str]]:
+    ) -> dict[str, str] | None:
         """Find affiliation data by name (case-insensitive).
 
         Args:

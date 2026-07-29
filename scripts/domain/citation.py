@@ -2,7 +2,6 @@
 
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Optional
 
 
 class CitoProperty(str, Enum):
@@ -154,7 +153,7 @@ class CitationRegistry:
         else:
             self.citations[citation.cite_id] = citation
 
-    def get_citation(self, cite_id: str) -> Optional[Citation]:
+    def get_citation(self, cite_id: str) -> Citation | None:
         """Get citation by ID.
 
         Args:

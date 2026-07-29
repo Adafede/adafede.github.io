@@ -7,7 +7,6 @@ RSS feed items. Uses the refactored infrastructure layer.
 
 import sys
 from pathlib import Path
-from typing import Dict, List, Union
 
 from bs4 import BeautifulSoup
 
@@ -31,7 +30,7 @@ DOI_URL_PREFIX = "https://doi.org/"
 # ============================================================================
 
 
-def extract_doi_from_qmd(qmd_path: Path, yaml_loader: YamlLoader) -> Dict[str, str]:
+def extract_doi_from_qmd(qmd_path: Path, yaml_loader: YamlLoader) -> dict[str, str]:
     """Extract title and DOI from QMD file metadata.
 
     Args:
@@ -65,9 +64,9 @@ def extract_doi_from_qmd(qmd_path: Path, yaml_loader: YamlLoader) -> Dict[str, s
 
 
 def build_doi_mapping(
-    qmd_files: List[Union[str, Path]],
+    qmd_files: list[str | Path],
     yaml_loader: YamlLoader,
-) -> Dict[str, str]:
+) -> dict[str, str]:
     """Build mapping from titles to DOIs from QMD files.
 
     Args:
@@ -96,7 +95,7 @@ def build_doi_mapping(
 
 def inject_doi_in_rss(
     rss_path: Path,
-    qmd_files: List[Union[str, Path]],
+    qmd_files: list[str | Path],
     yaml_loader: YamlLoader = None,
 ) -> None:
     """Inject DOIs into RSS feed items.
@@ -181,4 +180,4 @@ if __name__ == "__main__":
         print("Usage: inject_doi_in_rss.py <rss_file> <qmd_file1> [qmd_file2 ...]")
         sys.exit(1)
 
-    inject_doi_in_rss(Path(sys.argv[1]), cast(List[Union[str, Path]], sys.argv[2:]))
+    inject_doi_in_rss(Path(sys.argv[1]), cast(list[str | Path], sys.argv[2:]))

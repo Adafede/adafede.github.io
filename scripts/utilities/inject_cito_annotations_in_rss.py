@@ -8,7 +8,6 @@ Uses the refactored infrastructure layer.
 
 import sys
 from pathlib import Path
-from typing import Dict, List
 
 from bs4 import BeautifulSoup
 from lxml import etree
@@ -56,7 +55,7 @@ def snake_to_camel_case(snake_str: str) -> str:
 
 def inject_cito_annotations_in_rss(
     rss_path: Path,
-    citation_properties: Dict[str, List[str]],
+    citation_properties: dict[str, list[str]],
 ) -> None:
     """Inject CiTO annotations into RSS feed bibliography entries.
 

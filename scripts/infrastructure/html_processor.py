@@ -1,7 +1,6 @@
 """HTML parsing and manipulation utilities using BeautifulSoup."""
 
 from pathlib import Path
-from typing import Optional
 
 from bs4 import BeautifulSoup, Tag
 
@@ -21,7 +20,7 @@ class HtmlProcessor:
         """
         self.parser = parser
 
-    def load_from_path(self, path: Path) -> Optional[BeautifulSoup]:
+    def load_from_path(self, path: Path) -> BeautifulSoup | None:
         """Load and parse HTML file.
 
         Args:
@@ -72,7 +71,7 @@ class HtmlProcessor:
         self,
         soup: BeautifulSoup,
         element_id: str,
-    ) -> Optional[Tag]:
+    ) -> Tag | None:
         """Find element by ID.
 
         Args:
@@ -88,7 +87,7 @@ class HtmlProcessor:
         self,
         soup: BeautifulSoup,
         class_name: str,
-        tag: Optional[str] = None,
+        tag: str | None = None,
     ) -> list[Tag]:
         """Find elements by class name.
 
@@ -108,7 +107,7 @@ class HtmlProcessor:
         self,
         soup: BeautifulSoup,
         tag: str,
-        text: Optional[str] = None,
+        text: str | None = None,
         **attrs,
     ) -> Tag:
         """Create a new HTML element.
@@ -157,8 +156,8 @@ class HtmlProcessor:
         self,
         element: Tag,
         attr_name: str,
-        default: Optional[str] = None,
-    ) -> Optional[str]:
+        default: str | None = None,
+    ) -> str | None:
         """Get element attribute value.
 
         Args:

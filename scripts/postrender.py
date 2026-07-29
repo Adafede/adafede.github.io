@@ -5,7 +5,6 @@ Runs after Quarto renders the site to inject semantic annotations.
 
 import sys
 from pathlib import Path
-from typing import List
 
 # Add scripts directory to path for imports
 sys.path.insert(0, str(Path(__file__).parent))
@@ -119,7 +118,7 @@ def process_posts(
 
 
 def process_rss_and_feeds(
-    post_qmds: List[Path],
+    post_qmds: list[Path],
     citation_properties: dict,
     yaml_loader: YamlLoader,
 ) -> None:

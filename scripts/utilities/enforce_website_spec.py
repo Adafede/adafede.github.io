@@ -6,7 +6,6 @@ Adds missing head tags so generated pages meet modern baseline expectations.
 import json
 from datetime import date
 from pathlib import Path
-from typing import List
 
 from infrastructure import get_logger
 
@@ -342,7 +341,7 @@ def _ensure_head_basics(soup, *, site_url: str, route: str) -> bool:
     return changed
 
 
-def enforce_website_spec(html_files: List[Path], site_url: str) -> None:
+def enforce_website_spec(html_files: list[Path], site_url: str) -> None:
     """Apply metadata and discovery defaults to all rendered HTML pages."""
     fixed_count = 0
     changed_count = 0

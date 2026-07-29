@@ -2,7 +2,7 @@
 
 from dataclasses import dataclass, field
 from datetime import datetime
-from typing import Optional, TypedDict
+from typing import TypedDict
 
 
 class JSONFeedItem(TypedDict, total=False):
@@ -22,10 +22,10 @@ class ContentMetadata:
 
     title: str
     url: str
-    date_published: Optional[datetime] = None
-    date_modified: Optional[datetime] = None
-    summary: Optional[str] = None
-    content_html: Optional[str] = None
+    date_published: datetime | None = None
+    date_modified: datetime | None = None
+    summary: str | None = None
+    content_html: str | None = None
     tags: list[str] = field(default_factory=list)
     authors: list[dict] = field(default_factory=list)
 
@@ -67,9 +67,9 @@ class FeedItem:
 
     title: str
     link: str
-    description: Optional[str] = None
-    pub_date: Optional[datetime] = None
-    guid: Optional[str] = None
+    description: str | None = None
+    pub_date: datetime | None = None
+    guid: str | None = None
 
     def to_rss_item(self) -> str:
         """Convert to RSS XML item element.

@@ -2,7 +2,6 @@
 
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Optional
 
 
 @dataclass
@@ -10,25 +9,25 @@ class Affiliation:
     """Represents an institutional affiliation."""
 
     name: str
-    ror: Optional[str] = None
-    qid: Optional[str] = None  # Wikidata QID
+    ror: str | None = None
+    qid: str | None = None  # Wikidata QID
 
     @property
-    def ror_url(self) -> Optional[str]:
+    def ror_url(self) -> str | None:
         """Get full ROR URL."""
         if self.ror:
             return f"https://ror.org/{self.ror}"
         return None
 
     @property
-    def wikidata_url(self) -> Optional[str]:
+    def wikidata_url(self) -> str | None:
         """Get Wikidata URL."""
         if self.qid:
             return f"https://www.wikidata.org/wiki/{self.qid}"
         return None
 
     @property
-    def scholia_url(self) -> Optional[str]:
+    def scholia_url(self) -> str | None:
         """Get Scholia organization URL."""
         if self.qid:
             return f"https://scholia.toolforge.org/organization/{self.qid}"
@@ -40,13 +39,13 @@ class Author:
     """Represents a document author."""
 
     name: str
-    orcid: Optional[str] = None
+    orcid: str | None = None
     affiliations: list[Affiliation] = field(default_factory=list)
-    email: Optional[str] = None
-    url: Optional[str] = None
+    email: str | None = None
+    url: str | None = None
 
     @property
-    def orcid_url(self) -> Optional[str]:
+    def orcid_url(self) -> str | None:
         """Get full ORCID URL."""
         if self.orcid:
             return f"https://orcid.org/{self.orcid}"
@@ -58,11 +57,11 @@ class Post:
     """Represents a blog post or article."""
 
     path: Path
-    title: Optional[str] = None
-    date: Optional[str] = None
-    doi: Optional[str] = None
+    title: str | None = None
+    date: str | None = None
+    doi: str | None = None
     authors: list[Author] = field(default_factory=list)
-    abstract: Optional[str] = None
+    abstract: str | None = None
     tags: list[str] = field(default_factory=list)
     metadata: dict = field(default_factory=dict)
 
@@ -72,7 +71,7 @@ class Post:
         return self.path.stem
 
     @property
-    def doi_url(self) -> Optional[str]:
+    def doi_url(self) -> str | None:
         """Get full DOI URL."""
         if self.doi:
             if self.doi.startswith("http"):

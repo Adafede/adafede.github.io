@@ -6,7 +6,6 @@ Fixes common WAVE accessibility issues in generated HTML files.
 
 import sys
 from pathlib import Path
-from typing import List
 
 # Add parent directory to path for infrastructure imports
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -812,7 +811,7 @@ class AccessibilityFixer:
         return modified
 
 
-def fix_accessibility(html_files: List[Path]) -> None:
+def fix_accessibility(html_files: list[Path]) -> None:
     """Fix accessibility issues in HTML files.
 
     Args:

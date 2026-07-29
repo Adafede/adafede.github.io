@@ -4,7 +4,6 @@ import re
 from pathlib import Path
 
 from bs4 import Tag
-
 from infrastructure.filesystem import FileSystem
 from infrastructure.html_processor import HtmlProcessor
 from infrastructure.logger import get_logger

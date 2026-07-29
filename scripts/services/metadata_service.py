@@ -4,7 +4,6 @@ import re
 from pathlib import Path
 
 import yaml
-
 from infrastructure.filesystem import FileSystem
 from infrastructure.logger import get_logger
 

@@ -12,12 +12,11 @@ import subprocess
 import sys
 from datetime import datetime
 from pathlib import Path
-from typing import TypedDict, Any
+from typing import Any, TypedDict
 from urllib.parse import urlparse
 
 from bs4 import BeautifulSoup
 from lxml import etree
-
 
 # Add parent directory to path for infrastructure imports
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -119,8 +118,7 @@ def get_qmd_modification_time(item_url, base_url=None):
             parsed = urlparse(item_url)
             relative_path = parsed.path.strip("/")
 
-        if relative_path.endswith(".html"):
-            relative_path = relative_path[:-5]
+        relative_path = relative_path.removesuffix(".html")
 
         qmd_candidates = [
             f"{relative_path}/index.qmd",

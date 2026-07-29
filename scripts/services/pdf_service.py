@@ -1,9 +1,9 @@
 """PDF service for Pandoc PDF generation."""
 
+import re
+import shutil
 import subprocess
 from pathlib import Path
-import shutil
-import re
 
 from infrastructure.filesystem import FileSystem
 from infrastructure.logger import get_logger

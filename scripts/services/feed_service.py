@@ -3,14 +3,12 @@
 import json
 from datetime import datetime
 from pathlib import Path
-from typing import Optional
 
 from bs4 import BeautifulSoup
-from lxml import etree
-
 from infrastructure.filesystem import FileSystem
 from infrastructure.logger import get_logger
 from infrastructure.yaml_loader import YamlLoader
+from lxml import etree
 
 logger = get_logger(__name__)
 
@@ -328,7 +326,7 @@ class FeedService:
             logger.error(f"Failed to write JSON Feed: {e}")
             return False
 
-    def _convert_rss_item_to_json(self, item_elem) -> Optional[dict]:
+    def _convert_rss_item_to_json(self, item_elem) -> dict | None:
         """Convert RSS item to JSON Feed item.
 
         Args:

@@ -8,7 +8,6 @@ and CiTO filters. Uses the refactored infrastructure layer.
 import subprocess
 import sys
 from pathlib import Path
-from typing import List
 
 # Add parent directory to path for infrastructure imports
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -39,7 +38,7 @@ PANDOC_FILTERS = [
 # ============================================================================
 
 
-def build_pandoc_command(md_path: Path, pdf_path: Path) -> List[str]:
+def build_pandoc_command(md_path: Path, pdf_path: Path) -> list[str]:
     """Build Pandoc command for PDF generation.
 
     Args:
