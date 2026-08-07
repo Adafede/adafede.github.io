@@ -28,6 +28,7 @@ listing:
 ## 🌍 Talk Locations Map
 
 ```{python}
+#| label: talkmap
 #| include: false
 
 from scripts.utilities import talkmap

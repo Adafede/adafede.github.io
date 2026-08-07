@@ -60,7 +60,7 @@ class FeedService:
         try:
             content = self.fs.read_text(rss_path)
             soup = BeautifulSoup(content, "xml")
-        except Exception as e:
+        except (OSError, ValueError) as e:
             logger.error(f"Failed to parse RSS: {e}")
             return False
 
@@ -151,7 +151,7 @@ class FeedService:
         try:
             content = self.fs.read_text(rss_path)
             soup = BeautifulSoup(content, "xml")
-        except Exception as e:
+        except (OSError, ValueError) as e:
             logger.error(f"Failed to parse RSS: {e}")
             return False
 
@@ -221,7 +221,7 @@ class FeedService:
         try:
             content = self.fs.read_text(rss_path)
             tree = etree.fromstring(content.encode("utf-8"))
-        except Exception as e:
+        except (OSError, ValueError) as e:
             logger.error(f"Failed to parse RSS with lxml: {e}")
             return False
 
@@ -237,15 +237,13 @@ class FeedService:
             feed_authors = self._load_feed_authors()
             # if no authors found in _quarto.yml, try DC creator fallback
             if not feed_authors:
-                try:
-                    creator_elem = channel.find(
-                        "{http://purl.org/dc/elements/1.1/}creator",
-                    )
-                    if creator_elem is not None and creator_elem.text:
-                        feed_authors = [{"name": creator_elem.text.strip()}]
-                except Exception:
-                    pass
-        except Exception:
+                creator_elem = channel.find(
+                    "{http://purl.org/dc/elements/1.1/}creator",
+                )
+                if creator_elem is not None and creator_elem.text:
+                    feed_authors = [{"name": creator_elem.text.strip()}]
+        except (OSError, AttributeError):
+            # Silently use empty authors list if anything goes wrong
             feed_authors = []
 
         # Build JSON Feed with desired key order: version, title, description,
@@ -322,7 +320,7 @@ class FeedService:
             self.fs.write_text(json_feed_path, json_str)
             logger.info(f"✓ Converted RSS to JSON Feed: {json_feed_path.name}")
             return True
-        except Exception as e:
+        except OSError as e:
             logger.error(f"Failed to write JSON Feed: {e}")
             return False
 
@@ -365,8 +363,8 @@ class FeedService:
                 # Parse RSS date format
                 dt = datetime.strptime(pub_date, "%a, %d %b %Y %H:%M:%S %z")
                 item["date_published"] = dt.isoformat()
-            except Exception:
-                pass
+            except ValueError:
+                item["date_published"] = pub_date
 
         return item
 
@@ -457,8 +455,8 @@ class FeedService:
                     # Author is a string, use as name
                     authors.append({"name": author})
 
-        except Exception as e:
-            logger.error(f"Failed to load authors from _quarto.yml: {e}")
+        except (OSError, AttributeError) as e:
+            logger.debug(f"Failed to load authors from _quarto.yml: {e}")
 
         logger.debug(f"Loaded {len(authors)} authors from _quarto.yml")
         return authors

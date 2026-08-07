@@ -143,7 +143,7 @@ def run_pandoc_for_all_qmds() -> None:
         # Fix any ../images/... links that should point to _site/images/ before converting
         try:
             pdf_svc._fix_image_paths_in_md(md_path)
-        except Exception:
+        except OSError:
             logger.debug(f"Image path fixer failed for {md_path}, continuing...")
 
         # Convert to PDF

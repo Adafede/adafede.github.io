@@ -44,7 +44,7 @@ class PdfService:
         """
         try:
             text = md_path.read_text(encoding="utf-8")
-        except Exception:
+        except (OSError, UnicodeDecodeError):
             logger.debug(f"Could not read {md_path} for path-fix")
             return
 
@@ -58,12 +58,12 @@ class PdfService:
             bak = md_path.with_suffix(md_path.suffix + ".bak")
             try:
                 shutil.copy2(md_path, bak)
-            except Exception:
+            except OSError:
                 logger.warning(f"Could not create backup for {md_path}")
             try:
                 md_path.write_text(new_text, encoding="utf-8")
                 logger.info(f"Rewrote {n} Markdown image path(s) in {md_path}")
-            except Exception as e:
+            except OSError as e:
                 logger.error(f"Failed to write fixed markdown {md_path}: {e}")
         else:
             logger.debug(f"No Markdown image path fixes required for {md_path}")
@@ -89,7 +89,7 @@ class PdfService:
         # Attempt to fix image paths in generated markdown (rewrites ../images -> _site/images when present)
         try:
             self._fix_image_paths_in_md(md_path)
-        except Exception as e:
+        except OSError as e:
             logger.debug(f"Image path fix failed for {md_path}: {e}")
 
         # Build Pandoc command

@@ -10,7 +10,7 @@ import json
 import os
 import subprocess
 import sys
-from datetime import datetime
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any, TypedDict
 from urllib.parse import urlparse
@@ -134,11 +134,11 @@ def get_qmd_modification_time(item_url, base_url=None):
                     return git_date
                 else:
                     mod_timestamp = os.path.getmtime(candidate)
-                    return datetime.fromtimestamp(mod_timestamp).isoformat()
+                    return datetime.fromtimestamp(mod_timestamp, tz=UTC).isoformat()
 
         return None
 
-    except Exception as e:
+    except (OSError, ValueError) as e:
         print(f"Warning: Could not get .qmd modification time for {item_url}: {e}")
         return None
 
@@ -159,10 +159,11 @@ def is_file_modified(file_path):
             ],
             cwd=os.path.dirname(file_path) or ".",
             capture_output=True,
+            check=False,
         )
         # git diff --quiet returns 0 if no differences, 1 if differences exist
         return result.returncode != 0
-    except Exception:
+    except (OSError, FileNotFoundError):
         # If git command fails, assume file is modified to be safe
         return True
 
@@ -171,8 +172,7 @@ def get_git_commit_date(file_path):
     try:
         result = subprocess.run(
             ["git", "log", "-1", "--format=%cI", "--", file_path],
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
+            capture_output=True,
             text=True,
             check=True,
         )
@@ -223,7 +223,7 @@ def extract_item_data(item, base_url=None):
             dt = parsedate_to_datetime(pubdate)
             iso_date = dt.isoformat()
             item_data["date_published"] = iso_date
-        except Exception:
+        except (ValueError, TypeError):
             item_data["date_published"] = pubdate
 
     # Get .qmd file modification time for this item
@@ -239,7 +239,7 @@ def extract_item_data(item, base_url=None):
             dt = parsedate_to_datetime(pubdate)
             iso_date = dt.isoformat()
             item_data["date_modified"] = iso_date
-        except Exception:
+        except (ValueError, TypeError):
             item_data["date_modified"] = pubdate
 
     # Handle categories/tags
@@ -268,9 +268,7 @@ def extract_item_data(item, base_url=None):
                 link = entry.find("a", href=True)
                 if link:
                     url = link["href"]
-                    if url.startswith("http://dx.doi.org/") or url.startswith(
-                        "https://doi.org/",
-                    ):
+                    if url.startswith(("http://dx.doi.org/", "https://doi.org/")):
                         doi = url.split("doi.org/")[-1]
                         ref["url"] = url.replace(
                             "http://dx.doi.org/",
@@ -382,7 +380,7 @@ def convert_rss_to_json_feed(rss_path, json_feed_path):
                             authors_list.append(obj)
                     elif isinstance(a, str):
                         authors_list.append({"name": a})
-        except Exception:
+        except (OSError, AttributeError):
             authors_list = []
 
         # Build JSON with preferred ordering: version, title, description,
@@ -410,7 +408,7 @@ def convert_rss_to_json_feed(rss_path, json_feed_path):
 
         print(f"Generated JSON Feed: {json_feed_path}")
 
-    except Exception as e:
+    except (OSError, etree.ParseError, ValueError) as e:
         print(f"Error converting RSS to JSON: {e}")
 
 

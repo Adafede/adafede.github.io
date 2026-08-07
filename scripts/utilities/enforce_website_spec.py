@@ -135,7 +135,7 @@ def _inject_jsonld(
         payload["isPartOf"] = {"@type": "WebSite", "url": site_url.rstrip("/") + "/"}
 
     # Add author and dates for article pages
-    if route.startswith("/posts/") or route.startswith("/articles/"):
+    if route.startswith(("/posts/", "/articles/")):
         payload["@type"] = "Article"
         if author_name:
             payload["author"] = {"@type": "Person", "name": author_name}
@@ -262,11 +262,7 @@ def _ensure_head_basics(soup, *, site_url: str, route: str) -> bool:
         dark_theme_meta["content"] = "#0f172a"
         changed = True
 
-    og_type = (
-        "article"
-        if route.startswith("/posts/") or route.startswith("/articles/")
-        else "website"
-    )
+    og_type = "article" if route.startswith(("/posts/", "/articles/")) else "website"
     og_image = (
         soup.find("meta", attrs={"property": "og:image"}).get("content", "").strip()
         if soup.find("meta", attrs={"property": "og:image"})

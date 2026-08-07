@@ -24,12 +24,12 @@ cvmeta:
     right: "address: Wydäckerring, 63, 8047 Zürich, Switzerland"
 ---
 
-{{< include cv/_bio.qmd >}}
+{{< include /cv/_bio.qmd >}}
 
-{{< include cv/_experience.qmd >}}
+{{< include /cv/_experience.qmd >}}
 
-{{< include cv/_education.qmd >}}
+{{< include /cv/_education.qmd >}}
 
-{{< include cv/_awards.qmd >}}
+{{< include /cv/_awards.qmd >}}
 
-{{< include cv/_sports.qmd >}}
+{{< include /cv/_sports.qmd >}}

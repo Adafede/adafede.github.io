@@ -59,8 +59,8 @@ class GeoCache:
                 with self.cache_path.open("r", encoding="utf-8") as f:
                     self.cache = json.load(f)
                 logger.info(f"Loaded geocache with {len(self.cache)} locations")
-            except Exception as e:
-                logger.warning(f"Failed to load cache: {e}")
+            except (OSError, json.JSONDecodeError):
+                logger.warning("Failed to load cache")
                 self.cache = {}
         else:
             self.cache = {}
@@ -74,8 +74,8 @@ class GeoCache:
                 json.dump(self.cache, f, indent=2, ensure_ascii=False)
                 f.write("\n")
             logger.info(f"Saved geocache with {len(self.cache)} locations")
-        except Exception as e:
-            logger.error(f"Failed to save cache: {e}")
+        except OSError:
+            logger.error("Failed to save cache")
 
     def get(self, location: str) -> dict | None:
         """Get cached geocoding result.
@@ -147,8 +147,8 @@ def geocode_location(
 
         return (lat, lon)
 
-    except Exception as e:
-        logger.error(f"❌ Error geocoding '{location}': {e}")
+    except (AttributeError, TypeError):
+        logger.error(f"❌ Error geocoding '{location}'")
         return None
 
 
@@ -198,8 +198,8 @@ def extract_talks_metadata(
                 locations_with_meta.append((lat, lon, meta))
                 logger.debug(f"✓ Processed {qmd_file.name}: {location}")
 
-        except Exception as e:
-            logger.error(f"Failed to process {qmd_file.name}: {e}")
+        except (OSError, AttributeError, ValueError):
+            logger.error(f"Failed to process {qmd_file.name}")
             continue
 
     return locations_with_meta

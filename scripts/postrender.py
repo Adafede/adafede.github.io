@@ -51,8 +51,8 @@ def process_articles_talks_teaching() -> None:
         try:
             logger.info(f"Processing {name}: {pattern}")
             process_qmd_directory(qmd_glob=pattern)
-        except Exception as e:
-            logger.error(f"Failed to process {name}: {e}", exc_info=True)
+        except Exception:
+            logger.exception(f"Failed to process {name}")
 
 
 def process_posts(
@@ -107,11 +107,8 @@ def process_posts(
             # Inject author ORCID icons and Scholia links
             author_service.inject_into_html(qmd_file, html_file)
 
-        except Exception as e:
-            logger.error(
-                f"Failed to inject annotations for {qmd_file.name}: {e}",
-                exc_info=True,
-            )
+        except Exception:
+            logger.exception(f"Failed to inject annotations for {qmd_file.name}")
 
     # Process RSS and feeds
     process_rss_and_feeds(post_qmds, citation_properties, yaml_loader)
@@ -156,8 +153,8 @@ def process_rss_and_feeds(
         )
 
         logger.info("RSS and JSON feeds processed successfully")
-    except Exception as e:
-        logger.error(f"Failed to process feeds: {e}", exc_info=True)
+    except Exception:
+        logger.exception("Failed to process feeds")
 
 
 def postrender() -> None:
@@ -202,8 +199,8 @@ def postrender() -> None:
         logger.info("Post-render processing completed successfully")
         logger.info("=" * 80)
 
-    except Exception as e:
-        logger.error(f"Post-render failed: {e}", exc_info=True)
+    except Exception:
+        logger.exception("Post-render failed")
         sys.exit(1)
 
 

@@ -39,7 +39,7 @@ format:
 ---
 
 ::: {#hero-heading}
-{{< include cv/_bio.qmd >}}
+{{< include /cv/_bio.qmd >}}
 
 {{< include expertise.qmd >}}
 :::

@@ -221,15 +221,13 @@ class AuthorService:
             if author_data:
                 # Add ORCID icon
                 orcid = author_data.get("orcid")
-                if orcid:
-                    if self._inject_orcid_icon(soup, author_elem, orcid):
-                        enriched_count += 1
+                if orcid and self._inject_orcid_icon(soup, author_elem, orcid):
+                    enriched_count += 1
 
                 # Add Scholia link
                 qid = author_data.get("qid")
-                if qid:
-                    if self._inject_scholia_link(soup, author_elem, qid):
-                        enriched_count += 1
+                if qid and self._inject_scholia_link(soup, author_elem, qid):
+                    enriched_count += 1
 
         return enriched_count
 

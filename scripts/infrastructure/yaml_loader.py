@@ -61,7 +61,7 @@ class YamlLoader:
             # Handle pure YAML files
             return self._yaml.load(content)
 
-        except Exception as e:
+        except (OSError, ValueError) as e:
             logger.warning(f"Failed to parse YAML from {path}: {e}")
             return None
 
@@ -76,7 +76,7 @@ class YamlLoader:
         """
         try:
             return self._yaml.load(yaml_str)
-        except Exception as e:
+        except ValueError as e:
             logger.warning(f"Failed to parse YAML string: {e}")
             return None
 

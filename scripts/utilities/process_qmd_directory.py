@@ -73,8 +73,8 @@ def process_qmd_directory(qmd_glob: str) -> None:
                 author_service.inject_into_html(qmd_path, html_path)
 
                 processed += 1
-            except Exception as e:
-                logger.error(f"Failed to process {qmd_file}: {e}", exc_info=True)
+            except Exception:
+                logger.exception(f"Failed to process {qmd_file}")
         else:
             logger.warning(f"HTML not found for {qmd_file} at {html_path}")
             missing += 1

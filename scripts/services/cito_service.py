@@ -52,7 +52,7 @@ class CitoService:
 
         try:
             content = self.fs.read_text(qmd_path)
-        except Exception as e:
+        except OSError as e:
             logger.error(f"Failed to read {qmd_path}: {e}")
             return {}
 

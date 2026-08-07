@@ -114,6 +114,6 @@ project:
 all QMD files have correct frontmatter
 
 **Post-render (`postrender.py`):** 1. Generates PDFs with Pandoc 2. Processes
-articles, talks, teaching (injects ROR + ORCID) 3. Processes posts (injects CiTO
-+ ROR + ORCID) 4. Updates RSS feeds (DOIs + CiTO annotations) 5. Converts RSS to
-JSON Feed
+articles, talks, teaching (injects ROR \+ ORCID) 3. Processes posts (injects
+CiTO \+ ROR \+ ORCID) 4. Updates RSS feeds (DOIs \+ CiTO annotations) 5.
+Converts RSS to JSON Feed

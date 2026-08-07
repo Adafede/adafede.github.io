@@ -48,8 +48,8 @@ def prerender() -> None:
         logger.info("Pre-render processing completed successfully")
         logger.info("=" * 80)
 
-    except Exception as e:
-        logger.error(f"Pre-render failed: {e}", exc_info=True)
+    except Exception:
+        logger.exception("Pre-render failed")
         raise
 
 

@@ -42,7 +42,7 @@ def extract_doi_from_qmd(qmd_path: Path, yaml_loader: YamlLoader) -> dict[str, s
     """
     try:
         metadata = yaml_loader.load_from_path(qmd_path)
-    except Exception as e:
+    except (OSError, ValueError) as e:
         logger.warning(f"Failed to load metadata from {qmd_path}: {e}")
         return {}
 
@@ -129,7 +129,7 @@ def inject_doi_in_rss(
     try:
         with open(rss_path, encoding="utf-8") as f:
             soup = BeautifulSoup(f, "xml")
-    except Exception as e:
+    except (OSError, ValueError) as e:
         logger.error(f"Failed to read RSS {rss_path}: {e}")
         return
 
@@ -166,7 +166,7 @@ def inject_doi_in_rss(
             with open(rss_path, "w", encoding="utf-8") as f:
                 f.write(str(soup))
             logger.info(f"Injected DOIs into {rss_path.name}")
-        except Exception as e:
+        except OSError as e:
             logger.error(f"Failed to write RSS {rss_path}: {e}")
     else:
         logger.debug(f"No DOIs added to {rss_path.name}")

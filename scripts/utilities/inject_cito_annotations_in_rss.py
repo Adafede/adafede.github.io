@@ -77,7 +77,7 @@ def inject_cito_annotations_in_rss(
         parser = etree.XMLParser(remove_blank_text=True)
         tree = etree.parse(str(rss_path), parser)
         root = tree.getroot()
-    except Exception as e:
+    except (OSError, etree.ParseError) as e:
         logger.error(f"Failed to parse RSS {rss_path}: {e}")
         return
 
@@ -99,8 +99,8 @@ def inject_cito_annotations_in_rss(
         # Parse the inner HTML with BeautifulSoup
         try:
             soup = BeautifulSoup(desc_elem.text, "html.parser")
-        except Exception as e:
-            logger.warning(f"Failed to parse description HTML: {e}")
+        except (ValueError, TypeError):
+            logger.warning("Failed to parse description HTML")
             continue
 
         # Find bibliography container
@@ -153,7 +153,7 @@ def inject_cito_annotations_in_rss(
                 xml_declaration=True,
             )
             logger.info(f"Injected CiTO annotations into {rss_path.name}")
-        except Exception as e:
+        except OSError as e:
             logger.error(f"Failed to write RSS {rss_path}: {e}")
     else:
         logger.debug(f"No CiTO annotations added to {rss_path.name}")

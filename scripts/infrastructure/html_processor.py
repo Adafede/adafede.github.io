@@ -38,7 +38,7 @@ class HtmlProcessor:
         try:
             content = path.read_text(encoding="utf-8")
             return BeautifulSoup(content, self.parser)
-        except Exception as e:
+        except (OSError, ValueError) as e:
             logger.error(f"Failed to parse HTML from {path}: {e}")
             return None
 

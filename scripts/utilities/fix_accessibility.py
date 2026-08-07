@@ -498,15 +498,18 @@ class AccessibilityFixer:
                     body = item.find("div", class_="body")
                     if body:
                         title_link = body.find("a")
-                        if title_link and title_link.get("href") == img_href:
+                        if (
+                            title_link
+                            and title_link.get("href") == img_href
+                            and not img_link.get("aria-hidden")
+                        ):
                             # Same URL - make image link decorative
-                            if not img_link.get("aria-hidden"):
-                                img_link["aria-hidden"] = "true"
-                                img_link["tabindex"] = "-1"
-                                modified = True
-                                logger.debug(
-                                    f"Hidden redundant image link in listing: {img_href}",
-                                )
+                            img_link["aria-hidden"] = "true"
+                            img_link["tabindex"] = "-1"
+                            modified = True
+                            logger.debug(
+                                f"Hidden redundant image link in listing: {img_href}",
+                            )
 
         # Also check for traditional adjacent links
         links = soup.find_all("a")
@@ -537,15 +540,18 @@ class AccessibilityFixer:
                             logger.debug(
                                 f"Added aria-hidden to redundant image link: {current_href}",
                             )
-                    elif not current_has_img and next_has_img:
+                    elif (
+                        not current_has_img
+                        and next_has_img
+                        and not next_link.get("aria-hidden")
+                    ):
                         # Text link followed by image link
-                        if not next_link.get("aria-hidden"):
-                            next_link["aria-hidden"] = "true"
-                            next_link["tabindex"] = "-1"
-                            modified = True
-                            logger.debug(
-                                f"Added aria-hidden to redundant image link: {current_href}",
-                            )
+                        next_link["aria-hidden"] = "true"
+                        next_link["tabindex"] = "-1"
+                        modified = True
+                        logger.debug(
+                            f"Added aria-hidden to redundant image link: {current_href}",
+                        )
 
         return modified
 
@@ -558,7 +564,7 @@ class AccessibilityFixer:
 
         for grid in grids:
             # Ensure grid has an aria-label or role="grid"
-            if not grid.get("aria-label") and not grid.get("role") == "grid":
+            if not grid.get("aria-label") and grid.get("role") != "grid":
                 # Try to find a heading or label for the grid
                 label = grid.find_previous(
                     ["h1", "h2", "h3", "h4", "h5", "h6", "label"],
@@ -632,18 +638,20 @@ class AccessibilityFixer:
                     next_img = next_link.find("img")
 
                     # If one has image and other has text, hide the image link
-                    if current_img and not next_img:
+                    if current_img and not next_img and not current.get("aria-hidden"):
                         # Current is image link, next is text link
-                        if not current.get("aria-hidden"):
-                            current["aria-hidden"] = "true"
-                            current["tabindex"] = "-1"
-                            modified = True
-                    elif next_img and not current_img:
+                        current["aria-hidden"] = "true"
+                        current["tabindex"] = "-1"
+                        modified = True
+                    elif (
+                        next_img
+                        and not current_img
+                        and not next_link.get("aria-hidden")
+                    ):
                         # Next is image link, current is text link
-                        if not next_link.get("aria-hidden"):
-                            next_link["aria-hidden"] = "true"
-                            next_link["tabindex"] = "-1"
-                            modified = True
+                        next_link["aria-hidden"] = "true"
+                        next_link["tabindex"] = "-1"
+                        modified = True
 
         return modified
 
