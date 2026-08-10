@@ -40,7 +40,7 @@ hooks = [
 
 [[repos]]
 repo = "https://github.com/python-jsonschema/check-jsonschema"
-rev = "0.37.4"
+rev = "0.38.0"
 hooks = [{ id = "check-github-workflows" }, { id = "check-taskfile" }]
 
 [[repos]]
@@ -60,7 +60,7 @@ hooks = [{ id = "ruff-check", args = ["--fix"] }, { id = "ruff-format" }]
 
 [[repos]]
 repo = "https://github.com/astral-sh/uv-pre-commit"
-rev = "0.12.2"
+rev = "0.12.3"
 hooks = [{ id = "uv-lock" }]
 
 [[repos]]
@@ -98,7 +98,7 @@ hooks = [{ id = "zizmor", entry = "zizmor --fix=all ." }]
 
 [[repos]]
 repo = "https://github.com/jolars/panache-pre-commit"
-rev = "v3.2.0"
+rev = "v3.3.0"
 hooks = [{ id = "panache-format" }, { id = "panache-lint" }]
 
 [[repos]]
