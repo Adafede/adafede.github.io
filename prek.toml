@@ -5,38 +5,12 @@
 [[repos]]
 repo = "https://github.com/pre-commit/pre-commit-hooks"
 rev = "v6.0.0"
-hooks = [
-  { id = "check-added-large-files" },
-  { id = "check-ast" },
-  { id = "check-builtin-literals" },
-  { id = "check-case-conflict" },
-  { id = "check-docstring-first" },
-  { id = "check-executables-have-shebangs" },
-  { id = "check-illegal-windows-names" },
-  { id = "check-merge-conflict" },
-  { id = "check-symlinks" },
-  { id = "check-shebang-scripts-are-executable" },
-  { id = "check-symlinks" },
-  { id = "check-toml" },
-  { id = "check-xml" },
-  { id = "check-yaml" },
-  { id = "debug-statements" },
-  { id = "end-of-file-fixer" },
-  { id = "mixed-line-ending" },
-  { id = "trailing-whitespace" }
-]
+hooks = [{ id = "check-added-large-files" }, { id = "check-ast" }, { id = "check-builtin-literals" }, { id = "check-case-conflict" }, { id = "check-docstring-first" }, { id = "check-executables-have-shebangs" }, { id = "check-illegal-windows-names" }, { id = "check-merge-conflict" }, { id = "check-symlinks" }, { id = "check-shebang-scripts-are-executable" }, { id = "check-symlinks" }, { id = "check-toml" }, { id = "check-xml" }, { id = "check-yaml" }, { id = "debug-statements" }, { id = "end-of-file-fixer" }, { id = "mixed-line-ending" }, { id = "trailing-whitespace" }]
 
 [[repos]]
 repo = "https://github.com/fpgmaas/deptry"
 rev = "0.25.1"
-hooks = [
-  {
-    id = "deptry",
-    language = "python",
-    additional_dependencies = ["deptry"],
-    exclude = '^(?!.*\.py$).*$'
-  }
-]
+hooks = [{ id = "deptry", language = "python", additional_dependencies = ["deptry"], exclude = '^(?!.*\.py$).*$' }]
 
 [[repos]]
 repo = "https://github.com/python-jsonschema/check-jsonschema"
@@ -65,13 +39,13 @@ hooks = [{ id = "uv-lock" }]
 
 [[repos]]
 repo = "https://github.com/tombi-toml/tombi-pre-commit"
-rev = "v1.2.7"
+rev = "v1.3.5"
 hooks = [{ id = "tombi-format", exclude = '^uv\.lock$' }, { id = "tombi-lint" }]
 
 [[repos]]
 repo = "https://github.com/crate-ci/typos"
 rev = "v1.49.0"
-hooks = [{ id = "typos", exclude = '^articles/thesis\.qmd$' }]
+hooks = [{ id = "typos" }]
 
 [[repos]]
 repo = "https://github.com/shellcheck-py/shellcheck-py"
@@ -80,16 +54,7 @@ hooks = [{ id = "shellcheck" }]
 
 [[repos]]
 repo = "local"
-hooks = [
-  {
-    id = "ty-check",
-    name = "ty-check",
-    language = "python",
-    entry = "ty check",
-    exclude = '^(?!.*\.py$).*$',
-    additional_dependencies = ["ty"]
-  }
-]
+hooks = [{ id = "ty-check", name = "ty-check", language = "python", entry = "ty check", exclude = '^(?!.*\.py$).*$', additional_dependencies = ["ty"] }]
 
 [[repos]]
 repo = "https://github.com/zizmorcore/zizmor-pre-commit"

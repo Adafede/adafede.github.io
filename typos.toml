@@ -1,3 +1,8 @@
+[files]
+extend-exclude = [
+  "articles/thesis.qmd",
+]
+
 [default.extend-words]
 edn = "edn"
 Ege = "Ege"
