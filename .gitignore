@@ -1,5 +1,10 @@
 _site/
 
+.github/vale/styles/*
+!.github/vale/styles/config/
+!.github/vale/styles/config/ignore/
+!.github/vale/styles/config/vocabularies/
+
 .quarto/
 
 .DS_Store

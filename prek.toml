@@ -57,6 +57,20 @@ repo = "local"
 hooks = [{ id = "ty-check", name = "ty-check", language = "python", entry = "ty check", exclude = '^(?!.*\.py$).*$', additional_dependencies = ["ty"] }]
 
 [[repos]]
+repo = "https://github.com/vale-cli/vale"
+rev = "v3.17.1"
+
+[[repos.hooks]]
+id = "vale"
+name = "vale sync"
+pass_filenames = false
+args = ["sync"]
+
+[[repos.hooks]]
+id = "vale"
+args = ["--output=line", "--minAlertLevel=error"]
+
+[[repos]]
 repo = "https://github.com/zizmorcore/zizmor-pre-commit"
 rev = "v1.29.0"
 hooks = [{ id = "zizmor", entry = "zizmor --fix=all ." }]

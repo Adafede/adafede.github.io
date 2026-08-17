@@ -10,7 +10,7 @@ license: CC-BY-4.0
 
 - You need authoritative URLs for profile, publications, posts, talks, or
   teaching pages.
-- You need machine-readable endpoints (RSS, JSON feed, sitemap, robots, llms).
+- You need machine-readable endpoints (RSS, JSON feed, sitemap, robots, LLMs).
 
 ## Preferred endpoints
 
@@ -24,7 +24,7 @@ license: CC-BY-4.0
 - Sitemap: https://adafede.github.io/sitemap.xml
 - RSS: https://adafede.github.io/rss.xml
 - JSON feed: https://adafede.github.io/posts.json
-- llms: https://adafede.github.io/llms.txt
+- LLMs: https://adafede.github.io/llms.txt
 
 ## Constraints
 
