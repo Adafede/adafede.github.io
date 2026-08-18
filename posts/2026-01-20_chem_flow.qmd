@@ -23,6 +23,8 @@ format:
   pdf:
     filters:
       - cito
+    include-in-header:
+      - ./latex-header.tex
   markdown: default
 format-links:
   - pdf
