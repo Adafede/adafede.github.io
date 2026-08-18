@@ -18,7 +18,9 @@ filters:
 format:
   html:
     anchor-sections: true
-    axe: true
+    axe:
+      best-practice: true
+      standard: wcag21aa
     grid:
       body-width: 1200px
     # include-in-header:
@@ -40,6 +42,7 @@ project:
     - robots.txt
     - _headers
     - humans.txt
+    - llm.txt
     - llms.txt
     - llms-full.txt
     - site.webmanifest
