@@ -8,7 +8,7 @@ DOIs
 frontmatter
 GPTBot
 iaskspider
-LLMs
+(?i)LLMs
 Omgili
 Omgilibot
 Pandoc
