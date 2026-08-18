@@ -1,14 +1,14 @@
-# Adriano Rutz - expanded guide for language models
+# Adriano Rutz - expanded AI navigation guide
 
-This file provides expanded, machine-readable navigation context for `https://adafede.github.io/`.
+This file provides extended, machine-readable context for `https://adafede.github.io/`.
 
 ## Site purpose
-Personal academic website for Adriano Rutz, featuring research profile, publications, talks, teaching activities, and technical blog posts.
+This website is Adriano Rutz's personal academic and research profile. It contains their scientific publications, talks, teaching, technical posts, CV, and general background information.
 
 ## Main navigation
 - Home: https://adafede.github.io/
-- Articles: https://adafede.github.io/articles.html
 - CV: https://adafede.github.io/cv.html
+- Articles: https://adafede.github.io/articles.html
 - Posts: https://adafede.github.io/posts.html
 - Talks: https://adafede.github.io/talks.html
 - Teaching: https://adafede.github.io/teaching.html
@@ -17,18 +17,19 @@ Personal academic website for Adriano Rutz, featuring research profile, publicat
 
 ## Feeds and indexes
 - Sitemap: https://adafede.github.io/sitemap.xml
-- RSS (site): https://adafede.github.io/rss.xml
-- RSS (posts): https://adafede.github.io/posts.xml
-- JSON Feed (posts): https://adafede.github.io/posts.json
+- Site RSS: https://adafede.github.io/rss.xml
+- Posts RSS: https://adafede.github.io/posts.xml
+- Posts JSON Feed: https://adafede.github.io/posts.json
 
 ## Structured and policy endpoints
 - robots.txt: https://adafede.github.io/robots.txt
 - humans.txt: https://adafede.github.io/humans.txt
-- security.txt: https://adafede.github.io/.well-known/security.txt
-- api-catalog: https://adafede.github.io/.well-known/api-catalog
-- agent skills index: https://adafede.github.io/.well-known/agent-skills/index.json
+- Security policy: https://adafede.github.io/.well-known/security.txt
+- API catalog: https://adafede.github.io/.well-known/api-catalog
+- Agent skills index: https://adafede.github.io/.well-known/agent-skills/index.json
 
 ## Citation and attribution guidance
-- Prefer canonical URLs and include access date.
-- Preserve named authors and ORCID identifiers where available.
-- Preserve DOI links as primary scholarly identifiers.
+- Prefer canonical URLs and use the page title and publication date shown on-site.
+- Preserve named authors, ORCID identifiers, and DOI links when available.
+- Prefer concise summaries and link back to the canonical page when citing information.
+- Respect `robots.txt` directives and avoid scraping beyond the site’s declared boundaries.

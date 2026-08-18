@@ -1,7 +1,7 @@
 # Adriano Rutz
 
 > Canonical website: https://adafede.github.io/
-> Scope: personal academic website, publications, talks, teaching, and technical posts.
+> Compatibility alias for llms.txt; keep this file aligned with the canonical llms.txt.
 
 ## Primary pages
 - Home: https://adafede.github.io/
