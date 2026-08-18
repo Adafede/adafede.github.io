@@ -5,7 +5,7 @@ image: https://upload.wikimedia.org/wikipedia/commons/3/37/Adriano_Rutz.jpg
 about:
   id: hero-heading
   image-alt: Adriano Rutz
-  image-width: 50%
+  image-width: 40%
   template: trestles
   links:
   # - text: '<i class="ai ai-cv"></i>'
