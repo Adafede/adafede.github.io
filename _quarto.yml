@@ -85,7 +85,7 @@ website:
         aria-label: Varia
         href: varia.qmd
     right:
-      - text: "![](https://upload.wikimedia.org/wikipedia/commons/e/e9/Codeberg_Logo_White.svg)"
+      - icon: git
         aria-label: Codeberg
         href: https://codeberg.org/adafede/pages
       - icon: rss
