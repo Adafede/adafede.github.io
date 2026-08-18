@@ -1,7 +1,7 @@
 ---
 title: Adriano Rutz
 subtitle: Swiss Pharmaceutical Scientist
-image: https://avatars.githubusercontent.com/u/44283913?s=138
+image: https://avatars.githubusercontent.com/u/44283913
 about:
   id: hero-heading
   image-alt: Adriano Rutz
@@ -34,7 +34,7 @@ format:
   html:
     include-in-header:
       - text: |
-          <link rel="preload" as="image" fetchpriority="high" href="https://avatars.githubusercontent.com/u/44283913?s=138">
+          <link rel="preload" as="image" fetchpriority="high" href="https://avatars.githubusercontent.com/u/44283913">
           <style>
           body { margin-top: -60px; }
           @media screen and (max-width: 576px) { body { margin-top: -40px; } }
