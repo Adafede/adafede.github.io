@@ -1,7 +1,7 @@
 ---
 title: Adriano Rutz
 subtitle: Swiss Pharmaceutical Scientist
-image: https://upload.wikimedia.org/wikipedia/commons/3/37/Adriano_Rutz.jpg
+image: https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Adriano_Rutz.jpg/250px-Adriano_Rutz.jpg
 about:
   id: hero-heading
   image-alt: Adriano Rutz
