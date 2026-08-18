@@ -16,7 +16,7 @@ about:
       href: https://www.linkedin.com/in/AdrianoRutz/
       # - text: '<i class="ai ai-orcid"></i>'
       #   href: https://orcid.org/0000-0003-0443-9902
-    - text: "![](https://codeberg.org/Codeberg/Design/raw/branch/main/logo/icon/svg/codeberg-logo_icon_blue.svg)"
+    - text: "![](https://upload.wikimedia.org/wikipedia/commons/4/4e/Codeberg_Logo.svg)"
       href: https://codeberg.org/adafede
     - icon: github
       href: https://github.com/adafede
