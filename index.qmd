@@ -34,7 +34,29 @@ about:
       #   href: https://scholia.toolforge.org/author/Q97455964
 format:
   html:
-    css: assets/about-widths.css
+    include-in-header:
+      - text: |
+          <link rel="preload" as="image" fetchpriority="high" href="https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Adriano_Rutz.jpg/250px-Adriano_Rutz.jpg">
+          <style>
+          body { margin-top: -60px; }
+          @media screen and (max-width: 576px) { body { margin-top: -40px; } }
+          .about-entity { flex: 0 0 330.66px; max-width: 330.66px; }
+          .about-contents { flex: 1; min-width: 0; }
+          @media screen and (max-width: 991.98px) {
+            .quarto-about-trestles { flex-direction: column; }
+            .about-entity, .about-contents { max-width: 100%; flex: unset; }
+          }
+          .visually-hidden-focusable { position: absolute; top: -40px; left: 0; z-index: 9999; padding: 0.5rem 1rem; background: #000; color: #fff; text-decoration: none; font-weight: bold; }
+          .visually-hidden-focusable:focus { top: 0; clip: auto; clip-path: none; }
+          .quarto-listing-category-title[role="heading"] { font-weight: 600; font-size: 1rem; margin-bottom: 0.5rem; }
+          @media print {
+            body { margin-top: 0; }
+            .navbar, .quarto-search, #quarto-back-to-top, .visually-hidden-focusable { display: none !important; }
+            .about-entity img { max-width: 150px; }
+            a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 0.8em; word-break: break-all; }
+            a[href^="/"]::after, a[href^="#"]::after { content: ""; }
+          }
+          </style>
     page-layout: full
 ---
 
