@@ -86,8 +86,8 @@ website:
         href: varia.qmd
     right:
       - icon: git
-        aria-label: Codeberg
-        href: https://codeberg.org/adafede/pages
+        aria-label: Git
+        href: https://github.com/adafede
       - icon: rss
         aria-label: RSS Feed
         href: rss.xml
