@@ -6,27 +6,27 @@ This file provides extended, machine-readable context for `https://adafede.githu
 This website is Adriano Rutz's personal academic and research profile. It contains their scientific publications, talks, teaching, technical posts, CV, and general background information.
 
 ## Main navigation
-- Home: https://adafede.github.io/
-- CV: https://adafede.github.io/cv.html
-- Articles: https://adafede.github.io/articles.html
-- Posts: https://adafede.github.io/posts.html
-- Talks: https://adafede.github.io/talks.html
-- Teaching: https://adafede.github.io/teaching.html
-- Varia: https://adafede.github.io/varia.html
-- Privacy: https://adafede.github.io/privacy.html
+- [Home](https://adafede.github.io/)
+- [CV](https://adafede.github.io/cv.html)
+- [Articles](https://adafede.github.io/articles.html)
+- [Posts](https://adafede.github.io/posts.html)
+- [Talks](https://adafede.github.io/talks.html)
+- [Teaching](https://adafede.github.io/teaching.html)
+- [Varia](https://adafede.github.io/varia.html)
+- [Privacy](https://adafede.github.io/privacy.html)
 
 ## Feeds and indexes
-- Sitemap: https://adafede.github.io/sitemap.xml
-- Site RSS: https://adafede.github.io/rss.xml
-- Posts RSS: https://adafede.github.io/posts.xml
-- Posts JSON Feed: https://adafede.github.io/posts.json
+- [Sitemap](https://adafede.github.io/sitemap.xml)
+- [Site RSS](https://adafede.github.io/rss.xml)
+- [Posts RSS](https://adafede.github.io/posts.xml)
+- [Posts JSON Feed](https://adafede.github.io/posts.json)
 
 ## Structured and policy endpoints
-- robots.txt: https://adafede.github.io/robots.txt
-- humans.txt: https://adafede.github.io/humans.txt
-- Security policy: https://adafede.github.io/.well-known/security.txt
-- API catalog: https://adafede.github.io/.well-known/api-catalog
-- Agent skills index: https://adafede.github.io/.well-known/agent-skills/index.json
+- [robots.txt](https://adafede.github.io/robots.txt)
+- [humans.txt](https://adafede.github.io/humans.txt)
+- [Security policy](https://adafede.github.io/.well-known/security.txt)
+- [API catalog](https://adafede.github.io/.well-known/api-catalog)
+- [Agent skills index](https://adafede.github.io/.well-known/agent-skills/index.json)
 
 ## Citation and attribution guidance
 - Prefer canonical URLs and use the page title and publication date shown on-site.

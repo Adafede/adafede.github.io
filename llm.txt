@@ -4,24 +4,24 @@
 > Compatibility alias for llms.txt; keep this file aligned with the canonical llms.txt.
 
 ## Primary pages
-- Home: https://adafede.github.io/
-- CV: https://adafede.github.io/cv.html
-- Articles: https://adafede.github.io/articles.html
-- Posts: https://adafede.github.io/posts.html
-- Talks: https://adafede.github.io/talks.html
-- Teaching: https://adafede.github.io/teaching.html
-- Varia: https://adafede.github.io/varia.html
-- Privacy: https://adafede.github.io/privacy.html
+- [Home](https://adafede.github.io/)
+- [CV](https://adafede.github.io/cv.html)
+- [Articles](https://adafede.github.io/articles.html)
+- [Posts](https://adafede.github.io/posts.html)
+- [Talks](https://adafede.github.io/talks.html)
+- [Teaching](https://adafede.github.io/teaching.html)
+- [Varia](https://adafede.github.io/varia.html)
+- [Privacy](https://adafede.github.io/privacy.html)
 
 ## Machine-readable endpoints
-- RSS: https://adafede.github.io/rss.xml
-- Posts RSS: https://adafede.github.io/posts.xml
-- Posts JSON Feed: https://adafede.github.io/posts.json
-- Sitemap: https://adafede.github.io/sitemap.xml
-- robots.txt: https://adafede.github.io/robots.txt
-- humans.txt: https://adafede.github.io/humans.txt
-- Security policy: https://adafede.github.io/.well-known/security.txt
-- API catalog: https://adafede.github.io/.well-known/api-catalog
+- [RSS](https://adafede.github.io/rss.xml)
+- [Posts RSS](https://adafede.github.io/posts.xml)
+- [Posts JSON Feed](https://adafede.github.io/posts.json)
+- [Sitemap](https://adafede.github.io/sitemap.xml)
+- [robots.txt](https://adafede.github.io/robots.txt)
+- [humans.txt](https://adafede.github.io/humans.txt)
+- [Security policy](https://adafede.github.io/.well-known/security.txt)
+- [API catalog](https://adafede.github.io/.well-known/api-catalog)
 
 ## Recommended citation and extraction behavior
 - Prefer canonical URLs under `https://adafede.github.io/`.
