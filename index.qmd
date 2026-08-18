@@ -1,7 +1,7 @@
 ---
 title: Adriano Rutz
 subtitle: Swiss Pharmaceutical Scientist
-image: https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Adriano_Rutz.jpg/120px-Adriano_Rutz.jpg
+image: https://avatars.githubusercontent.com/u/44283913
 about:
   id: hero-heading
   image-alt: Adriano Rutz
@@ -16,14 +16,12 @@ about:
       href: https://www.linkedin.com/in/AdrianoRutz/
       # - text: '<i class="ai ai-orcid"></i>'
       #   href: https://orcid.org/0000-0003-0443-9902
-    - icon: git
-      href: https://codeberg.org/adafede
     - icon: github
       href: https://github.com/adafede
+    - icon: wikipedia
+      href: https://meta.wikimedia.org/wiki/User:AdrianoRutz
       # - icon: mastodon
       #   href: https://mastodon.online/@adafede
-      # - icon: wikipedia
-      #   href: https://en.wikipedia.org/wiki/User:AdrianoRutz
       # - text: '<i class="ai ai-google-scholar"></i>'
       #   href: https://scholar.google.com/citations?user=8889AMkAAAAJ
       # - text: '<i class="ai ai-impactstory"></i>'
@@ -36,7 +34,7 @@ format:
   html:
     include-in-header:
       - text: |
-          <link rel="preload" as="image" fetchpriority="high" href="https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Adriano_Rutz.jpg/120px-Adriano_Rutz.jpg">
+          <link rel="preload" as="image" fetchpriority="high" href="https://avatars.githubusercontent.com/u/44283913">
           <style>
           body { margin-top: -60px; }
           @media screen and (max-width: 576px) { body { margin-top: -40px; } }
