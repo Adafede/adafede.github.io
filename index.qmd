@@ -18,8 +18,8 @@ about:
       #   href: https://orcid.org/0000-0003-0443-9902
     - icon: github
       href: https://github.com/adafede
-    - icon: wikipedia
-      href: https://meta.wikimedia.org/wiki/User:AdrianoRutz
+      #- icon: wikipedia
+      #  href: https://meta.wikimedia.org/wiki/User:AdrianoRutz
       # - icon: mastodon
       #   href: https://mastodon.online/@adafede
       # - text: '<i class="ai ai-google-scholar"></i>'
@@ -40,7 +40,11 @@ format:
           @media screen and (max-width: 576px) { body { margin-top: -40px; } }
           .about-entity { flex: 0 0 330.66px; max-width: 330.66px; }
           .about-contents { flex: 1; min-width: 0; }
+          @media screen and (min-width: 1400px) {
+            .about-entity { flex: 0 0 260px; max-width: 260px; }
+          }
           @media screen and (max-width: 991.98px) {
+            body { margin-top: 0; }
             .quarto-about-trestles { flex-direction: column; }
             .about-entity, .about-contents { max-width: 100%; flex: unset; }
           }
