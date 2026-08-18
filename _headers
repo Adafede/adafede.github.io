@@ -5,17 +5,24 @@
   # Force HTTPS in supporting browsers
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
 
-  # Baseline CSP for static pages and known third-party embeds
-  Content-Security-Policy: default-src 'self'; img-src 'self' data: https:; script-src 'self' 'unsafe-inline' https://scripts.simpleanalyticscdn.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; connect-src 'self' https:; frame-src https:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; upgrade-insecure-requests
+  # Harden against XSS and clickjacking while allowing required static/analytics resources.
+  # The site uses a few inline scripts and third-party embeds, so the CSP is strict but practical.
+  Content-Security-Policy: default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://scripts.simpleanalyticscdn.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; img-src 'self' data: blob: https:; font-src 'self' data: https://cdnjs.cloudflare.com; connect-src 'self' https://scripts.simpleanalyticscdn.com https://*.wikidata.org https://*.wikimedia.org https://*.scholia.wiki https://hypothes.is; frame-src 'self' https://*.wikidata.org https://*.scholia.wiki; media-src 'self'; manifest-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests; block-all-mixed-content; require-trusted-types-for 'script'; trusted-types 'none'
 
   # Prevent MIME type sniffing
   X-Content-Type-Options: nosniff
 
   # Clickjacking protection
-  X-Frame-Options: SAMEORIGIN
+  X-Frame-Options: DENY
 
-  # XSS Protection (legacy browsers)
-  X-XSS-Protection: 1; mode=block
+  # Disable XSS protection in modern browsers; CSP is the authoritative control.
+  X-XSS-Protection: 0
+
+  # Origin isolation for popups/windows
+  Cross-Origin-Opener-Policy: same-origin
+
+  # Restrict cross-origin resource requests
+  Cross-Origin-Resource-Policy: same-origin
 
   # Referrer policy - send origin for cross-origin, full URL for same-origin
   Referrer-Policy: strict-origin-when-cross-origin
