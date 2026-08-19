@@ -4,13 +4,199 @@ qid: Q97455964
 
 ## Areas of Expertise
 
-```{=html}
-<iframe
-  title="Areas of Expertise from Wikidata"
-  style="width: 100%; height: 75vh; border: none;"
-  loading="lazy"
-  referrerpolicy="origin"
-  sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
-  src="https://wikidata-query-gui.scholia.wiki/embed.html#%23defaultView%3ABubbleChart%0APREFIX%20wdt%3A%20%3Chttp%3A%2F%2Fwww.wikidata.org%2Fprop%2Fdirect%2F%3E%0APREFIX%20wikibase%3A%20%3Chttp%3A%2F%2Fwikiba.se%2Fontology%23%3E%0APREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0APREFIX%20target%3A%20%3Chttp%3A%2F%2Fwww.wikidata.org%2Fentity%2FQ97455964%3E%0A%0A%23defaultView%3ABubbleChart%0A%0ASELECT%20%3Fscore%20%3Ftopic%20%3FtopicLabel%20WHERE%20%7B%0A%20%20%7B%0A%20%20%20%20SELECT%20%28SUM%28%3Fscore_%29%20AS%20%3Fscore%29%20%3Ftopic%20WHERE%20%7B%0A%20%20%20%20%20%20%7B%20SELECT%20%2864%20AS%20%3Fscore_%29%20%3Ftopic%20WHERE%20%7B%20target%3A%20wdt%3AP101%20%3Ftopic.%20%7D%20%7D%0A%20%20%20%20%20%20UNION%0A%20%20%20%20%20%20%7B%20SELECT%20%2832%20AS%20%3Fscore_%29%20%3Ftopic%20WHERE%20%7B%20%3Fwork%20wdt%3AP50%20target%3A%3B%20wdt%3AP921%20%3Ftopic.%20%7D%20%7D%0A%20%20%20%20%20%20UNION%0A%20%20%20%20%20%20%7B%20SELECT%20%2816%20AS%20%3Fscore_%29%20%3Ftopic%20WHERE%20%7B%20%3Fwork%20wdt%3AP50%20target%3A%3B%20%28wdt%3AP921%2Fwdt%3AP279%29%20%3Ftopic.%20%7D%20%7D%0A%20%20%20%20%20%20UNION%0A%20%20%20%20%20%20%7B%20SELECT%20%288%20AS%20%3Fscore_%29%20%3Ftopic%20WHERE%20%7B%20%3Fwork%20wdt%3AP50%20target%3A%3B%20%28wdt%3AP921%2Fwdt%3AP279%2Fwdt%3AP279%29%20%3Ftopic.%20%7D%20%7D%0A%20%20%20%20%20%20UNION%0A%20%20%20%20%20%20%7B%20SELECT%20%2832%20AS%20%3Fscore_%29%20%3Ftopic%20WHERE%20%7B%20%3Fwork%20wdt%3AP50%20target%3A%3B%20wdt%3AP4510%20%3Ftopic.%20%7D%20%7D%0A%20%20%20%20%20%20UNION%0A%20%20%20%20%20%20%7B%20SELECT%20%2816%20AS%20%3Fscore_%29%20%3Ftopic%20WHERE%20%7B%20%3Fwork%20wdt%3AP50%20target%3A%3B%20%28wdt%3AP4510%2Fwdt%3AP279%29%20%3Ftopic.%20%7D%20%7D%0A%20%20%20%20%20%20UNION%0A%20%20%20%20%20%20%7B%20SELECT%20%288%20AS%20%3Fscore_%29%20%3Ftopic%20WHERE%20%7B%20%3Fwork%20wdt%3AP50%20target%3A%3B%20%28wdt%3AP4510%2Fwdt%3AP279%2Fwdt%3AP279%29%20%3Ftopic.%20%7D%20%7D%0A%20%20%20%20%7D%0A%20%20%20%20GROUP%20BY%20%3Ftopic%0A%20%20%7D%0A%20%20%3Ftopic%20rdfs%3Alabel%20%3FtopicLabel.%0A%20%20FILTER%28LANG%28%3FtopicLabel%29%20%3D%20%22en%22%29%0A%7D%0AORDER%20BY%20DESC%28%3Fscore%29%0ALIMIT%2016">
-</iframe>
+```{r}
+#| label: SPARQL
+#| echo: false
+#| message: false
+#| warning: false
+
+# 1. Fetch SPARQL data from QLever endpoint
+sparql_query <- "
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema>
+PREFIX target: <http://www.wikidata.org/entity/Q97455964>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?score ?topic ?topicLabel WHERE {
+  {
+    SELECT (SUM(?score_) AS ?score) ?topic WHERE {
+      {
+        SELECT (64 AS ?score_) ?topic WHERE {
+          target: wdt:P101 ?topic .
+        }
+      }
+      UNION {
+        SELECT (32 AS ?score_) ?topic WHERE {
+          ?work wdt:P50 target: ;
+                wdt:P921 ?topic .
+        }
+      }
+      UNION {
+        SELECT (16 AS ?score_) ?topic WHERE {
+          ?work wdt:P50 target: ;
+                (wdt:P921/wdt:P279) ?topic .
+        }
+      }
+      UNION {
+        SELECT (8 AS ?score_) ?topic WHERE {
+          ?work wdt:P50 target: ;
+                (wdt:P921/wdt:P279/wdt:P279) ?topic .
+        }
+      }
+      UNION {
+        SELECT (32 AS ?score_) ?topic WHERE {
+          ?work wdt:P50 target: ;
+                wdt:P4510 ?topic .
+        }
+      }
+      UNION {
+        SELECT (16 AS ?score_) ?topic WHERE {
+          ?work wdt:P50 target: ;
+                (wdt:P4510/wdt:P279) ?topic .
+        }
+      }
+      UNION {
+        SELECT (8 AS ?score_) ?topic WHERE {
+          ?work wdt:P50 target: ;
+                (wdt:P4510/wdt:P279/wdt:P279) ?topic .
+        }
+      }
+    }
+    GROUP BY ?topic
+  }
+  ?topic rdfs:label ?topicLabel .
+  FILTER (LANG(?topicLabel) = \"en\")
+}
+ORDER BY DESC(?score)
+LIMIT 16
+"
+
+# Hit QLever Wikidata SPARQL API endpoint
+data_raw <- httr2::request(base_url = "https://qlever.cs.uni-freiburg.de/api/wikidata") |>
+  httr2::req_url_query(query = sparql_query, format = "json") |>
+  httr2::req_headers(`User-Agent` = "QuartoBuildScript/1.0")|>
+  httr2::req_perform() |>
+  httr2::resp_body_json()
+```
+
+```{r}
+#| label: Transform
+#| echo: false
+#| message: false
+#| warning: false
+
+# 2. Parse results into a clean data frame with url and qid
+df <- do.call(rbind, lapply(data_raw$results$bindings, function(x) {
+  topic_url <- x$topic$value
+  data.frame(
+    score = as.numeric(x$score$value),
+    label = x$topicLabel$value,
+    url   = topic_url,
+    qid   = sub(".*/", "", topic_url),
+    stringsAsFactors = FALSE
+  )
+}))
+
+# 3. Calculate circle packing layout
+packing <- packcircles::circleProgressiveLayout(df$score, sizetype = "area")
+df <- cbind(df, packing)
+df$id <- seq_len(nrow(df))
+
+# Calculate smart label wrapping and dynamic font scaling per item
+df$wrapped_label <- sapply(seq_len(nrow(df)), function(i) {
+  lbl <- df$label[i]
+  n_char <- nchar(lbl)
+
+  # Target width wraps more aggressively for long strings
+  target_width <- max(5, round(sqrt(df$r[i]) * 1.8))
+
+  # Replace hyphens with spaces temporarily for better wrapping if needed
+  clean_lbl <- gsub("-", " - ", lbl)
+  wrapped <- paste(strwrap(clean_lbl, width = target_width), collapse = "\n")
+  gsub(" - ", "-", wrapped) # restore hyphens
+})
+
+# Dynamic font sizing considering both circle radius AND string length
+df$font_size <- sapply(seq_len(nrow(df)), function(i) {
+  n_char <- nchar(df$label[i])
+  base_size <- df$r[i] * 0.35
+
+  # Penalize font size for longer string lengths
+  size_factor <- ifelse(n_char > 25, 0.5, ifelse(n_char > 15, 0.7, 1.0))
+  pmax(1.8, pmin(5.5, base_size * size_factor))
+})
+
+# Format explicit window.open JavaScript string for Quarto HTML output
+df$onclick <- sprintf("window.open(\"%s\", \"_blank\");", df$url)
+df$tooltip <- paste0("<b>", df$label, "</b><br>Score: ", df$score, "<br>QID: ", df$qid)
+
+# Generate circle vertices for ggplot polygons
+dat.gg <- packcircles::circleLayoutVertices(packing, npoints = 50)
+dat.gg <- merge(dat.gg, df[, c("id", "label", "score", "url", "qid", "onclick", "tooltip")], by = "id")
+```
+
+```{r}
+#| label: Plot
+#| echo: false
+#| message: false
+#| warning: false
+#| fig-alt: >-
+#|   Interactive circle packing chart displaying areas of expertise sized by
+#|   score, with labels colored using the batlowK palette.
+#| fig-height: 300
+#| fig-width: 300
+
+# 4. Plot Construction
+p <- ggplot2::ggplot() +
+  ggiraph::geom_polygon_interactive(
+    data = dat.gg,
+    ggplot2::aes(
+      x = x,
+      y = y,
+      group = id,
+      fill = score,
+      tooltip = tooltip,
+      onclick = onclick,
+      data_id = id
+    ),
+    colour = "white",
+    size = 0.5,
+    alpha = 0.85
+  ) +
+  ggplot2::scale_fill_gradientn(
+    colors = khroma::color("batlowK")(256)
+  ) +
+  ggiraph::geom_text_interactive(
+    data = df,
+    ggplot2::aes(
+      x = x,
+      y = y,
+      label = wrapped_label,
+      size = font_size,
+      tooltip = tooltip,
+      onclick = onclick,
+      data_id = id
+    ),
+    color = "white",
+    fontface = "bold",
+    lineheight = 0.8,
+    check_overlap = FALSE
+  ) +
+  ggplot2::scale_size_identity() +
+  ggplot2::theme_void() +
+  ggplot2::theme(
+    legend.position = "none",
+    plot.margin = ggplot2::margin(0, 0, 0, 0, "cm")
+  ) +
+  ggplot2::coord_equal()
+
+# 5. Render Interactive Widget
+ggiraph::giraffe(
+  ggobj = p,
+  width_svg = 8,
+  height_svg = 8,
+  options = list(
+    ggiraph::opts_hover(css = "cursor:pointer;fill-opacity:1.0;stroke:black;stroke-width:2px;"),
+    ggiraph::opts_tooltip(css = "background-color:black;color:white;padding:8px;border-radius:4px;")
+  )
+)
 ```
