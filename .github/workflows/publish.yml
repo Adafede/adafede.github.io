@@ -28,7 +28,8 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     concurrency:
-      group: altdoc-${{ github.event_name != 'pull_request' || github.run_id }}
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: ${{ github.event_name == 'pull_request' }}
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       TEXINPUTS: "_texlocal:"
@@ -46,58 +47,73 @@ jobs:
           fetch-depth: 1
           persist-credentials: false
 
-      # Cache Apt packages to avoid downloading TeX Live on every run
-      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
-        with:
-          path: /var/cache/apt/archives
-          key: ${{ runner.os }}-apt-${{ hashFiles('**/Dockerfile') }}
-          restore-keys: |
-            ${{ runner.os }}-apt-
-          lookup-only: true
+      # Install System TeX Live Base & Core Dependencies via APT
+      - name: Install system dependencies and TeX Live base
+        env:
+          DEBIAN_FRONTEND: noninteractive
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            nasm \
+            libqpdf-dev \
+            libxslt1-dev \
+            texlive-base \
+            texlive-latex-base \
+            texlive-latex-extra \
+            texlive-binaries \
+            xz-utils \
+            wget
 
-      # Install system dependencies and TeX Live
-#      - name: Install system dependencies
-#        env:
-#          DEBIAN_FRONTEND: noninteractive
-#        run: |
-#          sudo apt-get update
-#          sudo apt-get install -y --no-install-recommends \
-#            nasm \
-#            libqpdf-dev \
-#            libxslt1-dev
+      # Update tlmgr and install specific TeX packages
+      - name: Install extra TeX Live packages
+        run: |
+          wget https://mirror.ctan.org/systems/texlive/tlnet/update-tlmgr-latest.sh
+          sudo sh update-tlmgr-latest.sh --accept
+          sudo tlmgr option repository http://mirror.ctan.org/systems/texlive/tlnet
+          sudo tlmgr update --self
+          sudo tlmgr install \
+            caption \
+            fancyhdr \
+            ifmtarg \
+            koma-script \
+            moresize \
+            multirow \
+            pgf \
+            wrapfig \
+            xifthen
+          sudo mktexlsr
 
-      # Setup UV with caching
+      # Setup UV with native caching
       - uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9
         with:
           enable-cache: false
 
-      # Setup R
+      # Setup R & R dependencies (handles R package caching automatically)
       - uses: r-lib/actions/setup-r@d3c5be51b12e724e68f33216ca3c148b66d5f0b6
       - uses: r-lib/actions/setup-r-dependencies@d3c5be51b12e724e68f33216ca3c148b66d5f0b6
         with:
           extra-packages: |
             any::knitr
             any::rmarkdown
-      - uses: r-lib/actions/setup-tinytex@d3c5be51b12e724e68f33216ca3c148b66d5f0b6
 
       # Setup Pandoc
       - uses: pandoc/actions/setup@86321b6dd4675f5014c611e05088e10d4939e09e
 
-      # Setup Quarto without TinyTeX (use system TeX Live)
+      # Setup Quarto using system TeX Live (tinytex: false)
       - uses: quarto-dev/quarto-actions/setup@8a96df13519ee81fd526f2dfca5962811136661b
         with:
-          tinytex: true
+          tinytex: false
+
       # Build the site
       - name: Build site
         run: uv run quarto render
+
       # Upload artifact for Pages
-      - name: Upload Pages artifact
+      - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9
         if: github.event_name != 'pull_request'
-        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9
         with:
           path: _site/
-      # Deploy to GitHub Pages via Actions
-      - name: Deploy to GitHub Pages
+
+      # Deploy to GitHub Pages
+      - uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128
         if: github.event_name != 'pull_request'
-        id: deployment
-        uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128
