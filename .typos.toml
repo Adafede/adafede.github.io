@@ -5,6 +5,7 @@ extend-exclude = [
 
 [default.extend-words]
 edn = "edn"
+girafe = "girafe"
 Ege = "Ege"
 Modul = "Modul"
 Studi = "Studi"

@@ -188,7 +188,7 @@ p <- ggplot2::ggplot() +
   ggplot2::coord_equal()
 
 # 5. Render Interactive Widget
-ggiraph::giraffe(
+ggiraph::girafe(
   ggobj = p,
   width_svg = 8,
   height_svg = 8,
