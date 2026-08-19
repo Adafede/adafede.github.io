@@ -1,4 +1,5 @@
 ---
+title: "Articles"
 listing:
 # - id: last
 #   categories: true

@@ -1,4 +1,5 @@
 ---
+title: "Varia"
 listing:
   - id: varia_adafede
     categories: true

@@ -182,7 +182,7 @@ def generate_svg_markup(
     cmap = cm.batlowK
 
     all_scores = sorted(
-        list({meta["score"] for meta in items_by_id.values()}),
+        {meta["score"] for meta in items_by_id.values()},
         reverse=True,
     )
     num_ranks = max(1, len(all_scores))
@@ -201,14 +201,18 @@ def generate_svg_markup(
         '<div itemscope itemtype="https://schema.org/VisualArtwork" class="circle-pack-container">',
         '  <meta itemprop="name" content="Areas of Expertise Circle Packing Diagram" />',
         f'  <meta itemprop="description" content="Interactive circle packing visualization featuring {total_nodes} topics of expertise, led by {top_label}." />',
-        f'  <svg viewBox="0 0 {view_box} {view_box}" width="100%" height="{height}" role="img" '
-        'aria-labelledby="circle-pack-title circle-pack-desc" '
-        'style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 16px; font-family: system-ui, -apple-system, sans-serif;">',
+        (
+            f'  <svg viewBox="0 0 {view_box} {view_box}" width="100%" height="{height}" role="img" '
+            'aria-labelledby="circle-pack-title circle-pack-desc" '
+            'style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 16px; font-family: system-ui, -apple-system, sans-serif;">'
+        ),
         '    <title id="circle-pack-title">Areas of Expertise Circle Packing Diagram</title>',
-        '    <desc id="circle-pack-desc">'
-        f"A hierarchical circle chart showing {total_nodes} top research topics sourced from Wikidata. "
-        f"Larger circles indicate higher relative impact scores. Primary topic: {top_label}."
-        "    </desc>",
+        (
+            '    <desc id="circle-pack-desc">'
+            f"A hierarchical circle chart showing {total_nodes} top research topics sourced from Wikidata. "
+            f"Larger circles indicate higher relative impact scores. Primary topic: {top_label}."
+            "    </desc>"
+        ),
         "    <style>",
         "    a { text-decoration: none; }",
         "    .node-circle { transition: transform 0.2s ease, fill-opacity 0.2s ease; cursor: pointer; }",

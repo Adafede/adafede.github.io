@@ -1,4 +1,5 @@
 ---
+title: "Talks"
 listing:
   - id: talks_list
     contents: talks/*.qmd
@@ -20,12 +21,10 @@ listing:
       - date
 ---
 
-## Talks
-
 ::: {#talks_list}
 :::
 
-## 🌍 Talk Locations Map
+## 🌍 Talks Location Map
 
 ```{python}
 #| label: talkmap

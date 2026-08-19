@@ -1,4 +1,5 @@
 ---
+title: "Curriculum Vitæ"
 format:
   html: default
   pdf:

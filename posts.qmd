@@ -1,4 +1,5 @@
 ---
+title: "Posts"
 listing:
   - id: posts_list
     categories: true
@@ -8,8 +9,6 @@ listing:
     sort: date desc
     sort-ui: true
 ---
-
-## Posts
 
 ::: {#posts_list}
 :::
