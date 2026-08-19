@@ -6,6 +6,7 @@ from .fix_accessibility import fix_accessibility
 from .inject_cito_annotations_in_rss import inject_cito_annotations_in_rss
 from .inject_doi_in_rss import inject_doi_in_rss
 from .process_qmd_directory import process_qmd_directory
+from .render_circle_packing import render_circle_packing
 from .run_pandoc_for_all_qmds import run_pandoc_for_all_qmds
 from .talkmap import talkmap
 
@@ -16,6 +17,7 @@ __all__ = [
     "inject_cito_annotations_in_rss",
     "inject_doi_in_rss",
     "process_qmd_directory",
+    "render_circle_packing",
     "run_pandoc_for_all_qmds",
     "talkmap",
 ]

@@ -5,11 +5,15 @@ description = "My personal website"
 requires-python = "==3.13.*"
 dependencies = [
   "bs4>=0.0.2",
+  "circlify>=0.15.1",
+  "cmcrameri>=1.10",
   "commonmeta-py>=0.272",
   "folium>=0.20.0",
   "geopy>=2.5.0",
+  "ipython>=9.16.1",
   "lxml>=6.1.2",
   "markdown>=3.10.3",
+  "matplotlib>=3.11.1",
   "pyyaml>=6.0.3",
   "quarto>=0.1.0",
   "ruamel-yaml>=0.19.1",
@@ -32,6 +36,9 @@ known_first_party = [
 [tool.deptry.package_module_name_map]
 commonmeta-py = [
   "commonmeta",
+]
+ipython = [
+  "IPython",
 ]
 pyyaml = [
   "yaml",

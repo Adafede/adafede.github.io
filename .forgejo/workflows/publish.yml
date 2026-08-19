@@ -81,7 +81,7 @@ jobs:
       - name: Install R dependencies
         run: |
           Rscript -e "install.packages('pak', repos='https://r-lib.github.io/p/pak/stable/')"
-          Rscript -e "pak::pkg_install(c('ggiraph','ggplot2','httr2','knitr','khroma','packcircles','rmarkdown'))"
+          Rscript -e "pak::pkg_install(c('knitr','rmarkdown'))"
       # Build the site
       - name: Build site
         run: uv run quarto render
