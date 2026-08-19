@@ -1,7 +1,3 @@
----
-qid: Q97455964
----
-
 ## Areas of Expertise
 
 ```{python}

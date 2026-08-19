@@ -65,5 +65,5 @@ format:
 ::: {#hero-heading}
 {{< include /cv/_bio.qmd >}}
 
-{{< include expertise.qmd >}}
+{{< include _expertise.qmd >}}
 :::
