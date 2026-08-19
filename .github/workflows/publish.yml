@@ -47,8 +47,8 @@ jobs:
           fetch-depth: 1
           persist-credentials: false
 
-      # Install System TeX Live Base & Core Dependencies via APT
-      - name: Install system dependencies and TeX Live base
+      # Install System Dependencies & Complete TeX Live packages via APT
+      - name: Install system dependencies and TeX packages
         env:
           DEBIAN_FRONTEND: noninteractive
         run: |
@@ -57,31 +57,12 @@ jobs:
             nasm \
             libqpdf-dev \
             libxslt1-dev \
-            texlive-base \
-            texlive-latex-base \
             texlive-latex-extra \
-            texlive-binaries \
-            xz-utils \
-            wget
-
-      # Update tlmgr and install specific TeX packages
-      - name: Install extra TeX Live packages
-        run: |
-          wget https://mirror.ctan.org/systems/texlive/tlnet/update-tlmgr-latest.sh
-          sudo sh update-tlmgr-latest.sh --accept
-          sudo tlmgr option repository http://mirror.ctan.org/systems/texlive/tlnet
-          sudo tlmgr update --self
-          sudo tlmgr install \
-            caption \
-            fancyhdr \
-            ifmtarg \
-            koma-script \
-            moresize \
-            multirow \
-            pgf \
-            wrapfig \
-            xifthen
-          sudo mktexlsr
+            texlive-fonts-recommended \
+            texlive-latex-recommended \
+            texlive-pictures \
+            texlive-science \
+            texlive-luatex
 
       # Setup UV with native caching
       - uses: astral-sh/setup-uv@ae62891fec2bb8e7d6c99fc78c9fec3a63790f8d
