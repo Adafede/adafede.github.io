@@ -56,19 +56,15 @@ jobs:
           lookup-only: true
 
       # Install system dependencies and TeX Live
-      - name: Install system dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y \
-            nasm \
-            libqpdf-dev \
-            libxslt1-dev \
-            texlive-latex-extra \
-            texlive-fonts-recommended \
-            texlive-latex-recommended \
-            texlive-pictures \
-            texlive-science \
-            texlive-luatex
+#      - name: Install system dependencies
+#        env:
+#          DEBIAN_FRONTEND: noninteractive
+#        run: |
+#          sudo apt-get update
+#          sudo apt-get install -y --no-install-recommends \
+#            nasm \
+#            libqpdf-dev \
+#            libxslt1-dev
 
       # Setup UV with caching
       - uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9
