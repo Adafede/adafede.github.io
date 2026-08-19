@@ -142,8 +142,6 @@ dat.gg <- merge(dat.gg, df[, c("id", "label", "score", "url", "qid", "onclick", 
 #| fig-alt: >-
 #|   Interactive circle packing chart displaying areas of expertise sized by
 #|   score, with labels colored using the batlowK palette.
-#| fig-height: 300
-#| fig-width: 300
 
 # 4. Plot Construction
 p <- ggplot2::ggplot() +
