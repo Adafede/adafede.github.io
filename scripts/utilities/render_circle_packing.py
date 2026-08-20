@@ -145,7 +145,7 @@ def compute_text_styling(
 
     # W3C relative luminance contrast check
     luminance = 0.299 * rgba[0] + 0.587 * rgba[1] + 0.114 * rgba[2]
-    text_color = "#FFFFFF" if luminance < 0.5 else "#0F172A"
+    text_color = "#FFF" if luminance < 0.5 else "#0F172A"
 
     # Word wrapping logic
     words = label.split(" ")
@@ -202,9 +202,9 @@ def generate_svg_markup(
         '  <meta itemprop="name" content="Areas of Expertise Circle Packing Diagram" />',
         f'  <meta itemprop="description" content="Interactive circle packing visualization featuring {total_nodes} topics of expertise, led by {top_label}." />',
         (
-            f'  <svg viewBox="0 0 {view_box} {view_box}" width="100%" height="{height}" role="img" '
+            f'  <svg viewBox="0 0 {view_box} {view_box}" width="{view_box}" height="{height}" role="img" '
             'aria-labelledby="circle-pack-title circle-pack-desc" '
-            'style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 16px; font-family: system-ui, -apple-system, sans-serif;">'
+            'style="background: #FFFFFF; border-radius: 16px; font-family: system-ui, -apple-system, sans-serif;">'
         ),
         '    <title id="circle-pack-title">Areas of Expertise Circle Packing Diagram</title>',
         (
@@ -216,7 +216,7 @@ def generate_svg_markup(
         "    <style>",
         "    a { text-decoration: none; }",
         "    .node-circle { transition: transform 0.2s ease, fill-opacity 0.2s ease; cursor: pointer; }",
-        "    .node-circle:hover, .node-circle:focus { fill-opacity: 1.0; stroke: #090A0A; stroke-width: 3px; outline: none; }",
+        "    .node-circle:hover, .node-circle:focus { fill-opacity: 1.0; stroke: #FFF; stroke-width: 3px; outline: none; }",
         "    .node-text { pointer-events: none; user-select: none; font-weight: 700; }",
         "    @media (prefers-reduced-motion: reduce) { .node-circle { transition: none; } }",
         "  </style>",
@@ -265,7 +265,7 @@ def generate_svg_markup(
         svg_parts.append(f"        <title>{tooltip_text}</title>")
         svg_parts.append(
             f'        <circle class="node-circle" cx="{cx:.2f}" cy="{cy:.2f}" r="{r:.2f}" '
-            f'fill="{color}" fill-opacity="0.88" stroke="#FFFFFF" stroke-width="2" />',
+            f'fill="{color}" fill-opacity="0.88" stroke="#FFF" stroke-width="2" />',
         )
         svg_parts.append(
             f'        <text class="node-text" x="{cx:.2f}" y="{cy:.2f}" font-size="{font_size}px" '
@@ -278,7 +278,7 @@ def generate_svg_markup(
         for idx, line in enumerate(lines):
             ly = start_y + (idx * line_height)
             svg_parts.append(
-                f'          <tspan x="{cx:.2f}" y="{ly:.2f}">{line}</tspan>'
+                f'          <tspan x="{cx:.2f}" y="{ly:.2f}">{line}</tspan>',
             )
 
         svg_parts.append("        </text>")

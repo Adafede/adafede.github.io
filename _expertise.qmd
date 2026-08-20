@@ -1,9 +1,11 @@
 ## Areas of Expertise
 
+::: {style="display: flex; justify-content: center; width: 100%;"}
 ```{python}
 #| label: expertise-packing
 #| echo: false
 #| warning: false
+#| fig-align: center
 #| fig-alt: >-
 #|   Circle packing diagram showing top areas of expertise scaled by impact
 #|   score, with larger circles representing higher score.
@@ -11,3 +13,4 @@
 from scripts.utilities import render_circle_packing
 render_circle_packing()
 ```
+:::
