@@ -206,9 +206,9 @@ def generate_svg_markup(
         '  <meta itemprop="name" content="Areas of Expertise Circle Packing Diagram" />',
         f'  <meta itemprop="description" content="Interactive circle packing visualization featuring {total_nodes} topics of expertise, led by {top_label}." />',
         (
-            f'  <svg viewBox="0 0 {view_box} {view_box}" width="100%" height="auto" preserveAspectRatio="xMidYMid meet" role="graphics-document" '
+            f'  <svg viewBox="0 0 {view_box} {view_box}" width="{view_box}" height="{view_box}" role="graphics-document" '
             'aria-labelledby="circle-pack-title circle-pack-desc" '
-            'style="background: #FFFFFF; border-radius: 16px; font-family: system-ui, -apple-system, sans-serif;">'
+            'style="background: #FFF; border-radius: 16px; font-family: system-ui, -apple-system, sans-serif;">'
         ),
         '    <title id="circle-pack-title">Areas of Expertise Circle Packing Diagram</title>',
         (
