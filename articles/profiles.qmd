@@ -1,10 +1,9 @@
 ---
+title: "Publication profiles"
 qid: Q97455964
 orcid: 0000-0003-0443-9902
 scholar: 8889AMkAAAAJ
 ---
-
-## Publication profile
 
 - **Scholia** ![Scholia
   logo](https://upload.wikimedia.org/wikipedia/commons/5/5b/Scholia_Logo_Improved.svg){height=20} :

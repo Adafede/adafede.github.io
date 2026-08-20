@@ -80,7 +80,8 @@ uv run quarto render
 
 ```python
 import sys
-sys.path.insert(0, 'scripts')
+
+sys.path.insert(0, "scripts")
 
 from services import CitoService, AuthorService
 from infrastructure import FileSystem, HtmlProcessor
