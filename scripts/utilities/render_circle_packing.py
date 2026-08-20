@@ -207,8 +207,8 @@ def generate_svg_markup(
         f'  <meta itemprop="description" content="Interactive circle packing visualization featuring {total_nodes} topics of expertise, led by {top_label}." />',
         (
             f'  <svg viewBox="0 0 {view_box} {view_box}" width="{view_box}" height="{view_box}" role="graphics-document" '
-            'aria-labelledby="circle-pack-title circle-pack-desc" '
-            'style="background: #FFF; border-radius: 16px; font-family: system-ui, -apple-system, sans-serif;">'
+           'aria-labelledby="circle-pack-title circle-pack-desc" '
+           'style="width: 100%; max-width: 100%; height: auto; display: block; margin: 0 auto; background: #FFF; border-radius: 16px; font-family: system-ui, -apple-system, sans-serif;">'
         ),
         '    <title id="circle-pack-title">Areas of Expertise Circle Packing Diagram</title>',
         (
