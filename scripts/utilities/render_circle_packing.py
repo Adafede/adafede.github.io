@@ -9,9 +9,11 @@ from __future__ import annotations
 import json
 import math
 import sys
+import urllib.error
 import urllib.parse
 import urllib.request
 from pathlib import Path
+from typing import Any
 
 import circlify
 import matplotlib.colors as mcolors
@@ -137,7 +139,7 @@ def compute_text_styling(
     r: float,
     score: float,
     rank_norm: float,
-    cmap: any,
+    cmap: Any,
 ) -> tuple[str, str, list[str], int]:
     """Calculate color contrast, text wrapping, and optimal font size."""
     rgba = cmap(rank_norm)
@@ -192,7 +194,9 @@ def generate_svg_markup(
     if circles:
         first_ex = circles[0].ex
         # Extract ID depending on whether .ex is a dict or string
-        top_qid = first_ex.get("id") if isinstance(first_ex, dict) else first_ex
+        top_qid = first_ex.get("id", "") if isinstance(first_ex, dict) else first_ex
+        if not isinstance(top_qid, str):
+            top_qid = ""
         top_label = items_by_id.get(top_qid, {}).get("label", "Unknown")
     else:
         top_label = "N/A"
@@ -228,6 +232,8 @@ def generate_svg_markup(
         node_id = c.ex if isinstance(c.ex, str) else getattr(c, "id", None)
         if isinstance(c.ex, dict):
             node_id = c.ex.get("id", node_id)
+        if not isinstance(node_id, str):
+            node_id = ""
 
         meta = items_by_id.get(node_id, {})
         if not meta and isinstance(c.ex, dict):
