@@ -30,7 +30,7 @@ class Affiliation:
     def scholia_url(self) -> str | None:
         """Get Scholia organization URL."""
         if self.qid:
-            return f"https://scholia.toolforge.org/organization/{self.qid}"
+            return f"https://qlever.scholia.wiki/organization/{self.qid}"
         return None
 
 

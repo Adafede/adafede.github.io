@@ -350,7 +350,7 @@ class AuthorService:
         if existing_link:
             return False
 
-        scholia_url = f"https://scholia.toolforge.org/author/{qid}"
+        scholia_url = f"https://qlever.scholia.wiki/author/{qid}"
         scholia_img = (
             f'<img src="{self.SCHOLIA_SVG_URL}" alt="Scholia" '
             f'style="height:1em; vertical-align:middle; margin-left:0.25em;" />'

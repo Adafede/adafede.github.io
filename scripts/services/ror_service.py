@@ -289,7 +289,7 @@ class RorService:
             element: Element to add link to
             qid: Wikidata QID
         """
-        scholia_url = f"https://scholia.toolforge.org/organization/{qid}"
+        scholia_url = f"https://qlever.scholia.wiki/organization/{qid}"
         scholia_img = (
             f'<img src="{self.SCHOLIA_SVG_URL}" alt="" aria-hidden="true" '
             f'style="height:1em; vertical-align:middle; margin-left:0.25em;" />'
