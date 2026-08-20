@@ -8,7 +8,7 @@ scholar: 8889AMkAAAAJ
 
 - **Scholia** ![Scholia
   logo](https://upload.wikimedia.org/wikipedia/commons/5/5b/Scholia_Logo_Improved.svg){height=20} :
-  [https://scholia.toolforge.org/author/{{< meta qid >}}](https://scholia.toolforge.org/author/{{< meta qid >}})
+  [https://qlever.scholia.wiki/author/{{< meta qid >}}](https://qlever.scholia.wiki/author/{{< meta qid >}})
 
 - **ORCID** ![ORCID
   logo](https://upload.wikimedia.org/wikipedia/commons/0/06/ORCID_iD.svg){height=20} :

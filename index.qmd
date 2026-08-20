@@ -29,7 +29,7 @@ about:
       # - text: '<i class="ai ai-researchgate"></i>'
       #   href: https://www.researchgate.net/profile/Adriano_Rutz
       # - text: "![](https://upload.wikimedia.org/wikipedia/commons/5/5b/Scholia_Logo_Improved.svg){height=20}"
-      #   href: https://scholia.toolforge.org/author/Q97455964
+      #   href: https://qlever.scholia.wiki/author/Q97455964
 format:
   html:
     include-in-header:

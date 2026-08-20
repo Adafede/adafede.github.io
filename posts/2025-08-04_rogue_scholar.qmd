@@ -65,7 +65,7 @@ feels suboptimal.
 feed with correct CiTO annotations and their cool custom json feed, see:
 <https://adafede.github.io/posts.json>!
 
-### References
+## References
 
 ::: {#refs}
 :::

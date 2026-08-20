@@ -6,21 +6,27 @@ type: article
 venue: Briefings In Bioinformatics
 date: 2025-12-11
 doi: 10.1093/bib/bbaf659
-# qid: TODO
+qid: Q140773020
 url: <https://doi.org/10.1093/bib/bbaf659>
-# categories:
-#   - Biocuration
-#   - Bioinformatics
-# abstract: |
-#  TODO
+categories:
+  - Biocuration
+  - Bioinformatics
+abstract: |
+ Biocuration is essential to transform molecular sequence data into standardized, machine-readable resources.
+ Such curated datasets enable comparative analysis, predictive modeling, and data integration across bioinformatics platforms.
+ While professional biocuration is resource-intensive and usually limited to institutional settings, community-driven approaches can mobilize large-scale annotation of specialized datasets and are more resilient to disruptions in scientific funding.
+ Here, we present a model for community-powered curation applied to the Minimum Information about a Biosynthetic Gene Cluster (MIBiG) repository.
+ Through a framework of workflows for metadata capture, annotation validation, and contributor coordination, the MIBiG 4.0 initiative recruited 267 scientists across 178 institutions from 33 countries, volunteering an estimated 4000 h of work.
+ These efforts expanded the MIBiG repository by 22% and enhanced its usability in downstream molecular data analyses in comparative genomic analyses, natural product discovery, and machine learning applications.
+ We provide strategies and actionable lessons for adopting this model, supporting the sustainability of curated bioinformatics resources central to nucleic acid research and related fields.
 nocite: |
   @Blin2025
 ---
 
-<!-- ```{=html} -->
-<!-- <iframe width="100%" -->
-<!--         height="100%" -->
-<!--         src="https://scholia.toolforge.org/work/{{< meta qid >}}" -->
-<!--         title="Scholia entry"> -->
-<!-- </iframe> -->
-<!-- ``` -->
+```{=html}
+<iframe width="100%"
+        height="100%"
+        src="https://qlever.scholia.wiki/work/{{< meta qid >}}"
+        title="Scholia entry">
+</iframe>
+```

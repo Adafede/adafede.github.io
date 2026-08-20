@@ -6,23 +6,31 @@ type: article
 venue: JACS Au
 date: 2025-12-01
 doi: 10.1021/jacsau.5c01063
-# qid: TODO
+qid: Q140773395
 url: <https://doi.org/10.1021/jacsau.5c01063>
-# categories:
+categories:
 # - Dark Matter
-# - In Source Fragmentation
-# - Metabolomics
-# - Liquid Chromatography-Tandem Mass Spectrometry
-# abstract: |
-#  TODO
+  - In Source Fragmentation
+  - Metabolomics
+  - Liquid Chromatography-Tandem Mass Spectrometry
+abstract: |
+  In/postsource fragments (ISFs) arise during electrospray ionization or ion transfer in mass spectrometry when molecular bonds break, generating ions that can complicate data interpretation.
+  Although ISFs have been recognized for decades, their contribution to untargeted metabolomicsparticularly in the context of the so-called “dark matter” (unannotated MS or MS/MS spectra) and the “dark metabolome” (unannotated molecules)remains unsettled.
+  This ongoing debate reflects a central tension: while some caution against overinterpreting unidentified signals lacking biological evidence, others argue that dismissing them too quickly risks overlooking genuine molecular discoveries.
+  These discussions also raise a deeper question: what exactly should be considered part of the metabolome?
+  As metabolomics advances toward large-scale data mining and high-throughput computational analysis, resolving these conceptual and methodological ambiguities has become essential.
+  In this perspective, we propose a refined definition of the “dark metabolome” and present a systematic overview of ISFs and related ion forms, including adducts and multimers.
+  We examine their impact on metabolite annotation, experimental design, statistical analysis, computational workflows, and repository-scale data mining.
+  Finally, we provide practical recommendationsincluding a set of dos and do nots for researchers and reviewersand discuss the broader implications of ISFs for how the field explores unknown molecular space.
+  By embracing a more nuanced understanding of ISFs, metabolomics can achieve greater rigor, reduce misinterpretation, and unlock new opportunities for discovery.
 nocite: |
   @ElAbiead2025b
 ---
 
-<!-- ```{=html} -->
-<!-- <iframe width="100%" -->
-<!--         height="100%" -->
-<!--         src="https://scholia.toolforge.org/work/{{< meta qid >}}" -->
-<!--         title="Scholia entry"> -->
-<!-- </iframe> -->
-<!-- ``` -->
+```{=html}
+<iframe width="100%"
+        height="100%"
+        src="https://qlever.scholia.wiki/work/{{< meta qid >}}"
+        title="Scholia entry">
+</iframe>
+```
