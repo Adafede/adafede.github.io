@@ -7,7 +7,7 @@ venue: Natural Product Reports
 date: 2025-09-15
 doi: 10.1039/D5NP00034C
 qid: Q138348592
-image: https://pubs.rsc.org/en/Image/Get?imageInfo.ImageType=GA&imageInfo.ImageIdentifier.ManuscriptID=D5NP00034C&imageInfo.ImageIdentifier.Year=2025
+image: https://ars.els-cdn.com/content/image/1-s2.0-S0265056826000231-d5np00034c-f5_lrg.gif
 image-alt: Graphical abstract
 categories:
   - Metabolomics
