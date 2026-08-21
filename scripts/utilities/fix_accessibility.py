@@ -7,10 +7,11 @@ Fixes common WAVE accessibility issues in generated HTML files.
 import sys
 from pathlib import Path
 
-# Add parent directory to path for infrastructure imports
-sys.path.insert(0, str(Path(__file__).parent.parent))
+# Add project root to path so `scripts` is importable as a package
+root_dir = Path(__file__).resolve().parent.parent.parent
+sys.path.insert(0, str(root_dir))
 
-from infrastructure import FileSystem, HtmlProcessor, get_logger
+from scripts.infrastructure import FileSystem, HtmlProcessor, get_logger
 
 logger = get_logger(__name__)
 
@@ -25,8 +26,8 @@ class AccessibilityFixer:
             fs: FileSystem instance
             html_processor: HtmlProcessor instance
         """
-        self.fs = fs
-        self.html_processor = html_processor
+        self.fs: FileSystem = fs
+        self.html_processor: HtmlProcessor = html_processor
 
     def fix_html_file(self, html_path: Path) -> bool:
         """Fix accessibility issues in an HTML file.
@@ -47,16 +48,13 @@ class AccessibilityFixer:
 
         modified = False
 
-        # Fix 1: Add lang attribute to links with non-English text
-        modified |= self._fix_link_language(soup)
-
-        # Fix 2: Ensure all images have alt text
+        # Fix 1: Ensure all images have alt text
         modified |= self._fix_image_alt_text(soup)
 
-        # Fix 3: Fix empty links
+        # Fix 2: Fix empty links
         modified |= self._fix_empty_links(soup)
 
-        # Fix 4: Add ARIA labels where needed
+        # Fix 3: Add ARIA labels where needed
         modified |= self._fix_aria_labels(soup)
 
         # Fix 5: Ensure heading hierarchy
@@ -105,12 +103,6 @@ class AccessibilityFixer:
             return True
 
         return False
-
-    def _fix_link_language(self, soup) -> bool:
-        """Add hreflang attributes to external links."""
-        modified = False
-        # Implementation would check for external links and add appropriate lang attributes
-        return modified
 
     def _fix_image_alt_text(self, soup) -> bool:
         """Ensure all images have alt text."""

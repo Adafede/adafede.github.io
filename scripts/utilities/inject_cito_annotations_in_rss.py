@@ -7,65 +7,39 @@ Uses the refactored infrastructure layer.
 """
 
 import sys
+from collections.abc import Iterable, Mapping
 from pathlib import Path
+from typing import cast
 
 from bs4 import BeautifulSoup
-from lxml import etree
 
-# Add parent directory to path for infrastructure imports
-sys.path.insert(0, str(Path(__file__).parent.parent))
+# Add project root to path so `scripts` is importable as a package
+root_dir = Path(__file__).resolve().parent.parent.parent
+sys.path.insert(0, str(root_dir))
 
-from infrastructure import get_logger
+from scripts.config import (
+    CITO_SPAN_CLASS,
+    CSL_ENTRY_CLASS,
+    REF_ID_PREFIX,
+    REFS_CONTAINER_ID,
+)
+from scripts.infrastructure import get_logger, snake_to_camel
+from scripts.infrastructure.xml_parser import XmlParser
 
 logger = get_logger(__name__)
 
 
-# ============================================================================
-# CONSTANTS
-# ============================================================================
-
-REFS_CONTAINER_ID = "refs"
-CSL_ENTRY_CLASS = "csl-entry"
-CITO_SPAN_CLASS = "cito"
-REF_ID_PREFIX = "ref-"
-
-
-# ============================================================================
-# UTILITY FUNCTIONS
-# ============================================================================
-
-
-def snake_to_camel_case(snake_str: str) -> str:
-    """Convert snake_case to camelCase.
-
-    Args:
-        snake_str: String in snake_case format
-
-    Returns:
-        String in camelCase format
-    """
-    components = snake_str.split("_")
-    return components[0] + "".join(x.title() for x in components[1:])
-
-
-# ============================================================================
-# RSS PROCESSING
-# ============================================================================
-
-
 def inject_cito_annotations_in_rss(
     rss_path: Path,
-    citation_properties: dict[str, list[str]],
+    citation_properties: Mapping[str, Iterable[str]],
 ) -> None:
-    """Inject CiTO annotations into RSS feed bibliography entries.
+    """Inject [cito:...] annotations into bibliography entries in an RSS feed's
+    item descriptions.
 
     Args:
-        rss_path: Path to RSS XML file
-        citation_properties: Dictionary mapping citation IDs to lists of CiTO properties
-
-    Example:
-        >>> citation_props = {'smith2020': ['citesAsEvidence']}
-        >>> inject_cito_annotations_in_rss(Path('posts.xml'), citation_props)
+        rss_path: Path to RSS XML file.
+        citation_properties: Mapping of citation IDs to CiTO property lists,
+            e.g. ``{"smith2020": ["cites_as_evidence"]}``.
     """
     rss_path = Path(rss_path)
 
@@ -74,10 +48,9 @@ def inject_cito_annotations_in_rss(
         return
 
     try:
-        parser = etree.XMLParser(remove_blank_text=True)
-        tree = etree.parse(str(rss_path), parser)
-        root = tree.getroot()
-    except (OSError, etree.ParseError) as e:
+        parser = XmlParser.new_parser(remove_blank_text=True)
+        root = XmlParser.parse(str(rss_path), parser=parser)
+    except (OSError, XmlParser.ParseError) as e:
         logger.error(f"Failed to parse RSS {rss_path}: {e}")
         return
 
@@ -98,7 +71,7 @@ def inject_cito_annotations_in_rss(
 
         # Parse the inner HTML with BeautifulSoup
         try:
-            soup = BeautifulSoup(desc_elem.text, "html.parser")
+            soup = BeautifulSoup(str(desc_elem.text), "html.parser")
         except (ValueError, TypeError):
             logger.warning("Failed to parse description HTML")
             continue
@@ -113,7 +86,7 @@ def inject_cito_annotations_in_rss(
         item_modified = False
 
         for entry in bib_entries:
-            cid = entry.get("id", "")
+            cid = str(entry.get("id") or "")
             if not cid.startswith(REF_ID_PREFIX):
                 continue
 
@@ -128,30 +101,26 @@ def inject_cito_annotations_in_rss(
                 continue
 
             # Transform snake_case properties to camelCase
-            camel_case_props = [snake_to_camel_case(prop) for prop in cito_props]
+            camel_case_props = [snake_to_camel(prop) for prop in cito_props]
             annotation_text = " ".join(f"[cito:{prop}]" for prop in camel_case_props)
 
             # Create and append CiTO annotation span
-            cito_span = soup.new_tag("span", **{"class": CITO_SPAN_CLASS})
+            cito_span = soup.new_tag("span", attrs={"class": CITO_SPAN_CLASS})
             cito_span.string = " " + annotation_text
-            entry.append(cito_span)
+            _ = entry.append(cito_span)
             item_modified = True
 
         # Update description with CDATA section if modified
         if item_modified:
             desc_elem.clear()
-            desc_elem.text = etree.CDATA(str(soup))
+            cdata_node = XmlParser.cdata(str(soup))
+            desc_elem.text = cast("str | None", cdata_node)
             modified = True
 
     # Write back if modified
     if modified:
         try:
-            tree.write(
-                str(rss_path),
-                pretty_print=True,
-                encoding="utf-8",
-                xml_declaration=True,
-            )
+            XmlParser.write(root, str(rss_path))
             logger.info(f"Injected CiTO annotations into {rss_path.name}")
         except OSError as e:
             logger.error(f"Failed to write RSS {rss_path}: {e}")
@@ -160,8 +129,6 @@ def inject_cito_annotations_in_rss(
 
 
 if __name__ == "__main__":
-    import sys
-
     if len(sys.argv) < 2:
         print("Usage: inject_cito_annotations_in_rss.py <rss_file>")
         sys.exit(1)

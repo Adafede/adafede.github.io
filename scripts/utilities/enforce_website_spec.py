@@ -7,7 +7,9 @@ import json
 from datetime import date
 from pathlib import Path
 
-from infrastructure import get_logger
+from bs4 import BeautifulSoup
+
+from scripts.infrastructure import get_logger
 
 logger = get_logger(__name__)
 
@@ -350,7 +352,6 @@ def enforce_website_spec(html_files: list[Path], site_url: str) -> None:
                 site_dir = site_dir.parent
 
         content = html_file.read_text(encoding="utf-8")
-        from bs4 import BeautifulSoup  # local import to keep import surface minimal
 
         soup = BeautifulSoup(content, "html.parser")
         if not soup.head:

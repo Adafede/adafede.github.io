@@ -6,12 +6,13 @@ Runs before Quarto renders the site to update metadata in QMD files.
 import sys
 from pathlib import Path
 
-# Add scripts directory to path for imports
-sys.path.insert(0, str(Path(__file__).parent))
+# Add project root to path so `scripts` is importable as a package
+root_dir = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(root_dir))
 
-from config import LOG_LEVEL, PROJECT_ROOT
-from infrastructure import FileSystem, get_logger, setup_logging
-from services import MetadataService
+from scripts.config import LOG_LEVEL, PROJECT_ROOT
+from scripts.infrastructure import FileSystem, get_logger, setup_logging
+from scripts.services import MetadataService
 
 # Setup logging
 setup_logging(level=LOG_LEVEL)

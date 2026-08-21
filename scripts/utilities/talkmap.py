@@ -14,29 +14,21 @@ from time import sleep
 import folium
 import markdown
 from geopy import Nominatim
+from geopy.location import Location
 
-# Add parent directory to path for infrastructure imports
-sys.path.insert(0, str(Path(__file__).parent.parent))
+# Add project root to path so `scripts` is importable as a package
+root_dir = Path(__file__).resolve().parent.parent.parent
+sys.path.insert(0, str(root_dir))
 
-from infrastructure import YamlLoader, get_logger
+from scripts.infrastructure import YamlLoader, get_logger
 
 logger = get_logger(__name__)
-
-
-# ============================================================================
-# CONSTANTS
-# ============================================================================
 
 DEFAULT_TALKS_DIR = "talks"
 DEFAULT_CACHE_FILE = "_cache/geocache.json"
 DEFAULT_OUTPUT_MAP = "_site/talk_map.html"
 DEFAULT_USER_AGENT = "talk_map_folium"
 DEFAULT_SLEEP_SECONDS = 1.0
-
-
-# ============================================================================
-# GEOCODING
-# ============================================================================
 
 
 class GeoCache:
@@ -49,7 +41,7 @@ class GeoCache:
             cache_path: Path to cache JSON file
         """
         self.cache_path = cache_path
-        self.cache: dict[str, dict] = {}
+        self.cache: dict[str, dict[str, float | str]] = {}
         self._load()
 
     def _load(self) -> None:
@@ -77,7 +69,7 @@ class GeoCache:
         except OSError:
             logger.error("Failed to save cache")
 
-    def get(self, location: str) -> dict | None:
+    def get(self, location: str) -> dict[str, float | str] | None:
         """Get cached geocoding result.
 
         Args:
@@ -130,7 +122,7 @@ def geocode_location(
     # Check cache first
     cached = cache.get(location)
     if cached:
-        return (cached["latitude"], cached["longitude"])
+        return (float(cached["latitude"]), float(cached["longitude"]))
 
     # Geocode with API
     try:
@@ -138,9 +130,11 @@ def geocode_location(
         if not geo_info:
             logger.warning(f"⚠️  Location not found: {location}")
             return None
-
-        lat, lon = geo_info.latitude, geo_info.longitude
-        cache.set(location, lat, lon, geo_info.address)
+        if isinstance(geo_info, Location):
+            lat, lon = geo_info.latitude, geo_info.longitude
+            cache.set(location, lat, lon, geo_info.address)
+        else:
+            return None
 
         # Respect rate limits
         sleep(sleep_seconds)
@@ -152,18 +146,13 @@ def geocode_location(
         return None
 
 
-# ============================================================================
-# TALK PROCESSING
-# ============================================================================
-
-
 def extract_talks_metadata(
     talks_dir: Path,
     yaml_loader: YamlLoader,
     geocoder: Nominatim,
     cache: GeoCache,
     sleep_seconds: float = 1.0,
-) -> list[tuple[float, float, dict]]:
+) -> list[tuple[float, float, dict[str, object]]]:
     """Extract talk metadata with geocoded locations.
 
     Args:
@@ -181,18 +170,25 @@ def extract_talks_metadata(
     for qmd_file in talks_dir.glob("*.qmd"):
         try:
             # Load metadata
-            meta = yaml_loader.load_from_path(qmd_file)
-            if not meta:
+            meta_raw = yaml_loader.load_from_path(qmd_file)
+            if not meta_raw or not isinstance(meta_raw, dict):
                 logger.debug(f"No metadata in {qmd_file.name}")
                 continue
 
-            location = meta.get("location", "").strip()
-            if not location:
+            meta: dict[str, object] = meta_raw
+
+            location = meta.get("location", "")
+            if not isinstance(location, str):
+                logger.debug(f"No location in {qmd_file.name}")
+                continue
+
+            location_str = location.strip()
+            if not location_str:
                 logger.debug(f"No location in {qmd_file.name}")
                 continue
 
             # Geocode location
-            coords = geocode_location(location, geocoder, cache, sleep_seconds)
+            coords = geocode_location(location_str, geocoder, cache, sleep_seconds)
             if coords:
                 lat, lon = coords
                 locations_with_meta.append((lat, lon, meta))
@@ -205,12 +201,9 @@ def extract_talks_metadata(
     return locations_with_meta
 
 
-# ============================================================================
-# MAP GENERATION
-# ============================================================================
-
-
-def calculate_map_center(locations: list[tuple[float, float, dict]]) -> list[float]:
+def calculate_map_center(
+    locations: list[tuple[float, float, dict[str, object]]],
+) -> list[float]:
     """Calculate center point for map based on all locations.
 
     Args:
@@ -227,7 +220,7 @@ def calculate_map_center(locations: list[tuple[float, float, dict]]) -> list[flo
     return [avg_lat, avg_lon]
 
 
-def create_popup_html(meta: dict) -> str:
+def create_popup_html(meta: dict[str, object]) -> str:
     """Create HTML popup content from talk metadata.
 
     Args:
@@ -242,9 +235,10 @@ def create_popup_html(meta: dict) -> str:
 
     # Convert markdown description to HTML
     desc = ""
-    if meta.get("description"):
+    description = meta.get("description")
+    if isinstance(description, str):
         desc = markdown.markdown(
-            meta.get("description", ""),
+            description,
             output_format="html",
         ).strip()
 
@@ -258,7 +252,7 @@ def create_popup_html(meta: dict) -> str:
 
 
 def generate_map(
-    locations: list[tuple[float, float, dict]],
+    locations: list[tuple[float, float, dict[str, object]]],
     output_path: Path,
 ) -> None:
     """Generate Folium map with talk locations.
@@ -289,11 +283,6 @@ def generate_map(
     output_path.parent.mkdir(parents=True, exist_ok=True)
     m.save(str(output_path))
     logger.info(f"✓ Map saved to {output_path}")
-
-
-# ============================================================================
-# MAIN FUNCTION
-# ============================================================================
 
 
 def talkmap(

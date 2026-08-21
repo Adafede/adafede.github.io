@@ -85,7 +85,7 @@ class HtmlProcessor:
 
     def find_elements_by_class(
         self,
-        soup: BeautifulSoup,
+        soup: BeautifulSoup | Tag,
         class_name: str,
         tag: str | None = None,
     ) -> list[Tag]:
@@ -149,7 +149,9 @@ class HtmlProcessor:
         Returns:
             True if element has the class
         """
-        classes = element.get("class", [])
+        classes = element.get("class") or []
+        if not isinstance(classes, list):
+            return False
         return class_name in classes
 
     def get_attribute(
@@ -168,7 +170,10 @@ class HtmlProcessor:
         Returns:
             Attribute value or default
         """
-        return element.get(attr_name, default)
+        value = element.get(attr_name, default)
+        if isinstance(value, list):
+            return str(value[0]) if value else default
+        return value
 
     def set_attribute(
         self,

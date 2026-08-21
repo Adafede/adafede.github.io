@@ -6,76 +6,56 @@ RSS feed items. Uses the refactored infrastructure layer.
 """
 
 import sys
+from collections.abc import Sequence
 from pathlib import Path
 
 from bs4 import BeautifulSoup
 
-# Add parent directory to path for infrastructure imports
-sys.path.insert(0, str(Path(__file__).parent.parent))
+# Add project root to path so `scripts` is importable as a package
+root_dir = Path(__file__).resolve().parent.parent.parent
+sys.path.insert(0, str(root_dir))
 
-from infrastructure import YamlLoader, get_logger
+from scripts.config import DOI_URL_PREFIX
+from scripts.infrastructure import YamlLoader, get_logger
 
 logger = get_logger(__name__)
 
 
-# ============================================================================
-# CONSTANTS
-# ============================================================================
-
-DOI_URL_PREFIX = "https://doi.org/"
-
-
-# ============================================================================
-# DOI EXTRACTION
-# ============================================================================
-
-
 def extract_doi_from_qmd(qmd_path: Path, yaml_loader: YamlLoader) -> dict[str, str]:
-    """Extract title and DOI from QMD file metadata.
+    """Extract ``title`` and ``doi`` from a QMD file's YAML frontmatter.
 
-    Args:
-        qmd_path: Path to QMD file
-        yaml_loader: YamlLoader instance
-
-    Returns:
-        Dictionary with title and DOI, or empty dict if not found
+    Returns an empty dict if either field is missing or not a string.
     """
     try:
-        metadata = yaml_loader.load_from_path(qmd_path)
+        metadata_raw = yaml_loader.load_from_path(qmd_path)
     except (OSError, ValueError) as e:
         logger.warning(f"Failed to load metadata from {qmd_path}: {e}")
         return {}
 
-    if not metadata:
+    if not metadata_raw or not isinstance(metadata_raw, dict):
         return {}
+
+    metadata: dict[str, object] = metadata_raw
 
     title = metadata.get("title")
     doi = metadata.get("doi")
 
-    if not (title and doi):
+    if not (isinstance(title, str) and isinstance(doi, str)):
         return {}
 
     # Normalize DOI to full URL
-    doi = doi.strip()
-    if not doi.startswith("http"):
-        doi = DOI_URL_PREFIX + doi
+    doi_str = doi.strip()
+    if not doi_str.startswith("http"):
+        doi_str = DOI_URL_PREFIX + doi_str
 
-    return {"title": title.strip(), "doi": doi}
+    return {"title": title.strip(), "doi": doi_str}
 
 
 def build_doi_mapping(
-    qmd_files: list[str | Path],
+    qmd_files: Sequence[str | Path],
     yaml_loader: YamlLoader,
 ) -> dict[str, str]:
-    """Build mapping from titles to DOIs from QMD files.
-
-    Args:
-        qmd_files: List of QMD file paths
-        yaml_loader: YamlLoader instance
-
-    Returns:
-        Dictionary mapping titles to DOI URLs
-    """
+    """Build a ``{title: doi_url}`` mapping from a list of QMD files."""
     doi_mapping = {}
 
     for qmd_file in qmd_files:
@@ -88,27 +68,12 @@ def build_doi_mapping(
     return doi_mapping
 
 
-# ============================================================================
-# RSS PROCESSING
-# ============================================================================
-
-
 def inject_doi_in_rss(
     rss_path: Path,
-    qmd_files: list[str | Path],
-    yaml_loader: YamlLoader = None,
+    qmd_files: Sequence[str | Path],
+    yaml_loader: YamlLoader | None = None,
 ) -> None:
-    """Inject DOIs into RSS feed items.
-
-    Args:
-        rss_path: Path to RSS XML file
-        qmd_files: List of QMD file paths to extract DOIs from
-        yaml_loader: YamlLoader instance (creates new one if not provided)
-
-    Example:
-        >>> yaml_loader = YamlLoader()
-        >>> inject_doi_in_rss(Path('posts.xml'), [Path('posts/my-post.qmd')], yaml_loader)
-    """
+    """Inject DOI tags into RSS ``<item>`` elements based on QMD metadata."""
     rss_path = Path(rss_path)
 
     if not rss_path.exists():

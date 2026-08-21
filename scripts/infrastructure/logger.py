@@ -2,6 +2,7 @@
 
 import logging
 import sys
+from typing import cast
 
 
 def setup_logging(
@@ -18,7 +19,7 @@ def setup_logging(
         format_string = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 
     logging.basicConfig(
-        level=getattr(logging, level.upper()),
+        level=cast(int, getattr(logging, level.upper())),
         format=format_string,
         handlers=[logging.StreamHandler(sys.stdout)],
         force=True,  # Override any existing configuration

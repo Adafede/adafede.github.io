@@ -4,12 +4,14 @@ Runs after Quarto renders the site to inject semantic annotations.
 """
 
 import sys
+from collections.abc import Iterable, Mapping
 from pathlib import Path
 
-# Add scripts directory to path for imports
-sys.path.insert(0, str(Path(__file__).parent))
+# Add project root to path so `scripts` is importable as a package
+root_dir = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(root_dir))
 
-from config import (
+from scripts.config import (
     JSON_FEED_FILE,
     LOG_LEVEL,
     PROJECT_ROOT,
@@ -17,15 +19,15 @@ from config import (
     RSS_FILE,
     SITE_DIR,
 )
-from infrastructure import (
+from scripts.infrastructure import (
     FileSystem,
     HtmlProcessor,
     YamlLoader,
     get_logger,
     setup_logging,
 )
-from services import AuthorService, CitoService, RorService
-from utilities import (
+from scripts.services import AuthorService, CitoService, RorService
+from scripts.utilities import (
     convert_rss_to_json_feed,
     enforce_website_spec,
     fix_accessibility,
@@ -116,7 +118,7 @@ def process_posts(
 
 def process_rss_and_feeds(
     post_qmds: list[Path],
-    citation_properties: dict,
+    citation_properties: Mapping[str, Iterable[str]],
     yaml_loader: YamlLoader,
 ) -> None:
     """Process RSS feed and convert to JSON feed.

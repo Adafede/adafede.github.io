@@ -12,18 +12,71 @@ import sys
 import urllib.error
 import urllib.parse
 import urllib.request
+from collections.abc import Sequence
 from pathlib import Path
-from typing import Any
+from typing import TYPE_CHECKING, Protocol
 
-import circlify
 import matplotlib.colors as mcolors
-from cmcrameri import cm
+
+if TYPE_CHECKING:
+    # Type stubs for untyped third-party libraries
+    from matplotlib.colors import Colormap
+
+    class Circle:
+        """Type stub for circlify.Circle at type-checking time."""
+
+        def __init__(self, x: float = 0, y: float = 0, r: float = 0) -> None:
+            self.x = x
+            self.y = y
+            self.r = r
+            self.ex = {}
+
+        x: float
+        y: float
+        r: float
+        ex: dict[str, float | str] | str
+
+    class _Circle(Protocol):
+        """Protocol for circlify Circle objects."""
+
+        x: float
+        y: float
+        r: float
+        ex: dict[str, float | str] | str
+
+    class _CirclifyModule(Protocol):
+        """Protocol for circlify module."""
+
+        def circlify(
+            self,
+            data: list[dict[str, float | str]],
+            *,
+            show_enclosure: bool = False,
+            target_enclosure: _Circle | None = None,
+            **kwargs: object,
+        ) -> list[_Circle]: ...
+
+    circlify: _CirclifyModule
+
+    class _CmcrameriModule(Protocol):
+        """Protocol for cmcrameri module."""
+
+        batlowK: Colormap
+
+    cm: _CmcrameriModule
+
+else:
+    import circlify
+    from circlify import Circle
+    from cmcrameri import cm
+
 from IPython.display import HTML, display
 
-# Add parent directory to path for infrastructure imports
-sys.path.insert(0, str(Path(__file__).parent.parent))
+# Add project root to path so `scripts` is importable as a package
+root_dir = Path(__file__).resolve().parent.parent.parent
+sys.path.insert(0, str(root_dir))
 
-from infrastructure import get_logger
+from scripts.infrastructure import get_logger
 
 logger = get_logger(__name__)
 
@@ -80,7 +133,7 @@ def fetch_topic_scores(
     target_qid: str,
     user_agent: str = DEFAULT_USER_AGENT,
     limit: int = DEFAULT_LIMIT,
-) -> list[dict]:
+) -> list[dict[str, dict[str, str]]]:
     """Fetch topic expertise data from QLever Wikidata endpoint."""
     query = build_sparql_query(target_qid, limit=limit)
     params = urllib.parse.urlencode({"query": query, "format": "json"})
@@ -97,13 +150,17 @@ def fetch_topic_scores(
         return []
 
 
+# Type alias for metadata dict
+MetaDict = dict[str, float | str]
+
+
 def process_items(
-    bindings: list[dict],
+    bindings: list[dict[str, dict[str, str]]],
     scale_power: float,
-) -> tuple[list[dict], dict[str, dict]]:
+) -> tuple[list[dict[str, float | str]], dict[str, MetaDict]]:
     """Process SPARQL results into circlify items and metadata lookup."""
-    items = []
-    items_by_id = {}
+    items: list[dict[str, float | str]] = []
+    items_by_id: dict[str, MetaDict] = {}
 
     for b in bindings:
         topic_url = b["topic"]["value"]
@@ -114,7 +171,7 @@ def process_items(
         scaled_datum = math.pow(score, scale_power)
 
         # circlify only expects 'id' and 'datum'
-        item = {
+        item: dict[str, float | str] = {
             "id": qid,
             "datum": scaled_datum,
         }
@@ -137,9 +194,9 @@ def process_items(
 def compute_text_styling(
     label: str,
     r: float,
-    score: float,
+    _score: float,  # unused, kept for API compatibility
     rank_norm: float,
-    cmap: Any,
+    cmap: mcolors.Colormap,
 ) -> tuple[str, str, list[str], int]:
     """Calculate color contrast, text wrapping, and optimal font size."""
     rgba = cmap(rank_norm)
@@ -166,16 +223,27 @@ def compute_text_styling(
 
     # Dynamic font sizing calculation
     max_fs_height = (1.5 * r) / (len(lines) * 1.15)
-    max_line_len = max(len(l) for l in lines) if lines else 1
+    max_line_len = max(len(line) for line in lines) if lines else 1
     max_fs_width = (1.65 * r) / (max_line_len * 0.58)
     font_size = max(7, min(28, int(min(max_fs_height, max_fs_width))))
 
     return color, text_color, lines, font_size
 
 
+if TYPE_CHECKING:
+    # Runtime type for circles - protocol with needed attributes
+    class _CircleProto(Protocol):
+        x: float
+        y: float
+        r: float
+        ex: dict[str, float | str] | str
+else:
+    _CircleProto = object
+
+
 def generate_svg_markup(
-    circles: list,
-    items_by_id: dict[str, dict],
+    circles: Sequence[_CircleProto],
+    items_by_id: dict[str, MetaDict],
     view_box: int = DEFAULT_VIEW_BOX,
     height: int = DEFAULT_MAP_HEIGHT,
 ) -> str:
@@ -207,8 +275,8 @@ def generate_svg_markup(
         f'  <meta itemprop="description" content="Interactive circle packing visualization featuring {total_nodes} topics of expertise, led by {top_label}." />',
         (
             f'  <svg viewBox="0 0 {view_box} {view_box}" width="{view_box}" height="{view_box}" role="graphics-document" '
-           'aria-labelledby="circle-pack-title circle-pack-desc" '
-           'style="width: 100%; max-width: 100%; height: auto; display: block; margin: 0 auto; background: #FFF; border-radius: 16px; font-family: system-ui, -apple-system, sans-serif;">'
+            'aria-labelledby="circle-pack-title circle-pack-desc" '
+            'style="width: 100%; max-width: 100%; height: auto; display: block; margin: 0 auto; background: #FFF; border-radius: 16px; font-family: system-ui, -apple-system, sans-serif;">'
         ),
         '    <title id="circle-pack-title">Areas of Expertise Circle Packing Diagram</title>',
         (
@@ -236,24 +304,26 @@ def generate_svg_markup(
             node_id = ""
 
         meta = items_by_id.get(node_id, {})
+        if not isinstance(meta, dict):
+            meta = {}
         if not meta and isinstance(c.ex, dict):
-            meta = c.ex.get("data", c.ex)
+            meta = c.ex.get("data", c.ex) or {}
 
-        score = meta.get("score", 0)
-        label = meta.get("label", "")
-        url_link = meta.get("url", "#")
-        qid = meta.get("id", "")
+        score = meta.get("score", 0) if isinstance(meta, dict) else 0
+        label = meta.get("label", "") if isinstance(meta, dict) else ""
+        url_link = meta.get("url", "#") if isinstance(meta, dict) else "#"
+        qid = meta.get("id", "") if isinstance(meta, dict) else ""
 
         rank_norm = (
-            1.0 - (all_scores.index(score) / (num_ranks - 1))
-            if score in all_scores and num_ranks > 1
+            1.0 - (all_scores.index(float(score)) / (num_ranks - 1))
+            if float(score) in all_scores and num_ranks > 1
             else 0.5
         )
 
         color, text_color, lines, font_size = compute_text_styling(
-            label,
+            str(label),
             r,
-            score,
+            float(score),
             rank_norm,
             cmap,
         )
@@ -271,11 +341,11 @@ def generate_svg_markup(
         svg_parts.append(f"        <title>{tooltip_text}</title>")
         svg_parts.append(
             f'        <circle class="node-circle" cx="{cx:.2f}" cy="{cy:.2f}" r="{r:.2f}" '
-            f'fill="{color}" fill-opacity="0.88" stroke="#FFF" stroke-width="2" />',
+            + f'fill="{color}" fill-opacity="0.88" stroke="#FFF" stroke-width="2" />',
         )
         svg_parts.append(
             f'        <text class="node-text" x="{cx:.2f}" y="{cy:.2f}" font-size="{font_size}px" '
-            f'fill="{text_color}" text-anchor="middle" dominant-baseline="central">',
+            + f'fill="{text_color}" text-anchor="middle" dominant-baseline="central">',
         )
 
         line_height = font_size * 1.15
@@ -319,7 +389,7 @@ def render_circle_packing(
     circles = circlify.circlify(
         items,
         show_enclosure=False,
-        target_enclosure=circlify.Circle(x=0, y=0, r=300),
+        target_enclosure=Circle(x=0, y=0, r=300),
     )
 
     svg_html = generate_svg_markup(circles, items_by_id)
@@ -328,7 +398,7 @@ def render_circle_packing(
     logger.info("Circle packing map generated successfully")
 
     if display_output:
-        display(html_object)
+        _ = display(html_object)
         return None
 
     return html_object
@@ -336,7 +406,7 @@ def render_circle_packing(
 
 def main() -> None:
     """CLI entry point."""
-    render_circle_packing()
+    _ = render_circle_packing()
 
 
 if __name__ == "__main__":

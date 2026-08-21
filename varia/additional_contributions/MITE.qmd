@@ -1,7 +1,7 @@
 ---
 title: Minimum Information about a Tailoring Enzyme
 url: https://mite.lisc.univie.ac.at
-image: https://raw.githubusercontent.com/mite-standard/mite_web/refs/heads/main/mite_web/mite_web/static/images/mite_logo.svg
+image: https://raw.githubusercontent.com/mite-standard/mite_web/refs/heads/main/app/static/images/mite_logo.svg
 image-alt: Logo of MITE
 categories:
   - Enzymes

@@ -18,7 +18,7 @@ class YamlLoader:
 
     def __init__(self):
         """Initialize YAML loader with safe mode."""
-        self._yaml = YAML(typ="safe")
+        self._yaml: YAML = YAML(typ="safe")
 
     def extract_frontmatter(self, content: str) -> str | None:
         """Extract YAML frontmatter from QMD content.
@@ -32,7 +32,7 @@ class YamlLoader:
         match = YAML_FRONTMATTER_PATTERN.match(content)
         return match.group(1) if match else None
 
-    def load_from_path(self, path: Path) -> dict | None:
+    def load_from_path(self, path: Path) -> dict[str, object] | list[object] | None:
         """Load YAML from file or QMD frontmatter.
 
         Args:
@@ -65,7 +65,10 @@ class YamlLoader:
             logger.warning(f"Failed to parse YAML from {path}: {e}")
             return None
 
-    def load_from_string(self, yaml_str: str) -> dict | None:
+    def load_from_string(
+        self,
+        yaml_str: str,
+    ) -> dict[str, object] | list[object] | None:
         """Parse YAML from string.
 
         Args:
@@ -80,7 +83,7 @@ class YamlLoader:
             logger.warning(f"Failed to parse YAML string: {e}")
             return None
 
-    def dump_to_string(self, data: dict, **kwargs) -> str:
+    def dump_to_string(self, data: dict[str, object], **kwargs: object) -> str:
         """Dump dictionary to YAML string.
 
         Args:
@@ -93,14 +96,14 @@ class YamlLoader:
         from io import StringIO
 
         stream = StringIO()
-        self._yaml.dump(data, stream, **kwargs)
+        _ = self._yaml.dump(data, stream, **kwargs)
         return stream.getvalue()
 
     def load_metadata_file(
         self,
         relative_path: str,
         base_dir: Path,
-    ) -> dict | None:
+    ) -> dict[str, object] | list[object] | None:
         """Load a metadata file referenced from frontmatter.
 
         Args:
@@ -113,7 +116,11 @@ class YamlLoader:
         full_path = (base_dir / relative_path).resolve()
         return self.load_from_path(full_path)
 
-    def load_author_file(self, author_id: str, root_dir: Path) -> dict | None:
+    def load_author_file(
+        self,
+        author_id: str,
+        root_dir: Path,
+    ) -> dict[str, object] | list[object] | None:
         """Load author metadata from _authors/_<id>.yml file.
 
         Args:

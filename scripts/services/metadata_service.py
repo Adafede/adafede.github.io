@@ -4,8 +4,9 @@ import re
 from pathlib import Path
 
 import yaml
-from infrastructure.filesystem import FileSystem
-from infrastructure.logger import get_logger
+
+from scripts.config import DOI_URL_PREFIX
+from scripts.infrastructure import FileSystem, get_logger
 
 logger = get_logger(__name__)
 
@@ -13,15 +14,13 @@ logger = get_logger(__name__)
 class MetadataService:
     """Handles YAML metadata updates for posts."""
 
-    YAML_FRONTMATTER_PATTERN = re.compile(r"^---\n(.*?)\n---\n(.*)$", re.DOTALL)
+    YAML_FRONTMATTER_PATTERN: re.Pattern[str] = re.compile(
+        r"^---\n(.*?)\n---\n(.*)$",
+        re.DOTALL,
+    )
 
     def __init__(self, filesystem: FileSystem):
-        """Initialize metadata service.
-
-        Args:
-            filesystem: FileSystem instance
-        """
-        self.fs = filesystem
+        self.fs: FileSystem = filesystem
 
     def update_post_metadata(
         self,
@@ -30,20 +29,12 @@ class MetadataService:
     ) -> bool:
         """Update YAML frontmatter for a post.
 
-        Updates:
-        - date: extracted from filename if not present
-        - doi: generated if not present (when generate_doi=True)
-
-        Args:
-            post_path: Path to post QMD file
-            generate_doi: Whether to generate DOI if missing
-
-        Returns:
-            True if file was modified, False otherwise
+        Ensures the ``date`` field matches the filename and generates a DOI
+        when missing (if ``generate_doi`` is set).  Returns ``True`` if the
+        file was written.
         """
         content = self.fs.read_text(post_path)
 
-        # Parse frontmatter
         match = self.YAML_FRONTMATTER_PATTERN.match(content)
         if match:
             front_matter, body = match.groups()
@@ -52,7 +43,6 @@ class MetadataService:
             data = {}
             body = content
 
-        # Only proceed if no DOI exists (or if we don't care about DOI)
         if "doi" in data and not generate_doi:
             return False
 
@@ -69,7 +59,6 @@ class MetadataService:
             data["doi"] = self._generate_doi()
             changed = True
 
-        # Write back if changed
         if changed:
             self._write_frontmatter(post_path, data, body)
             logger.info(f"Updated metadata for {post_path.name}")
@@ -77,33 +66,27 @@ class MetadataService:
         return changed
 
     def _generate_doi(self) -> str:
-        """Generate a new DOI.
-
-        Returns:
-            DOI string (without https://doi.org/ prefix)
-        """
+        """Generate a stable DOI and strip the resolver URL prefix."""
         from commonmeta import encode_doi
 
         doi_url = encode_doi("10.59350")
-        return doi_url.removeprefix("https://doi.org/")
+        return doi_url.removeprefix(DOI_URL_PREFIX)
 
     def _write_frontmatter(
         self,
         path: Path,
-        data: dict,
+        data: dict[str, object],
         body: str,
     ) -> None:
-        """Write YAML frontmatter and body to file.
-
-        Args:
-            path: File path
-            data: Frontmatter data dictionary
-            body: Document body
-        """
+        """Write YAML frontmatter and body back to *path* with stable formatting."""
 
         # Custom YAML dumper for consistent formatting
         class CustomDumper(yaml.SafeDumper):
-            def increase_indent(self, flow=False, indentless=False):
+            def increase_indent(
+                self,
+                flow: bool = False,
+                indentless: bool = False,
+            ) -> None:
                 return super().increase_indent(flow, False)
 
         new_front = yaml.dump(
@@ -121,14 +104,12 @@ class MetadataService:
         lines = new_front.split("\n")
         for i, line in enumerate(lines):
             if line.startswith("date:"):
-                # Remove any quotes from dates
                 lines[i] = line.replace('"', "").replace("'", "")
             elif "'" in line:
                 lines[i] = line.replace("'", '"')
 
         new_front = "\n".join(lines)
         new_content = f"---\n{new_front}---\n\n{body.lstrip()}"
-
         self.fs.write_text(path, new_content)
 
     def update_all_posts(
@@ -136,14 +117,9 @@ class MetadataService:
         post_paths: list[Path],
         generate_doi: bool = True,
     ) -> int:
-        """Update metadata for multiple posts.
+        """Update metadata for every post in *post_paths*.
 
-        Args:
-            post_paths: List of post paths
-            generate_doi: Whether to generate DOIs
-
-        Returns:
-            Number of posts modified
+        Returns the number of files that were modified.
         """
         logger.info(f"Updating metadata for {len(post_paths)} posts")
 

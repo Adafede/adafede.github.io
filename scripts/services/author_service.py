@@ -2,11 +2,14 @@
 
 from pathlib import Path
 
-from bs4 import BeautifulSoup
-from infrastructure.filesystem import FileSystem
-from infrastructure.html_processor import HtmlProcessor
-from infrastructure.logger import get_logger
-from infrastructure.yaml_loader import YamlLoader
+from bs4 import BeautifulSoup, Tag
+
+from scripts.infrastructure import (
+    FileSystem,
+    HtmlProcessor,
+    YamlLoader,
+    get_logger,
+)
 
 logger = get_logger(__name__)
 
@@ -15,12 +18,12 @@ class AuthorService:
     """Handles author metadata enrichment (ORCID icons, Scholia links)."""
 
     # Official SVG assets from Scholia repository
-    ORCID_SVG_URL = (
+    ORCID_SVG_URL: str = (
         "https://raw.githubusercontent.com/WDscholia/scholia/main/"
         "scholia/app/static/images/orcid.svg"
     )
 
-    SCHOLIA_SVG_URL = (
+    SCHOLIA_SVG_URL: str = (
         "https://raw.githubusercontent.com/WDscholia/scholia/main/"
         "scholia/app/static/images/scholia_logo.svg"
     )
@@ -38,9 +41,9 @@ class AuthorService:
             html_processor: HtmlProcessor instance
             yaml_loader: YamlLoader instance
         """
-        self.fs = filesystem
-        self.html = html_processor
-        self.yaml = yaml_loader
+        self.fs: FileSystem = filesystem
+        self.html: HtmlProcessor = html_processor
+        self.yaml: YamlLoader = yaml_loader
 
     def extract_author_metadata(self, qmd_path: Path) -> list[dict[str, str]]:
         """Extract author metadata from QMD file and metadata files.
@@ -55,7 +58,7 @@ class AuthorService:
 
         # Load QMD frontmatter
         metadata = self.yaml.load_from_path(qmd_path)
-        if not metadata:
+        if not metadata or not isinstance(metadata, dict):
             return []
 
         # Load from metadata-files
@@ -66,7 +69,7 @@ class AuthorService:
                     metadata_path,
                     qmd_path.parent,
                 )
-                if metadata_doc:
+                if metadata_doc and isinstance(metadata_doc, dict):
                     authors = self._parse_authors(metadata_doc)
                     self._merge_authors(authors_by_key, authors)
 
@@ -78,7 +81,10 @@ class AuthorService:
         logger.debug(f"Extracted {len(authors_data)} authors from {qmd_path.name}")
         return authors_data
 
-    def _parse_authors(self, doc: dict) -> list[dict[str, str]]:
+    def _parse_authors(
+        self,
+        doc: dict[str, object] | list[object],
+    ) -> list[dict[str, str]]:
         """Parse author metadata from YAML document.
 
         Args:
@@ -187,8 +193,7 @@ class AuthorService:
         if enriched_count > 0:
             self.html.save_to_path(soup, html_path)
             logger.info(
-                f"✓ Injected author links for {enriched_count} author(s) "
-                f"in {html_path.name}",
+                f"✓ Injected author links for {enriched_count} author(s) in {html_path.name}",
             )
 
         return enriched_count
@@ -231,7 +236,7 @@ class AuthorService:
 
         return enriched_count
 
-    def _find_author_elements(self, soup: BeautifulSoup) -> list:
+    def _find_author_elements(self, soup: BeautifulSoup) -> list[Tag]:
         """Find author-related elements in HTML.
 
         Args:
@@ -309,16 +314,13 @@ class AuthorService:
 
         # Create new ORCID link
         orcid_url = f"https://orcid.org/{orcid}"
-        orcid_link = soup.new_tag(
-            "a",
-            href=orcid_url,
-            **{
-                "class": "orcid-link",
-                "target": "_blank",
-                "rel": "noopener noreferrer",
-                "title": f"ORCID: {orcid}",
-            },
-        )
+        orcid_attrs: dict[str, str] = {
+            "class": "orcid-link",
+            "target": "_blank",
+            "rel": "noopener noreferrer",
+            "title": f"ORCID: {orcid}",
+        }
+        orcid_link = soup.new_tag("a", href=orcid_url, attrs=orcid_attrs)
         orcid_link.append(BeautifulSoup(orcid_img, "html.parser"))
         element.append(" ")
         element.append(orcid_link)
@@ -356,16 +358,13 @@ class AuthorService:
             f'style="height:1em; vertical-align:middle; margin-left:0.25em;" />'
         )
 
-        link = soup.new_tag(
-            "a",
-            href=scholia_url,
-            **{
-                "class": "scholia-link",
-                "target": "_blank",
-                "rel": "noopener noreferrer",
-                "title": f"Scholia profile: {qid}",
-            },
-        )
+        scholia_attrs: dict[str, str] = {
+            "class": "scholia-link",
+            "target": "_blank",
+            "rel": "noopener noreferrer",
+            "title": f"Scholia profile: {qid}",
+        }
+        link = soup.new_tag("a", href=scholia_url, attrs=scholia_attrs)
         link.append(BeautifulSoup(scholia_img, "html.parser"))
 
         element.append(" ")

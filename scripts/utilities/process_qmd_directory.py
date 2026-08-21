@@ -10,11 +10,12 @@ import glob
 import sys
 from pathlib import Path
 
-# Add parent directory to path for infrastructure imports
-sys.path.insert(0, str(Path(__file__).parent.parent))
+# Add project root to path so `scripts` is importable as a package
+root_dir = Path(__file__).resolve().parent.parent.parent
+sys.path.insert(0, str(root_dir))
 
-from infrastructure import FileSystem, HtmlProcessor, YamlLoader, get_logger
-from services import AuthorService, RorService
+from scripts.infrastructure import FileSystem, HtmlProcessor, YamlLoader, get_logger
+from scripts.services import AuthorService, RorService
 
 logger = get_logger(__name__)
 

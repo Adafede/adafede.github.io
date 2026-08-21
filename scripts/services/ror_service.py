@@ -3,10 +3,13 @@
 from pathlib import Path
 
 from bs4 import BeautifulSoup
-from infrastructure.filesystem import FileSystem
-from infrastructure.html_processor import HtmlProcessor
-from infrastructure.logger import get_logger
-from infrastructure.yaml_loader import YamlLoader
+
+from scripts.infrastructure import (
+    FileSystem,
+    HtmlProcessor,
+    YamlLoader,
+    get_logger,
+)
 
 logger = get_logger(__name__)
 
@@ -15,12 +18,12 @@ class RorService:
     """Handles ROR affiliation linking in HTML files."""
 
     # Official ROR and Scholia logos
-    ROR_ICON_URL = (
+    ROR_ICON_URL: str = (
         "https://raw.githubusercontent.com/ror-community/ror-logos/"
         "refs/heads/main/ror-icon-rgb-transparent.svg"
     )
 
-    SCHOLIA_SVG_URL = (
+    SCHOLIA_SVG_URL: str = (
         "https://raw.githubusercontent.com/WDscholia/scholia/main/"
         "scholia/app/static/images/scholia_logo.svg"
     )
@@ -30,7 +33,7 @@ class RorService:
         filesystem: FileSystem,
         html_processor: HtmlProcessor,
         yaml_loader: YamlLoader,
-    ):
+    ) -> None:
         """Initialize ROR service.
 
         Args:
@@ -38,9 +41,9 @@ class RorService:
             html_processor: HtmlProcessor instance
             yaml_loader: YamlLoader instance
         """
-        self.fs = filesystem
-        self.html = html_processor
-        self.yaml = yaml_loader
+        self.fs: FileSystem = filesystem
+        self.html: HtmlProcessor = html_processor
+        self.yaml: YamlLoader = yaml_loader
 
     def load_affiliations(self, qmd_path: Path) -> dict[str, dict[str, str]]:
         """Load affiliation definitions from metadata files and QMD frontmatter.
@@ -54,19 +57,24 @@ class RorService:
         merged: dict[str, dict[str, str]] = {}
 
         # Load QMD frontmatter
-        metadata = self.yaml.load_from_path(qmd_path)
-        if not metadata:
+        metadata_raw = self.yaml.load_from_path(qmd_path)
+        if not metadata_raw or not isinstance(metadata_raw, dict):
             return merged
 
+        metadata: dict[str, object] = metadata_raw
+
         # Load from metadata-files referenced in frontmatter
-        metadata_files = metadata.get("metadata-files", [])
-        if isinstance(metadata_files, list):
-            for metadata_path in metadata_files:
+        metadata_files_raw = metadata.get("metadata-files", [])
+        if isinstance(metadata_files_raw, list):
+            metadata_files: list[object] = metadata_files_raw
+            for metadata_path_raw in metadata_files:
+                if not isinstance(metadata_path_raw, str):
+                    continue
                 metadata_doc = self.yaml.load_metadata_file(
-                    metadata_path,
+                    metadata_path_raw,
                     qmd_path.parent,
                 )
-                if metadata_doc:
+                if isinstance(metadata_doc, dict):
                     affiliations = self._parse_affiliations(metadata_doc)
                     merged.update(affiliations)
 
@@ -76,7 +84,7 @@ class RorService:
         logger.debug(f"Loaded {len(merged)} affiliations for {qmd_path.name}")
         return merged
 
-    def _parse_affiliations(self, doc: dict) -> dict[str, dict[str, str]]:
+    def _parse_affiliations(self, doc: dict[str, object]) -> dict[str, dict[str, str]]:
         """Parse affiliation definitions from a YAML document.
 
         Args:
@@ -87,7 +95,7 @@ class RorService:
         """
         result: dict[str, dict[str, str]] = {}
 
-        if not doc or not isinstance(doc, dict):
+        if not doc:
             return result
 
         # Handle both 'affiliations' (list) and 'affiliation' (singular)
@@ -157,8 +165,7 @@ class RorService:
         if enriched_count > 0:
             self.html.save_to_path(soup, html_path)
             logger.info(
-                f"✓ Injected ROR links for {enriched_count} affiliation(s) "
-                f"in {html_path.name}",
+                f"✓ Injected ROR links for {enriched_count} affiliation(s) in {html_path.name}",
             )
 
         return enriched_count
@@ -182,7 +189,7 @@ class RorService:
         # Find affiliation paragraphs
         affiliation_elements = []
         for p in soup.find_all("p"):
-            classes = p.get("class", [])
+            classes = p.get("class") or []
             if any("affiliation" in str(cls).lower() for cls in classes):
                 affiliation_elements.append(p)
 
@@ -191,7 +198,7 @@ class RorService:
             existing_link = aff_elem.find(
                 "a",
                 class_="uri",
-                href=lambda h: h and "ror.org" in h,
+                href=lambda h: h is not None and "ror.org" in h,
             )
             if existing_link:
                 continue
@@ -261,16 +268,13 @@ class RorService:
             f'style="height:14px; vertical-align:middle;" />'
         )
 
-        link = soup.new_tag(
-            "a",
-            href=ror_url,
-            **{
-                "class": "uri",
-                "aria-label": "View organization in Research Organization Registry (ROR)",
-                "target": "_blank",
-                "rel": "noopener noreferrer",
-            },
-        )
+        attrs: dict[str, str] = {
+            "class": "uri",
+            "aria-label": "View organization in Research Organization Registry (ROR)",
+            "target": "_blank",
+            "rel": "noopener noreferrer",
+        }
+        link = soup.new_tag("a", href=ror_url, attrs=attrs)
         link.append(BeautifulSoup(ror_img, "html.parser"))
 
         element.append(" ")
@@ -295,17 +299,14 @@ class RorService:
             f'style="height:1em; vertical-align:middle; margin-left:0.25em;" />'
         )
 
-        link = soup.new_tag(
-            "a",
-            href=scholia_url,
-            **{
-                "class": "scholia-link",
-                "target": "_blank",
-                "rel": "noopener noreferrer",
-                "title": f"Scholia profile: {qid}",
-                "aria-label": f"View Scholia profile for {qid}",
-            },
-        )
+        attrs: dict[str, str] = {
+            "class": "scholia-link",
+            "target": "_blank",
+            "rel": "noopener noreferrer",
+            "title": f"Scholia profile: {qid}",
+            "aria-label": f"View Scholia profile for {qid}",
+        }
+        link = soup.new_tag("a", href=scholia_url, attrs=attrs)
         link.append(BeautifulSoup(scholia_img, "html.parser"))
 
         element.append(" ")
