@@ -50,7 +50,18 @@ class MetadataService:
 
         # Update date from filename if needed
         date_str = self.fs.extract_date_from_filename(post_path)
-        if data.get("date") != date_str:
+        current_date = data.get("date")
+
+        # YAML parses dates as datetime.date objects, need to normalize for comparison
+        if isinstance(current_date, str):
+            should_update = current_date != date_str
+        elif current_date is not None and hasattr(current_date, "isoformat"):
+            # datetime.date-like object
+            should_update = current_date.isoformat() != date_str
+        else:
+            should_update = True
+
+        if should_update:
             data["date"] = date_str
             changed = True
 

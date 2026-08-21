@@ -114,7 +114,11 @@ def extract_feed_metadata(channel: XmlElement) -> dict[str, object]:
     if atom_link is not None and atom_link.get("rel") == "self":
         href = atom_link.get("href")
         if href:
-            metadata["feed_url"] = href.replace(".xml", ".json")
+            # Only replace .xml suffix, not any .xml in the path
+            if href.endswith(".xml"):
+                metadata["feed_url"] = href[:-4] + ".json"
+            else:
+                metadata["feed_url"] = href
 
     return metadata
 

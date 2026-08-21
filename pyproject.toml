@@ -55,9 +55,6 @@ ruamel-yaml = [
 [tool.deptry.per_rule_ignores]
 DEP002 = ["quarto", "circlify", "cmcrameri"]
 
-[tool.pyright]
-reportUnknownImportedSymbol = "warning"
-
 [tool.pytest.ini_options]
 addopts = "-ra"
 testpaths = ["tests"]

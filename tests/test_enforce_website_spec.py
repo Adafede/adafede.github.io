@@ -103,7 +103,9 @@ def test_adds_jsonld_script(tmp_path: Path):
     soup = BeautifulSoup(html_file.read_text(encoding="utf-8"), "html.parser")
     script = soup.find("script", attrs={"id": "website-spec-jsonld"})
     assert script is not None
-    assert "application/ld+json" in script.get("type", "")
+    script_type = script.get("type")
+    assert script_type is not None
+    assert "application/ld+json" in script_type
 
 
 def test_is_idempotent(tmp_path: Path):

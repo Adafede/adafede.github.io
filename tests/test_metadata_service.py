@@ -83,12 +83,10 @@ def test_existing_doi_not_overwritten(
 
     changed = metadata_service.update_post_metadata(qmd, generate_doi=True)
 
-    assert changed is True
+    # Date matches filename, DOI already exists → no changes needed
+    assert changed is False
     fm = _frontmatter_text(qmd.read_text(encoding="utf-8"))
     assert "10.59350/existing-123" in fm
-    # NOTE: changed is True even though DOI exists — the date comparison between
-    # yaml's datetime.date (from safe_load) and the str from extract_date_from_filename
-    # always fails, so the date is needlessly re-emitted. Flagged as a bug to fix.
 
 
 def test_date_mismatch_corrected(
@@ -145,11 +143,8 @@ def test_unmodified_post_not_rewritten(
 
     changed = metadata_service.update_post_metadata(qmd, generate_doi=True)
 
-    # The file is re-emitted because the date comparison has a type mismatch:
-    # yaml.safe_load parses `2025-01-01` as a datetime.date object while
-    # extract_date_from_filename returns a str, so they're never "==".
-    # This is a known bug (flagged separately), captured here as current behavior.
-    assert changed is True
+    # Date matches filename, DOI already exists → no changes needed
+    assert changed is False
     fm = _frontmatter_text(qmd.read_text(encoding="utf-8"))
     assert "date: 2025-01-01" in fm
     assert "doi: 10.59350/existing" in fm
