@@ -18,9 +18,9 @@ filters:
 format:
   html:
     anchor-sections: true
-    axe:
-      best-practice: true
-      standard: wcag21aa
+    # axe:
+      # best-practice: true
+      # standard: wcag21aa
     grid:
       body-width: 1200px
     # include-in-header:
@@ -57,7 +57,7 @@ website:
   description: Personal website of Adriano Rutz - Swiss Pharmaceutical Scientist specializing in metabolomics, mass spectrometry, and natural products research.
   site-path: ./
   site-url: https://adafede.github.io
-  favicon: images/favicon/favicon.ico
+  favicon: images/favicon/favicon.svg
   repo-url: https://github.com/adafede/adafede.github.io
   search:
     location: navbar

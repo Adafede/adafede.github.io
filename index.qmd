@@ -1,9 +1,9 @@
 ---
 title: Adriano Rutz
 subtitle: Swiss Pharmaceutical Scientist
-image: https://avatars.githubusercontent.com/u/44283913
 about:
   id: hero-heading
+  image: /images/profile/avatar-520.webp
   image-alt: Adriano Rutz
   image-width: 40%
   template: trestles
@@ -32,9 +32,9 @@ about:
       #   href: https://qlever.scholia.wiki/author/Q97455964
 format:
   html:
+    page-layout: full
     include-in-header:
       - text: |
-          <link rel="preload" as="image" fetchpriority="high" href="https://avatars.githubusercontent.com/u/44283913">
           <style>
           body { margin-top: -60px; }
           @media screen and (max-width: 576px) { body { margin-top: -40px; } }
@@ -59,7 +59,6 @@ format:
             a[href^="/"]::after, a[href^="#"]::after { content: ""; }
           }
           </style>
-    page-layout: full
 ---
 
 ::: {#hero-heading}

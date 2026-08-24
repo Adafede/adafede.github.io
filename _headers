@@ -1,4 +1,11 @@
 # =============================================================================
+# NOTE: GitHub Pages does NOT process _headers files (Netlify-specific).
+# On GitHub Pages, all assets receive cache-control: max-age=600 by default.
+# To unlock proper cache headers, deploy via Netlify or add a CDN in front.
+# This file is kept for Netlify compatibility and documentation.
+# =============================================================================
+
+# =============================================================================
 # Global Security Headers (apply to all pages)
 # =============================================================================
 /*
@@ -7,7 +14,7 @@
 
   # Harden against XSS and clickjacking while allowing required static/analytics resources.
   # The site uses a few inline scripts and third-party embeds, so the CSP is strict but practical.
-  Content-Security-Policy: default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://scripts.simpleanalyticscdn.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; img-src 'self' data: blob: https:; font-src 'self' data: https://cdnjs.cloudflare.com; connect-src 'self' https://scripts.simpleanalyticscdn.com https://*.wikidata.org https://*.wikimedia.org https://*.scholia.wiki https://hypothes.is; frame-src 'self' https://*.wikidata.org https://*.scholia.wiki; media-src 'self'; manifest-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests; block-all-mixed-content; require-trusted-types-for 'script'; trusted-types 'none'
+  Content-Security-Policy: default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://scripts.simpleanalyticscdn.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; img-src 'self' data: blob: https:; font-src 'self' data: https://cdnjs.cloudflare.com; connect-src 'self' https://scripts.simpleanalyticscdn.com https://*.wikidata.org https://*.wikimedia.org https://*.scholia.wiki https://hypothes.is; frame-src 'self' https://*.wikidata.org https://*.scholia.wiki; media-src 'self'; manifest-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests; block-all-mixed-content; require-trusted-types-for 'script'; trusted-types 'none'
 
   # Prevent MIME type sniffing
   X-Content-Type-Options: nosniff

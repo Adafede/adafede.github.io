@@ -89,6 +89,13 @@ jobs:
       - name: Build site
         run: uv run quarto render
 
+      # Ensure .nojekyll is present so GitHub Pages serves all files
+      # (including files/directories with underscores in their names)
+      - name: Add .nojekyll
+        run: |
+          touch _site/.nojekyll
+          echo "# This file prevents GitHub Pages from running Jekyll.\n# The site is built by Quarto and deployed as static files.\n# For custom HTTP response headers (cache-control, CSP, etc.),\n# this site is best deployed via Netlify which supports the _headers file.\n# On GitHub Pages, static assets receive a default max-age=600 cache." > _site/.nojekyll
+
       # Upload artifact for Pages
       - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9
         if: github.event_name != 'pull_request'
