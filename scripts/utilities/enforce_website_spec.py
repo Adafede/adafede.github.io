@@ -218,12 +218,6 @@ def _ensure_head_basics(soup, *, site_url: str, route: str) -> bool:
         href=f"{site_url.rstrip('/')}/humans.txt",
     )
     changed |= _upsert_link(soup, rel="manifest", href="/site.webmanifest")
-    changed |= _upsert_link(
-        soup,
-        rel="apple-touch-icon",
-        href="/images/favicon/apple-touch-icon.png",
-    )
-
     changed |= _upsert_meta(
         soup,
         attr_name="name",

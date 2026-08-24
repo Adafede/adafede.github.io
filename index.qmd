@@ -3,7 +3,7 @@ title: Adriano Rutz
 subtitle: Swiss Pharmaceutical Scientist
 about:
   id: hero-heading
-  image: /images/profile/avatar-520.webp
+  # image: /images/profile/avatar-260.webp
   image-alt: Adriano Rutz
   image-width: 40%
   template: trestles
@@ -57,6 +57,47 @@ format:
             .about-entity img { max-width: 150px; }
             a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 0.8em; word-break: break-all; }
             a[href^="/"]::after, a[href^="#"]::after { content: ""; }
+          }
+
+          /* --- Responsive Image --- */
+          .about-entity::before {
+            content: "";
+            display: block;
+            width: 138px;
+            height: 138px;
+            border-radius: 50%;
+            margin: 0 auto 1em auto;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            /* Default image (classic screens) */
+            background-image: url('/images/profile/avatar-260.webp');
+          }
+
+          /* Smartphones or tablets (max width 991px) */
+          @media screen and (max-width: 991.98px) {
+            .about-entity::before {
+              width: 40vw;
+              max-width: 150px;
+              height: 40vw;
+              max-height: 150px;
+              /* Smaller image adapted to mobile constraints */
+              background-image: url('/images/profile/avatar-150.webp');
+            }
+          }
+
+          /* High density management (Retina 2x and modern smartphone screens) */
+          @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            /* Retina computer (sharp rendering) */
+            .about-entity::before {
+              background-image: url('/images/profile/avatar-260.webp');
+            }
+            /* Mobile High Density (Retina): download the large image to remain sharp when zoomed */
+            @media screen and (max-width: 991.98px) {
+              .about-entity::before {
+                background-image: url('/images/profile/avatar-520.webp');
+              }
+            }
           }
           </style>
 ---
