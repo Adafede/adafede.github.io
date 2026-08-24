@@ -275,7 +275,7 @@ class RorService:
             "rel": "noopener noreferrer",
         }
         link = soup.new_tag("a", href=ror_url, attrs=attrs)
-        link.append(BeautifulSoup(ror_img, "html.parser"))
+        _ = link.append(BeautifulSoup(ror_img, "html.parser"))
 
         element.append(" ")
         element.append(link)
@@ -307,7 +307,7 @@ class RorService:
             "aria-label": f"View Scholia profile for {qid}",
         }
         link = soup.new_tag("a", href=scholia_url, attrs=attrs)
-        link.append(BeautifulSoup(scholia_img, "html.parser"))
+        _ = link.append(BeautifulSoup(scholia_img, "html.parser"))
 
         element.append(" ")
         element.append(link)

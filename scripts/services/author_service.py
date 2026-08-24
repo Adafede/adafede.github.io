@@ -321,7 +321,7 @@ class AuthorService:
             "title": f"ORCID: {orcid}",
         }
         orcid_link = soup.new_tag("a", href=orcid_url, attrs=orcid_attrs)
-        orcid_link.append(BeautifulSoup(orcid_img, "html.parser"))
+        _ = orcid_link.append(BeautifulSoup(orcid_img, "html.parser"))
         element.append(" ")
         element.append(orcid_link)
 
@@ -365,7 +365,7 @@ class AuthorService:
             "title": f"Scholia profile: {qid}",
         }
         link = soup.new_tag("a", href=scholia_url, attrs=scholia_attrs)
-        link.append(BeautifulSoup(scholia_img, "html.parser"))
+        _ = link.append(BeautifulSoup(scholia_img, "html.parser"))
 
         element.append(" ")
         element.append(link)

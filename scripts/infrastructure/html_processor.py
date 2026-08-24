@@ -18,7 +18,7 @@ class HtmlProcessor:
         Args:
             parser: BeautifulSoup parser to use
         """
-        self.parser = parser
+        self.parser: str = parser
 
     def load_from_path(self, path: Path) -> BeautifulSoup | None:
         """Load and parse HTML file.
@@ -64,7 +64,7 @@ class HtmlProcessor:
         path.parent.mkdir(parents=True, exist_ok=True)
 
         html_str = str(soup)
-        path.write_text(html_str, encoding="utf-8")
+        _ = path.write_text(html_str, encoding="utf-8")
         logger.debug(f"Saved HTML to {path}")
 
     def find_element_by_id(
@@ -137,7 +137,7 @@ class HtmlProcessor:
             parent: Parent element
             child: Child element to append
         """
-        parent.append(child)
+        _ = parent.append(child)
 
     def has_class(self, element: Tag, class_name: str) -> bool:
         """Check if element has a specific class.

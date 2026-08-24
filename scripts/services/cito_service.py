@@ -22,15 +22,15 @@ class CitoService:
     """Handles CiTO citation parsing and HTML injection."""
 
     # Pattern to match Pandoc citations: [@...]
-    CITATION_PATTERN = re.compile(r"\[@([^\]]+)\]")
+    CITATION_PATTERN: re.Pattern[str] = re.compile(r"\[@([^\]]+)\]")
 
     def __init__(
         self,
         filesystem: FileSystem,
         html_processor: HtmlProcessor,
     ):
-        self.fs = filesystem
-        self.html = html_processor
+        self.fs: FileSystem = filesystem
+        self.html: HtmlProcessor = html_processor
 
     def parse_citations_from_qmd(self, qmd_path: Path) -> dict[str, set[str]]:
         """Parse CiTO citations from a QMD file into {cite_id: {properties}}."""
@@ -174,14 +174,14 @@ class CitoService:
         citation_properties = {k: sorted(v) for k, v in merged.items()}
 
         logger.info(
-            f"Merged {len(citation_properties)} unique citations "
-            f"with {sum(len(v) for v in citation_properties.values())} properties",
+            f"Merged {len(citation_properties)} unique citations with "
+            + f"{sum(len(v) for v in citation_properties.values())} properties",
         )
 
         for qmd_path in post_paths:
             html_path = self.fs.get_html_path(qmd_path, str(site_dir))
             if self.fs.exists(html_path):
-                self.inject_into_html(html_path, citation_properties)
+                _ = self.inject_into_html(html_path, citation_properties)
             else:
                 logger.warning(f"HTML not found for {qmd_path.name}")
 

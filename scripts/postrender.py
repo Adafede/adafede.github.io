@@ -101,13 +101,13 @@ def process_posts(
 
         try:
             # Inject CiTO annotations
-            cito_service.inject_into_html(html_file, citation_properties)
+            _ = cito_service.inject_into_html(html_file, citation_properties)
 
             # Inject ROR affiliations
-            ror_service.inject_into_html(qmd_file, html_file)
+            _ = ror_service.inject_into_html(qmd_file, html_file)
 
             # Inject author ORCID icons and Scholia links
-            author_service.inject_into_html(qmd_file, html_file)
+            _ = author_service.inject_into_html(qmd_file, html_file)
 
         except Exception:
             logger.exception(f"Failed to inject annotations for {qmd_file.name}")

@@ -245,7 +245,7 @@ def generate_svg_markup(
     circles: Sequence[_CircleProto],
     items_by_id: dict[str, MetaDict],
     view_box: int = DEFAULT_VIEW_BOX,
-    height: int = DEFAULT_MAP_HEIGHT,
+    _height: int = DEFAULT_MAP_HEIGHT,
 ) -> str:
     """Generate accessible, SEO-optimized interactive SVG markup from layout circles."""
     center = view_box / 2
@@ -304,8 +304,6 @@ def generate_svg_markup(
             node_id = ""
 
         meta = items_by_id.get(node_id, {})
-        if not isinstance(meta, dict):
-            meta = {}
         if not meta and isinstance(c.ex, dict):
             meta = c.ex.get("data", c.ex) or {}
 

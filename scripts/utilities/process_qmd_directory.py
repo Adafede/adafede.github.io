@@ -68,10 +68,10 @@ def process_qmd_directory(qmd_glob: str) -> None:
         if html_path.exists():
             try:
                 # Inject ROR affiliations
-                ror_service.inject_into_html(qmd_path, html_path)
+                _ = ror_service.inject_into_html(qmd_path, html_path)
 
                 # Inject author ORCID icons and Scholia links
-                author_service.inject_into_html(qmd_path, html_path)
+                _ = author_service.inject_into_html(qmd_path, html_path)
 
                 processed += 1
             except Exception:

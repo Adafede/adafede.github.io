@@ -31,13 +31,12 @@ def cito(fs: FileSystem) -> CitoService:
 
 
 def _write(path: Path, content: str) -> Path:
-    path.write_text(content, encoding="utf-8")
+    _ = path.write_text(content, encoding="utf-8")
     return path
 
 
 def test_parse_single_citation_with_property(
     tmp_path: Path,
-    fs: FileSystem,
     cito: CitoService,
 ):
     """``[@cites:smith2020]`` yields cite_id ``smith2020`` with property ``cites``."""
@@ -48,7 +47,6 @@ def test_parse_single_citation_with_property(
 
 def test_parse_multiple_citations_in_one_bracket(
     tmp_path: Path,
-    fs: FileSystem,
     cito: CitoService,
 ):
     """Semicolon-separated citations inside one ``[@...]`` are parsed separately."""
@@ -62,7 +60,6 @@ def test_parse_multiple_citations_in_one_bracket(
 
 def test_parse_citation_without_property_defaults_to_citation(
     tmp_path: Path,
-    fs: FileSystem,
     cito: CitoService,
 ):
     """``[@smith2020]`` (no ``property:`` prefix) defaults to property ``citation``."""
@@ -73,7 +70,6 @@ def test_parse_citation_without_property_defaults_to_citation(
 
 def test_parse_citation_ids_merge_properties(
     tmp_path: Path,
-    fs: FileSystem,
     cito: CitoService,
 ):
     """The same cite_id appearing in two brackets merges its property sets."""
@@ -87,7 +83,6 @@ def test_parse_citation_ids_merge_properties(
 
 def test_parse_citation_strips_whitespace(
     tmp_path: Path,
-    fs: FileSystem,
     cito: CitoService,
 ):
     """Leading/trailing whitespace around property and id is stripped."""
@@ -98,7 +93,6 @@ def test_parse_citation_strips_whitespace(
 
 def test_parse_missing_file_returns_empty(
     tmp_path: Path,
-    fs: FileSystem,
     cito: CitoService,
 ):
     result = cito.parse_citations_from_qmd(tmp_path / "nonexistent.qmd")
@@ -129,6 +123,7 @@ def test_inject_single_citation(tmp_path: Path, cito: CitoService):
     assert changed is True
     soup = BeautifulSoup(html_file.read_text(encoding="utf-8"), "html.parser")
     entry = soup.find("div", id="ref-smith2020")
+    assert entry is not None
     cito_span = entry.find("span", class_="cito")
     assert cito_span is not None
     assert "cito:cites" in cito_span.text
@@ -138,8 +133,8 @@ def test_inject_multiple_properties_are_camelcased(tmp_path: Path, cito: CitoSer
     html_file = _write(
         tmp_path / "out.html",
         '<html><body><div id="refs">'
-        '<div id="ref-doe2023" class="csl-entry">Doe.</div>'
-        "</div></body></html>",
+        + '<div id="ref-doe2023" class="csl-entry">Doe.</div>'
+        + "</div></body></html>",
     )
 
     changed = cito.inject_into_html(
@@ -162,9 +157,9 @@ def test_inject_skips_entries_without_cito_properties(
     html_file = _write(
         tmp_path / "out.html",
         '<html><body><div id="refs">'
-        '<div id="ref-alpha" class="csl-entry">Alpha.</div>'
-        '<div id="ref-beta" class="csl-entry">Beta.</div>'
-        "</div></body></html>",
+        + '<div id="ref-alpha" class="csl-entry">Alpha.</div>'
+        + '<div id="ref-beta" class="csl-entry">Beta.</div>'
+        + "</div></body></html>",
     )
 
     changed = cito.inject_into_html(html_file, {"beta": ["cites"]})
@@ -172,7 +167,9 @@ def test_inject_skips_entries_without_cito_properties(
     assert changed is True
     soup = BeautifulSoup(html_file.read_text(encoding="utf-8"), "html.parser")
     alpha = soup.find("div", id="ref-alpha")
+    assert alpha is not None
     beta = soup.find("div", id="ref-beta")
+    assert beta is not None
     assert alpha.find("span", class_="cito") is None
     assert beta.find("span", class_="cito") is not None
 
@@ -182,9 +179,9 @@ def test_inject_is_idempotent(tmp_path: Path, cito: CitoService):
     html_file = _write(
         tmp_path / "out.html",
         '<html><body><div id="refs">'
-        '<div id="ref-x" class="csl-entry">X.'
-        '<span class="cito"> [cito:cites]</span></div>'
-        "</div></body></html>",
+        + '<div id="ref-x" class="csl-entry">X.'
+        + '<span class="cito"> [cito:cites]</span></div>'
+        + "</div></body></html>",
     )
 
     changed = cito.inject_into_html(html_file, {"x": ["cites"]})

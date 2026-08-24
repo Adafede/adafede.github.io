@@ -50,7 +50,7 @@ def convert_md_to_pdf(md_path: Path, pdf_path: Path) -> bool:
     logger.debug(f"Running: {' '.join(cmd)}")
 
     try:
-        subprocess.run(cmd, check=True, capture_output=True, text=True)
+        _ = subprocess.run(cmd, check=True, capture_output=True, text=True)
         logger.info(f"✓ Generated PDF: {pdf_path.name}")
         return True
     except subprocess.CalledProcessError as e:

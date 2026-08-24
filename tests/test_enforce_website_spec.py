@@ -26,7 +26,7 @@ def _write_html(tmp_path: Path, name: str = "page.html") -> Path:
     site = tmp_path / "_site"
     path = site / name
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(SAMPLE_HTML, encoding="utf-8")
+    _ = path.write_text(SAMPLE_HTML, encoding="utf-8")
     return path
 
 

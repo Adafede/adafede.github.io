@@ -347,6 +347,7 @@ def convert_rss_to_json_feed(rss_path: str | Path, json_feed_path: str | Path) -
 
         # Build JSON Feed structure with proper ordering: version, title,
         # description, home_page_url, feed_url, language, authors, items
+        feed_items: list[dict[str, object]] = []
         json_feed: dict[str, object] = {
             "version": "https://jsonfeed.org/version/1.1",
             "title": "",
@@ -354,7 +355,7 @@ def convert_rss_to_json_feed(rss_path: str | Path, json_feed_path: str | Path) -
             "home_page_url": "",
             "feed_url": "",
             "language": "en",
-            "items": [],
+            "items": feed_items,
         }
 
         # Extract and apply feed metadata
@@ -423,7 +424,7 @@ def convert_rss_to_json_feed(rss_path: str | Path, json_feed_path: str | Path) -
         for item in items:
             item_data = extract_item_data(item, str(base_url) if base_url else None)
             if item_data:
-                json_feed["items"].append(item_data)
+                feed_items.append(item_data)
 
         # Write JSON Feed file
         with open(json_feed_path, "w", encoding="utf-8") as f:

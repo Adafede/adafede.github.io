@@ -36,7 +36,7 @@ class EtreeModule(Protocol):
 # Import lxml and cast to typed interface
 import lxml.etree as _lxml_etree
 
-_etree: EtreeModule = cast(EtreeModule, _lxml_etree)
+_etree: EtreeModule = _lxml_etree  # pyright: ignore[reportAssignmentType]
 
 
 class XmlElement(Protocol):

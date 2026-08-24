@@ -46,7 +46,7 @@ def _qmd_file(tmp_path: Path, name: str, title: str, doi: str | None = None) -> 
     if doi:
         frontmatter += f"doi: {doi}\n"
     qmd = tmp_path / name
-    qmd.write_text(f"---\n{frontmatter}---\n\nBody.\n", encoding="utf-8")
+    _ = qmd.write_text(f"---\n{frontmatter}---\n\nBody.\n", encoding="utf-8")
     return qmd
 
 
@@ -57,7 +57,7 @@ def _qmd_file(tmp_path: Path, name: str, title: str, doi: str | None = None) -> 
 
 def test_inject_doi_adds_doi_tag(tmp_path: Path):
     rss = tmp_path / "rss.xml"
-    rss.write_text(SAMPLE_RSS, encoding="utf-8")
+    _ = rss.write_text(SAMPLE_RSS, encoding="utf-8")
     qmd1 = _qmd_file(tmp_path, "2025-01-01_first.qmd", "First Post", "10.59350/abc123")
 
     inject_doi_in_rss(rss, [qmd1])
@@ -72,7 +72,7 @@ def test_inject_doi_no_op_when_doi_already_present(tmp_path: Path):
         "</item>",
         "<doi>https://doi.org/10.59350/existing</doi>\n</item>",
     )
-    rss.write_text(rss_text, encoding="utf-8")
+    _ = rss.write_text(rss_text, encoding="utf-8")
     qmd1 = _qmd_file(tmp_path, "2025-01-01_first.qmd", "First Post", "10.59350/abc123")
 
     inject_doi_in_rss(rss, [qmd1])
@@ -84,8 +84,8 @@ def test_inject_doi_no_op_when_doi_already_present(tmp_path: Path):
 
 def test_inject_doi_skips_unmatched_titles(tmp_path: Path):
     rss = tmp_path / "rss.xml"
-    rss.write_text(SAMPLE_RSS, encoding="utf-8")
-    _qmd_file(tmp_path, "2025-01-01_other.qmd", "Unrelated Post", "10.59350/xyz")
+    _ = rss.write_text(SAMPLE_RSS, encoding="utf-8")
+    _ = _qmd_file(tmp_path, "2025-01-01_other.qmd", "Unrelated Post", "10.59350/xyz")
 
     inject_doi_in_rss(rss, [tmp_path / "2025-01-01_other.qmd"])
 
@@ -100,7 +100,7 @@ def test_inject_doi_skips_unmatched_titles(tmp_path: Path):
 
 def test_inject_cito_annotates_matching_citation(tmp_path: Path):
     rss = tmp_path / "rss.xml"
-    rss.write_text(SAMPLE_RSS, encoding="utf-8")
+    _ = rss.write_text(SAMPLE_RSS, encoding="utf-8")
 
     inject_cito_annotations_in_rss(rss, {"smith2020": ["cites_as_evidence"]})
 
@@ -110,7 +110,7 @@ def test_inject_cito_annotates_matching_citation(tmp_path: Path):
 
 def test_inject_cito_skips_unmatched_citations(tmp_path: Path):
     rss = tmp_path / "rss.xml"
-    rss.write_text(SAMPLE_RSS, encoding="utf-8")
+    _ = rss.write_text(SAMPLE_RSS, encoding="utf-8")
 
     inject_cito_annotations_in_rss(rss, {"other2021": ["cites"]})
 
@@ -124,7 +124,7 @@ def test_inject_cito_is_idempotent(tmp_path: Path):
         "Smith citation.</div>",
         'Smith citation.<span class="cito"> [cito:cites]</span></div>',
     )
-    rss.write_text(rss_text, encoding="utf-8")
+    _ = rss.write_text(rss_text, encoding="utf-8")
 
     inject_cito_annotations_in_rss(rss, {"smith2020": ["cites"]})
 
@@ -139,7 +139,7 @@ def test_inject_cito_is_idempotent(tmp_path: Path):
 
 def test_convert_rss_to_json_feed_basic(tmp_path: Path):
     rss = tmp_path / "rss.xml"
-    rss.write_text(SAMPLE_RSS, encoding="utf-8")
+    _ = rss.write_text(SAMPLE_RSS, encoding="utf-8")
     json_path = tmp_path / "feed.json"
 
     convert_rss_to_json_feed(rss, json_path)
@@ -161,7 +161,7 @@ def test_convert_rss_to_json_feed_basic(tmp_path: Path):
 def test_convert_after_doi_injection(tmp_path: Path):
     """End-to-end: inject DOI then convert — JSON Feed item gets the guid/id."""
     rss = tmp_path / "rss.xml"
-    rss.write_text(SAMPLE_RSS, encoding="utf-8")
+    _ = rss.write_text(SAMPLE_RSS, encoding="utf-8")
     qmd1 = _qmd_file(tmp_path, "2025-01-01_first.qmd", "First Post", "10.59350/abc123")
 
     yaml_loader = YamlLoader()

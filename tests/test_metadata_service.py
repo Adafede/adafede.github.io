@@ -35,12 +35,11 @@ def _frontmatter_text(text: str) -> str:
 
 def test_date_extracted_from_filename(
     tmp_path: Path,
-    fs: FileSystem,
     metadata_service: MetadataService,
 ):
     """A post without ``date`` in frontmatter gets it from its filename prefix."""
     qmd = tmp_path / "2025-08-04_rogue_scholar.qmd"
-    qmd.write_text("---\ntitle: Test Post\n---\n\nHello.\n", encoding="utf-8")
+    _ = qmd.write_text("---\ntitle: Test Post\n---\n\nHello.\n", encoding="utf-8")
 
     changed = metadata_service.update_post_metadata(qmd, generate_doi=False)
 
@@ -51,12 +50,11 @@ def test_date_extracted_from_filename(
 
 def test_doi_generated_when_missing(
     tmp_path: Path,
-    fs: FileSystem,
     metadata_service: MetadataService,
 ):
     """A post without a DOI gets one generated (prefix 10.59350)."""
     qmd = tmp_path / "2025-01-01_test.qmd"
-    qmd.write_text(
+    _ = qmd.write_text(
         "---\ntitle: No DOI Yet\ndate: 2025-01-01\n---\n\nBody.\n",
         encoding="utf-8",
     )
@@ -71,12 +69,11 @@ def test_doi_generated_when_missing(
 
 def test_existing_doi_not_overwritten(
     tmp_path: Path,
-    fs: FileSystem,
     metadata_service: MetadataService,
 ):
     """A post that already has a DOI does not get it regenerated."""
     qmd = tmp_path / "2025-01-01_test.qmd"
-    qmd.write_text(
+    _ = qmd.write_text(
         "---\ntitle: Has DOI\ndate: 2025-01-01\ndoi: 10.59350/existing-123\n---\n\nBody.\n",
         encoding="utf-8",
     )
@@ -91,12 +88,11 @@ def test_existing_doi_not_overwritten(
 
 def test_date_mismatch_corrected(
     tmp_path: Path,
-    fs: FileSystem,
     metadata_service: MetadataService,
 ):
     """A wrong date in frontmatter is overwritten with the filename date."""
     qmd = tmp_path / "2025-03-15_test.qmd"
-    qmd.write_text(
+    _ = qmd.write_text(
         "---\ntitle: Wrong Date\ndate: 2099-12-31\n---\n\nBody.\n",
         encoding="utf-8",
     )
@@ -111,12 +107,11 @@ def test_date_mismatch_corrected(
 
 def test_doi_not_generated_when_generate_doi_false_but_date_updated(
     tmp_path: Path,
-    fs: FileSystem,
     metadata_service: MetadataService,
 ):
     """With generate_doi=False, date is still updated if mismatched, but no DOI added."""
     qmd = tmp_path / "2025-06-01_test.qmd"
-    qmd.write_text(
+    _ = qmd.write_text(
         "---\ntitle: No DOI\ndate: 2000-01-01\n---\n\nBody.\n",
         encoding="utf-8",
     )
@@ -131,7 +126,6 @@ def test_doi_not_generated_when_generate_doi_false_but_date_updated(
 
 def test_unmodified_post_not_rewritten(
     tmp_path: Path,
-    fs: FileSystem,
     metadata_service: MetadataService,
 ):
     """If date and DOI already match, the file is not touched."""
@@ -139,7 +133,7 @@ def test_unmodified_post_not_rewritten(
     original = (
         "---\ntitle: Fine\ndate: 2025-01-01\ndoi: 10.59350/existing\n---\n\nBody.\n"
     )
-    qmd.write_text(original, encoding="utf-8")
+    _ = qmd.write_text(original, encoding="utf-8")
 
     changed = metadata_service.update_post_metadata(qmd, generate_doi=True)
 

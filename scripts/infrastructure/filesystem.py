@@ -18,7 +18,7 @@ class FileSystem:
         Args:
             root: Project root directory
         """
-        self.root = Path(root).resolve()
+        self.root: Path = Path(root).resolve()
 
     def find_posts(self, posts_dir: str = "posts") -> list[Path]:
         """Find all post QMD files with date-prefixed naming.
@@ -111,7 +111,7 @@ class FileSystem:
         if create_parents:
             path.parent.mkdir(parents=True, exist_ok=True)
 
-        path.write_text(content, encoding=encoding)
+        _ = path.write_text(content, encoding=encoding)
         logger.debug(f"Wrote {len(content)} chars to {path}")
 
     def exists(self, path: Path) -> bool:

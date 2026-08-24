@@ -359,7 +359,7 @@ def enforce_website_spec(html_files: list[Path], site_url: str) -> None:
 
         route = _route_from_html(html_file, site_dir)
         if _ensure_head_basics(soup, site_url=site_url, route=route):
-            html_file.write_text(str(soup), encoding="utf-8")
+            _ = html_file.write_text(str(soup), encoding="utf-8")
             changed_count += 1
 
         fixed_count += 1

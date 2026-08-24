@@ -2,6 +2,7 @@
 
 import re
 from pathlib import Path
+from typing import override
 
 import yaml
 
@@ -78,7 +79,7 @@ class MetadataService:
 
     def _generate_doi(self) -> str:
         """Generate a stable DOI and strip the resolver URL prefix."""
-        from commonmeta import encode_doi
+        from commonmeta import encode_doi  # pyright: ignore[reportMissingTypeStubs]
 
         doi_url = encode_doi("10.59350")
         return doi_url.removeprefix(DOI_URL_PREFIX)
@@ -93,12 +94,13 @@ class MetadataService:
 
         # Custom YAML dumper for consistent formatting
         class CustomDumper(yaml.SafeDumper):
+            @override
             def increase_indent(
                 self,
                 flow: bool = False,
                 indentless: bool = False,
             ) -> None:
-                return super().increase_indent(flow, False)
+                super().increase_indent(flow, False)
 
         new_front = yaml.dump(
             data,

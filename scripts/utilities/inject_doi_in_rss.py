@@ -121,7 +121,7 @@ def inject_doi_in_rss(
         # Create and append DOI tag
         doi_tag = soup.new_tag("doi")
         doi_tag.string = doi
-        item.append(doi_tag)
+        _ = item.append(doi_tag)
         modified = True
         logger.debug(f"Added DOI for '{title}': {doi}")
 
@@ -129,7 +129,7 @@ def inject_doi_in_rss(
     if modified:
         try:
             with open(rss_path, "w", encoding="utf-8") as f:
-                f.write(str(soup))
+                _ = f.write(str(soup))
             logger.info(f"Injected DOIs into {rss_path.name}")
         except OSError as e:
             logger.error(f"Failed to write RSS {rss_path}: {e}")

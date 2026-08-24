@@ -12,9 +12,9 @@ from pathlib import Path
 from time import sleep
 
 import folium
-import markdown
-from geopy import Nominatim
-from geopy.location import Location
+import markdown  # pyright: ignore[reportMissingTypeStubs]
+from geopy import Nominatim  # pyright: ignore[reportMissingTypeStubs]
+from geopy.location import Location  # pyright: ignore[reportMissingTypeStubs]
 
 # Add project root to path so `scripts` is importable as a package
 root_dir = Path(__file__).resolve().parent.parent.parent
@@ -40,7 +40,7 @@ class GeoCache:
         Args:
             cache_path: Path to cache JSON file
         """
-        self.cache_path = cache_path
+        self.cache_path: Path = cache_path
         self.cache: dict[str, dict[str, float | str]] = {}
         self._load()
 
@@ -64,7 +64,7 @@ class GeoCache:
         try:
             with self.cache_path.open("w", encoding="utf-8") as f:
                 json.dump(self.cache, f, indent=2, ensure_ascii=False)
-                f.write("\n")
+                _ = f.write("\n")
             logger.info(f"Saved geocache with {len(self.cache)} locations")
         except OSError:
             logger.error("Failed to save cache")
@@ -274,14 +274,14 @@ def generate_map(
     # Add markers
     for lat, lon, meta in locations:
         popup_html = create_popup_html(meta)
-        folium.Marker(
+        _ = folium.Marker(
             [lat, lon],
             popup=folium.Popup(popup_html, max_width=300),
         ).add_to(m)
 
     # Save map
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    m.save(str(output_path))
+    _ = m.save(str(output_path))
     logger.info(f"✓ Map saved to {output_path}")
 
 

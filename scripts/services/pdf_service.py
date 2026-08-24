@@ -35,11 +35,11 @@ def fix_image_paths_in_md(md_path: Path) -> None:
     if n > 0 and new_text != text:
         bak = md_path.with_suffix(md_path.suffix + ".bak")
         try:
-            shutil.copy2(md_path, bak)
+            _ = shutil.copy2(md_path, bak)
         except OSError:
             logger.warning(f"Could not create backup for {md_path}")
         try:
-            md_path.write_text(new_text, encoding="utf-8")
+            _ = md_path.write_text(new_text, encoding="utf-8")
             logger.info(f"Rewrote {n} Markdown image path(s) in {md_path}")
         except OSError as e:
             logger.error(f"Failed to write fixed markdown {md_path}: {e}")
