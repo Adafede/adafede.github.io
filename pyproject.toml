@@ -7,13 +7,13 @@ dependencies = [
   "bs4>=0.0.2",
   "circlify>=0.15.1",
   "cmcrameri>=1.10",
-  "commonmeta-py>=0.275",
+  "commonmeta-py>=0.309",
   "folium>=0.20.0",
   "geopy>=2.5.0",
-  "ipython>=9.16.1",
-  "lxml>=6.1.2",
+  "ipython>=9.17.1",
+  "lxml>=6.1.3",
   "markdown>=3.10.3",
-  "matplotlib>=3.11.1",
+  "matplotlib>=3.11.2",
   "pyyaml>=6.0.3",
   "quarto>=0.1.0",
   "ruamel-yaml>=0.19.1",
@@ -21,7 +21,7 @@ dependencies = [
 
 [dependency-groups]
 dev = [
-  "prek>=0.4.14",
+  "prek>=0.5.3",
   "pytest>=9.1.1",
 ]
 
