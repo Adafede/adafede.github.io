@@ -37,6 +37,9 @@
     <input type="radio" name="topic" id="tag-{{ loop.index }}" value="{{ entry.tag | lower }}" toolparamdescription="Topic slug to keep visible. Use all to clear the filter.">
     {% endfor %}
   </fieldset>
+  {# Pa11y requires a submit control on every form. Filtering is CSS-only;
+     submit is a no-op (`onsubmit="return false"`). #}
+  <button type="submit" class="visually-hidden">Apply topic filter</button>
   </form>
 
   <ul class="tag-filter__list">
