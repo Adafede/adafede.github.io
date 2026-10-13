@@ -102,7 +102,7 @@ const result = spawnSync('quarto', ['render', ...sources, '--to', 'pdf'], {
 });
 
 if (result.status !== 0) {
-  console.error(`  ! quarto render --to pdf failed (${result.status})`);
+  console.error(`  ! uv run quarto render --to pdf failed (${result.status})`);
   process.exitCode = 1;
 } else {
   console.log(`  + rendered ${sources.length} PDF(s) into _site/`);

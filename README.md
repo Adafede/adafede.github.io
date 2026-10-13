@@ -10,10 +10,10 @@ no longer the website renderer, only the PDF renderer.
 - **HTML site** --- [Eleventy](https://www.11ty.dev/) reads Markdown extracted
   from the `.qmd` sources into `src/content/` by
   `scripts/site/migrate_posts.py`.
-- **PDFs** --- `scripts/site/render-pdfs.mjs` runs `quarto render --to pdf` for
-  exactly the documents that opt in (`cv.qmd` and posts with
-  `format-links: [pdf]`). Quarto is optional for local HTML development: if it
-  isn't installed the build proceeds without PDFs.
+- **PDFs** --- `scripts/site/render-pdfs.mjs` runs
+  `uv run quarto render --to pdf` for exactly the documents that opt in
+  (`cv.qmd` and posts with `format-links: [pdf]`). Quarto is optional for local
+  HTML development: if it isn't installed the build proceeds without PDFs.
 
 ## Build the whole website
 
