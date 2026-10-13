@@ -139,5 +139,9 @@
     <main class="site-main" id="main" tabindex="-1">
       {{ content | safe }}
     </main>
+
+    {# Same collector Quarto injected via `_quarto.yml` body-header. Privacy
+       policy and CSP already assume this origin. #}
+    <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js" crossorigin="anonymous"></script>
   </body>
 </html>
