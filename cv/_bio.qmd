@@ -21,4 +21,7 @@ His work uses [mass spectrometry]{about="wd:Q180809"} to determine which
 [knowledge]{about="wd:Q9081"} [open]{about="wd:Q232932"} and
 [reusable]{about="wd:Q115999420"}. He is a core contributor to the [LOTUS
 initiative](https://doi.org/10.7554/eLife.70780), and works across [data
-science]{about="wd:Q2374463"}, chemistry, and [biology]{about="wd:Q420"}.
+science]{about="wd:Q2374463"}, chemistry, and [biology]{about="wd:Q420"}. His
+computational work connects research data across systems using open principles,
+designing architectures that adapt smoothly across different tools and
+environments.
