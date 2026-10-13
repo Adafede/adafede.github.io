@@ -92,6 +92,3 @@ Disallow: /
 
 # Sitemap location
 Sitemap: https://adafede.github.io/sitemap.xml
-
-# Agent Resource Discovery catalog (Lighthouse looks here first)
-Agentmap: https://adafede.github.io/.well-known/ai-catalog.json

@@ -100,6 +100,9 @@ jobs:
         if: github.event_name != 'pull_request'
         with:
           path: _eleventy_site/
+          # Default excludes dotdirs, so /.well-known (ai-catalog, security.txt,
+          # agent-skills) never reached Pages while HTML still linked to them.
+          include-hidden-files: true
 
       - uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346
         if: github.event_name != 'pull_request'
