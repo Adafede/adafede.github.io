@@ -95,7 +95,7 @@ if (!quartoOnPath) {
 // That HTML pipeline is the Eleventy site's job now, so signal it away with
 // the PDF_ONLY sentinel — the hooks short-circuit to a one-line no-op,
 // leaving this path to Quarto's LaTeX renderer alone.
-const result = spawnSync('uv run quarto', ['render', ...sources, '--to', 'pdf'], {
+const result = spawnSync('uv', ['run', 'quarto', 'render', ...sources, '--to', 'pdf'], {
   encoding: 'utf-8',
   stdio: ['ignore', 'inherit', 'inherit'],
   env: { ...process.env, PDF_ONLY: '1' },
