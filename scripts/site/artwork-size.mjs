@@ -81,6 +81,30 @@ function pngSize(buffer) {
   return { width: buffer.readUInt32BE(16), height: buffer.readUInt32BE(20) };
 }
 
+/** Intrinsic dimensions for the lossy VP8 files emitted by cwebp. */
+function webpSize(buffer) {
+  if (buffer.toString('ascii', 0, 4) !== 'RIFF' || buffer.toString('ascii', 8, 12) !== 'WEBP') return null;
+  let offset = 12;
+  while (offset + 18 <= buffer.length) {
+    const type = buffer.toString('ascii', offset, offset + 4);
+    const length = buffer.readUInt32LE(offset + 4);
+    const data = offset + 8;
+    if (
+      type === 'VP8 '
+      && buffer[data + 3] === 0x9d
+      && buffer[data + 4] === 0x01
+      && buffer[data + 5] === 0x2a
+    ) {
+      return {
+        width: buffer.readUInt16LE(data + 6) & 0x3fff,
+        height: buffer.readUInt16LE(data + 8) & 0x3fff,
+      };
+    }
+    offset = data + length + (length % 2);
+  }
+  return null;
+}
+
 const sizes = {};
 let measured = 0;
 let unmeasured = 0;
@@ -92,7 +116,13 @@ for (const name of readdirSync(OUT)) {
   let size = null;
   try {
     const buffer = readFileSync(path);
-    size = lower.endsWith('.svg') ? svgSize(buffer) : lower.endsWith('.png') ? pngSize(buffer) : null;
+    size = lower.endsWith('.svg')
+      ? svgSize(buffer)
+      : lower.endsWith('.png')
+        ? pngSize(buffer)
+        : lower.endsWith('.webp')
+          ? webpSize(buffer)
+          : null;
   } catch {
     size = null;
   }

@@ -131,7 +131,7 @@ local function split_cito_from_id (citation_id)
     end
   end
 
-  if next(split_citation_id) == nill then
+  if next(split_citation_id) == nil then
     table.insert(split_citation_id, table.remove(cito_props))
   end
 

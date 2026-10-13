@@ -17,14 +17,27 @@
  * Run: node scripts/site/fetch-artwork.mjs
  */
 import { createHash } from 'node:crypto';
-import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
+import {
+  existsSync,
+  mkdirSync,
+  mkdtempSync,
+  readFileSync,
+  readdirSync,
+  rmSync,
+  statSync,
+  unlinkSync,
+  writeFileSync,
+} from 'node:fs';
 import { dirname, extname, join } from 'node:path';
+import { tmpdir } from 'node:os';
+import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const CONTENT = join(ROOT, 'src', 'content');
 const OUT = join(ROOT, 'public', 'images', 'artwork');
 const MANIFEST = join(OUT, 'manifest.json');
+const THUMBNAILS = join(OUT, 'thumbnails.json');
 
 /** Only these are cached; anything else is not ours to mirror. */
 const CACHEABLE = /^https:\/\/(upload\.wikimedia\.org|raw\.githubusercontent\.com|ars\.els-cdn\.com|media\.springernature\.com|pharma\.unibas\.ch)\//;
@@ -81,9 +94,13 @@ for (const section of ['articles', 'varia']) {
 }
 
 const urls = new Set();
+const thumbnailUrls = new Set();
 for (const file of contentFiles) {
   const image = readFileSync(file, 'utf-8').match(/^image:\s*"?([^"\n]+)"?\s*$/m)?.[1];
-  if (image && CACHEABLE.test(image)) urls.add(image);
+  if (image && CACHEABLE.test(image)) {
+    urls.add(image);
+    if (file.includes('/articles/')) thumbnailUrls.add(image);
+  }
 }
 
 mkdirSync(OUT, { recursive: true });
@@ -97,39 +114,122 @@ if (existsSync(MANIFEST)) {
     manifest = {};
   }
 }
+let thumbnails = {};
+if (existsSync(THUMBNAILS)) {
+  try {
+    thumbnails = JSON.parse(readFileSync(THUMBNAILS, 'utf-8'));
+  } catch {
+    thumbnails = {};
+  }
+}
 
 let fetched = 0;
 let failed = 0;
 
 for (const url of urls) {
-  const name = `${createHash('sha256').update(url).digest('hex').slice(0, 16)}${extname(new URL(url).pathname) || '.img'}`;
-  const target = join(OUT, name);
-  manifest[url] = `/images/artwork/${name}`;
+  const stem = createHash('sha256').update(url).digest('hex').slice(0, 16);
+  const extension = extname(new URL(url).pathname) || '.img';
+  const cachedName = manifest[url]?.replace(/^\/images\/artwork\//, '');
+  const cached = cachedName ? join(OUT, cachedName) : null;
+  const needsSvgThumb = extension === '.svg' && thumbnailUrls.has(url);
+  const thumbnailName = `${stem}-thumb.webp`;
+  const cachedThumbnailName = thumbnails[url]?.replace(/^\/images\/artwork\//, '');
+  const hasThumbnail = cachedThumbnailName === thumbnailName
+    && existsSync(join(OUT, thumbnailName));
 
-  if (existsSync(target)) continue;
-
-  try {
-    const response = await fetch(url, { signal: AbortSignal.timeout(30_000) });
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    let buffer = Buffer.from(await response.arrayBuffer());
-    let note = '';
-    if (name.endsWith('.svg')) {
-      const shrunk = keepSvg(buffer.toString('utf-8'));
-      buffer = Buffer.from(shrunk.text, 'utf-8');
-      writeFileSync(target, buffer);
-      if (shrunk.saved > 1024) note = ` (saved ${Math.round(shrunk.saved / 1024)} KB)`;
-    } else {
-      writeFileSync(target, buffer);
+  let buffer;
+  if (
+    cached
+    && existsSync(cached)
+    && (extension !== '.gif' || cachedName === `${stem}-thumb.webp`)
+    && (!needsSvgThumb || hasThumbnail)
+  ) {
+    continue;
+  }
+  if (needsSvgThumb && !hasThumbnail) delete thumbnails[url];
+  if (
+    cached
+    && existsSync(cached)
+    && (extname(cached) === '.gif' || needsSvgThumb)
+  ) {
+    buffer = readFileSync(cached);
+  } else {
+    try {
+      const response = await fetch(url, { signal: AbortSignal.timeout(30_000) });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      buffer = Buffer.from(await response.arrayBuffer());
+    } catch (error) {
+      failed++;
+      console.log(`  ! could not cache ${url}: ${error.message}`);
+      delete manifest[url];
+      continue;
     }
+  }
+
+  let name = `${stem}${extension}`;
+  try {
+    if (name.endsWith('.svg')) {
+      buffer = Buffer.from(keepSvg(buffer.toString('utf-8')).text, 'utf-8');
+      if (needsSvgThumb) {
+        const temporaryDirectory = mkdtempSync(join(tmpdir(), 'site-artwork-'));
+        const source = join(temporaryDirectory, `${stem}.svg`);
+        const thumbnail = join(OUT, thumbnailName);
+        try {
+          writeFileSync(source, buffer);
+          const result = spawnSync(
+            'uv',
+            ['run', 'python', 'scripts/site/optimize_artwork.py', source, thumbnail],
+            { cwd: ROOT, encoding: 'utf-8' },
+          );
+          if (result.error) throw result.error;
+          if (result.status === 0) {
+            thumbnails[url] = `/images/artwork/${thumbnailName}`;
+          } else if (result.status !== 2) {
+            throw new Error(`SVG thumbnail generation failed: ${result.stderr || result.status}`);
+          } else if (buffer.length >= 100_000) {
+            console.log(`  = kept original SVG (rsvg-convert unavailable): ${url}`);
+          }
+        } finally {
+          rmSync(temporaryDirectory, { recursive: true, force: true });
+        }
+      }
+    } else if (extension === '.gif') {
+      const temporaryDirectory = mkdtempSync(join(tmpdir(), 'site-artwork-'));
+      const source = join(temporaryDirectory, `${stem}.gif`);
+      const optimizedName = `${stem}-thumb.webp`;
+      const optimized = join(OUT, optimizedName);
+      try {
+        writeFileSync(source, buffer);
+        const result = spawnSync(
+          'uv',
+          ['run', 'python', 'scripts/site/optimize_artwork.py', source, optimized],
+          { cwd: ROOT, encoding: 'utf-8' },
+        );
+        if (result.error) throw result.error;
+        if (result.status === 0) {
+          name = optimizedName;
+        } else if (result.status !== 2) {
+          throw new Error(`GIF optimization failed: ${result.stderr || result.status}`);
+        } else {
+          console.log(`  = kept original GIF (animated or cwebp unavailable): ${url}`);
+        }
+        if (cached && cached !== join(OUT, name) && existsSync(cached)) unlinkSync(cached);
+      } finally {
+        rmSync(temporaryDirectory, { recursive: true, force: true });
+      }
+    }
+
+    if (name.endsWith('.gif')) writeFileSync(join(OUT, name), buffer);
+    else if (!name.endsWith('.webp')) writeFileSync(join(OUT, name), buffer);
+
+    manifest[url] = `/images/artwork/${name}`;
     fetched++;
-    console.log(`  + ${name} (${Math.round(buffer.length / 1024)} KB)${note} <- ${url}`);
+    console.log(`  + ${name} (${Math.round(statSync(join(OUT, name)).size / 1024)} KB) <- ${url}`);
   } catch (error) {
-    failed++;
-    console.log(`  ! could not cache ${url}: ${error.message}`);
-    // Leave the mapping out so the template falls back to the remote URL.
-    delete manifest[url];
+    throw new Error(`Could not store artwork ${url}: ${error.message}`, { cause: error });
   }
 }
 
 writeFileSync(MANIFEST, `${JSON.stringify(manifest, null, 2)}\n`, 'utf-8');
+writeFileSync(THUMBNAILS, `${JSON.stringify(thumbnails, null, 2)}\n`, 'utf-8');
 console.log(`  artwork: ${Object.keys(manifest).length} cached (${fetched} new, ${failed} failed)`);

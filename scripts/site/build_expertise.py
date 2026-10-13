@@ -179,12 +179,9 @@ def render(data: dict) -> str:
     circles.sort(key=lambda c: -c.r)  # big circles first: smaller ones nest on top
 
     centre = ENCLOSURE_R
-    # cmcrameri populates its `cm` module's attributes at import time,
-    # so a checker cannot see this member. The suppression is the
-    # documented way to say the attribute is real and the checker is
-    # wrong about it — unlike getattr, which the linter rejects as
-    # being exactly equivalent to the plain access.
-    cmap = cm.batlowK
+    # cmcrameri adds this colormap to the module dynamically; indexing the
+    # module dictionary avoids a false unknown-attribute diagnostic.
+    cmap: mcolors.Colormap = cm.__dict__["batlowK"]
 
     parts = [
         '<div class="expertise">',

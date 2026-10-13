@@ -9,7 +9,7 @@ format:
     template: cv/template.tex
 cvauthor: Adriano Rutz
 cvprofession: Pharmaceutical Scientist
-cvcolor: 58748F
+cvcolor: 0C6E73
 # Contact details, one field per value.
 #
 # These used to be sentences jammed into the `right` slot of cvmeta — the phone

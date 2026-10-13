@@ -57,6 +57,8 @@ jobs:
             nasm \
             libqpdf-dev \
             libxslt1-dev \
+            librsvg2-bin \
+            webp \
             texlive-latex-extra \
             texlive-fonts-recommended \
             texlive-latex-recommended \

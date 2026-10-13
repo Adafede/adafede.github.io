@@ -1,103 +1,24 @@
-%-----------------------------------------------------------------------------------------------------------------------------------------------%
-%	The MIT License (MIT)
-%
-%	Copyright (c) 2015 Jan Küster
-%
-%	Permission is hereby granted, free of charge, to any person obtaining a copy
-%	of this software and associated documentation files (the "Software"), to deal
-%	in the Software without restriction, including without limitation the rights
-%	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-%	copies of the Software, and to permit persons to whom the Software is
-%	furnished to do so, subject to the following conditions:
-%
-%	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-%	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-%	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-%	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-%	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-%	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-%	THE SOFTWARE.
-%
-%
-%-----------------------------------------------------------------------------------------------------------------------------------------------%
+\documentclass[10pt,a4paper]{article}
 
-
-%============================================================================%
-%
-%	DOCUMENT DEFINITION
-%
-%============================================================================%
-\documentclass[10pt,A4]{article}
-
-
-%----------------------------------------------------------------------------------------
-%	ENCODING
-%----------------------------------------------------------------------------------------
-\usepackage[utf8]{inputenc}
-
-%----------------------------------------------------------------------------------------
-%	PDF ACCESSIBILITY AND METADATA
-%----------------------------------------------------------------------------------------
-% Tagging gives the PDF a structure tree (headings, lists, paragraphs) that a
-% screen reader can navigate rather than a wall of text. `lang` is the document
-% language, which is what /Lang in the file descriptor is set from, and which
-% decides hyphenation. Both are PDF/UA requirements; without them the file is
-% technically valid and practically unreadable to assistive technology.
-%
-% DocumentMetadata has to be the first thing after \documentclass. pdfTeX of
-% TeX Live 2020 or newer is required for tagging=on.
-
-% Language declaration. It is what hyphenation follows and, through babel,
-% what hyperref writes into /Lang — the document language a screen reader
-% announces. Tagged PDF is not offered by this TeX, which predates
-% \DocumentMetadata, so no structure tree is available here; /Lang and the
-% title metadata are what this install can provide.
 \usepackage[english]{babel}
-% /Lang (document language a screen reader announces, and what babel uses for
-% hyphenation) is set in the hypersetup block below via `pdflang`. Declaring it
-% once avoids a "Multiple definitions ... for key /Lang" PDF warning.
-
-%----------------------------------------------------------------------------------------
-%	LOGIC
-%----------------------------------------------------------------------------------------
-\usepackage{xifthen}
-
-%----------------------------------------------------------------------------------------
-%	FONT
-%----------------------------------------------------------------------------------------
-
-% some tex-live fonts - choose your own
-\usepackage{$cvfont$}
-
-% set font default
-\renewcommand*\familydefault{\sfdefault}
 \usepackage[T1]{fontenc}
-
-% more font size definitions
-\usepackage{moresize}
-
-
-%----------------------------------------------------------------------------------------
-%	PAGE LAYOUT  DEFINITIONS
-%----------------------------------------------------------------------------------------
-\usepackage[a4paper]{geometry}
-\geometry{top=1.25cm, bottom=-.1cm, left=1.5cm, right=1.5cm}
-
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[a4paper,top=1.1cm,bottom=1.3cm,left=1.5cm,right=1.5cm]{geometry}
+\usepackage{xcolor}
 \usepackage{fancyhdr}
-\pagestyle{fancy}
- \usepackage[colorlinks, allcolors=sectcol]{hyperref}
-% The `bookmark' package renders the PDF outline tree more reliably than
-% hyperref's built-in bookmarking, especially on pdfTeX, and keeps the
-% \pdfbookmark entries emitted by \cvsection (below) in sync with the
-% document's sectioning. It must follow hyperref.
+\usepackage{hyperref}
 \usepackage{bookmark}
 
-% Title, author and subject shown in the PDF's document properties and used by
-% the reader's title bar. The subject says what the document is, which a
-% screen reader announces before any content. `pdfusetitle' promotes the
-% pdftitle above into the document's tagged title (a structure-tree entry a
-% reader can jump to), giving the single-page CV a top-level landmark.
+\definecolor{accent}{HTML}{$cvcolor$}
+\definecolor{ink}{HTML}{172F40}
+\definecolor{muted}{HTML}{526878}
+\definecolor{rule}{HTML}{D7E1E6}
+\definecolor{accentlight}{HTML}{A9D5D1}
+
 \hypersetup{
+  colorlinks=true,
+  allcolors=accent,
   pdftitle={Curriculum Vit\ae},
   pdfauthor={Adriano Rutz},
   pdfsubject={Curriculum Vitae — pharmaceutical scientist, metabolomics and mass spectrometry},
@@ -109,196 +30,71 @@
   pdfstartview={FitH},
   pdflang={en-GB}
 }
-%less space between header and content
-\setlength{\headheight}{-5pt}
 
-\setlength{\parindent}{0mm}
-
-%----------------------------------------------------------------------------------------
-%	TABLE /ARRAY DEFINITIONS
-%----------------------------------------------------------------------------------------
-%for layouting tables
-\usepackage{multicol}
-\usepackage{multirow}
-
-%extended aligning of tabular cells
-\usepackage{array}
-
-\newcolumntype{x}[1]{%
->{\raggedleft\hspace{0pt}}p{#1}}%
-
-
-%----------------------------------------------------------------------------------------
-%	GRAPHICS DEFINITIONS
-%----------------------------------------------------------------------------------------
-\usepackage{graphicx}
-\usepackage{wrapfig}
-\usepackage{float}
-\usepackage{tikz}
-\usetikzlibrary{shapes, backgrounds,mindmap, trees}
-
-
-%----------------------------------------------------------------------------------------
-%	Color DEFINITIONS
-%----------------------------------------------------------------------------------------
-
-\usepackage{color}
-
-%accent color
-\definecolor{sectcol}{HTML}{$cvcolor$}
-
-%dark background color
-\definecolor{bgcol}{RGB}{110,110,110}
-
-%light background / accent color
-\definecolor{softcol}{RGB}{225,225,225}
-
-
-%============================================================================%
-%
-%
-%	DEFINITIONS
-%
-%
-%============================================================================%
-
-%----------------------------------------------------------------------------------------
-% 	HEADER
-%----------------------------------------------------------------------------------------
-
-% remove top header line
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1.5pt}
+\setlength{\headheight}{0pt}
+\setlength{\headsep}{0pt}
+\setlength{\footskip}{18pt}
+\emergencystretch=1em
+\renewcommand{\familydefault}{\sfdefault}
+\raggedright
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[L]{\scriptsize\textcolor{muted}{\href{$if(cvcontact.website)$$cvcontact.website$$endif$}{$if(cvcontact.website)$$cvcontact.website$$endif$}\quad\textcolor{rule}{|}\quad\href{mailto:$cvcontact.email$}{$cvcontact.email$}}}
+\fancyfoot[R]{\scriptsize\textcolor{muted}{\thepage}}
 \renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0.35pt}
+\renewcommand{\footrule}{\hbox to\headwidth{\color{rule}\leaders\hrule height \footrulewidth\hfill}}
 
-%remove bottom header line
-\renewcommand{\footrulewidth}{0pt}
-
-%remove pagenum
-\renewcommand{\thepage}{}
-
-%remove section num
-\renewcommand{\thesection}{}
-
-
-%----------------------------------------------------------------------------------------
-%	custom sections
-%----------------------------------------------------------------------------------------
-
-% create a coloured box with arrow and title as cv section headline
-% param 1: section title
-%
-% Visual only: a centred boxed title. The PDF outline/bookmark tree is built by
-% the `Header` filter in cv/styles.lua, which knows each heading's level and so
-% can nest entry titles under their section; \cvsection itself stays level-
-% agnostic.
-\newcommand{\cvsection}[1]
-{
-	\begin{center}
-		\large\textcolor{sectcol}{\textbf{#1}}
-	\end{center}
+\newcommand{\cvsection}[1]{%
+  \par\addvspace{5pt}%
+  {\fontsize{9.5}{11}\selectfont\bfseries\color{accent}\MakeUppercase{#1}}%
+  \hspace{0.8em}{\color{rule}\leaders\hrule height 0.5pt\hfill}%
+  \par\vspace{1pt}%
 }
 
-%
-\newcommand{\metasection}[2]
-{
-\footnotesize{#2} \hspace*{\fill} \footnotesize{#1}\\[1pt]
+\newcommand{\cventry}[2]{%
+  \par\addvspace{2pt}\noindent
+  \textcolor{accent}{\rule{2pt}{8pt}}\hspace{5pt}%
+  {\small\bfseries\color{ink}#1}%
+  \if\relax\detokenize{#2}\relax\else
+    \hfill{\footnotesize\color{muted}#2}%
+  \fi
+  \par
 }
 
-%----------------------------------------------------------------------------------------
-%	 CV EVENT
-%----------------------------------------------------------------------------------------
-
-% creates a stretched box as cv entry headline followed by some paragraphs about
-% the work you did
-% param 1:	event time i.e. 2014 or 2011-2014 etc.
-% param 2:	event name (what did you do?)
-% param 3:	institution (where did you work / study)
-% param 4:	list of paragraphs
-%
-\newcommand{\cvevent}[4]
-{
-
-\begin{tabular*}{1\textwidth}{p{13.6cm}  x{3.9cm}}
-	\textbf{#2} - \textcolor{bgcol}{#3} &   \vspace{2.5pt}\textcolor{sectcol}{#1}
-\end{tabular*}
-
-\vspace{-8pt}
-\textcolor{softcol}{\hrule}
-\vspace{6pt}
-\foreach \desc in {#4}{
-	*  \desc\\[3pt]
+\newcommand{\cvmeta}[2]{%
+  \noindent{\scriptsize\bfseries\color{accent}\MakeUppercase{#1}}%
+  \hspace{0.8em}{\footnotesize\color{ink}#2}\par
 }
-
-\vspace{3pt}
-}
-
-% creates a stretched box as
-\newcommand{\cveventmeta}[2]
-{
-	\mbox{\mystrut \hspace{87pt}\textit{#1}}\\
-	#2
-}
-
-%----------------------------------------------------------------------------------------
-% CUSTOM STRUT FOR EMPTY BOXES
-%----------------------------------------- -----------------------------------------------
-\newcommand{\mystrut}{\rule[-.3\baselineskip]{0pt}{\baselineskip}}
 
 \begin{document}
 
-\pagestyle{fancy}
+\noindent{\color{accent}\rule{\linewidth}{2.5pt}}\par
+\vspace{3pt}
+\noindent\colorbox{ink}{%
+  \parbox{\dimexpr\linewidth-2\fboxsep\relax}{%
+    \raggedright
+    {\fontsize{27}{30}\selectfont\rmfamily\bfseries\color{white}\textls[35]{\MakeUppercase{$cvauthor$}}\par}
+    \vspace{2pt}
+    {\small\color{accentlight}$cvprofession$}
+  }%
+}\par
+\vspace{4pt}
 
-%---------------------------------------------------------------------------------------
-%	TITLE HEADLINE
-%----------------------------------------------------------------------------------------
-\vspace{-8pt}
-\begin{center}
-	\HUGE \textsc{$cvauthor$}
-	% \textcolor{sectcol}{\rule[-1mm]{1mm}{0.9cm}} \textsc{Resume}
-	\\[2pt]
-	\small $cvprofession$
-\end{center}
-
-\vspace{6pt}
-
-%---------------------------------------------------------------------------------------
-%	META SECTION
-%----------------------------------------------------------------------------------------
 $for(cvmeta)$
-% The label is small and in the accent colour, the value in the body face, so
-% the two read as a label and its content rather than as one bold run.
-\metasection{}{\textcolor{softcol}{\textsc{$cvmeta.title$}\hspace{4pt}}\textcolor{softcol}{\textbar}\hspace{4pt} $cvmeta.left$}
+\cvmeta{$cvmeta.title$}{$cvmeta.left$}
 $endfor$
 
-% Contact line. The phone number is here and not on the website; the email is
-% here and on the website, where it is spelled rather than linked.
-\vspace{-2pt}
-% Contact line. The phone number is here and not on the website; the email is
-% here and on the website, where it is spelled rather than linked. The three are
-% separated by rules so they read as three facts, not one run of text.
-\metasection{}{%
-  $if(cvcontact.phone)$\textcolor{softcol}{$cvcontact.phone$}$endif$%
-  \hspace{4pt}\textcolor{softcol}{\textbar}\hspace{4pt}%
+\vspace{1pt}
+\noindent{\footnotesize\color{muted}%
+  $if(cvcontact.phone)$$cvcontact.phone$\hspace{0.7em}\textcolor{rule}{|}\hspace{0.7em}$endif$%
   \href{mailto:$cvcontact.email$}{$cvcontact.email$}%
-  \hspace{4pt}\textcolor{softcol}{\textbar}\hspace{4pt}%
-  $if(cvcontact.location)$\textcolor{softcol}{$cvcontact.location$}$endif$%
-}
+  $if(cvcontact.location)$\hspace{0.7em}\textcolor{rule}{|}\hspace{0.7em}$cvcontact.location$$endif$%
+}\par
+\vspace{2pt}
 
-
-\vspace{-2pt}
-\textcolor{softcol}{\hrule}
-\vspace{6pt}
-
-\normalsize
-
-\vspace{-6pt}
 $body$
-
-%--------------------------------------------------------------------------------------------------
-%	ARTIFICIAL FOOTER (fancy footer cannot exceed linewidth)
-%--------------------------------------------------------------------------------------------------
-
-\null
-\vspace*{\fill}
-\hspace{-0.25\linewidth}\colorbox{white}{\makebox[1.5\linewidth][c]{\mystrut  \textnormal{\textcolor{sectcol}{$if(cvcontact.website)$$cvcontact.website$$endif$}  -  \textcolor{sectcol}{$if(cvcontact.email)$$cvcontact.email$$endif$}}}}
 
 \end{document}

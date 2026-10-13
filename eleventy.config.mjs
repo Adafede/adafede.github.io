@@ -1121,6 +1121,18 @@ export default function (eleventyConfig) {
     }
   })();
   eleventyConfig.addFilter('artwork', (url) => (url ? artworkManifest[url] ?? url : ''));
+  const artworkThumbnails = (() => {
+    const path = join(ROOT, 'public', 'images', 'artwork', 'thumbnails.json');
+    if (!existsSync(path)) return {};
+    try {
+      return JSON.parse(readFileSync(path, 'utf-8'));
+    } catch {
+      return {};
+    }
+  })();
+  eleventyConfig.addFilter('artworkThumb', (url) => (
+    url ? artworkThumbnails[url] ?? artworkManifest[url] ?? url : ''
+  ));
 
   /**
    * The intrinsic size of a cached artwork file, as { width, height }.

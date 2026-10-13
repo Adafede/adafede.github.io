@@ -4,6 +4,7 @@ version = "0.0.1"
 description = "My personal website"
 requires-python = "==3.13.*"
 dependencies = [
+  "Pillow>=10.0.0",
   "bs4>=0.0.2",
   "circlify>=0.15.1",
   "cmcrameri>=1.10",
@@ -35,6 +36,9 @@ known_first_party = [
 ]
 
 [tool.deptry.package_module_name_map]
+Pillow = [
+  "PIL",
+]
 commonmeta-py = [
   "commonmeta",
 ]

@@ -7,7 +7,7 @@
   {% if article.data.image %}
   {# width/height are the rendered box doubled, so the browser reserves space
      before the image loads; CSS overrides them for display. #}
-  <img class="publication__image" src="{{ article.data.image | artwork }}" loading="lazy" decoding="async" fetchpriority="low"
+  <img class="publication__image" src="{{ article.data.image | artworkThumb }}" loading="lazy" decoding="async" fetchpriority="low"
     width="352" height="256"
     {% if article.data.imageAlt %}alt="{{ article.data.imageAlt }}"{% else %}alt=""{% endif %} />
   {% endif %}
