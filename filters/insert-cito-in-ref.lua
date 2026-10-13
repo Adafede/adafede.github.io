@@ -4,6 +4,7 @@
 -- under the terms of the MIT license. See LICENSE for details.
 
 local List = require 'pandoc.List'
+local pandoc = require 'pandoc'
 local utils = require 'pandoc.utils'
 local citation_properties
 
