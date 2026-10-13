@@ -66,6 +66,9 @@
     {# Declared, not merely published: a sitemap nobody links to is a sitemap
        nobody finds. #}
     <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+    {# Lighthouse Agentic Browsing discovers the catalog via this relation
+       before falling back to /.well-known/ai-catalog.json. #}
+    <link rel="ai-catalog" href="/.well-known/ai-catalog.json" type="application/ai-catalog+json" />
     <link rel="icon" href="/images/favicon/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/images/favicon/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
@@ -98,12 +101,14 @@
            is the default and an explicit choice can override it either way.
            The only thing that changes is `color-scheme`: every token is a
            `light-dark()` pair, so flipping it flips the whole palette. No
-           script — and nothing that remembers the choice, which would need one. #}
+           script — and nothing that remembers the choice, which would need one.
+           Wrapped as a WebMCP tool so agents can set the theme declaratively. #}
+        <form class="theme-switch-form" toolname="set_colour_theme" tooldescription="Set the site colour theme to follow the system, light, or dark. The change applies immediately via CSS; nothing is submitted to a server." onsubmit="return false">
         <fieldset class="theme-switch">
           <legend class="visually-hidden">Colour theme</legend>
-          <input type="radio" name="theme" id="theme-auto" checked>
-          <input type="radio" name="theme" id="theme-light">
-          <input type="radio" name="theme" id="theme-dark">
+          <input type="radio" name="theme" id="theme-auto" value="auto" toolparamdescription="Colour theme: auto follows the operating system preference." checked>
+          <input type="radio" name="theme" id="theme-light" value="light" toolparamdescription="Colour theme: force light appearance.">
+          <input type="radio" name="theme" id="theme-dark" value="dark" toolparamdescription="Colour theme: force dark appearance.">
           <div class="theme-switch__options">
             <label class="theme-switch__btn" for="theme-auto" title="Theme: follow the system">
               <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="2.5" y="4" width="19" height="12.5" rx="1.5"/><path d="M8.5 20.5h7"/></svg>
@@ -119,6 +124,7 @@
             </label>
           </div>
         </fieldset>
+        </form>
 
         <ul class="site-nav site-nav--utility">
           <li>

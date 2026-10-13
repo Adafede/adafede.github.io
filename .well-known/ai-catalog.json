@@ -1,0 +1,23 @@
+{
+  "specVersion": "1.0",
+  "host": {
+    "displayName": "Adriano Rutz",
+    "identifier": "adafede.github.io",
+    "documentationUrl": "https://adafede.github.io/llms.txt"
+  },
+  "entries": [
+    {
+      "identifier": "urn:air:adafede.github.io:skill:site-navigation",
+      "displayName": "Website Navigation",
+      "description": "Guides agents to canonical pages, feeds, and policy endpoints on adafede.github.io.",
+      "type": "text/markdown; profile=\"urn:air:agent-skills\"",
+      "url": "https://adafede.github.io/.well-known/agent-skills/site-navigation/SKILL.md",
+      "representativeQueries": [
+        "Where is Adriano Rutz's CV?",
+        "What is the RSS or JSON feed URL for this site?",
+        "Find the articles, talks, and teaching pages",
+        "Where is the privacy policy?"
+      ]
+    }
+  ]
+}

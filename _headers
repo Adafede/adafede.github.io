@@ -44,7 +44,7 @@
   X-Robots-Tag: noai, noimageai
 
   # Machine-readable discovery links for agents and crawlers
-  Link: </sitemap.xml>; rel="sitemap", </rss.xml>; rel="alternate"; type="application/rss+xml", </posts.json>; rel="alternate"; type="application/feed+json", </llms.txt>; rel="alternate"; type="text/markdown", </llm.txt>; rel="alternate"; type="text/markdown", </humans.txt>; rel="author", </.well-known/api-catalog>; rel="service-desc"; type="application/linkset+json", </robots.txt>; rel="robots"
+  Link: </sitemap.xml>; rel="sitemap", </rss.xml>; rel="alternate"; type="application/rss+xml", </posts.json>; rel="alternate"; type="application/feed+json", </llms.txt>; rel="alternate"; type="text/markdown", </llm.txt>; rel="alternate"; type="text/markdown", </humans.txt>; rel="author", </.well-known/api-catalog>; rel="service-desc"; type="application/linkset+json", </.well-known/ai-catalog.json>; rel="ai-catalog"; type="application/ai-catalog+json", </.well-known/ard.json>; rel="ard"; type="application/ai-catalog+json", </robots.txt>; rel="robots"
 
 # =============================================================================
 # HTML Pages - No cache, fresh content
@@ -182,6 +182,16 @@
 /.well-known/api-catalog
   Cache-Control: public, max-age=3600, stale-while-revalidate=86400
   Content-Type: application/linkset+json; charset=utf-8
+
+/.well-known/ai-catalog.json
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+  Content-Type: application/ai-catalog+json; charset=utf-8
+  Access-Control-Allow-Origin: *
+
+/.well-known/ard.json
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+  Content-Type: application/ai-catalog+json; charset=utf-8
+  Access-Control-Allow-Origin: *
 
 /.well-known/agent-skills/*
   Cache-Control: public, max-age=3600, stale-while-revalidate=86400

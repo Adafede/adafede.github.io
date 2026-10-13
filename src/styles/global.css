@@ -2629,6 +2629,11 @@ html:has(#theme-dark:checked) {
    across pages: a visitor who picks dark lands on a light page after a click.
    Persisting it needs one line of script, which is the trade being made. */
 
+.theme-switch-form {
+  flex-shrink: 0;
+  margin: 0;
+}
+
 .theme-switch {
   flex-shrink: 0;
   margin: 0;

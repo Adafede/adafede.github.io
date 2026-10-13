@@ -26,14 +26,18 @@
 
   {# A real <fieldset>, not a div with role="group": these are radio inputs,
      and the native grouping element is what gives them an accessible name
-     without an aria-label bolted on. WAVE flags a bare group of radios. #}
+     without an aria-label bolted on. WAVE flags a bare group of radios.
+     The wrapping form is a WebMCP tool: agents pick a topic radio and the
+     existing CSS `:has()` rules hide non-matching entries. #}
+  <form class="tag-filter__form" toolname="filter_by_topic" tooldescription="Filter this listing to entries tagged with one topic, or show every entry. Filtering is client-side CSS only; nothing is submitted to a server." onsubmit="return false">
   <fieldset class="tag-filter__inputs">
     <legend class="visually-hidden">Filter by topic</legend>
-    <input type="radio" name="tag-filter-{{ counts | length }}" id="tag-all" checked>
+    <input type="radio" name="topic" id="tag-all" value="all" toolparamdescription="Topic slug to keep visible. Use all to clear the filter." checked>
     {% for entry in counts %}
-    <input type="radio" name="tag-filter-{{ counts | length }}" id="tag-{{ loop.index }}" value="{{ entry.tag | lower }}">
+    <input type="radio" name="topic" id="tag-{{ loop.index }}" value="{{ entry.tag | lower }}" toolparamdescription="Topic slug to keep visible. Use all to clear the filter.">
     {% endfor %}
   </fieldset>
+  </form>
 
   <ul class="tag-filter__list">
     <li><label class="tag" for="tag-all">All <span class="tag-filter__count">{{ items | length }}</span></label></li>

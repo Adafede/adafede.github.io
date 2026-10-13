@@ -27,6 +27,21 @@
           "href": "https://adafede.github.io/llm.txt",
           "rel": "alternate",
           "type": "text/markdown"
+        },
+        {
+          "href": "https://adafede.github.io/.well-known/ai-catalog.json",
+          "rel": "ai-catalog",
+          "type": "application/ai-catalog+json"
+        },
+        {
+          "href": "https://adafede.github.io/.well-known/ard.json",
+          "rel": "ard",
+          "type": "application/ai-catalog+json"
+        },
+        {
+          "href": "https://adafede.github.io/.well-known/agent-skills/index.json",
+          "rel": "alternate",
+          "type": "application/json"
         }
       ]
     }

@@ -9,8 +9,9 @@ This privacy policy applies to `https://adafede.github.io`.
 
 ## Data Collection
 
-This website is a static site and does not provide user accounts, comments, or
-forms.
+This website is a static site and does not provide user accounts or comments.
+On-page controls (colour theme, topic filters) are local UI only and do not
+submit personal data to a server.
 
 - Server infrastructure may process standard request logs (IP address,
   user-agent, timestamp, requested URL) for delivery, caching, and abuse

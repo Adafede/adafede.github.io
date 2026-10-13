@@ -25,6 +25,7 @@ license: CC-BY-4.0
 - RSS: https://adafede.github.io/rss.xml
 - JSON feed: https://adafede.github.io/posts.json
 - LLMs: https://adafede.github.io/llms.txt
+- AI catalog: https://adafede.github.io/.well-known/ai-catalog.json
 
 ## Constraints
 
