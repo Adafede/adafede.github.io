@@ -1,16 +1,5 @@
 name: site
 
-# Verifies the Eleventy build + the PDF pipeline. The whole site is built with
-# `npm run build:all` (Quarto PDFs -> migrate src/content from .qmd -> Eleventy
-# into _eleventy_site). src/content, public/ and build/ are gitignored, which
-# means a stale local copy cannot silently reach CI: the build regenerates them
-# rather than trusting what is on disk.
-#
-# PDFs come only from Quarto (LaTeX-quality, with the CiTO filters) and are
-# still produced here when a toolchain is present; without one `render-pdfs`
-# skips silently and the templates omit the PDF links — the same behaviour as a
-# fresh clone. This workflow does not deploy; deploy is publish.yml.
-
 on:
   push:
     branches: [main]
@@ -24,7 +13,6 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    # No deploy here, so a read-only token is the only one the job needs.
     permissions:
       contents: read
     steps:
@@ -39,43 +27,22 @@ jobs:
 
       - uses: astral-sh/setup-uv@ae62891fec2bb8e7d6c99fc78c9fec3a63790f8d
 
-      # The content migration needs the project dependencies.
-      - name: Install Python dependencies
-        run: uv sync --all-extras
-
-      - name: Install bs4 (BeautifulSoup4) for PDF rendering
-        run: uv pip install beautifulsoup4
+      - run: uv sync --all-extras
 
       - run: npm ci
 
-      # `npm run build:all` is the single canonical build command for this
-      # project and produces `_eleventy_site/` locally and in deploy
-      # (see README). It runs, in order: render-pdfs (Quarto PDFs — skipped
-      # without a toolchain), sync:content, build:eleventy. PDFs come only
-      # from Quarto (LaTeX-quality, with the CiTO filters); the HTML site is
-      # Eleventy-only, so Quarto is never the website renderer.
-      - name: Build site
-        run: npm run build:all
+      - run: npm run build:all
 
-      # Verify colour contrast of the built CSS
-      - name: Verify colour contrast
-        run: npm run check:contrast
+      - run: npm run check:contrast
 
-      - name: Check internal links
-        run: npm run check:links
+      - run: npm run check:links
 
-      # pa11y needs the site served over HTTP.
-      - name: Accessibility audit
-        run: |
+      - run: |
           npx --yes @11ty/eleventy --serve --port=8080 &
           npx --yes wait-on http://localhost:8080/index.html --timeout=60000
           npx --yes pa11y-ci@4 --config .pa11yci.json
 
-      # RDFa is load-bearing here: the prefixes, `about`, and `typeof`
-      # attributes are what turn a page into a Wikidata-linked description, and
-      # a typo in them is invisible in a screenshot.
-      - name: Validate RDFa
-        run: npm run check:rdfa
+      - run: npm run check:rdfa
 
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:

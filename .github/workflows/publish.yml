@@ -64,18 +64,15 @@ jobs:
             texlive-science \
             texlive-luatex
 
-      # Setup Node.js (needed by setup-r; on GH Actions ubuntu-latest Node is pre-installed)
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
         with:
           node-version: 24
           package-manager-cache: false
 
-      # Setup UV with native caching
       - uses: astral-sh/setup-uv@ae62891fec2bb8e7d6c99fc78c9fec3a63790f8d
         with:
           enable-cache: false
 
-      # Setup R & R dependencies (handles R package caching automatically)
       - uses: r-lib/actions/setup-r@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05
       - uses: r-lib/actions/setup-r-dependencies@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05
         with:
@@ -83,38 +80,26 @@ jobs:
             any::knitr
             any::rmarkdown
 
-      # Setup Pandoc
       - uses: pandoc/actions/setup@86321b6dd4675f5014c611e05088e10d4939e09e
 
-      # Setup Quarto using system TeX Live (tinytex: false)
       - uses: quarto-dev/quarto-actions/setup@8a96df13519ee81fd526f2dfca5962811136661b
         with:
           tinytex: false
 
-      # Install Python deps for the content migration (sync:content)
       - run: uv sync --all-extras
-
-      - name: Install bs4 (BeautifulSoup4) for PDF rendering
-        run: uv pip install beautifulsoup4
 
       - run: npm ci
 
-      # Build the whole site
-      - name: Build site
-        run: npm run build:all
+      - run: npm run build:all
 
-      # Ensure .nojekyll is present
-      - name: Add .nojekyll
-        run: |
+      - run: |
           touch _eleventy_site/.nojekyll
           echo "# This file prevents GitHub Pages from running Jekyll." > _eleventy_site/.nojekyll
 
-      # Upload artifact for Pages
       - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9
         if: github.event_name != 'pull_request'
         with:
           path: _eleventy_site/
 
-      # Deploy to GitHub Pages
       - uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346
         if: github.event_name != 'pull_request'
