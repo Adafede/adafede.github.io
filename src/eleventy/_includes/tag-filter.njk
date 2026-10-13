@@ -1,0 +1,76 @@
+{#
+  Topic filter for a listing. `items` must be the collection being listed, so the
+  counts match what is on the page.
+
+  This is pure CSS: a radio group, each input paired with a label styled as a
+  tag, plus selectors that hide non-matching entries. No JavaScript at all, so
+  filtering works with scripting disabled and costs nothing on load.
+
+  Radio rather than checkbox, and that is a deliberate trade-off. Showing the
+  union of several selected tags needs "hide anything matching none of the
+  checked boxes", which cannot be written as a static selector without
+  enumerating every subset of the 22 tags. Single-select is one rule per tag.
+
+  Two details make it behave:
+
+    * The inputs are direct children of the same element as the list, so a
+      sibling selector reaches the entries without escaping a container.
+    * `:has()` hides a section that has no surviving entries, so a heading is
+      never left stranded above nothing. Where `:has()` is unsupported nothing
+      is hidden and the page degrades to the full listing.
+#}
+{% set counts = items | tagCounts %}
+{% if counts.length %}
+<div class="tag-filter">
+  <h2 class="tag-filter__heading" id="filter-heading">Filter by topic</h2>
+
+  {# A real <fieldset>, not a div with role="group": these are radio inputs,
+     and the native grouping element is what gives them an accessible name
+     without an aria-label bolted on. WAVE flags a bare group of radios. #}
+  <fieldset class="tag-filter__inputs">
+    <legend class="visually-hidden">Filter by topic</legend>
+    <input type="radio" name="tag-filter-{{ counts | length }}" id="tag-all" checked>
+    {% for entry in counts %}
+    <input type="radio" name="tag-filter-{{ counts | length }}" id="tag-{{ loop.index }}" value="{{ entry.tag | lower }}">
+    {% endfor %}
+  </fieldset>
+
+  <ul class="tag-filter__list">
+    <li><label class="tag" for="tag-all">All <span class="tag-filter__count">{{ items | length }}</span></label></li>
+    {% for entry in counts %}
+    <li><label class="tag" for="tag-{{ loop.index }}">{{ entry.tag }} <span class="tag-filter__count">{{ entry.count }}</span></label></li>
+    {% endfor %}
+  </ul>
+
+  <style>
+    /* "All" starts checked, so it has to look selected from the start. */
+    .tag-filter:has(#tag-all:checked) label[for="tag-all"] {
+      background: var(--brand);
+      border-color: var(--brand);
+      color: var(--brand-ink);
+    }
+    {% for entry in counts %}
+    /* The state has to be observed from an ancestor of the entries, which are
+       siblings of this filter, so the container is the scope. */
+    .site-main:has(#tag-{{ loop.index }}:checked) [data-tags]:not([data-tags*="|{{ entry.tag | lower }}|"]) { display: none; }
+    /* ...and any section left with nothing in it. */
+    .site-main:has(#tag-{{ loop.index }}:checked) [data-filter-group]:not(:has([data-tags*="|{{ entry.tag | lower }}|"])) { display: none; }
+    .tag-filter:has(#tag-{{ loop.index }}:checked) label[for="tag-{{ loop.index }}"] {
+      background: var(--brand);
+      border-color: var(--brand);
+      color: var(--brand-ink);
+    }
+    /* The radio itself is hidden, so the focus ring has to be drawn on the
+       label — otherwise keyboard users get no visible focus at all. */
+    .tag-filter:has(#tag-{{ loop.index }}:focus-visible) label[for="tag-{{ loop.index }}"] {
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
+    }
+    .tag-filter:has(#tag-all:focus-visible) label[for="tag-all"] {
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
+    }
+    {% endfor %}
+  </style>
+</div>
+{% endif %}

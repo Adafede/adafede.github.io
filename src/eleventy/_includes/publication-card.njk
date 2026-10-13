@@ -1,0 +1,59 @@
+{# One article in a listing. #}
+{% set href = '/articles/' + article.id + '.html' %}
+<article class="publication{% if article.data.image %} publication--with-image{% endif %}" vocab="https://schema.org/" typeof="ScholarlyArticle"
+  resource="{{ site.url }}{{ href }}"
+  data-tags="{{ article | tagKey }}"
+  {% if article.data.qid %}about="wd:{{ article.data.qid }}"{% endif %}>
+  {% if article.data.image %}
+  {# width/height are the rendered box doubled, so the browser reserves space
+     before the image loads; CSS overrides them for display. #}
+  <img class="publication__image" src="{{ article.data.image | artwork }}" loading="lazy" decoding="async" fetchpriority="low"
+    width="352" height="256"
+    {% if article.data.imageAlt %}alt="{{ article.data.imageAlt }}"{% else %}alt=""{% endif %} />
+  {% endif %}
+  <div class="publication__text">
+  <h3 class="publication__title">
+    <a href="{{ href }}" property="url" rel="item">{{ article.data.title }}</a>
+  </h3>
+  <p class="publication__meta">
+    {% if article.data.venue %}<span class="publication__venue">{{ article.data.venue }}</span><span aria-hidden="true"> · </span>{% endif %}
+    <time property="datePublished" datetime="{{ article.data.date | readableDate }}">{{ article.data.date | readableDate }}</time>
+  </p>
+  {% if article.data.authors.length %}
+  {# Every author, in full. A summary line with a "46 more" link hid the people
+     who actually did the work behind a click, and on a paper with fifty authors
+     the four that happened to be listed first were an arbitrary subset. #}
+  <p class="publication__authors" property="author">
+    {% for author in article.data.authors %}{% if loop.index0 > 0 %}, {% endif %}<span typeof="Person"{% if author.qid %} about="wd:{{ author.qid }}"{% endif %}>{{ author.name }}</span>{% endfor %}
+  </p>
+  {% endif %}
+  {# The abstract is clipped to three lines. A `<details>` reveals the rest with
+     no script: the summary is a real control, keyboard-operable and announced,
+     and the hidden text is in the document for a screen reader and a crawler.
+     The clamp stays on the collapsed <p>, so the open state is full height. #}
+  {% if article.data.abstract %}
+  <div class="publication__abstract-block">
+    <input type="checkbox" id="abstract-{{ article.id }}" class="publication__abstract-checkbox">
+    {# No ellipsis here: `line-clamp` already draws one at the cut, and two of
+       them read as a typo. The control is a word instead. #}
+    <label class="publication__abstract-toggle" for="abstract-{{ article.id }}">
+      <span aria-hidden="true">More</span>
+      <span class="visually-hidden">Read the full abstract</span>
+    </label>
+    <p class="publication__abstract" property="abstract">{{ article.data.abstract | inlineMarkdown | safe }}</p>
+  </div>
+  {% endif %}
+  {# The value, not the name of the registry. The icon says which registry it is
+     and the text says which record, which is the part a reader can read out or
+     copy; "DOI" alone tells them nothing they did not already know. #}
+  <p class="publication__links">
+    {% if article.data.doi %}<a rel="sameAs" property="identifier" href="https://doi.org/{{ article.data.doi }}" title="DOI {{ article.data.doi }}">{% registryIcon 'doi' %}<span class="identifier">{{ article.data.doi }}</span></a>{% endif %}
+    {% if article.data.qid %}<a rel="sameAs" href="https://qlever.scholia.wiki/work/{{ article.data.qid }}" title="Scholia {{ article.data.qid }}">{% registryIcon 'scholia' %}<span class="identifier">{{ article.data.qid }}</span></a>{% endif %}
+  </p>
+  {% if article.data.tags.length %}
+  <ul class="tag-list" property="keywords" aria-label="Tags for {{ article.data.title }}">
+    {% for tag in article.data.tags %}<li><span class="tag">{{ tag }}</span></li>{% endfor %}
+  </ul>
+  {% endif %}
+  </div>
+</article>

@@ -1,0 +1,35 @@
+{
+  "name": "adafede-github-io",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "npx @11ty/eleventy --serve",
+    "build": "npm run build:eleventy",
+    "build:all": "npm run render-pdfs && npm run sync:content && npm run build:eleventy",
+    "sync:content": "uv run python scripts/site/migrate_posts.py && uv run python scripts/site/optimize_images.py && uv run python scripts/site/build_talkmap.py && uv run python scripts/site/build_expertise.py && node scripts/site/generate-redirects.mjs && node scripts/site/fetch-artwork.mjs && node scripts/site/artwork-size.mjs && node scripts/site/minify-css.mjs && node scripts/site/stage-public.mjs",
+    "check": "npm run check:links && npm run check:rdfa && npm run check:document && npm run check:contrast",
+    "check:links": "node scripts/site/check-links.mjs _eleventy_site",
+    "check:contrast": "node scripts/site/check-contrast.mjs",
+    "build:eleventy": "npm run minify:css && npx @11ty/eleventy && node scripts/site/inline-css.mjs",
+    "render-pdfs": "node scripts/site/render-pdfs.mjs",
+    "minify:css": "node scripts/site/minify-css.mjs",
+    "check:rdfa": "node scripts/site/check-rdfa.mjs _eleventy_site",
+    "check:a11y": "pa11y-ci --config .pa11yci.json",
+    "check:document": "node scripts/site/check-document.mjs _eleventy_site"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.6",
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^22.10.0",
+    "axe-core": "^4.14.0",
+    "js-yaml": "^5.4.3",
+    "lightningcss": "^1.33.0",
+    "luxon": "^3.7.2",
+    "markdown-it": "^15.0.2",
+    "markdown-it-anchor": "^10.0.0",
+    "mdast-util-to-string": "^4.0.0",
+    "pa11y-ci": "^4.1.1",
+    "remark": "^15.0.1"
+  }
+}

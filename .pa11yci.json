@@ -1,0 +1,30 @@
+{
+  "defaults": {
+    "standard": "WCAG2AA",
+    "runners": [
+      "axe",
+      "htmlcs"
+    ],
+    "ignore": [
+      "color-contrast-enhanced"
+    ],
+    "timeout": 30000,
+    "chromeLaunchConfig": {
+      "args": [
+        "--no-sandbox",
+        "--disable-dev-shm-usage"
+      ]
+    },
+    "levelCapWhenNeedsReview": "warning"
+  },
+  "urls": [
+    "http://localhost:8080/index.html",
+    "http://localhost:8080/articles.html",
+    "http://localhost:8080/posts.html",
+    "http://localhost:8080/cv.html",
+    "http://localhost:8080/teaching.html",
+    "http://localhost:8080/varia.html",
+    "http://localhost:8080/404.html",
+    "http://localhost:8080/articles/first/2022-05-26_lotus.html"
+  ]
+}

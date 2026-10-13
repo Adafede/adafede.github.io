@@ -1,0 +1,51 @@
+---
+layout: base.njk
+pagination:
+  data: collections.variaItems
+  size: 1
+  alias: item
+permalink: "/varia/{{ item.id }}.html"
+eleventyComputed:
+  title: "{{ item.data.title | safe }}"
+  description: "{{ item.data.description | plainText }}"
+---
+<article class="event-detail">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <ol class="breadcrumb__list" vocab="https://schema.org/" typeof="BreadcrumbList">
+      <li property="itemListElement" typeof="ListItem">
+        <a property="item" href="/varia.html" typeof="WebPage">Varia</a>
+        <meta property="position" content="1" />
+      </li>
+      <li><span aria-hidden="true">/</span></li>
+      <li property="itemListElement" typeof="ListItem">
+        <span property="item" typeof="WebPage">{{ item.data.title }}</span>
+        <meta property="position" content="2" />
+      </li>
+    </ol>
+  </nav>
+
+  <header class="event-detail__header">
+    {% if item.data.image %}
+    <img class="event-detail__image" src="{{ item.data.image | artwork }}" loading="lazy" decoding="async" width="256" height="160"
+      {% if item.data.imageAlt %}alt="{{ item.data.imageAlt }}"{% else %}alt=""{% endif %} />
+    {% endif %}
+    <h1>{{ item.data.title }}</h1>
+    {% if item.data.tags.length %}
+    <ul class="tag-list" aria-label="Tags">
+      {% for tag in item.data.tags %}<li><span class="tag">{{ tag }}</span></li>{% endfor %}
+    </ul>
+    {% endif %}
+  </header>
+
+  {% if item.body %}
+  <div class="prose">{{ item.body | renderMarkdown(item.data) | safe }}</div>
+  {% elif item.data.description and item.data.description != item.data.url %}
+  {# Some entries are a bare pointer; do not render a URL as the body. #}
+  <div class="event-detail__summary prose">{{ item.data.description | inlineMarkdown | safe }}</div>
+  {% endif %}
+
+  <p class="event-detail__links">
+    {% if item.data.url %}<a class="button" href="{{ item.data.url }}" rel="noopener">Visit</a>{% endif %}
+    <a href="/varia.html">All varia</a>
+  </p>
+</article>

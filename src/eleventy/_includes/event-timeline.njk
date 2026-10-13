@@ -1,0 +1,32 @@
+{#
+  Year-grouped timeline of talks or teaching.
+
+  The caller sets `timelineItems` before including; Nunjucks cannot filter
+  inside {% set %}, so the list has to be prepared by the caller or by a
+  collection. Both talks.njk and teaching.njk use this.
+#}
+{% set years = timelineItems | sliceYears %}
+{% for year in years %}
+<section aria-labelledby="year-{{ year }}" data-filter-group>
+  <h2 class="year-heading" id="year-{{ year }}">{{ year }}</h2>
+  <ol class="timeline">
+    {% for item in timelineItems %}
+      {% if item.data.date | year == year %}
+      <li data-tags="{{ item | tagKey }}">
+        <time datetime="{{ item.data.date | readableDate }}">{{ item.data.date | monthDay }}</time>
+        <div>
+          {# Always a link: every entry has its own page. The external event
+             URL, when present, is offered there rather than here. #}
+          <a class="timeline__title" href="{{ item.url }}">{{ item.data.title }}</a>
+          {% if item.data.venue or item.data.location %}<p class="timeline__venue">{{ item.data.venue }}{% if item.data.venue and item.data.location %} · {% endif %}{{ item.data.location }}</p>{% endif %}
+          {% if item.data.authors.length %}<p class="timeline__authors">{% for author in item.data.authors %}{% if loop.index0 > 0 %}, {% endif %}{{ author.name }}{% endfor %}</p>{% endif %}
+          {# The description is Markdown in the source, so it is rendered rather
+             than printed; it is also what makes a talk worth clicking into. #}
+          {% if item.data.description %}<div class="timeline__summary">{{ item.data.description | inlineMarkdown | safe }}</div>{% endif %}
+        </div>
+      </li>
+      {% endif %}
+    {% endfor %}
+  </ol>
+</section>
+{% endfor %}

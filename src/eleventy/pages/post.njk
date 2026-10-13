@@ -1,0 +1,71 @@
+---
+layout: base.njk
+pagination:
+  data: collections.posts
+  size: 1
+  alias: post
+permalink: "/posts/{{ post.id }}.html"
+# `description` is derived from the opening prose in _data/sitecontent.js,
+# because eleventyComputed would escape the raw body passing it through here.
+eleventyComputed:
+  title: "{{ post.data.title | safe }}"
+  description: "{{ post.data.description | plainText }}"
+---
+{% set meta = post.data %}
+{# `post--wide`: the body takes the full container rather than the 66ch reading
+   measure. A post is a page of its own here, and a page that stops two thirds
+   of the way across reads as an accident. #}
+<article class="post post--wide" vocab="https://schema.org/" typeof="{{ post.data.rdfaType }}"
+  resource="{{ site.url }}{{ page.url }}"
+  {% if post.data.tags %}about="{{ post.data.tags | join(' ') }}"{% endif %}>
+  <header class="post-header">
+    <h1 property="headline" class="p-name">{{ post.data.title }}</h1>
+
+    <div class="post-header__meta">
+      {% if post.data.authors.length %}
+      {# Authors are grouped per author — name, then each registry id, then the
+         affiliation — so a person appears once with everything that belongs to
+         them, mirroring the article header. (`about` carries the Wikidata item;
+         the registry links are rel="sameAs" so a graph consumer sees them as
+         edges, not just anchors.) #}
+      <span class="post-header__authors" property="author">
+        {% for author in post.data.authors %}{% if loop.index0 > 0 %}, {% endif %}<span rel="author" typeof="Person"{% if author.qid %} about="wd:{{ author.qid }}"{% endif %}><span class="author__name" property="name">{{ author.name }}</span>{% if author.orcid %} <a class="author__id" href="https://orcid.org/{{ author.orcid }}" rel="sameAs noopener noreferrer" title="ORCID {{ author.orcid }}">{% registryIcon 'orcid' %}ORCID</a>{% endif %}{% if author.qid %} <a class="author__id" href="https://qlever.scholia.wiki/author/{{ author.qid }}" rel="sameAs noopener noreferrer" title="Scholia {{ author.qid }}">{% registryIcon 'scholia' %}Scholia</a>{% endif %}{% if author.affiliationIds %}{% for affId in author.affiliationIds %}{% if loop.index0 > 0 %}; {% endif %}{% set aff = affId | affiliation %}{% if aff.ror %} <a class="author__affiliation" href="{{ aff.ror }}" rel="noopener noreferrer" title="ROR {{ aff.ror }}">{% registryIcon 'ror' %}{{ aff.name }}</a>{% elif aff.qid %} <a class="author__affiliation" href="https://www.wikidata.org/wiki/{{ aff.qid }}" rel="noopener noreferrer" title="Wikidata {{ aff.qid }}">{{ aff.name }}</a>{% else %} <span class="author__affiliation">{{ aff.name }}</span>{% endif %}{% endfor %}{% endif %}</span>{% endfor %}
+      </span>
+      {% endif %}
+
+      <time property="datePublished" datatype="xsd:date" datetime="{{ post.data.pubDate | readableDate }}">{{ post.data.pubDate | readableDate }}</time>
+
+      {# Icon and value, like the article footer: "DOI" on its own tells a
+         reader nothing they did not already know from the icon. #}
+      {% if post.data.doi %}<span><a rel="sameAs" href="https://doi.org/{{ post.data.doi }}" property="identifier" typeof="PropertyValue" title="DOI {{ post.data.doi }}">{% registryIcon 'doi' %}<span class="identifier">{{ post.data.doi }}</span></a></span>{% endif %}
+
+      {% if post.data.pdf %}<span><a href="{{ post.data.pdf }}" rel="alternate noopener" type="application/pdf" target="_blank" title="PDF of {{ post.data.title }}">{% registryIcon 'pdf' %}PDF<span class="visually-hidden"> of {{ post.data.title }} (opens in a new tab)</span></a></span>{% endif %}
+    </div>
+
+    {% if post.data.tags.length %}
+    <ul class="tag-list" property="keywords" aria-label="Tags">
+      {% for tag in post.data.tags %}<li rel="tag" typeof="DefinedTerm"><span class="tag">{{ tag }}</span></li>{% endfor %}
+    </ul>
+    {% endif %}
+  </header>
+
+  <div class="prose post-body" property="articleBody">{{ post.body | renderMarkdown(post.data) | safe }}</div>
+
+  {# Comments live on GitHub Discussions. Embedding them means giscus, which is a
+     third-party script on every post and would make this the one page on the
+     site that needs JavaScript to be read properly. So there is no embed: a
+     single link, scoped to this post's discussion by searching for its title,
+     and nothing that has to load or execute. #}
+  {% if site.discussionsRepo %}
+  <aside class="comments">
+    <a class="comments__link" href="https://github.com/{{ site.discussionsRepo }}/discussions?discussions_q={{ post.data.title | urlencode }}" rel="noopener">Discuss this post on GitHub</a>
+  </aside>
+  {% endif %}
+
+  {% if post.data.license %}
+  <footer class="post-license">
+    <link rel="license" href="{{ post.data.license.url }}">
+    <p>Licensed under <a href="{{ post.data.license.url }}" rel="license">{{ post.data.license.name }}</a>.</p>
+  </footer>
+  {% endif %}
+</article>

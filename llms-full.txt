@@ -17,9 +17,10 @@ This website is Adriano Rutz's personal academic and research profile. It contai
 
 ## Feeds and indexes
 - [Sitemap](https://adafede.github.io/sitemap.xml)
-- [Site RSS](https://adafede.github.io/rss.xml)
-- [Posts RSS](https://adafede.github.io/posts.xml)
-- [Posts JSON Feed](https://adafede.github.io/posts.json)
+- [Atom](https://adafede.github.io/atom.xml)
+- [RSS](https://adafede.github.io/rss.xml)
+- [JSON Feed](https://adafede.github.io/posts.json)
+- [Per-section RSS](https://adafede.github.io/articles.xml), [talks](https://adafede.github.io/talks.xml), [teaching](https://adafede.github.io/teaching.xml), [posts](https://adafede.github.io/posts.xml), [varia](https://adafede.github.io/varia.xml)
 
 ## Structured and policy endpoints
 - [robots.txt](https://adafede.github.io/robots.txt)

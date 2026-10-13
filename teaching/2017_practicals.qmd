@@ -5,6 +5,9 @@ date: 2017-09-15
 location: Geneva, Switzerland
 categories:
   - Teaching
+metadata-files:
+  - ../_includes/entities/authors/AdrianoRutz_UNIGE.yml
+  - ../_includes/entities/affiliations/UNIGE_Wolfender.yml
 ---
 
 ## Topics

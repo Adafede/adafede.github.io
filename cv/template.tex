@@ -36,6 +36,28 @@
 \usepackage[utf8]{inputenc}
 
 %----------------------------------------------------------------------------------------
+%	PDF ACCESSIBILITY AND METADATA
+%----------------------------------------------------------------------------------------
+% Tagging gives the PDF a structure tree (headings, lists, paragraphs) that a
+% screen reader can navigate rather than a wall of text. `lang` is the document
+% language, which is what /Lang in the file descriptor is set from, and which
+% decides hyphenation. Both are PDF/UA requirements; without them the file is
+% technically valid and practically unreadable to assistive technology.
+%
+% DocumentMetadata has to be the first thing after \documentclass. pdfTeX of
+% TeX Live 2020 or newer is required for tagging=on.
+
+% Language declaration. It is what hyphenation follows and, through babel,
+% what hyperref writes into /Lang — the document language a screen reader
+% announces. Tagged PDF is not offered by this TeX, which predates
+% \DocumentMetadata, so no structure tree is available here; /Lang and the
+% title metadata are what this install can provide.
+\usepackage[english]{babel}
+% /Lang (document language a screen reader announces, and what babel uses for
+% hyphenation) is set in the hypersetup block below via `pdflang`. Declaring it
+% once avoids a "Multiple definitions ... for key /Lang" PDF warning.
+
+%----------------------------------------------------------------------------------------
 %	LOGIC
 %----------------------------------------------------------------------------------------
 \usepackage{xifthen}
@@ -63,7 +85,30 @@
 
 \usepackage{fancyhdr}
 \pagestyle{fancy}
-\usepackage[colorlinks, allcolors=sectcol]{hyperref}
+ \usepackage[colorlinks, allcolors=sectcol]{hyperref}
+% The `bookmark' package renders the PDF outline tree more reliably than
+% hyperref's built-in bookmarking, especially on pdfTeX, and keeps the
+% \pdfbookmark entries emitted by \cvsection (below) in sync with the
+% document's sectioning. It must follow hyperref.
+\usepackage{bookmark}
+
+% Title, author and subject shown in the PDF's document properties and used by
+% the reader's title bar. The subject says what the document is, which a
+% screen reader announces before any content. `pdfusetitle' promotes the
+% pdftitle above into the document's tagged title (a structure-tree entry a
+% reader can jump to), giving the single-page CV a top-level landmark.
+\hypersetup{
+  pdftitle={Curriculum Vit\ae},
+  pdfauthor={Adriano Rutz},
+  pdfsubject={Curriculum Vitae — pharmaceutical scientist, metabolomics and mass spectrometry},
+  pdfkeywords={metabolomics, mass spectrometry, natural products, open science},
+  pdfusetitle,
+  bookmarksnumbered=true,
+  bookmarksopen=true,
+  bookmarksopenlevel=1,
+  pdfstartview={FitH},
+  pdflang={en-GB}
+}
 %less space between header and content
 \setlength{\headheight}{-5pt}
 
@@ -141,6 +186,10 @@
 % create a coloured box with arrow and title as cv section headline
 % param 1: section title
 %
+% Visual only: a centred boxed title. The PDF outline/bookmark tree is built by
+% the `Header` filter in cv/styles.lua, which knows each heading's level and so
+% can nest entry titles under their section; \cvsection itself stays level-
+% agnostic.
 \newcommand{\cvsection}[1]
 {
 	\begin{center}
@@ -215,8 +264,25 @@
 %	META SECTION
 %----------------------------------------------------------------------------------------
 $for(cvmeta)$
-\metasection{$cvmeta.right$}{\textbf{$cvmeta.title$}: $cvmeta.left$}
+% The label is small and in the accent colour, the value in the body face, so
+% the two read as a label and its content rather than as one bold run.
+\metasection{}{\textcolor{softcol}{\textsc{$cvmeta.title$}\hspace{4pt}}\textcolor{softcol}{\textbar}\hspace{4pt} $cvmeta.left$}
 $endfor$
+
+% Contact line. The phone number is here and not on the website; the email is
+% here and on the website, where it is spelled rather than linked.
+\vspace{-2pt}
+% Contact line. The phone number is here and not on the website; the email is
+% here and on the website, where it is spelled rather than linked. The three are
+% separated by rules so they read as three facts, not one run of text.
+\metasection{}{%
+  $if(cvcontact.phone)$\textcolor{softcol}{$cvcontact.phone$}$endif$%
+  \hspace{4pt}\textcolor{softcol}{\textbar}\hspace{4pt}%
+  \href{mailto:$cvcontact.email$}{$cvcontact.email$}%
+  \hspace{4pt}\textcolor{softcol}{\textbar}\hspace{4pt}%
+  $if(cvcontact.location)$\textcolor{softcol}{$cvcontact.location$}$endif$%
+}
+
 
 \vspace{-2pt}
 \textcolor{softcol}{\hrule}
@@ -233,6 +299,6 @@ $body$
 
 \null
 \vspace*{\fill}
-\hspace{-0.25\linewidth}\colorbox{white}{\makebox[1.5\linewidth][c]{\mystrut  \textnormal{\textcolor{sectcol}{$cvfooter.left$}  -  \textcolor{sectcol}{$cvfooter.right$}}}}
+\hspace{-0.25\linewidth}\colorbox{white}{\makebox[1.5\linewidth][c]{\mystrut  \textnormal{\textcolor{sectcol}{$if(cvcontact.website)$$cvcontact.website$$endif$}  -  \textcolor{sectcol}{$if(cvcontact.email)$$cvcontact.email$$endif$}}}}
 
 \end{document}

@@ -85,22 +85,35 @@ jobs:
         with:
           tinytex: false
 
-      # Build the site
+      # Node.js/npm: provided by quarto-dev/quarto-actions/setup above (Quarto
+      # requires Node.js, which that action installs into PATH) and ubuntu-latest
+      # also ships Node 20 + npm. No separate `actions/setup-node` step: zizor
+      # flags setup-node in a workflow that deploys runtime artifacts as a
+      # cache-poisoning vector, even when `cache` is omitted/disabled.
+      - run: npm ci
+
+      # Install Python deps for the content migration (sync:content)
+      - run: uv sync --all-extras
+
+      # Build the whole site with the canonical command: Quarto PDFs ->
+      # migrate src/content from .qmd -> Eleventy into _eleventy_site/. This is
+      # the same command you run locally (see README); Quarto is set up above,
+      # so the PDFs render.
       - name: Build site
-        run: uv run quarto render
+        run: npm run build:all
 
       # Ensure .nojekyll is present so GitHub Pages serves all files
       # (including files/directories with underscores in their names)
       - name: Add .nojekyll
         run: |
-          touch _site/.nojekyll
-          echo "# This file prevents GitHub Pages from running Jekyll.\n# The site is built by Quarto and deployed as static files.\n# For custom HTTP response headers (cache-control, CSP, etc.),\n# this site is best deployed via Netlify which supports the _headers file.\n# On GitHub Pages, static assets receive a default max-age=600 cache." > _site/.nojekyll
+          touch _eleventy_site/.nojekyll
+          echo "# This file prevents GitHub Pages from running Jekyll.\n# The site is built with Eleventy (HTML) and Quarto (PDFs); static files\n# are deployed from _eleventy_site/.\n# For custom HTTP response headers (cache-control, CSP, etc.),\n# this site is best deployed via Netlify which supports the _headers file.\n# On GitHub Pages, static assets receive a default max-age=600 cache." > _eleventy_site/.nojekyll
 
       # Upload artifact for Pages
       - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9
         if: github.event_name != 'pull_request'
         with:
-          path: _site/
+          path: _eleventy_site/
 
       # Deploy to GitHub Pages
       - uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346

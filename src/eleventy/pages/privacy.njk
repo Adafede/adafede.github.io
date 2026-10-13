@@ -1,0 +1,51 @@
+---
+layout: base.njk
+title: Privacy Policy
+description: "Privacy and data handling policy for adafede.github.io."
+permalink: /privacy.html
+---
+<div class="page-header">
+  <h1>Privacy Policy</h1>
+</div>
+
+<div class="prose">
+  <h2>Scope</h2>
+  <p>This privacy policy applies to <code>https://adafede.github.io</code>.</p>
+
+  <h2>Data Collection</h2>
+  <p>This website is a static site and does not provide user accounts, comments, or forms.</p>
+  <ul>
+    <li>Server infrastructure may process standard request logs (IP address, user-agent, timestamp, requested URL) for delivery, caching, and abuse prevention.</li>
+    <li>Aggregated traffic analytics are collected with Simple Analytics (<code>https://scripts.simpleanalyticscdn.com/latest.js</code>).</li>
+    <li>This site does not intentionally set tracking cookies for analytics.</li>
+  </ul>
+
+  <h2>Third-Party Requests</h2>
+  <p>
+    Some pages include links or embedded resources from external services. When your
+    browser loads those resources, those providers may receive technical request data
+    according to their own privacy policies.
+  </p>
+  <p>
+    In particular, the interactive publication graphs are served by
+    <a href="https://qlever.scholia.wiki/" rel="noopener nofollow">qlever.scholia.wiki</a>.
+    They sit behind a <strong>click-to-load</strong> control, so nothing is requested
+    from that origin unless you choose to load it. A direct link is always offered as
+    an alternative.
+  </p>
+
+  <h2>AI Crawlers and Training</h2>
+  <p>
+    <code>robots.txt</code> includes explicit directives for AI crawler user-agents.
+    These directives are intended to communicate crawling and reuse preferences.
+  </p>
+
+  <h2>Your Choices</h2>
+  <p>You can reduce data sharing by using browser privacy controls, content blockers, and DNS/network filtering for third-party domains.</p>
+
+  <h2>Contact</h2>
+  <p>For privacy questions, contact: <a href="mailto:{{ site.contact.email | obfuscate | safe }}">{{ site.contact.email | spellEmail }}</a>.</p>
+
+  <h2>Policy Updates</h2>
+  <p>This page may be updated when site features or third-party services change.</p>
+</div>

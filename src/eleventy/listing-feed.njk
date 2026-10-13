@@ -1,0 +1,56 @@
+---
+pagination:
+  data: listingFeeds
+  size: 1
+  alias: feed
+  addAllPagesToCollections: false
+permalink: "{{ feed.slug }}.xml"
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="utf-8"?>
+{#
+  One RSS feed per listing, matching what Quarto publishes at these URLs. The
+  feed is a view of the listing: same items, same order, same titles — so a
+  reader subscribed to talks.xml sees the talks page change underneath them.
+#}
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>{{ site.author }} — {{ feed.title }}</title>
+    <link>{{ site.url }}{{ feed.url }}</link>
+    <atom:link href="{{ site.url }}/{{ feed.slug }}.xml" rel="self" type="application/rss+xml"/>
+    <description>{{ site.description }}</description>
+    <language>en</language>
+    <generator>Eleventy</generator>
+    {# Exactly one build date: the newest item in the feed. This used to be one
+       per item, which put twenty <lastBuildDate> elements in the rss channel and
+       thirty-three in articles.xml. RSS allows one, and a reader that takes the
+       first and stops would otherwise be reading the date of whatever item
+       happened to be rendered first. #}
+    {% set newest = feed.items() | limitCount(feed.limit) | latestDate(feed.date) %}
+    {% if newest %}<lastBuildDate>{{ newest | toRfc822 }}</lastBuildDate>{% endif %}
+    {% for item in feed.items() | limitCount(feed.limit) %}
+    <item>
+      <title>{{ item.data.title }}</title>
+      <link>{{ site.url }}{{ item.url }}</link>
+      <guid isPermaLink="true">{{ site.url }}{{ item.url }}</guid>
+      {% set published = feed.date(item) %}
+      {% if published %}<pubDate>{{ published | toRfc822 }}</pubDate>{% endif %}
+      {% set category = feed.category(item) %}
+      {% for tag in item.data.tags %}<category>{{ tag }}</category>{% endfor %}
+      {% if item.data.authors and item.data.authors.length %}
+      <dc:creator>{{ item.data.authors | joinNames }}</dc:creator>
+      {% endif %}
+      {% if item.data.doi %}<dc:identifier>doi:{{ item.data.doi }}</dc:identifier>{% endif %}
+      {# An item with no description renders as a bare title and link, which is
+         what made these feeds look truncated. Articles carry no description
+         field under that name: their text is in `abstract`. The body is the last
+         resort and is often just a stub pointing at the paper, so it is only
+         reached when there is no abstract either. #}
+      {% set description = item.data.description or item.data.abstract or item.data.summary %}
+      {% if not description %}{% set description = item.body | renderMarkdown(item.data) | stripTags | truncateWords(70) %}{% endif %}
+      {% if description %}<description><![CDATA[{{ description | plainText }}]]></description>{% endif %}
+      {% if item.data.venue %}<dc:publisher>{{ item.data.venue }}</dc:publisher>{% endif %}
+    </item>
+    {% endfor %}
+  </channel>
+</rss>

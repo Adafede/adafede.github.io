@@ -1,0 +1,60 @@
+---
+layout: base.njk
+title: Adriano Rutz — Swiss pharmaceutical scientist
+description: "Personal website of Adriano Rutz — Swiss pharmaceutical scientist specialising in metabolomics, mass spectrometry, and natural products research."
+permalink: /index.html
+---
+<article class="home" vocab="https://schema.org/" typeof="Blog">
+
+  <header class="hero">
+    {# srcset: the portrait is the LCP element on this page, so it should not be
+       a compromise size for every display. width/height reserve the box; the
+       sizes attribute lets the browser pick before layout. #}
+    <img class="hero__avatar" src="/images/profile/avatar-260.webp"
+      srcset="/images/profile/avatar-150.webp 150w,
+              /images/profile/avatar-260.webp 260w,
+              /images/profile/avatar-520.webp 520w"
+      sizes="(max-width: 36rem) 5.5rem, (max-width: 48rem) 6.5rem, 9rem"
+      width="150" height="150"
+      alt="" property="image" decoding="async" fetchpriority="high" />
+     {# One top-level heading: the name, with the role folded in as a
+        visually-subdued span. WAVE flags a paragraph styled like a byline as a
+        "possible heading"; co-locating the role inside the h1 removes that
+        heading-like paragraph entirely while keeping the page's single
+        top-level heading. The portrait's alt is empty: the name is right
+        beside it in this heading, so repeating it there is the redundancy
+        WAVE flags. #}
+     <h1 class="hero__name p-name" property="name">Adriano Rutz<span class="hero__role">, Swiss pharmaceutical scientist</span></h1>
+     <div class="hero__text">
+       <p class="hero__lede">
+        Metabolomics, mass spectrometry, open science, and natural products — currently at the
+        Institute for Molecular Systems Biology at ETH Zürich.
+      </p>
+      {# Contact details, not publication profiles. Someone landing here wants to
+         reach you; the scholarly identifiers belong with the articles, which is
+         where they are. #}
+      <ul class="identifiers" aria-label="Contact">
+        <li><a href="mailto:{{ site.contact.email | obfuscate | safe }}">{% registryIcon 'email' %}Email<span class="visually-hidden"> — {{ site.contact.email | spellEmail }}</span></a></li>
+        <li><a href="https://www.linkedin.com/in/AdrianoRutz/" rel="me noopener">{% registryIcon 'linkedin' %}LinkedIn</a></li>
+        <li><a href="https://github.com/adafede" rel="me noopener">{% registryIcon 'github' %}GitHub</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <section class="prose" aria-labelledby="about-heading">
+    <h2 id="about-heading">What I work on</h2>
+    <p>
+      My work sits at the intersection of open chemistry and knowledge management:
+      turning chemical data into structured, linked and reusable knowledge. That has
+      meant building and maintaining <a href="https://lotus.nprod.net/" rel="noopener">LOTUS</a>,
+      contributing to Wikidata's chemistry coverage, and writing tools that make SPARQL
+      and RDF usable for people who did not train as ontologists.
+    </p>
+  </section>
+
+  <section class="home__expertise" aria-labelledby="expertise-heading">
+    <h2 id="expertise-heading">Areas of expertise</h2>
+    {% include "expertise.njk" %}
+  </section>
+
+</article>

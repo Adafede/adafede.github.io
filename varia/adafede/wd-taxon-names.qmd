@@ -2,8 +2,7 @@
 title: Wikidata Taxon Names
 url: https://adafede.codeberg.page/wd-taxon-names
 image: https://raw.githubusercontent.com/Adafede/wd-taxon-names/refs/heads/main/index_files/figure-html/fig-cumul-1.svg
-image-alt: A Cumulative Frequency Curve Illustrating The Number of Epithets
-  (X-axis) Covered by Number of Taxa (Y-Axis)
+image-alt: Cumulative frequency curve of epithet coverage by number of taxa.
 categories:
   - LOTUS
   - Taxonomy

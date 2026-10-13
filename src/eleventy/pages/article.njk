@@ -1,0 +1,101 @@
+---
+layout: base.njk
+pagination:
+  data: collections.articles
+  size: 1
+  alias: article
+permalink: "/articles/{{ article.id }}.html"
+eleventyComputed:
+  title: "{{ article.data.title | safe }}"
+  description: "{{ article.data.abstract | orDescription(article.data) | plainText }}"
+  rdfaType: ScholarlyArticle
+  doi: "{{ article.data.doi }}"
+  authors: "{{ article.data.authors }}"
+---
+{% set groupLabels = { first: 'Single first author', shared: 'Shared first author', co: 'Co-author', thesis: 'Doctoral thesis' } %}
+{% set summary = article.data.abstract | orDescription(article.data) %}
+{# `article.data.group` is the authorship bucket; deriving it here rather than
+   reading a bare `group` is what the breadcrumb used to do, and `group` is not
+   in scope on this page, so the label rendered as an empty element. #}
+{% set authorship = groupLabels[article.data.group] or 'Article' %}
+{# The nav is both a link trail and a BreadcrumbList. A search engine reads the
+   second to understand where a page sits in the site; a screen reader reads the
+   first. Same markup, two consumers. #}
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <ol class="breadcrumb__list" vocab="https://schema.org/" typeof="BreadcrumbList">
+    <li property="itemListElement" typeof="ListItem">
+      <a property="item" href="/articles.html" typeof="WebPage">Articles</a>
+      <meta property="position" content="1" />
+    </li>
+    <li><span aria-hidden="true">/</span></li>
+    <li property="itemListElement" typeof="ListItem">
+      <span property="item" typeof="WebPage">{{ authorship }}</span>
+      <meta property="position" content="2" />
+      <meta property="name" content="{{ authorship }}" />
+    </li>
+  </ol>
+</nav>
+
+<article class="article" vocab="https://schema.org/" typeof="ScholarlyArticle"
+  resource="{{ site.url }}{{ page.url }}"
+  {% if article.data.qid %}about="wd:{{ article.data.qid }}"{% endif %}>
+  <header class="article__header">
+    <h1 property="name">{{ article.data.title }}</h1>
+    <p class="article__meta">
+      {% if article.data.venue %}<span class="article__venue" typeof="Periodical" property="isPartOf">{{ article.data.venue }}</span><span aria-hidden="true"> · </span>{% endif %}
+      <time property="datePublished" datetime="{{ article.data.date | readableDate }}">{{ article.data.date | readableDate }}</time>
+    </p>
+
+    {% if article.data.authors.length %}
+    <div class="article__authors" property="author">
+      <h2 class="article__subheading">Authors</h2>
+      <ol class="author-list">
+        {% for author in article.data.authors %}
+        {# `about` names the Wikidata item; the visible registry links are
+           declared `rel="sameAs"` so a consumer reading the RDFa gets the
+           ORCID and Wikidata URLs as graph edges, not just as anchors. #}
+        <li class="author" typeof="Person"{% if author.qid %} about="wd:{{ author.qid }}"{% endif %}>
+          <span class="author__name" property="name">
+            {{ loop.index }}. {{ author.name }}
+            {% if author.corresponding %}<abbr class="mark" title="Corresponding author">†</abbr>{% endif %}
+            {% if author.equalContributor %}<abbr class="mark" title="Equal contribution">*</abbr>{% endif %}
+            {% if author.orcid %} <a class="author__id" href="https://orcid.org/{{ author.orcid }}" rel="sameAs noopener noreferrer" title="ORCID {{ author.orcid }}">{% registryIcon 'orcid' %}ORCID</a>{% endif %}
+            {% if author.qid %} <a class="author__id" href="https://qlever.scholia.wiki/author/{{ author.qid }}" rel="sameAs noopener noreferrer" title="Scholia {{ author.qid }}">{% registryIcon 'scholia' %}Scholia</a>{% endif %}
+          </span>
+          {% if author.affiliationIds.length %}
+          <span class="author__affiliation">
+            {% for affId in author.affiliationIds %}{% if loop.index0 > 0 %}; {% endif %}{% set aff = affId | affiliation %}{% if aff.ror %}<a href="{{ aff.ror }}" rel="noopener noreferrer" title="ROR {{ aff.ror }}">{% registryIcon 'ror' %}{{ aff.name }}</a>{% elif aff.qid %}<a href="https://www.wikidata.org/wiki/{{ aff.qid }}" rel="noopener noreferrer" title="Wikidata {{ aff.qid }}">{{ aff.name }}</a>{% else %}{{ aff.name }}{% endif %}{% endfor %}
+          </span>
+          {% endif %}
+        </li>
+        {% endfor %}
+      </ol>
+    </div>
+    {% endif %}
+  </header>
+
+  {% if article.data.abstract %}
+  <section class="article__section" aria-labelledby="abstract-heading">
+    <h2 class="article__subheading" id="abstract-heading">Abstract</h2>
+    <div class="article__abstract prose" property="abstract">{{ article.data.abstract | inlineMarkdown | safe }}</div>
+  </section>
+  {% endif %}
+
+  <div class="prose article__body">{{ article.body | renderMarkdown(article.data) | safe }}</div>
+
+  <footer class="article__footer">
+    <p class="article__links">
+      {# Icon and value, no registry name: the icon says which registry it is,
+         the text says which record, and spelling out "DOI" on a link that
+         already carries the DOI icon just repeats it. #}
+      {% if article.data.doi %}<a rel="sameAs" property="identifier" href="https://doi.org/{{ article.data.doi }}" title="DOI {{ article.data.doi }}">{% registryIcon 'doi' %}<span class="identifier">{{ article.data.doi }}</span></a>{% endif %}
+      {% if article.data.qid %}<a rel="sameAs" href="https://qlever.scholia.wiki/work/{{ article.data.qid }}" title="Scholia {{ article.data.qid }}">{% registryIcon 'scholia' %}<span class="identifier">{{ article.data.qid }}</span></a>{% endif %}
+      {% if article.data.venue %}<span>{{ article.data.venue }}</span>{% endif %}
+    </p>
+    {% if article.data.tags.length %}
+    <ul class="tag-list" property="keywords" aria-label="Tags">
+      {% for tag in article.data.tags %}<li><span class="tag">{{ tag }}</span></li>{% endfor %}
+    </ul>
+    {% endif %}
+  </footer>
+</article>

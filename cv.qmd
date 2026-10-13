@@ -9,20 +9,39 @@ format:
     template: cv/template.tex
 cvauthor: Adriano Rutz
 cvprofession: Pharmaceutical Scientist
-cvfooter:
-  left: "website: https://adafede.github.io"
-  right: "email: adriano.rutz@ik.me"
 cvcolor: 58748F
+# Contact details, one field per value.
+#
+# These used to be sentences jammed into the `right` slot of cvmeta — the phone
+# and email sat on the Field row and the address on the Languages row, because
+# that was the only free-text field available. It meant every consumer had to
+# read them back out of a sentence, and on the web it meant a postal address was
+# announced as a language.
+#
+# `website` and `phone` are printed in the PDF only. The website
+# page shows the email and the town: a link to this site from this site carries
+# no information, and a phone number on a public page is only a thing to be
+# collected.
+cvcontact:
+  email: adriano.rutz@ik.me
+  website: https://adafede.github.io
+  phone: "+41 76 521 45 40"
+  location: Zürich, Switzerland
+
+  # The header strip: one statement each, with no trailing detail to parse.
+  #
+  # Named the way a CV names them. "Status" and "Field" say almost nothing to a
+  # reader scanning for a position or for research areas, and the labels are also
+  # what the structured data on the page is keyed off, so the standard terms are
+  # what let these facts be published as schema.org properties instead of free
+  # text.
 cvmeta:
-  - title: Status
+  - title: Current position
     left: Postdoctoral Researcher, ETH Zürich
-    right: "website: https://adafede.github.io"
-  - title: Field
-    left: Metabolomics, Mass Spectrometry, Natural Products
-    right: "phone: +41 76 521 45 40 - email: adriano.rutz@ik.me"
+  - title: Areas of expertise
+    left: Mass Spectrometry, Metabolomics, Natural Products, Open Science
   - title: Languages
     left: French (C2), English (C1), German (C1), Italian (C1)
-    right: "address: Wydäckerring, 63, 8047 Zürich, Switzerland"
 ---
 
 {{< include /cv/_bio.qmd >}}

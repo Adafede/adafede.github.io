@@ -1,0 +1,117 @@
+---
+layout: base.njk
+title: Curriculum Vitæ
+description: "Curriculum vitæ of Adriano Rutz: bio, professional experience, education, awards and sports."
+permalink: /cv.html
+---
+{# addGlobalData exposes `curriculum` at the top of the cascade; cvData is
+   just a local alias so the template reads clearly. #}
+{% set cvData = curriculum %}
+<article class="cv" vocab="https://schema.org/" typeof="schema:Person" about="wd:Q97455964">
+  <header class="cv-header">
+    <h1 property="name">Curriculum Vitæ</h1>
+    {% if cvData.meta.profession %}<p class="page-header__lede">{{ cvData.meta.profession }}</p>{% endif %}
+    {# The facts: status, field, languages. Only `left` is printed.
+
+       `right` is deliberately dropped, and that is the whole point of the split.
+       In the source it is where the phone number, the email, this site's own URL
+       and the postcode ended up — attached to Field and to Languages — because
+       there was nowhere else for them to go. cv/template.tex reads those same
+       values into the PDF, which is where they belong. #}
+    {% if cvData.meta.meta.length %}
+    <dl class="cv-header__facts">
+      {% for item in cvData.meta.meta %}
+      {% set prop = item.title | schemaProperty %}
+      <div class="cv-header__fact">
+        <dt>{{ item.title }}</dt>
+        {# The property is derived from the label, so the same standard wording
+           that makes the label readable is what makes it machine-readable. A
+           fact with no matching property is printed plainly rather than forced
+           into an unrelated one. #}
+        <dd {% if prop %}itemprop="{{ prop }}" {% endif %}>{{ item.left }}</dd>
+      </div>
+      {% endfor %}
+    </dl>
+    {% endif %}
+    {# Contact details come from `cvcontact` in cv.qmd, which names each one,
+       so nothing here has to be read back out of a sentence. The `right` field
+       of cvmeta is left alone: that block is what cv/template.tex prints into
+       the PDF, and it still carries the phone number and the full address.
+
+       Only the email and the town reach this page at all: the migration does not
+       even carry `phone` or `website` across, so there is nothing here to
+       accidentally print. A link to this site from this site says nothing, and
+       a phone number on a public page is only a thing to be collected. #}
+    {% set contact = cvData.meta.contact or {} %}
+    {% if contact.email or contact.location %}
+     {# An address element is the right one for "where this person is", and it is
+        also what carries the structured data for the location. #}
+     <address class="cv-header__contact" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+       <dl>
+         {% if contact.email %}
+         <div class="cv-header__contact-item">
+           <dt>Email</dt>
+           {# Spelled rather than linked. A mailto has to exist as a real URL in
+              the document, which puts the address back in the page for anything
+              that reads markup; the spelled form is readable, typeable, and
+              cannot be lifted as one unbroken string. #}
+           <dd><span class="contact-obfuscated">{{ contact.email | obfuscateContact }}</span></dd>
+         </div>
+         {% endif %}
+         {% if contact.location %}
+         <div class="cv-header__contact-item">
+           <dt>Location</dt>
+           <dd><span itemprop="addressLocality">{{ contact.location }}</span></dd>
+         </div>
+         {% endif %}
+       </dl>
+     </address>
+     {% endif %}
+     {% if site.hasCvPdf %}
+     <p class="cv-header__actions">
+       <a class="button" href="/cv.pdf" type="application/pdf" target="_blank" rel="noopener">Download the CV as PDF</a>
+     </p>
+     {% endif %}
+   </header>
+
+  <section class="cv-section" aria-labelledby="cv-bio">
+    <h2 id="cv-bio">Bio</h2>
+    {# Full width, like every other part of the CV: the reading measure is set
+       for article prose, and here it left the Bio as the one narrow column on a
+       page that is otherwise edge to edge. #}
+    <div class="prose prose--wide">{{ cvData.bio | renderMarkdown | safe }}</div>
+  </section>
+
+  {% for section in curriculum | cvSections %}
+  <section class="cv-section" aria-labelledby="cv-{{ section.id }}">
+    <h2 id="cv-{{ section.id }}">{{ section.label }}</h2>
+    <ul class="cv-entries">
+      {% for entry in section.entries %}
+      <li class="cv-entry">
+        <div class="cv-entry__head">
+          <h3 class="cv-entry__title">
+            {# Awards entries carry no heading of their own; the label is the award. #}
+            {{ entry.title or (entry.bullets[0].label if entry.bullets else section.label) }}
+          </h3>
+          {% if entry.startYear %}
+          <p class="cv-entry__range">
+            {% if entry.current %}{{ entry.startYear }} – present{% elif entry.endYear %}{{ entry.startYear }} – {{ entry.endYear }}{% else %}{{ entry.startYear }}{% endif %}
+          </p>
+          {% endif %}
+        </div>
+        {% if entry.summary %}<p class="cv-entry__summary">{{ entry.summary | safe }}</p>{% endif %}
+        {% if entry.bullets %}
+        {% for bullet in entry.bullets %}
+        <div class="cv-entry__bullet">
+          {% if bullet.label and entry.title %}<strong>{{ bullet.label }}. </strong>{% endif %}
+          <span>{{ bullet.detail | safe }}</span>
+        </div>
+        {% endfor %}
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endfor %}
+
+</article>

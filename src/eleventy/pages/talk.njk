@@ -1,0 +1,73 @@
+---
+layout: base.njk
+pagination:
+  data: collections.talks
+  size: 1
+  alias: talk
+permalink: "/talks/{{ talk.id }}.html"
+eleventyComputed:
+  title: "{{ talk.data.title | safe }}"
+  description: "{{ talk.data.description | plainText }}"
+---
+<article class="event-detail">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <ol class="breadcrumb__list" vocab="https://schema.org/" typeof="BreadcrumbList">
+      <li property="itemListElement" typeof="ListItem">
+        <a property="item" href="/talks.html" typeof="WebPage">Talks</a>
+        <meta property="position" content="1" />
+      </li>
+      <li><span aria-hidden="true">/</span></li>
+      <li property="itemListElement" typeof="ListItem">
+        <span property="item" typeof="WebPage">{{ talk.data.title }}</span>
+        <meta property="position" content="2" />
+      </li>
+    </ol>
+  </nav>
+
+  <header class="event-detail__header">
+    <h1>{{ talk.data.title }}</h1>
+
+    {# Authors, their ORCID and their Wikidata item, then their affiliations —
+       the same order and the same registry links as the article and post pages.
+     Affiliations are read per author, so a co-presented talk does not read as a
+     list of institutions belonging to whoever happens to be named first. #}
+    {% if talk.data.authors.length %}
+    <div class="event-detail__authors" property="author">
+      {% for author in talk.data.authors %}
+      <p class="event-detail__author" typeof="Person"{% if author.qid %} about="wd:{{ author.qid }}"{% endif %}>
+        <span>{{ author.name }}</span>
+        {% if author.orcid %}<a class="author__id" href="https://orcid.org/{{ author.orcid }}" rel="noopener noreferrer" title="ORCID {{ author.orcid }}">{% registryIcon 'orcid' %}ORCID</a>{% endif %}
+        {% if author.qid %}<a class="author__id" href="https://qlever.scholia.wiki/author/{{ author.qid }}" rel="noopener noreferrer" title="Scholia {{ author.qid }}">{% registryIcon 'scholia' %}Scholia</a>{% endif %}
+        {% if author.affiliationIds.length %}
+        <span class="event-detail__affiliations" rel="affiliation" typeof="Organization">
+          {% for affId in author.affiliationIds %}{% if loop.index0 > 0 %}; {% endif %}{% set aff = affId | affiliation %}{% if aff.ror %}<a href="{{ aff.ror }}" rel="noopener noreferrer" title="ROR {{ aff.ror }}">{% registryIcon 'ror' %}{{ aff.name }}</a>{% elif aff.qid %}<a href="https://www.wikidata.org/wiki/{{ aff.qid }}" rel="noopener noreferrer" title="Wikidata {{ aff.qid }}">{{ aff.name }}</a>{% else %}{{ aff.name }}{% endif %}{% endfor %}
+        </span>
+        {% endif %}
+      </p>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <p class="event-detail__meta">
+      {% if talk.data.date %}<time datetime="{{ talk.data.date | readableDate }}">{{ talk.data.date | readableDate }}</time>{% endif %}
+      {% if talk.data.venue %} · <span class="event-detail__venue">{{ talk.data.venue }}</span>{% endif %}
+      {% if talk.data.location %} · {{ talk.data.location }}{% endif %}
+    </p>
+    {% if talk.data.tags.length %}
+    <ul class="tag-list" aria-label="Tags">
+      {% for tag in talk.data.tags %}<li><span class="tag">{{ tag }}</span></li>{% endfor %}
+    </ul>
+    {% endif %}
+  </header>
+
+  {% if talk.data.description %}<div class="event-detail__summary prose">{{ talk.data.description | inlineMarkdown | safe }}</div>{% endif %}
+
+  {% if talk.body %}
+  <div class="prose">{{ talk.body | renderMarkdown(talk.data) | safe }}</div>
+  {% endif %}
+
+  <p class="event-detail__links">
+    {% if talk.data.url %}<a class="button" href="{{ talk.data.url }}" rel="noopener">Event page</a>{% endif %}
+    <a href="/talks.html">All talks</a>
+  </p>
+</article>

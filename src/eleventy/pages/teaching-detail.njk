@@ -1,0 +1,78 @@
+---
+layout: base.njk
+pagination:
+  data: collections.teaching
+  size: 1
+  alias: course
+permalink: "/teaching/{{ course.id }}.html"
+eleventyComputed:
+  title: "{{ course.data.title | safe }}"
+  description: "{{ course.data.venue | plainText }}"
+---
+<article class="event-detail">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <ol class="breadcrumb__list" vocab="https://schema.org/" typeof="BreadcrumbList">
+      <li property="itemListElement" typeof="ListItem">
+        <a property="item" href="/teaching.html" typeof="WebPage">Teaching</a>
+        <meta property="position" content="1" />
+      </li>
+      <li><span aria-hidden="true">/</span></li>
+      <li property="itemListElement" typeof="ListItem">
+        <span property="item" typeof="WebPage">{{ course.data.title }}</span>
+        <meta property="position" content="2" />
+      </li>
+    </ol>
+  </nav>
+
+  <header class="event-detail__header">
+    <h1>{{ course.data.title }}</h1>
+
+    {# Lecturers, their ORCID and their Wikidata item, then their affiliations —
+       the same order and the same registry links as the article, post and talk
+       pages. Some course pages declare their lecturers through `metadata-files`,
+       some do not; those fall back to the site owner, who is who teaches them. #}
+    {% set lecturers = course.data.authors | default([], true) %}
+    <div class="event-detail__authors" property="author">
+      {% for lecturer in lecturers %}
+      <p class="event-detail__author" typeof="Person"{% if lecturer.qid %} about="wd:{{ lecturer.qid }}"{% endif %}>
+        <span>{{ lecturer.name }}</span>
+        {% if lecturer.orcid %}<a class="author__id" href="https://orcid.org/{{ lecturer.orcid }}" rel="noopener noreferrer" title="ORCID {{ lecturer.orcid }}">{% registryIcon 'orcid' %}ORCID</a>{% endif %}
+        {% if lecturer.qid %}<a class="author__id" href="https://qlever.scholia.wiki/author/{{ lecturer.qid }}" rel="noopener noreferrer" title="Scholia {{ lecturer.qid }}">{% registryIcon 'scholia' %}Scholia</a>{% endif %}
+        {% if lecturer.affiliationIds.length %}
+        <span class="event-detail__affiliations" rel="affiliation" typeof="Organization">
+          {% for affId in lecturer.affiliationIds %}{% if loop.index0 > 0 %}; {% endif %}{% set aff = affId | affiliation %}{% if aff.ror %}<a href="{{ aff.ror }}" rel="noopener noreferrer" title="ROR {{ aff.ror }}">{% registryIcon 'ror' %}{{ aff.name }}</a>{% elif aff.qid %}<a href="https://www.wikidata.org/wiki/{{ aff.qid }}" rel="noopener noreferrer" title="Wikidata {{ aff.qid }}">{{ aff.name }}</a>{% else %}{{ aff.name }}{% endif %}{% endfor %}
+        </span>
+        {% endif %}
+      </p>
+      {% else %}
+      <p class="event-detail__author" typeof="Person"{% if profiles.qid %} about="wd:{{ profiles.qid }}"{% endif %}>
+        <span>{{ site.author }}</span>
+        {% if profiles.orcid %}<a class="author__id" href="https://orcid.org/{{ profiles.orcid }}" rel="noopener noreferrer" title="ORCID {{ profiles.orcid }}">{% registryIcon 'orcid' %}ORCID</a>{% endif %}
+        {% if profiles.qid %}<a class="author__id" href="https://qlever.scholia.wiki/author/{{ profiles.qid }}" rel="noopener noreferrer" title="Scholia {{ profiles.qid }}">{% registryIcon 'scholia' %}Scholia</a>{% endif %}
+      </p>
+      {% endfor %}
+    </div>
+
+    <p class="event-detail__meta">
+      {% if course.data.date %}<time datetime="{{ course.data.date | readableDate }}">{{ course.data.date | readableDate }}</time>{% endif %}
+      {% if course.data.venue %} · <span class="event-detail__venue">{{ course.data.venue }}</span>{% endif %}
+      {% if course.data.location %} · {{ course.data.location }}{% endif %}
+    </p>
+    {% if course.data.tags.length %}
+    <ul class="tag-list" aria-label="Tags">
+      {% for tag in course.data.tags %}<li><span class="tag">{{ tag }}</span></li>{% endfor %}
+    </ul>
+    {% endif %}
+  </header>
+
+  {% if course.data.description %}<div class="event-detail__summary prose">{{ course.data.description | inlineMarkdown | safe }}</div>{% endif %}
+
+  {% if course.body %}
+  <div class="prose">{{ course.body | renderMarkdown(course.data) | safe }}</div>
+  {% endif %}
+
+  <p class="event-detail__links">
+    {% if course.data.url %}<a class="button" href="{{ course.data.url }}" rel="noopener">Course page</a>{% endif %}
+    <a href="/teaching.html">All teaching</a>
+  </p>
+</article>

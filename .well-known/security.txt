@@ -1,5 +1,5 @@
-Contact: mailto:rutz@imsb.biol.ethz.ch
+Contact: https://github.com/adafede/adafede.github.io/security/advisories/new
 Expires: 2027-05-31T23:59:59Z
-Preferred-Languages: en, de, fr, it
+Preferred-Languages: en, fr, de, it
 Canonical: https://adafede.github.io/.well-known/security.txt
 Policy: https://adafede.github.io/privacy.html

@@ -1,0 +1,11 @@
+---
+permalink: "/posts.json"
+eleventyExcludeFromCollections: true
+---
+{#- -#}
+{#
+  Quarto published this address and readers subscribe to it, so it has to keep
+  resolving. The document itself is assembled in src/lib/jsonFeed.mjs — a feed is
+  JSON, and building JSON in a template is how quotes in titles break.
+#}
+{{ postsJsonFeed | safe }}

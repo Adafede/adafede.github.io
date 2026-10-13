@@ -5,9 +5,12 @@ CCBot
 [Cc]odeberg
 Diffbot
 DOIs
+Eleventy
+ethz
 frontmatter
 GPTBot
 iaskspider
+imsb
 (?i)LLMs
 Omgili
 Omgilibot

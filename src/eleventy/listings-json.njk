@@ -1,0 +1,18 @@
+---
+permalink: "/listings.json"
+eleventyExcludeFromCollections: true
+---
+{#- -#}
+{#
+  Quarto's listing index: which items sit on which listing page, in the order the
+  page shows them. Kept so the published site keeps the same shape of machine
+  readable listing data it always had.
+#}
+[
+{% for feed in listingFeeds %}{% if not loop.first %},{% endif %}
+  {
+    "listing": "{{ feed.url }}",
+    "items": [{% for item in feed.items() %}"{{ item.url }}"{% if not loop.last %},{% endif %}{% endfor %}]
+  }
+{% endfor %}
+]

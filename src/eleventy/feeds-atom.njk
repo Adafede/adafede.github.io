@@ -1,0 +1,42 @@
+---
+permalink: /atom.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="utf-8"?>
+{# Atom alongside RSS, not instead of it. Both are declared in the head so a
+   reader — or an aggregator — picks whichever it prefers. Atom is the more
+   expressive of the two (a stable, self-describing id per entry, and content
+   with an explicit type), which is why it is worth carrying both. #}
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+  <title>{{ site.author }}</title>
+  <subtitle>{{ site.description }}</subtitle>
+  <id>{{ site.url }}/</id>
+  <link rel="alternate" type="text/html" href="{{ site.url }}/"/>
+  <link rel="self" type="application/atom+xml" href="{{ site.url }}/atom.xml"/>
+  {# RFC 3339, not RFC 822. Atom timestamps must be date-times; an RFC 822
+     string here ("Tue, 12 May 2026 00:00:00 +0000") is not one, and readers
+     that validate the feed reject it — which reads as the entries being cut
+     off. Newest entry, for the same reason the RSS channels now carry a single
+     build date. #}
+  {% set newest = collections.posts | latestPostDate %}
+  <updated>{{ newest | isoDate }}</updated>
+  <author><name>{{ site.author }}</name></author>
+  <generator uri="https://www.11ty.dev/">Eleventy</generator>
+  {% for post in collections.posts %}
+  <entry>
+    <title>{{ post.data.title }}</title>
+    <id>{{ site.url }}{{ post.url }}</id>
+    <link rel="alternate" type="text/html" href="{{ site.url }}{{ post.url }}"/>
+    <published>{{ post.data.pubDate | isoDate }}</published>
+    <updated>{{ (post.data.updatedDate | default(post.data.pubDate)) | isoDate }}</updated>
+    <author><name>{{ site.author }}</name></author>
+    {% for tag in post.data.tags %}<category term="{{ tag }}"/>{% endfor %}
+    {% if post.data.doi %}<link rel="related" type="text/html" href="https://doi.org/{{ post.data.doi }}"/>{% endif %}
+    <summary type="text">{{ post.data.description | plainText }}</summary>
+    {# type="html" means the element's text is parsed as HTML, but the document
+       is still XML, so the markup has to be escaped or a raw <div> closes the
+       element early and the feed stops parsing. #}
+    <content type="html"><![CDATA[{{ post.body | renderMarkdown(post.data) }}]]></content>
+  </entry>
+  {% endfor %}
+</feed>

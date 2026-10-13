@@ -3,6 +3,7 @@
 Runs before Quarto renders the site to update metadata in QMD files.
 """
 
+import os
 import sys
 from pathlib import Path
 
@@ -21,6 +22,15 @@ logger = get_logger(__name__)
 
 def prerender() -> None:
     """Main pre-render orchestration."""
+    # PDF-only renders (`quarto render --to pdf`, driven by
+    # scripts/site/render-pdfs.mjs) set PDF_ONLY=1. The pre-render step here
+    # updates QMD metadata (dates, DOIs) consumed by the HTML/RSS pipeline,
+    # which is owned by Eleventy now. For a PDF-only build that work is unused,
+    # so short-circuit and let Quarto's LaTeX renderer run straight away.
+    if os.environ.get("PDF_ONLY"):
+        logger.info("PDF_ONLY set — skipping pre-render metadata processing.")
+        return
+
     logger.info("=" * 80)
     logger.info("Starting pre-render processing")
     logger.info("=" * 80)

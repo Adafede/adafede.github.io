@@ -1,0 +1,2785 @@
+/*
+ * Design system for the Eleventy build.
+ *
+ * Performance model: https://www.speedlify.dev/ — itself an Eleventy site and
+ * the performance target for this project. The techniques taken from it:
+ *
+ *   - All CSS is inlined into <head> by the build (see inline-css.mjs), so there
+ *     is no render-blocking request. speedlify.dev ships zero stylesheets.
+ *   - Colour tokens are literal values, repeated per theme, so automated
+ *     contrast checks can resolve them (see the note above the dark block).
+ *   - System font stacks only: no webfont request, no FOUT, no layout shift.
+ *   - `color-scheme` declared in meta *and* CSS so the UA paints the right
+ *     backdrop before the stylesheet is parsed.
+ *   - A restrained radius scale and no shadows in the resting state.
+ *
+ * Every text/background pair is verified by scripts/site/check-contrast.mjs,
+ * which parses all three token blocks rather than trusting the values.
+ *
+ * Contrast targets: 4.5:1 for text, 3:1 for borders and other non-text.
+ */
+
+/* ------------------------------------------------------------------ tokens */
+
+:root {
+  color-scheme: light dark;
+
+  /* Type. System stacks only — no webfont, so no request and no shift.
+     Body is serif, headings and metadata are sans: the split that gives a page
+     a printed feel without giving up interface clarity. */
+  --sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --serif: Charter, 'Bitstream Charter', 'Sitka Text', Cambria, Georgia, serif;
+  --mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+
+  /* Fluid scale: ~1.2 ratio between steps, interpolated across the viewport. */
+  --step--2: clamp(0.72rem, 0.7rem + 0.08vw, 0.78rem);
+  --step--1: clamp(0.85rem, 0.83rem + 0.1vw, 0.92rem);
+  --step-0: clamp(1.05rem, 1.02rem + 0.16vw, 1.12rem);
+  --step-1: clamp(1.26rem, 1.21rem + 0.26vw, 1.4rem);
+  --step-2: clamp(1.51rem, 1.42rem + 0.42vw, 1.76rem);
+  --step-3: clamp(1.81rem, 1.67rem + 0.68vw, 2.2rem);
+  --step-4: clamp(2.18rem, 1.94rem + 1.12vw, 2.76rem);
+  --step-5: clamp(2.61rem, 2.25rem + 1.76vw, 3.46rem);
+
+  /* A slightly wider scale than before: the pages had more air than they had
+     hierarchy, which reads as unfinished rather than calm. */
+  --space-3xs: 0.25rem;
+  --space-2xs: 0.5rem;
+  --space-xs: 0.75rem;
+  --space-s: 1rem;
+  --space-m: 1.75rem;
+  --space-l: 2.75rem;
+  --space-xl: 4.25rem;
+  --space-2xl: 6.5rem;
+
+  /* Two widths: a narrower column for prose, a slightly wider one for listings
+     that carry a metadata gutter. Both are within a comfortable line length. */
+  --measure: 66ch;
+  --page: 60rem;
+  --wide: 68rem;
+
+  /* Restrained. Cards get a hairline and a whisper of shadow; only genuinely
+     floating things (skip link, dialogs) get a real corner. */
+  --radius: 6px;
+  --radius-lg: 10px;
+  --radius-pill: 999px;
+
+  --bg: #faf8f5;
+  --surface: #ffffff;
+  --surface-sunken: #f3f0ea;
+  --border: #e6e1d8;
+  --border-strong: #938b7e;
+  --text: #1b1a17;
+  --text-muted: #5e594f;
+  --text-faint: #6f685c;
+  --link: #0d5a80;
+  --link-visited: #6b3d75;
+  --brand: #0d5a80;
+  --brand-ink: #ffffff;
+  --brand-soft: #e4eff5;
+  --focus: #0d5a80;
+  --mark: #fdf0c8;
+  --code-bg: #f3f0ea;
+  /* Outline on the expertise circles. Grey rather than white: white reads as a
+     hard cut across the pale fills. Sized to sit entirely inside the gap the
+     generator leaves between circles — see .expertise__topic circle. */
+  --expertise-stroke: rgb(28 26 22 / 0.14);
+
+  /* The same outline on a dark page. The circle fills are the same pale
+     pastels in both themes, so the outline has to stay faint to sit behind
+     them rather than cut across them. */
+  --expertise-stroke: rgb(255 255 255 / 0.18);
+  --shadow: 0 1px 2px rgb(27 26 23 / 0.04);
+  --shadow-lg: 0 10px 30px -12px rgb(27 26 23 / 0.18);
+}
+
+/* ------------------------------------------------------------------- reset */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Any rule that sets `display` outranks the UA stylesheet's `[hidden]`, so a
+   hidden card would stay on screen. This restores the attribute's meaning. */
+[hidden] {
+  display: none !important;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  /* Anchor targets must clear the sticky header. */
+  scroll-padding-top: 5rem;
+  text-size-adjust: 100%;
+  /* Stops iOS Safari inflating text in landscape. */
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100dvh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--serif);
+  font-size: var(--step-0);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  /* Long URLs and DOIs wrap instead of forcing a horizontal scrollbar. */
+  overflow-wrap: break-word;
+}
+
+img,
+picture,
+svg,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+:target {
+  scroll-margin-top: 5rem;
+}
+
+/* ------------------------------------------------------------------- base */
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--sans);
+  line-height: 1.15;
+  letter-spacing: -0.018em;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--step-4);
+}
+h2 {
+  font-size: var(--step-3);
+  margin-block: var(--space-l) var(--space-xs);
+}
+h3 {
+  font-size: var(--step-1);
+  margin-block: var(--space-m) var(--space-2xs);
+}
+h4 {
+  font-size: var(--step-0);
+  margin-block: var(--space-m) var(--space-3xs);
+}
+
+/* A short rule under the top-level heading gives the page an anchor point
+   without needing a hero, which this site does not have. */
+h1 + .page-header__lede {
+  margin-block-start: var(--space-xs);
+}
+
+p,
+ul,
+ol,
+dl,
+blockquote,
+figure,
+table,
+pre {
+  margin-block: var(--space-s);
+}
+
+ul,
+ol {
+  padding-inline-start: 1.4em;
+}
+
+li + li {
+  margin-block-start: var(--space-3xs);
+}
+
+li > ul,
+li > ol {
+  margin-block: var(--space-3xs);
+}
+
+hr {
+  margin-block: var(--space-l);
+  border: 0;
+  border-block-start: 1px solid var(--border);
+}
+
+mark {
+  background: var(--mark);
+  color: inherit;
+  padding: 0 0.15em;
+  border-radius: 3px;
+}
+
+/* ------------------------------------------------------------------ links */
+
+a {
+  color: var(--link);
+  text-decoration-thickness: 0.07em;
+  text-underline-offset: 0.18em;
+  overflow-wrap: anywhere;
+}
+
+a:visited {
+  color: var(--link-visited);
+}
+
+a:hover {
+  text-decoration-thickness: 0.14em;
+}
+
+/* Every interactive element gets the same visible ring (2.4.7). */
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+@supports selector(:focus-visible) {
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+}
+
+/* ------------------------------------------------------------------- code */
+
+code,
+kbd,
+samp,
+pre {
+  font-family: var(--mono);
+  font-size: 0.875em;
+}
+
+:not(pre) > code {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.1em 0.35em;
+}
+
+pre {
+  overflow-x: auto;
+  padding: var(--space-s);
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  line-height: 1.5;
+  tab-size: 2;
+}
+
+pre code {
+  background: none;
+  border: 0;
+  padding: 0;
+  font-size: 0.84rem;
+}
+
+/* Shiki emits both themes as custom properties; pick by the used scheme. */
+@media (prefers-color-scheme: light) {
+  pre {
+    color: var(--shiki-light, inherit);
+    background-color: var(--shiki-light-bg, var(--code-bg)) !important;
+  }
+  pre span {
+    color: var(--shiki-light, inherit) !important;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  pre {
+    color: var(--shiki-dark, inherit);
+    background-color: var(--shiki-dark-bg, var(--code-bg)) !important;
+  }
+  pre span {
+    color: var(--shiki-dark, inherit) !important;
+  }
+}
+
+/* ------------------------------------------------------------- quotes etc */
+
+blockquote {
+  margin-inline: 0;
+  padding: var(--space-2xs) 0 var(--space-2xs) var(--space-s);
+  border-inline-start: 3px solid var(--brand);
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+blockquote > :first-child {
+  margin-block-start: 0;
+}
+blockquote > :last-child {
+  margin-block-end: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--step--1);
+}
+
+th,
+td {
+  padding: var(--space-2xs) var(--space-xs);
+  border-block-end: 1px solid var(--border);
+  text-align: start;
+  vertical-align: top;
+}
+
+thead th {
+  border-block-end: 2px solid var(--border-strong);
+  font-family: var(--sans);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+figcaption {
+  color: var(--text-muted);
+  font-size: var(--step--1);
+  margin-block-start: var(--space-2xs);
+}
+
+/* ------------------------------------------------------------------- motion */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (forced-colors: active) {
+  :focus-visible {
+    outline: 3px solid Highlight;
+  }
+  a:visited {
+    color: LinkText;
+  }
+}
+
+@media print {
+  body {
+    background: #fff;
+    color: #000;
+    font-size: 11pt;
+  }
+  .site-header,
+  .skip-link,
+  .qlever,
+  .comments {
+    display: none !important;
+  }
+  a[href^='http']::after {
+    content: ' (' attr(href) ')';
+    font-size: 0.85em;
+    word-break: break-all;
+  }
+}
+
+/* ------------------------------------------------------------------- tabset */
+
+/* Language tabs for the thesis abstract, built from radio inputs.
+   The radios hold the state and are hidden but not removed; :has() on the
+   container is what turns that state into a visible panel and a selected tab.
+   Without it there is no way in CSS to say "this input controls that panel". */
+.tabset {
+  margin-block: var(--space-m);
+}
+
+.tabset__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3xs);
+  padding: 0;
+  margin: 0;
+  border: 0;
+  /* A fieldset is sized by its widest child unless told otherwise, which here
+     would stretch the tab bar across the whole article. */
+  min-inline-size: 0;
+}
+
+/* Visible rather than hidden: it names the group of controls for anyone who
+   cannot see the shape of the tab bar, and it is what the fieldset is for. */
+.tabset__legend {
+  float: inline-start;
+  padding-inline-end: var(--space-2xs);
+  font-family: var(--sans);
+  font-size: var(--step--1);
+  color: var(--text-muted);
+}
+
+.tabset__radio {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.tabset__tab {
+  padding: var(--space-3xs) var(--space-s);
+  font-family: var(--sans);
+  font-size: var(--step--1);
+  line-height: 1.5;
+  color: var(--text-muted);
+  background: var(--surface-sunken);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+}
+
+.tabset__tab:hover {
+  color: var(--text);
+  border-color: var(--border-strong);
+}
+
+/* Keyboard focus has to show on the label, because the radio the browser
+   focused is the hidden one behind it. */
+.tabset__radio:focus-visible + .tabset__tab {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
+.tabset__panel {
+  display: none;
+  padding-block-start: var(--space-s);
+}
+
+/* Only the panel belonging to the checked radio is shown, and only that radio's
+   label looks selected. */
+.tabset:has(.tabset__radio--1:checked) .tabset__panel--1,
+.tabset:has(.tabset__radio--2:checked) .tabset__panel--2,
+.tabset:has(.tabset__radio--3:checked) .tabset__panel--3,
+.tabset:has(.tabset__radio--4:checked) .tabset__panel--4,
+.tabset:has(.tabset__radio--5:checked) .tabset__panel--5,
+.tabset:has(.tabset__radio--6:checked) .tabset__panel--6 {
+  display: block;
+}
+
+.tabset:has(.tabset__radio--1:checked) .tabset__tab--1,
+.tabset:has(.tabset__radio--2:checked) .tabset__tab--2,
+.tabset:has(.tabset__radio--3:checked) .tabset__tab--3,
+.tabset:has(.tabset__radio--4:checked) .tabset__tab--4,
+.tabset:has(.tabset__radio--5:checked) .tabset__tab--5,
+.tabset:has(.tabset__radio--6:checked) .tabset__tab--6 {
+  color: var(--surface);
+  background: var(--brand);
+  border-color: var(--brand);
+}
+
+@media print {
+  /* A printed page cannot be switched, so every language is shown. */
+  .tabset__tabs {
+    display: none;
+  }
+
+  .tabset__panel {
+    display: block !important;
+  }
+}
+
+/* ------------------------------------------------------------------- shell */
+
+.skip-link {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  z-index: 100;
+  padding: var(--space-2xs) var(--space-s);
+  background: var(--brand);
+  color: var(--brand-ink);
+  font-family: var(--sans);
+  font-weight: 600;
+  text-decoration: none;
+  border-end-end-radius: var(--radius);
+  transform: translateY(-110%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.site-header {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 20;
+  /* Frosted, as on the reference sites: the page scrolls under a translucent
+     bar rather than a solid slab. */
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  backdrop-filter: blur(14px) saturate(1.5);
+  border-block-end: 1px solid var(--border);
+}
+
+/* One row, one baseline. Every child gets the same line-height and the icons
+   the same box, so the wordmark, the page links and the utility buttons line up
+   instead of each centring on its own content. */
+.site-header__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2xs) var(--space-s);
+  max-width: var(--wide);
+  min-inline-size: 0;
+  margin-inline: auto;
+  padding: 0 var(--space-m);
+  block-size: 3.75rem;
+  line-height: 1.5;
+}
+
+.site-header__brand {
+  flex-shrink: 0;
+  font-family: var(--sans);
+  font-size: var(--step-0);
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  text-decoration: none;
+  margin-inline-end: auto;
+}
+
+/* One right-hand cluster, so the theme control and the two utility links can
+   never drift apart on the way to a narrow viewport. */
+.site-header__controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  flex-shrink: 0;
+}
+
+.site-header__brand:hover {
+  color: var(--link);
+}
+
+/* The global `li + li { margin-block-start }` rule applies to these too, which
+   pushed every item but the first down by half a space and made the row look
+   misaligned. A flex row spaces itself with `gap`. */
+.site-nav li {
+  margin: 0;
+}
+
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3xs) var(--space-xs);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Every link is the same fixed-height flex box rather than a padded inline
+   block. Sizing from content let the first item settle a couple of pixels
+   differently from the rest, which is exactly the kind of misalignment that
+   reads as sloppy without being obvious. */
+.site-nav a {
+  display: flex;
+  align-items: center;
+  block-size: 2rem;
+  padding: 0;
+  font-family: var(--sans);
+  font-size: var(--step--1);
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--text-muted);
+  text-decoration: none;
+  /* Underline as the affordance, which is how the minimalism reference marks the
+     active page: colour alone is not enough of a signal. */
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 5px;
+  transition: color 0.15s, text-decoration-color 0.15s;
+}
+
+.site-nav a:hover {
+  color: var(--text);
+  text-decoration-color: var(--text-faint);
+}
+
+.site-nav a[aria-current='page'] {
+  color: var(--text);
+  text-decoration-color: var(--brand);
+}
+
+.site-main {
+  max-width: var(--wide);
+  margin-inline: auto;
+  padding: var(--space-l) var(--space-m) var(--space-2xl);
+}
+
+/* Prose and article bodies keep to the narrower measure; listings that need the
+   extra room opt in with a modifier. */
+.prose,
+.article,
+.post-header {
+  max-width: var(--measure);
+}
+
+/* The CV reuses .article for its markup but is a full-width listing, not a
+   reading column — capping it at the measure made it visibly narrower than
+   every other page. Its own prose blocks still hold the measure via .prose. */
+.cv {
+  max-width: var(--wide);
+}
+
+/* Opt-out from the reading measure. Prose is capped for line length, but a CV is
+   a listing, and one column at 66ch next to full-width entries reads as a
+   mistake rather than as restraint. */
+/* Two classes, not one: `.prose` is declared later in the file, and at equal
+   specificity the later rule would win. */
+.prose.prose--wide {
+  max-width: none;
+}
+
+/* RSS and Source sit after the page links, as in Quarto, so there is no footer. */
+.site-nav--utility {
+  gap: var(--space-3xs);
+  margin-inline-start: auto;
+  flex-shrink: 0;
+}
+
+/* A square hit area with a hairline, so it reads as a control next to the
+   text links rather than as another link. */
+.site-nav--utility a {
+  display: grid;
+  place-items: center;
+  inline-size: 2.25rem;
+  block-size: 2.25rem;
+  padding: 0;
+  color: var(--text-faint);
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  transition: color 0.15s, background-color 0.15s, border-color 0.15s;
+}
+
+.site-nav--utility a:hover {
+  color: var(--text);
+  background: var(--surface-sunken);
+  border-color: var(--border);
+}
+
+.icon {
+  inline-size: 1.1rem;
+  block-size: 1.1rem;
+  display: block;
+}
+
+/* ------------------------------------------------------------- page header */
+
+.page-header {
+  margin-block-end: var(--space-l);
+}
+
+.page-header__lede {
+  max-width: var(--measure);
+  color: var(--text-muted);
+  font-size: var(--step-1);
+  line-height: 1.5;
+}
+
+.page-header h1 {
+  margin-block-end: var(--space-2xs);
+}
+
+/* ------------------------------------------------------------------- prose */
+
+.prose {
+  max-width: var(--measure);
+}
+
+.prose > :first-child {
+  margin-block-start: 0;
+}
+
+.prose > :last-child {
+  margin-block-end: 0;
+}
+
+/* The file type appended to a PDF link whose own text does not say it.
+   Deliberately visible rather than visually hidden: it is the thing WAVE asks
+   for, and a sighted reader is the one who most needs to know a link leaves the
+   page for a document before they follow it. Set quieter than the link text so
+   it reads as an annotation on the link, not as part of its title. */
+.link-format {
+  font-size: 0.85em;
+  font-variant-caps: all-small-caps;
+  letter-spacing: 0.03em;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* --------------------------------------------------------------- post head */
+
+.post-header {
+  max-width: var(--measure);
+  margin-block-end: var(--space-l);
+  padding-block-end: var(--space-m);
+  border-block-end: 1px solid var(--border);
+}
+
+/* A post is a page of its own, not a column inside a listing, so it takes the
+   full container the way the CV does. Two classes, not one: `.post-header` is
+   declared again further down and would otherwise win on source order. */
+.post.post--wide .post-header,
+.post.post--wide .prose {
+  max-width: none;
+}
+
+.post-header__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-3xs) var(--space-s);
+  margin-block-start: var(--space-s);
+  color: var(--text-muted);
+  font-family: var(--sans);
+  font-size: var(--step--1);
+}
+
+.post-header__meta > * + *::before {
+  content: '·';
+  margin-inline-end: var(--space-s);
+  color: var(--border-strong);
+}
+
+.post-header__authors {
+  font-style: italic;
+}
+
+/* A registry value — a DOI, a Wikidata QID. A utility, because the same value
+   appears beside an ORCID chip, in an article's identifier row and in a listing
+   card, and all three should read identically. */
+.identifier {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* -------------------------------------------------------------------- tags */
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3xs);
+  list-style: none;
+  padding: 0;
+  margin-block-start: var(--space-xs);
+}
+
+.tag-list li + li {
+  margin: 0;
+}
+
+.tag {
+  display: inline-block;
+  padding: 0.05rem 0.5rem;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  background: var(--surface-sunken);
+  color: var(--text-muted);
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  line-height: 1.6;
+  white-space: nowrap;
+}
+
+/* ----------------------------------------------------------- entry listings */
+
+.entry-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: var(--space-s);
+}
+
+.entry-list--grid {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
+}
+
+/* A hairline-separated list rather than floating cards: denser, and it lets the
+   whole row act as one target without nesting interactive elements. */
+.entry {
+  position: relative;
+  padding: var(--space-s) var(--space-m);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  transition:
+    border-color 120ms ease,
+    transform 120ms ease;
+}
+
+@media (hover: hover) {
+  .entry:hover {
+    border-color: var(--border-strong);
+    transform: translateY(-1px);
+  }
+}
+
+/* A card with artwork: the image sits above the text, cropped to a consistent
+   band so a row of cards lines up regardless of what each project uploaded. */
+.entry--with-image {
+  padding: var(--space-s);
+}
+
+/* The frame. Its size is fixed so a row of cards lines up, and the artwork is
+   fitted inside it rather than stretched to it. */
+.entry__media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-block-size: 9rem;
+  padding: var(--space-2xs);
+  margin-block-end: var(--space-s);
+  background: var(--surface-sunken);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+/* The artwork, at its own aspect ratio.
+   Neither dimension is set: the measured width and height on the <img> give the
+   browser the ratio, and the two maxima shrink it down proportionally to fit the
+   frame. Setting inline-size to 100% instead would pin the width and force the
+   ratio to be letterboxed, which is the thing this replaces. */
+.entry__image {
+  display: block;
+  /* Height is the definite one, width follows from the measured ratio, so the
+     artwork scales to fill the frame in both directions: up as well as down.
+     Only height is set, because an <img> with both dimensions set is
+     stretched to them rather than scaled, which would distort anything that is
+     not exactly the frame's shape. */
+  block-size: 8rem;
+  inline-size: auto;
+  /* A wide logo at 8rem tall would be wider than the card; the max shrinks it,
+     and the ratio carries the height down with it. */
+  max-inline-size: 100%;
+  object-fit: contain;
+}
+
+.entry--with-image .entry__title {
+  margin-block-start: 0;
+}
+
+.entry__title {
+  font-size: var(--step-1);
+  margin: 0;
+  line-height: 1.25;
+}
+
+/* Card titles are text, not chrome. */
+.entry__title a {
+  color: var(--text);
+  text-decoration: none;
+  text-decoration-color: var(--border-strong);
+  text-underline-offset: 4px;
+}
+
+.entry__title a:hover {
+  text-decoration: underline;
+}
+
+.entry__title a::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+
+/* The stretched title link paints over the whole card, which is what makes the
+   card tappable anywhere. But a link that means something *other* than "open
+   the post" — the DOI, the PDF, an external project — has to be painted after
+   that overlay or it never receives the click: the overlay swallows it and the
+   reader lands on the post instead, which is not what the link says it does.
+
+   Positioning these raises them above the overlay, because they come later in
+   the document than the title that owns it. The date and author text alongside
+   are deliberately left alone: clicking those should still open the post.
+ */
+.entry__meta a,
+.entry__actions a {
+  position: relative;
+}
+
+.entry__meta {
+  margin-block-start: var(--space-3xs);
+  color: var(--text-muted);
+  font-family: var(--sans);
+  font-size: var(--step--1);
+}
+
+.entry__summary {
+  margin-block-start: var(--space-2xs);
+  color: var(--text);
+}
+
+/* -------------------------------------------------------------- publications */
+
+.publication-list {
+  display: grid;
+  gap: var(--space-l);
+}
+
+.publication {
+  display: grid;
+  gap: var(--space-3xs);
+  padding-block-end: var(--space-m);
+  border-block-end: 1px solid var(--border);
+}
+
+.publication:last-child {
+  border-block-end: 0;
+}
+
+/* With cover art the card becomes two columns: text beside a thumbnail. */
+.publication--with-image {
+  grid-template-columns: minmax(0, 1fr) 11rem;
+  gap: var(--space-s) var(--space-m);
+  align-items: start;
+}
+
+.publication__image {
+  inline-size: 11rem;
+  block-size: 8rem;
+  object-fit: contain;
+  object-position: left center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--space-3xs);
+}
+
+.publication__text {
+  min-inline-size: 0;
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.publication--with-image .publication__image {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.publication__title {
+  font-size: var(--step-1);
+  margin: 0;
+  line-height: 1.3;
+}
+
+/* Titles read as titles; the underline arrives on hover. */
+.publication__title a {
+  color: var(--text);
+  text-decoration: none;
+  text-decoration-color: var(--border-strong);
+  text-underline-offset: 4px;
+}
+
+.publication__title a:hover {
+  text-decoration: underline;
+}
+
+.publication__meta {
+  margin: 0;
+  color: var(--text-muted);
+  font-family: var(--sans);
+  font-size: var(--step--1);
+}
+
+.publication__venue {
+  font-style: italic;
+}
+
+.publication__authors {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: var(--step--1);
+}
+
+.publication__more {
+  font-variant: small-caps;
+}
+
+.publication__note {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: var(--step--1);
+}
+
+.mark {
+  text-decoration: none;
+  border: 0;
+  color: var(--text-muted);
+  font-size: 0.8em;
+}
+
+/* Three lines is enough to judge relevance without the listing becoming a wall. */
+/* A checkbox rather than <details>: a closed <details> hides every child but
+   its summary, so the three clamped lines — the whole point of the collapsed
+   state — would disappear. The checkbox is checked by a label and answered by a
+   sibling selector, which needs no script and keeps the text in the document. */
+.publication__abstract-block {
+  display: flex;
+  flex-direction: column;
+  margin-block-start: var(--space-3xs);
+}
+
+.publication__abstract-checkbox {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.publication__abstract {
+  order: 1;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: var(--step--1);
+  color: var(--text-muted);
+}
+
+/* Checked: the clamp is what the collapsed state needed, not the whole text. */
+.publication__abstract-checkbox:checked ~ .publication__abstract {
+  display: block;
+}
+
+.publication__abstract-toggle {
+  order: 2;
+  align-self: start;
+  margin-block-start: 2px;
+  color: var(--link);
+  font-family: var(--sans);
+  font-size: var(--step--2);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: 0.2rem;
+  /* The label sits after the text visually, but before it in the document, so
+     it reads in order for a screen reader before the passage it controls. */
+}
+
+.publication__abstract-toggle:hover {
+  text-decoration: underline;
+}
+
+.publication__abstract-checkbox:focus-visible + .publication__abstract-toggle {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* Open, the control becomes a way back rather than a way forward. */
+.publication__abstract-checkbox:checked ~ .publication__abstract-toggle {
+  color: var(--text-faint);
+  font-size: var(--step--2);
+}
+
+.publication__abstract-checkbox:checked ~ .publication__abstract-toggle span[aria-hidden]::after {
+  content: "Show less";
+  font-size: var(--step--2);
+}
+
+.publication__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-s);
+  margin: var(--space-3xs) 0 0;
+  font-family: var(--sans);
+  font-size: var(--step--1);
+}
+
+/* A DOI is longer than the column it sits in, so a value that would otherwise
+   stretch the card has to be allowed to break rather than overflow it. */
+.publication__links .identifier {
+  overflow-wrap: anywhere;
+}
+
+.publication-table {
+  font-size: var(--step--1);
+}
+
+.publication-table th:first-child,
+.publication-table td:first-child {
+  white-space: nowrap;
+}
+
+.table-scroll {
+  overflow-x: auto;
+}
+
+.profiles {
+  margin-block-end: var(--space-l);
+  padding: var(--space-s);
+  background: var(--surface-sunken);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.profiles__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2xs) var(--space-m);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-family: var(--sans);
+  font-size: var(--step--1);
+}
+
+.profiles__list li {
+  display: flex;
+  gap: var(--space-3xs);
+}
+
+.profiles__list li + li {
+  margin: 0;
+}
+
+/* Areas of expertise: a circle packing drawn at build time by
+   scripts/site/build_expertise.py. The circles carry the picture and the list
+   carries the content — the drawing is decorative, so it stays measurable and
+   the names stay selectable. */
+.expertise {
+  margin-block-start: var(--space-m);
+}
+
+.expertise__pack {
+  display: block;
+  inline-size: min(100%, 34rem);
+  block-size: auto;
+  margin-inline: auto;
+}
+
+.expertise__topic {
+  cursor: pointer;
+}
+
+/* No outline at rest. The circles are separated by a gap the generator bakes
+   into the geometry instead, because circles from the packer touch each other:
+   an outline on a shared boundary is centred on it, so the two outlines collide
+   across the join and read as overlapping circles even though the fills never
+   overlap. Removing the outline removes the collision. */
+/* The outline is a hairline that lives entirely in the gap between circles.
+   The generator leaves GAP units between neighbouring fills and this stroke is
+   narrower than GAP, so the two outlines of adjacent circles cannot reach each
+   other — which is the collision that made the packing look overlapped before.
+   paint-order puts the stroke under the fill, so only its outer half is drawn
+   and the visible line is half the nominal width: 2.2 leaves about one
+   screen pixel of outline, which is the thinnest that still reads as a border
+   rather than as an artefact. */
+.expertise__topic circle {
+  stroke: var(--expertise-stroke);
+  stroke-width: 2.2;
+  paint-order: stroke fill;
+  transition: opacity 0.15s ease;
+}
+
+/* Hovered or focused, a ring is useful: there is no resting outline to grow
+   from, and one circle at a time is picked out. */
+.expertise__topic:hover circle,
+.expertise__topic:focus-visible circle {
+  opacity: 0.82;
+  stroke: var(--brand);
+  stroke-width: 2.6;
+}
+
+.expertise__topic text {
+  font-family: var(--sans);
+  font-weight: 600;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* The accessible copy of the packing: off the page, in the tab order, and
+   shown the moment anything in it takes focus — so a keyboard user reaches
+   every topic, and a sighted one never sees a second list of the same names. */
+.expertise__list {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.expertise__list:focus-within {
+  position: static;
+  inline-size: auto;
+  block-size: auto;
+  margin: var(--space-l) 0 0;
+  overflow: visible;
+  clip-path: none;
+  white-space: normal;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 14rem), 1fr));
+  gap: var(--space-3xs) var(--space-l);
+  padding: var(--space-s);
+  background: var(--surface-sunken);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  list-style: none;
+  font-family: var(--sans);
+  font-size: var(--step--1);
+}
+
+.expertise__list li {
+  display: flex;
+  gap: var(--space-2xs);
+}
+
+.expertise__score {
+  color: var(--text-faint);
+  font-variant-numeric: tabular-nums;
+  margin-inline-start: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .expertise__topic circle {
+    transition: none;
+  }
+}
+
+.collaborator-list {
+  display: grid;
+  gap: var(--space-3xs);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.collaborator-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-s);
+  padding: var(--space-3xs) var(--space-2xs);
+  border-block-end: 1px solid var(--border);
+  margin: 0;
+}
+
+.collaborator-list__count {
+  color: var(--text-muted);
+  font-family: var(--sans);
+  font-size: var(--step--1);
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------------------- event lists */
+
+.timeline {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.timeline > li {
+  display: grid;
+  grid-template-columns: 6rem minmax(0, 1fr);
+  gap: var(--space-s);
+  padding-block: var(--space-xs);
+  border-block-end: 1px solid var(--border);
+  margin: 0;
+}
+
+.timeline > li:last-child {
+  border-block-end: 0;
+}
+
+.timeline time {
+  color: var(--text-muted);
+  font-family: var(--mono);
+  font-size: var(--step--1);
+  font-variant-numeric: tabular-nums;
+}
+
+.timeline__authors,
+.event-detail__authors {
+  color: var(--text-muted);
+  font-size: var(--step--1);
+}
+
+.timeline__authors {
+  margin-block-start: 2px;
+}
+
+.event-detail__authors {
+  margin-block-start: var(--space-2xs);
+  padding-block-end: var(--space-s);
+  border-block-end: 1px solid var(--border);
+}
+
+.event-detail__author {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-3xs) var(--space-2xs);
+  margin-block-end: var(--space-3xs);
+}
+
+.event-detail__author:last-child {
+  margin-block-end: 0;
+}
+
+.event-detail__affiliations {
+  display: block;
+  margin-block-start: 2px;
+}
+
+/* One row per author, named, as on the post pages. */
+.event-detail__affiliation {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3xs);
+}
+
+.event-detail__affiliation + .event-detail__affiliation {
+  margin-block-start: 2px;
+}
+
+.event-detail__affiliation-owner {
+  font-style: italic;
+}
+
+.timeline__venue {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: var(--step--1);
+}
+
+/* The description is secondary to the title: smaller, and set on its own line so
+   the two do not read as one block. */
+.timeline__summary {
+  margin-block-start: var(--space-3xs);
+  max-inline-size: 60ch;
+  color: var(--text-muted);
+  font-size: var(--step--1);
+}
+
+.timeline__summary p {
+  margin: 0;
+}
+
+/* Only the entry title is de-emphasised. Scoped to the class rather than to
+   `.timeline a`, which would also flatten the links inside the description. */
+.timeline__title {
+  color: var(--text);
+  text-decoration: none;
+  text-decoration-color: var(--border-strong);
+  text-underline-offset: 4px;
+}
+
+.timeline__title:hover {
+  text-decoration: underline;
+}
+
+/* Not sticky. A sticky heading sits on top of the entries that scroll beneath
+   it, which leaves the text's real background ambiguous — automated contrast
+   checking cannot resolve it and reports a failure that is not one. The year
+   rule carries the grouping just as well without the overlap. */
+.year-heading {
+  margin-block: var(--space-l) var(--space-3xs);
+  padding-block-end: var(--space-3xs);
+  font-family: var(--mono);
+  font-size: var(--step--1);
+  color: var(--text-muted);
+  border-block-end: 1px solid var(--border-strong);
+}
+
+@media (max-width: 32rem) {
+  .timeline > li {
+    grid-template-columns: 1fr;
+    gap: var(--space-3xs);
+  }
+}
+
+/* --------------------------------------------------------------- article page */
+
+/* An ordered list, because a breadcrumb is a path: assistive technology reads
+   the items and their count, which a bare flex row of links does not give it. */
+.breadcrumb__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3xs);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.breadcrumb__list li {
+  display: flex;
+  gap: var(--space-3xs);
+  margin: 0;
+}
+
+.breadcrumb {
+  margin-block-end: var(--space-m);
+  color: var(--text-muted);
+  font-family: var(--sans);
+  font-size: var(--step--1);
+}
+
+.breadcrumb a {
+  color: var(--link);
+}
+
+.article {
+  max-width: var(--measure);
+}
+
+.article__header {
+  margin-block-end: var(--space-l);
+}
+
+.article__meta {
+  color: var(--text-muted);
+  font-family: var(--sans);
+  font-size: var(--step--1);
+}
+
+.article__venue {
+  font-style: italic;
+}
+
+/* Small caps, wide tracking, muted: reads as a label rather than competing with
+   the title above it. */
+.article__subheading {
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-block: var(--space-m) var(--space-2xs);
+}
+
+.author-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.author-list li + li {
+  margin-block-start: var(--space-2xs);
+}
+
+.author {
+  display: grid;
+  gap: 0;
+}
+
+.author__name {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: var(--step--1);
+}
+
+.author__id {
+  font-size: 0.68rem;
+  font-weight: 400;
+  text-decoration: none;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  padding: 0 0.4em;
+  color: var(--text-muted);
+}
+
+.author__affiliation {
+  color: var(--text-muted);
+  font-size: var(--step--1);
+}
+
+.article__note {
+  margin-block-start: var(--space-2xs);
+  color: var(--text-muted);
+  font-size: var(--step--1);
+}
+
+.article__abstract {
+  font-size: var(--step-0);
+}
+
+.article__section {
+  margin-block-end: var(--space-l);
+}
+
+.article__footer,
+.post-license {
+  margin-block-start: var(--space-xl);
+  padding-block-start: var(--space-m);
+  border-block-start: 1px solid var(--border);
+  color: var(--text-muted);
+  font-family: var(--sans);
+  font-size: var(--step--1);
+}
+
+.article__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-s);
+}
+
+/* ------------------------------------------------------------------- the CV */
+
+.cv-header {
+  max-width: var(--measure);
+  padding-block-end: var(--space-m);
+  margin-block-end: var(--space-l);
+  border-block-end: 2px solid var(--border-strong);
+}
+
+.cv-header__facts {
+  display: grid;
+  gap: var(--space-2xs);
+  margin: var(--space-m) 0 0;
+  font-family: var(--sans);
+  font-size: var(--step--1);
+}
+
+.cv-header__fact {
+  display: grid;
+  grid-template-columns: 6rem minmax(0, 1fr);
+  gap: var(--space-s);
+}
+
+.cv-header__fact dt {
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.cv-header__fact dd {
+  margin: 0;
+}
+
+/* Contact details, lifted out of the fact list into the element that means
+   "how to reach this person". The browser's default italic is not wanted: these
+   are facts about a person, not a quotation. */
+.cv-header__contact {
+  display: block;
+  margin-block-start: var(--space-s);
+  font-style: normal;
+}
+
+.cv-header__contact dl {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2xs) var(--space-m);
+  margin: 0;
+  font-family: var(--sans);
+  font-size: var(--step--1);
+}
+
+.cv-header__contact-item {
+  display: flex;
+  gap: var(--space-3xs);
+  align-items: baseline;
+}
+
+/* The label is a real <dt>, so it is named in the markup rather than smuggled
+   into the value as a "phone:" prefix. */
+.cv-header__contact dt {
+  color: var(--text-muted);
+}
+
+.cv-header__contact dd {
+  margin: 0;
+  color: var(--text);
+}
+
+.cv-section {
+  margin-block-end: var(--space-xl);
+}
+
+.cv-entries {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cv-entry {
+  padding-block: var(--space-s);
+  border-block-end: 1px solid var(--border);
+  margin: 0;
+}
+
+.cv-entry:last-child {
+  border-block-end: 0;
+}
+
+.cv-entry__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3xs) var(--space-s);
+}
+
+.cv-entry__title {
+  font-size: var(--step-0);
+  margin: 0;
+}
+
+.cv-entry__range {
+  margin: 0;
+  color: var(--text-muted);
+  font-family: var(--mono);
+  font-size: var(--step--1);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.cv-entry__summary {
+  margin-block: var(--space-3xs) 0;
+}
+
+.cv-entry__bullet {
+  margin-block-start: var(--space-3xs);
+}
+
+.cv-footer {
+  margin-block-start: var(--space-l);
+  padding-block-start: var(--space-m);
+  border-block-start: 1px solid var(--border);
+  color: var(--text-muted);
+  font-family: var(--sans);
+  font-size: var(--step--1);
+}
+
+.cv-footer p {
+  margin-block: 0;
+}
+
+@media (max-width: 32rem) {
+  .cv-header__fact {
+    grid-template-columns: 1fr;
+    gap: var(--space-3xs);
+  }
+}
+
+/* -------------------------------------------------------------- references */
+
+.references {
+  margin-block-start: var(--space-l);
+  padding-block-start: var(--space-s);
+  border-block-start: 1px solid var(--border);
+  font-size: var(--step--1);
+}
+
+.references .csl-entry {
+  margin-block-end: var(--space-2xs);
+  padding-inline-start: 1.75rem;
+  text-indent: -1.75rem;
+  line-height: 1.5;
+}
+
+/* Citations sit inside prose, so colour alone cannot distinguish them. */
+.citation,
+.citation a,
+a[role='doc-biblioref'] {
+  text-decoration: underline;
+  text-decoration-thickness: 0.06em;
+  text-underline-offset: 0.18em;
+}
+
+.citation a:hover,
+a[role='doc-biblioref']:hover {
+  text-decoration-thickness: 0.13em;
+}
+
+.cito {
+  font-family: var(--mono);
+  font-size: 0.72em;
+  color: var(--text-faint);
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------------------ heading links */
+
+.heading-anchor {
+  color: var(--border-strong);
+  text-decoration: none;
+  margin-inline-start: 0.35em;
+  opacity: 0;
+}
+
+h2:hover > .heading-anchor,
+h3:hover > .heading-anchor,
+.heading-anchor:focus-visible {
+  opacity: 1;
+}
+
+@media (max-width: 44rem) {
+  .heading-anchor {
+    display: none;
+  }
+}
+
+/* ----------------------------------------------------- third-party embeds */
+
+.note {
+  padding: var(--space-s);
+  background: var(--surface-sunken);
+  border: 1px solid var(--border);
+  border-inline-start: 3px solid var(--brand);
+  border-radius: var(--radius);
+  font-size: var(--step--1);
+}
+
+.note > :first-child {
+  margin-block-start: 0;
+}
+.note > :last-child {
+  margin-block-end: 0;
+}
+
+.qlever {
+  margin-block: var(--space-m);
+}
+
+.qlever__facade {
+  display: grid;
+  gap: var(--space-s);
+  place-items: center;
+  padding: var(--space-l) var(--space-s);
+  background: var(--surface-sunken);
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-lg);
+  text-align: center;
+}
+
+.qlever__preview {
+  color: var(--text-faint);
+  width: min(100%, 20rem);
+}
+
+.qlever__cta {
+  display: grid;
+  gap: var(--space-2xs);
+  justify-items: center;
+}
+
+.qlever__note,
+.qlever__caveat {
+  font-family: var(--sans);
+  font-size: var(--step--1);
+  color: var(--text-muted);
+  max-width: 40ch;
+}
+
+.qlever__caveat {
+  border-inline-start: 3px solid var(--border-strong);
+  padding-inline-start: var(--space-2xs);
+  text-align: start;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  padding: var(--space-2xs) var(--space-m);
+  background: var(--brand);
+  color: var(--brand-ink);
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  font-family: var(--sans);
+  font-size: var(--step--1);
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button:visited {
+  color: var(--brand-ink);
+}
+
+@media (hover: hover) {
+  .button:hover {
+    filter: brightness(1.12);
+    color: var(--brand-ink);
+  }
+}
+
+.comments,
+.annotations {
+  margin-block-start: var(--space-xl);
+}
+
+.comments {
+  padding-block-start: var(--space-m);
+  border-block-start: 1px solid var(--border);
+}
+
+/* One quiet link rather than a paragraph explaining where the comments went.
+   The rule above is a hairline above it, so it reads as the end of the post
+   rather than as a section with a heading that has nothing under it. */
+.comments__link {
+  color: var(--text-muted);
+  font-family: var(--sans);
+  font-size: var(--step--1);
+}
+
+.annotations {
+  margin-block-start: var(--space-m);
+}
+
+.comments__frame {
+  margin-block-start: var(--space-m);
+  min-height: 8rem;
+}
+
+/* ---------------------------------------------------------------- utilities */
+
+.section-links {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 0;
+  border-block-start: 1px solid var(--border);
+}
+
+.section-links li {
+  display: grid;
+  grid-template-columns: 8rem minmax(0, 1fr);
+  gap: var(--space-s);
+  align-items: baseline;
+  padding-block: var(--space-2xs);
+  border-block-end: 1px solid var(--border);
+  margin: 0;
+}
+
+.section-links a {
+  font-family: var(--sans);
+  font-weight: 600;
+}
+
+.section-links span {
+  color: var(--text-muted);
+  font-size: var(--step--1);
+}
+
+.identifiers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2xs) var(--space-m);
+  margin-block-start: var(--space-2xs);
+  font-family: var(--sans);
+  font-size: var(--step--1);
+}
+
+/* The home hero and CV render identifiers as a list, not a run of paragraphs. */
+.identifiers li {
+  margin: 0;
+  list-style: none;
+}
+
+.note-inline {
+  color: var(--text-muted);
+  font-size: var(--step--1);
+}
+
+/* ----------------------------------------------------------------- home page */
+
+/* The home page uses the same container as every other page, so it does not read
+   as a narrower, separate site. The reading measure is applied to the prose
+   inside it, which is where the line length actually matters. */
+.home {
+  max-width: var(--wide);
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 9rem minmax(0, 1fr);
+  gap: var(--space-m) var(--space-l);
+  align-items: center;
+  margin-block-end: var(--space-2xl);
+  padding-block-end: var(--space-l);
+  border-block-end: 1px solid var(--border);
+}
+
+.hero__avatar {
+  inline-size: 9rem;
+  block-size: 9rem;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--surface-sunken);
+  /* A hairline keeps the portrait from disappearing into a dark background. */
+  box-shadow: 0 0 0 1px var(--border-strong);
+}
+
+/* Explicit placement. Auto-placement cannot work here: the name spans both
+   columns, so it would be pushed onto its own row and leave the text column
+   only as wide as the portrait. */
+.hero__name {
+  /* Kept at byline weight rather than display size: it is the page heading and
+     must be visible, but the wordmark already carries the name at a glance and
+     a display-size repeat of it read as an accident. */
+  grid-area: 1 / 1 / 2 / -1;
+  font-size: var(--step-1);
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  color: var(--text-muted);
+  margin-block-end: var(--space-m);
+}
+
+.hero__avatar {
+  grid-area: 2 / 1 / 3 / 2;
+  align-self: center;
+}
+
+.hero__text {
+  grid-area: 2 / 2 / 3 / 3;
+}
+
+.hero__role {
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: var(--step--1);
+  color: var(--text-muted);
+}
+
+.hero__lede {
+  max-width: var(--measure);
+  margin-block-start: var(--space-2xs);
+  color: var(--text-muted);
+}
+
+
+@media (max-width: 36rem) {
+  .section-links li {
+    grid-template-columns: 1fr;
+    gap: var(--space-3xs);
+  }
+  .hero {
+    grid-template-columns: 1fr;
+    justify-items: start;
+    gap: var(--space-s);
+  }
+  .hero__avatar {
+    inline-size: 6.5rem;
+    block-size: 6.5rem;
+  }
+
+  /* A long topic name ("Liquid Chromatography-Tandem Mass Spectrometry")
+     must not push the page wider than a small phone. */
+  .tag {
+    white-space: normal;
+    text-align: center;
+  }
+}
+/* ------------------------------------------------------------------- mobile
+
+   Small-screen adjustments. Everything here is about touch: 44px targets,
+   safe-area insets for notched devices, no hover-reveal affordances, and
+   tables/code that scroll on their own instead of stretching the page. */
+
+@media (max-width: 48rem) {
+  :root {
+    /* Room for the notch and the home indicator. */
+    --space-l: 1.75rem;
+    --space-xl: 2.75rem;
+    --space-2xl: 4rem;
+  }
+
+  .site-header {
+    /* Ignore the notch in portrait, respect it in landscape. */
+    padding-block-start: env(safe-area-inset-top);
+    padding-inline: env(safe-area-inset-right) env(safe-area-inset-left);
+    /* Two rows are too tall to pin: a 150px sticky bar eats a fifth of a phone
+       screen. On a phone the header scrolls away with the rest of the page. */
+    position: static;
+  }
+
+  .site-header__inner,
+  .site-main {
+    padding-inline: var(--space-s);
+  }
+
+  /* Two rows: wordmark and controls, then the page links. The links are a
+     three-column grid rather than a horizontally scrolling strip — a strip that
+     runs past the edge of a phone reads as broken, not as scrollable, and the
+     site has exactly six of them. */
+  .site-header__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      'brand controls'
+      'nav   nav';
+    align-items: center;
+    gap: var(--space-2xs) var(--space-s);
+    block-size: auto;
+    min-block-size: 3.25rem;
+    padding-block: var(--space-2xs);
+  }
+
+  html {
+    /* Anchor targets must clear a header that is now two rows tall. */
+    scroll-padding-top: 7rem;
+  }
+
+  .site-main {
+    padding-block-end: calc(var(--space-2xl) + env(safe-area-inset-bottom));
+  }
+
+  .site-header__brand {
+    grid-area: brand;
+    margin-inline-end: 0;
+    font-size: var(--step--1);
+  }
+
+  .site-header__controls {
+    grid-area: controls;
+  }
+
+  /* The home page already says the name at hero size, so the wordmark would be
+     a second, smaller copy of it. The row keeps its shape for the pages that
+     do need it. */
+  .is-home .site-header__brand {
+    display: none;
+  }
+
+  .is-home .site-header__controls {
+    grid-column: 1 / -1;
+    justify-content: center;
+  }
+
+  .site-nav {
+    grid-area: nav;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-3xs);
+    min-inline-size: 0;
+  }
+
+  .site-nav a {
+    justify-content: center;
+    block-size: 2.5rem;
+    padding: 0 var(--space-2xs);
+    white-space: nowrap;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+  }
+
+  .site-nav a[aria-current='page'] {
+    color: var(--brand);
+    background: var(--brand-soft);
+    border-color: var(--brand);
+  }
+
+  /* A utility control must not sit inside the link grid. */
+  .site-nav--utility {
+    display: flex;
+    grid-area: auto;
+    margin-inline-start: 0;
+    overflow-x: visible;
+  }
+
+  .site-nav--utility a {
+    border-color: transparent;
+  }
+
+  .site-nav--utility a,
+  .button,
+  .entry,
+  .tag {
+    /* 44px minimum touch target. */
+    min-block-size: 2.75rem;
+  }
+
+  /* The header has to fit a wordmark, three theme buttons and two utility
+     icons on one 360px row, so these sit a little under the 44px floor. */
+  .site-nav--utility a {
+    display: grid;
+    place-items: center;
+    inline-size: 2.5rem;
+    block-size: 2.5rem;
+  }
+
+  .theme-switch__options {
+    padding: 1px;
+  }
+
+  .theme-switch__btn {
+    inline-size: 1.85rem;
+    block-size: 1.85rem;
+  }
+
+  /* Body links get real padding so thumbs do not have to hit a text line. */
+  .prose a,
+  .article a,
+  .post-body a {
+    /* Underline already exists; this widens the hit area vertically. */
+    padding-block: 2px;
+  }
+
+  /* Wide tables and code scroll inside their own box. */
+  table {
+    display: block;
+    overflow-x: auto;
+white-space: nowrap;
+  max-inline-size: 100%;
+  overflow-wrap: anywhere;
+}
+
+  pre {
+    margin-inline: calc(var(--space-s) * -1);
+    padding-inline: var(--space-s);
+    border-inline: 0;
+    border-radius: 0;
+  }
+
+  /* Hover-only lifts do not exist on touch; keep the resting state flat. */
+  .entry:hover {
+    transform: none;
+  }
+
+  /* The whole card is the link target, so it must read as tappable. */
+  .entry__title a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+  }
+
+  .timeline > li {
+    grid-template-columns: 1fr;
+    gap: var(--space-3xs);
+  }
+
+  .section-links li {
+    grid-template-columns: 1fr;
+    gap: var(--space-3xs);
+  }
+
+  /* The hero's two-column grid squeezes the text into a narrow strip beside the
+     portrait on a phone. Below this width it becomes one column: name, portrait,
+     text — the same order as the markup, no explicit placement needed. */
+  .hero {
+    grid-template-columns: 5.5rem minmax(0, 1fr);
+    gap: var(--space-s) var(--space-m);
+    margin-block-end: var(--space-l);
+    padding-block-end: var(--space-m);
+  }
+
+  /* Portrait and name share the first row; the description spans underneath at
+     full width, so the text never has to share space with the portrait. */
+  .hero__name {
+    grid-area: 1 / 2 / 2 / 3;
+    align-self: center;
+    font-size: var(--step-0);
+    margin-block-end: 0;
+  }
+
+  .hero__avatar {
+    grid-area: 1 / 1 / 2 / 2;
+    align-self: center;
+    inline-size: 5.5rem;
+    block-size: 5.5rem;
+  }
+
+  .hero__text {
+    grid-area: 2 / 1 / 3 / -1;
+  }
+
+  .hero__role {
+    font-weight: 400;
+    font-size: var(--step--1);
+    margin-block: 0;
+  }
+
+  .hero__lede {
+    margin-block-start: var(--space-3xs);
+  }
+
+  /* Body copy in the reading column is already at the smallest step; letting the
+     measure breathe costs legibility without buying anything. */
+  .prose,
+  .article,
+  .post-body,
+  .page-header__lede {
+    font-size: var(--step--1);
+  }
+
+  /* Filter chips are touch targets, but at the 44px default they eat half the
+     first screen. 2.25rem is still comfortably tappable. */
+  .tag {
+    min-block-size: 2.25rem;
+  }
+}
+
+/* Respect the reader's motion preference for smooth scrolling too. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ------------------------------------------------------------- tag filtering */
+
+.tag-filter {
+  margin-block-end: var(--space-l);
+}
+
+/* The inputs drive the CSS but are not drawn: a row of radios above a row of
+   pills is noise. They stay in the DOM and keyboard-reachable; the matching
+   label carries the focus ring and the checked state. */
+/* The fieldset exists for semantics and for the focus target; the radios
+   themselves are not drawn. A row of radios above a row of pills is noise. */
+.tag-filter__inputs {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  /* A fieldset defaults to min-inline-size: min-content, so without this it
+     refuses to collapse and pushes the page wider than the viewport — the one
+     place a <fieldset> behaves differently from a <div>. */
+  min-inline-size: 0;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.tag-filter {
+  position: relative;
+}
+
+.tag-filter__heading {
+  font-family: var(--sans);
+  font-size: var(--step--1);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-block-end: var(--space-2xs);
+}
+
+.tag-filter__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3xs);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tag-filter__list li {
+  margin: 0;
+}
+
+/* A button styled like a tag, so the control and the tags it matches share one
+   appearance. 44px tall so it is reachable with a thumb. */
+/* A label standing in for a hidden radio: it needs the cursor and the padding
+   a button would have had. */
+/* A label standing in for a hidden radio. It is a flex box rather than an
+   inline-block with padding, so the text is centred in the control's height
+   instead of sitting against the top of it — which is what an inline-block
+   with only `min-block-size` does. */
+.tag-filter label.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  cursor: pointer;
+  block-size: 2.25rem;
+  padding-inline: 0.7rem;
+  line-height: 1;
+  color: var(--text-muted);
+  transition: color 0.15s, border-color 0.15s, background-color 0.15s;
+}
+
+.tag-filter__count {
+  line-height: 1;
+}
+
+.tag-filter label.tag:hover {
+  color: var(--text);
+  border-color: var(--text-faint);
+}
+
+/* The count is dimmed with `opacity`, which drops it below the contrast
+   minimum. A muted colour that still passes reads as secondary without
+   becoming unreadable. */
+/* The count inherits the label's colour: muted on a resting pill, accent-ink on
+   a selected one. It is deliberately not dimmed with `opacity`, which drops it
+   below the contrast minimum against the pill background. */
+.tag-filter__count {
+  color: inherit;
+  font-variant-numeric: tabular-nums;
+  margin-inline-start: 0.15em;
+}
+
+.tag-filter__status {
+  font-family: var(--sans);
+  font-size: var(--step--1);
+  color: var(--text-muted);
+  margin-block-start: var(--space-2xs);
+  min-block-size: 1.2em;
+}
+
+.tag-filter__status:empty {
+  margin-block-start: 0;
+}
+
+.listing-section {
+  margin-block-end: var(--space-xl);
+}
+
+.listing-section__count {
+  font-family: var(--mono);
+  font-size: var(--step--1);
+  font-weight: 400;
+  color: var(--text-muted);
+  vertical-align: baseline;
+}
+
+.sr-heading {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------------------ detail pages */
+
+/* Talks, courses and varia entries: a title, the facts, then the body.
+   Full width, like posts and the CV: each of these is a page of its own, and a
+   page that stops two thirds of the way across reads as an accident. */
+.event-detail {
+  max-width: none;
+  margin-inline: auto;
+}
+
+/* Two classes: `.prose` is declared later and would win on source order. */
+.event-detail.event-detail .prose {
+  max-width: none;
+}
+
+.event-detail__header {
+  margin-block-end: var(--space-l);
+  padding-block-end: var(--space-s);
+  border-block-end: 1px solid var(--border);
+}
+
+.event-detail__image {
+  inline-size: 8rem;
+  block-size: 5rem;
+  object-fit: contain;
+  object-position: left center;
+  margin-block-end: var(--space-s);
+}
+
+.event-detail__meta {
+  font-family: var(--sans);
+  font-size: var(--step--1);
+  color: var(--text-muted);
+  margin-block-start: var(--space-3xs);
+}
+
+.event-detail__venue {
+  font-style: italic;
+}
+
+.event-detail__summary {
+  font-size: var(--step-1);
+  color: var(--text-muted);
+}
+
+.event-detail__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-s);
+  align-items: center;
+  margin-block-start: var(--space-xl);
+  padding-block-start: var(--space-m);
+  border-block-start: 1px solid var(--border);
+  font-family: var(--sans);
+  font-size: var(--step--1);
+}
+
+/* -------------------------------------------------------------- talks map */
+
+.talk-map-section {
+  margin-block-start: var(--space-xl);
+  padding-block-start: var(--space-m);
+  border-block-start: 1px solid var(--border);
+}
+
+.talk-map-section__lede {
+  max-width: var(--measure);
+  color: var(--text-muted);
+  font-size: var(--step--1);
+}
+
+/* The map is inlined into the talks page (scripts/site/build_talkmap.py), so
+   it is styled with the page's own tokens rather than a second set of colours.
+   That is what keeps it in step with the theme switch. */
+.talk-map {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface-sunken);
+  overflow: hidden;
+}
+
+.talk-map svg {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+}
+
+.talk-map__land {
+  fill: #ded8cd;
+  stroke: #c6bfb1;
+  stroke-width: 0.5;
+}
+
+.talk-map__country circle {
+  fill: var(--brand);
+  fill-opacity: 0.85;
+  stroke: var(--bg);
+  stroke-width: 2.5;
+}
+
+.talk-map__country text {
+  font-family: var(--sans);
+  font-size: 12px;
+  fill: var(--text);
+  text-anchor: middle;
+  /* A halo in the page background, so a label stays readable where it crosses
+     the coastline. */
+  paint-order: stroke;
+  stroke: var(--bg);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
+
+.talk-map__n {
+  fill: var(--text-muted);
+}
+
+.talk-map__legend {
+  margin: 0;
+  padding: var(--space-2xs) var(--space-s);
+  font-family: var(--sans);
+  font-size: var(--step--1);
+  color: var(--text-muted);
+  border-block-start: 1px solid var(--border);
+}
+
+.talk-map__place {
+  border-block-start: 1px solid var(--border);
+}
+
+.talk-map__place summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: baseline;
+  padding: var(--space-2xs) var(--space-s);
+  cursor: pointer;
+  font-family: var(--sans);
+  font-size: var(--step--1);
+  list-style-position: inside;
+}
+
+.talk-map__country-name {
+  font-weight: 650;
+  color: var(--text);
+}
+
+.talk-map__count {
+  font-variant-numeric: tabular-nums;
+  color: var(--link);
+}
+
+.talk-map__cities {
+  color: var(--text-muted);
+}
+
+.talk-map__place ul {
+  margin: 0;
+  padding: 0 var(--space-s) var(--space-s) 2.4rem;
+}
+
+.talk-map__place li + li {
+  margin-block-start: var(--space-3xs);
+}
+
+.talk-map__venue {
+  display: block;
+  color: var(--text-muted);
+  font-size: var(--step--2);
+}
+
+/* Dark palette. Same tokens, one value each, so a checker can read the actual
+   colour rather than having to evaluate `light-dark()`. */
+@media (prefers-color-scheme: dark) {
+:root {
+  --bg: #100f12;
+  --surface: #17161a;
+  --surface-sunken: #0a0a0c;
+  --border: #2b2a30;
+  --border-strong: #837d8c;
+  --text: #ecebe7;
+  --text-muted: #a8a49b;
+  --text-faint: #918b83;
+  --link: #8ccbef;
+  --link-visited: #d3abe2;
+  --brand: #8ccbef;
+  --brand-ink: #08131a;
+  --brand-soft: #16242c;
+  --focus: #9fd6f5;
+  --mark: #4a3f16;
+  --code-bg: #131216;
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.35);
+  --shadow-lg: 0 10px 30px -12px rgb(0 0 0 / 0.6);
+}
+}
+
+/* An explicit choice overrides the operating system. These come last so they
+   win on specificity and source order, and they carry the same literals rather
+   than relying on `color-scheme` to do the work. */
+html:has(#theme-light:checked) {
+  --bg: #faf8f5;
+  --surface: #ffffff;
+  --surface-sunken: #f3f0ea;
+  --border: #e6e1d8;
+  --border-strong: #938b7e;
+  --text: #1b1a17;
+  --text-muted: #5e594f;
+  --text-faint: #6f685c;
+  --link: #0d5a80;
+  --link-visited: #6b3d75;
+  --brand: #0d5a80;
+  --brand-ink: #ffffff;
+  --brand-soft: #e4eff5;
+  --focus: #0d5a80;
+  --mark: #fdf0c8;
+  --code-bg: #f3f0ea;
+}
+
+html:has(#theme-dark:checked) {
+  --bg: #100f12;
+  --surface: #17161a;
+  --surface-sunken: #0a0a0c;
+  --border: #2b2a30;
+  --border-strong: #837d8c;
+  --text: #ecebe7;
+  --text-muted: #a8a49b;
+  --text-faint: #918b83;
+  --link: #8ccbef;
+  --link-visited: #d3abe2;
+  --brand: #8ccbef;
+  --brand-ink: #08131a;
+  --brand-soft: #16242c;
+  --focus: #9fd6f5;
+  --mark: #4a3f16;
+  --code-bg: #131216;
+}
+
+/* -------------------------------------------------------------- theme switch
+
+   Three radios: follow the system, light, dark. The palette itself is decided
+   by the token blocks near the top of this file; these rules only carry the
+   `color-scheme` hint to the UA and draw the control.
+
+   The cost of doing this without script is that the choice is not remembered
+   across pages: a visitor who picks dark lands on a light page after a click.
+   Persisting it needs one line of script, which is the trade being made. */
+
+.theme-switch {
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-inline-size: 0;
+}
+
+.theme-switch > input {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.theme-switch__options {
+  display: flex;
+  gap: 2px;
+  padding: 2px;
+  background: var(--surface-sunken);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+}
+
+.theme-switch__btn {
+  display: grid;
+  place-items: center;
+  inline-size: 1.9rem;
+  block-size: 1.9rem;
+  border-radius: var(--radius-pill);
+  color: var(--text-faint);
+  cursor: pointer;
+  transition: color 0.15s, background-color 0.15s;
+}
+
+.theme-switch__btn:hover {
+  color: var(--text);
+}
+
+/* The pressed button is the one whose radio is checked. Drawn on the label
+   because the input itself is hidden, so keyboard focus needs somewhere to go. */
+html:has(#theme-auto:checked) label[for='theme-auto'],
+html:has(#theme-light:checked) label[for='theme-light'],
+html:has(#theme-dark:checked) label[for='theme-dark'] {
+  color: var(--brand-ink);
+  background: var(--brand);
+}
+
+/* A selected button is marked by a ring as well as a fill. The fill alone is
+   invisible in Windows High Contrast, where the system paints over the
+   background colour, so the ring is what actually carries "this is the current
+   choice" there. */
+html:has(#theme-auto:checked) label[for='theme-auto'],
+html:has(#theme-light:checked) label[for='theme-light'],
+html:has(#theme-dark:checked) label[for='theme-dark'] {
+  box-shadow: inset 0 0 0 1.5px var(--brand-ink);
+}
+
+/* Focus and selection are different things and must not be drawn the same way:
+   an outline means "you are here", a fill means "this is chosen". Both can be
+   present at once, so focus is an offset outline that reads clearly on top of
+   the selected fill. */
+html:has(#theme-auto:focus-visible) label[for='theme-auto'],
+html:has(#theme-light:focus-visible) label[for='theme-light'],
+html:has(#theme-dark:focus-visible) label[for='theme-dark'] {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+@media (forced-colors: active) {
+  /* In forced-colors the fill and box-shadow above are stripped, so mark the
+     selected option with a border and the focused one with an outline the
+     system colour. */
+  html:has(#theme-auto:checked) label[for='theme-auto'],
+  html:has(#theme-light:checked) label[for='theme-light'],
+  html:has(#theme-dark:checked) label[for='theme-dark'] {
+    outline: 2px solid ButtonText;
+    outline-offset: -2px;
+  }
+}
+
+html:has(#theme-light:checked) {
+  color-scheme: light;
+}
+
+html:has(#theme-dark:checked) {
+  color-scheme: dark;
+}
+
+/* ---------------------------------------------------------- registry icons */
+
+/* Sits in the text flow at the current font size, so it scales with whatever it
+   is next to and needs no per-context size rule. */
+.registry-icon {
+  display: inline-block;
+  /* Inline SVGs default to a black fill rather than inheriting, which leaves a
+     monochrome mark invisible on the dark background. Setting it here covers
+     every drawn mark, present and future, instead of relying on each one to
+     carry fill="currentColor" on each shape. */
+  fill: currentColor;
+  inline-size: 1em;
+  block-size: 1em;
+  vertical-align: -0.13em;
+  margin-inline-end: 0.22em;
+  flex-shrink: 0;
+}
+
+/* Every mark is one square box sized from the line height. The earlier version
+   gave the wordmark-ish marks a wider box to avoid squashing them, which left
+   an empty strip beside them — and the link's underline ran straight through
+   that empty strip, so the gap and the "underlined space" were the same bug. */
+.registry-icon {
+  display: inline-block;
+  /* Inline SVGs default to a black fill rather than inheriting, which leaves a
+     monochrome mark invisible on the dark background. Setting it here covers
+     every drawn mark, present and future, instead of relying on each one to
+     carry fill="currentColor" on each shape. */
+  fill: currentColor;
+  block-size: 1.05em;
+  inline-size: auto;
+  max-inline-size: 1.05em;
+  vertical-align: -0.16em;
+  margin-inline-end: 0.28em;
+  flex-shrink: 0;
+  border-radius: 0;
+}
+
+/* An <img> inside an underlined link takes the underline itself, which draws a
+   line under the icon as well as the label. The icon is decorative, so it is
+   lifted out of the text flow's decoration instead. */
+a .registry-icon {
+  text-decoration: none;
+}
+
+/* Scholia's lockup is device over wordmark, so it only reads above about
+   1.4em. Its box grows with it; the gap after it is the same as every other
+   mark. */
+.registry-icon--scholia {
+  block-size: 1.3em;
+  inline-size: 1.3em;
+  /* Deeper than the default because this lockup is device-over-wordmark, so its
+     visual centre sits above the middle of its own box. At 1.3em/-0.3em the
+     device lands level with the cap height and the wordmark tucks under the
+     baseline, which is how it reads in the source logo. */
+  vertical-align: -0.3em;
+  /* The file's own aspect metadata is inconsistent; `contain` guarantees the
+     whole lockup is visible rather than cropping the wordmark. */
+  object-fit: contain;
+}
+
+a:hover .registry-icon {
+  opacity: 0.75;
+}

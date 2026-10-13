@@ -3,6 +3,7 @@
 Runs after Quarto renders the site to inject semantic annotations.
 """
 
+import os
 import sys
 from collections.abc import Iterable, Mapping
 from pathlib import Path
@@ -161,6 +162,16 @@ def process_rss_and_feeds(
 
 def postrender() -> None:
     """Main post-render orchestration function."""
+    # PDF-only renders (`quarto render --to pdf`, driven by
+    # scripts/site/render-pdfs.mjs) set PDF_ONLY=1. The post-render pipeline
+    # here is HTML-centric (CiTO injection, RSS, a11y, website-spec, Pandoc PDF
+    # pass) and is owned by Eleventy now — Quarto's LaTeX renderer already
+    # produced the PDF. Short-circuit so a PDF build does not re-run all the
+    # HTML preprocessing it does not need.
+    if os.environ.get("PDF_ONLY"):
+        logger.info("PDF_ONLY set — skipping HTML post-render processing.")
+        return
+
     logger.info("=" * 80)
     logger.info("Starting post-render processing")
     logger.info("=" * 80)
