@@ -12,6 +12,22 @@ eleventyComputed:
   description: "{{ post.data.description | plainText }}"
 ---
 {% set meta = post.data %}
+{# Same trail as talks/articles/varia: listing → this page. Without it a post
+   was the one detail type that left readers with only the sticky header. #}
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <ol class="breadcrumb__list" vocab="https://schema.org/" typeof="BreadcrumbList">
+    <li property="itemListElement" typeof="ListItem">
+      <a property="item" href="/posts.html" typeof="WebPage">Posts</a>
+      <meta property="position" content="1" />
+    </li>
+    <li><span aria-hidden="true">/</span></li>
+    <li property="itemListElement" typeof="ListItem">
+      <span property="item" typeof="WebPage">{{ post.data.title }}</span>
+      <meta property="position" content="2" />
+    </li>
+  </ol>
+</nav>
+
 {# `post--wide`: the body takes the full container rather than the 66ch reading
    measure. A post is a page of its own here, and a page that stops two thirds
    of the way across reads as an accident. #}
