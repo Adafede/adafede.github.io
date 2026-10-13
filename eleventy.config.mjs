@@ -497,6 +497,32 @@ export default function (eleventyConfig) {
   }
 
   /**
+   * The text of a fragment of HTML, tags removed without adding spaces.
+   *
+   * `stripTags` inserts a space for every tag, which is right for sentences but
+   * wrong for inline runs like `<span>(<a>…</a>)</span>`, where it would open a
+   * gap inside the parentheses. This one concatenates the text nodes as-is.
+   */
+  function htmlText(html) {
+    return String(html ?? '')
+      .replace(/<[^>]+>/g, '')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  /** The text of the first paragraph of a rendered body, or ''. */
+  function firstParagraphText(html) {
+    const m = String(html ?? '').match(/<p[^>]*>([\s\S]*?)<\/p>/i);
+    return m ? htmlText(m[1]) : '';
+  }
+
+  /** The `src` of the first image in a rendered body, or ''. */
+  function firstImageSrc(html) {
+    const m = String(html ?? '').match(/<img\b[^>]*?\bsrc="([^"]+)"/i);
+    return m ? m[1] : '';
+  }
+
+  /**
    * Open links to PDFs in a new tab, and say so.
    *
    * A PDF replaces the page, so a reader who followed "slides" from a talk
@@ -586,26 +612,56 @@ export default function (eleventyConfig) {
     // Scoped to the bibliography rather than the whole body on purpose: a DOI
     // linked in passing is not a reference, and listing it as one turns the
     // feed's citation list into a list of everything the post ever mentioned.
+    //
+    // Each reference also carries its CiTO predicates — the `[cito:…]` spans
+    // inside the entry. Quarto's postrender injected those into the RSS feed
+    // before converting it to JSON, so a reader parsing `_references` has always
+    // been able to see how a post uses a paper. Dropping them here would quietly
+    // delete that annotation.
     const references = [];
     const bibliography = env.references || '';
-    const doiRe = /https?:\/\/(?:dx\.)?doi\.org\/([^\s"'<)]+)/gi;
     const ownDoi = String(frontmatter.doi || '').toLowerCase();
-    for (const match of bibliography.matchAll(doiRe)) {
-      const doi = match[1].replace(/[.,;]$/, '');
+    const entryRe = /<div class="csl-entry"[^>]*>([\s\S]*?)<\/div>/g;
+    for (const match of bibliography.matchAll(entryRe)) {
+      const entry = match[1];
+      const doiMatch = entry.match(/https?:\/\/(?:dx\.)?doi\.org\/([^\s"'<)]+)/i);
+      if (!doiMatch) continue;
+      const doi = doiMatch[1].replace(/[.,;]$/, '');
       // A post that lists itself among its own references is not a reference.
       // Quarto drops the self-citation here, and a feed that reports one back to
       // the reader as "this post cites this post" reads as a bug.
       if (doi.toLowerCase() === ownDoi) continue;
-      if (!references.some((r) => r.doi === doi)) {
-        references.push({ url: `https://doi.org/${doi}`, doi });
+      if (references.some((r) => r.doi === doi)) continue;
+      const ref = { url: `https://doi.org/${doi}`, doi };
+      const cito = [];
+      for (const c of entry.matchAll(/\[cito:([^\]]+)\]/g)) {
+        for (const p of c[1].split(',')) {
+          const t = p.trim();
+          if (t && !cito.includes(t)) cito.push(t);
+        }
       }
+      if (cito.length) ref.cito = cito;
+      references.push(ref);
     }
 
-    return { html, references };
+    return {
+      html,
+      references,
+      // The first paragraph, tags out. The Quarto feed used the first paragraph
+      // as the item summary; the truncated page meta description is a page
+      // concern, not a feed one, so the feed gets the whole paragraph.
+      firstParagraph: firstParagraphText(html),
+      // The first figure's source, absolutized by the feed builder.
+      image: firstImageSrc(html),
+    };
   }
 
   eleventyConfig.addFilter('renderMarkdown', (body, frontmatter = {}) =>
     renderBody(body, frontmatter).html,
+  );
+  /** The first paragraph of a rendered body as plain text, for feed summaries. */
+  eleventyConfig.addFilter('firstParagraph', (body, frontmatter = {}) =>
+    renderBody(body, frontmatter).firstParagraph,
   );
 
   /**
