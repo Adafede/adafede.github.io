@@ -2783,3 +2783,8 @@ a .registry-icon {
 a:hover .registry-icon {
   opacity: 0.75;
 }
+a:hover .registry-icon {
+  opacity: 0.75;
+}
+.home__bio, .home__expertise { margin-block: 0; }
+.home__bio p { margin-block: 0; }
