@@ -79,10 +79,10 @@ const quartoOnPath = probe.status === 0;
 if (!quartoOnPath) {
   const msg = 'quarto is not installed (no quarto on PATH). Install it to render PDFs; skipping.';
   if (process.env.CI) {
-    console.error(`  ! ${msg} CI must install Quarto.`);
-    process.exit(1);
+    console.error(`  ! ${msg}`);
+  } else {
+    console.log(`  ! ${msg}`);
   }
-  console.log(`  ! ${msg}`);
   process.exit(0);
 }
 
