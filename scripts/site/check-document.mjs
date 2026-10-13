@@ -126,6 +126,7 @@ function check(html) {
 
   for (const link of doc.matchAll(/<a\b[^>]*>/g)) {
     const tag = link[0];
+    if (!/\shref=/.test(tag)) problems.push('anchor without href');
     if (/\shref=""/.test(tag)) problems.push('empty href');
     if (/\starget="_blank"/.test(tag) && !/\srel="[^"]*noopener/.test(tag)) {
       problems.push('target="_blank" without rel="noopener"');

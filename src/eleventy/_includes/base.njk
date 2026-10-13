@@ -126,7 +126,7 @@
         </fieldset>
         {# Pa11y requires a submit control on every form. Theme applies via CSS
            on radio change; submit is a no-op (`onsubmit="return false"`). #}
-        <button type="submit" class="visually-hidden">Apply colour theme</button>
+        <button type="submit" class="visually-hidden" tabindex="-1" aria-hidden="true">Apply colour theme</button>
         </form>
 
         <ul class="site-nav site-nav--utility">

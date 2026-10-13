@@ -193,9 +193,9 @@ def normalize_license(value) -> dict | None:
 #
 #   [Adriano Rutz]{about="wd:Q97455964" property="wdt:P31" typeof="schema:Person"}
 #
-# Pandoc renders this as `<a about="wd:Q97455964" ...>Adriano Rutz</a>`; neither
-# Markdown parser here understands it, so it printed literally in the CV bio.
-# The RDFa attributes are meaningful and kept; only the brackets are converted.
+# Neither Markdown parser here understands it, so it printed literally in the
+# CV bio. The RDFa attributes are meaningful and kept; only the brackets are
+# converted.
 SPAN_ATTRS_RE = re.compile(r"\[(?P<text>[^\[\]]+)\]\{(?P<attrs>[^{}]*)\}", re.DOTALL)
 
 
@@ -211,12 +211,12 @@ def convert_span_attributes(body: str) -> str:
     def replace(match: re.Match) -> str:
         text = match.group("text")
         attrs = _attrs_to_html(match.group("attrs"))
-        # Escaped emphasis around the link (*text*) is unwrapped here because the
-        # asterisks would otherwise end up inside the anchor.
+        # Escaped emphasis around the span (*text*) is unwrapped here because
+        # the asterisks would otherwise end up inside it.
         inner = text.strip()
         if inner.startswith("*") and inner.endswith("*") and len(inner) > 2:
             inner = inner[1:-1]
-        return f"<a{attrs}>{inner}</a>" if attrs else inner
+        return f"<span{attrs}>{inner}</span>" if attrs else inner
 
     return SPAN_ATTRS_RE.sub(replace, body)
 

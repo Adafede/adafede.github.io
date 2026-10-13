@@ -1,17 +1,12 @@
 """
 Optimise the post screenshots for the Eleventy build.
 
-The Eleventy build serves these directly, so this emits WebP with
-intrinsic dimensions. Eleventy has no asset pipeline, so a raw 220 KB PNG becomes
-the Largest Contentful Paint on post pages — Lighthouse flags both the byte
-weight and the unsized image. This writes WebP copies into public/images/ and
-repoints the generated Markdown at them.
+The Eleventy build serves these directly, so this emits WebP with intrinsic
+dimensions when cwebp is available. Otherwise it keeps the ONGs and still adds
+their intrinsic dimensions to prevent layout shifts.
 
-The Eleventy build is unaffected otherwise: it serves these from
-same source ONGs under images/.
-
-Requires cwebp (libwebp) and sips; both are present on macOS with Homebrew and on
-Linux via libwebp-tools. Skipped cleanly when absent.
+The original screenshots live under images/; WebP copies are written to
+public/images/ when conversion is available.
 
 Run: uv run python scripts/site/optimize_images.py
 """
@@ -20,6 +15,7 @@ from __future__ import annotations
 
 import re
 import shutil
+import struct
 import subprocess
 from pathlib import Path
 
@@ -34,44 +30,50 @@ IMAGE_RE = re.compile(
 
 
 def dimensions(path: Path) -> str | None:
-    """`1872x1096` via sips, which is present on macOS."""
+    """Return the intrinsic dimensions of a PNG from its header."""
     try:
-        out = subprocess.run(
-            ["sips", "-g", "pixelWidth", "-g", "pixelHeight", str(path)],
-            capture_output=True,
-            text=True,
-            check=True,
-        ).stdout
-    except (FileNotFoundError, subprocess.CalledProcessError):
+        with path.open("rb") as image:
+            header = image.read(24)
+    except OSError:
         return None
 
-    width = height = None
-    for line in out.splitlines():
-        if "pixelWidth" in line:
-            width = line.split(":")[-1].strip()
-        elif "pixelHeight" in line:
-            height = line.split(":")[-1].strip()
+    if len(header) < 24 or header[:8] != b"\x89PNG\r\n\x1a\n":
+        return None
+    width, height = struct.unpack(">II", header[16:24])
     return f"{width}x{height}" if width and height else None
 
 
 def main() -> int:
-    if not shutil.which("cwebp"):
-        print("  ! cwebp not installed; Eleventy will ship the raw ONGs")
-        return 0
     if not SOURCE_DIR.exists():
         return 0
 
-    TARGET_DIR.mkdir(parents=True, exist_ok=True)
+    converter = shutil.which("cwebp")
+    if converter:
+        TARGET_DIR.mkdir(parents=True, exist_ok=True)
+    else:
+        print("  ! cwebp not installed; keeping ONGs with intrinsic dimensions")
+
     names = []
 
     for source in sorted(SOURCE_DIR.glob("*.png")):
         stem = source.stem
-        target = TARGET_DIR / f"{stem}.webp"
-        # -m6 is the slowest/best method; these run once per sync.
-        subprocess.run(
-            ["cwebp", "-quiet", "-q", "82", "-m", "6", str(source), "-o", str(target)],
-            check=True,
-        )
+        if converter:
+            target = TARGET_DIR / f"{stem}.webp"
+            # -m6 is the slowest/best method; these run once per sync.
+            subprocess.run(
+                [
+                    converter,
+                    "-quiet",
+                    "-q",
+                    "82",
+                    "-m",
+                    "6",
+                    str(source),
+                    "-o",
+                    str(target),
+                ],
+                check=True,
+            )
         names.append((stem, dimensions(source)))
 
     if BLOG_DIR.exists():
@@ -82,7 +84,8 @@ def main() -> int:
             def replace(match: re.Match) -> str:
                 stem = match.group("name")
                 dims = dict(names).get(stem)
-                src = f"/images/screenshots/{stem}.webp"
+                extension = "webp" if converter else "png"
+                src = f"/images/screenshots/{stem}.{extension}"
                 alt = match.group("alt")
                 if not dims:
                     return f"![{alt}]({src})"
@@ -98,14 +101,16 @@ def main() -> int:
 
             if changed:
                 print(
-                    f"    {post.relative_to(PROJECT_ROOT)}: {len(names)} screenshot(s) -> webp",
+                    f"    {post.relative_to(PROJECT_ROOT)}: "
+                    f"{'optimized to WebP' if converter else 'kept as PNG'} with dimensions",
                 )
 
-    total = sum(p.stat().st_size for p in TARGET_DIR.glob("*.webp"))
-    original = sum(p.stat().st_size for p in SOURCE_DIR.glob("*.png"))
-    print(
-        f"  + public/images/screenshots/*.webp ({original // 1024} KB -> {total // 1024} KB)",
-    )
+    if converter:
+        total = sum(p.stat().st_size for p in TARGET_DIR.glob("*.webp"))
+        original = sum(p.stat().st_size for p in SOURCE_DIR.glob("*.png"))
+        print(
+            f"  + public/images/screenshots/*.webp ({original // 1024} KB -> {total // 1024} KB)",
+        )
     return 0
 
 

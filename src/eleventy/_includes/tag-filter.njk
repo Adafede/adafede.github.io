@@ -39,7 +39,7 @@
   </fieldset>
   {# Pa11y requires a submit control on every form. Filtering is CSS-only;
      submit is a no-op (`onsubmit="return false"`). #}
-  <button type="submit" class="visually-hidden">Apply topic filter</button>
+  <button type="submit" class="visually-hidden" tabindex="-1" aria-hidden="true">Apply topic filter</button>
   </form>
 
   <ul class="tag-filter__list">

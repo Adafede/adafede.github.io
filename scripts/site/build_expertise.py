@@ -232,8 +232,8 @@ def render(data: dict) -> str:
         # which is the accessible copy of this picture in any case.
         parts.append(
             f'<a class="expertise__topic" href="https://www.wikidata.org/wiki/{qid}" '
-            f'tabindex="-1" target="_blank" rel="noopener" '
-            f'title="{escape(text)} — score {score}">',
+            f'tabindex="-1" target="_blank" rel="noopener">'
+            f"<title>{escape(text)} — score {score}</title>",
         )
         parts.append(
             # The outline colour comes from CSS (--expertise-stroke) rather than
