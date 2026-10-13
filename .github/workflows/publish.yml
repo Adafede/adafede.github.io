@@ -99,19 +99,15 @@ jobs:
 
       - run: npm ci
 
-      # `npm run build:all` is the single canonical build command for this
-      # project and produces `_eleventy_site/` locally and in deploy
-      # (see README). It runs, in order: render-pdfs (Quarto PDFs — skipped
-      # without a toolchain), sync:content, build:eleventy. PDFs come only
-      # from Quarto (LaTeX-quality, with the CiTO filters); the HTML site is
-      # Eleventy-only, so Quarto is never the website renderer.
+      # Build the whole site
+      - name: Build site
+        run: npm run build:all
 
-      # Ensure .nojekyll is present so GitHub Pages serves all files
-      # (including files/directories with underscores in their names)
+      # Ensure .nojekyll is present
       - name: Add .nojekyll
         run: |
           touch _eleventy_site/.nojekyll
-          echo "# This file prevents GitHub Pages from running Jekyll.\n# The site is built with Eleventy (HTML) and Quarto (PDFs); static files\n# are deployed from _eleventy_site/.\n# For custom HTTP response headers (cache-control, CSP, etc.),\n# this site is best deployed via Netlify which supports the _headers file.\n# On GitHub Pages, static assets receive a default max-age=600 cache." > _eleventy_site/.nojekyll
+          echo "# This file prevents GitHub Pages from running Jekyll." > _eleventy_site/.nojekyll
 
       # Upload artifact for Pages
       - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9
