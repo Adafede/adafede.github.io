@@ -16,7 +16,8 @@ at Tradall SA ([Bacardi Group]{about="wd:Q685395"}), and completed his
 [PhD]{about="wd:Q752297"} at the [University of Geneva]{about="wd:Q503473"}.
 
 His work uses [mass spectrometry]{about="wd:Q180809"} to determine which
-metabolites are present in a [sample]{about="wd:Q485146"}, and aims to make this
+[chemical compounds]{about="wd:Q11173"} are present in a
+[sample]{about="wd:Q485146"}, and aims to make this
 [knowledge]{about="wd:Q9081"} [open]{about="wd:Q232932"} and
 [reusable]{about="wd:Q115999420"}. He is a core contributor to the [LOTUS
 initiative](https://doi.org/10.7554/eLife.70780), and works across [data
