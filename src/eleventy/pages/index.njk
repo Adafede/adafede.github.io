@@ -42,7 +42,7 @@ permalink: /index.html
   </header>
 
   <section class="home__bio">
-    {% include "cv/_bio.qmd" %}
+    {{ curriculum.bio | renderMarkdown | safe }}
   </section>
 
   <section class="home__expertise" aria-labelledby="expertise-heading">

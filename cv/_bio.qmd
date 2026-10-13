@@ -8,14 +8,16 @@ at [ETH
 Zürich]{about="wd:Q11942" property="wdt:P31" resource="wd:Q875538" typeof="schema:CollegeOrUniversity"},
 where he develops [computational]{about="wd:Q104595152"} and [analytical
 methods]{about="wd:Q4751159"} for [metabolomics]{about="wd:Q12149006"}. His
-research{about="wd:Q42240"} focuses on the chemistry{about="wd:Q2329"} of
-Life{about="wd:Q3"} and the metabolites{about="wd:Q407595"} found in
-organisms{about="wd:Q7239"}. He trained in pharmaceutical sciences and
-phytochemistry, worked at Tradall SA (Bacardi Group), and completed his PhD at
-the University of Geneva.
+[research]{about="wd:Q42240"} focuses on the [chemistry]{about="wd:Q2329"} of
+[Life]{about="wd:Q3"} and the [metabolites]{about="wd:Q407595"} found in
+[organisms]{about="wd:Q7239"}. He trained in [pharmaceutical
+sciences]{about="wd:Q7180763s"} and [phytochemistry]{about="wd:Q640068"}, worked
+at Tradall SA ([Bacardi Group]{about="wd:Q685395"}), and completed his
+[PhD]{about="wd:Q752297"} at the [University of Geneva]{about="wd:Q503473"}.
 
-His work uses mass spectrometry to determine which metabolites are present in a
-sample, and aims to make this knowledge open and reusable. He is a core
-contributor to the [LOTUS initiative](https://doi.org/10.7554/eLife.70780), an
-open resource linking metabolites to the organisms in which they are found, and
-works across data science, chemistry, and biology.
+His work uses [mass spectrometry]{about="wd:Q180809"} to determine which
+metabolites are present in a [sample]{about="wd:Q485146"}, and aims to make this
+[knowledge]{about="wd:Q9081"} [open]{about="wd:Q232932"} and
+[reusable]{about="wd:Q115999420"}. He is a core contributor to the [LOTUS
+initiative](https://doi.org/10.7554/eLife.70780), and works across [data
+science]{about="wd:Q2374463"}, chemistry, and [biology]{about="wd:Q420"}.
