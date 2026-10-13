@@ -43,6 +43,9 @@ jobs:
       - name: Install Python dependencies
         run: uv sync --all-extras
 
+      - name: Install bs4 (BeautifulSoup4) for PDF rendering
+        run: uv pip install beautifulsoup4
+
       - run: npm ci
 
       # `npm run build:all` is the single canonical build command for this
