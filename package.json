@@ -21,13 +21,13 @@
   "devDependencies": {
     "@11ty/eleventy": "^3.1.6",
     "@types/js-yaml": "^4.0.9",
-    "@types/node": "^22.10.0",
+    "@types/node": "^24.0.0",
     "axe-core": "^4.14.0",
     "js-yaml": "^5.4.3",
     "lightningcss": "^1.33.0",
     "markdown-it": "^15.0.2",
     "markdown-it-anchor": "^10.0.0",
-    "pa11y-ci": "^4.1.1",
+    "pa11y-ci": "^5.0.0",
     "remark": "^15.0.1"
   }
 }

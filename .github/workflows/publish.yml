@@ -67,7 +67,7 @@ jobs:
       # Setup Node.js (needed by setup-r; on GH Actions ubuntu-latest Node is pre-installed)
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
         with:
-          node-version: 20
+          node-version: 24
           cache: npm
 
       # Setup UV with native caching

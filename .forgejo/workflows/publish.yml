@@ -60,6 +60,7 @@ jobs:
           sudo tlmgr option repository http://mirror.ctan.org/systems/texlive/tlnet
           sudo tlmgr update --self
           sudo tlmgr install \
+          babel-english \
           caption \
           fancyhdr \
           ifmtarg \
