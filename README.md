@@ -15,6 +15,40 @@ no longer the website renderer, only the PDF renderer.
   (`cv.qmd` and posts with `format-links: [pdf]`). Quarto is optional for local
   HTML development: if it isn't installed the build proceeds without PDFs.
 
+## Install
+
+```sh
+# 1. Clone the repository
+git clone https://github.com/adafede/adafede.github.io.git
+cd adafede.github.io
+
+# 2. Install Node.js dependencies (requires Node.js 26+)
+npm ci
+
+# 3. Install Python dependencies (requires Python 3.14+ and uv)
+uv sync --all-extras
+```
+
+## Development
+
+Run the Eleventy development server with hot reload:
+
+```sh
+npm run dev
+```
+
+Validate the site (links, RDFa, document structure, contrast):
+
+```sh
+npm run check
+```
+
+Run Python tests:
+
+```sh
+uv run pytest
+```
+
 ## Build the whole website
 
 One command builds everything --- PDFs, content, and the Eleventy site --- and

@@ -1,4 +1,5 @@
 Adriano
+Affero
 Amazonbot
 Bytespider
 CCBot
