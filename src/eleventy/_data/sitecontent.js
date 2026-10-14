@@ -99,8 +99,8 @@ function summaryFrom(body) {
   return `${cut.replace(/[\s,;:.—-]+$/, '')}…`;
 }
 
-const byDateDesc = (a, b) => new Date(b.data.pubDate) - new Date(a.data.pubDate);
-const byArticleDate = (a, b) => new Date(b.data.date) - new Date(a.data.date);
+const byPubDateDesc = (a, b) => new Date(b.data.pubDate) - new Date(a.data.pubDate);
+const byDateDesc = (a, b) => new Date(b.data.date) - new Date(a.data.date);
 
 export default function buildData() {
   return {
@@ -111,12 +111,18 @@ export default function buildData() {
         url: `/posts/${p.id}.html`,
         data: { ...p.data, description: p.data.description || summaryFrom(p.body) },
       }))
-      .sort(byDateDesc),
+      .sort(byPubDateDesc),
 
-  articles: () => loadNested('articles').sort(byArticleDate),
+  articles: () => loadNested('articles').sort(byDateDesc),
   // Talks and teaching each get their own page; the listing links to them.
-  talks: () => loadCollection('talks').map((t) => ({ ...t, url: `/talks/${t.id}.html` })),
-  teaching: () => loadCollection('teaching').map((t) => ({ ...t, url: `/teaching/${t.id}.html` })),
+  talks: () =>
+    loadCollection('talks')
+      .map((t) => ({ ...t, url: `/talks/${t.id}.html` }))
+      .sort(byDateDesc),
+  teaching: () =>
+    loadCollection('teaching')
+      .map((t) => ({ ...t, url: `/teaching/${t.id}.html` }))
+      .sort(byDateDesc),
   varia: () => {
     const base = join(CONTENT, 'varia');
     if (!existsSync(base)) return [];
