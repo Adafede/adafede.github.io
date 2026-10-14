@@ -1,4 +1,6 @@
 _site/
+.idea/
+.venv/
 
 .github/vale/styles/*
 !.github/vale/styles/config/
@@ -19,6 +21,10 @@ _site/
 *.log
 
 .DS_Store
+
+/.pytest_cache/
+/.ruff_cache/
+/.states/
 
 /.quarto/
 
