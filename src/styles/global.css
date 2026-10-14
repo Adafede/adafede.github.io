@@ -2239,6 +2239,25 @@ white-space: nowrap;
     margin-block-start: var(--space-3xs);
   }
 
+  /* Cover art gets its own row on a phone. Beside the text an 11rem column is
+     half the width of the screen, and the abstract — the reason to read the
+     entry — ends up in a 12rem sliver beside it. */
+  .publication--with-image {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-xs);
+  }
+
+  .publication--with-image .publication__image {
+    grid-column: 1;
+    grid-row: 1;
+    inline-size: 5.5rem;
+    block-size: 4rem;
+  }
+
+  .publication--with-image .publication__text {
+    grid-row: 2;
+  }
+
   /* Body copy in the reading column is already at the smallest step; letting the
      measure breathe costs legibility without buying anything. */
   .prose,
