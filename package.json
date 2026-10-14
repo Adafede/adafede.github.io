@@ -11,7 +11,7 @@
     "check": "npm run check:links && npm run check:rdfa && npm run check:document && npm run check:contrast",
     "check:links": "node scripts/site/check-links.mjs _eleventy_site",
     "check:contrast": "node scripts/site/check-contrast.mjs",
-    "build:eleventy": "npm run minify:css && npx @11ty/eleventy && node scripts/site/inline-css.mjs",
+    "build:eleventy": "npm run minify:css && npx @11ty/eleventy && node scripts/site/inline-css.mjs && node scripts/site/external-links.mjs",
     "render-pdfs": "node scripts/site/render-pdfs.mjs",
     "minify:css": "node scripts/site/minify-css.mjs",
     "check:rdfa": "node scripts/site/check-rdfa.mjs _eleventy_site",
