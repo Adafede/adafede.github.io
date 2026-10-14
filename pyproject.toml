@@ -1,8 +1,12 @@
 [project]
 name = "adafede-github-io"
 version = "0.0.1"
-description = "My personal website"
+description = "Personal website of Adriano Rutz"
 requires-python = "==3.14.*"
+license = "AGPL-3.0"
+authors = [
+  { name = "Adriano Rutz" },
+]
 dependencies = [
   "bs4>=0.0.2",
   "circlify>=0.15.1",
@@ -22,6 +26,7 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+  "deptry>=0.25.1",
   "prek>=0.5.5",
   "pytest>=9.1.1",
 ]

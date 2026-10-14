@@ -4,11 +4,14 @@ Post-processing scripts for Quarto output with semantic web annotations.
 
 ## Overview
 
-This directory contains a **clean 4-layer architecture** for processing Quarto
-output: - **CiTO citations** - Citation typing ontology annotations - **ROR
-affiliations** - Research organization registry links - **ORCID integration** -
-Author identification and Scholia links - **DOI metadata** - Digital object
-identifiers - **Semantic markup** - RDFa and Schema.org annotations
+This directory contains scripts for processing Quarto output with the following
+features:
+
+- **CiTO citations** - Citation typing ontology annotations
+- **ROR affiliations** - Research organization registry links
+- **ORCID integration** - Author identification and Scholia links
+- **DOI metadata** - Digital object identifiers
+- **Semantic markup** - RDFa and Schema.org annotations
 
 ## Architecture
 
@@ -19,19 +22,15 @@ identifiers - **Semantic markup** - RDFa and Schema.org annotations
 └─────────────────────────────────────┘
                  ▼
 ┌─────────────────────────────────────┐
-│       UTILITIES LAYER               │  ← Specialized processing
-│  RSS • PDF • QMD • TalkMap          │
-└─────────────────────────────────────┘
-                 ▼
-┌─────────────────────────────────────┐
 │       SERVICES LAYER                │  ← Business logic
 │  Cito • Metadata • Author • ROR     │
 └─────────────────────────────────────┘
         ▼                    ▼
-┌──────────────┐    ┌──────────────────┐
-│   DOMAIN     │    │ INFRASTRUCTURE   │
-│   MODELS     │    │   UTILITIES      │
-└──────────────┘    └──────────────────┘
+┌─────────────────────────────────────┐
+│      INFRASTRUCTURE LAYER           │  ← Reusable utilities
+│  filesystem, html_processor, logger │
+│  text, xml_parser, yaml_loader      │
+└─────────────────────────────────────┘
 ```
 
 ## Directory Structure
@@ -42,12 +41,9 @@ scripts/
 │   ├── filesystem.py        # File operations
 │   ├── html_processor.py    # HTML manipulation
 │   ├── logger.py            # Centralized logging
+│   ├── text.py              # Text utilities
+│   ├── xml_parser.py        # XML parsing
 │   └── yaml_loader.py       # YAML parsing
-│
-├── domain/                  # Business models
-│   ├── citation.py          # Citation, CitoProperty
-│   ├── content.py           # ContentMetadata, FeedItem
-│   └── post.py              # Post, Author, Affiliation
 │
 ├── services/                # Business logic
 │   ├── cito_service.py      # CiTO citation handling

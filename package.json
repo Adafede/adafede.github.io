@@ -2,6 +2,9 @@
   "name": "adafede-github-io",
   "type": "module",
   "version": "0.1.0",
+  "description": "Personal website of Adriano Rutz",
+  "author": "Adriano Rutz",
+  "license": "AGPL-3.0",
   "private": true,
   "scripts": {
     "dev": "npx @11ty/eleventy --serve",
