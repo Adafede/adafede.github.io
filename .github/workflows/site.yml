@@ -37,10 +37,16 @@ jobs:
 
       - run: npm run check:links
 
+      - name: Install Chromium for pa11y
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y chromium
+          echo "CHROMIUM_PATH=$(which chromium || which chromium-browser)" >> "$GITHUB_ENV"
+
       - run: |
           npx --yes @11ty/eleventy --serve --port=8080 &
           npx --yes wait-on http://localhost:8080/index.html --timeout=60000
-          npx --yes pa11y-ci@4 --config .pa11yci.json
+          PUPPETEER_EXECUTABLE_PATH="${CHROMIUM_PATH}" npx --yes pa11y-ci@4 --config .pa11yci.json
 
       - run: npm run check:rdfa
 
