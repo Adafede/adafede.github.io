@@ -58,11 +58,11 @@ def main() -> int:
 
     for source in sorted(SOURCE_DIR.glob("*.png")):
         stem = source.stem
+        size = dimensions(source)
         if converter:
             target = TARGET_DIR / f"{stem}.webp"
             # Keep enough pixels for a full-width, high-density display
             # without shipping the original multi-megapixel screenshot.
-            size = dimensions(source)
             width, height = map(int, size.split("x")) if size else (0, 0)
             longest_edge = max(width, height)
             scale = MAX_DIMENSION / longest_edge if longest_edge > MAX_DIMENSION else 1
@@ -86,7 +86,7 @@ def main() -> int:
                 ],
                 check=True,
             )
-        names.append((stem, dimensions(source)))
+        names.append((stem, size))
 
     if BLOG_DIR.exists():
         for post in sorted(BLOG_DIR.glob("*.md")):

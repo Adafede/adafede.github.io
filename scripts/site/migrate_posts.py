@@ -325,8 +325,9 @@ def build_frontmatter(
     license_obj = normalize_license(meta.get("license") or meta.get("creative_commons"))
     if license_obj:
         out["license"] = license_obj
-    if normalize_doi(meta.get("doi")):
-        out["doi"] = normalize_doi(meta.get("doi"))
+    doi_value = normalize_doi(meta.get("doi"))
+    if doi_value:
+        out["doi"] = doi_value
     if meta.get("updated"):
         out["updatedDate"] = meta["updated"]
     if meta.get("image"):
@@ -396,8 +397,9 @@ def build_event_frontmatter(
         out["description"] = str(meta["description"]).strip()
     if meta.get("url"):
         out["url"] = str(meta["url"])
-    if normalize_doi(meta.get("doi")):
-        out["doi"] = normalize_doi(meta.get("doi"))
+    doi_value = normalize_doi(meta.get("doi"))
+    if doi_value:
+        out["doi"] = doi_value
     if meta.get("image"):
         out["image"] = str(meta["image"])
     return {k: v for k, v in out.items() if v not in (None, [], {}, "") or k == "tags"}
