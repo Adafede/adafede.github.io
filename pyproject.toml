@@ -2,7 +2,7 @@
 name = "adafede-github-io"
 version = "0.0.1"
 description = "My personal website"
-requires-python = "==3.15.*"
+requires-python = "==3.14.*"
 dependencies = [
   "bs4>=0.0.2",
   "circlify>=0.15.1",
