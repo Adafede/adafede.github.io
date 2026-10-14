@@ -166,7 +166,49 @@ function truncateAtWord(text, limit) {
   return `${cut.replace(/[\s,;:.—-]+$/, '')}…`;
 }
 
+// --- superscript -----------------------------------------------------------
+
+/**
+ * Pandoc's `^2^` superscript, which markdown-it has no rule for.
+ *
+ * The Quarto sources write MultiMS^2^ and Pandoc renders it `<sup>2</sup>`.
+ * Without this rule markdown-it passes the carets through, and every title and
+ * abstract in that shape reads as "^2^" on the page.
+ *
+ * Anchored like Pandoc: no whitespace inside the pair and none immediately
+ * before it, so a bare "^" in prose, an exponent like "x^2" and a caret with
+ * nothing after it are all left as written.
+ */
+function superscript(mdi) {
+  mdi.inline.ruler.before('emphasis', 'superscript', (state, silent) => {
+    const start = state.pos;
+    const max = state.posMax;
+    if (state.src.charCodeAt(start) !== 0x5e /* ^ */) return false;
+    if (state.src[start + 1] === undefined || /\s/.test(state.src[start + 1])) return false;
+
+    let pos = start + 1;
+    while (pos < max) {
+      const ch = state.src[pos];
+      if (ch === '^') break;
+      if (/\s/.test(ch) || ch === undefined) return false;
+      pos++;
+    }
+    if (pos >= max || pos === start + 1) return false;
+
+    if (!silent) {
+      const token = state.push('superscript', '', 0);
+      token.content = state.src.slice(start + 1, pos);
+    }
+    state.pos = pos + 1;
+    return true;
+  });
+
+  mdi.renderer.rules.superscript = (tokens, idx) =>
+    `<sup>${escapeHtml(tokens[idx].content)}</sup>`;
+}
+
 const md = markdownIt({ html: true, linkify: false, typographer: false });
+superscript(md);
 
 // --- panel tabsets -----------------------------------------------------------
 
@@ -465,6 +507,7 @@ export default function (eleventyConfig) {
    * the content, and `linkify` turns bare URLs into links.
    */
   const inlineMd = markdownIt({ html: false, linkify: true, typographer: false });
+  superscript(inlineMd);
 
   /**
    * Link text that tells a screen-reader user nothing on its own.
