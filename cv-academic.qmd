@@ -43,10 +43,10 @@ cvmeta:
 
 ```{=latex}
 \newpage
-\vspace*{0.5cm}
+\vspace*{0.35cm}
 \begingroup
 \fontsize{10.5}{14}\selectfont
-\setlength{\parskip}{5pt}
+\setlength{\parskip}{6pt}
 ```
 
 ## Selected Publications
@@ -69,8 +69,8 @@ author(s).
 
 ```{=latex}
 \begingroup
-\fontsize{8.5}{10.3}\selectfont
-\setlength{\parskip}{1.5pt}
+\fontsize{9.2}{11.6}\selectfont
+\setlength{\parskip}{2.5pt}
 ```
 
 ```{python}

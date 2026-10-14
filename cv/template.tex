@@ -32,7 +32,7 @@
 }
 
 \setlength{\parindent}{0pt}
-\setlength{\parskip}{1.5pt}
+\setlength{\parskip}{1.25pt}
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{1pt}%
   \setlength{\parskip}{0pt}%
@@ -53,39 +53,33 @@
 
 \newcommand{\cvsection}[1]{%
   \par\addvspace{5pt}%
-  {\fontsize{9.5}{11}\selectfont\bfseries\color{accent}\MakeUppercase{#1}}%
-  \hspace{0.8em}{\color{rule}\leaders\hrule height 0.5pt\hfill}%
-  \par\vspace{1pt}%
+  {\fontsize{11}{13}\selectfont\rmfamily\bfseries\color{ink}#1}%
+  \hspace{0.7em}{\color{rule}\leaders\hrule height 0.45pt\hfill}%
+  \par\vspace{2pt}%
 }
 
 \newcommand{\cventry}[2]{%
-  \par\addvspace{2pt}\noindent
-  \textcolor{accent}{\rule{2pt}{8pt}}\hspace{5pt}%
+  \par\addvspace{1.5pt}\noindent
   {\small\bfseries\color{ink}#1}%
   \if\relax\detokenize{#2}\relax\else
-    \hfill{\footnotesize\color{muted}#2}%
+    \hfill{\footnotesize\color{muted}\textls[15]{#2}}%
   \fi
   \par
 }
 
 \newcommand{\cvmeta}[2]{%
-  \noindent{\scriptsize\bfseries\color{accent}\MakeUppercase{#1}}%
-  \hspace{0.8em}{\footnotesize\color{ink}#2}\par
+  \noindent\makebox[1.38in][l]{\scriptsize\bfseries\color{accent}\MakeUppercase{#1}}%
+  {\small\color{ink}#2}\par\vspace{1pt}
 }
 
 \begin{document}
 
-\noindent{\color{accent}\rule{\linewidth}{2.5pt}}\par
-\vspace{3pt}
-\noindent\colorbox{ink}{%
-  \parbox{\dimexpr\linewidth-2\fboxsep\relax}{%
-    \raggedright
-    {\fontsize{27}{30}\selectfont\rmfamily\bfseries\color{white}\textls[35]{\MakeUppercase{$cvauthor$}}\par}
-    \vspace{2pt}
-    {\small\color{accentlight}$cvprofession$}
-  }%
-}\par
-\vspace{4pt}
+\noindent{\color{accent}\rule{2.2cm}{1.5pt}}\par
+\vspace{5pt}
+{\fontsize{30}{34}\selectfont\rmfamily\bfseries\color{ink}$cvauthor$\par}
+\vspace{1pt}
+{\normalsize\color{accent}$cvprofession$\par}
+\vspace{5pt}
 
 $for(cvmeta)$
 \cvmeta{$cvmeta.title$}{$cvmeta.left$}
@@ -97,7 +91,7 @@ $endfor$
   \href{mailto:$cvcontact.email$}{$cvcontact.email$}%
   $if(cvcontact.location)$\hspace{0.7em}\textcolor{rule}{|}\hspace{0.7em}$cvcontact.location$$endif$%
 }\par
-\vspace{2pt}
+\vspace{3pt}
 
 $body$
 
