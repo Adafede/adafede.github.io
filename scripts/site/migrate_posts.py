@@ -99,16 +99,15 @@ def collect_entities() -> tuple[dict[str, Metadata], dict[str, Metadata]]:
     authors: dict[str, Metadata] = {}
     affiliations: dict[str, Metadata] = {}
 
-    for path in sorted((ENTITIES_DIR / "authors").glob("*.yml")):
-        for entry in load_yaml(path).get("author") or []:
-            if entry.get("id"):
-                authors.setdefault(entry["id"], entry)
-
-    for path in sorted((ENTITIES_DIR / "affiliations").glob("*.yml")):
-        for entry in load_yaml(path).get("affiliations") or []:
-            if entry.get("id"):
-                # First definition wins; a few ids are declared twice upstream.
-                affiliations.setdefault(entry["id"], entry)
+    # Process all entity files in a single pass for efficiency
+    for entity_type, key in [("authors", "author"), ("affiliations", "affiliations")]:
+        entity_dir = ENTITIES_DIR / entity_type
+        target = authors if entity_type == "authors" else affiliations
+        for path in sorted(entity_dir.glob("*.yml")):
+            for entry in load_yaml(path).get(key) or []:
+                if entry.get("id"):
+                    # First definition wins; a few ids are declared twice upstream.
+                    target.setdefault(entry["id"], entry)
 
     return authors, affiliations
 
