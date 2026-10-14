@@ -1516,18 +1516,26 @@ figcaption {
 }
 
 .author__id {
+  display: inline-block;
+  min-block-size: 1.5rem;
   font-size: 0.68rem;
   font-weight: 400;
   text-decoration: none;
   border: 1px solid var(--border-strong);
   border-radius: var(--radius-pill);
-  padding: 0 0.4em;
+  padding: 0.1rem 0.4em;
   color: var(--text-muted);
 }
 
 .author__affiliation {
   color: var(--text-muted);
   font-size: var(--step--1);
+}
+
+.author__affiliation a {
+  display: inline-block;
+  min-block-size: 1.5rem;
+  padding-block: 0.25rem;
 }
 
 .article__note {
@@ -1831,6 +1839,12 @@ h3:hover > .heading-anchor,
 
 .button:visited {
   color: var(--brand-ink);
+}
+
+.cv-header__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
 }
 
 @media (hover: hover) {

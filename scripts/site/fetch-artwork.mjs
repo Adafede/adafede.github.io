@@ -1,11 +1,11 @@
 /**
- * Caches the article and varia cover artwork locally.
+ * Caches article and varia artwork locally.
  *
  * Those images are declared in the Quarto sources as absolute URLs on
  * Wikimedia, GitHub raw, arXiv's CDN and publisher sites. Hotlinking them means
- * every visitor to the articles page triggers a request to four unrelated
- * third parties, one of which serves a 690 KB GIF, and Lighthouse rightly
- * dings the page for third-party cookies.
+ * page loads trigger requests to unrelated third parties, including one source
+ * serving a 690 KB GIF, and Lighthouse rightly dings the pages for third-party
+ * cookies.
  *
  * So the files are fetched once at build time into public/images/artwork/ and
  * the templates prefer the local copy. Falls back to the remote URL when the
@@ -99,7 +99,7 @@ for (const file of contentFiles) {
   const image = readFileSync(file, 'utf-8').match(/^image:\s*"?([^"\n]+)"?\s*$/m)?.[1];
   if (image && CACHEABLE.test(image)) {
     urls.add(image);
-    if (file.includes('/articles/')) thumbnailUrls.add(image);
+    if (file.includes('/articles/') || file.includes('/varia/')) thumbnailUrls.add(image);
   }
 }
 
@@ -131,8 +131,14 @@ for (const url of urls) {
   const extension = extname(new URL(url).pathname) || '.img';
   const cachedName = manifest[url]?.replace(/^\/images\/artwork\//, '');
   const cached = cachedName ? join(OUT, cachedName) : null;
-  const needsSvgThumb = extension === '.svg' && thumbnailUrls.has(url);
-  const thumbnailName = `${stem}-thumb.webp`;
+  const needsRasterThumb = thumbnailUrls.has(url) && (
+    extension === '.png'
+    || (
+      extension === '.svg'
+      && (!cached || !existsSync(cached) || statSync(cached).size >= 100_000)
+    )
+  );
+  const thumbnailName = `${stem}-thumb-320-fit.webp`;
   const cachedThumbnailName = thumbnails[url]?.replace(/^\/images\/artwork\//, '');
   const hasThumbnail = cachedThumbnailName === thumbnailName
     && existsSync(join(OUT, thumbnailName));
@@ -142,15 +148,15 @@ for (const url of urls) {
     cached
     && existsSync(cached)
     && (extension !== '.gif' || cachedName === `${stem}-thumb.webp`)
-    && (!needsSvgThumb || hasThumbnail)
+    && (!needsRasterThumb || hasThumbnail)
   ) {
     continue;
   }
-  if (needsSvgThumb && !hasThumbnail) delete thumbnails[url];
+  if (needsRasterThumb && !hasThumbnail) delete thumbnails[url];
   if (
     cached
     && existsSync(cached)
-    && (extname(cached) === '.gif' || needsSvgThumb)
+    && (extname(cached) === '.gif' || needsRasterThumb)
   ) {
     buffer = readFileSync(cached);
   } else {
@@ -170,7 +176,7 @@ for (const url of urls) {
   try {
     if (name.endsWith('.svg')) {
       buffer = Buffer.from(keepSvg(buffer.toString('utf-8')).text, 'utf-8');
-      if (needsSvgThumb) {
+      if (needsRasterThumb) {
         const temporaryDirectory = mkdtempSync(join(tmpdir(), 'site-artwork-'));
         const source = join(temporaryDirectory, `${stem}.svg`);
         const thumbnail = join(OUT, thumbnailName);
@@ -185,13 +191,35 @@ for (const url of urls) {
           if (result.status === 0) {
             thumbnails[url] = `/images/artwork/${thumbnailName}`;
           } else if (result.status !== 2) {
-            throw new Error(`SVG thumbnail generation failed: ${result.stderr || result.status}`);
+            throw new Error(`Artwork thumbnail generation failed: ${result.stderr || result.status}`);
           } else if (buffer.length >= 100_000) {
             console.log(`  = kept original SVG (rsvg-convert unavailable): ${url}`);
           }
         } finally {
           rmSync(temporaryDirectory, { recursive: true, force: true });
         }
+      }
+    } else if (extension === '.png' && needsRasterThumb) {
+      const temporaryDirectory = mkdtempSync(join(tmpdir(), 'site-artwork-'));
+      const source = join(temporaryDirectory, `${stem}.png`);
+      const thumbnail = join(OUT, thumbnailName);
+      try {
+        writeFileSync(source, buffer);
+        const result = spawnSync(
+          'uv',
+          ['run', 'python', 'scripts/site/optimize_artwork.py', source, thumbnail],
+          { cwd: ROOT, encoding: 'utf-8' },
+        );
+        if (result.error) throw result.error;
+        if (result.status === 0) {
+          thumbnails[url] = `/images/artwork/${thumbnailName}`;
+        } else if (result.status !== 2) {
+          throw new Error(`Artwork thumbnail generation failed: ${result.stderr || result.status}`);
+        } else {
+          console.log(`  = kept original PNG (no smaller WebP preview): ${url}`);
+        }
+      } finally {
+        rmSync(temporaryDirectory, { recursive: true, force: true });
       }
     } else if (extension === '.gif') {
       const temporaryDirectory = mkdtempSync(join(tmpdir(), 'site-artwork-'));

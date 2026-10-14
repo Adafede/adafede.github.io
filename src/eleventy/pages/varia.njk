@@ -12,6 +12,7 @@ permalink: /varia.html
 {% include 'tag-filter.njk' %}
 
 {% for group in varia | groupByVaria %}
+{% set isFirstGroup = loop.first %}
 <section class="listing-section" data-filter-group aria-labelledby="varia-{{ group.id }}">
   <h2 id="varia-{{ group.id }}">{{ group.label }} <span class="listing-section__count">{{ group.items.length }}</span></h2>
   <ul class="entry-list entry-list--grid">
@@ -25,7 +26,9 @@ permalink: /varia.html
          the frame's shape has to be letterboxed into it — which is what made
          the square and tall logos read as images that failed to load. #}
       <div class="entry__media">
-        <img class="entry__image" src="{{ card.data.image | artwork }}" loading="lazy" decoding="async" fetchpriority="low"
+        <img class="entry__image" src="{{ card.data.image | artworkThumb }}"
+          loading="{% if isFirstGroup and loop.first %}eager{% else %}lazy{% endif %}" decoding="async"
+          fetchpriority="{% if isFirstGroup and loop.first %}high{% else %}low{% endif %}"
           width="{{ artworkSize.width }}" height="{{ artworkSize.height }}"
           {% if card.data.imageAlt %}alt="{{ card.data.imageAlt }}"{% else %}alt=""{% endif %} />
       </div>

@@ -53,3 +53,5 @@ src/eleventy/_includes/talk-map.njk
 # scripts/site/build_expertise.py from the committed scores in
 # _cache/expertise.json. The picture is derived.
 src/eleventy/_includes/expertise.njk
+
+graphify-out/

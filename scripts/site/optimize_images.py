@@ -23,6 +23,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 SOURCE_DIR = PROJECT_ROOT / "images" / "screenshots"
 TARGET_DIR = PROJECT_ROOT / "public" / "images" / "screenshots"
 BLOG_DIR = PROJECT_ROOT / "src" / "content" / "posts"
+MAX_DIMENSION = 1400
 
 IMAGE_RE = re.compile(
     r"!\[(?P<alt>[^\]]*)\]\(/images/screenshots/(?P<name>[^)]+)\.png\)",
@@ -59,7 +60,17 @@ def main() -> int:
         stem = source.stem
         if converter:
             target = TARGET_DIR / f"{stem}.webp"
-            # -m6 is the slowest/best method; these run once per sync.
+            # Keep enough pixels for a full-width, high-density display
+            # without shipping the original multi-megapixel screenshot.
+            size = dimensions(source)
+            width, height = map(int, size.split("x")) if size else (0, 0)
+            longest_edge = max(width, height)
+            scale = MAX_DIMENSION / longest_edge if longest_edge > MAX_DIMENSION else 1
+            resize = (
+                ["-resize", str(round(width * scale)), str(round(height * scale))]
+                if scale < 1
+                else []
+            )
             subprocess.run(
                 [
                     converter,
@@ -68,6 +79,7 @@ def main() -> int:
                     "82",
                     "-m",
                     "6",
+                    *resize,
                     str(source),
                     "-o",
                     str(target),

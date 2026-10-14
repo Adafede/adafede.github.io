@@ -1,4 +1,4 @@
-"""Create compact WebP previews for artwork displayed in article cards."""
+"""Create compact WebP previews for artwork displayed in article and Varia cards."""
 
 from __future__ import annotations
 
@@ -10,7 +10,7 @@ from pathlib import Path
 
 from PIL import Image
 
-MAX_SIZE = (400, 400)
+MAX_SIZE = (320, 320)
 SVG_MIN_SIZE = 100_000
 
 
@@ -34,22 +34,19 @@ def encode_webp(png: Path, target: Path) -> None:
 
 
 def optimize_artwork(source: Path, target: Path) -> bool:
-    """Downsample static GIFs and large SVGs; preserve animated GIFs."""
+    """Downsample static raster artwork and large SVGs; preserve animation."""
     cwebp = shutil.which("cwebp")
     if not cwebp:
         return False
 
     with tempfile.TemporaryDirectory() as directory:
         png = Path(directory) / "artwork.png"
-        if source.suffix.lower() == ".gif":
+        if source.suffix.lower() in {".gif", ".png"}:
             with Image.open(source) as image:
-                if image.format != "GIF":
+                expected_format = source.suffix[1:].upper()
+                if image.format != expected_format:
                     return False
-                try:
-                    image.seek(1)
-                except EOFError:
-                    pass
-                else:
+                if getattr(image, "n_frames", 1) > 1:
                     return False
                 image.seek(0)
                 frame = image.convert("RGBA")
@@ -72,7 +69,14 @@ def optimize_artwork(source: Path, target: Path) -> bool:
             )
         else:
             return False
+        with Image.open(png) as image:
+            preview = image.convert("RGBA")
+        preview.thumbnail(MAX_SIZE, Image.Resampling.LANCZOS)
+        preview.save(png)
         encode_webp(png, target)
+    if target.stat().st_size >= source.stat().st_size:
+        target.unlink()
+        return False
     return True
 
 

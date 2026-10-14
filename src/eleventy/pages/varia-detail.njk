@@ -26,7 +26,7 @@ eleventyComputed:
 
   <header class="event-detail__header">
     {% if item.data.image %}
-    <img class="event-detail__image" src="{{ item.data.image | artwork }}" loading="lazy" decoding="async" width="256" height="160"
+    <img class="event-detail__image" src="{{ item.data.image | artworkThumb }}" loading="eager" decoding="async" fetchpriority="high" width="256" height="160"
       {% if item.data.imageAlt %}alt="{{ item.data.imageAlt }}"{% else %}alt=""{% endif %} />
     {% endif %}
     <h1>{{ item.data.title }}</h1>
