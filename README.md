@@ -58,3 +58,8 @@ Pages. PDFs render there because the deploy job installs TeX Live and Quarto.
 Eleventy HTML side re-asserts the same relations as RDFa (`cito:usesMethodIn`,
 `cito:citesAsRecommendedReading`, etc.), so the published HTML and the PDFs
 carry consistent citation metadata.
+
+## License
+
+This project is licensed under the GNU Affero General Public License version 3
+(AGPL-3.0). See [LICENSE](LICENSE) for the full license text.

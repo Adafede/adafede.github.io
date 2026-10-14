@@ -17,24 +17,47 @@ categories:
   - Monoterpene Indole Alkaloids
   - Spectral Library
   - Tandem Mass Spectrometry
-  # authors:
-  #   - name: Adriano Rutz
-  #     orcid: 0000-0003-0443-9902
-  #     number: 2
-  #     affiliations:
-  #       - ref: imsb
-  #     equal-contributor: true
-  # affiliations:
-  #   - id: imsb
-  #     number: 1
-  #     name: ETH Zürich
-  #     department: Institute for Molecular Systems Biology
-  #     group: Zamboni
-  #     address: Otto-Stern-Weg, 3
-  #     city: Zürich
-  #     country: Switzerland
-  #     postal-code: 8093
-  #     ror: https://ror.org/03j5gm982
+  # metadata-files:
+  #   - ../../_includes/entities/authors/TODO
+  #   - ../../_includes/entities/authors/TODO
+  #   - ../../_includes/entities/authors/TODO
+  #   - ../../_includes/entities/authors/TODO
+  #   - ../../_includes/entities/authors/TODO
+  #   - ../../_includes/entities/authors/TODO
+  #   - ../../_includes/entities/authors/TODO
+  #   - ../../_includes/entities/authors/TODO
+  #   - ../../_includes/entities/authors/TODO
+  #   - ../../_includes/entities/authors/TODO
+  #   - ../../_includes/entities/authors/TODO
+  #   - ../../_includes/entities/authors/TODO
+  #   - ../../_includes/entities/authors/TODO
+  #   - ../../_includes/entities/authors/TODO
+  #   - ../../_includes/entities/authors/TODO
+  #   - ../../_includes/entities/authors/TODO
+  #   - ../../_includes/entities/authors/TODO
+  #   - ../../_includes/entities/authors/TODO
+  #   - ../../_includes/entities/authors/TODO
+  #   - ../../_includes/entities/authors/TODO
+  #   - ../../_includes/entities/authors/TODO
+  #   - ../../_includes/entities/authors/TODO
+  #   - ../../_includes/entities/authors/TODO
+  #   - ../../_includes/entities/authors/TODO
+  #   - ../../_includes/entities/authors/TODO
+  #   - ../../_includes/entities/affiliations/TODO
+  #   - ../../_includes/entities/affiliations/TODO
+  #   - ../../_includes/entities/affiliations/TODO
+  #   - ../../_includes/entities/affiliations/TODO
+  #   - ../../_includes/entities/affiliations/TODO
+  #   - ../../_includes/entities/affiliations/TODO
+  #   - ../../_includes/entities/affiliations/TODO
+  #   - ../../_includes/entities/affiliations/TODO
+  #   - ../../_includes/entities/affiliations/TODO
+  #   - ../../_includes/entities/affiliations/TODO
+  #   - ../../_includes/entities/affiliations/TODO
+  #   - ../../_includes/entities/affiliations/TODO
+  #   - ../../_includes/entities/affiliations/TODO
+  #   - ../../_includes/entities/affiliations/TODO
+  #   - ../../_includes/entities/affiliations/TODO
 abstract: >
   With over 3000 representatives, the monoterpene indole alkaloids (MIAs) class
   is among the most diverse families of plant natural products. The MS/MS
