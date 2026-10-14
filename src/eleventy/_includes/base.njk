@@ -160,7 +160,11 @@
             try { url = new URL(h, location.href); } catch (e) { return; }
             if (url.protocol.startsWith('http') && url.hostname !== location.hostname) {
               a.setAttribute('target', '_blank');
-              a.setAttribute('rel', 'noopener noreferrer');
+              const rel = a.getAttribute('rel') || '';
+              const parts = rel.split(/\s+/).filter(Boolean);
+              if (!parts.includes('noopener')) parts.push('noopener');
+              if (!parts.includes('noreferrer')) parts.push('noreferrer');
+              a.setAttribute('rel', parts.join(' '));
             }
           });
         }
