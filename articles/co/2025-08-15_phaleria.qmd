@@ -8,14 +8,21 @@ date: 2025-08-15
 doi: 10.1038/s41467-025-62689-8
 qid: Q135917754
 url: <https://doi.org/10.1038/s41467-025-62689-8>
-# categories:
-#   - Bioactivity
-#   - Charged Aerosol Detector
-#   - Liquid Chromatography-Tandem Mass Spectrometry
-#   - Natural Extracts
-#   - Reverse Pharmacology
-# abstract: |
-#  TODO
+categories:
+  - Bioactivity
+  - Charged Aerosol Detector
+  - Liquid Chromatography-Tandem Mass Spectrometry
+  - Natural Extracts
+  - Reverse Pharmacology
+abstract: |
+ Natural remedies are used as standalone treatments or complementary to modern medicine to control type 2 diabetes.
+ In Palau, the traditional leaf decoction of *Phaleria nisidai* (PNe) is selected to treat hyperglycemia and its efficacy has been supported by a small clinical trial.
+ As part of a reverse pharmacology approach, we here investigated the anti-diabetic potential of PNe and its bioactive compounds to alleviate insulin resistance in diet-induced obese, male mice.
+ Dietary supplementation with PNe improves insulin sensitivity and promotes glucose uptake into adipose depots.
+ In vitro, PNe triggers glucose disposal into murine and human adipocytes by upregulating *Glut1* expression through PKC-ERK1/2 signaling.
+ To identify active constituents in PNe, we conducted bioactivity-guided fractionations and deciphered genkwanin flavone glycosides as bioactive principles.
+ Moreover, we demonstrate that the aglycone genkwanin (GE) improves insulin resistance to a comparable extent to the anti-diabetic drug, metformin.
+ Our findings present GE as promising glucoregulatory phytochemical that facilitates glucose uptake into adipocytes, thereby reducing systemic glucose load and enhancing insulin sensitivity.
 nocite: |
   @Horvath2025
 ---
