@@ -7,10 +7,23 @@ date: 2021-06-16
 doi: 10.3390/ijms22126467
 qid: Q107270365
 url: <https://doi.org/10.3390/ijms22126467>
-# categories:
-#   - TODO
-# abstract: |
-#  TODO
+categories:
+  - Drugs
+  - Liquid Chromatography-Tandem Mass Spectrometry
+abstract: |
+ Resistance in clear cell renal cell carcinoma (ccRCC) against sunitinib is a multifaceted process encompassing numerous molecular aberrations.
+ This induces clinical complications, reducing the treatment success.
+ Understanding these aberrations helps us to select an adapted treatment strategy that surpasses resistance mechanisms, reverting the treatment insensitivity.
+ In this regard, we investigated the dominant mechanisms of resistance to sunitinib and validated an optimized multidrug combination to overcome this resistance.
+ Human ccRCC cells were exposed to single or chronic treatment with sunitinib to obtain three resistant clones.
+ Upon manifestation of sunitinib resistance, morphometric changes in the cells were observed.
+ At the molecular level, the production of cell membrane and extracellular matrix components, chemotaxis, and cell cycle progression were dysregulated.
+ Molecules enforcing the cell cycle progression, i.e., cyclin A, B1, and E, were upregulated.
+ Mass spectrometry analysis revealed the intra- and extracellular presence of *N*-desethyl sunitinib, the active metabolite.
+ Lysosomal sequestration of sunitinib was confirmed.
+ After treatment with a synergistic optimized drug combination, the cell metabolic activity in Caki-1-sunitinib-resistant cells and 3D heterotypic co-cultures was reduced by >80%, remaining inactive in non-cancerous cells.
+ These results demonstrate geno- and phenotypic changes in response to sunitinib treatment upon resistance induction.
+ Mimicking resistance in the laboratory served as a platform to study drug responses.
 nocite: |
   @Rausch2021a
 ---
