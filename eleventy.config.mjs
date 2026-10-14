@@ -17,6 +17,7 @@ import markdownIt from 'markdown-it';
 import { existsSync, readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { elementText, firstElement, htmlText as extractHtmlText } from './scripts/site/html.mjs';
 import { parseBib, renderReference, inlineCitation, parseAuthors, detex } from './src/lib/bib.mjs';
 import siteContent from './src/eleventy/_data/sitecontent.js';
 import { buildJsonFeed } from './src/lib/jsonFeed.mjs';
@@ -490,10 +491,7 @@ export default function (eleventyConfig) {
 
   /** The text of a fragment of HTML, tags out. */
   function stripTags(html) {
-    return String(html ?? '')
-      .replace(/<[^>]+>/g, ' ')
-      .replace(/\s+/g, ' ')
-      .trim();
+    return extractHtmlText(html, { separateTags: true });
   }
 
   /**
@@ -504,22 +502,19 @@ export default function (eleventyConfig) {
    * gap inside the parentheses. This one concatenates the text nodes as-is.
    */
   function htmlText(html) {
-    return String(html ?? '')
-      .replace(/<[^>]+>/g, '')
-      .replace(/\s+/g, ' ')
-      .trim();
+    return extractHtmlText(html);
   }
 
   /** The text of the first paragraph of a rendered body, or ''. */
   function firstParagraphText(html) {
-    const m = String(html ?? '').match(/<p[^>]*>([\s\S]*?)<\/p>/i);
-    return m ? htmlText(m[1]) : '';
+    return elementText(html, 'p');
   }
 
   /** The `src` of the first image in a rendered body, or ''. */
   function firstImageSrc(html) {
-    const m = String(html ?? '').match(/<img\b[^>]*?\bsrc="([^"]+)"/i);
-    return m ? m[1] : '';
+    return firstElement(html, 'img')?.attrs
+      .find(({ name }) => name === 'src')
+      ?.value ?? '';
   }
 
   /**
@@ -986,10 +981,11 @@ export default function (eleventyConfig) {
   });
 
   eleventyConfig.addFilter('plainText', (value) => {
-    const text = String(value ?? '')
-      .replace(/<[^>]+>/g, '') // Markdown autolinks and angle brackets
+    const markdown = String(value ?? '')
+      .replace(/<https?:\/\/[^>\s]+>/gi, ' ')
       .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1') // links
-      .replace(/[*_`]/g, '') // emphasis and code markers
+      .replace(/[*_`]/g, ''); // emphasis and code markers
+    const text = extractHtmlText(markdown)
       // A description is prose, not code: quotes and apostrophes carry no
       // meaning here, and keeping them means the attribute is escaped twice
       // (once by eleventyComputed, once by the content attribute) and the

@@ -17,7 +17,7 @@ def test_downsamples_single_frame_gif_to_webp(tmp_path):
     assert optimize_artwork(source, target)
     with Image.open(target) as image:
         assert image.format == "WEBP"
-        assert image.size == (400, 200)
+        assert image.size == (320, 160)
 
 
 def test_keeps_animated_gif_unchanged(tmp_path, monkeypatch):
@@ -47,4 +47,4 @@ def test_rasterizes_large_svg_preview(tmp_path):
     assert optimize_artwork(source, target)
     with Image.open(target) as image:
         assert image.format == "WEBP"
-        assert image.size == (400, 225)
+        assert image.size == (320, 180)

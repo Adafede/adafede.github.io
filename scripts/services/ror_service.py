@@ -10,6 +10,7 @@ from scripts.infrastructure import (
     YamlLoader,
     get_logger,
 )
+from scripts.url_utils import url_has_host
 
 logger = get_logger(__name__)
 
@@ -198,7 +199,7 @@ class RorService:
             existing_link = aff_elem.find(
                 "a",
                 class_="uri",
-                href=lambda h: h is not None and "ror.org" in h,
+                href=lambda href: url_has_host(href, "ror.org"),
             )
             if existing_link:
                 continue

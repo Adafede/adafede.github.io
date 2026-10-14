@@ -21,6 +21,7 @@
  */
 import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
+import { htmlText, removeScriptAndStyle } from './html.mjs';
 
 const roots = process.argv.slice(2);
 if (!roots.length) {
@@ -41,16 +42,9 @@ function htmlFiles(dir) {
   return out;
 }
 
-/** The document, with the stylesheet, the inline <style> and scripts removed. */
-function documentOf(html) {
-  return html
-    .replace(/<style[\s\S]*?<\/style>/g, '')
-    .replace(/<script[\s\S]*?<\/script>/g, '');
-}
-
 function check(html) {
   const problems = [];
-  const doc = documentOf(html);
+  const doc = removeScriptAndStyle(html);
 
   const lang = doc.match(/<html\b[^>]*\blang="([^"]*)"/);
   if (!lang || !lang[1].trim()) problems.push('no lang on <html>');
@@ -61,7 +55,7 @@ function check(html) {
   // Checked against the link's own text rather than a class, so the guarantee
   // holds however the label happens to be marked up.
   for (const m of doc.matchAll(/<a\b([^>]*?)href="[^"]*\.pdf(?:#[^"]*)?"([^>]*)>([\s\S]*?)<\/a>/gi)) {
-    const label = m[3].replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+    const label = htmlText(m[3], { separateTags: true });
     if (!/\bpdf\b/i.test(label)) {
       problems.push(`PDF link whose text does not say PDF: "${label || '(empty)'}"`);
     }
@@ -82,8 +76,7 @@ function check(html) {
   const h1 = main.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/);
   if (docTitle && h1) {
     const norm = (value) =>
-      value
-        .replace(/<[^>]+>/g, ' ')
+      htmlText(value)
         .replace(/\s+—\s*[^\s—]+$/, '')
         .replace(/[\s\u00a0]+/g, ' ')
         .trim()

@@ -12,6 +12,7 @@ root_dir = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(root_dir))
 
 from scripts.infrastructure import FileSystem, HtmlProcessor, get_logger
+from scripts.url_utils import url_has_host, url_scheme
 
 logger = get_logger(__name__)
 
@@ -199,15 +200,15 @@ class AccessibilityFixer:
 
         # Try to get from href
         href = link.get("href", "")
-        if "mailto:" in href:
+        if url_scheme(href) == "mailto":
             return "Email"
-        elif "linkedin.com" in href:
+        elif url_has_host(href, "linkedin.com"):
             return "LinkedIn profile"
-        elif "github.com" in href:
+        elif url_has_host(href, "github.com"):
             return "GitHub profile"
-        elif "orcid.org" in href:
+        elif url_has_host(href, "orcid.org"):
             return "ORCID profile"
-        elif "twitter.com" in href or "x.com" in href:
+        elif url_has_host(href, "twitter.com", "x.com"):
             return "Twitter/X profile"
 
         return ""
@@ -300,15 +301,15 @@ class AccessibilityFixer:
         src = iframe.get("src", "")
 
         # Check for common embed patterns
-        if "wikidata-query" in src or "scholia" in src:
+        if url_has_host(src, "wikidata.org", "scholia.toolforge.org", "scholia.wiki"):
             return "Interactive data visualization from Wikidata"
-        elif "youtube.com" in src or "youtu.be" in src:
+        elif url_has_host(src, "youtube.com", "youtu.be"):
             return "Embedded YouTube video"
-        elif "vimeo.com" in src:
+        elif url_has_host(src, "vimeo.com"):
             return "Embedded Vimeo video"
-        elif "twitter.com" in src or "x.com" in src:
+        elif url_has_host(src, "twitter.com", "x.com"):
             return "Embedded Twitter/X content"
-        elif "maps.google" in src or "openstreetmap" in src:
+        elif url_has_host(src, "maps.google.com", "openstreetmap.org"):
             return "Embedded map"
 
         # Try to infer from parent headings

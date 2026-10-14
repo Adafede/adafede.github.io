@@ -10,6 +10,7 @@ from scripts.infrastructure import (
     YamlLoader,
     get_logger,
 )
+from scripts.url_utils import url_has_host
 
 logger = get_logger(__name__)
 
@@ -294,7 +295,10 @@ class AuthorService:
         self._remove_existing_orcid_icons(element)
 
         # Check if there's already an ORCID link
-        existing_link = element.find("a", href=lambda h: h and "orcid.org" in h)
+        existing_link = element.find(
+            "a",
+            href=lambda href: url_has_host(href, "orcid.org"),
+        )
 
         orcid_img = (
             f'<img src="{self.ORCID_SVG_URL}" alt="ORCID" '
@@ -347,7 +351,11 @@ class AuthorService:
         # Check if already has Scholia link
         existing_link = element.find(
             "a",
-            href=lambda h: h and "scholia.toolforge.org" in h,
+            href=lambda href: url_has_host(
+                href,
+                "scholia.toolforge.org",
+                "scholia.wiki",
+            ),
         )
         if existing_link:
             return False
