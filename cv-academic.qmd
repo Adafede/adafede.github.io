@@ -1,0 +1,89 @@
+---
+title: "Academic Curriculum Vitæ"
+academic-publications:
+  - articles/first/2025-09-26_mite.qmd
+  - articles/first/2025-09-15_scalability.qmd
+  - articles/shared/2025-04-28-miadb2.qmd
+  - articles/shared/2025-02-28_isf.qmd
+  - articles/first/2022-05-26_lotus.qmd
+execute:
+  freeze: false
+format:
+  pdf:
+    filters:
+      - cv/styles.lua
+    keep-tex: true
+    template: cv/template.tex
+cvauthor: Adriano Rutz
+cvprofession: Pharmaceutical Scientist
+cvcolor: 0C6E73
+cvcontact:
+  email: adriano.rutz@ik.me
+  website: https://adafede.github.io
+  phone: "+41 76 521 45 40"
+  location: Zürich, Switzerland
+cvmeta:
+  - title: Current position
+    left: Postdoctoral Researcher, ETH Zürich
+  - title: Areas of expertise
+    left: Mass Spectrometry, Metabolomics, Natural Products, Open Science
+  - title: Languages
+    left: French (C2), English (C1), German (C1), Italian (C1)
+---
+
+{{< include /cv/_bio.qmd >}}
+
+{{< include /cv/_experience.qmd >}}
+
+{{< include /cv/_education.qmd >}}
+
+{{< include /cv/_awards.qmd >}}
+
+{{< include /cv/_sports.qmd >}}
+
+```{=latex}
+\newpage
+\vspace*{0.5cm}
+\begingroup
+\fontsize{10.5}{14}\selectfont
+\setlength{\parskip}{5pt}
+```
+
+## Selected Publications
+
+```{python}
+#| label: cv-selected-publications
+#| output: asis
+#| echo: false
+
+from IPython.display import Markdown, display
+from scripts.site.academic_cv import publication_list
+
+display(Markdown(publication_list()))
+```
+
+$\dagger$ Shared first authors. $\ddagger$ Last author. \* Corresponding
+author(s).
+
+## Talks and Workshops
+
+```{=latex}
+\begingroup
+\fontsize{8.5}{10.3}\selectfont
+\setlength{\parskip}{1.5pt}
+```
+
+```{python}
+#| label: cv-talks-and-workshops
+#| output: asis
+#| echo: false
+
+from IPython.display import Markdown, display
+from scripts.site.academic_cv import talk_list
+
+display(Markdown(talk_list()))
+```
+
+```{=latex}
+\endgroup
+```

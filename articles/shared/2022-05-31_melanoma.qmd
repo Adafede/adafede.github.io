@@ -5,6 +5,9 @@ type: article
 venue: Journal of Natural Products
 date: 2022-05-31
 doi: 10.1021/acs.jnatprod.2c00146
+cv-equal-contributors:
+  - Tanja Hell
+  - Adriano Rutz
 qid: Q112189007
 image: https://pharma.unibas.ch/fileadmin/user_upload/pharma/Events_News/News/Publications/Hell_T_Publication.png
 image-alt: Article's Graphical Abstract

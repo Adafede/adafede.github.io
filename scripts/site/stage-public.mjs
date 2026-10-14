@@ -36,7 +36,7 @@ const FILE_SOURCES = ['_headers', 'humans.txt', 'llm.txt', 'llms.txt', 'llms-ful
  */
 const PDF_GLOBS = [
   { from: '_site/posts', to: 'posts' },
-  { from: '_site', to: '.', files: ['cv.pdf'] },
+  { from: '_site', to: '.', files: ['cv.pdf', 'cv-academic.pdf'] },
 ];
 
 mkdirSync(PUBLIC, { recursive: true });

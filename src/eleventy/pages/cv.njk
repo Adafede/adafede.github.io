@@ -67,9 +67,14 @@ permalink: /cv.html
        </dl>
      </address>
      {% endif %}
-     {% if site.hasCvPdf %}
+     {% if site.hasCvPdf or site.hasAcademicCvPdf %}
      <p class="cv-header__actions">
+       {% if site.hasCvPdf %}
        <a class="button" href="/cv.pdf" type="application/pdf" target="_blank" rel="noopener">Download the CV as PDF</a>
+       {% endif %}
+       {% if site.hasAcademicCvPdf %}
+       <a class="button" href="/cv-academic.pdf" type="application/pdf" target="_blank" rel="noopener">Download the academic CV PDF</a>
+       {% endif %}
      </p>
      {% endif %}
    </header>

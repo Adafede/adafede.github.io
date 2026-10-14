@@ -1,2 +1,4 @@
-[lint.rules]
-citation-nonbreaking-space = false
+#:schema https://panache.bz/panache.schema.json
+
+[lint]
+ignore = ["citation-nonbreaking-space"]

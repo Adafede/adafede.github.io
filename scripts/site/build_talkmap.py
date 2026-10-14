@@ -37,6 +37,7 @@ import sys
 from collections import Counter
 from html import escape
 from pathlib import Path
+from typing import Any
 
 ROOT = Path(__file__).resolve().parents[2]
 CONTENT = ROOT / "src" / "content" / "talks"
@@ -51,7 +52,7 @@ LON_MIN, LON_MAX = -11.0, 24.0
 LAT_MIN, LAT_MAX = 35.0, 56.0
 
 
-def parse_frontmatter(raw: str) -> dict:
+def parse_frontmatter(raw: str) -> dict[str, Any]:
     """Minimal YAML frontmatter reader.
 
     The talk files only use flat scalars and inline lists, so pulling in a YAML
@@ -62,7 +63,7 @@ def parse_frontmatter(raw: str) -> dict:
     end = raw.find("\n---", 3)
     if end == -1:
         return {}
-    data: dict = {}
+    data: dict[str, Any] = {}
     for line in raw[3:end].splitlines():
         if not line.strip() or line.startswith((" ", "\t", "-")):
             continue
@@ -123,7 +124,7 @@ def main() -> int:
     )
 
     # location -> list of talks, so a city visited twice gets one marker.
-    places: dict[str, list[dict]] = {}
+    places: dict[str, list[dict[str, Any]]] = {}
     missing: Counter[str] = Counter()
     for source in sorted(CONTENT.glob("*.md")):
         meta = parse_frontmatter(source.read_text(encoding="utf-8"))
@@ -163,7 +164,7 @@ def main() -> int:
     # labels overlap and the dots read as one blob. One marker per country,
     # placed at the mean of its talk coordinates and scaled by how many talks it
     # holds, is both legible and the more useful summary.
-    countries: dict[str, dict] = {}
+    countries: dict[str, dict[str, Any]] = {}
     for location, talks in places.items():
         country = location.rsplit(",", 1)[-1].strip().strip('"') or "Unknown"
         entry = countries.setdefault(country, {"talks": [], "cities": {}})
@@ -204,6 +205,7 @@ def main() -> int:
     positioned = []
     for country, entry, x, y, radius in discs:
         half_width = 5.2 * len(country)
+        label_y = y + radius + 14
         for step in range(14):
             label_y = y + radius + 14 + step * 15
             clash_label = any(

@@ -5,6 +5,9 @@ type: article
 venue: Frontiers in Plant Science
 date: 2019-10-25
 doi: 10.3389/fpls.2019.01329
+cv-equal-contributors:
+  - Adriano Rutz
+  - Miwa Dounoue-Kubo
 qid: Q91218352
 image: https://raw.githubusercontent.com/taxonomicallyinformedannotation/tima/refs/heads/main/man/figures/tima.svg
 image-alt: TIMA's Workflow

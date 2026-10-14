@@ -26,6 +26,9 @@ dev = [
   "pytest>=9.1.1",
 ]
 
+[tool.basedpyright]
+typeCheckingMode = "basic"
+
 [tool.deptry]
 known_first_party = [
   "config",

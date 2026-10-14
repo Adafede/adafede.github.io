@@ -15,8 +15,11 @@ import json
 import re
 import sys
 from pathlib import Path
+from typing import Any
 
 import yaml
+
+Metadata = dict[str, Any]
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 POSTS_DIR = PROJECT_ROOT / "posts"
@@ -79,22 +82,22 @@ def rewrite_paths(body: str, extra_depth: int) -> str:
     )
 
 
-def load_yaml(path: Path) -> dict:
+def load_yaml(path: Path) -> Metadata:
     with path.open(encoding="utf-8") as fh:
         return yaml.safe_load(fh) or {}
 
 
-def split_frontmatter(text: str) -> tuple[dict, str]:
+def split_frontmatter(text: str) -> tuple[Metadata, str]:
     if not text.startswith("---"):
         return {}, text
     _, fm, body = text.split("---", 2)
     return yaml.safe_load(fm) or {}, body
 
 
-def collect_entities() -> tuple[dict[str, dict], dict[str, dict]]:
+def collect_entities() -> tuple[dict[str, Metadata], dict[str, Metadata]]:
     """Merge every author/affiliation entity file into id-keyed maps."""
-    authors: dict[str, dict] = {}
-    affiliations: dict[str, dict] = {}
+    authors: dict[str, Metadata] = {}
+    affiliations: dict[str, Metadata] = {}
 
     for path in sorted((ENTITIES_DIR / "authors").glob("*.yml")):
         for entry in load_yaml(path).get("author") or []:
@@ -110,9 +113,9 @@ def collect_entities() -> tuple[dict[str, dict], dict[str, dict]]:
     return authors, affiliations
 
 
-def resolve_metadata_files(meta: dict, base: Path) -> dict:
+def resolve_metadata_files(meta: Metadata, base: Path) -> Metadata:
     """Inline Quarto's `metadata-files` keys into the frontmatter mapping."""
-    merged: dict = {}
+    merged: Metadata = {}
     for rel in meta.get("metadata-files") or []:
         path = (base / rel).resolve()
         if not path.exists():
@@ -126,7 +129,7 @@ def resolve_metadata_files(meta: dict, base: Path) -> dict:
     return merged
 
 
-def compact(data: dict) -> dict:
+def compact(data: Metadata) -> Metadata:
     """Drop keys whose value is None, so optional fields are absent, not null."""
     return {k: v for k, v in data.items() if v is not None}
 
@@ -146,7 +149,7 @@ def optional_str(value) -> str | None:
     return text
 
 
-def author_literal(author: dict) -> str:
+def author_literal(author: Metadata) -> str:
     name = author.get("name") or {}
     if name.get("literal"):
         return str(name["literal"])
@@ -158,7 +161,7 @@ def author_literal(author: dict) -> str:
     return " ".join(p for p in parts if p).strip() or author.get("id", "Unknown")
 
 
-def normalize_license(value) -> dict | None:
+def normalize_license(value: Any) -> Metadata | None:
     if not value:
         return None
     if isinstance(value, str):
@@ -208,7 +211,7 @@ def _attrs_to_html(raw: str) -> str:
 
 
 def convert_span_attributes(body: str) -> str:
-    def replace(match: re.Match) -> str:
+    def replace(match: re.Match[str]) -> str:
         text = match.group("text")
         attrs = _attrs_to_html(match.group("attrs"))
         # Escaped emphasis around the span (*text*) is unwrapped here because
@@ -263,11 +266,11 @@ def pdf_available(slug: str) -> bool:
 
 
 def build_frontmatter(
-    meta: dict,
+    meta: Metadata,
     slug: str,
     date_hint: str | None,
     pdf_slug: str | None = None,
-) -> dict:
+) -> Metadata:
     authors_meta = meta.get("author") or []
     if isinstance(authors_meta, dict):
         authors_meta = [authors_meta]
@@ -354,7 +357,7 @@ def build_frontmatter(
     return {k: v for k, v in out.items() if v not in (None, [], {}, "") or k == "tags"}
 
 
-def dump_frontmatter(data: dict) -> str:
+def dump_frontmatter(data: Metadata) -> str:
     # PyYAML output is already valid YAML; do not post-process the quotes.
     dumped = yaml.safe_dump(data, sort_keys=False, allow_unicode=True, width=100)
     return f"---\n{dumped}---\n\n"
@@ -369,8 +372,12 @@ def dump_frontmatter(data: dict) -> str:
 # ---------------------------------------------------------------------------
 
 
-def build_event_frontmatter(meta: dict, date_hint: str | None, kind: str) -> dict:
-    out: dict = {
+def build_event_frontmatter(
+    meta: Metadata,
+    date_hint: str | None,
+    kind: str,
+) -> Metadata:
+    out: Metadata = {
         "title": meta.get("title"),
         "date": meta.get("date") or date_hint,
         "venue": meta.get("venue"),
@@ -397,8 +404,8 @@ def build_event_frontmatter(meta: dict, date_hint: str | None, kind: str) -> dic
     return {k: v for k, v in out.items() if v not in (None, [], {}, "") or k == "tags"}
 
 
-def build_card_frontmatter(meta: dict) -> dict:
-    out: dict = {
+def build_card_frontmatter(meta: Metadata) -> Metadata:
+    out: Metadata = {
         # Varia titles are written with emphasis markers ("**CASCADE**: ...") and
         # rendered as plain strings, so the Markdown has to come off here.
         "title": strip_inline_markdown(str(meta.get("title") or "")),
@@ -414,7 +421,7 @@ def build_card_frontmatter(meta: dict) -> dict:
     return {k: v for k, v in out.items() if v not in (None, [], {}, "") or k == "tags"}
 
 
-def write(target: Path, frontmatter: dict, body: str, extra_depth: int = 0) -> None:
+def write(target: Path, frontmatter: Metadata, body: str, extra_depth: int = 0) -> None:
     """Write a generated content file.
 
     `extra_depth` is how many directory levels deeper the target sits compared
@@ -441,9 +448,13 @@ ARTICLE_GROUPS = {
 }
 
 
-def build_article_frontmatter(meta: dict, group: str, date_hint: str | None) -> dict:
+def build_article_frontmatter(
+    meta: Metadata,
+    group: str,
+    date_hint: str | None,
+) -> Metadata:
     authors = normalize_authors(meta)
-    out: dict = {
+    out: Metadata = {
         "title": strip_inline_markdown(
             str(meta.get("title") or "").replace("\n  ", " "),
         ),
@@ -526,7 +537,7 @@ def clean_abstract(value) -> str | None:
     return " ".join(str(value).split())
 
 
-def normalize_authors(meta: dict) -> list[dict]:
+def normalize_authors(meta: Metadata) -> list[Metadata]:
     """Same entity shape as posts, plus the co-author fields the articles use."""
     raw = meta.get("author") or []
     if isinstance(raw, dict):
@@ -556,7 +567,7 @@ def normalize_authors(meta: dict) -> list[dict]:
     return out
 
 
-def migrate_articles(clean: bool, affils_all: dict) -> int:
+def migrate_articles(clean: bool, affils_all: Metadata) -> int:
     written = 0
     out_root = PROJECT_ROOT / "src" / "content" / "articles"
     out_root.mkdir(parents=True, exist_ok=True)
@@ -665,7 +676,7 @@ CV_SECTIONS = [
 CV_HEADING_RE = re.compile(r"^###\s+(?P<title>.+?)(?:\s*\((?P<range>[^)]*)\))?\s*$")
 
 
-def parse_cv_entry(path: Path) -> dict | None:
+def parse_cv_entry(path: Path) -> Metadata | None:
     text = path.read_text(encoding="utf-8").strip()
     if not text:
         return None
@@ -710,7 +721,7 @@ def parse_cv_entry(path: Path) -> dict | None:
     }
 
 
-def clean_cv_bullets(body: str) -> list[dict]:
+def clean_cv_bullets(body: str) -> list[Metadata]:
     """Join wrapped bullet lines into one string per bullet.
 
     The CV partials wrap Markdown across lines, so a naive per-line scan would

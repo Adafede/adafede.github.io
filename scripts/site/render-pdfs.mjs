@@ -43,9 +43,11 @@ function pdfRequested(data) {
 function collectSources() {
   const sources = [];
 
-  // The CV is a single file, not a posts/* glob.
-  const cv = join(ROOT, 'cv.qmd');
-  if (existsSync(cv)) sources.push(cv);
+  // CVs are separate files, not part of the posts/* glob.
+  for (const file of ['cv.qmd', 'cv-academic.qmd']) {
+    const cv = join(ROOT, file);
+    if (existsSync(cv)) sources.push(cv);
+  }
 
   if (existsSync(POSTS_DIR)) {
     for (const file of readdirSync(POSTS_DIR).filter((f) => f.endsWith('.qmd')).sort()) {

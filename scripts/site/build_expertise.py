@@ -33,6 +33,7 @@ import urllib.parse
 import urllib.request
 from html import escape
 from pathlib import Path
+from typing import Any
 
 import circlify as _circlify_module
 import matplotlib.colors as mcolors
@@ -94,7 +95,7 @@ def qid_of(uri: str) -> str:
     return uri.rsplit("/", 1)[-1]
 
 
-def refresh() -> dict:
+def refresh() -> dict[str, Any]:
     url = ENDPOINT + "?" + urllib.parse.urlencode({"query": SCORE_QUERY})
     req = urllib.request.Request(
         url,
@@ -164,7 +165,7 @@ def relative_luminance(rgba) -> float:
     return 0.2126 * r + 0.7152 * g + 0.0722 * b
 
 
-def render(data: dict) -> str:
+def render(data: dict[str, Any]) -> str:
     topics = data["topics"]
     items = [
         {"id": qid, "datum": float(score) ** SCALE_POWER} for qid, _, score in topics

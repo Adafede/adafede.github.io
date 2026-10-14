@@ -18,6 +18,7 @@ export default {
   // where the PDFs lived before they were moved onto the Quarto URLs — the
   // button quietly stopped rendering when that changed.
   hasCvPdf: existsSync(join(dirname(fileURLToPath(import.meta.url)), '..', '..', '..', 'public', 'cv.pdf')),
+  hasAcademicCvPdf: existsSync(join(dirname(fileURLToPath(import.meta.url)), '..', '..', '..', 'public', 'cv-academic.pdf')),
   author: 'Adriano Rutz',
   /**
    * The one place the contact address is written down.

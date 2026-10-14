@@ -1,0 +1,22 @@
+---
+title: >-
+  De l’Importance du Contexte d'Annotation + mzmine workshop
+venue: "École thématique #2 Métabolomique et Santé Humaine"
+date: 2026-10-07
+location: Aussois, France
+categories:
+  - Talk
+  - Workshop
+metadata-files:
+  - ../_includes/entities/authors/AdrianoRutz_IMSB.yml
+  - ../_includes/entities/affiliations/IMSB_Zamboni.yml
+description: >
+  Invited lecture and practical workshop in the frame of the “[École thématique
+  #2 Métabolomique et Santé Humaine](https://2-et-rfmf-2026.sciencesconf.org/)”
+  organized by the [Réseau Francophone de Métabolomique et Fluxomique
+  Society](https://www.rfmf.fr/) and the [Société française de Biologie
+  Clinique](https://www.sfbc-asso.fr/).
+
+  Available
+  [here](https://github.com/flomehl/ET02_metabolomique_et_sante_humaine/tree/main/J3_mercredi_annotation).
+---

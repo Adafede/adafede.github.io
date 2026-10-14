@@ -81,7 +81,7 @@ def main() -> int:
             text = post.read_text(encoding="utf-8")
             changed = False
 
-            def replace(match: re.Match) -> str:
+            def replace(match: re.Match[str]) -> str:
                 stem = match.group("name")
                 dims = dict(names).get(stem)
                 extension = "webp" if converter else "png"
