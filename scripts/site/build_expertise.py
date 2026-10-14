@@ -53,7 +53,7 @@ ENCLOSURE_R = 300
 # Separation between neighbouring circles, in viewBox units.
 #
 # circlify packs circles tangent to each other: touching, not overlapping. An
-# outline drawn on that boundary is centred on it, so each circle's stroke
+# outline drawn on that boundary is centered on it, so each circle's stroke
 # extends half its width outward and the two strokes collide across the join.
 # That is what makes a packing look like it has overlapping circles — the fills
 # never overlap, the borders do.
@@ -179,7 +179,7 @@ def render(data: dict[str, Any]) -> str:
     )
     circles.sort(key=lambda c: -c.r)  # big circles first: smaller ones nest on top
 
-    centre = ENCLOSURE_R
+    center = ENCLOSURE_R
     # cmcrameri adds this colormap to the module dynamically; indexing the
     # module dictionary avoids a false unknown-attribute diagnostic.
     cmap: mcolors.Colormap = cm.__dict__["batlowK"]
@@ -190,7 +190,7 @@ def render(data: dict[str, Any]) -> str:
         # screen reader gains nothing from an SVG of linked circles — and linked
         # SVG text is exactly what axe and the contrast checker mismeasure.
         (
-            f'<svg class="expertise__pack" viewBox="0 0 {centre * 2} {centre * 2}" '
+            f'<svg class="expertise__pack" viewBox="0 0 {center * 2} {center * 2}" '
             'aria-hidden="true" focusable="false" '
             'xmlns="http://www.w3.org/2000/svg">'
         ),
@@ -211,7 +211,7 @@ def render(data: dict[str, Any]) -> str:
         text = display_label(label)
         # Drawn radius: the packed radius less half the gap. Clamped so a
         # circle too small to hold the separation still comes out positive.
-        cx, cy = centre + circle.x, centre + circle.y
+        cx, cy = center + circle.x, center + circle.y
         r = max(1.0, circle.r - GAP / 2)
 
         rgba = cmap(1 - index / max(1, len(circles) - 1))
@@ -234,7 +234,7 @@ def render(data: dict[str, Any]) -> str:
             f"<title>{escape(text)} — score {score}</title>",
         )
         parts.append(
-            # The outline colour comes from CSS (--expertise-stroke) rather than
+            # The outline color comes from CSS (--expertise-stroke) rather than
             # being baked in here, because it has to change with the theme and
             # the drawing is generated once for both.
             f'<circle cx="{cx:.1f}" cy="{cy:.1f}" r="{r:.1f}" fill="{fill}"/>',

@@ -50,7 +50,7 @@ NUMBERED_HEADING_RE = re.compile(r"^###\s+References\s*$", re.MULTILINE)
 # through raw and blow up the Largest Contentful Paint.
 PARENT_PATH_RE = re.compile(r"(?<=[(\"'])\.\./(?=[a-zA-Z0-9_])")
 
-# This script emits optimised
+# This script emits optimized
 # WebP next to the originals, so a relative path would
 # resolve to /images/... and 404. Images are copied verbatim into
 # public/images/ instead, and referenced as root-absolute paths that both
