@@ -32,16 +32,7 @@
      and the hidden text is in the document for a screen reader and a crawler.
      The clamp stays on the collapsed <p>, so the open state is full height. #}
   {% if article.data.abstract %}
-  <div class="publication__abstract-block">
-    <input type="checkbox" id="abstract-{{ article.id }}" class="publication__abstract-checkbox">
-    {# No ellipsis here: `line-clamp` already draws one at the cut, and two of
-       them read as a typo. The control is a word instead. #}
-    <label class="publication__abstract-toggle" for="abstract-{{ article.id }}">
-      <span aria-hidden="true">More</span>
-      <span class="visually-hidden">Read the full abstract</span>
-    </label>
-    <p class="publication__abstract" property="abstract">{{ article.data.abstract | inlineMarkdown | safe }}</p>
-  </div>
+  <p class="publication__abstract" property="abstract">{{ article.data.abstract | inlineMarkdown | safe }}</p>
   {% endif %}
   {# The value, not the name of the registry. The icon says which registry it is
      and the text says which record, which is the part a reader can read out or
