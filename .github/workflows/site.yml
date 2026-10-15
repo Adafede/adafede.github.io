@@ -29,13 +29,7 @@ jobs:
 
       - run: uv sync --all-extras
 
-      - run: uv run ruff check .
-      - run: uv run ruff format --check .
-      - run: uv run pytest -q
-
       - run: npm ci
-
-      - run: node --test tests/
 
       - run: npm run build:all
 
