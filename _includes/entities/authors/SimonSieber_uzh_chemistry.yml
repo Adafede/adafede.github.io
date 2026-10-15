@@ -1,0 +1,10 @@
+---
+author:
+  - id: SimonSieber
+    name:
+      given: Simon
+      family: Sieber
+      literal: Simon Sieber
+    orcid: 0000-0003-1763-2525
+    affiliations:
+      - ref: uzh_chemistry

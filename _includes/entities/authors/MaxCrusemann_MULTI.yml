@@ -3,9 +3,9 @@ author:
   - id: MaxCrusemann
     name:
       given: Max
-      family: Crüsemann
-      literal: Max Crüsemann
+      family: Cruesemann
+      literal: Max Cruesemann
     orcid: 0000-0001-6660-2715
     affiliations:
-      - ref: bonn
-      - ref: frankfurt2
+      - ref: bonn_ipb
+      - ref: frankfurt_pharmbio

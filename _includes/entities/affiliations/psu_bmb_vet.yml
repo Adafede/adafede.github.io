@@ -1,0 +1,10 @@
+---
+affiliations:
+  - id: psu_bmb_vet
+    name: Pennsylvania State University
+    department:
+      - Department of Biochemistry and Molecular Biology and Department of Veterinary and Biomedical Sciences
+    city: State College
+    country: United States
+    ror: https://ror.org/04p491231
+    qid: Q739627

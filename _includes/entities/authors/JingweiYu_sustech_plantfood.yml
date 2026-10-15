@@ -1,0 +1,10 @@
+---
+author:
+  - id: JingweiYu
+    name:
+      given: Jingwei
+      family: Yu
+      literal: Jingwei Yu
+    orcid: 0000-0003-4268-436X
+    affiliations:
+      - ref: sustech_plantfood

@@ -1,0 +1,10 @@
+---
+author:
+  - id: NavneetKaur
+    name:
+      given: Navneet
+      family: Kaur
+      literal: Navneet Kaur
+    orcid: 0000-0003-4392-4484
+    affiliations:
+      - ref: nabi_complab

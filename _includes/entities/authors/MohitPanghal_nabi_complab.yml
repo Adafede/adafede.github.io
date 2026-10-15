@@ -1,0 +1,10 @@
+---
+author:
+  - id: MohitPanghal
+    name:
+      given: Mohit
+      family: Panghal
+      literal: Mohit Panghal
+    orcid: 0009-0001-3436-5302
+    affiliations:
+      - ref: nabi_complab

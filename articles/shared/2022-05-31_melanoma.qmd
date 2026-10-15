@@ -20,23 +20,23 @@ categories:
   - Natural Products
   - Metabolite Annotation
 metadata-files:
-  - ../../_includes/entities/authors/TanjaHell_BASEL_eq.yml
-  - ../../_includes/entities/authors/AdrianoRutz_UNIGE_eq.yml
-  - ../../_includes/entities/authors/LaraDurr_BASEL.yml
-  - ../../_includes/entities/authors/MaciejDobrzynski_BERN.yml
-  - ../../_includes/entities/authors/JakobReinhardt_BASEL.yml
-  - ../../_includes/entities/authors/TimoLehner_BASEL.yml
-  - ../../_includes/entities/authors/MorisKeller_BASEL.yml
-  - ../../_includes/entities/authors/AnikaJohn_BERN.yml
-  - ../../_includes/entities/authors/MahabirGupta_PANAMA_deceased.yml
-  - ../../_includes/entities/authors/OlivierPertz_BERN.yml
-  - ../../_includes/entities/authors/MatthiasHamburger_BASEL.yml
-  - ../../_includes/entities/authors/JeanLucWolfender_UNIGE.yml
-  - ../../_includes/entities/authors/ElianeGaro_BASEL_corr.yml
-  - ../../_includes/entities/affiliations/BASEL_Hamburger.yml
-  - ../../_includes/entities/affiliations/UNIGE_Wolfender.yml
-  - ../../_includes/entities/affiliations/BERN_Pertz.yml
-  - ../../_includes/entities/affiliations/PANAMA.yml
+  - ../../_includes/entities/authors/TanjaHell_basel_pharmbio_hamburger_eq.yml
+  - ../../_includes/entities/authors/AdrianoRutz_unige_pharm_wolfender_eq.yml
+  - ../../_includes/entities/authors/LaraDurr_basel_pharmbio_hamburger.yml
+  - ../../_includes/entities/authors/MaciejDobrzynski_bern_cellbio_pertz.yml
+  - ../../_includes/entities/authors/JakobReinhardt_basel_pharmbio_hamburger.yml
+  - ../../_includes/entities/authors/TimoLehner_basel_pharmbio_hamburger.yml
+  - ../../_includes/entities/authors/MorisKeller_basel_pharmbio_hamburger.yml
+  - ../../_includes/entities/authors/AnikaJohn_bern_cellbio_pertz.yml
+  - ../../_includes/entities/authors/MahabirGupta_panama_facpharm_deceased.yml
+  - ../../_includes/entities/authors/OlivierPertz_bern_cellbio_pertz.yml
+  - ../../_includes/entities/authors/MatthiasHamburger_basel_pharmbio_hamburger.yml
+  - ../../_includes/entities/authors/JeanLucWolfender_unige_pharm_wolfender.yml
+  - ../../_includes/entities/authors/ElianeGaro_basel_pharmbio_hamburger_corr.yml
+  - ../../_includes/entities/affiliations/basel_pharmbio_hamburger.yml
+  - ../../_includes/entities/affiliations/unige_pharm_wolfender.yml
+  - ../../_includes/entities/affiliations/bern_cellbio_pertz.yml
+  - ../../_includes/entities/affiliations/panama_facpharm.yml
 abstract: >
   The discovery of bioactive natural products remains a time-consuming and
   challenging task. The ability to link high-confidence metabolite annotations

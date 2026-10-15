@@ -1,0 +1,10 @@
+---
+author:
+  - id: SimranNarula
+    name:
+      given: Simran
+      family: Narula
+      literal: Simran Narula
+    orcid: 0009-0001-9399-9671
+    affiliations:
+      - ref: nabi_complab

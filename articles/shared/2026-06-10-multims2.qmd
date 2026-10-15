@@ -17,10 +17,10 @@ categories:
   - Spectral Library
   - Tandem Mass Spectrometry
 metadata-files:
-  - ../../_includes/entities/authors/AdrianoRutz_IMSB_eq.yml
-  - ../../_includes/entities/authors/MarioCorreia_IMSB_eq.yml
-  - ../../_includes/entities/authors/NicolaZamboni_IMSB_corr.yml
-  - ../../_includes/entities/affiliations/IMSB_Zamboni.yml
+  - ../../_includes/entities/authors/AdrianoRutz_ethz_imsb_zamboni_eq.yml
+  - ../../_includes/entities/authors/MarioCorreia_ethz_imsb_zamboni_eq.yml
+  - ../../_includes/entities/authors/NicolaZamboni_ethz_imsb_zamboni_corr.yml
+  - ../../_includes/entities/affiliations/ethz_imsb_zamboni.yml
 abstract: >
   **Background**
 

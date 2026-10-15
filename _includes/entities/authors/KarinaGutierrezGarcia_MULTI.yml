@@ -1,0 +1,11 @@
+---
+author:
+  - id: KarinaGutierrezGarcia
+    name:
+      given: Karina
+      family: Gutierrez Garcia
+      literal: Karina Gutierrez Garcia
+    orcid: 0000-0002-6077-7490
+    affiliations:
+      - ref: carnegie_biosphere
+      - ref: arizona_eeb

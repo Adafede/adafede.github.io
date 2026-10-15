@@ -3,9 +3,9 @@ author:
   - id: EstebanCharriaGiron
     name:
       given: Esteban
-      family: Charria Girón
-      literal: Esteban Charria Girón
+      family: Charria Giron
+      literal: Esteban Charria Giron
     orcid: 0000-0002-3823-1416
     affiliations:
-      - ref: wageningen
-      - ref: helmholtz
+      - ref: wageningen_bioinformatics
+      - ref: helmholtz_saarland

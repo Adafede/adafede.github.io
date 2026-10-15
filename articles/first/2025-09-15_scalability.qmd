@@ -14,20 +14,20 @@ categories:
   - Liquid Chromatography-Tandem Mass Spectrometry
   - Natural Extracts
 metadata-files:
-  - ../../_includes/entities/authors/AdrianoRutz_IMSB_corr.yml
-  - ../../_includes/entities/authors/WoutBittremieux_ANTWERP.yml
-  - ../../_includes/entities/authors/RobinSchmid_IOCBMZIO.yml
-  - ../../_includes/entities/authors/OlivierCailloux_LAMSADE.yml
+  - ../../_includes/entities/authors/AdrianoRutz_ethz_imsb_zamboni_corr.yml
+  - ../../_includes/entities/authors/WoutBittremieux_antwerp_cs.yml
+  - ../../_includes/entities/authors/RobinSchmid_MULTI.yml
+  - ../../_includes/entities/authors/OlivierCailloux_dau_phine_lamsade.yml
   - ../../_includes/entities/authors/JustinVanDerHooft_MULTI.yml
-  - ../../_includes/entities/authors/MehdiBeniddir_BIOCIS_corr.yml
-  - ../../_includes/entities/affiliations/IMSB_Zamboni.yml
-  - ../../_includes/entities/affiliations/ANTWERP.yml
-  - ../../_includes/entities/affiliations/IOCB_Pluskal.yml
-  - ../../_includes/entities/affiliations/MZIO.yml
-  - ../../_includes/entities/affiliations/LAMSADE.yml
-  - ../../_includes/entities/affiliations/WAGENINGEN.yml
-  - ../../_includes/entities/affiliations/JOHANNESBURG.yml
-  - ../../_includes/entities/affiliations/BIOCIS.yml
+  - ../../_includes/entities/authors/MehdiBeniddir_parissaclay_biocis_corr.yml
+  - ../../_includes/entities/affiliations/ethz_imsb_zamboni.yml
+  - ../../_includes/entities/affiliations/antwerp_cs.yml
+  - ../../_includes/entities/affiliations/cas_iocb_pluskal.yml
+  - ../../_includes/entities/affiliations/mzio.yml
+  - ../../_includes/entities/affiliations/dau_phine_lamsade.yml
+  - ../../_includes/entities/affiliations/wageningen_bioinformatics.yml
+  - ../../_includes/entities/affiliations/joburg_biochem.yml
+  - ../../_includes/entities/affiliations/parissaclay_biocis.yml
 abstract: >
   This review explores the potential of bioinformatics and chemoinformatics
   tools to advance the exploration of natural extracts libraries (NELs).

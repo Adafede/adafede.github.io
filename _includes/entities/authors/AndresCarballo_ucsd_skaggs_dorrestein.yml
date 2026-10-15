@@ -1,0 +1,11 @@
+---
+author:
+  - id: AndresCarballo
+    name:
+      given: Andres Mauricio
+      family: Caraballo-Rodriguez
+      literal: Andres Mauricio Caraballo-Rodriguez
+    orcid: 0000-0001-5499-2728
+    qid: Q90252420
+    affiliations:
+      - ref: ucsd_skaggs_dorrestein

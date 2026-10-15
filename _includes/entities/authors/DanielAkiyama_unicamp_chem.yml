@@ -1,0 +1,10 @@
+---
+author:
+  - id: DanielAkiyama
+    name:
+      given: Daniel Y.
+      family: Akiyama
+      literal: Daniel Y. Akiyama
+    orcid: 0000-0003-2859-1992
+    affiliations:
+      - ref: unicamp_chem

@@ -1,0 +1,10 @@
+---
+author:
+  - id: SunainaPaliyal
+    name:
+      given: Sunaina
+      family: Paliyal
+      literal: Sunaina Paliyal
+    orcid: 0009-0003-1714-1678
+    affiliations:
+      - ref: nabi_complab

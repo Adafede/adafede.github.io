@@ -1,0 +1,10 @@
+---
+author:
+  - id: SvenSowa
+    name:
+      given: Sven T.
+      family: Sowa
+      literal: Sven T. Sowa
+    orcid: 0000-0001-7411-5925
+    affiliations:
+      - ref: basel_pharmbio_hamburger

@@ -1,0 +1,11 @@
+---
+author:
+  - id: JiriVrondasek
+    name:
+      given: Jiri
+      family: Vondrasek
+      literal: Jiri Vondrasek
+    orcid: 0000-0002-6066-973X
+    qid: Q60961322
+    affiliations:
+      - ref: cas_iiac_vondrasek

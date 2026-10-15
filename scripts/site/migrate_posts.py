@@ -126,21 +126,43 @@ def duplicate_affiliation_ids() -> list[tuple[str, list[str], list[str]]]:
 
 
 def split_affiliation_ids() -> dict[str, list[str]]:
-    """One organisation under several ids, which is the same conflation.
+    """One organisation and one unit under two ids, which is the same conflation.
 
-    `frankfurt`/`frankfurt2` and `fsu_jena`/`fsu_jena_b` are one institution
-    each, split because the papers credit different institutes or groups. The
-    shared ROR is the evidence: it identifies the organisation, whatever the
-    local id happens to call it.
+    `frankfurt`/`frankfurt2` were one university in two files, `fsu_jena`/
+    `fsu_jena_b` one institute. An id is `<institution>_<unit>[_<group>]`, so
+    units inside an institution legitimately share a ROR — `frankfurt_molbiosci`
+    and `frankfurt_pharmbio` both belong to Goethe and that is correct. What is
+    not correct is two ids for the same unit, which would make the two papers
+    cite different keys for one institute.
+
+    So the evidence is a shared ROR *and* a shared unit: the same department or
+    group recorded under two ids, where only one spelling can be right.
     """
-    by_ror: dict[str, list[str]] = {}
+    by_ror: dict[str, list[tuple[str, Metadata]]] = {}
     for path in sorted((ENTITIES_DIR / "affiliations").glob("*.yml")):
         for entry in load_yaml(path).get("affiliations") or []:
             if entry.get("ror") and entry.get("id"):
-                by_ror.setdefault(entry["ror"], [])
-                if entry["id"] not in by_ror[entry["ror"]]:
-                    by_ror[entry["ror"]].append(entry["id"])
-    return {ror: ids for ror, ids in sorted(by_ror.items()) if len(ids) > 1}
+                by_ror.setdefault(entry["ror"], []).append((entry["id"], entry))
+
+    out = {}
+    for ror, entries in sorted(by_ror.items()):
+        units: dict[str, list[str]] = {}
+        for identifier, entry in entries:
+            department = entry.get("department")
+            key = f"{department}|{entry.get('group')}"
+            units.setdefault(key, []).append(identifier)
+        for key, ids in units.items():
+            if len(ids) > 1:
+                out[f"{ror} ({key.replace('|', ' / ')})"] = ids
+    return out
+
+
+def duplicate_affiliation_ids_records() -> list[Metadata]:
+    """Every affiliation record, one entry per file."""
+    records = []
+    for path in sorted((ENTITIES_DIR / "affiliations").glob("*.yml")):
+        records.extend(load_yaml(path).get("affiliations") or [])
+    return records
 
 
 def unresolved_affiliation_refs() -> dict[str, list[str]]:
@@ -151,7 +173,7 @@ def unresolved_affiliation_refs() -> dict[str, list[str]]:
     and nothing anywhere says why. `ulaberta` sat in DavidWishart_UALBERTA.yml
     for that reason.
     """
-    known = {e["id"] for e in duplicate_affiliation_ids_records()}
+    known = {entry["id"] for entry in duplicate_affiliation_ids_records()}
     out: dict[str, list[str]] = {}
     for path in sorted((ENTITIES_DIR / "authors").glob("*.yml")):
         for entry in load_yaml(path).get("author") or []:
@@ -160,14 +182,6 @@ def unresolved_affiliation_refs() -> dict[str, list[str]]:
                 if ref and ref not in known:
                     out.setdefault(ref, []).append(path.name)
     return dict(sorted(out.items()))
-
-
-def duplicate_affiliation_ids_records() -> list[Metadata]:
-    """Every affiliation record, one entry per file."""
-    records = []
-    for path in sorted((ENTITIES_DIR / "affiliations").glob("*.yml")):
-        records.extend(load_yaml(path).get("affiliations") or [])
-    return records
 
 
 def collect_entities() -> tuple[dict[str, Metadata], dict[str, Metadata]]:

@@ -9,5 +9,5 @@ author:
     orcid: 0000-0002-9340-5511
     qid: Q50726922
     affiliations:
-      - ref: wageningen
-      - ref: johannesburg
+      - ref: wageningen_bioinformatics
+      - ref: joburg_biochem

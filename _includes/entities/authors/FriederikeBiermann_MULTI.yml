@@ -7,6 +7,6 @@ author:
       literal: Friederike Biermann
     orcid: 0000-0002-9152-2562
     affiliations:
-      - ref: wageningen
-      - ref: frankfurt
+      - ref: wageningen_bioinformatics
+      - ref: frankfurt_molbiosci
       - ref: loewe

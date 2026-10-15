@@ -1,0 +1,11 @@
+---
+author:
+  - id: ShipeiXing
+    name:
+      given: Shipei
+      family: Xing
+      literal: Shipei Xing
+    orcid: 0000-0001-6227-6959
+    qid: Q139488669
+    affiliations:
+      - ref: ucsd_skaggs_dorrestein

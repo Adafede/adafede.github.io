@@ -1,0 +1,11 @@
+---
+author:
+  - id: RobKnight
+    name:
+      given: Rob
+      family: Knight
+      literal: Rob Knight
+    orcid: 0000-0002-0975-9019
+    qid: Q20657126
+    affiliations:
+      - ref: ucsd

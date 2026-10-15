@@ -7,5 +7,5 @@ author:
       literal: Hannah E. Augustijn
     orcid: 0000-0002-1862-6699
     affiliations:
-      - ref: wageningen
-      - ref: leiden
+      - ref: wageningen_bioinformatics
+      - ref: leiden_biology

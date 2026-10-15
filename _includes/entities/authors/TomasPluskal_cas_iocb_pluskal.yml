@@ -1,0 +1,11 @@
+---
+author:
+  - id: TomasPluskal
+    name:
+      given: Tomas
+      family: Pluskal
+      literal: Tomas Pluskal
+    orcid: 0000-0002-6940-3006
+    qid: Q43370334
+    affiliations:
+      - ref: cas_iocb_pluskal

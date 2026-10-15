@@ -1,0 +1,12 @@
+---
+affiliations:
+  - id: fsu_jena_cs_boecker
+    name: Friedrich-Schiller-University Jena
+    department:
+      - Institute of Computer Science
+    group: Boecker
+    city: Jena
+    country: Germany
+    postal-code: 7732
+    ror: https://ror.org/05qpz1x62
+    qid: Q154561

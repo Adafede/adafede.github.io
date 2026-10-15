@@ -1,0 +1,10 @@
+---
+author:
+  - id: GiangSonNguyen
+    name:
+      given: Giang-Son
+      family: Nguyen
+      literal: Giang-Son Nguyen
+    orcid: 0000-0001-5730-3326
+    affiliations:
+      - ref: sintef_bionano

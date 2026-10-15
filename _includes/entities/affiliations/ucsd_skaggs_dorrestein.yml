@@ -1,0 +1,11 @@
+---
+affiliations:
+  - id: ucsd_skaggs_dorrestein
+    name: University of California San Diego
+    department:
+      - Skaggs School of Pharmacy and Pharmaceutical Sciences
+    group: Dorrestein
+    city: San Diego
+    country: United States
+    ror: https://ror.org/0168r3w48
+    qid: Q622664

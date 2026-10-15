@@ -7,8 +7,8 @@ categories:
   - Talk
   - Workshop
 metadata-files:
-  - ../_includes/entities/authors/AdrianoRutz_IMSB.yml
-  - ../_includes/entities/affiliations/IMSB_Zamboni.yml
+  - ../_includes/entities/authors/AdrianoRutz_ethz_imsb_zamboni.yml
+  - ../_includes/entities/affiliations/ethz_imsb_zamboni.yml
 description: >
   Workshop co-animated with [Mehdi
   Beniddir](https://www.wikidata.org/wiki/Q57858606) during the [6e Symposium

@@ -1,0 +1,10 @@
+---
+author:
+  - id: HellenBertolettiBarbieri
+    name:
+      given: Hellen
+      family: Bertoletti Barbieri
+      literal: Hellen Bertoletti Barbieri
+    orcid: 0000-0002-6270-3874
+    affiliations:
+      - ref: unicamp_chem

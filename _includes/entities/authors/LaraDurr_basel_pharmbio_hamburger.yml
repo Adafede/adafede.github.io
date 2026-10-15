@@ -1,0 +1,11 @@
+---
+author:
+  - id: LaraDurr
+    name:
+      given: Lara
+      family: Duerr
+      literal: Lara Duerr
+    orcid: 0000-0001-6551-1854
+    qid: Q112189021
+    affiliations:
+      - ref: basel_pharmbio_hamburger

@@ -6,8 +6,8 @@ location: Geneva, Switzerland
 categories:
   - Teaching
 metadata-files:
-  - ../_includes/entities/authors/AdrianoRutz_UNIGE.yml
-  - ../_includes/entities/affiliations/UNIGE_Wolfender.yml
+  - ../_includes/entities/authors/AdrianoRutz_unige_pharm_wolfender.yml
+  - ../_includes/entities/affiliations/unige_pharm_wolfender.yml
 ---
 
 ## Topics

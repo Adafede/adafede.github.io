@@ -15,47 +15,47 @@ categories:
   - Metabolomics
   - Liquid Chromatography-Tandem Mass Spectrometry
 metadata-files:
-  - ../../_includes/entities/authors/YasinElAbiead_UCSD_eq.yml
-  - ../../_includes/entities/authors/AdrianoRutz_IMSB_eq.yml
-  - ../../_includes/entities/authors/SimoneZuffa_UCSD.yml
-  - ../../_includes/entities/authors/BasharAmer_THERMO.yml
-  - ../../_includes/entities/authors/ShipeiXing_UCSD.yml
-  - ../../_includes/entities/authors/CorinnaBrungs_IOCB.yml
-  - ../../_includes/entities/authors/RobinSchmid_IOCB.yml
-  - ../../_includes/entities/authors/MarioCorreia_IMSB.yml
-  - ../../_includes/entities/authors/AndresCarballo_UCSD.yml
-  - ../../_includes/entities/authors/AmirZarrinpar_UCSD.yml
-  - ../../_includes/entities/authors/HelenaManocchio_UCSD.yml
-  - ../../_includes/entities/authors/MichaelWitting_HZM.yml
-  - ../../_includes/entities/authors/IpsitaMohanty_UCSD.yml
-  - ../../_includes/entities/authors/TomasPluskal_IOCB.yml
-  - ../../_includes/entities/authors/WoutBittremieux_ANTWERP.yml
-  - ../../_includes/entities/authors/RobKnight_UCSD.yml
-  - ../../_includes/entities/authors/AndrewPatterson_PSU.yml
+  - ../../_includes/entities/authors/YasinElAbiead_ucsd_skaggs_dorrestein_eq.yml
+  - ../../_includes/entities/authors/AdrianoRutz_ethz_imsb_zamboni_eq.yml
+  - ../../_includes/entities/authors/SimoneZuffa_ucsd_skaggs_dorrestein.yml
+  - ../../_includes/entities/authors/BasharAmer_thermo.yml
+  - ../../_includes/entities/authors/ShipeiXing_ucsd_skaggs_dorrestein.yml
+  - ../../_includes/entities/authors/CorinnaBrungs_cas_iocb_pluskal.yml
+  - ../../_includes/entities/authors/RobinSchmid_cas_iocb_pluskal.yml
+  - ../../_includes/entities/authors/MarioCorreia_ethz_imsb_zamboni.yml
+  - ../../_includes/entities/authors/AndresCarballo_ucsd_skaggs_dorrestein.yml
+  - ../../_includes/entities/authors/AmirZarrinpar_ucsd.yml
+  - ../../_includes/entities/authors/HelenaManocchio_ucsd_skaggs_dorrestein.yml
+  - ../../_includes/entities/authors/MichaelWitting_hzm.yml
+  - ../../_includes/entities/authors/IpsitaMohanty_ucsd.yml
+  - ../../_includes/entities/authors/TomasPluskal_cas_iocb_pluskal.yml
+  - ../../_includes/entities/authors/WoutBittremieux_antwerp_cs.yml
+  - ../../_includes/entities/authors/RobKnight_ucsd.yml
+  - ../../_includes/entities/authors/AndrewPatterson_psu_bmb_vet.yml
   - ../../_includes/entities/authors/JustinVanDerHooft_MULTI.yml
-  - ../../_includes/entities/authors/SebastianBoecker_JENA.yml
-  - ../../_includes/entities/authors/WarwickDunn_ULIV.yml
-  - ../../_includes/entities/authors/RogerLinington_SFU.yml
-  - ../../_includes/entities/authors/DavidWishart_UALBERTA.yml
-  - ../../_includes/entities/authors/JeanLucWolfender_UNIGE.yml
-  - ../../_includes/entities/authors/OliverFiehn_UCD.yml
-  - ../../_includes/entities/authors/NicolaZamboni_IMSB.yml
-  - ../../_includes/entities/authors/PieterDorrestein_UCSD.yml
-  - ../../_includes/entities/affiliations/UCSD_Dorrestein.yml
-  - ../../_includes/entities/affiliations/IMSB_Zamboni.yml
-  - ../../_includes/entities/affiliations/THERMO.yml
-  - ../../_includes/entities/affiliations/IOCB_Pluskal.yml
-  - ../../_includes/entities/affiliations/UCSD.yml
-  - ../../_includes/entities/affiliations/HZM.yml
-  - ../../_includes/entities/affiliations/ANTWERP.yml
-  - ../../_includes/entities/affiliations/PSU.yml
-  - ../../_includes/entities/affiliations/WAGENINGEN.yml
-  - ../../_includes/entities/affiliations/JOHANNESBURG.yml
-  - ../../_includes/entities/affiliations/FSU_Boecker.yml
-  - ../../_includes/entities/affiliations/ULIV.yml
-  - ../../_includes/entities/affiliations/SFU.yml
-  - ../../_includes/entities/affiliations/UALBERTA.yml
-  - ../../_includes/entities/affiliations/UCD.yml
+  - ../../_includes/entities/authors/SebastianBoecker_fsu_jena_cs_boecker.yml
+  - ../../_includes/entities/authors/WarwickDunn_uliv.yml
+  - ../../_includes/entities/authors/RogerLinington_sfu.yml
+  - ../../_includes/entities/authors/DavidWishart_ualberta.yml
+  - ../../_includes/entities/authors/JeanLucWolfender_unige_pharm_wolfender.yml
+  - ../../_includes/entities/authors/OliverFiehn_ucd.yml
+  - ../../_includes/entities/authors/NicolaZamboni_ethz_imsb_zamboni.yml
+  - ../../_includes/entities/authors/PieterDorrestein_ucsd_skaggs_dorrestein.yml
+  - ../../_includes/entities/affiliations/ucsd_skaggs_dorrestein.yml
+  - ../../_includes/entities/affiliations/ethz_imsb_zamboni.yml
+  - ../../_includes/entities/affiliations/thermo.yml
+  - ../../_includes/entities/affiliations/cas_iocb_pluskal.yml
+  - ../../_includes/entities/affiliations/ucsd.yml
+  - ../../_includes/entities/affiliations/hzm.yml
+  - ../../_includes/entities/affiliations/antwerp_cs.yml
+  - ../../_includes/entities/affiliations/psu_bmb_vet.yml
+  - ../../_includes/entities/affiliations/wageningen_bioinformatics.yml
+  - ../../_includes/entities/affiliations/joburg_biochem.yml
+  - ../../_includes/entities/affiliations/fsu_jena_cs_boecker.yml
+  - ../../_includes/entities/affiliations/uliv.yml
+  - ../../_includes/entities/affiliations/sfu.yml
+  - ../../_includes/entities/affiliations/ualberta.yml
+  - ../../_includes/entities/affiliations/ucd.yml
 nocite: |
   @ElAbiead2025a
 ---
