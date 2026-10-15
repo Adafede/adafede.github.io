@@ -54,7 +54,8 @@ jobs:
           sudo apt-get install -y --no-install-recommends \
             nasm \
             libqpdf-dev \
-            libxslt1-dev
+            libxslt1-dev \
+            pandoc
           wget https://mirror.ctan.org/systems/texlive/tlnet/update-tlmgr-latest.sh
           sudo sh update-tlmgr-latest.sh --accept
           sudo tlmgr option repository http://mirror.ctan.org/systems/texlive/tlnet
@@ -67,7 +68,6 @@ jobs:
           koma-script \
           moresize \
           multirow \
-          pandoc \
           pgf \
           wrapfig \
           xifthen
