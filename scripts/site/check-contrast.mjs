@@ -34,9 +34,20 @@ function extractTokens(css) {
   // match the one whose :root actually declares the palette.
   const darkAt = css.lastIndexOf('@media (prefers-color-scheme: dark)');
   const darkRoot = css.indexOf(':root {', darkAt);
+  const lightStart = css.indexOf(':root {');
+  const lightEnd = css.indexOf('\n}', lightStart);
+  if (lightStart < 0 || lightEnd < 0) {
+    console.error(`! could not locate the light :root block in ${SHEET}`);
+    process.exit(2);
+  }
+  const darkEnd = css.indexOf('\n}', darkRoot);
+  if (darkRoot < 0 || darkEnd < 0) {
+    console.error(`! could not locate the dark :root block in ${SHEET}`);
+    process.exit(2);
+  }
   const blocks = {
-    light: readBlock(css.slice(css.indexOf(':root {'), css.indexOf('\n}'))),
-    dark: readBlock(css.slice(darkRoot, css.indexOf('\n}', darkRoot))),
+    light: readBlock(css.slice(lightStart, lightEnd)),
+    dark: readBlock(css.slice(darkRoot, darkEnd)),
   };
 
   // Resolve light-dark(a, b) and nested var() references into two themes.
@@ -116,6 +127,7 @@ const css = readFileSync(SHEET, 'utf-8');
 const themes = extractTokens(css);
 
 let failures = 0;
+let unresolved = 0;
 let checks = 0;
 
 for (const theme of ['light', 'dark']) {
@@ -124,7 +136,7 @@ for (const theme of ['light', 'dark']) {
   for (const [fg, bg, required, label] of PAIRS) {
     if (!/^#[0-9a-f]{3,8}$/i.test(t[fg] ?? '') || !/^#[0-9a-f]{3,8}$/i.test(t[bg] ?? '')) {
       console.log(`  ?  ${label}: unresolved (${fg}=${t[fg]}, ${bg}=${t[bg]})`);
-      failures++;
+      unresolved++;
       continue;
     }
     const ratio = contrast(t[fg], t[bg]);
@@ -139,5 +151,8 @@ for (const theme of ['light', 'dark']) {
   }
 }
 
-console.log(`\n${checks - failures}/${checks} checks passed`);
-process.exit(failures ? 1 : 0);
+console.log(`\n${checks - failures}/${checks} checks passed, ${unresolved} unresolved`);
+// An unresolved token is a defect in the palette, not a WCAG failure: the pair
+// was never actually tested, so counting it as a failure made the summary below
+// the "N/0" line read a negative number of failures.
+process.exit(failures || unresolved ? 1 : 0);
