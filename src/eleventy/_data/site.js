@@ -53,10 +53,22 @@ export default {
   // Assembled here because a literal `?` inside a Nunjucks tag reads as ternary.
   // `site` and `sitecontent` are separate data objects, so the profile id is read
   // from disk instead of from a sibling key.
-  scholarUrl: `https://scholar.google.com/citations?user=${readFileSync(
-    fileURLToPath(new URL('../../content/profiles.json', import.meta.url)),
-    'utf-8',
-  ).match(/"scholar":\s*"([^"]+)"/)?.[1] ?? ''}`,
+  //
+  // src/content/ is generated and gitignored, so on a clone that has not run
+  // `npm run sync:content` yet the file is absent. That used to be a hard
+  // stack trace at data-import time; it now degrades to no scholar link, the
+  // way the three artwork manifests below already do.
+  scholarUrl: (() => {
+    try {
+      const profiles = readFileSync(
+        fileURLToPath(new URL('../../content/profiles.json', import.meta.url)),
+        'utf-8',
+      );
+      return `https://scholar.google.com/citations?user=${profiles.match(/"scholar":\s*"([^"]+)"/)?.[1] ?? ''}`;
+    } catch {
+      return 'https://scholar.google.com/citations';
+    }
+  })(),
   nav: [
     { url: '/articles.html', label: 'Articles' },
     { url: '/cv.html', label: 'CV' },
