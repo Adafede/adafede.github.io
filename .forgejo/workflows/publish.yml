@@ -67,6 +67,7 @@ jobs:
           koma-script \
           moresize \
           multirow \
+          pandoc \
           pgf \
           wrapfig \
           xifthen

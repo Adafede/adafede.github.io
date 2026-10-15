@@ -10,8 +10,10 @@ from pathlib import Path
 
 from PIL import Image
 
-MAX_SIZE = (320, 320)
-SVG_MIN_SIZE = 100_000
+# The card box is 11rem (176 CSS px) wide, so 512px covers a 2x display with
+# room to spare and stays sharp on a 3x phone. 320px was only 1.8x, which reads
+# as a soft thumbnail on exactly the devices most likely to be looking at it.
+MAX_SIZE = (512, 512)
 
 
 def encode_webp(png: Path, target: Path) -> None:
@@ -34,7 +36,11 @@ def encode_webp(png: Path, target: Path) -> None:
 
 
 def optimize_artwork(source: Path, target: Path) -> bool:
-    """Downsample static raster artwork and large SVGs; preserve animation."""
+    """Downsample raster artwork for a card preview; preserve animation.
+
+    Vectors are not accepted. Rasterizing a vector trades away the scaling and the
+    sharpness it was published in, so SVGs are served as they were authored.
+    """
     cwebp = shutil.which("cwebp")
     if not cwebp:
         return False
@@ -52,21 +58,6 @@ def optimize_artwork(source: Path, target: Path) -> bool:
                 frame = image.convert("RGBA")
             frame.thumbnail(MAX_SIZE, Image.Resampling.LANCZOS)
             frame.save(png)
-        elif source.suffix.lower() == ".svg" and source.stat().st_size >= SVG_MIN_SIZE:
-            rsvg_convert = shutil.which("rsvg-convert")
-            if not rsvg_convert:
-                return False
-            subprocess.run(
-                [
-                    rsvg_convert,
-                    "--width",
-                    str(MAX_SIZE[0]),
-                    str(source),
-                    "-o",
-                    str(png),
-                ],
-                check=True,
-            )
         else:
             return False
         with Image.open(png) as image:

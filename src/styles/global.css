@@ -1542,6 +1542,25 @@ figcaption {
   font-size: var(--step-0);
 }
 
+/* The figure on the article page itself. `contain` rather than `cover`, so a
+   logo or a workflow is never cropped, and capped in width so a wide diagram
+   does not run past the measure. */
+.article__figure {
+  margin-block: var(--space-m);
+}
+
+.article__image {
+  object-fit: contain;
+  inline-size: 100%;
+  block-size: auto;
+  max-block-size: 70vh;
+  margin-inline: auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--space-2xs);
+}
+
 .article__section {
   margin-block-end: var(--space-l);
 }
@@ -2250,8 +2269,8 @@ white-space: nowrap;
   .publication--with-image .publication__image {
     grid-column: 1;
     grid-row: 1;
-    inline-size: 5.5rem;
-    block-size: 4rem;
+    inline-size: 7.5rem;
+    block-size: 5.5rem;
   }
 
   .publication--with-image .publication__text {

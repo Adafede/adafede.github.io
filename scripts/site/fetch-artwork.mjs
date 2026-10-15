@@ -79,6 +79,7 @@ function keepSvg(source) {
   return { text: source, saved: 0 };
 }
 
+
 const contentFiles = [];
 for (const section of ['articles', 'varia']) {
   const dir = join(CONTENT, section);
@@ -131,19 +132,27 @@ for (const url of urls) {
   const extension = extname(new URL(url).pathname) || '.img';
   const cachedName = manifest[url]?.replace(/^\/images\/artwork\//, '');
   const cached = cachedName ? join(OUT, cachedName) : null;
-  const needsRasterThumb = thumbnailUrls.has(url) && (
-    extension === '.png'
-    || (
-      extension === '.svg'
-      && (!cached || !existsSync(cached) || statSync(cached).size >= 100_000)
-    )
-  );
-  const thumbnailName = `${stem}-thumb-320-fit.webp`;
+  // Vectors are never rasterized. A size threshold does not make that safe, it
+  // just makes it inconsistent: the same logo is a vector in one article and a
+  // 320px blur in another, the blur is soft on a 2x screen, and it cannot be
+  // enlarged or reused. So the only previews here are for artwork that arrived
+  // as raster to begin with.
+  const needsRasterThumb = thumbnailUrls.has(url) && extension === '.png';
+  const thumbnailName = `${stem}-thumb-512-fit.webp`;
   const cachedThumbnailName = thumbnails[url]?.replace(/^\/images\/artwork\//, '');
   const hasThumbnail = cachedThumbnailName === thumbnailName
     && existsSync(join(OUT, thumbnailName));
 
   let buffer;
+  if (!needsRasterThumb && thumbnails[url]) {
+    // The vector is cheap enough to send as it is, so the raster preview is no
+    // longer wanted: drop the mapping and the file. Without this the entry
+    // survives from a run when the threshold was different, and the card keeps
+    // serving a 320px raster of artwork that was never heavy.
+    const stale = join(OUT, thumbnails[url].replace(/^\/images\/artwork\//, ''));
+    if (existsSync(stale)) unlinkSync(stale);
+    delete thumbnails[url];
+  }
   if (
     cached
     && existsSync(cached)
@@ -176,29 +185,6 @@ for (const url of urls) {
   try {
     if (name.endsWith('.svg')) {
       buffer = Buffer.from(keepSvg(buffer.toString('utf-8')).text, 'utf-8');
-      if (needsRasterThumb) {
-        const temporaryDirectory = mkdtempSync(join(tmpdir(), 'site-artwork-'));
-        const source = join(temporaryDirectory, `${stem}.svg`);
-        const thumbnail = join(OUT, thumbnailName);
-        try {
-          writeFileSync(source, buffer);
-          const result = spawnSync(
-            'uv',
-            ['run', 'python', 'scripts/site/optimize_artwork.py', source, thumbnail],
-            { cwd: ROOT, encoding: 'utf-8' },
-          );
-          if (result.error) throw result.error;
-          if (result.status === 0) {
-            thumbnails[url] = `/images/artwork/${thumbnailName}`;
-          } else if (result.status !== 2) {
-            throw new Error(`Artwork thumbnail generation failed: ${result.stderr || result.status}`);
-          } else if (buffer.length >= 100_000) {
-            console.log(`  = kept original SVG (rsvg-convert unavailable): ${url}`);
-          }
-        } finally {
-          rmSync(temporaryDirectory, { recursive: true, force: true });
-        }
-      }
     } else if (extension === '.png' && needsRasterThumb) {
       const temporaryDirectory = mkdtempSync(join(tmpdir(), 'site-artwork-'));
       const source = join(temporaryDirectory, `${stem}.png`);
@@ -257,6 +243,22 @@ for (const url of urls) {
     throw new Error(`Could not store artwork ${url}: ${error.message}`, { cause: error });
   }
 }
+
+// Previews from an earlier naming scheme, matched by no mapping above. They are
+// never referenced and never will be; OUT is a build artifact, so removing them
+// here is enough.
+const referenced = new Set([
+  ...Object.values(manifest),
+  ...Object.values(thumbnails),
+].map((url) => url.replace(/^\/images\/artwork\//, '')));
+let removed = 0;
+for (const file of readdirSync(OUT)) {
+  if (referenced.has(file)) continue;
+  if (!/^[\da-f]{16}(-thumb(-\d+)?(-\w+)?)?\.(svg|png|gif|webp)$/.test(file)) continue;
+  unlinkSync(join(OUT, file));
+  removed++;
+}
+if (removed) console.log(`  artwork: removed ${removed} unreferenced file(s)`);
 
 writeFileSync(MANIFEST, `${JSON.stringify(manifest, null, 2)}\n`, 'utf-8');
 writeFileSync(THUMBNAILS, `${JSON.stringify(thumbnails, null, 2)}\n`, 'utf-8');

@@ -46,6 +46,18 @@ eleventyComputed:
       <time property="datePublished" datetime="{{ article.data.date | readableDate }}">{{ article.data.date | readableDate }}</time>
     </p>
 
+    {# The artwork, at full resolution. The listing card shows a preview; this
+       is the page a reader came for, so it gets the file itself — vector if it
+       arrived as one, never a raster stand-in. #}
+    {% if article.data.image %}
+    {% set artwork = article.data.image | artwork %}
+    {% set artworkSize = article.data.image | artworkSize %}
+    <figure class="article__figure">
+      <img class="article__image" src="{{ artwork }}" alt="{{ article.data.imageAlt or '' }}" decoding="async"
+        width="{{ artworkSize.width }}" height="{{ artworkSize.height }}" />
+    </figure>
+    {% endif %}
+
     {% if article.data.authors.length %}
     <div class="article__authors" property="author">
       <h2 class="article__subheading">Authors</h2>

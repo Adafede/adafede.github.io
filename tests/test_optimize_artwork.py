@@ -3,7 +3,7 @@ import shutil
 import pytest
 from PIL import Image
 
-from scripts.site.optimize_artwork import optimize_artwork
+from scripts.site.optimize_artwork import MAX_SIZE, optimize_artwork
 
 
 def test_downsamples_single_frame_gif_to_webp(tmp_path):
@@ -17,7 +17,7 @@ def test_downsamples_single_frame_gif_to_webp(tmp_path):
     assert optimize_artwork(source, target)
     with Image.open(target) as image:
         assert image.format == "WEBP"
-        assert image.size == (320, 160)
+        assert image.size == (MAX_SIZE[0], MAX_SIZE[0] // 2)
 
 
 def test_keeps_animated_gif_unchanged(tmp_path, monkeypatch):
@@ -32,19 +32,14 @@ def test_keeps_animated_gif_unchanged(tmp_path, monkeypatch):
     assert not target.exists()
 
 
-def test_rasterizes_large_svg_preview(tmp_path):
-    if not shutil.which("cwebp") or not shutil.which("rsvg-convert"):
-        pytest.skip("cwebp and rsvg-convert are required")
-
-    source = tmp_path / "large.svg"
-    target = tmp_path / "large.webp"
+def test_refuses_to_rasterize_a_vector(tmp_path):
+    """The whole point: an SVG goes out as an SVG, at any size."""
+    source = tmp_path / "logo.svg"
+    target = tmp_path / "logo.webp"
     source.write_text(
         '<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900">'
         '<rect width="1600" height="900" fill="teal"/></svg>',
     )
-    source.write_bytes(source.read_bytes() + b" " * 100_000)
 
-    assert optimize_artwork(source, target)
-    with Image.open(target) as image:
-        assert image.format == "WEBP"
-        assert image.size == (320, 180)
+    assert not optimize_artwork(source, target)
+    assert not target.exists()
