@@ -58,19 +58,20 @@ jobs:
             pandoc
           wget https://mirror.ctan.org/systems/texlive/tlnet/update-tlmgr-latest.sh
           sudo sh update-tlmgr-latest.sh --accept
-          sudo tlmgr option repository http://mirror.ctan.org/systems/texlive/tlnet
-          sudo tlmgr update --self
+          # Use a reliable explicit mirror instead of the dynamic pool
+          sudo tlmgr option repository https://ctan.math.utah.edu/tex-archive/systems/texlive/tlnet
+          sudo tlmgr update --self || sudo tlmgr update --self
           sudo tlmgr install \
-          babel-english \
-          caption \
-          fancyhdr \
-          ifmtarg \
-          koma-script \
-          moresize \
-          multirow \
-          pgf \
-          wrapfig \
-          xifthen
+            babel-english \
+            caption \
+            fancyhdr \
+            ifmtarg \
+            koma-script \
+            moresize \
+            multirow \
+            pgf \
+            wrapfig \
+            xifthen
           sudo mktexlsr
 
       # Cache R packages
