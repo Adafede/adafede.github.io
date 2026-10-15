@@ -8,7 +8,3 @@ edn = "edn"
 Ege = "Ege"
 Modul = "Modul"
 Studi = "Studi"
-# The entity files are ASCII, so a French institution is written "Universite
-# Paris-Saclay". Left alone, typos rewrites that to "Universities", which is a
-# different university in a different country.
-Universite = "Universite"

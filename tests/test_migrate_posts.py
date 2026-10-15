@@ -48,25 +48,32 @@ def test_known_affiliation_id_collisions():
     assert split_affiliation_ids() == {}
 
 
-def test_entity_files_are_ascii():
-    """No non-ASCII byte in an entity file or its name.
+def test_entity_machine_names_are_ascii():
+    """Filenames, ids and refs are ASCII; prose is not required to be.
 
-    `TÜBINGEN.yml`, `AnnaMMohler_HANNOVER.yml` and `KarinaGutierrezGarcia` all
-    carried umlauts and accents that no filename convention, keyboard or
-    terminal should have to carry. Umlauts are spelled out (`ETH Zuerich`), the
-    rest decomposed, so an id is typeable from what the record says.
+    An id, a ref and a filename have to survive a keyboard, a case-sensitive
+    filesystem and a shell that does not quote its arguments: `TÜBINGEN.yml`
+    and `HellenBertoletiBarbie ri_unicamp_chem.yml` both broke something.
+
+    Display values are left alone, because they are prose. "ETH Zürich" is how
+    the institution writes itself, and a transliterated "ETH Zuerich" in an
+    address is a different spelling, not a portable one.
     """
     import pathlib
 
+    import yaml
+
     entities = pathlib.Path(__file__).resolve().parents[1] / "_includes" / "entities"
-    for path in entities.rglob("*.yml"):
-        assert path.name.isascii(), f"{path.name} is not ASCII"
-        # A space in a filename needs quoting in every shell and CI step that
-        # touches it. `HellenBertoletiBarbie ri_unicamp_chem.yml` had one, from
-        # a corrupted id.
-        assert " " not in path.name, f"{path.name} contains a space"
-        text = path.read_text(encoding="utf-8")
-        assert text.isascii(), f"{path.name} has non-ASCII characters"
+    for kind, key in (("authors", "author"), ("affiliations", "affiliations")):
+        for path in (entities / kind).glob("*.yml"):
+            assert path.name.isascii(), f"{path.name} is not ASCII"
+            assert " " not in path.name, f"{path.name} contains a space"
+            for entry in yaml.safe_load(path.read_text())[key]:
+                assert entry["id"].isascii(), f"{entry['id']} is not ASCII"
+                for affiliation in entry.get("affiliations") or []:
+                    assert affiliation["ref"].isascii(), (
+                        f"{affiliation['ref']} is not ASCII"
+                    )
 
 
 def test_affiliation_ids_name_their_unit():

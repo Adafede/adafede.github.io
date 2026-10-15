@@ -1,7 +1,7 @@
 ---
 affiliations:
-  - id: dau_phine_lamsade
-    name: Universite Paris-Dauphine, Universite PSL
+  - id: dauphine_lamsade
+    name: Université Paris-Dauphine, Université PSL
     department: LAMSADE, CNRS
     city: Paris
     country: France

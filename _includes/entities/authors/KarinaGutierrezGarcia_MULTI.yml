@@ -3,8 +3,8 @@ author:
   - id: KarinaGutierrezGarcia
     name:
       given: Karina
-      family: Gutierrez Garcia
-      literal: Karina Gutierrez Garcia
+      family: Gutiérrez García
+      literal: Karina Gutiérrez García
     orcid: 0000-0002-6077-7490
     affiliations:
       - ref: carnegie_biosphere

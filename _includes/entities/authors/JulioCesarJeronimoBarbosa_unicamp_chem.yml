@@ -2,9 +2,9 @@
 author:
   - id: JulioCesarJeronimoBarbosa
     name:
-      given: Julio Cesar
+      given: Júlio César
       family: Jeronimo Barbosa
-      literal: Julio Cesar Jeronimo Barbosa
+      literal: Júlio César Jeronimo Barbosa
     orcid: 0000-0001-8831-831X
     affiliations:
       - ref: unicamp_chem

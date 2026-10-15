@@ -3,8 +3,8 @@ author:
   - id: AnnaMMoehler
     name:
       given: Anna M.
-      family: Koehler
-      literal: Anna M. Koehler
+      family: Köhler
+      literal: Anna M. Köhler
     orcid: 0000-0002-2715-8954
     affiliations:
       - ref: hannover_orgchem

@@ -1,11 +1,11 @@
 ---
 affiliations:
   - id: ethz_imsb_zamboni
-    name: ETH Zuerich
+    name: ETH Zürich
     department: Institute for Molecular Systems Biology
     group: Zamboni
     address: Otto-Stern-Weg, 3
-    city: Zuerich
+    city: Zürich
     country: Switzerland
     postal-code: 8093
     ror: https://ror.org/03j5gm982
