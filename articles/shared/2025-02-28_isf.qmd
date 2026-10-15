@@ -55,6 +55,7 @@ metadata-files:
   - ../../_includes/entities/affiliations/uliv.yml
   - ../../_includes/entities/affiliations/sfu.yml
   - ../../_includes/entities/affiliations/ualberta.yml
+  - ../../_includes/entities/affiliations/unige_pharm_wolfender.yml
   - ../../_includes/entities/affiliations/ucd.yml
 nocite: |
   @ElAbiead2025a
