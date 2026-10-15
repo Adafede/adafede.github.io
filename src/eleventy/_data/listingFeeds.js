@@ -66,15 +66,27 @@ export default function listingFeeds() {
       // would point a reader at a feed from the feed. The site root is the
       // page this feed actually describes.
       url: '/',
-      items: () => [
-        ...content.articles(),
-        ...content.talks(),
-        ...content.teaching(),
-        ...content.varia(),
-        ...content.posts(),
-      ],
-      date: (item) => item.data.date,
+      date: (item) => item.data.date || item.data.pubDate,
       category: (item) => (item.data.tags ?? [])[0] ?? undefined,
+      // Newest first, so that the cap below keeps the 20 most recent items
+      // rather than the first 20 articles and nothing else. Undated items (the
+      // varia listings) sort last.
+      items: () => {
+        const all = [
+          ...content.articles(),
+          ...content.talks(),
+          ...content.teaching(),
+          ...content.varia(),
+          ...content.posts(),
+        ];
+        const stamp = (item) => {
+          const when = item.data.date || item.data.pubDate;
+          if (!when) return 0;
+          const time = new Date(when).getTime();
+          return Number.isNaN(time) ? 0 : time;
+        };
+        return all.sort((a, b) => stamp(b) - stamp(a));
+      },
       // Quarto published the 20 most recent here, not all 80. Keeping the cap
       // matters: a reader on this feed has a bounded backlog, and a feed that
       // silently grows to every talk ever given is a different feed.
