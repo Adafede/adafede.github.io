@@ -61,3 +61,20 @@ src/eleventy/_includes/talk-map.njk
 src/eleventy/_includes/expertise.njk
 
 graphify-out/
+
+# --- local agent tooling (not for publication) ---
+.kb/
+graphify-out/
+AGENTS.md
+CLAUDE.md
+GEMINI.md
+.claude/
+.cursor/
+.opencode/
+.codex/
+.aider*
+.mcp.json
+.claudeignore
+.agentignore
+.obsidian/
+*.agent-scratch*
