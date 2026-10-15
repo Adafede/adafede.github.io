@@ -142,3 +142,32 @@ def test_unmodified_post_not_rewritten(
     fm = _frontmatter_text(qmd.read_text(encoding="utf-8"))
     assert "date: 2025-01-01" in fm
     assert "doi: 10.59350/existing" in fm
+
+
+def test_apostrophes_and_quotes_in_values_are_preserved(
+    tmp_path: Path,
+    metadata_service: MetadataService,
+):
+    """Rewriting frontmatter must not rewrite the prose it carries.
+
+    The old pass over the dumped YAML replaced every `'` in a non-date line
+    with `"`, which turned `It's a "quoted" study` into `It"s a "quoted"
+    study` — silently, and into a tracked source file.
+    """
+    original = (
+        "---\n"
+        'title: "It\'s a \\"quoted\\" study"\n'
+        "abstract: M. Müller's method — l'œuvre, d'après Mme. Dubois\n"
+        "---\n\nBody text.\n"
+    )
+    post = tmp_path / "2024-01-02_apostrophe.qmd"
+    post.write_text(original, encoding="utf-8")
+
+    metadata_service.update_post_metadata(post, generate_doi=False)
+
+    result = post.read_text(encoding="utf-8")
+    assert 'It\'s a "quoted" study' in result
+    assert "Müller's method" in result
+    assert "l'œuvre" in result
+    assert "d'après" in result
+    assert 'It"s' not in result

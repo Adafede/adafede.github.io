@@ -1,5 +1,6 @@
 """Author service for ORCID and Scholia link injection."""
 
+import re
 from pathlib import Path
 
 from bs4 import BeautifulSoup, Tag
@@ -270,8 +271,20 @@ class AuthorService:
 
         for author in authors:
             computed_name = author.get("_computed_name", "")
-            if computed_name.lower() in author_text_lower:
+            if author_text_lower == computed_name.lower():
                 return author
+
+        matches = [
+            author
+            for author in authors
+            if re.search(
+                r"\b" + re.escape(author.get("_computed_name", "")) + r"\b",
+                author_text_lower,
+                re.IGNORECASE,
+            )
+        ]
+        if matches:
+            return max(matches, key=lambda a: len(a.get("_computed_name", "")))
 
         return None
 

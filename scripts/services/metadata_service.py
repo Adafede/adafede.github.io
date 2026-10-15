@@ -113,13 +113,10 @@ class MetadataService:
             Dumper=CustomDumper,
         )
 
-        # Clean up quotes (remove from dates, convert single to double)
         lines = new_front.split("\n")
         for i, line in enumerate(lines):
             if line.startswith("date:"):
                 lines[i] = line.replace('"', "").replace("'", "")
-            elif "'" in line:
-                lines[i] = line.replace("'", '"')
 
         new_front = "\n".join(lines)
         new_content = f"---\n{new_front}---\n\n{body.lstrip()}"
