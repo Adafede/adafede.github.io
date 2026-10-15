@@ -21,7 +21,7 @@ permalink: /posts.html
       {% if post.data.pdf %} · <a href="{{ post.data.pdf }}" target="_blank" rel="noopener" type="application/pdf" title="PDF of {{ post.data.title }}">{% registryIcon 'pdf' %}PDF<span class="visually-hidden"> of {{ post.data.title }} (opens in a new tab)</span></a>{% endif %}
       {% if post.data.authors.length %} · <span property="author">{{ post.data.authors | joinNames }}</span>{% endif %}
     </p>
-    {% if post.data.description %}<p class="entry__summary">{{ post.data.description }}</p>{% endif %}
+    {% if post.data.description %}<p class="entry__summary">{{ post.data.description | plainText }}</p>{% endif %}
     {% if post.data.tags.length %}
     <ul class="tag-list" property="keywords" aria-label="Tags for {{ post.data.title }}">
       {% for tag in post.data.tags %}<li><span class="tag">{{ tag }}</span></li>{% endfor %}
