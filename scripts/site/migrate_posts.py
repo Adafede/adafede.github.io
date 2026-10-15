@@ -94,6 +94,82 @@ def split_frontmatter(text: str) -> tuple[Metadata, str]:
     return yaml.safe_load(fm) or {}, body
 
 
+def duplicate_affiliation_ids() -> list[tuple[str, list[str], list[str]]]:
+    """Affiliation ids that more than one file claims, and why.
+
+    An id is an organisation, so two files claiming one is one of two mistakes:
+    the same unit recorded twice, or — the one that actually happens here — one
+    organisation and two of its groups sharing an id, so the second file is
+    ignored and its department never reaches the page.
+
+    Nothing is merged or corrected here. Deciding whether these should be one
+    id or two is an editorial call about the paper, not something a build
+    script may decide by concatenation, so this only says what is there.
+    """
+    by_id: dict[str, list[tuple[str, Metadata]]] = {}
+    for path in sorted((ENTITIES_DIR / "affiliations").glob("*.yml")):
+        for entry in load_yaml(path).get("affiliations") or []:
+            if entry.get("id"):
+                by_id.setdefault(entry["id"], []).append((path.name, entry))
+
+    out = []
+    for identifier, entries in sorted(by_id.items()):
+        if len(entries) < 2:
+            continue
+        differing = sorted(
+            key
+            for key in entries[0][1]
+            if len({str(entry.get(key)) for _, entry in entries}) > 1
+        )
+        out.append((identifier, [name for name, _ in entries], differing))
+    return out
+
+
+def split_affiliation_ids() -> dict[str, list[str]]:
+    """One organisation under several ids, which is the same conflation.
+
+    `frankfurt`/`frankfurt2` and `fsu_jena`/`fsu_jena_b` are one institution
+    each, split because the papers credit different institutes or groups. The
+    shared ROR is the evidence: it identifies the organisation, whatever the
+    local id happens to call it.
+    """
+    by_ror: dict[str, list[str]] = {}
+    for path in sorted((ENTITIES_DIR / "affiliations").glob("*.yml")):
+        for entry in load_yaml(path).get("affiliations") or []:
+            if entry.get("ror") and entry.get("id"):
+                by_ror.setdefault(entry["ror"], [])
+                if entry["id"] not in by_ror[entry["ror"]]:
+                    by_ror[entry["ror"]].append(entry["id"])
+    return {ror: ids for ror, ids in sorted(by_ror.items()) if len(ids) > 1}
+
+
+def unresolved_affiliation_refs() -> dict[str, list[str]]:
+    """`affiliations: - ref:` values that name no affiliation at all.
+
+    An author's `ref` is looked up in the registry to get a name and a link, so
+    a typo resolves to nothing: the page renders an author with no affiliation
+    and nothing anywhere says why. `ulaberta` sat in DavidWishart_UALBERTA.yml
+    for that reason.
+    """
+    known = {e["id"] for e in duplicate_affiliation_ids_records()}
+    out: dict[str, list[str]] = {}
+    for path in sorted((ENTITIES_DIR / "authors").glob("*.yml")):
+        for entry in load_yaml(path).get("author") or []:
+            for affiliation in entry.get("affiliations") or []:
+                ref = affiliation.get("ref")
+                if ref and ref not in known:
+                    out.setdefault(ref, []).append(path.name)
+    return dict(sorted(out.items()))
+
+
+def duplicate_affiliation_ids_records() -> list[Metadata]:
+    """Every affiliation record, one entry per file."""
+    records = []
+    for path in sorted((ENTITIES_DIR / "affiliations").glob("*.yml")):
+        records.extend(load_yaml(path).get("affiliations") or [])
+    return records
+
+
 def collect_entities() -> tuple[dict[str, Metadata], dict[str, Metadata]]:
     """Merge every author/affiliation entity file into id-keyed maps."""
     authors: dict[str, Metadata] = {}
@@ -106,8 +182,35 @@ def collect_entities() -> tuple[dict[str, Metadata], dict[str, Metadata]]:
         for path in sorted(entity_dir.glob("*.yml")):
             for entry in load_yaml(path).get(key) or []:
                 if entry.get("id"):
-                    # First definition wins; a few ids are declared twice upstream.
+                    # First definition wins. An author id is legitimately claimed
+                    # by several files — one per affiliation, plus a corr/eq
+                    # variant — and an article resolves its own authors from the
+                    # files it names, so this only builds the registry used to
+                    # fill in what an article left out. Collisions that are not
+                    # legitimate are reported by duplicate_affiliation_ids().
                     target.setdefault(entry["id"], entry)
+
+    for identifier, files, differing in duplicate_affiliation_ids():
+        print(
+            f"\n  ! {identifier} is claimed by {len(files)} affiliation files: "
+            f"{', '.join(files)}",
+        )
+        print(
+            f"      differing: {', '.join(differing) or 'nothing — the same record twice'}",
+        )
+        print("      not merged; one organisation or one organisation and its groups?")
+
+    for ror, ids in split_affiliation_ids().items():
+        print(f"\n  ! one organisation, several ids: {', '.join(ids)} (ror {ror})")
+        print(
+            "      same institution split by institute or group; kept apart on purpose",
+        )
+
+    for ref, files in unresolved_affiliation_refs().items():
+        print(
+            f"\n  ! affiliation ref {ref!r} names no affiliation, used by {len(files)} author file(s)",
+        )
+        print(f"      {', '.join(files[:3])}{'…' if len(files) > 3 else ''}")
 
     return authors, affiliations
 

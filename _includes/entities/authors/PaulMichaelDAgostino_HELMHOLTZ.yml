@@ -1,0 +1,10 @@
+---
+author:
+  - id: PaulMichaelDAgostino
+    name:
+      given: Paul Michael
+      family: D'Agostino
+      literal: Paul Michael D'Agostino
+    orcid: 0000-0002-8323-5416
+    affiliations:
+      - ref: helmholtz

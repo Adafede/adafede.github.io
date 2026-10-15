@@ -1,0 +1,10 @@
+---
+author:
+  - id: AleksandraKorenskaia
+    name:
+      given: Aleksandra
+      family: Korenskaia
+      literal: Aleksandra Korenskaia
+    orcid: 0000-0003-3002-6458
+    affiliations:
+      - ref: tübingen

@@ -1,0 +1,10 @@
+---
+author:
+  - id: TilmannWeber
+    name:
+      given: Tilmann
+      family: Weber
+      literal: Tilmann Weber
+    orcid: 0000-0002-8260-5120
+    affiliations:
+      - ref: dtu

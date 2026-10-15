@@ -1,0 +1,10 @@
+---
+author:
+  - id: AlanBridge
+    name:
+      given: Alan J.
+      family: Bridge
+      literal: Alan J. Bridge
+    orcid: 0000-0003-2148-9135
+    affiliations:
+      - ref: sib

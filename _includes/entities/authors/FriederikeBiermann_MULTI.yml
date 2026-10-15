@@ -1,0 +1,12 @@
+---
+author:
+  - id: FriederikeBiermann
+    name:
+      given: Friederike
+      family: Biermann
+      literal: Friederike Biermann
+    orcid: 0000-0002-9152-2562
+    affiliations:
+      - ref: wageningen
+      - ref: frankfurt
+      - ref: loewe

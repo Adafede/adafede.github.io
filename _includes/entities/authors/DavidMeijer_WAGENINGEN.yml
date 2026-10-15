@@ -1,0 +1,10 @@
+---
+author:
+  - id: DavidMeijer
+    name:
+      given: David
+      family: Meijer
+      literal: David Meijer
+    orcid: 0000-0001-6406-4394
+    affiliations:
+      - ref: wageningen

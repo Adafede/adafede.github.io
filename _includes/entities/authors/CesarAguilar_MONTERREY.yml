@@ -1,0 +1,10 @@
+---
+author:
+  - id: CesarAguilar
+    name:
+      given: César
+      family: Aguilar
+      literal: César Aguilar
+    orcid: 0000-0001-7044-2419
+    affiliations:
+      - ref: monterrey

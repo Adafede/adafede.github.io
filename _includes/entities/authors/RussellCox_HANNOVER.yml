@@ -1,0 +1,10 @@
+---
+author:
+  - id: RussellCox
+    name:
+      given: Russell
+      family: Cox
+      literal: Russell Cox
+    orcid: 0000-0002-1844-0157
+    affiliations:
+      - ref: hannover

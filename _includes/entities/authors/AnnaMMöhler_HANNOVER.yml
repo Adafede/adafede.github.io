@@ -1,0 +1,10 @@
+---
+author:
+  - id: AnnaMMöhler
+    name:
+      given: Anna M.
+      family: Köhler
+      literal: Anna M. Köhler
+    orcid: 0000-0002-2715-8954
+    affiliations:
+      - ref: hannover

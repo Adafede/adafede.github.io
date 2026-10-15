@@ -1,0 +1,10 @@
+---
+author:
+  - id: NadineZiemert
+    name:
+      given: Nadine
+      family: Ziemert
+      literal: Nadine Ziemert
+    orcid: 0000-0002-7264-1857
+    affiliations:
+      - ref: tübingen

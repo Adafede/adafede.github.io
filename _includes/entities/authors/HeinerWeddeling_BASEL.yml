@@ -1,0 +1,10 @@
+---
+author:
+  - id: HeinerWeddeling
+    name:
+      given: Heiner G.
+      family: Weddeling
+      literal: Heiner G. Weddeling
+    orcid: 0009-0003-2819-1486
+    affiliations:
+      - ref: basel

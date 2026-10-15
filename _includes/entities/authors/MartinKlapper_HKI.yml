@@ -1,0 +1,10 @@
+---
+author:
+  - id: MartinKlapper
+    name:
+      given: Martin
+      family: Klapper
+      literal: Martin Klapper
+    orcid: 0000-0002-4977-2541
+    affiliations:
+      - ref: hki

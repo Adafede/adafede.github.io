@@ -1,0 +1,11 @@
+---
+author:
+  - id: HannahAugustijn
+    name:
+      given: Hannah E.
+      family: Augustijn
+      literal: Hannah E. Augustijn
+    orcid: 0000-0002-1862-6699
+    affiliations:
+      - ref: wageningen
+      - ref: leiden

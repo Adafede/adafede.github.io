@@ -16,14 +16,85 @@ categories:
   - SMARTS
 metadata-files:
   - ../../_includes/entities/authors/AdrianoRutz_IMSB.yml
-  - ../../_includes/entities/authors/MITE_authors_1.yml
+  - ../../_includes/entities/authors/DanielProbst_WAGENINGEN.yml
+  - ../../_includes/entities/authors/CesarAguilar_MONTERREY.yml
+  - ../../_includes/entities/authors/DanielAkiyama_UNICAMP.yml
+  - ../../_includes/entities/authors/FabrizioAlberti_WARWICK.yml
+  - ../../_includes/entities/authors/HannahAugustijn_MULTI.yml
+  - ../../_includes/entities/authors/NicoleAvalon_MULTI.yml
+  - ../../_includes/entities/authors/ChristineBeemelmanns_HELMHOLTZ.yml
+  - ../../_includes/entities/authors/HellenBertoletiBarbie ri_UNICAMP.yml
+  - ../../_includes/entities/authors/FriederikeBiermann_MULTI.yml
+  - ../../_includes/entities/authors/AlanBridge_SIB.yml
+  - ../../_includes/entities/authors/EstebanCharriaGiron_MULTI.yml
+  - ../../_includes/entities/authors/RussellCox_HANNOVER.yml
+  - ../../_includes/entities/authors/MaxCrusemann_MULTI.yml
+  - ../../_includes/entities/authors/PaulMichaelDAgostino_HELMHOLTZ.yml
+  - ../../_includes/entities/authors/MarcFeuermann_SIB.yml
+  - ../../_includes/entities/authors/JenniferGerke_HANNOVER.yml
+  - ../../_includes/entities/authors/KarinaGutierrezGarcía_MULTI.yml
+  - ../../_includes/entities/authors/JonathanHolme_SINTEF.yml
+  - ../../_includes/entities/authors/JiYeonHwang_FREDERICK.yml
+  - ../../_includes/entities/authors/RiccardoIacovelli_VTT.yml
+  - ../../_includes/entities/authors/JulioCesarJeronimoBarbosa_UNICAMP.yml
+  - ../../_includes/entities/authors/NavneetKaur_NABI.yml
+  - ../../_includes/entities/authors/MartinKlapper_HKI.yml
+  - ../../_includes/entities/authors/AnnaMMöhler_HANNOVER.yml
+  - ../../_includes/entities/authors/AleksandraKorenskaia_TÜBINGEN.yml
+  - ../../_includes/entities/authors/NoelKubach_TÜBINGEN.yml
+  - ../../_includes/entities/authors/ByungTaeLee_KAIST.yml
+  - ../../_includes/entities/authors/CatarinaLoureiro_WAGENINGEN.yml
+  - ../../_includes/entities/authors/ShrikantMantri_NABI.yml
+  - ../../_includes/entities/authors/SimranNarula_NABI.yml
+  - ../../_includes/entities/authors/DavidMeijer_WAGENINGEN.yml
+  - ../../_includes/entities/authors/JorgeNavarroMunoz_WAGENINGEN.yml
+  - ../../_includes/entities/authors/GiangSonNguyen_SINTEF.yml
+  - ../../_includes/entities/authors/SunainaPaliyal_NABI.yml
+  - ../../_includes/entities/authors/MohitPanghal_NABI.yml
+  - ../../_includes/entities/authors/LatikaRao_NABI.yml
+  - ../../_includes/entities/authors/SimonSieber_UZH.yml
+  - ../../_includes/entities/authors/NikaSokolova_GRONINGEN.yml
+  - ../../_includes/entities/authors/SvenSowa_BASEL.yml
+  - ../../_includes/entities/authors/JudithSzenei_DTU.yml
+  - ../../_includes/entities/authors/BarbaraTerlouw_LEIDEN.yml
+  - ../../_includes/entities/authors/HeinerWeddeling_BASEL.yml
+  - ../../_includes/entities/authors/JingweiYu_SHENZHEN.yml
+  - ../../_includes/entities/authors/NadineZiemert_TÜBINGEN.yml
+  - ../../_includes/entities/authors/TilmannWeber_DTU.yml
+  - ../../_includes/entities/authors/KaiBlin_DTU.yml
   - ../../_includes/entities/authors/JustinVanDerHooft_MULTI.yml
   - ../../_includes/entities/authors/MarnixMedema_WAGENINGEN_corr.yml
   - ../../_includes/entities/authors/MitjaZdouc_WAGENINGEN_corr.yml
   - ../../_includes/entities/affiliations/IMSB_Zamboni.yml
   - ../../_includes/entities/affiliations/WAGENINGEN.yml
   - ../../_includes/entities/affiliations/JOHANNESBURG.yml
-  - ../../_includes/entities/affiliations/MITE.yml
+  - ../../_includes/entities/affiliations/ARIZONA.yml
+  - ../../_includes/entities/affiliations/BASEL_Hamburger.yml
+  - ../../_includes/entities/affiliations/BONN.yml
+  - ../../_includes/entities/affiliations/CARNEGIE.yml
+  - ../../_includes/entities/affiliations/DTU.yml
+  - ../../_includes/entities/affiliations/FRANKFURT.yml
+  - ../../_includes/entities/affiliations/FRANKFURT2.yml
+  - ../../_includes/entities/affiliations/FREDERICK.yml
+  - ../../_includes/entities/affiliations/GRONINGEN.yml
+  - ../../_includes/entities/affiliations/HANNOVER.yml
+  - ../../_includes/entities/affiliations/HELMHOLTZ.yml
+  - ../../_includes/entities/affiliations/HKI.yml
+  - ../../_includes/entities/affiliations/IRVINE.yml
+  - ../../_includes/entities/affiliations/KAIST.yml
+  - ../../_includes/entities/affiliations/LEIDEN.yml
+  - ../../_includes/entities/affiliations/LOEWE.yml
+  - ../../_includes/entities/affiliations/MONTERREY.yml
+  - ../../_includes/entities/affiliations/NABI.yml
+  - ../../_includes/entities/affiliations/SCRIPPS.yml
+  - ../../_includes/entities/affiliations/SHENZHEN.yml
+  - ../../_includes/entities/affiliations/SIB.yml
+  - ../../_includes/entities/affiliations/SINTEF.yml
+  - ../../_includes/entities/affiliations/TÜBINGEN.yml
+  - ../../_includes/entities/affiliations/UNICAMP.yml
+  - ../../_includes/entities/affiliations/UZH.yml
+  - ../../_includes/entities/affiliations/VTT.yml
+  - ../../_includes/entities/affiliations/WARWICK.yml
 abstract: >
   Secondary or specialized metabolites show extraordinary structural diversity
   and potent biological activities relevant for clinical and industrial

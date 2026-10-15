@@ -1,0 +1,10 @@
+---
+author:
+  - id: RiccardoIacovelli
+    name:
+      given: Riccardo
+      family: Iacovelli
+      literal: Riccardo Iacovelli
+    orcid: 0000-0003-4819-2251
+    affiliations:
+      - ref: vtt

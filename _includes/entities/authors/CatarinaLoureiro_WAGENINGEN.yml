@@ -1,0 +1,10 @@
+---
+author:
+  - id: CatarinaLoureiro
+    name:
+      given: Catarina
+      family: Loureiro
+      literal: Catarina Loureiro
+    orcid: 0000-0002-6258-2080
+    affiliations:
+      - ref: wageningen

@@ -1,0 +1,10 @@
+---
+author:
+  - id: MarcFeuermann
+    name:
+      given: Marc
+      family: Feuermann
+      literal: Marc Feuermann
+    orcid: 0000-0002-4187-2863
+    affiliations:
+      - ref: sib

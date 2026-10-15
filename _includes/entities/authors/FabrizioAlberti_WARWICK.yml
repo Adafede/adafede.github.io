@@ -1,0 +1,10 @@
+---
+author:
+  - id: FabrizioAlberti
+    name:
+      given: Fabrizio
+      family: Alberti
+      literal: Fabrizio Alberti
+    orcid: 0000-0001-6585-0696
+    affiliations:
+      - ref: warwick

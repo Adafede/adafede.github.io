@@ -1,0 +1,10 @@
+---
+author:
+  - id: JenniferGerke
+    name:
+      given: Jennifer
+      family: Gerke
+      literal: Jennifer Gerke
+    orcid: 0000-0001-7301-2676
+    affiliations:
+      - ref: hannover

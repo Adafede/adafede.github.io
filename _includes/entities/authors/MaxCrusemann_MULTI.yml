@@ -1,0 +1,11 @@
+---
+author:
+  - id: MaxCrusemann
+    name:
+      given: Max
+      family: Crüsemann
+      literal: Max Crüsemann
+    orcid: 0000-0001-6660-2715
+    affiliations:
+      - ref: bonn
+      - ref: frankfurt2
