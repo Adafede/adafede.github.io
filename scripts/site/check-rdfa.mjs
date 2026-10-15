@@ -34,6 +34,9 @@ const BARE_TERMS = new Set([
   'a', 'describedby', 'label', 'title', 'type', 'value', 'xml:lang', 'role',
 ]);
 
+/** An absolute IRI: scheme://... — its first colon is a scheme separator. */
+const IRI = /^[a-z][a-z0-9+.-]*:\/\//i;
+
 function htmlFiles(dir) {
   const out = [];
   for (const entry of readdirSync(dir)) {
@@ -58,9 +61,12 @@ for (const root of roots) {
     // hidden element, as Quarto does, so this collects all of them.
     const declared = new Set();
     for (const m of html.matchAll(/prefix="([^"]*)"/g)) {
-      for (const pair of m[1].trim().split(/\s+/)) {
-        const prefix = pair.split(':')[0];
-        if (prefix) declared.add(prefix);
+      // Each entry is `prefix: iri` with a space after the colon, which is the
+      // RDFa serialization. Matching `name: iri` directly keeps the IRI's own
+      // colons out of the prefix, so `wd: http://…` yields `wd`, not `wd` and
+      // a bogus `http`.
+      for (const pair of m[1].matchAll(/([\w-]+):\s*(\S+)/g)) {
+        declared.add(pair[1]);
       }
     }
 
@@ -77,7 +83,11 @@ for (const root of roots) {
         if (!value) continue;
         for (const term of value.split(/\s+/)) {
           if (!term || BARE_TERMS.has(term)) continue;
-          if (!term.includes(':')) continue; // A bare IRI or term.
+          // An absolute IRI is not a prefixed term: `https:` is its scheme, not
+          // a declared prefix. Skipping only on a missing colon reported these
+          // as undeclared prefixes.
+          if (!term.includes(':')) continue;
+          if (IRI.test(term)) continue; // A bare IRI or term.
           const prefix = term.slice(0, term.indexOf(':'));
           if (!declared.has(prefix)) {
             problems.push(`${name}: <${tag.slice(0, 90)}…> uses undeclared prefix "${prefix}:"`);
