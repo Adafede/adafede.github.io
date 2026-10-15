@@ -47,6 +47,7 @@ metadata-files:
   - ../../_includes/entities/affiliations/IOCB_Pluskal.yml
   - ../../_includes/entities/affiliations/UCSD.yml
   - ../../_includes/entities/affiliations/HZM.yml
+  - ../../_includes/entities/affiliations/ANTWERP.yml
   - ../../_includes/entities/affiliations/PSU.yml
   - ../../_includes/entities/affiliations/FSU_Boecker.yml
   - ../../_includes/entities/affiliations/SFU.yml
