@@ -2,11 +2,21 @@
 
 from __future__ import annotations
 
+from datetime import date
 from pathlib import Path
 
 from .logger import get_logger
 
 logger = get_logger(__name__)
+
+
+def _is_real_date(stamp: str) -> bool:
+    """Whether *stamp* is a calendar date, not merely a date-shaped string."""
+    try:
+        date.fromisoformat(stamp)
+    except ValueError:
+        return False
+    return True
 
 
 class FileSystem:
@@ -29,9 +39,18 @@ class FileSystem:
         Returns:
             List of Path objects for dated post files
         """
-        pattern = "20[0-9][0-9]-[01][0-9]-[0-3][0-9]_*.qmd"
+        # A real calendar date. The glob is deliberately loose on the date (a
+        # glob cannot express "month < 13") and the match is validated with
+        # date.fromisoformat below: the previous pattern accepted months 00-19
+        # and days 00-39, and whatever called this wrote that string straight
+        # into `date:` frontmatter as though it were a day that exists.
+        pattern = "20[0-9][0-9]-[0-9][0-9]-[0-9][0-9]_*.qmd"
         posts_path = self.root / posts_dir
-        files = list(posts_path.glob(pattern))
+        files = [
+            candidate
+            for candidate in posts_path.glob(pattern)
+            if _is_real_date(candidate.name[:10])
+        ]
         logger.debug(f"Found {len(files)} posts in {posts_path}")
         return files
 
@@ -61,9 +80,14 @@ class FileSystem:
         # Calculate relative path from root
         try:
             rel_path = qmd_path.relative_to(self.root)
-        except ValueError:
-            # If qmd_path is not relative to root, assume it's already relative
-            rel_path = qmd_path
+        except ValueError as e:
+            # `Path("/a") / Path("/b")` is `/b`: the right operand's absolute
+            # path discards the left one. Assuming "already relative" on a path
+            # that is actually absolute therefore resolved outside the site
+            # root, and every caller then gated on exists() and quietly skipped.
+            raise ValueError(
+                f"Expected {qmd_path} to be relative to the site root {self.root}",
+            ) from e
 
         # Convert to HTML path in site directory
         html_rel = rel_path.with_suffix(".html")

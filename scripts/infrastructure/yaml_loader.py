@@ -3,7 +3,7 @@
 import re
 from pathlib import Path
 
-from ruamel.yaml import YAML
+from ruamel.yaml import YAML, YAMLError
 
 from .logger import get_logger
 
@@ -61,7 +61,7 @@ class YamlLoader:
             # Handle pure YAML files
             return self._yaml.load(content)
 
-        except (OSError, ValueError) as e:
+        except (OSError, ValueError, YAMLError) as e:
             logger.warning(f"Failed to parse YAML from {path}: {e}")
             return None
 
@@ -75,11 +75,14 @@ class YamlLoader:
             yaml_str: YAML content as string
 
         Returns:
-            Parsed dictionary or None if invalid
+            Parsed dictionary, or None if the string is not valid YAML. ruamel
+            raises MarkedYAMLError, which is not a ValueError, so it has to be
+            named explicitly or a malformed document aborts the whole run
+            instead of degrading the way this signature promises.
         """
         try:
             return self._yaml.load(yaml_str)
-        except ValueError as e:
+        except (ValueError, YAMLError) as e:
             logger.warning(f"Failed to parse YAML string: {e}")
             return None
 
