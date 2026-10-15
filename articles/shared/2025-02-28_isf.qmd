@@ -52,6 +52,7 @@ metadata-files:
   - ../../_includes/entities/affiliations/WAGENINGEN.yml
   - ../../_includes/entities/affiliations/JOHANNESBURG.yml
   - ../../_includes/entities/affiliations/FSU_Boecker.yml
+  - ../../_includes/entities/affiliations/ULIV.yml
   - ../../_includes/entities/affiliations/SFU.yml
   - ../../_includes/entities/affiliations/UALBERTA.yml
   - ../../_includes/entities/affiliations/UCD.yml
