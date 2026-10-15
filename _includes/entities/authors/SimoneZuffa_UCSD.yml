@@ -1,0 +1,11 @@
+---
+author:
+  - id: SimoneZuffa
+    name:
+      given: Simone
+      family: Zuffa
+      literal: Simone Zuffa
+    orcid: 0000-0001-7237-3402
+    qid: Q90280154
+    affiliations:
+      - ref: ucsd

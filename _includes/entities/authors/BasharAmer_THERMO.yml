@@ -1,0 +1,11 @@
+---
+author:
+  - id: BasharAmer
+    name:
+      given: Bashar
+      family: Amer
+      literal: Bashar Amer
+    orcid: 0000-0002-3525-0945
+    qid: Q59684749
+    affiliations:
+      - ref: thermo

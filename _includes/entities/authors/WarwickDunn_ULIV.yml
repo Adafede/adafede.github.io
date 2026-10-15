@@ -1,0 +1,11 @@
+---
+author:
+  - id: WarwickDunn
+    name:
+      given: Warwick
+      family: Dunn
+      literal: Warwick Dunn
+    orcid: 0000-0001-6924-0027
+    qid: Q42869731
+    affiliations:
+      - ref: uliv

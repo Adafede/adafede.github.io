@@ -1,0 +1,11 @@
+---
+author:
+  - id: MichaelWitting
+    name:
+      given: Michael
+      family: Witthing
+      literal: Michael Witting
+    orcid: 0000-0002-1462-4426
+    qid: Q57058851
+    affiliations:
+      - ref: hzm

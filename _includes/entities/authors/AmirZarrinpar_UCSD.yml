@@ -1,0 +1,11 @@
+---
+author:
+  - id: AmirZarrinpar
+    name:
+      given: Amir
+      family: Zarrinpar
+      literal: Amir Zarrinpar
+    orcid: 0000-0001-6423-5982
+    qid: Q51032415
+    affiliations:
+      - ref: ucsd_gen

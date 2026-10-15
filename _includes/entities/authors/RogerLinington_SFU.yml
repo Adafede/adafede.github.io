@@ -1,0 +1,11 @@
+---
+author:
+  - id: RogerLinington
+    name:
+      given: Roger
+      family: Linington
+      literal: Roger Linington
+    orcid: 0000-0003-1818-4971
+    qid: Q41365997
+    affiliations:
+      - ref: sfu

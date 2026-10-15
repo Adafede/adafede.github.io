@@ -1,0 +1,11 @@
+---
+author:
+  - id: OliverFiehn
+    name:
+      given: Oliver
+      family: Fiehn
+      literal: Oliver Fiehn
+    orcid: 0000-0002-6261-8928
+    qid: Q28540892
+    affiliations:
+      - ref: ucd
