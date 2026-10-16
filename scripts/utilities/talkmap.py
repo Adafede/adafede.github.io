@@ -8,15 +8,16 @@ from __future__ import annotations
 
 import json
 import sys
+from html import escape
 from pathlib import Path
 from time import sleep
 
 import folium
 import markdown  # pyright: ignore[reportMissingTypeStubs]
 from geopy import Nominatim  # pyright: ignore[reportMissingTypeStubs]
+from geopy.exc import GeopyError  # pyright: ignore[reportMissingTypeStubs]
 from geopy.location import Location  # pyright: ignore[reportMissingTypeStubs]
 
-# Add project root to path so `scripts` is importable as a package
 # Project root, computed from this file rather than from the working directory.
 # Quarto invokes these with the project root as the CWD, so a cwd-relative root
 # resolved there by luck; every other directory gave a root that exists but
@@ -146,8 +147,15 @@ def geocode_location(
 
         return (lat, lon)
 
-    except (AttributeError, TypeError):
-        logger.error(f"❌ Error geocoding '{location}'")
+    except (AttributeError, TypeError, GeopyError) as e:
+        # GeopyError is the base of the quota, rate-limit, unavailable and
+        # timeout failures, none of which are OSError or ValueError. Without it
+        # a single transient Nominatim failure escaped this function, escaped
+        # extract_talks_metadata (which only catches OSError/AttributeError/
+        # ValueError), aborted the map build — and because cache.save() runs
+        # after extract_talks_metadata returns, discarded every location that
+        # had just been geocoded.
+        logger.error(f"❌ Error geocoding '{location}': {e}")
         return None
 
 
@@ -170,7 +178,7 @@ def extract_talks_metadata(
     Returns:
         List of tuples: (latitude, longitude, metadata_dict)
     """
-    locations_with_meta = []
+    locations_with_meta: list[tuple[float, float, dict[str, object]]] = []
 
     for qmd_file in talks_dir.glob("*.qmd"):
         try:
@@ -234,9 +242,12 @@ def create_popup_html(meta: dict[str, object]) -> str:
     Returns:
         HTML string for popup
     """
-    title = f"<b>{meta.get('title', 'No title')}</b>"
-    venue = f"Venue: {meta.get('venue')}" if meta.get("venue") else ""
-    date = f"Date: {meta.get('date')}" if meta.get("date") else ""
+    # Escaped: the popup is HTML, and a title or venue containing "<" or "&"
+    # was written into it verbatim. The description below is Markdown, which is
+    # the one field here that is meant to render markup.
+    title = f"<b>{escape(str(meta.get('title', 'No title')))}</b>"
+    venue = f"Venue: {escape(str(meta['venue']))}" if meta.get("venue") else ""
+    date = f"Date: {escape(str(meta['date']))}" if meta.get("date") else ""
 
     # Convert markdown description to HTML
     desc = ""
