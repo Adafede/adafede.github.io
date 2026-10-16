@@ -1,6 +1,7 @@
 """YAML parsing and loading utilities."""
 
 import re
+from io import StringIO
 from pathlib import Path
 
 from ruamel.yaml import YAML, YAMLError
@@ -96,8 +97,6 @@ class YamlLoader:
         Returns:
             YAML string
         """
-        from io import StringIO
-
         stream = StringIO()
         _ = self._yaml.dump(data, stream, **kwargs)
         return stream.getvalue()
@@ -118,20 +117,3 @@ class YamlLoader:
         """
         full_path = (base_dir / relative_path).resolve()
         return self.load_from_path(full_path)
-
-    def load_author_file(
-        self,
-        author_id: str,
-        root_dir: Path,
-    ) -> dict[str, object] | list[object] | None:
-        """Load author metadata from _authors/_<id>.yml file.
-
-        Args:
-            author_id: Author identifier (e.g., 'adriano')
-            root_dir: Project root directory
-
-        Returns:
-            Author metadata dictionary or None
-        """
-        author_file = root_dir / "_authors" / f"_{author_id}.yml"
-        return self.load_from_path(author_file)
