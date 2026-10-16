@@ -7,7 +7,7 @@ pagination:
 permalink: "/articles/{{ article.id }}.html"
 eleventyComputed:
   title: "{{ article.data.title | safe }}"
-  description: "{{ article.data.abstract | orDescription(article.data) | plainText }}"
+  description: "{{ article.data.abstract | orDescription(article.data) | plainText | safe }}"
   rdfaType: ScholarlyArticle
   doi: "{{ article.data.doi }}"
   authors: "{{ article.data.authors }}"
