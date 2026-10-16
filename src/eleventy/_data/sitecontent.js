@@ -115,6 +115,13 @@ function summaryFrom(body) {
 const byPubDateDesc = (a, b) => new Date(b.data.pubDate) - new Date(a.data.pubDate);
 const byDateDesc = (a, b) => new Date(b.data.date) - new Date(a.data.date);
 
+/** A dated listing collection (talks, teaching): flat directory, one page each. */
+function loadEvents(dir) {
+  return loadCollection(dir)
+    .map((item) => ({ ...item, url: `/${dir}/${item.id}.html` }))
+    .sort(byDateDesc);
+}
+
 export default function buildData() {
   return {
     posts: () =>
@@ -128,14 +135,8 @@ export default function buildData() {
 
     articles: () => loadNested('articles').sort(byDateDesc),
     // Talks and teaching each get their own page; the listing links to them.
-    talks: () =>
-      loadCollection('talks')
-        .map((t) => ({ ...t, url: `/talks/${t.id}.html` }))
-        .sort(byDateDesc),
-    teaching: () =>
-      loadCollection('teaching')
-        .map((t) => ({ ...t, url: `/teaching/${t.id}.html` }))
-        .sort(byDateDesc),
+    talks: () => loadEvents('talks'),
+    teaching: () => loadEvents('teaching'),
     varia: () => {
       const base = join(CONTENT, 'varia');
       if (!existsSync(base)) return [];
