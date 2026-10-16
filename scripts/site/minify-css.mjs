@@ -20,16 +20,11 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const SOURCE = join(ROOT, 'src', 'styles', 'global.css');
 const TARGET = join(ROOT, 'build', 'eleventy', 'styles.css');
 
-const { code } = transform({
-  filename: SOURCE,
-  code: readFileSync(SOURCE),
-  minify: true,
-});
+const source = readFileSync(SOURCE);
+const { code } = transform({ filename: SOURCE, code: source, minify: true });
 
 mkdirSync(dirname(TARGET), { recursive: true });
 writeFileSync(TARGET, code);
 
 const kb = (n) => `${(n / 1024).toFixed(0)} KB`;
-console.log(
-  `  + build/eleventy/styles.css (${kb(readFileSync(SOURCE).length)} -> ${kb(code.length)})`,
-);
+console.log(`  + build/eleventy/styles.css (${kb(source.length)} -> ${kb(code.length)})`);
