@@ -77,9 +77,11 @@ export function buildJsonFeed(posts, { url, renderBody }) {
       // source path of the first image; the body now carries the optimised
       // WebP, so the original format is restored here.
       if (body.image) {
-        item.image = body.image.replace(/\.webp$/i, '.png').startsWith('/')
-          ? `https://adafede.github.io${body.image.replace(/\.webp$/i, '.png')}`
-          : body.image.replace(/\.webp$/i, '.png');
+        // Derived from `base` rather than a literal host, so the feed cannot
+        // end up pointing at one domain while every other URL in it points at
+        // another.
+        const source = body.image.replace(/\.webp$/i, '.png');
+        item.image = source.startsWith('/') ? `${base}${source}` : source;
       }
       if (post.data.pdf) {
         item.attachments = [
