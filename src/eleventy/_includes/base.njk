@@ -109,7 +109,7 @@
            `light-dark()` pair, so flipping it flips the whole palette. No
            script — and nothing that remembers the choice, which would need one.
            Wrapped as a WebMCP tool so agents can set the theme declaratively. #}
-        <form class="theme-switch-form" toolname="set_colour_theme" tooldescription="Set the site colour theme to follow the system, light, or dark. The change applies immediately via CSS; nothing is submitted to a server." onsubmit="return false">
+        <form class="theme-switch-form" toolname="set_colour_theme" tooldescription="Set the site colour theme to follow the system, light, or dark. The change applies immediately via CSS; nothing is submitted to a server.">
         <fieldset class="theme-switch">
           <legend class="visually-hidden">Colour theme</legend>
           <input type="radio" name="theme" id="theme-auto" value="auto" toolparamdescription="Colour theme: auto follows the operating system preference." checked>
@@ -159,6 +159,7 @@
        handled at build time by an Eleventy transform that adds
        target="_blank" and rel="noopener noreferrer" — see the comment on
        externalLinks in eleventy.config.mjs. #}
+    <script defer src="/theme-form.js"></script>
     <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js" crossorigin="anonymous" integrity="sha384-6r8ANWkTbGeAoBOxTtwsJD6VBfqnKe+kD3q/w51t91jCOCSxtKcCN2erSIv/1GHO"></script>
   </body>
 </html>
