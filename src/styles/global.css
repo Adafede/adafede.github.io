@@ -2309,15 +2309,22 @@ h3:hover > .heading-anchor,
 
 /* ------------------------------------------------------------- tag filtering */
 
+/* JS-driven hiding: the inline script sets data-hidden to hide entries that
+   match none of the checked tags. This is the union (OR) path that CSS
+   `:has(:checked)` cannot express without enumerating every subset. */
+[data-hidden] { display: none !important; }
+/* The same treatment for whole sections left with no surviving entries. */
+[data-group-hidden] { display: none !important; }
+
 .tag-filter {
   margin-block-end: var(--space-l);
 }
 
-/* The inputs drive the CSS but are not drawn: a row of radios above a row of
-   pills is noise. They stay in the DOM and keyboard-reachable; the matching
-   label carries the focus ring and the checked state. */
-/* The fieldset exists for semantics and for the focus target; the radios
-   themselves are not drawn. A row of radios above a row of pills is noise. */
+/* The inputs drive the CSS and JS but are not drawn: a row of checkboxes above
+   a row of pills is noise. They stay in the DOM and keyboard-reachable; the
+   matching label carries the focus ring and the checked state. */
+/* The fieldset exists for semantics and for the focus target; the checkboxes
+   themselves are not drawn. A row of checkboxes above a row of pills is noise. */
 .tag-filter__inputs {
   position: absolute;
   inline-size: 1px;
@@ -2363,9 +2370,9 @@ h3:hover > .heading-anchor,
 
 /* A button styled like a tag, so the control and the tags it matches share one
    appearance. 44px tall so it is reachable with a thumb. */
-/* A label standing in for a hidden radio: it needs the cursor and the padding
+/* A label standing in for a hidden checkbox: it needs the cursor and the padding
    a button would have had. */
-/* A label standing in for a hidden radio. It is a flex box rather than an
+/* A label standing in for a hidden checkbox. It is a flex box rather than an
    inline-block with padding, so the text is centred in the control's height
    instead of sitting against the top of it — which is what an inline-block
    with only `min-block-size` does. */
