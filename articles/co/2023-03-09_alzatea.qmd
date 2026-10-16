@@ -10,8 +10,10 @@ url: <https://doi.org/10.3389/fntpr.2023.1147195>
 categories:
   - Chemical composition
   - Isolation
+  - Metabolite Annotation
   - Metabolomics
   - Natural Products
+  - NMR
 abstract: |
  *Alzatea verticillata* Ruiz & Pav. (Alzateaceae) is a tropical tree from Central and South America.
  It is the only living species of *Alzatea* genus and the Alzateaceae family, all others being extinct.

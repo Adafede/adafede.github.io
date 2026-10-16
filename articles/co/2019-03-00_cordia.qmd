@@ -15,6 +15,7 @@ categories:
   - Liquid Chromatography-Tandem Mass Spectrometry
   - Natural Extracts
   - Natural Products
+  - NMR
 abstract: |
  The dichloromethane extract of the root bark of the Panamanian plant *Cordia anisophylla* J.S. Mill. (Boraginaceae) presented antifungal activity against a susceptible strain of *Candida albicans* in a bioautography primary screening.
  The susceptible strain was used to detect minor active compounds that would not have been detected using a classical approach.

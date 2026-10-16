@@ -13,10 +13,11 @@ image: https://raw.githubusercontent.com/taxonomicallyinformedannotation/tima/re
 image-alt: TIMA's Workflow
 categories:
   - Chemotaxonomy
-  - Metabolomics
   - Liquid Chromatography-Tandem Mass Spectrometry
-  - Natural Products
   - Metabolite Annotation
+  - Metabolomics
+  - Natural Products
+  - Open Science
 metadata-files:
   - ../../_includes/entities/authors/AdrianoRutz_unige_pharm_wolfender_eq.yml
   - ../../_includes/entities/authors/MiwaDounoueKubo_MULTI_eq.yml

@@ -10,6 +10,7 @@ url: <https://doi.org/10.3389/fmolb.2022.1028334>
 categories:
   - Bioinformatics
   - Liquid Chromatography-Tandem Mass Spectrometry
+  - Metabolite Annotation
   - Natural Products
 abstract: |
  Collections of natural extracts hold potential for the discovery of novel natural products with original modes of action.

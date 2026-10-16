@@ -10,7 +10,9 @@ qid: Q123938372
 url: <https://doi.org/10.3389/fpls.2023.1278745>
 categories:
   - Liquid Chromatography-Tandem Mass Spectrometry
+  - Metabolite Annotation
   - Metabolomics
+  - Microbiome
   - Natural Products
 abstract: |
  *Introduction**:

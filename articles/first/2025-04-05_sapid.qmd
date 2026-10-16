@@ -10,9 +10,11 @@ qid: Q138348705
 image: https://raw.githubusercontent.com/Adafede/sapid/refs/heads/main/man/figures/sapid-workflow.svg
 image-alt: SAPID's Workflow
 categories:
+  - Metabolite Annotation
   - Metabolomics
   - Liquid Chromatography-Tandem Mass Spectrometry
   - Natural Extracts
+  - NMR
   - Taste
 metadata-files:
   - ../../_includes/entities/authors/AdrianoRutz_MULTI_corr.yml

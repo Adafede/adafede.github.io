@@ -10,9 +10,12 @@ qid: Q138348474
 image: https://raw.githubusercontent.com/mite-standard/mite_web/refs/heads/main/app/static/images/workflow.svg
 image-alt: MITE's workflow
 categories:
+  - Bioinformatics
+  - Biocuration
   - Biosynthesis
   - Database
   - Natural Products
+  - Open Science
   - SMARTS
 metadata-files:
   - ../../_includes/entities/authors/AdrianoRutz_ethz_imsb_zamboni.yml

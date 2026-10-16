@@ -15,6 +15,7 @@ image: https://media.springernature.com/lw685/springer-static/image/art%3A10.118
 image-alt: Article's Graphical Abstract
 categories:
   - Monoterpene Indole Alkaloids
+  - Open Science
   - Spectral Library
   - Tandem Mass Spectrometry
   # metadata-files:

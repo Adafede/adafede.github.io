@@ -12,6 +12,7 @@ categories:
   - Chemical composition
   - Metabolomics
   - Natural Products
+  - Open Science
 abstract: |
  As privileged structures, natural products often display potent biological activities.
  However, the discovery of novel bioactive scaffolds is often hampered by the chemical complexity of the biological matrices they are found in.

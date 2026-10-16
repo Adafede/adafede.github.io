@@ -10,6 +10,7 @@ categories:
   - Bioinformatics
   - Biocuration
   - Knowledge Graph
+  - Open Science
 abstract: |
  The standardized identification of biomedical entities is a cornerstone of interoperability, reuse, and data integration in the life sciences.
  Several registries have been developed to catalog resources maintaining identifiers for biomedical entities such as small molecules, proteins, cell lines, and clinical trials.

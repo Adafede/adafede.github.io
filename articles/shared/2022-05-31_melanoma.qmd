@@ -16,9 +16,9 @@ categories:
   - Charged Aerosol Detector
   - Metabolomics
   - Liquid Chromatography-Tandem Mass Spectrometry
+  - Metabolite Annotation
   - Natural Extracts
   - Natural Products
-  - Metabolite Annotation
 metadata-files:
   - ../../_includes/entities/authors/TanjaHell_basel_pharmbio_hamburger_eq.yml
   - ../../_includes/entities/authors/AdrianoRutz_unige_pharm_wolfender_eq.yml

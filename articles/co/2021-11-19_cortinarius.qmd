@@ -11,6 +11,7 @@ categories:
   - Bioactivity
   - Chemical composition
   - Liquid Chromatography-Tandem Mass Spectrometry
+  - Metabolite Annotation
   - Natural Products
 abstract: |
  Fungi have developed a wide array of defense strategies to overcome mechanical injuries and pathogen infections.

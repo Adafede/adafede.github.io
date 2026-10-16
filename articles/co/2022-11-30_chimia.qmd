@@ -10,6 +10,7 @@ qid: Q115517760
 url: <https://doi.org/10.2533/chimia.2022.954>
 categories:
   - Bioinformatics
+  - Metabolite Annotation
   - Metabolomics
   - Natural Products
 abstract: |
