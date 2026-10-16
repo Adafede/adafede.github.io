@@ -14,7 +14,7 @@ metadata-files:
 
 - Extraction of an essential oil according to the European Pharmacopoeia
 
-- Gas Chromatography - Flame Ionization Detection analysis as a tool for quality
-  control
+- Gas Chromatography -- Flame Ionisation Detection analysis as a quality-control
+  tool
 
-- Notions of method optimization
+- Notions of method optimisation

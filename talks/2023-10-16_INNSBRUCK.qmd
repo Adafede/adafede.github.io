@@ -9,5 +9,5 @@ metadata-files:
   - ../_includes/entities/authors/AdrianoRutz_ethz_imsb_zamboni.yml
   - ../_includes/entities/affiliations/ethz_imsb_zamboni.yml
 description: |
-  Talk given in the frame of the Neue Forschungsergebnisse Pharmakognosie.
+  Given at the Neue Forschungsergebnisse Pharmakognosie.
 ---

@@ -10,8 +10,7 @@ metadata-files:
   - ../_includes/entities/authors/AdrianoRutz_ethz_imsb_zamboni.yml
   - ../_includes/entities/affiliations/ethz_imsb_zamboni.yml
 description: >
-  Talk given in the frame of the Prague Computational Mass Spectrometry
-  Workshop.
+  Given at the Prague Computational Mass Spectrometry Workshop.
 
   Available [here
   (talk)](https://adafede.github.io/my-presentations/20240417_prague/20240417_prague.pdf)

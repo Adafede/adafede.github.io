@@ -141,3 +141,68 @@ def test_author_file_names_carry_their_affiliation():
             if entry.get(flag):
                 suffix += mark
         assert path.name == f"{entry['id']}_{suffix}.yml", path.name
+
+
+def test_cv_year_range_reads_the_dashes_the_sources_write():
+    """The heading separator is a run of dashes, not a single one.
+
+    Every `cv/` partial spells the range `2015 -- 2016`: a lone `-` is a hyphen
+    in Markdown and `--` is what Pandoc's smart extension turns into an en dash.
+    The pattern used to accept only one dash at a time, so it matched nothing,
+    `endYear` and `current` came back false for every entry, and the CV page
+    printed the start year alone — `2015`, with no range at all. It failed
+    quietly, because the filename fallback supplies a start year either way.
+    """
+    from scripts.site.migrate_posts import CV_YEAR_RANGE_RE
+
+    for separator in ("--", "–", "—", "-"):
+        match = CV_YEAR_RANGE_RE.match(f"2015 {separator} 2016")
+        assert match is not None, f"{separator!r} did not parse"
+        assert match.group("from") == "2015"
+        assert match.group("to") == "2016"
+
+    ongoing = CV_YEAR_RANGE_RE.match("2022 -- present")
+    assert ongoing is not None, "'-- present' did not parse"
+    assert ongoing.group("to") == "present"
+
+    assert CV_YEAR_RANGE_RE.match("Swiss National ORD Prize") is None
+
+
+def test_cv_entries_carry_both_years_of_their_range():
+    """Every ranged CV entry keeps its end year and its `present` flag.
+
+    The regression test above covers the pattern; this one runs it over the real
+    partials through `parse_cv_entry`, so a source whose range stops parsing
+    fails on the data rather than on the regex.
+
+    Awards are excluded deliberately: `### Swiss National ORD Prize (2023)` is a
+    single point year, not a range, and `endYear`/`current` are correctly empty.
+    """
+    import pathlib
+    import re
+
+    from scripts.site.migrate_posts import CV_HEADING_RE, parse_cv_entry
+
+    cv_dir = pathlib.Path(__file__).resolve().parents[1] / "cv"
+    ranged = []
+    for path in sorted(cv_dir.glob("*/*.qmd")):
+        heading = path.read_text(encoding="utf-8").lstrip().splitlines()[0]
+        match = CV_HEADING_RE.match(heading)
+        if not match:
+            continue
+        date_range = (match.group("range") or "").strip()
+        if re.search(r"\d{4}\s*[-‐‑‒–—―]", date_range):
+            ranged.append((path, date_range))
+
+    assert ranged, "no ranged CV entries found"
+
+    for path, date_range in ranged:
+        # `parse_cv_entry` returns None for an empty file. Every path reaching
+        # here has a heading, so None means the file went blank, and that is
+        # worth its own message rather than a TypeError three lines down.
+        entry = parse_cv_entry(path)
+        assert entry is not None, f"{path.name} parsed to nothing"
+        assert entry["startYear"] is not None, f"{path.name} lost its start year"
+        assert entry["endYear"] is not None or entry["current"], (
+            f"{path.name} lost '{date_range}'"
+        )

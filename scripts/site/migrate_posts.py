@@ -793,6 +793,13 @@ CV_SECTIONS = [
 # "### Postdoctoral Researcher, ETH Zürich, Zürich (2022 - present)"
 CV_HEADING_RE = re.compile(r"^###\s+(?P<title>.+?)(?:\s*\((?P<range>[^)]*)\))?\s*$")
 
+# The separator between the two years is a run of dashes, not a single one: the
+# Markdown sources write `2022 -- present` because a lone `-` is a hyphen and
+# `--` is an en dash once Pandoc's smart extension has run. The character class
+# below covers all three spellings, so the same pattern reads `2011 -- 2016`,
+# `2011 – 2016` and `2011 - 2016` alike.
+CV_YEAR_RANGE_RE = re.compile(r"(?P<from>\d{4})\s*[-‐‑‒–—―]+\s*(?P<to>present|\d{4})")
+
 
 def parse_cv_entry(path: Path) -> Metadata | None:
     text = path.read_text(encoding="utf-8").strip()
@@ -814,10 +821,7 @@ def parse_cv_entry(path: Path) -> Metadata | None:
         body = text
         kind = "bullets"
 
-    year_match = re.match(
-        r"(?P<from>\d{4})\s*(?:-|–|—)\s*(?P<to>present|\d{4})",
-        date_range,
-    )
+    year_match = CV_YEAR_RANGE_RE.match(date_range)
     start = int(year_match.group("from")) if year_match else None
     end = year_match.group("to") if year_match else None
 

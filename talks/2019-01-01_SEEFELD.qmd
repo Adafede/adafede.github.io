@@ -11,5 +11,5 @@ metadata-files:
   - ../_includes/entities/authors/AdrianoRutz_unige_pharm_wolfender.yml
   - ../_includes/entities/affiliations/unige_pharm_wolfender.yml
 description: |
-  My first academic talk. Great experience!
+  My first academic talk — a valuable experience.
 ---

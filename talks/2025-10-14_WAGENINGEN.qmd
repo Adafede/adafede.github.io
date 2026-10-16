@@ -9,8 +9,7 @@ metadata-files:
   - ../_includes/entities/authors/AdrianoRutz_ethz_imsb_zamboni.yml
   - ../_includes/entities/affiliations/ethz_imsb_zamboni.yml
 description: >
-  Talk given in the frame of the “Knowledge Graphs for Plant and Microbiome
-  Multiomics” Symposium.
+  Given at the “Knowledge Graphs for Plant and Microbiome Multiomics” Symposium.
 
   Available
   [here](https://adafede.github.io/my-presentations/20251014_wageningen/index.html).

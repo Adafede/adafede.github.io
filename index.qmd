@@ -1,6 +1,6 @@
 ---
 title: Adriano Rutz
-subtitle: Swiss Pharmaceutical Scientist
+subtitle: Swiss pharmaceutical scientist
 about:
   id: hero-heading
   # image: /images/profile/avatar-260.webp

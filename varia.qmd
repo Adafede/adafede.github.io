@@ -59,7 +59,7 @@ listing:
     type: grid
 ---
 
-Some other pages of interest
+A selection of other pages
 
 ## Extras
 

@@ -1,12 +1,12 @@
-### Research and Teaching Assistant, UNIGE, Geneva (2017 - 2022)
+### Research and Teaching Assistant, UNIGE, Geneva (2017 -- 2022)
 
-Development of *LC-HRMS/MS* based approaches for comprehensive composition
-assessment of complex plant extracts.
+Development of *LC-HRMS/MS*-based approaches for comprehensive assessment of
+complex plant extracts.
 
-In depth annotation using Spectral Networking.
+In-depth annotation using spectral networking.
 
 Plant metabolomics.
 
 Teaching activities with Bachelor and Master students.
 
-Maintenance and optimization of analytical instruments (LC).
+Maintenance and optimisation of analytical instruments (LC).

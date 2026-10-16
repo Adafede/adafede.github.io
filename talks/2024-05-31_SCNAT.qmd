@@ -10,8 +10,8 @@ metadata-files:
   - ../_includes/entities/authors/AdrianoRutz_ethz_imsb_zamboni.yml
   - ../_includes/entities/affiliations/ethz_imsb_zamboni.yml
 description: >
-  Talk given in the frame of the Swiss Academy of Sciences (SCNAT) symposium
-  "Open Research Data – are we on track?".
+  Given at the Swiss Academy of Sciences (SCNAT) symposium "Open Research Data –
+  are we on track?".
 
   Available
   [here](https://adafede.github.io/my-presentations/20240531_bern/20240531_bern.pdf).
