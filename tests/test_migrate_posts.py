@@ -230,3 +230,34 @@ def test_prune_keeps_tags_but_drops_the_other_empty_values():
     from scripts.site.migrate_posts import prune
 
     assert prune({"tags": [], "venue": "", "doi": None, "authors": []}) == {"tags": []}
+
+
+def test_the_quarto_pipeline_paths_are_anchored_to_the_project_root():
+    """The Quarto-side scripts built their paths relative to the process CWD.
+
+    Quarto runs them with the project root as the working directory, so the
+    relative paths resolved by luck and nowhere else: invoked from /tmp they
+    produced "Bibliography not found" and handed Pandoc paths that do not exist.
+    """
+    import importlib
+
+    pandoc = importlib.import_module(
+        "scripts.utilities.run_pandoc_for_all_qmds",
+    )
+    directory = importlib.import_module(
+        "scripts.utilities.process_qmd_directory",
+    )
+
+    root = pandoc.PROJECT_ROOT
+    assert root.is_absolute()
+    for path in (
+        pandoc.POSTS_DIR,
+        pandoc.SITE_POSTS_DIR,
+        pandoc.BIBLIOGRAPHY_FILE,
+        pandoc.CSL_FILE,
+        *pandoc.PANDOC_FILTERS,
+    ):
+        assert path.is_absolute(), path
+        assert path.exists(), path
+
+    assert directory.PROJECT_ROOT == root

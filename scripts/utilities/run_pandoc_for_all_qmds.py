@@ -9,22 +9,27 @@ import sys
 from pathlib import Path
 
 # Add project root to path so `scripts` is importable as a package
-root_dir = Path(__file__).resolve().parent.parent.parent
-sys.path.insert(0, str(root_dir))
+PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
+sys.path.insert(0, str(PROJECT_ROOT))
 
 from scripts.infrastructure import FileSystem, get_logger
 from scripts.services.pdf_service import fix_image_paths_in_md
 
 logger = get_logger(__name__)
 
-POSTS_DIR = Path("posts")
-SITE_POSTS_DIR = Path("_site/posts")
-BIBLIOGRAPHY_FILE = Path("posts/references.bib")
-CSL_FILE = Path("journal-of-cheminformatics.csl")
+# Anchored to the project root rather than left relative. Quarto invokes this
+# with the project root as the working directory, so a relative path resolved
+# there by luck; every one of these silently resolved somewhere else, and the
+# failure was a "Bibliography not found" warning followed by Pandoc being handed
+# paths that do not exist.
+POSTS_DIR = PROJECT_ROOT / "posts"
+SITE_POSTS_DIR = PROJECT_ROOT / "_site" / "posts"
+BIBLIOGRAPHY_FILE = PROJECT_ROOT / "posts" / "references.bib"
+CSL_FILE = PROJECT_ROOT / "journal-of-cheminformatics.csl"
 
 PANDOC_FILTERS = [
-    Path("filters/extract-cito.lua"),
-    Path("filters/insert-cito-in-ref.lua"),
+    PROJECT_ROOT / "filters" / "extract-cito.lua",
+    PROJECT_ROOT / "filters" / "insert-cito-in-ref.lua",
 ]
 
 
@@ -63,8 +68,7 @@ def convert_md_to_pdf(md_path: Path, pdf_path: Path) -> bool:
 
 def run_pandoc_for_all_qmds() -> None:
     """Convert all QMD posts' generated Markdown to PDF via Pandoc."""
-    project_root = Path.cwd()
-    fs = FileSystem(project_root)
+    fs = FileSystem(PROJECT_ROOT)
 
     qmd_files = fs.find_posts("posts")
     if not qmd_files:

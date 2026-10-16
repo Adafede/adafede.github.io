@@ -11,8 +11,8 @@ import sys
 from pathlib import Path
 
 # Add project root to path so `scripts` is importable as a package
-root_dir = Path(__file__).resolve().parent.parent.parent
-sys.path.insert(0, str(root_dir))
+PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
+sys.path.insert(0, str(PROJECT_ROOT))
 
 from scripts.infrastructure import FileSystem, HtmlProcessor, YamlLoader, get_logger
 from scripts.services import AuthorService, RorService
@@ -33,11 +33,9 @@ def process_qmd_directory(qmd_glob: str) -> None:
         >>> process_qmd_directory("posts/*.qmd")
         >>> process_qmd_directory("articles/**/*.qmd")
     """
-    # Extract root directory from glob pattern
-    root_dir = qmd_glob.split("*", 1)[0].rstrip("/")
-
-    # Find all matching QMD files
-    qmd_files = glob.glob(qmd_glob, recursive=True)
+    # Sorted, so a run processes the same files in the same order on any
+    # machine; glob's order is filesystem-dependent.
+    qmd_files = sorted(glob.glob(qmd_glob, recursive=True))
 
     if not qmd_files:
         logger.warning(f"No QMD files found matching pattern: {qmd_glob}")
@@ -45,9 +43,10 @@ def process_qmd_directory(qmd_glob: str) -> None:
 
     logger.info(f"Processing {len(qmd_files)} QMD files from {qmd_glob}")
 
-    # Initialize services
-    project_root = Path.cwd()
-    fs = FileSystem(project_root)
+    # The project root, not the working directory. Quarto happens to invoke
+    # this from the project root, so a CWD-relative path works there and
+    # nowhere else.
+    fs = FileSystem(PROJECT_ROOT)
     html_processor = HtmlProcessor()
     yaml_loader = YamlLoader()
 
@@ -58,12 +57,20 @@ def process_qmd_directory(qmd_glob: str) -> None:
     missing = 0
 
     for qmd_file in qmd_files:
-        qmd_path = Path(qmd_file)
+        qmd_path = Path(qmd_file).resolve()
 
-        # Calculate relative path and corresponding HTML path
-        rel_path = qmd_path.relative_to(root_dir)
-        rel_html_path = rel_path.with_suffix(".html")
-        html_path = Path("_site") / root_dir / rel_html_path
+        # The HTML sits at the same place in the Quarto output tree. Anchored to
+        # the project root for the same reason the glob's matches are resolved:
+        # a relative path here resolves against wherever the process was
+        # started.
+        try:
+            rel_path = qmd_path.relative_to(PROJECT_ROOT)
+        except ValueError:
+            # The pattern matched something outside the project. Injecting into
+            # it would mean writing outside the site.
+            logger.warning(f"Skipping {qmd_file}: not under {PROJECT_ROOT}")
+            continue
+        html_path = PROJECT_ROOT / "_site" / rel_path.with_suffix(".html")
 
         if html_path.exists():
             try:
@@ -75,17 +82,18 @@ def process_qmd_directory(qmd_glob: str) -> None:
 
                 processed += 1
             except Exception:
-                logger.exception(f"Failed to process {qmd_file}")
+                logger.exception(f"Failed to process {qmd_path.name}")
         else:
-            logger.warning(f"HTML not found for {qmd_file} at {html_path}")
+            logger.warning(
+                f"HTML not found for {qmd_path.name} at "
+                f"{html_path.relative_to(PROJECT_ROOT)}",
+            )
             missing += 1
 
     logger.info(f"Processed {processed} files, {missing} HTML files missing")
 
 
 if __name__ == "__main__":
-    import sys
-
     if len(sys.argv) < 2:
         print("Usage: process_qmd_directory.py <glob_pattern>")
         print("Examples:")
