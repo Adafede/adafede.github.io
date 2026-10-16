@@ -31,6 +31,7 @@ import json
 import sys
 import urllib.parse
 import urllib.request
+from collections.abc import Sequence
 from html import escape
 from pathlib import Path
 from typing import Any
@@ -92,6 +93,7 @@ LIMIT {LIMIT}
 
 
 def qid_of(uri: str) -> str:
+    """The Wikidata QID at the end of an entity URI."""
     return uri.rsplit("/", 1)[-1]
 
 
@@ -160,9 +162,47 @@ def font_size(lines: list[str], radius: float) -> int:
     return max(7, min(26, int(min(by_height, by_width))))
 
 
-def relative_luminance(rgba) -> float:
-    r, g, b = rgba[:3]
-    return 0.2126 * r + 0.7152 * g + 0.0722 * b
+# The two label inks. Every circle gets whichever of these reads better against
+# its own fill.
+INK_DARK = "#0f172a"
+INK_LIGHT = "#ffffff"
+
+
+def _channel_luminance(value: float) -> float:
+    """One sRGB channel, linearised as WCAG 2.x relative luminance requires."""
+    return value / 12.92 if value <= 0.04045 else ((value + 0.055) / 1.055) ** 2.4
+
+
+def relative_luminance(rgba: Sequence[float]) -> float:
+    """WCAG relative luminance of an RGB or RGBA colour.
+
+    The channels have to be linearised before they are weighted. A plain
+    weighted sum of the gamma-encoded values is a luma approximation — the one
+    used for NTSC video — and it puts the point where black stops reading better
+    than white in the wrong place, by enough to pick the wrong ink for the
+    mid-tones this colormap spends most of its range in.
+    """
+    red, green, blue = (_channel_luminance(c) for c in rgba[:3])
+    return 0.2126 * red + 0.7152 * green + 0.0722 * blue
+
+
+def contrast_ratio(first: Sequence[float], second: Sequence[float]) -> float:
+    """WCAG contrast ratio between two colours, from 1 to 21."""
+    a, b = relative_luminance(first), relative_luminance(second)
+    return (max(a, b) + 0.05) / (min(a, b) + 0.05)
+
+
+def ink_for(rgba: Sequence[float]) -> str:
+    """The label ink that reads better against *rgba*.
+
+    Comparing the two ratios rather than testing luminance against a threshold:
+    the midpoint where black and white are equally legible is not 0.5, so any
+    fixed cut-off is wrong by some amount, and the amount shows up as a label
+    that is measurably harder to read.
+    """
+    dark = contrast_ratio(rgba, mcolors.to_rgba(INK_DARK))
+    light = contrast_ratio(rgba, mcolors.to_rgba(INK_LIGHT))
+    return INK_DARK if dark >= light else INK_LIGHT
 
 
 def render(data: dict[str, Any]) -> str:
@@ -216,7 +256,7 @@ def render(data: dict[str, Any]) -> str:
 
         rgba = cmap(1 - index / max(1, len(circles) - 1))
         fill = mcolors.to_hex(rgba)
-        ink = "#0f172a" if relative_luminance(rgba) > 0.55 else "#ffffff"
+        ink = ink_for(rgba)
 
         lines = wrap(text, r)
         size = font_size(lines, r)
