@@ -53,3 +53,17 @@ def test_a_path_inside_the_root_resolves_under_the_site_dir(tmp_path: Path):
         fs.get_html_path(post, "posts")
         == tmp_path / "posts" / "posts" / "2024-01-02_x.html"
     )
+
+
+def test_posts_are_returned_oldest_first(tmp_path: Path):
+    """Ordering must not depend on what the filesystem's readdir hands back."""
+    (tmp_path / "posts").mkdir()
+    for stem in ("2024-03-01_c", "2024-01-02_a", "2024-02-01_b"):
+        (tmp_path / "posts" / f"{stem}.qmd").write_text("x", encoding="utf-8")
+
+    found = FileSystem(tmp_path).find_posts("posts")
+    assert [p.name for p in found] == [
+        "2024-01-02_a.qmd",
+        "2024-02-01_b.qmd",
+        "2024-03-01_c.qmd",
+    ]

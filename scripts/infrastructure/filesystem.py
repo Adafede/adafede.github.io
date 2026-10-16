@@ -46,11 +46,13 @@ class FileSystem:
         # into `date:` frontmatter as though it were a day that exists.
         pattern = "20[0-9][0-9]-[0-9][0-9]-[0-9][0-9]_*.qmd"
         posts_path = self.root / posts_dir
-        files = [
+        # Sorted by name, so a run over the same tree visits the same posts in
+        # the same order regardless of what the filesystem's readdir returned.
+        files = sorted(
             candidate
             for candidate in posts_path.glob(pattern)
             if _is_real_date(candidate.name[:10])
-        ]
+        )
         logger.debug(f"Found {len(files)} posts in {posts_path}")
         return files
 
@@ -63,7 +65,7 @@ class FileSystem:
         Returns:
             List of matching Path objects
         """
-        files = list(self.root.glob(pattern))
+        files = sorted(self.root.glob(pattern))
         logger.debug(f"Found {len(files)} files matching {pattern}")
         return files
 
