@@ -82,26 +82,7 @@
   </style>
 </div>
 
-  {# Read topic= query parameters from the URL and check the matching
-     checkboxes on load. The CSS :has(:checked) rules do the actual hiding
-     — this script only restores checkbox state from the URL so a filtered
-     view can be bookmarked or shared. Clicking checkboxes works live via
-     CSS; the URL is not updated (pure-CSS filter, no JS for the behavior).
-     Skipped if scripting is disabled; the filter still works via CSS.
-     URL format: ?topic=tag1&topic=tag2 (multiple params). #}
-  <script>
-    (function () {
-      var root = document.querySelector('[data-filter-root]');
-      if (!root) return;
-      var all = root.querySelector('#tag-all');
-      var params = new URLSearchParams(window.location.search);
-      var topics = params.getAll('topic').map(function (t) { return t.toLowerCase(); });
-      if (!topics.length) return;
-      if (all) all.checked = false;
-      topics.forEach(function (t) {
-        var cb = root.querySelector('input[type="checkbox"][name="topic"][value="' + t + '"]');
-        if (cb) cb.checked = true;
-      });
-    })();
-  </script>
+  {# No JavaScript. The filter works entirely via CSS :has(:checked).
+     Clicking checkboxes shows/hides entries live. Filter state is not
+     synced to the URL (pure-CSS approach cannot read query parameters). #}
 {% endif %}
