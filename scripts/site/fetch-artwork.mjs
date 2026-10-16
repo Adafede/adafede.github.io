@@ -43,20 +43,6 @@ const THUMBNAILS = join(OUT, 'thumbnails.json');
 const CACHEABLE = /^https:\/\/(upload\.wikimedia\.org|raw\.githubusercontent\.com|ars\.els-cdn\.com|media\.springernature\.com|pharma\.unibas\.ch)\//;
 
 /**
- * Trims a vector file to the precision the page actually needs.
- *
- * The artwork is exported from Illustrator and Inkscape at full precision: a
- * 56-path logo comes to 540 KB because every coordinate carries a dozen
- * significant figures. Rendered into a 350px-wide box, all of that is below a
- * device pixel. Rounding path coordinates to one decimal cuts the file roughly
- * in half with no visible difference, and it is the only reduction available
- * without adding a rasteriser as a build dependency.
- *
- * Only `d` attributes on <path> are touched. Transforms, gradients and ids are
- * left exactly as they were, because rounding those is where this kind of
- * optimisation quietly breaks an image.
- */
-/**
  * SVGs are cached byte for byte as downloaded.
  *
  * This used to round every number in a <path d> to a fixed number of decimals,
@@ -75,17 +61,12 @@ const CACHEABLE = /^https:\/\/(upload\.wikimedia\.org|raw\.githubusercontent\.co
  * file, not a mangled logo. Rasterising would shrink them further but needs a
  * native dependency, and would lose the scaling these are used at.
  */
-function keepSvg(source) {
-  return { text: source, saved: 0 };
-}
-
-
 const contentFiles = [];
 for (const section of ['articles', 'varia']) {
   const dir = join(CONTENT, section);
   if (!existsSync(dir)) continue;
   const walk = (d) => {
-    for (const entry of readdirSync(d, { withFileTypes: true })) {
+    for (const entry of readdirSync(d, { withFileTypes: true }).sort((a, b) => a.name.localeCompare(b.name))) {
       const path = join(d, entry.name);
       if (entry.isDirectory()) walk(path);
       else if (path.endsWith('.md')) contentFiles.push(path);
@@ -100,36 +81,42 @@ for (const file of contentFiles) {
   const image = readFileSync(file, 'utf-8').match(/^image:\s*"?([^"\n]+)"?\s*$/m)?.[1];
   if (image && CACHEABLE.test(image)) {
     urls.add(image);
-    if (file.includes('/articles/') || file.includes('/varia/')) thumbnailUrls.add(image);
+    // Every file walked above is under articles/ or varia/, which are the two
+    // sections that render a card per item, so every cacheable image gets a
+    // preview; the set exists to record that.
+    thumbnailUrls.add(image);
   }
 }
 
 mkdirSync(OUT, { recursive: true });
 
-// Reuse a previous run's manifest so a failed fetch does not lose a good copy.
-let manifest = {};
-if (existsSync(MANIFEST)) {
+/** Reuse a previous run's manifest so a failed fetch does not lose a good copy. */
+const readManifest = (path) => {
+  if (!existsSync(path)) return {};
   try {
-    manifest = JSON.parse(readFileSync(MANIFEST, 'utf-8'));
+    return JSON.parse(readFileSync(path, 'utf-8'));
   } catch {
-    manifest = {};
+    return {};
   }
-}
-let thumbnails = {};
-if (existsSync(THUMBNAILS)) {
-  try {
-    thumbnails = JSON.parse(readFileSync(THUMBNAILS, 'utf-8'));
-  } catch {
-    thumbnails = {};
-  }
-}
+};
+const manifest = readManifest(MANIFEST);
+const thumbnails = readManifest(THUMBNAILS);
 
 let fetched = 0;
 let failed = 0;
 
 for (const url of urls) {
   const stem = createHash('sha256').update(url).digest('hex').slice(0, 16);
-  const extension = extname(new URL(url).pathname) || '.img';
+  let extension;
+  try {
+    extension = extname(new URL(url).pathname) || '.img';
+  } catch {
+    // The CACHEABLE test already requires an absolute https URL, so this is a
+    // malformed one. Skip it and say so rather than aborting the fetch loop.
+    failed++;
+    console.log(`  ! skipping unparsable artwork URL: ${url}`);
+    continue;
+  }
   const cachedName = manifest[url]?.replace(/^\/images\/artwork\//, '');
   const cached = cachedName ? join(OUT, cachedName) : null;
   // Vectors are never rasterized. A size threshold does not make that safe, it
@@ -184,7 +171,7 @@ for (const url of urls) {
   let name = `${stem}${extension}`;
   try {
     if (name.endsWith('.svg')) {
-      buffer = Buffer.from(keepSvg(buffer.toString('utf-8')).text, 'utf-8');
+      buffer = buffer; // SVG: cached exactly as downloaded, see the note above.
     } else if (extension === '.png' && needsRasterThumb) {
       const temporaryDirectory = mkdtempSync(join(tmpdir(), 'site-artwork-'));
       const source = join(temporaryDirectory, `${stem}.png`);

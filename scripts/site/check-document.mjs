@@ -19,9 +19,9 @@
  *
  * Run: node scripts/site/check-document.mjs _eleventy_site
  */
-import { readFileSync, readdirSync, statSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { htmlText, removeScriptAndStyle } from './html.mjs';
+import { htmlFiles, htmlText, removeScriptAndStyle } from './html.mjs';
 
 const roots = process.argv.slice(2);
 if (!roots.length) {
@@ -31,16 +31,6 @@ if (!roots.length) {
 
 /** The redirect stubs are deliberately minimal documents. */
 const isStub = (html) => html.includes('http-equiv="refresh"');
-
-function htmlFiles(dir) {
-  const out = [];
-  for (const entry of readdirSync(dir)) {
-    const path = join(dir, entry);
-    if (statSync(path).isDirectory()) out.push(...htmlFiles(path));
-    else if (path.endsWith('.html')) out.push(path);
-  }
-  return out;
-}
 
 function check(html) {
   const problems = [];
@@ -114,7 +104,7 @@ function check(html) {
     const w = tag.match(/\bwidth="(\d+)"/);
     const h = tag.match(/\bheight="(\d+)"/);
     if (!w || !h) problems.push(`<img> without intrinsic size: ${tag.slice(0, 80)}`);
-    if (tag.includes('alt=') === false) problems.push(`<img> without alt: ${tag.slice(0, 80)}`);
+    if (!tag.includes('alt=')) problems.push(`<img> without alt: ${tag.slice(0, 80)}`);
   }
 
   for (const link of doc.matchAll(/<a\b[^>]*>/g)) {
