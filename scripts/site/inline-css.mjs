@@ -14,19 +14,19 @@
  * Run: node scripts/site/inline-css.mjs   (after an Eleventy build)
  */
 
-import { existsSync, readFileSync, writeFileSync, readdirSync } from 'node:fs';
-import { join, dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { existsSync, readFileSync, writeFileSync, readdirSync } from "node:fs";
+import { join, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
 
-import { htmlFiles } from './html.mjs';
+import { htmlFiles } from "./html.mjs";
 
-const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
-const SITE = join(ROOT, '_eleventy_site');
-const CSS_FILE = join(SITE, 'styles.css');
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
+const SITE = join(ROOT, "_eleventy_site");
+const CSS_FILE = join(SITE, "styles.css");
 const CSS_LINK = /[ \t]*<link rel="stylesheet" href="\/styles\.css"\s*\/?>\n?/g;
 
 if (!existsSync(SITE) || !readdirSync(SITE, { withFileTypes: true }).length) {
-  console.error('  ! _eleventy_site is empty; run the Eleventy build first');
+  console.error("  ! _eleventy_site is empty; run the Eleventy build first");
   process.exit(1);
 }
 
@@ -34,18 +34,20 @@ if (!existsSync(SITE) || !readdirSync(SITE, { withFileTypes: true }).length) {
 // is missing, `npm run minify:css` did not run — say that rather than letting
 // readFileSync raise an ENOENT with a bare stack trace.
 if (!existsSync(CSS_FILE)) {
-  console.error('  ! _eleventy_site/styles.css is missing; run `npm run minify:css`');
+  console.error(
+    "  ! _eleventy_site/styles.css is missing; run `npm run minify:css`",
+  );
   process.exit(1);
 }
 
-const css = readFileSync(CSS_FILE, 'utf-8').trim();
+const css = readFileSync(CSS_FILE, "utf-8").trim();
 const styleTag = `<style>${css}</style>`;
 const pages = htmlFiles(SITE);
 
 let rewritten = 0;
 
 for (const page of pages) {
-  const html = readFileSync(page, 'utf-8');
+  const html = readFileSync(page, "utf-8");
 
   if (!html.includes('href="/styles.css"')) continue;
 

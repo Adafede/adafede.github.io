@@ -60,11 +60,11 @@ npm run build:all
 
 That runs, in order:
 
-  | Step   | Script                   | Produces                                                                                                                               |
-  | ------ | --------                 | ----------                                                                                                                             |
-  | 1      | `npm run render-pdfs`    | `_site/*.pdf` (Quarto + LuaTeX; skipped if no tool chain)                                                                              |
-  | 2      | `npm run sync:content`   | `src/content/**`, then `public/` (migrate `.qmd` → Markdown, stage PDFs, optimise images, talk map, expertise, redirects, minify CSS)  |
-  | 3      | `npm run build:eleventy` | `_eleventy_site/` (Eleventy + CSS)                                                                                                     |
+  | Step | Script                   | Produces                                                                                                                              |
+  | ---- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------- |
+  | 1    | `npm run render-pdfs`    | `_site/*.pdf` (Quarto + LuaTeX; skipped if no tool chain)                                                                             |
+  | 2    | `npm run sync:content`   | `src/content/**`, then `public/` (migrate `.qmd` → Markdown, stage PDFs, optimise images, talk map, expertise, redirects, minify CSS) |
+  | 3    | `npm run build:eleventy` | `_eleventy_site/` (Eleventy + CSS)                                                                                                    |
 
 The PDF step runs **before** the content migration on purpose: the migrator only
 writes a `pdf:` link into a post's frontmatter when the PDF already exists in
@@ -72,14 +72,14 @@ writes a `pdf:` link into a post's frontmatter when the PDF already exists in
 
 ### Other commands
 
-  | Command                | Purpose                                                        |
-  | ---------              | ---------                                                      |
-  | `npm run dev`          | Serve Eleventy locally with hot reload.                        |
-  | `npm run build`        | Build only the Eleventy HTML site (no PDFs, no migration).     |
-  | `npm run sync:content` | Re-migrate `src/content/` and stage `public/` only.            |
-  | `npm run render-pdfs`  | (Re)render only the Quarto PDFs.                               |
-  | `npm run check`        | Validate links, RDFa, document structure, and color contrast.  |
-  | `npm run check:a11y`   | Run pa11y (axe + HTMLCS) over the served site.                 |
+  | Command                | Purpose                                                       |
+  | ---------------------- | ------------------------------------------------------------- |
+  | `npm run dev`          | Serve Eleventy locally with hot reload.                       |
+  | `npm run build`        | Build only the Eleventy HTML site (no PDFs, no migration).    |
+  | `npm run sync:content` | Re-migrate `src/content/` and stage `public/` only.           |
+  | `npm run render-pdfs`  | (Re)render only the Quarto PDFs.                              |
+  | `npm run check`        | Validate links, RDFa, document structure, and color contrast. |
+  | `npm run check:a11y`   | Run pa11y (axe + HTMLCS) over the served site.                |
 
 ### Deploy
 

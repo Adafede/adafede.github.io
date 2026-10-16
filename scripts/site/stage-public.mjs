@@ -14,18 +14,32 @@
  *
  * Run: node scripts/site/stage-public.mjs
  */
-import { copyFileSync, cpSync, existsSync, mkdirSync, readdirSync } from 'node:fs';
-import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import {
+  copyFileSync,
+  cpSync,
+  existsSync,
+  mkdirSync,
+  readdirSync,
+} from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
-const PUBLIC = join(ROOT, 'public');
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
+const PUBLIC = join(ROOT, "public");
 
 /** Directories copied wholesale from the repository root. */
-const DIR_SOURCES = ['images', '.well-known'];
+const DIR_SOURCES = ["images", ".well-known"];
 
 /** Individual files copied from the repository root. */
-const FILE_SOURCES = ['_headers', 'humans.txt', 'llm.txt', 'llms.txt', 'llms-full.txt', 'robots.txt', 'site.webmanifest'];
+const FILE_SOURCES = [
+  "_headers",
+  "humans.txt",
+  "llm.txt",
+  "llms.txt",
+  "llms-full.txt",
+  "robots.txt",
+  "site.webmanifest",
+];
 
 /**
  * Quarto build output that the site links to.
@@ -35,8 +49,8 @@ const FILE_SOURCES = ['_headers', 'humans.txt', 'llm.txt', 'llms.txt', 'llms-ful
  * moves is a broken link in the wild, so nothing gets re-homed.
  */
 const PDF_SOURCES = [
-  { from: '_site/posts', to: 'posts' },
-  { from: '_site', to: '.', files: ['cv.pdf', 'cv-academic.pdf'] },
+  { from: "_site/posts", to: "posts" },
+  { from: "_site", to: ".", files: ["cv.pdf", "cv-academic.pdf"] },
 ];
 
 mkdirSync(PUBLIC, { recursive: true });
@@ -80,10 +94,10 @@ for (const spec of PDF_SOURCES) {
   }
 
   for (const file of readdirSync(dir)) {
-    if (!file.endsWith('.pdf')) continue;
+    if (!file.endsWith(".pdf")) continue;
     copyFileSync(join(dir, file), join(target, file));
     pdfCount++;
   }
 }
 
-console.log(`  + public/ staged (${pdfCount} PDF${pdfCount === 1 ? '' : 's'})`);
+console.log(`  + public/ staged (${pdfCount} PDF${pdfCount === 1 ? "" : "s"})`);

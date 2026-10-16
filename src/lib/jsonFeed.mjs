@@ -1,11 +1,11 @@
 const SITE = {
-  author: 'Adriano Rutz',
+  author: "Adriano Rutz",
   // The description is the one from _quarto.yml, which is what the published
   // feed has always carried: an en dash and "specialising", not the em dash and
   // spelling the Eleventy site data uses. A feed that has resolved for years
   // should not change its description under a new generator.
   description:
-    'Personal website of Adriano Rutz - Swiss Pharmaceutical Scientist specializing in metabolomics, mass spectrometry, and natural products research.',
+    "Personal website of Adriano Rutz - Swiss Pharmaceutical Scientist specializing in metabolomics, mass spectrometry, and natural products research.",
 };
 
 /** An ISO 8601 date with a numeric offset, e.g. `2026-01-20T00:00:00+00:00`.
@@ -16,8 +16,8 @@ const SITE = {
  */
 function isoOffset(date) {
   const d = new Date(date);
-  if (Number.isNaN(d.valueOf())) return '';
-  const pad = (n) => String(n).padStart(2, '0');
+  if (Number.isNaN(d.valueOf())) return "";
+  const pad = (n) => String(n).padStart(2, "0");
   return `${d.getUTCFullYear()}-${pad(d.getUTCMonth() + 1)}-${pad(d.getUTCDate())}T${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())}:${pad(d.getUTCSeconds())}+00:00`;
 }
 
@@ -38,14 +38,14 @@ function isoOffset(date) {
  * kept under underscore keys so spec-compliant readers ignore them.
  */
 export function buildJsonFeed(posts, { url, renderBody }) {
-  const base = url.replace(/\/[^/]*$/, '');
+  const base = url.replace(/\/[^/]*$/, "");
   const feed = {
-    version: 'https://jsonfeed.org/version/1.1',
+    version: "https://jsonfeed.org/version/1.1",
     title: SITE.author,
     description: SITE.description,
     home_page_url: url,
     feed_url: `${base}/posts.json`,
-    language: 'en',
+    language: "en",
     items: posts.map((post) => {
       const link = `${base}${post.url}`;
       const body = renderBody(post);
@@ -65,7 +65,9 @@ export function buildJsonFeed(posts, { url, renderBody }) {
         tags: post.data.tags ?? [],
         authors: (post.data.authors ?? []).map((author) => ({
           name: author.name,
-          ...(author.qid ? { url: `https://www.wikidata.org/wiki/${author.qid}` } : {}),
+          ...(author.qid
+            ? { url: `https://www.wikidata.org/wiki/${author.qid}` }
+            : {}),
         })),
       };
       if (post.data.doi) item._doi = post.data.doi;
@@ -80,12 +82,12 @@ export function buildJsonFeed(posts, { url, renderBody }) {
         // Derived from `base` rather than a literal host, so the feed cannot
         // end up pointing at one domain while every other URL in it points at
         // another.
-        const source = body.image.replace(/\.webp$/i, '.png');
-        item.image = source.startsWith('/') ? `${base}${source}` : source;
+        const source = body.image.replace(/\.webp$/i, ".png");
+        item.image = source.startsWith("/") ? `${base}${source}` : source;
       }
       if (post.data.pdf) {
         item.attachments = [
-          { url: `${base}${post.data.pdf}`, mime_type: 'application/pdf' },
+          { url: `${base}${post.data.pdf}`, mime_type: "application/pdf" },
         ];
       }
       return item;

@@ -15,28 +15,31 @@
  *
  * Quarto is optional for HTML-only dev: a missing binary is a non-fatal skip.
  */
-import { readFileSync, readdirSync, existsSync } from 'node:fs';
-import { dirname, join, sep } from 'node:path';
-import { fileURLToPath } from 'node:url';
-import { spawnSync } from 'node:child_process';
-import { load as loadYaml } from 'js-yaml';
+import { readFileSync, readdirSync, existsSync } from "node:fs";
+import { dirname, join, sep } from "node:path";
+import { fileURLToPath } from "node:url";
+import { spawnSync } from "node:child_process";
+import { load as loadYaml } from "js-yaml";
 
-const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
-const POSTS_DIR = join(ROOT, 'posts');
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
+const POSTS_DIR = join(ROOT, "posts");
 
 function splitFrontmatter(text) {
-  if (!text.startsWith('---')) return { data: {}, body: text };
-  const end = text.indexOf('\n---', 3);
+  if (!text.startsWith("---")) return { data: {}, body: text };
+  const end = text.indexOf("\n---", 3);
   if (end < 0) return { data: {}, body: text };
-  return { data: loadYaml(text.slice(4, end)) ?? {}, body: text.slice(end + 4) };
+  return {
+    data: loadYaml(text.slice(4, end)) ?? {},
+    body: text.slice(end + 4),
+  };
 }
 
 /** A post opts in to a PDF via `format-links: [pdf]` (or `- pdf`). */
 function pdfRequested(data) {
-  const links = data['format-links'];
+  const links = data["format-links"];
   if (!links) return false;
   const list = Array.isArray(links) ? links : [links];
-  return list.some((item) => String(item).toLowerCase() === 'pdf');
+  return list.some((item) => String(item).toLowerCase() === "pdf");
 }
 
 /** Collect the .qmd sources that should produce a PDF. */
@@ -44,15 +47,17 @@ function collectSources() {
   const sources = [];
 
   // CVs are separate files, not part of the posts/* glob.
-  for (const file of ['cv.qmd', 'cv-academic.qmd']) {
+  for (const file of ["cv.qmd", "cv-academic.qmd"]) {
     const cv = join(ROOT, file);
     if (existsSync(cv)) sources.push(cv);
   }
 
   if (existsSync(POSTS_DIR)) {
-    for (const file of readdirSync(POSTS_DIR).filter((f) => f.endsWith('.qmd')).sort()) {
+    for (const file of readdirSync(POSTS_DIR)
+      .filter((f) => f.endsWith(".qmd"))
+      .sort()) {
       const path = join(POSTS_DIR, file);
-      const { data } = splitFrontmatter(readFileSync(path, 'utf-8'));
+      const { data } = splitFrontmatter(readFileSync(path, "utf-8"));
       if (pdfRequested(data)) sources.push(path);
     }
   }
@@ -60,26 +65,30 @@ function collectSources() {
   return sources;
 }
 
-const dryRun = process.argv.includes('--dry-run');
+const dryRun = process.argv.includes("--dry-run");
 const sources = collectSources();
 
 if (!sources.length) {
-  console.log('  no PDFs requested');
+  console.log("  no PDFs requested");
   process.exit(0);
 }
 
 console.log(`  renders PDF for ${sources.length} document(s):`);
-for (const src of sources) console.log(`    - ${src.replace(ROOT + sep, '')}`);
+for (const src of sources) console.log(`    - ${src.replace(ROOT + sep, "")}`);
 
 if (dryRun) process.exit(0);
 
 // Probe whether the quarto binary resolves on PATH. Mirrors the CI guard
 // (`command -v quarto`); avoids a hard dependency on the `which` npm package.
-const probe = spawnSync('quarto', ['--version'], { encoding: 'utf-8', stdio: 'ignore' });
+const probe = spawnSync("quarto", ["--version"], {
+  encoding: "utf-8",
+  stdio: "ignore",
+});
 const quartoOnPath = probe.status === 0;
 
 if (!quartoOnPath) {
-  const msg = 'quarto is not installed (no quarto on PATH). Install it to render PDFs; skipping.';
+  const msg =
+    "quarto is not installed (no quarto on PATH). Install it to render PDFs; skipping.";
   if (process.env.CI) {
     console.error(`  ! ${msg}`);
   } else {
@@ -97,11 +106,15 @@ if (!quartoOnPath) {
 // That HTML pipeline is the Eleventy site's job now, so signal it away with
 // the PDF_ONLY sentinel — the hooks short-circuit to a one-line no-op,
 // leaving this path to Quarto's LaTeX renderer alone.
-const result = spawnSync('uv', ['run', 'quarto', 'render', ...sources, '--to', 'pdf'], {
-  encoding: 'utf-8',
-  stdio: ['ignore', 'inherit', 'inherit'],
-  env: { ...process.env, PDF_ONLY: '1' },
-});
+const result = spawnSync(
+  "uv",
+  ["run", "quarto", "render", ...sources, "--to", "pdf"],
+  {
+    encoding: "utf-8",
+    stdio: ["ignore", "inherit", "inherit"],
+    env: { ...process.env, PDF_ONLY: "1" },
+  },
+);
 
 if (result.status !== 0) {
   console.error(`  ! uv run quarto render --to pdf failed (${result.status})`);

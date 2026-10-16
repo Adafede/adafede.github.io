@@ -2,7 +2,8 @@
 affiliations:
   - id: tuebingen_imit_ibmi
     name: University of Tübingen
-    department: Interfaculty Institute of Microbiology and Infection Medicine Tübingen (IMIT), Interfaculty
+    department:
+      Interfaculty Institute of Microbiology and Infection Medicine Tübingen (IMIT), Interfaculty
       Institute for Biomedical Informatics (IBMI)
     city: Tübingen
     country: Germany

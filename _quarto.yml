@@ -19,8 +19,8 @@ format:
   html:
     anchor-sections: true
     # axe:
-      # best-practice: true
-      # standard: wcag21aa
+    # best-practice: true
+    # standard: wcag21aa
     grid:
       body-width: 1200px
     # include-in-header:

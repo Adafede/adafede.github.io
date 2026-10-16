@@ -1,7 +1,8 @@
 ---
 affiliations:
   - id: hki_paleobio
-    name: Leibniz-Institut für Naturstoff-Forschung und Infektionsbiologie e. V. - Hans-Knöll-Institut
+    name:
+      Leibniz-Institut für Naturstoff-Forschung und Infektionsbiologie e. V. - Hans-Knöll-Institut
       (HKI)
     department: Department of Paleobiotechnology
     city: Jena

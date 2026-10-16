@@ -45,7 +45,7 @@ jobs:
         with:
           fetch-depth: 1
           persist-credentials: false
-       # Install system dependencies and TeX Live
+        # Install system dependencies and TeX Live
       - name: Install system dependencies
         env:
           DEBIAN_FRONTEND: noninteractive

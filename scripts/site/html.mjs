@@ -1,6 +1,6 @@
-import { readdirSync } from 'node:fs';
-import { join } from 'node:path';
-import { parse, parseFragment, serialize } from 'parse5';
+import { readdirSync } from "node:fs";
+import { join } from "node:path";
+import { parse, parseFragment, serialize } from "parse5";
 
 /**
  * Every .html file under a directory, recursively.
@@ -14,34 +14,35 @@ export function htmlFiles(dir) {
   for (const entry of readdirSync(dir, { withFileTypes: true })) {
     const path = join(dir, entry.name);
     if (entry.isDirectory()) out.push(...htmlFiles(path));
-    else if (entry.name.endsWith('.html')) out.push(path);
+    else if (entry.name.endsWith(".html")) out.push(path);
   }
   return out;
 }
 
 function appendText(node, parts, separateTags) {
   const tag = node.tagName;
-  if (tag === 'script' || tag === 'style') return;
+  if (tag === "script" || tag === "style") return;
 
-  if (node.nodeName === '#text') {
+  if (node.nodeName === "#text") {
     parts.push(node.value);
     return;
   }
 
-  if (separateTags && tag) parts.push(' ');
-  for (const child of node.childNodes ?? []) appendText(child, parts, separateTags);
+  if (separateTags && tag) parts.push(" ");
+  for (const child of node.childNodes ?? [])
+    appendText(child, parts, separateTags);
   if (node.content) appendText(node.content, parts, separateTags);
-  if (separateTags && tag) parts.push(' ');
+  if (separateTags && tag) parts.push(" ");
 }
 
 export function htmlText(html, { separateTags = false } = {}) {
   const parts = [];
-  appendText(parseFragment(String(html ?? '')), parts, separateTags);
-  return parts.join('').replace(/\s+/g, ' ').trim();
+  appendText(parseFragment(String(html ?? "")), parts, separateTags);
+  return parts.join("").replace(/\s+/g, " ").trim();
 }
 
 export function firstElement(html, tagName) {
-  return findElement(parseFragment(String(html ?? '')), tagName);
+  return findElement(parseFragment(String(html ?? "")), tagName);
 }
 
 function findElement(node, tagName) {
@@ -56,22 +57,23 @@ function findElement(node, tagName) {
 
 export function elementText(html, tagName) {
   const element = firstElement(html, tagName);
-  if (!element) return '';
+  if (!element) return "";
   const parts = [];
   appendText(element, parts, false);
-  return parts.join('').replace(/\s+/g, ' ').trim();
+  return parts.join("").replace(/\s+/g, " ").trim();
 }
 
 export function removeScriptAndStyle(html) {
-  const document = parse(String(html ?? ''));
-  const removeElements = (nodes) => nodes.filter((node) => {
-    if (node.tagName === 'script' || node.tagName === 'style') return false;
-    if (node.childNodes) node.childNodes = removeElements(node.childNodes);
-    if (node.content?.childNodes) {
-      node.content.childNodes = removeElements(node.content.childNodes);
-    }
-    return true;
-  });
+  const document = parse(String(html ?? ""));
+  const removeElements = (nodes) =>
+    nodes.filter((node) => {
+      if (node.tagName === "script" || node.tagName === "style") return false;
+      if (node.childNodes) node.childNodes = removeElements(node.childNodes);
+      if (node.content?.childNodes) {
+        node.content.childNodes = removeElements(node.content.childNodes);
+      }
+      return true;
+    });
 
   document.childNodes = removeElements(document.childNodes);
   return serialize(document);

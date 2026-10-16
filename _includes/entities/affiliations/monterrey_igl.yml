@@ -2,7 +2,8 @@
 affiliations:
   - id: monterrey_igl
     name: Tecnológico de Monterrey
-    department: Industrial Genomics Laboratory, Centro de Biotecnología FEMSA, Escuela de Ingeniería y
+    department:
+      Industrial Genomics Laboratory, Centro de Biotecnología FEMSA, Escuela de Ingeniería y
       Ciencias
     city: Nuevo Leon
     country: México

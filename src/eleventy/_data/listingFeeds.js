@@ -9,7 +9,7 @@
  * Each entry names its own listing page and the items on it. The items are
  * resolved lazily, so a feed is only ever built for a collection that exists.
  */
-import buildContent from './sitecontent.js';
+import buildContent from "./sitecontent.js";
 
 export default function listingFeeds() {
   // Imported rather than read off the data cascade: a global-data function is
@@ -18,41 +18,41 @@ export default function listingFeeds() {
   const content = buildContent();
   return [
     {
-      slug: 'articles',
-      title: 'Articles',
-      url: '/articles.html',
+      slug: "articles",
+      title: "Articles",
+      url: "/articles.html",
       items: () => content.articles(),
       date: (item) => item.data.date,
       category: () => undefined,
     },
     {
-      slug: 'talks',
-      title: 'Talks',
-      url: '/talks.html',
+      slug: "talks",
+      title: "Talks",
+      url: "/talks.html",
       items: () => content.talks(),
       date: (item) => item.data.date,
       category: (item) => (item.data.tags ?? [])[0] ?? undefined,
     },
     {
-      slug: 'teaching',
-      title: 'Teaching',
-      url: '/teaching.html',
+      slug: "teaching",
+      title: "Teaching",
+      url: "/teaching.html",
       items: () => content.teaching(),
       date: (item) => item.data.date,
       category: (item) => (item.data.tags ?? [])[0] ?? undefined,
     },
     {
-      slug: 'posts',
-      title: 'Posts',
-      url: '/posts.html',
+      slug: "posts",
+      title: "Posts",
+      url: "/posts.html",
       items: () => content.posts(),
       date: (item) => item.data.date || item.data.pubDate,
       category: (item) => (item.data.tags ?? [])[0] ?? undefined,
     },
     {
-      slug: 'varia',
-      title: 'Varia',
-      url: '/varia.html',
+      slug: "varia",
+      title: "Varia",
+      url: "/varia.html",
       items: () => content.varia(),
       date: () => undefined,
       category: (item) => (item.data.tags ?? [])[0] ?? undefined,
@@ -60,12 +60,12 @@ export default function listingFeeds() {
     {
       // Quarto's catch-all listing. It has no page of its own, but the address
       // and its shape are part of the published site, so it is reproduced here.
-      slug: 'rss',
-      title: 'All items',
+      slug: "rss",
+      title: "All items",
       // /rss.html redirects to this very feed, so linking the channel at it
       // would point a reader at a feed from the feed. The site root is the
       // page this feed actually describes.
-      url: '/',
+      url: "/",
       date: (item) => item.data.date || item.data.pubDate,
       category: (item) => (item.data.tags ?? [])[0] ?? undefined,
       // Newest first, so that the cap below keeps the 20 most recent items

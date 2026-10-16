@@ -19,13 +19,13 @@
  *
  * Run: node scripts/site/check-document.mjs _eleventy_site
  */
-import { readFileSync } from 'node:fs';
-import { join } from 'node:path';
-import { htmlFiles, htmlText, removeScriptAndStyle } from './html.mjs';
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
+import { htmlFiles, htmlText, removeScriptAndStyle } from "./html.mjs";
 
 const roots = process.argv.slice(2);
 if (!roots.length) {
-  console.error('usage: check-document.mjs <dir> [dir...]');
+  console.error("usage: check-document.mjs <dir> [dir...]");
   process.exit(2);
 }
 
@@ -37,26 +37,30 @@ function check(html) {
   const doc = removeScriptAndStyle(html);
 
   const lang = doc.match(/<html\b[^>]*\blang="([^"]*)"/);
-  if (!lang || !lang[1].trim()) problems.push('no lang on <html>');
+  if (!lang || !lang[1].trim()) problems.push("no lang on <html>");
 
   // Every PDF link has to say it is a PDF. This is what WAVE's "Link to a PDF
   // document" alert is about: the file type is the one thing a reader cannot
   // infer from the URL, and a background icon does not reach a screen reader.
   // Checked against the link's own text rather than a class, so the guarantee
   // holds however the label happens to be marked up.
-  for (const m of doc.matchAll(/<a\b([^>]*?)href="[^"]*\.pdf(?:#[^"]*)?"([^>]*)>([\s\S]*?)<\/a>/gi)) {
+  for (const m of doc.matchAll(
+    /<a\b([^>]*?)href="[^"]*\.pdf(?:#[^"]*)?"([^>]*)>([\s\S]*?)<\/a>/gi,
+  )) {
     const label = htmlText(m[3], { separateTags: true });
     if (!/\bpdf\b/i.test(label)) {
-      problems.push(`PDF link whose text does not say PDF: "${label || '(empty)'}"`);
+      problems.push(
+        `PDF link whose text does not say PDF: "${label || "(empty)"}"`,
+      );
     }
   }
 
-  if (!/<a class="skip-link"/.test(doc)) problems.push('no skip link');
-  if (!/<main\b/.test(doc)) problems.push('no <main> landmark');
+  if (!/<a class="skip-link"/.test(doc)) problems.push("no skip link");
+  if (!/<main\b/.test(doc)) problems.push("no <main> landmark");
 
   // Headings inside <main> only: a page can legitimately have an <h1> in a
   // hidden template block, and what matters is what the reader can reach.
-  const main = doc.slice(doc.indexOf('<main'));
+  const main = doc.slice(doc.indexOf("<main"));
 
   // The <h1> must not be a copy of the <title>. WAVE reports that as a
   // "possible heading reference": on a page where the two are identical the
@@ -67,18 +71,20 @@ function check(html) {
   if (docTitle && h1) {
     const norm = (value) =>
       htmlText(value)
-        .replace(/\s+—\s*[^\s—]+$/, '')
-        .replace(/[\s\u00a0]+/g, ' ')
+        .replace(/\s+—\s*[^\s—]+$/, "")
+        .replace(/[\s\u00a0]+/g, " ")
         .trim()
         .toLowerCase();
     if (norm(h1[1]) === norm(docTitle[1])) {
       problems.push(`<h1> "${norm(h1[1])}" repeats the <title>`);
     }
   }
-  const headings = [...main.matchAll(/<h([1-6])[\s>]/g)].map((m) => Number(m[1]));
+  const headings = [...main.matchAll(/<h([1-6])[\s>]/g)].map((m) =>
+    Number(m[1]),
+  );
 
   const h1s = headings.filter((level) => level === 1).length;
-  if (h1s === 0) problems.push('no <h1> in <main>');
+  if (h1s === 0) problems.push("no <h1> in <main>");
   if (h1s > 1) problems.push(`${h1s} <h1> elements in <main> (expected 1)`);
 
   let previous = 0;
@@ -90,8 +96,9 @@ function check(html) {
     previous = level;
   }
 
-  if (!/<link rel="canonical"/.test(doc)) problems.push('no canonical URL');
-  if (!/<meta name="description"/.test(doc)) problems.push('no meta description');
+  if (!/<link rel="canonical"/.test(doc)) problems.push("no canonical URL");
+  if (!/<meta name="description"/.test(doc))
+    problems.push("no meta description");
 
   // Escaped twice: the first pass turns `<`, the second turns `&`, so the
   // reader and the crawler see literal `&lt;`.
@@ -103,14 +110,16 @@ function check(html) {
     // width/height must both be there, and must describe the same box.
     const w = tag.match(/\bwidth="(\d+)"/);
     const h = tag.match(/\bheight="(\d+)"/);
-    if (!w || !h) problems.push(`<img> without intrinsic size: ${tag.slice(0, 80)}`);
-    if (!tag.includes('alt=')) problems.push(`<img> without alt: ${tag.slice(0, 80)}`);
+    if (!w || !h)
+      problems.push(`<img> without intrinsic size: ${tag.slice(0, 80)}`);
+    if (!tag.includes("alt="))
+      problems.push(`<img> without alt: ${tag.slice(0, 80)}`);
   }
 
   for (const link of doc.matchAll(/<a\b[^>]*>/g)) {
     const tag = link[0];
-    if (!/\shref=/.test(tag)) problems.push('anchor without href');
-    if (/\shref=""/.test(tag)) problems.push('empty href');
+    if (!/\shref=/.test(tag)) problems.push("anchor without href");
+    if (/\shref=""/.test(tag)) problems.push("empty href");
     if (/\starget="_blank"/.test(tag) && !/\srel="[^"]*noopener/.test(tag)) {
       problems.push('target="_blank" without rel="noopener"');
     }
@@ -120,8 +129,8 @@ function check(html) {
   // needs a name, and it should not be able to reach back into this page.
   for (const frame of doc.matchAll(/<iframe\b[^>]*>/g)) {
     const tag = frame[0];
-    if (!/\stitle="[^"]+"/.test(tag)) problems.push('<iframe> without title');
-    if (!/\ssandbox=/.test(tag)) problems.push('<iframe> without sandbox');
+    if (!/\stitle="[^"]+"/.test(tag)) problems.push("<iframe> without title");
+    if (!/\ssandbox=/.test(tag)) problems.push("<iframe> without sandbox");
   }
 
   return problems;
@@ -134,12 +143,12 @@ for (const root of roots) {
   const failures = [];
 
   for (const page of htmlFiles(root)) {
-    const html = readFileSync(page, 'utf-8');
+    const html = readFileSync(page, "utf-8");
     if (isStub(html)) continue;
     pages++;
     const problems = check(html);
     if (problems.length) {
-      failures.push([page.slice(root.length) || '/', [...new Set(problems)]]);
+      failures.push([page.slice(root.length) || "/", [...new Set(problems)]]);
     }
   }
 
@@ -149,7 +158,8 @@ for (const root of roots) {
     console.log(`  ${name}`);
     for (const problem of problems) console.log(`    - ${problem}`);
   }
-  if (failures.length > 12) console.log(`  ... and ${failures.length - 12} more`);
+  if (failures.length > 12)
+    console.log(`  ... and ${failures.length - 12} more`);
 }
 
 process.exit(total ? 1 : 0);

@@ -11,14 +11,14 @@
  *
  * Run: node scripts/site/minify-css.mjs
  */
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
-import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
-import { transform } from 'lightningcss';
+import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
+import { transform } from "lightningcss";
 
-const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
-const SOURCE = join(ROOT, 'src', 'styles', 'global.css');
-const TARGET = join(ROOT, 'build', 'eleventy', 'styles.css');
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
+const SOURCE = join(ROOT, "src", "styles", "global.css");
+const TARGET = join(ROOT, "build", "eleventy", "styles.css");
 
 const source = readFileSync(SOURCE);
 const { code } = transform({ filename: SOURCE, code: source, minify: true });
@@ -27,4 +27,6 @@ mkdirSync(dirname(TARGET), { recursive: true });
 writeFileSync(TARGET, code);
 
 const kb = (n) => `${(n / 1024).toFixed(0)} KB`;
-console.log(`  + build/eleventy/styles.css (${kb(source.length)} -> ${kb(code.length)})`);
+console.log(
+  `  + build/eleventy/styles.css (${kb(source.length)} -> ${kb(code.length)})`,
+);

@@ -1,19 +1,11 @@
 {
   "defaults": {
     "standard": "WCAG2AA",
-    "runners": [
-      "axe",
-      "htmlcs"
-    ],
-    "ignore": [
-      "color-contrast-enhanced"
-    ],
+    "runners": ["axe", "htmlcs"],
+    "ignore": ["color-contrast-enhanced"],
     "timeout": 30000,
     "chromeLaunchConfig": {
-      "args": [
-        "--no-sandbox",
-        "--disable-dev-shm-usage"
-      ]
+      "args": ["--no-sandbox", "--disable-dev-shm-usage"]
     },
     "levelCapWhenNeedsReview": "warning"
   },
