@@ -1,7 +1,6 @@
 """YAML parsing and loading utilities."""
 
 import re
-from io import StringIO
 from pathlib import Path
 
 from ruamel.yaml import YAML, YAMLError
@@ -86,20 +85,6 @@ class YamlLoader:
         except (ValueError, YAMLError) as e:
             logger.warning(f"Failed to parse YAML string: {e}")
             return None
-
-    def dump_to_string(self, data: dict[str, object], **kwargs: object) -> str:
-        """Dump dictionary to YAML string.
-
-        Args:
-            data: Dictionary to serialize
-            **kwargs: Additional arguments for YAML dumper
-
-        Returns:
-            YAML string
-        """
-        stream = StringIO()
-        _ = self._yaml.dump(data, stream, **kwargs)
-        return stream.getvalue()
 
     def load_metadata_file(
         self,

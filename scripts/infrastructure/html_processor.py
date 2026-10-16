@@ -139,21 +139,6 @@ class HtmlProcessor:
         """
         _ = parent.append(child)
 
-    def has_class(self, element: Tag, class_name: str) -> bool:
-        """Check if element has a specific class.
-
-        Args:
-            element: Tag to check
-            class_name: Class name to look for
-
-        Returns:
-            True if element has the class
-        """
-        classes = element.get("class") or []
-        if not isinstance(classes, list):
-            return False
-        return class_name in classes
-
     def get_attribute(
         self,
         element: Tag,
@@ -174,18 +159,3 @@ class HtmlProcessor:
         if isinstance(value, list):
             return str(value[0]) if value else default
         return value
-
-    def set_attribute(
-        self,
-        element: Tag,
-        attr_name: str,
-        value: str,
-    ) -> None:
-        """Set element attribute.
-
-        Args:
-            element: Tag to modify
-            attr_name: Attribute name
-            value: Attribute value
-        """
-        element[attr_name] = value

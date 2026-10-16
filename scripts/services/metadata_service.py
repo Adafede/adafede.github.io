@@ -121,22 +121,3 @@ class MetadataService:
         new_front = "\n".join(lines)
         new_content = f"---\n{new_front}---\n\n{body.lstrip()}"
         self.fs.write_text(path, new_content)
-
-    def update_all_posts(
-        self,
-        post_paths: list[Path],
-        generate_doi: bool = True,
-    ) -> int:
-        """Update metadata for every post in *post_paths*.
-
-        Returns the number of files that were modified.
-        """
-        logger.info(f"Updating metadata for {len(post_paths)} posts")
-
-        modified = 0
-        for path in post_paths:
-            if self.update_post_metadata(path, generate_doi):
-                modified += 1
-
-        logger.info(f"Modified {modified} posts")
-        return modified

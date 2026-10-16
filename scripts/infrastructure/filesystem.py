@@ -56,19 +56,6 @@ class FileSystem:
         logger.debug(f"Found {len(files)} posts in {posts_path}")
         return files
 
-    def find_qmd_files(self, pattern: str) -> list[Path]:
-        """Find QMD files matching a glob pattern.
-
-        Args:
-            pattern: Glob pattern relative to root (e.g., "articles/**/*.qmd")
-
-        Returns:
-            List of matching Path objects
-        """
-        files = sorted(self.root.glob(pattern))
-        logger.debug(f"Found {len(files)} files matching {pattern}")
-        return files
-
     def get_html_path(self, qmd_path: Path, site_dir: str = "_site") -> Path:
         """Get corresponding HTML path for a QMD file.
 

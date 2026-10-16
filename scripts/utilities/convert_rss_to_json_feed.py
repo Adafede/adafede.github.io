@@ -162,29 +162,6 @@ def get_qmd_modification_time(
         return None
 
 
-def is_file_modified(file_path: str) -> bool:
-    """Check if a file has uncommitted changes."""
-    try:
-        result = subprocess.run(
-            [
-                "git",
-                "diff",
-                "--quiet",
-                "HEAD",
-                "--",
-                file_path,
-            ],
-            cwd=os.path.dirname(file_path) or ".",
-            capture_output=True,
-            check=False,
-        )
-        # git diff --quiet returns 0 if no differences, 1 if differences exist
-        return result.returncode != 0
-    except (OSError, FileNotFoundError):
-        # If git command fails, assume file is modified to be safe
-        return True
-
-
 def get_git_commit_date(file_path: str) -> str | None:
     try:
         result = subprocess.run(

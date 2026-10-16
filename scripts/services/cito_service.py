@@ -160,29 +160,3 @@ class CitoService:
         self.html.append_element(entry, cito_span)
 
         return True
-
-    def process_posts(
-        self,
-        post_paths: list[Path],
-        site_dir: Path,
-    ) -> dict[str, list[str]]:
-        """Parse citations from all posts and inject CiTO annotations into HTML."""
-        logger.info(f"Parsing citations from {len(post_paths)} posts")
-        all_cito_dicts = [self.parse_citations_from_qmd(qmd) for qmd in post_paths]
-
-        merged = self.merge_citations(all_cito_dicts)
-        citation_properties = {k: sorted(v) for k, v in merged.items()}
-
-        logger.info(
-            f"Merged {len(citation_properties)} unique citations with "
-            + f"{sum(len(v) for v in citation_properties.values())} properties",
-        )
-
-        for qmd_path in post_paths:
-            html_path = self.fs.get_html_path(qmd_path, str(site_dir))
-            if self.fs.exists(html_path):
-                _ = self.inject_into_html(html_path, citation_properties)
-            else:
-                logger.warning(f"HTML not found for {qmd_path.name}")
-
-        return citation_properties
