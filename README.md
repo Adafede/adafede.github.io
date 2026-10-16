@@ -26,7 +26,7 @@ cd adafede.github.io
 npm ci
 
 # 3. Install Python dependencies (requires Python 3.14+ and uv)
-uv sync --all-extras
+uv sync
 ```
 
 ## Development
@@ -43,10 +43,13 @@ Validate the site (links, RDFa, document structure, contrast):
 npm run check
 ```
 
-Run Python tests:
+Run the test suites (both run in CI):
 
 ```sh
-uv run pytest
+npm test                # both, in order
+
+uv run pytest -q        # Python: the content pipeline and its helpers
+node --test tests/      # JavaScript: the Eleventy data loaders and feeds
 ```
 
 ## Build the whole website
@@ -73,18 +76,37 @@ writes a `pdf:` link into a post's frontmatter when the PDF already exists in
 ### Other commands
 
   | Command                | Purpose                                                        |
-  | ---------              | ---------                                                      |
+  | ---------------------- | -------------------------------------------------------------- |
   | `npm run dev`          | Serve Eleventy locally with hot reload.                        |
+  | `npm test`             | Run the Python and JavaScript test suites.                     |
   | `npm run build`        | Build only the Eleventy HTML site (no PDFs, no migration).     |
   | `npm run sync:content` | Re-migrate `src/content/` and stage `public/` only.            |
   | `npm run render-pdfs`  | (Re)render only the Quarto PDFs.                               |
   | `npm run check`        | Validate links, RDFa, document structure, and color contrast.  |
   | `npm run check:a11y`   | Run pa11y (axe + HTMLCS) over the served site.                 |
 
+`check:a11y` expects a site already being served on port 8080, which is the host
+`.pa11yci.json` points at. Run `npm run dev -- --port=8080` alongside it.
+
 ### Deploy
 
-`publish.yml` runs `npm run build:all` and publishes `_eleventy_site/` to GitHub
-Pages. PDFs render there because the deploy job installs TeX Live and Quarto.
+Two workflows publish to two different hosts, and which one does what matters
+before editing either.
+
+  | Workflow                                 | Builds                                    | Publishes to             |
+  | ---------------------------------------- | ----------------------------------------- | ------------------------ |
+  | `.github/workflows/publish.yml`          | `npm run build:all` → `_eleventy_site/`   | GitHub Pages             |
+  | `.forgejo/workflows/publish.yml`         | `uv run quarto render` → `_site/`         | `adafede.codeberg.page`  |
+
+The GitHub one is the site as it stands: Eleventy renders the HTML, and PDFs
+render because that job installs TeX Live and Quarto. The Codeberg one still
+runs the Quarto pipeline end to end, which is the build Eleventy is replacing.
+That workflow is kept working rather than deleted so the two builds can be
+compared side by side.
+
+`.github/workflows/site.yml` is the other GitHub workflow: it builds, runs all
+four validators, runs both test suites and pa11y, and uploads the result as an
+artifact without deploying it.
 
 ## CiTO annotations
 

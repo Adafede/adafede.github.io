@@ -27,7 +27,7 @@ jobs:
 
       - uses: astral-sh/setup-uv@ae62891fec2bb8e7d6c99fc78c9fec3a63790f8d
 
-      - run: uv sync --all-extras
+      - run: uv sync
 
       - run: npm ci
 
