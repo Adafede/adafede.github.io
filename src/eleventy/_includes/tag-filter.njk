@@ -25,12 +25,12 @@
   {# A real <fieldset>, not a div with role="group": these are checkboxes,
      and the native grouping element gives them an accessible name without an
      aria-label bolted on. WAVE flags a bare group. #}
-  <form class="tag-filter__form" toolname="filter_by_topic" tooldescription="Filter this listing to entries tagged with one or more topics. Checking several tags narrows the list to entries carrying all checked tags. The active filter can be set via ?topic=tag&topic=tag URL parameters. With a single tag checked, matching entries are shown. Checking no tags shows every entry. Filtering is client-side CSS + a minimal URL reader; nothing is submitted to a server." onsubmit="return false">
+  <form class="tag-filter__form" onsubmit="return false">
   <fieldset class="tag-filter__inputs">
     <legend class="visually-hidden">Filter by topic</legend>
-    <input type="checkbox" name="topic" id="tag-all" value="all" toolparamdescription="Show every entry. Uncheck all topic tags to restore the full listing." checked>
+    <input type="checkbox" name="topic" id="tag-all" value="all" checked>
     {% for entry in counts %}
-    <input type="checkbox" name="topic" id="tag-{{ loop.index }}" value="{{ entry.tag | lower }}" toolparamdescription="Topic slug to match. Check to show only entries carrying this tag.">
+    <input type="checkbox" name="topic" id="tag-{{ loop.index }}" value="{{ entry.tag | lower }}">
     {% endfor %}
   </fieldset>
   {# Pa11y requires a submit control on every form. Filtering is CSS-only;
@@ -110,7 +110,14 @@
         tags.forEach(function (t) {
           url.searchParams.append('topic', t);
         });
-        window.history.replaceState(null, '', url);
+        // pushState (not replaceState) so the back button can undo filter
+        // changes one step at a time. When no tags are selected, strip the
+        // query string entirely so the URL is clean when showing all entries.
+        if (tags.length) {
+          window.history.pushState(null, '', url);
+        } else {
+          window.history.pushState(null, '', url.pathname + url.hash);
+        }
       }
 
       function syncFromUrl() {
