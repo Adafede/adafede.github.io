@@ -9,7 +9,7 @@ qid: Q109715863
 url: <https://doi.org/10.3390/metabo11110791>
 categories:
   - Bioactivity
-  - Chemical composition
+  - Chemical Composition
   - Liquid Chromatography-Tandem Mass Spectrometry
   - Metabolite Annotation
   - Natural Products

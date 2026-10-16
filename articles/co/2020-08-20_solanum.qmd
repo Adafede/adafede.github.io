@@ -9,7 +9,7 @@ qid: Q99711601
 url: <https://doi.org/10.3389/fpls.2020.01287>
 categories:
   - Bioactivity
-  - Chemical composition
+  - Chemical Composition
   - Metabolomics
   - Natural Products
 abstract: |

@@ -8,7 +8,7 @@ doi: 10.3389/fntpr.2023.1147195
 qid: Q117039043
 url: <https://doi.org/10.3389/fntpr.2023.1147195>
 categories:
-  - Chemical composition
+  - Chemical Composition
   - Isolation
   - Metabolite Annotation
   - Metabolomics

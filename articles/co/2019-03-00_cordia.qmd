@@ -9,7 +9,7 @@ qid: Q106516421
 url: <https://doi.org/10.21577/0103-5053.20180221>
 categories:
   - Bioactivity
-  - Chemical composition
+  - Chemical Composition
   - Fractionation
   - Isolation
   - Liquid Chromatography-Tandem Mass Spectrometry

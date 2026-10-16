@@ -9,7 +9,7 @@ qid: Q110656312
 url: <https://doi.org/10.1038/s41598-022-04975-9>
 categories:
   - Bioactivity
-  - Chemical composition
+  - Chemical Composition
   - Isolation
   - Natural Products
 abstract: |

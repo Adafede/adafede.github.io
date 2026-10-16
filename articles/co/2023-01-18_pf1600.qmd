@@ -9,7 +9,7 @@ qid: Q116245417
 url: <https://doi.org/10.1093/gigascience/giac124>
 categories:
   - Bioinformatics
-  - Chemical composition
+  - Chemical Composition
   - Metabolomics
   - Natural Products
   - Open Science
