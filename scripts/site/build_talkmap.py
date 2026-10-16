@@ -162,8 +162,8 @@ def main() -> int:
     # Aggregate by country. A marker per city clutters the map badly, because
     # most of the talks are within a few hundred kilometers of each other: the
     # labels overlap and the dots read as one blob. One marker per country,
-    # placed at the mean of its talk coordinates and scaled by how many talks it
-    # holds, is both legible and the more useful summary.
+    # placed at the mean of its cities' coordinates and scaled by how many talks
+    # it holds, is both legible and the more useful summary.
     countries: dict[str, dict[str, Any]] = {}
     for location, talks in places.items():
         country = location.rsplit(",", 1)[-1].strip().strip('"') or "Unknown"
@@ -178,12 +178,9 @@ def main() -> int:
     # proportional to the number of talks rather than the radius.
     biggest = max((len(c["talks"]) for c in countries.values()), default=1)
 
-    # Label placement. Most of Europe is within a few hundred kilometers, so
-    # markers end up almost on top of each other and a naive "below the dot"
-    # label lands one country's text on top of its neighbour's marker. Labels
-    # are therefore pushed down until they clear every other marker disc and
-    # every label already placed. Rank order, so the countries with the most
-    # talks keep the position closest to their own marker.
+    # Marker positions. A country is placed at the mean of its cities'
+    # coordinates — each city weighs the same, so one outlier talk does not
+    # drag the marker away from where the country actually is.
     discs = []
     for country, entry in ranked:
         lats = [t[2] for t in entry["talks"]]
@@ -193,7 +190,10 @@ def main() -> int:
             (country, entry, x, y, 7 + 11 * math.sqrt(len(entry["talks"]) / biggest)),
         )
 
-    # Label placement. Labels start under their own marker and are pushed down
+    # Label placement. Most of Europe is within a few hundred kilometers, so
+    # markers end up almost on top of each other and a naive "below the dot"
+    # label lands one country's text on top of its neighbour's marker. Labels
+    # start under their own marker and are pushed down
     # until they clear every marker and every label already placed. Rank order,
     # so the countries with the most talks keep the position nearest the dot.
     #
