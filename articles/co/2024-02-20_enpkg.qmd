@@ -7,10 +7,14 @@ date: 2024-03-27
 doi: 10.1021/acscentsci.3c00800
 qid: Q124670540
 url: <https://doi.org/10.1021/acscentsci.3c00800>
-# categories:
-#   - TODO
-# abstract: |
-#  TODO
+categories:
+  - Bioinformatics
+  - Knowledge Graph
+  - Metabolomics
+  - Natural Products
+abstract: |
+ The Experimental Natural Products Knowledge Graph (ENPKG) framework combines a sample-centric approach with semantic enrichment to organize large heterogeneous metabolomics data sets as a knowledge graph.
+ Harmonization of experimental data with publicly available data sets and federated queries mechanisms enable efficient information extraction and the contextualization of metabolomics studies, thereby offering exciting opportunities for drug discovery and global chemodiversity characterization.
 nocite: |
   @Gaudry2024
 ---

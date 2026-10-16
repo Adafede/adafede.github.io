@@ -7,10 +7,14 @@ date: 2024-02-05
 doi: 10.1038/s41564-023-01575-9
 qid: Q124670541
 url: <https://doi.org/10.1038/s41564-023-01575-9>
-# categories:
-#   - TODO
-# abstract: |
-#  TODO
+categories:
+  - Bioinformatics
+  - Liquid Chromatography-Tandem Mass Spectrometry
+  - Metabolomics
+abstract: |
+ microbeMASST, a taxonomically informed mass spectrometry (MS) search tool, tackles limited microbial metabolite annotation in untargeted metabolomics experiments.
+ Leveraging a curated database of >60,000 microbial monocultures, users can search known and unknown MS/MS spectra and link them to their respective microbial producers via MS/MS fragmentation patterns.
+ Identification of microbe-derived metabolites and relative producers without a priori knowledge will vastly enhance the understanding of microorganisms’ role in ecology and human health.
 nocite: |
   @Zuffa2024
 ---

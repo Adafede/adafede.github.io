@@ -7,10 +7,19 @@ date: 2024-12-15
 doi: 10.1016/j.foodchem.2024.140801
 qid: Q128896351
 url: <https://doi.org/10.1016/j.foodchem.2024.140801>
-# categories:
-#   - TODO
-# abstract: |
-#  TODO
+categories:
+  - Isolation
+  - Liquid Chromatography-Tandem Mass Spectrometry
+  - Metabolomics
+abstract: |
+ The sensory quality of a wine is mainly based on its aroma and flavor.
+ Sweetness contributes in the gustatory balance of red wines.
+ The investigation of compounds involved in this flavor was based on empirical observations, such as the increase in wine sweetness during yeast autolysis, concomitant to post-fermentation maceration in red winemaking.
+ An untargeted metabolomics approach using UHPLC-HRMS has been developed to discover a new sweet molecule released during this stage.
+ Among several markers highlighted, one compound was selected to be isolated by various separative techniques.
+ It was unambiguously identified by NMR as N6-succinyladenosine and is reported for the first time in wine at an average concentration of 3.16 mg/L in 85 red wines.
+ Furthermore, sensory analysis has highlighted its sweetness.
+ In addition to discovering a new sweet compound in wine, this study proposes new tools for studying taste-active compounds in natural matrices.
 nocite: |
   @LeScanff2024
 ---

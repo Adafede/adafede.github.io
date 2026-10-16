@@ -12,6 +12,7 @@ categories:
   - Chemical composition
   - Fractionation
   - Liquid Chromatography-Tandem Mass Spectrometry
+  - Metabolomics
   - Natural Products
 abstract: |
  **Ethnopharmacological relevance**

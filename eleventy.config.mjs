@@ -231,8 +231,38 @@ function superscript(mdi) {
     `<sup>${escapeHtml(tokens[idx].content)}</sup>`;
 }
 
+function subscript(mdi) {
+  mdi.inline.ruler.before("emphasis", "subscript", (state, silent) => {
+    const start = state.pos;
+    const max = state.posMax;
+    if (state.src.charCodeAt(start) !== 0x7e /* ~ */) return false;
+    if (state.src[start + 1] === undefined || /\s/.test(state.src[start + 1]))
+      return false;
+
+    let pos = start + 1;
+    while (pos < max) {
+      const ch = state.src[pos];
+      if (ch === "~") break;
+      if (/\s/.test(ch) || ch === undefined) return false;
+      pos++;
+    }
+    if (pos >= max || pos === start + 1) return false;
+
+    if (!silent) {
+      const token = state.push("subscript", "", 0);
+      token.content = state.src.slice(start + 1, pos);
+    }
+    state.pos = pos + 1;
+    return true;
+  });
+
+  mdi.renderer.rules.subscript = (tokens, idx) =>
+    `<sub>${escapeHtml(tokens[idx].content)}</sub>`;
+}
+
 const md = markdownIt({ html: true, linkify: false, typographer: false });
 superscript(md);
+subscript(md);
 
 // --- panel tabsets -----------------------------------------------------------
 
@@ -532,6 +562,7 @@ export default function (eleventyConfig) {
     typographer: false,
   });
   superscript(inlineMd);
+  subscript(inlineMd);
 
   /**
    * Link text that tells a screen-reader user nothing on its own.

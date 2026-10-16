@@ -8,10 +8,31 @@ date: 2023-12-19
 doi: 10.3389/fpls.2023.1278745
 qid: Q123938372
 url: <https://doi.org/10.3389/fpls.2023.1278745>
-# categories:
-#   - TODO
-# abstract: |
-#  TODO
+categories:
+  - Liquid Chromatography-Tandem Mass Spectrometry
+  - Metabolomics
+  - Natural Products
+abstract: |
+ *Introduction**:
+ In contrast to the dynamics observed in plant/pathogen interactions, endophytic fungi have the capacity to establish enduring associations within their hosts, leading to the development of a mutually beneficial relationship that relies on specialized chemical interactions.
+ Research indicates that the presence of endophytic fungi has the ability to significantly modify the chemical makeup of the host organism.
+ Our hypothesis proposes the existence of a reciprocal exchange of chemical signals between plants and fungi, facilitated by specialized chemical processes that could potentially manifest within the tissues of the host.
+ This research aimed to precisely quantify the portion of the cumulative fungal endophytic community's metabolome detectable within host leaves, and tentatively evaluate its relevance to the host-endophyte interplay.
+ The understory palm *Astrocaryum sciophilum* (Miq.) Pulle was used as a interesting host plant because of its notable resilience and prolonged life cycle, in a tropical ecosystem.
+
+ *Method*:
+ Using advanced metabolome characterization, including UHPLC-HRMS/MS and molecular networking, the study explored enriched metabolomes of both host leaves and 15 endophytic fungi.
+ The intention was to capture a metabolomic "snapshot" of both host and endophytic community, to achieve a thorough and detailed analysis.
+
+ Results and discussion:
+ This approach yielded an extended MS-based molecular network, integrating diverse metadata for identifying host- and endophyte-derived metabolites.
+ The exploration of such data (>24000 features in positive ionization mode) enabled effective metabolome comparison, yielding insights into cultivable endophyte chemodiversity and occurrence of common metabolites between the holobiont and its fungal communities.
+ Surprisingly, a minor subset of features overlapped between host leaf and fungal samples despite significant plant metabolome enrichment.
+ This indicated that fungal metabolic signatures produced in vitro remain sparingly detectable in the leaf.
+ Several classes of primary metabolites were possibly shared.
+ Specific fungal metabolites and/or compounds of their chemical classes were only occasionally discernible in the leaf, highlighting endophytes partial contribution to the overall holobiont metabolome.
+ To our knowledge, the metabolomic study of a plant host and its microbiome has rarely been performed in such a comprehensive manner.
+ The general analytical strategy proposed in this paper seems well-adapted for any study in the field of microbial- or microbiome-related MS and can be applied to most host-microbe interactions.
 nocite: |
   @Pellissier2023
 ---

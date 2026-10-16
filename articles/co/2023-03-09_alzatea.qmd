@@ -7,10 +7,21 @@ date: 2023-03-09
 doi: 10.3389/fntpr.2023.1147195
 qid: Q117039043
 url: <https://doi.org/10.3389/fntpr.2023.1147195>
-# categories:
-#   - TODO
-# abstract: |
-#  TODO
+categories:
+  - Chemical composition
+  - Isolation
+  - Metabolomics
+  - Natural Products
+abstract: |
+ *Alzatea verticillata* Ruiz & Pav. (Alzateaceae) is a tropical tree from Central and South America.
+ It is the only living species of *Alzatea* genus and the Alzateaceae family, all others being extinct.
+ With the aim to investigate the possibility to find unusual natural products, the chemical content of the dichloromethane and methanolic extracts (stems and leaves) of *A. verticillata* have been investigated.
+ Apolar and polar extracts were purified by semi-preparative HPLC using appropriate stationary phase columns allowing the isolation of 12 compounds: walterolactone B (**2**) walterolactone A/B *β*-D-pyranoglucoside (**3**), gallic acid (4), caffeic acid 4-*O*-*β*-D-glucopyranoside (**6**), walterolactone A/B 6-*O*-gallate-*β*-D-glucopyranoside (**8**), caffeic acid (**9**), 8-desmethylsideroxylin (**11**), sideroxylin (**12**) and 7,7′-bis(3,4-dihydroxyphenyl)-8,8′-cyclobutanedicarboxylic acid (**7**).
+ Three isolated compounds are natural products described here for the first time: dimethyl-anemonin (**1**) and two *β*-truxinic acid derivatives (*rel*-(7*S*, 8*R*, 7′*R*, 8′*S*)-7,7′-bis(4-glucosyloxy-3-hydroxyphenyl)-8,8′-cyclobutane dicarboxylic acid (**5**) and *rel*-(7*S*, 8*R*, 7′*R*, 8′*S*)-7,7′-bis(4-glucosyloxy-3-hydroxyphenyl)-8,8′-cyclobutane-9-methyl dicarboxylic acid (**10**).
+ The structures of the isolated compounds were elucidated by NMR and HRMS.
+ The structure of compound **1** was confirmed by X-ray crystallography.
+ A MS-based metabolite analysis of the *A. verticillata* extracts revealed additional truxinic acid derivatives that were putatively annotated with the help of feature-based molecular network.
+ The presence of phenolic compounds such as truxinic acid derivatives could explain the traditional use of this plant as these compounds are known to possess anti-inflammatory and anti-nociceptive properties.
 nocite: |
   @FerreiraQueiroz2023
 ---

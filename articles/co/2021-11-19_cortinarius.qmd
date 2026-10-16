@@ -7,10 +7,22 @@ date: 2021-11-19
 doi: 10.3390/metabo11110791
 qid: Q109715863
 url: <https://doi.org/10.3390/metabo11110791>
-# categories:
-#   - TODO
-# abstract: |
-#  TODO
+categories:
+  - Bioactivity
+  - Chemical composition
+  - Liquid Chromatography-Tandem Mass Spectrometry
+  - Natural Products
+abstract: |
+ Fungi have developed a wide array of defense strategies to overcome mechanical injuries and pathogen infections.
+ Recently, photoactivity has been discovered by showing that pigments isolated from *Cortinarius uliginosus* produce singlet oxygen under irradiation.
+ To test if this phenomenon is limited to dermocyboid Cortinarii, six colourful *Cortinarius* species belonging to different classical subgenera (*i.e.*, *Dermocybe*, *Leprocybe*, *Myxacium*, *Phlegmacium*, and *Telamonia*) were investigated.
+ Fungal extracts were explored by the combination of in vitro photobiological methods, UHPLC coupled to high-resolution tandem mass spectrometry (UHPLC-HRMS^2^), feature-based molecular networking (FBMN), and metabolite dereplication techniques.
+ The fungi *C. rubrophyllus* (Dermocybe) and *C. xanthophyllus* (Phlegmacium) exhibited promising photobiological activity in a low concentration range (1–7 *µ*g/mL).
+ Using UHPLC-HRMS^2^-based metabolomic tools, the underlying photoactive principle was investigated.
+ Several monomeric and dimeric anthraquinones were annotated as compounds responsible for the photoactivity.
+ Furthermore, the results showed that light-induced activity is not restricted to a single subgenus, but rather is a trait of Cortinarius species of different phylogenetic lineages and is linked to the presence of fungal anthraquinones.
+ This study highlights the genus *Cortinarius* as a promising source for novel photopharmaceuticals.
+ Additionally, we showed that putative dereplication of natural photosensitizers can be done by FBMN.
 nocite: |
   @Hammerle2021
 ---

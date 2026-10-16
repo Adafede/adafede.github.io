@@ -7,10 +7,20 @@ date: 2022-11-21
 doi: 10.3389/fmolb.2022.1028334
 qid: Q115177826
 url: <https://doi.org/10.3389/fmolb.2022.1028334>
-# categories:
-#   - TODO
-# abstract: |
-#  TODO
+categories:
+  - Bioinformatics
+  - Liquid Chromatography-Tandem Mass Spectrometry
+  - Natural Products
+abstract: |
+ Collections of natural extracts hold potential for the discovery of novel natural products with original modes of action.
+ The prioritization of extracts from collections remains challenging due to the lack of a workflow that combines multiple-source information to facilitate the data interpretation.
+ Results from different analytical techniques and literature reports need to be organized, processed, and interpreted to enable optimal decision-making for extracts prioritization.
+ Here, we introduce *Inventa*, a computational tool that highlights the structural novelty potential within extracts, considering untargeted mass spectrometry data, spectral annotation, and literature reports.
+ Based on this information, *Inventa* calculates multiple scores that inform their structural potential.
+ Thus, *Inventa* has the potential to accelerate new natural products discovery.
+ Inventa was applied to a set of plants from the Celastraceae family as a proof of concept.
+ The *Pristimera indica* (Willd.) A.C.Sm roots extract was highlighted as a promising source of potentially novel compounds.
+ Its phytochemical investigation resulted in the isolation and de novo characterization of thirteen new dihydro-*β*-agarofuran sesquiterpenes, five of them presenting a new 9-oxodihydro-*β*-agarofuran base scaffold.
 nocite: |
   @QuirosGuerrero2022
 ---

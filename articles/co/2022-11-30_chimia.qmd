@@ -8,10 +8,18 @@ date: 2022-11-30
 doi: 10.2533/chimia.2022.954
 qid: Q115517760
 url: <https://doi.org/10.2533/chimia.2022.954>
-# categories:
-#   - TODO
-# abstract: |
-#  TODO
+categories:
+  - Bioinformatics
+  - Metabolomics
+  - Natural Products
+abstract: |
+ Metabolomics is playing an increasingly prominent role in chemical ecology and in the discovery of bioactive natural products (NPs).
+ The identification of metabolites is a common/central objective in both research fields.
+ NPs have significant biological properties and play roles in multiple chemical-ecological interactions.
+ Classically, in pharmacognosy, their chemical structure is determined after a complex process of isolating and interpreting spectroscopic data.
+ With the advent of powerful analytical techniques such as liquid chromatography-mass spectrometry (LC-MS) the annotation process of the specialised metabolome of plants and microorganisms has improved considerably.
+ In this article, we summarise the possibilities opened by these advances and illustrate how we harnessed them in our own research to automate annotations of NPs and target the isolation of key compounds.
+ In addition, we are also discussing the analytical and computational challenges associated with these emerging approaches and their perspective.
 nocite: |
   @Wolfender2022
 ---

@@ -11,6 +11,7 @@ categories:
   - Chemical composition
   - Fractionation
   - Isolation
+  - Liquid Chromatography-Tandem Mass Spectrometry
   - Natural Products
 abstract: |
   *Niedenzuella multiglandulosa* (Malpighiaceae) is a neotropical liana responsible for cattle intoxication outbreaks in Brazil that may lead to abortion and even death of the animals, causing substantial losses in Brazilian trade balance.

@@ -7,10 +7,20 @@ date: 2025-07-29
 doi: 10.1371/journal.pbio.3003287
 # qid: TODO
 url: <https://doi.org/10.1371/journal.pbio.3003287>
-# categories:
-#   - TODO
-# abstract: |
-#  TODO
+categories:
+  - Metabolomics
+  - Natural Products
+abstract: |
+ Metabolic cross-feeding networks are central to shaping microbial community dynamics in environments ranging from the rhizosphere, gut, and marine carbon cycling.
+ Yet cross-feeding has predominantly been viewed by examining exchanged small metabolites.
+ In contrast, the role of extracellular polymeric substance (EPS)—a complex mixture of proteins, polysaccharides, DNA, and humic-like compounds—in cross-feeding remains poorly understood, mainly due to technical challenges in measuring their secretion relative to small metabolites.
+ Using chitin-degrading microbes as a model system, we used a bicarbonate-buffered bioreactor coupled with elemental analysis, which allowed us to quantify both EPS and small metabolite secretion.
+ This revealed that ~25% of carbon exuded by a chitin degrader is in the form of EPS.
+ EPS was produced at similar levels across marine chitin-degrading isolates and seawater communities, underscoring its importance relative to small metabolites.
+ Notably, different sources of EPS were found to select for distinct and diverse microbial communities.
+ Combining in vitro enzyme assays and untargeted metabolomics, we show that EPS undergoes sequential degradation—from large oligomers to smaller, broadly accessible monomers.
+ This sequential breakdown creates a temporal succession of metabolic niches, potentially fueling a shift from specialist species degrading complex substrates to a more diverse community of generalists using simpler monomers.
+ By identifying EPS as a major and dynamic contributor to cross-feeding networks, our findings reveal a hidden layer of complexity in how microbial communities assemble and function across ecosystems.
 nocite: |
   @Pontrelli2025
 ---
