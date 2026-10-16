@@ -42,25 +42,6 @@ const THUMBNAILS = join(OUT, 'thumbnails.json');
 /** Only these are cached; anything else is not ours to mirror. */
 const CACHEABLE = /^https:\/\/(upload\.wikimedia\.org|raw\.githubusercontent\.com|ars\.els-cdn\.com|media\.springernature\.com|pharma\.unibas\.ch)\//;
 
-/**
- * SVGs are cached byte for byte as downloaded.
- *
- * This used to round every number in a <path d> to a fixed number of decimals,
- * which is a real saving and quietly corrupts artwork. Rounding perturbs each
- * vertex independently, and the outlines here are traced glyphs and text-as-
- * paths: a perturbed outline self-intersects, and the default nonzero fill rule
- * then paints the interior solid. The TIMA logo lost its lettering to black
- * blobs, and the LOTUS and Wikidata marks went with it.
- *
- * Making the precision depend on the viewBox did not rescue it either — it only
- * moved the damage. Anything that rewrites path data has this failure mode, so
- * the coordinates are left exactly as authored.
- *
- * There is little left to reclaim: these files are already minified, and their
- * comments are worth well under 1% of their size. The honest trade is a larger
- * file, not a mangled logo. Rasterising would shrink them further but needs a
- * native dependency, and would lose the scaling these are used at.
- */
 const contentFiles = [];
 for (const section of ['articles', 'varia']) {
   const dir = join(CONTENT, section);
@@ -76,15 +57,10 @@ for (const section of ['articles', 'varia']) {
 }
 
 const urls = new Set();
-const thumbnailUrls = new Set();
 for (const file of contentFiles) {
   const image = readFileSync(file, 'utf-8').match(/^image:\s*"?([^"\n]+)"?\s*$/m)?.[1];
   if (image && CACHEABLE.test(image)) {
     urls.add(image);
-    // Every file walked above is under articles/ or varia/, which are the two
-    // sections that render a card per item, so every cacheable image gets a
-    // preview; the set exists to record that.
-    thumbnailUrls.add(image);
   }
 }
 
@@ -124,7 +100,7 @@ for (const url of urls) {
   // 320px blur in another, the blur is soft on a 2x screen, and it cannot be
   // enlarged or reused. So the only previews here are for artwork that arrived
   // as raster to begin with.
-  const needsRasterThumb = thumbnailUrls.has(url) && extension === '.png';
+  const needsRasterThumb = extension === '.png';
   const thumbnailName = `${stem}-thumb-512-fit.webp`;
   const cachedThumbnailName = thumbnails[url]?.replace(/^\/images\/artwork\//, '');
   const hasThumbnail = cachedThumbnailName === thumbnailName
@@ -170,8 +146,10 @@ for (const url of urls) {
 
   let name = `${stem}${extension}`;
   try {
+    // SVGs are written through byte for byte: no path-data rewriting, because
+    // anything that rewrites it corrupts this artwork (see below).
     if (name.endsWith('.svg')) {
-      buffer = buffer; // SVG: cached exactly as downloaded, see the note above.
+      // Nothing to do; `buffer` is already what was downloaded.
     } else if (extension === '.png' && needsRasterThumb) {
       const temporaryDirectory = mkdtempSync(join(tmpdir(), 'site-artwork-'));
       const source = join(temporaryDirectory, `${stem}.png`);
@@ -250,3 +228,23 @@ if (removed) console.log(`  artwork: removed ${removed} unreferenced file(s)`);
 writeFileSync(MANIFEST, `${JSON.stringify(manifest, null, 2)}\n`, 'utf-8');
 writeFileSync(THUMBNAILS, `${JSON.stringify(thumbnails, null, 2)}\n`, 'utf-8');
 console.log(`  artwork: ${Object.keys(manifest).length} cached (${fetched} new, ${failed} failed)`);
+
+/*
+ * Why the SVG branch above writes the download through untouched.
+ *
+ * It used to round every number in a <path d> to a fixed number of decimals,
+ * which is a real saving and quietly corrupts artwork. Rounding perturbs each
+ * vertex independently, and the outlines here are traced glyphs and text-as-
+ * paths: a perturbed outline self-intersects, and the default nonzero fill rule
+ * then paints the interior solid. The TIMA logo lost its lettering to black
+ * blobs, and the LOTUS and Wikidata marks went with it.
+ *
+ * Making the precision depend on the viewBox did not rescue it either — it only
+ * moved the damage. Anything that rewrites path data has this failure mode, so
+ * the coordinates are left exactly as authored.
+ *
+ * There is little left to reclaim: these files are already minified, and their
+ * comments are worth well under 1% of their size. The honest trade is a larger
+ * file, not a mangled logo. Rasterising would shrink them further but needs a
+ * native dependency, and would lose the scaling these are used at.
+ */
