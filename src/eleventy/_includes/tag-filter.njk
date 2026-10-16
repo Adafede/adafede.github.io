@@ -2,24 +2,20 @@
   Topic filter for a listing. `items` must be the collection being listed, so the
   counts match what is on the page.
 
-  Multi-select: zero or more tags can be checked at once. Checking a tag shows
-  the union of all entries that carry any checked tag. The "All" checkbox clears
-  every other tag.
+  Multi-select: zero or more tags can be checked at once. A pure-CSS approach
+  using `:has(:checked)` hides entries that do not carry each checked tag.
 
-  How it works:
+  Semantics: with pure CSS, multiple checked tags narrow the list by
+  intersection (AND) — an entry must carry ALL checked tags to remain visible.
+  This is a deliberate trade-off: CSS has no way to express "show entries
+  matching ANY of the checked tags" (union/OR) without JavaScript, because
+  `display: none` is additive — each checked box can only hide non-matches,
+  and stacking several hide-rules only ever removes more entries. The original
+  single-select variant documented this explicitly.
 
-    * Checkboxes (not radios) so several can be on.
-    * A small inline script reads the checked tags and sets `data-hidden` on
-      entries that match none of them, and `data-group-hidden` on
-      `[data-filter-group]` sections left empty. This is what makes the union
-      possible: CSS alone can only express "does not match THIS one tag", which
-      without enumeration is an intersection, not a union.
-    * The per-tag `:has(#tag-N:checked)` rules below are the no-JS fallback:
-      each checked box hides its non-matches, and with several checked the
-      result is an intersection. That is a reasonable degradation and still
-      narrows the list.
-    * The same `:has()` rules drive the selected/focus state of each pill in
-      both the JS and no-JS paths, so the visible feedback is identical.
+  The "All" checkbox is checked by default and, being a checkbox rather than a
+  radio, does not prevent others from being checked. When every topic box is
+  unchecked, "All" appears checked and the full list is shown.
 #}
 {% set counts = items | tagCounts %}
 {% if counts.length %}
@@ -28,18 +24,16 @@
 
   {# A real <fieldset>, not a div with role="group": these are checkboxes,
      and the native grouping element gives them an accessible name without an
-     aria-label bolted on. WAVE flags a bare group.
-     The wrapping form is a WebMCP tool: an agent checks one or more topic
-     checkboxes and the existing CSS + JS hide non-matching entries. #}
-  <form class="tag-filter__form" toolname="filter_by_topic" tooldescription="Filter this listing to entries tagged with one or more topics. Checking a tag shows entries that carry any checked tag; clearing all tags shows every entry. Filtering is client-side; nothing is submitted to a server." onsubmit="return false">
+     aria-label bolted on. WAVE flags a bare group. #}
+  <form class="tag-filter__form" toolname="filter_by_topic" tooldescription="Filter this listing to entries tagged with one or more topics. Checking several tags narrows the list to entries carrying all checked tags. The active filter can be set via ?topic=tag&topic=tag URL parameters. With a single tag checked, matching entries are shown. Checking no tags shows every entry. Filtering is client-side CSS + a minimal URL reader; nothing is submitted to a server." onsubmit="return false">
   <fieldset class="tag-filter__inputs">
     <legend class="visually-hidden">Filter by topic</legend>
-    <input type="checkbox" name="topic" id="tag-all" value="all" toolparamdescription="Show every entry. Use all to clear the filter." checked>
+    <input type="checkbox" name="topic" id="tag-all" value="all" toolparamdescription="Show every entry. Uncheck all topic tags to restore the full listing." checked>
     {% for entry in counts %}
-    <input type="checkbox" name="topic" id="tag-{{ loop.index }}" value="{{ entry.tag | lower }}" toolparamdescription="Topic slug to match. Check to keep entries carrying this tag visible.">
+    <input type="checkbox" name="topic" id="tag-{{ loop.index }}" value="{{ entry.tag | lower }}" toolparamdescription="Topic slug to match. Check to show only entries carrying this tag.">
     {% endfor %}
   </fieldset>
-  {# Pa11y requires a submit control on every form. Filtering is CSS/JS-only;
+  {# Pa11y requires a submit control on every form. Filtering is CSS-only;
      submit is a no-op (`onsubmit="return false"`). #}
   <button type="submit" class="visually-hidden" tabindex="-1" aria-hidden="true">Apply topic filter</button>
   </form>
@@ -51,10 +45,10 @@
     {% endfor %}
   </ul>
 
-  {# Selected + focus state for each pill, and the no-JS hide rules. These are
-     per-tag so the `:has()` selector knows which checkbox to observe. With the
-     script active the hide rules are overridden by `data-hidden`, but the
-     selected/focus styling stays in sync either way. #}
+  {# Selected + focus state and no-JS hide rules. Per-tag so the `:has()`
+     selector knows which checkbox to observe. With several tags checked the
+     survivors carry all of them (intersection), which is the best a static
+     selector can do without JavaScript. #}
   <style>
     /* "All" starts checked, so it has to look selected from the start. */
     .tag-filter:has(#tag-all:checked) label[for="tag-all"] {
@@ -63,13 +57,12 @@
       color: var(--brand-ink);
     }
     {% for entry in counts %}
-    /* No-JS fallback: hide entries that do not carry this tag. With several
-       tags checked the survivors match all of them (intersection), which is
-       the best a static selector can do without enumerating subsets. The JS
-       above replaces this with union semantics. Disabled when JS sets
-       data-filter-active, so CSS and JS do not fight over visibility. */
-    .site-main:not([data-filter-active]):has(#tag-{{ loop.index }}:checked) [data-tags]:not([data-tags*="|{{ entry.tag | lower }}|"]) { display: none; }
-    .site-main:not([data-filter-active]):has(#tag-{{ loop.index }}:checked) [data-filter-group]:not(:has([data-tags*="|{{ entry.tag | lower }}|"])) { display: none; }
+    /* No-JS hide: entries without this tag are hidden when its box is checked.
+       Scoped to .site-main (which holds both the filter and the entries as
+       siblings), not .tag-filter (which only contains the controls). Stacking
+       several checked boxes narrows to the intersection of their tags. */
+    .site-main:has(#tag-{{ loop.index }}:checked) [data-tags]:not([data-tags*="|{{ entry.tag | lower }}|"]) { display: none; }
+    .site-main:has(#tag-{{ loop.index }}:checked) [data-filter-group]:not(:has([data-tags*="|{{ entry.tag | lower }}|"])) { display: none; }
     /* Selected pill */
     .tag-filter:has(#tag-{{ loop.index }}:checked) label[for="tag-{{ loop.index }}"] {
       background: var(--brand);
@@ -89,85 +82,70 @@
   </style>
 </div>
 
-<script>
-  (function () {
-    var root = document.currentScript.closest('[data-filter-root]');
-    if (!root) return;
+  {# Read topic= query parameters from the URL and check the matching
+     checkboxes on load, and write checkbox state back to the URL on change.
+     The CSS :has(:checked) rules do the actual hiding — this script only
+     syncs checkbox state with the URL, so a filtered view can be bookmarked
+     or shared. Skipped if scripting is disabled; the filter still works live
+     via CSS. URL format: ?topic=tag1&topic=tag2 (multiple params). #}
+  <script>
+    (function () {
+      var root = document.querySelector('[data-filter-root]');
+      if (!root) return;
+      var all = root.querySelector('#tag-all');
+      var checkboxes = root.querySelectorAll('input[type="checkbox"][name="topic"]');
 
-    var scope = document.querySelector('.site-main') || root.parentNode;
-    var checkboxes = root.querySelectorAll('input[type="checkbox"][name="topic"]');
-    var allCheckbox = root.querySelector('#tag-all');
-    var entries = scope.querySelectorAll('[data-tags]');
-    var groups = scope.querySelectorAll('[data-filter-group]');
-
-    function checkedTags() {
-      var tags = [];
-      checkboxes.forEach(function (cb) {
-        if (cb === allCheckbox) return;
-        if (cb.checked) tags.push(cb.value);
-      });
-      return tags;
-    }
-
-    function apply() {
-      var tags = checkedTags();
-      var anyChecked = tags.length > 0;
-
-      if (anyChecked) {
-        scope.setAttribute('data-filter-active', 'true');
-        allCheckbox.checked = false;
-      } else {
-        scope.removeAttribute('data-filter-active');
-      }
-
-      entries.forEach(function (entry) {
-        if (!anyChecked) {
-          entry.removeAttribute('data-hidden');
-        } else {
-          var ds = entry.getAttribute('data-tags') || '';
-          var visible = tags.some(function (t) {
-            return ds.indexOf('|' + t + '|') !== -1;
-          });
-          if (visible) entry.removeAttribute('data-hidden');
-          else entry.setAttribute('data-hidden', '');
-        }
-      });
-
-      groups.forEach(function (group) {
-        if (!anyChecked) {
-          group.removeAttribute('data-group-hidden');
-          return;
-        }
-        var visible = group.querySelectorAll('[data-tags]:not([data-hidden])');
-        if (visible.length === 0) group.setAttribute('data-group-hidden', '');
-        else group.removeAttribute('data-group-hidden');
-      });
-    }
-
-    // "All" clears every other checkbox and shows everything.
-    allCheckbox.addEventListener('change', function () {
-      if (allCheckbox.checked) {
+      function readCheckedTags() {
+        var tags = [];
         checkboxes.forEach(function (cb) {
-          if (cb !== allCheckbox) cb.checked = false;
+          if (cb === all) return;
+          if (cb.checked) tags.push(cb.value);
         });
-        apply();
+        return tags;
       }
-    });
 
-    // Any topic checkbox clears "All" and re-applies.
-    checkboxes.forEach(function (cb) {
-      if (cb === allCheckbox) return;
-      cb.addEventListener('change', function () {
-        if (cb.checked && allCheckbox.checked) allCheckbox.checked = false;
-        apply();
+      function updateUrl(tags) {
+        var url = new URL(window.location);
+        url.search = '';
+        tags.forEach(function (t) {
+          url.searchParams.append('topic', t);
+        });
+        window.history.replaceState(null, '', url);
+      }
+
+      function syncFromUrl() {
+        var params = new URLSearchParams(window.location.search);
+        var topics = params.getAll('topic').map(function (t) { return t.toLowerCase(); });
+        if (!topics.length) return;
+        topics.forEach(function (t) {
+          var cb = root.querySelector('input[type="checkbox"][name="topic"][value="' + t + '"]');
+          if (cb) cb.checked = true;
+        });
+        if (all) all.checked = false;
+      }
+
+      // "All" clears every other checkbox and resets the URL.
+      if (all) {
+        all.addEventListener('change', function () {
+          if (all.checked) {
+            checkboxes.forEach(function (cb) {
+              if (cb !== all) cb.checked = false;
+            });
+            updateUrl([]);
+          }
+        });
+      }
+
+      // Any topic checkbox clears "All" and updates the URL.
+      checkboxes.forEach(function (cb) {
+        if (cb === all) return;
+        cb.addEventListener('change', function () {
+          if (cb.checked && all && all.checked) all.checked = false;
+          updateUrl(readCheckedTags());
+        });
       });
-    });
 
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', apply);
-    } else {
-      apply();
-    }
-  })();
-</script>
+      syncFromUrl();
+    })();
+  </script>
 {% endif %}
