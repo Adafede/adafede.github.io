@@ -227,8 +227,6 @@ superscript(md);
  * keyboard-operable and announced correctly, controlling a region that is
  * simply shown or hidden.
  */
-const TAB_LABELS = { en: 'English', fr: 'Français', de: 'Deutsch', it: 'Italiano' };
-
 md.block.ruler.before('fence', 'panel_tabset', (state, startLine, endLine, silent) => {
   const start = state.bMarks[startLine] + state.tShift[startLine];
   const max = state.eMarks[startLine];
@@ -473,27 +471,6 @@ export default function (eleventyConfig) {
     }),
   );
 
-  /**
-   * The topics the work clusters around, with a count each, across articles
-   * and posts. Powers the home page's topics section. Precomputed because
-   * Nunjucks cannot sort or aggregate inside {% set %}.
-   *
-   * The listing pages already carry a working topic filter; this is the same
-   * data as a set of entry points, so a visitor can arrive at the work from a
-   * subject rather than only from a page type.
-   */
-  eleventyConfig.addGlobalData('topicCounts', () => {
-    const counts = new Map();
-    for (const item of [...content.articles(), ...content.posts()]) {
-      for (const tag of item.data?.tags ?? []) {
-        counts.set(tag, (counts.get(tag) ?? 0) + 1);
-      }
-    }
-    return [...counts.entries()]
-      .map(([tag, count]) => ({ tag, count }))
-      .sort((a, b) => b.count - a.count || a.tag.localeCompare(b.tag));
-  });
-
   // --- filters -------------------------------------------------------
   eleventyConfig.setLibrary('md', md);
 
@@ -697,39 +674,16 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter('renderMarkdown', (body, frontmatter = {}) =>
     renderBody(body, frontmatter).html,
   );
-  /** The first paragraph of a rendered body as plain text, for feed summaries. */
-  eleventyConfig.addFilter('firstParagraph', (body, frontmatter = {}) =>
-    renderBody(body, frontmatter).firstParagraph,
-  );
-
   /**
-   * The first `count` items of an array.
+   * The newest date among a collection of posts, as a Date or null.
    *
-   * A missing count means "all of them", so feeds that have no cap do not have
-   * to carry a `limit` just to be sliced.
-   */
-  /**
-   * The newest of the first matching field on each item, as a Date or null.
-   *
-   * Written as a filter taking field names rather than a function because the
-   * call site is a Nunjucks template, which cannot pass a callback. Fields are
-   * tried in order, so `latestOf(posts, 'updatedDate', 'pubDate')` prefers a
-   * post's own modification date and falls back to its publication date.
+   * A post's own modification date wins over its publication date, so the feed's
+   * single build date moves when a post is edited rather than going stale.
    */
   eleventyConfig.addFilter('latestPostDate', (posts) => {
     let newest = null;
-    for (const post of posts) {
+    for (const post of posts ?? []) {
       const date = new Date(post.data.updatedDate || post.data.pubDate);
-      if (!Number.isNaN(date.valueOf()) && (!newest || date > newest)) newest = date;
-    }
-    return newest;
-  });
-
-  eleventyConfig.addFilter('latestOf', (items, ...keys) => {
-    let newest = null;
-    for (const item of items) {
-      const value = keys.map((key) => item?.[key]).find((v) => v);
-      const date = value instanceof Date ? value : new Date(value);
       if (!Number.isNaN(date.valueOf()) && (!newest || date > newest)) newest = date;
     }
     return newest;
@@ -762,6 +716,12 @@ export default function (eleventyConfig) {
     encodeURIComponent(String(value ?? '')),
   );
 
+  /**
+   * The first `count` items of an array.
+   *
+   * A missing count means "all of them", so feeds that have no cap do not have
+   * to carry a `limit` just to be sliced.
+   */
   eleventyConfig.addFilter('limitCount', (items, count) =>
     count ? items.slice(0, count) : items,
   );
@@ -779,21 +739,6 @@ export default function (eleventyConfig) {
   });
   eleventyConfig.addFilter('year', (value) => toDate(value).getUTCFullYear());
   eleventyConfig.addFilter('isoDate', (value) => toDate(value).toISOString());
-  /** The giscus configuration, copied verbatim from the Quarto output. */
-  eleventyConfig.addGlobalData('giscusConfig', {
-    repo: 'adafede/adafede.github.io',
-    repoId: 'R_kgDON8Npdw',
-    category: 'General',
-    categoryId: 'DIC_kwDON8Npd84CuC86',
-    mapping: 'title',
-    reactionsEnabled: '1',
-    emitMetadata: '0',
-    inputPosition: 'top',
-    theme: 'preferred_color_scheme',
-    lang: 'en',
-    loading: 'lazy',
-  });
-
   eleventyConfig.addFilter('toRfc822', (value) => new Date(toDate(value)).toUTCString());
   eleventyConfig.addFilter('stripTags', (html) => stripTags(html));
   eleventyConfig.addFilter('json', (value) => JSON.stringify(value));
@@ -802,13 +747,6 @@ export default function (eleventyConfig) {
   // provided here instead.
   eleventyConfig.addFilter('joinNames', (items) =>
     (items ?? []).map((item) => item?.name).filter(Boolean).join(', '),
-  );
-  eleventyConfig.addFilter('mapProp', (items, prop) =>
-    (items ?? []).map((item) => item?.[prop]).filter((v) => v !== undefined),
-  );
-  eleventyConfig.addFilter('uniq', (values) => [...new Set(values ?? [])]);
-  eleventyConfig.addFilter('sortAttr', (items, attr) =>
-    [...(items ?? [])].sort((a, b) => String(a[attr] ?? '').localeCompare(String(b[attr] ?? ''))),
   );
   eleventyConfig.addFilter('sliceYears', (items) =>
     [...new Set((items ?? []).map((i) => toDate(i.data?.date ?? i).getUTCFullYear()))].sort(
@@ -831,16 +769,6 @@ export default function (eleventyConfig) {
         items: items.sort((a, b) => a.data.title.localeCompare(b.data.title)),
       }));
   });
-
-  /**
-   * Nunjucks' built-in `slice` is the *string* slice and returns nothing useful
-   * for an array of objects, so `collections.posts | slice(0, 3)` yields an
-   * empty loop. This is the array slice the templates actually mean.
-   */
-  eleventyConfig.addFilter('take', (items, n) => (items ?? []).slice(0, Number(n)));
-
-  /** Merge two collections, so a page can show posts and articles together. */
-  eleventyConfig.addFilter('concat', (a, b) => [...(a ?? []), ...(b ?? [])]);
 
   /**
    * Every distinct tag across a collection, most-used first, with counts.
@@ -869,7 +797,6 @@ export default function (eleventyConfig) {
     `|${(item.data?.tags ?? []).map((t) => String(t).toLowerCase()).join('|')}|`,
   );
 
-  eleventyConfig.addFilter('minus', (value, n) => (Number(value) || 0) - (Number(n) || 0));
   eleventyConfig.addFilter('where', (items, prop, value) =>
     (items ?? []).filter(
       (item) => String(String(prop).split('.').reduce((acc, k) => acc?.[k], item)) === String(value),
@@ -1140,7 +1067,6 @@ export default function (eleventyConfig) {
         return '';
     }
   });
-  eleventyConfig.addShortcode('affiliationName', (id) => affiliation(id).name ?? id);
 
   /**
    * Prefer the locally cached copy of a remote cover image.
