@@ -206,3 +206,27 @@ def test_cv_entries_carry_both_years_of_their_range():
         assert entry["endYear"] is not None or entry["current"], (
             f"{path.name} lost '{date_range}'"
         )
+
+
+def test_the_bibliography_is_resolved_against_the_project_root(tmp_path, monkeypatch):
+    """The bibliography key was gated on a cwd-relative path.
+
+    `Path("posts") / "references.bib"` resolves against whatever directory the
+    process was started in, so every post silently lost its bibliography the
+    moment the script was invoked from anywhere but the repo root. npm happens to
+    run it from the root, which is why it went unnoticed.
+    """
+    import scripts.site.migrate_posts as migrate
+
+    monkeypatch.chdir(tmp_path)
+    frontmatter = migrate.build_frontmatter({"title": "T"}, "slug", "2026-01-01")
+
+    assert frontmatter["bibliography"] == "../../../posts/references.bib"
+
+
+def test_prune_keeps_tags_but_drops_the_other_empty_values():
+    """An entry with no topics is a fact about the entry; every other empty
+    value is a field that was never set."""
+    from scripts.site.migrate_posts import prune
+
+    assert prune({"tags": [], "venue": "", "doi": None, "authors": []}) == {"tags": []}

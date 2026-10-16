@@ -11,6 +11,7 @@ Run:  uv run python scripts/site/migrate_posts.py
 from __future__ import annotations
 
 import argparse
+import html
 import json
 import re
 import sys
@@ -250,6 +251,26 @@ def compact(data: Metadata) -> Metadata:
     return {k: v for k, v in data.items() if v is not None}
 
 
+# Keys that stay even when empty. `tags` is one of them: an entry with no topics
+# is a fact about the entry, and the templates read `tags` unconditionally to
+# build the filter key and the topic counts.
+ALWAYS_EMITTED = frozenset({"tags"})
+
+
+def prune(out: Metadata) -> Metadata:
+    """Drop keys whose value is empty, so an absent field is missing, not empty.
+
+    The collections schema rejects null, an empty list and an empty string alike,
+    and a frontmatter key that is present but empty reads as "this was set and
+    has no value" rather than as "this was never set".
+    """
+    return {
+        key: value
+        for key, value in out.items()
+        if value not in (None, [], {}, "") or key in ALWAYS_EMITTED
+    }
+
+
 def optional_str(value) -> str | None:
     """Drop empty values.
 
@@ -467,11 +488,16 @@ def build_frontmatter(
         out["pdf"] = f"/posts/{pdf_slug}.pdf"
 
     # Return the .bib path relative to the generated file.
-    bib = Path("posts") / "references.bib"
-    if bib.exists():
+    #
+    # Resolved against PROJECT_ROOT, not the working directory: this runs as
+    # `Path("posts") / "references.bib"`, which is relative to wherever the
+    # process happened to be started. Invoked from the repo root by npm it
+    # worked; invoked from anywhere else every post silently lost its
+    # bibliography and nothing said so.
+    if (PROJECT_ROOT / "posts" / "references.bib").exists():
         out["bibliography"] = "../../../posts/references.bib"
 
-    return {k: v for k, v in out.items() if v not in (None, [], {}, "") or k == "tags"}
+    return prune(out)
 
 
 def dump_frontmatter(data: Metadata) -> str:
@@ -519,7 +545,7 @@ def build_event_frontmatter(
         out["doi"] = doi_value
     if meta.get("image"):
         out["image"] = str(meta["image"])
-    return {k: v for k, v in out.items() if v not in (None, [], {}, "") or k == "tags"}
+    return prune(out)
 
 
 def build_card_frontmatter(meta: Metadata) -> Metadata:
@@ -536,7 +562,7 @@ def build_card_frontmatter(meta: Metadata) -> Metadata:
         out["image"] = str(meta["image"])
     if meta.get("image-alt"):
         out["imageAlt"] = str(meta["image-alt"])
-    return {k: v for k, v in out.items() if v not in (None, [], {}, "") or k == "tags"}
+    return prune(out)
 
 
 def write(target: Path, frontmatter: Metadata, body: str, extra_depth: int = 0) -> None:
@@ -595,7 +621,7 @@ def build_article_frontmatter(
         out["image"] = str(meta["image"])
     if meta.get("image-alt"):
         out["imageAlt"] = str(meta["image-alt"])
-    return {k: v for k, v in out.items() if v not in (None, [], {}, "") or k == "tags"}
+    return prune(out)
 
 
 def normalize_url(value) -> str | None:
@@ -685,7 +711,7 @@ def normalize_authors(meta: Metadata) -> list[Metadata]:
     return out
 
 
-def migrate_articles(clean: bool, affils_all: Metadata) -> int:
+def migrate_articles(clean: bool, affils_all: dict[str, Metadata]) -> int:
     written = 0
     out_root = PROJECT_ROOT / "src" / "content" / "articles"
     out_root.mkdir(parents=True, exist_ok=True)
@@ -783,11 +809,13 @@ def migrate_articles(clean: bool, affils_all: Metadata) -> int:
 # heading text are parsed out of the Markdown itself.
 # ---------------------------------------------------------------------------
 
+# (directory under cv/, section label). The label is what the page renders, so
+# it is written out rather than title-cased from the folder name.
 CV_SECTIONS = [
-    ("experience", "Professional Experience", "Professional Experience"),
-    ("education", "Education", "Education"),
-    ("awards", "Awards", "Awards"),
-    ("sports", "Sports", "Sports"),
+    ("experience", "Professional Experience"),
+    ("education", "Education"),
+    ("awards", "Awards"),
+    ("sports", "Sports"),
 ]
 
 # "### Postdoctoral Researcher, ETH Zürich, Zürich (2022 - present)"
@@ -891,9 +919,7 @@ def inline_md(text: str) -> str:
     Handles `[label](url)`, `<url>` autolinks, and `*emphasis*`. Everything is
     HTML-escaped first, so the result is safe to emit with set:html.
     """
-    import html as html_mod
-
-    escaped = html_mod.escape(text, quote=False)
+    escaped = html.escape(text, quote=False)
 
     # [label](url) — the label may itself contain escaped entities.
     escaped = re.sub(
@@ -918,7 +944,7 @@ def migrate_cv(clean: bool) -> int:
     target_dir = PROJECT_ROOT / "src" / "content" / "cv"
     target_dir.mkdir(parents=True, exist_ok=True)
 
-    for folder, key, label in CV_SECTIONS:
+    for folder, label in CV_SECTIONS:
         source_dir = CV_DIR / folder
         if not source_dir.exists():
             continue
