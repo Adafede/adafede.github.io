@@ -10,7 +10,7 @@
     <!-- Content Security Policy: the only scripts are SimpleAnalytics (external
          CDN) and the inlined CSS. No inline scripts, no eval, no object/embed.
          connect-src allows SimpleAnalytics' beacon endpoint. -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://scripts.simpleanalyticscdn.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://*.simpleanalytics.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none';" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://scripts.simpleanalyticscdn.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://*.simpleanalytics.com; base-uri 'self'; form-action 'self'; object-src 'none';" />
 
     {%- set pageTitle = (site.author ~ ' — ' ~ title) if (title and title != site.author) else site.author %}
     <title>{{ pageTitle }}</title>
