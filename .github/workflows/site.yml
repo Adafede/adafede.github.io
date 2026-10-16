@@ -31,11 +31,22 @@ jobs:
 
       - run: npm ci
 
+      # Cheap, and they catch what the build cannot: these assert properties of
+      # the helpers (citation rendering, CSL formatting, path rebasing, sitemap
+      # coverage) that a successful build says nothing about.
+      - run: uv run pytest -q
+
+      - run: node --test tests/
+
       - run: npm run build:all
 
       - run: npm run check:contrast
 
       - run: npm run check:links
+
+      - run: npm run check:document
+
+      - run: npm run check:rdfa
 
       - name: Install Chromium for pa11y
         run: |
