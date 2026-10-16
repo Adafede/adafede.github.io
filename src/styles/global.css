@@ -246,6 +246,19 @@ a:hover {
   text-decoration-thickness: 0.14em;
 }
 
+/* External links get a visual indicator — an arrow-out icon — so readers know
+   they are leaving the site. The indicator is added by CSS, not by markup, so
+   it degrades gracefully and needs no script. The build-time transform in
+   eleventy.config.mjs already adds target="_blank" + rel="noopener noreferrer";
+   this is purely the visual cue. */
+a[target="_blank"]::after {
+  content: "↗";
+  font-size: 0.8em;
+  vertical-align: text-top;
+  margin-inline-start: 0.15em;
+  color: var(--text-muted);
+}
+
 /* Every interactive element gets the same visible ring (2.4.7). */
 :focus-visible {
   outline: 3px solid var(--focus);

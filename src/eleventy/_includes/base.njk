@@ -148,29 +148,10 @@
       {{ content | safe }}
     </main>
 
-    {# Same collector Quarto injected via `_quarto.yml` body-header. Privacy
-       policy and CSP already assume this origin. #}
+    {# SimpleAnalytics — the only script on the site. External links are
+       handled at build time by an Eleventy transform that adds
+       target="_blank" and rel="noopener noreferrer" — see the comment on
+       externalLinks in eleventy.config.mjs. #}
     <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js" crossorigin="anonymous"></script>
-    <script>
-      (function () {
-        function fix() {
-          document.querySelectorAll('a').forEach(a => {
-            const h = a.getAttribute('href') || '';
-            let url;
-            try { url = new URL(h, location.href); } catch (e) { return; }
-            if (url.protocol.startsWith('http') && url.hostname !== location.hostname) {
-              a.setAttribute('target', '_blank');
-              const rel = a.getAttribute('rel') || '';
-              const parts = rel.split(/\s+/).filter(Boolean);
-              if (!parts.includes('noopener')) parts.push('noopener');
-              if (!parts.includes('noreferrer')) parts.push('noreferrer');
-              a.setAttribute('rel', parts.join(' '));
-            }
-          });
-        }
-        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fix);
-        else fix();
-      })();
-    </script>
   </body>
 </html>

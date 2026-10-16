@@ -489,6 +489,52 @@ export default function (eleventyConfig) {
 
   eleventyConfig.addWatchTarget("src/content/");
 
+  // --- transforms ----------------------------------------------------
+  /**
+   * Adds `target="_blank"` and `rel="noopener noreferrer"` to every external
+   * link at build time, replacing the inline script that previously did the
+   * same at runtime. This keeps the site free of inline JavaScript while
+   * ensuring outbound links open safely.
+   *
+   * A link is "external" when its href is an absolute URL whose host differs
+   * from the site host. Links already carrying a rel attribute keep the
+   * existing value (with noopener/noreferrer added) so explicit `rel="me"` or
+   * `rel="sameAs"` declarations are preserved.
+   */
+  const SITE_HOST = "adafede.github.io";
+  const EXTERNAL_LINK_RE = /<a\b([^>]*)>/g;
+  const HREF_RE = /\bhref=["']([^"']*)["']/;
+
+  eleventyConfig.addTransform("externalLinks", (content, outputPath) => {
+    if (!outputPath || !outputPath.endsWith(".html")) return content;
+    return content.replace(EXTERNAL_LINK_RE, (tag, attrs) => {
+      const hrefMatch = attrs.match(HREF_RE);
+      if (!hrefMatch) return tag;
+      let href = hrefMatch[1];
+      let url;
+      try { url = new URL(href); } catch { return tag; }
+      if (url.protocol !== "http:" && url.protocol !== "https:") return tag;
+      if (url.hostname === SITE_HOST) return tag;
+
+      // Don't double-process: skip if target is already _blank.
+      if (/\starget="_blank"/.test(attrs)) return tag;
+
+      // Preserve existing rel, ensure noopener + noreferrer.
+      let rel = "noopener noreferrer";
+      const relMatch = attrs.match(/\srel="([^"]*)"/);
+      if (relMatch) {
+        const existing = relMatch[1].split(/\s+/).filter(Boolean);
+        const combined = [...new Set([...existing, "noopener", "noreferrer"])];
+        rel = combined.join(" ");
+        attrs = attrs.replace(/\srel="[^"]*"/, ` rel="${rel}"`);
+      } else {
+        attrs += ` rel="${rel}"`;
+      }
+      attrs += ' target="_blank"';
+      return `<a${attrs}>`;
+    });
+  });
+
   // --- collections ---------------------------------------------------
   // Backed by _data/sitecontent.js rather than getFilteredByGlob: the
   // generated Markdown lives outside dir.input (src/eleventy), and Eleventy
