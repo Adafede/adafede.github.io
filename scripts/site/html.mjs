@@ -1,4 +1,23 @@
+import { readdirSync } from 'node:fs';
+import { join } from 'node:path';
 import { parse, parseFragment, serialize } from 'parse5';
+
+/**
+ * Every .html file under a directory, recursively.
+ *
+ * Shared by the validators and the inline-CSS pass, which all walk a built site
+ * the same way. Uses Dirent rather than a stat per entry so the walk costs one
+ * readdir per directory rather than two syscalls per file.
+ */
+export function htmlFiles(dir) {
+  const out = [];
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    const path = join(dir, entry.name);
+    if (entry.isDirectory()) out.push(...htmlFiles(path));
+    else if (entry.name.endsWith('.html')) out.push(path);
+  }
+  return out;
+}
 
 function appendText(node, parts, separateTags) {
   const tag = node.tagName;

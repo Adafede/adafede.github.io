@@ -18,20 +18,12 @@ import { existsSync, readFileSync, writeFileSync, readdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { htmlFiles } from './html.mjs';
+
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const SITE = join(ROOT, '_eleventy_site');
 const CSS_FILE = join(SITE, 'styles.css');
 const CSS_LINK = /[ \t]*<link rel="stylesheet" href="\/styles\.css"\s*\/?>\n?/g;
-
-function htmlFiles(dir) {
-  const out = [];
-  for (const entry of readdirSync(dir, { withFileTypes: true })) {
-    const path = join(dir, entry.name);
-    if (entry.isDirectory()) out.push(...htmlFiles(path));
-    else if (entry.name.endsWith('.html')) out.push(path);
-  }
-  return out;
-}
 
 if (!existsSync(SITE) || !readdirSync(SITE, { withFileTypes: true }).length) {
   console.error('  ! _eleventy_site is empty; run the Eleventy build first');

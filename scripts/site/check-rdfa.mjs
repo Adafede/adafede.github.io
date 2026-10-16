@@ -14,8 +14,10 @@
  *
  * Run: node scripts/site/check-rdfa.mjs _eleventy_site
  */
-import { readFileSync, readdirSync, statSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
+
+import { htmlFiles } from './html.mjs';
 
 const roots = process.argv.slice(2);
 if (!roots.length) {
@@ -36,16 +38,6 @@ const BARE_TERMS = new Set([
 
 /** An absolute IRI: scheme://... — its first colon is a scheme separator. */
 const IRI = /^[a-z][a-z0-9+.-]*:\/\//i;
-
-function htmlFiles(dir) {
-  const out = [];
-  for (const entry of readdirSync(dir)) {
-    const path = join(dir, entry);
-    if (statSync(path).isDirectory()) out.push(...htmlFiles(path));
-    else if (path.endsWith('.html')) out.push(path);
-  }
-  return out;
-}
 
 let totalProblems = 0;
 

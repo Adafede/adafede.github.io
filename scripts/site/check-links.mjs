@@ -12,8 +12,10 @@
  *
  * Run: node scripts/site/check-links.mjs _eleventy_site
  */
-import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
+
+import { htmlFiles } from './html.mjs';
 
 const roots = process.argv.slice(2);
 if (!roots.length) {
@@ -23,16 +25,6 @@ if (!roots.length) {
 
 /** Schemes and forms that are not our problem to resolve. */
 const EXTERNAL = /^(?:[a-z][a-z0-9+.-]*:|\/\/|#)/i;
-
-function htmlFiles(dir) {
-  const out = [];
-  for (const entry of readdirSync(dir)) {
-    const path = join(dir, entry);
-    if (statSync(path).isDirectory()) out.push(...htmlFiles(path));
-    else if (path.endsWith('.html')) out.push(path);
-  }
-  return out;
-}
 
 const hasExtension = (p) => /\.[a-z0-9]+$/i.test(p);
 
