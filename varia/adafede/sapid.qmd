@@ -5,6 +5,7 @@ url: https://adafede.github.io/sapid
 image: https://raw.githubusercontent.com/Adafede/sapid/refs/heads/main/man/figures/logo.svg
 image-alt: Logo of SAPID
 categories:
+  - Charged Aerosol Detector
   - Mass spectrometry
   - Metabolite annotation
   - Natural products
