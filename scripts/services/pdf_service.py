@@ -1,8 +1,10 @@
 """Markdown image-path fixing for Pandoc PDF generation.
 
-During ``quarto render``, generated Markdown in ``_site/posts/`` may reference
-images with ``../images/`` paths that are wrong on disk.  This helper rewrites
-those to ``_site/images/`` when the target exists, creating a ``.bak`` backup.
+During ``quarto render``, the Markdown Pandoc consumes lives in ``_site/posts/``
+while the images live in ``_site/images/``, so an ``../images/foo.png`` reference
+— correct relative to the *source* post — resolves to ``_site/posts/images/``,
+which does not exist.  This helper rewrites those references to ``_site/images/``,
+creating a ``.bak`` backup first.
 """
 
 import re
@@ -21,8 +23,14 @@ _MD_IMG_RE = re.compile(
 def fix_image_paths_in_md(md_path: Path) -> None:
     """Rewrite ``../images/`` Markdown links to ``_site/images/`` in-place.
 
-    Only rewrites when the file contains such references.
-    A ``.bak`` backup is created before the first modification.
+    Only rewrites when the file actually contains such references.  A ``.bak``
+    backup is created before the first modification.
+
+    Args:
+        md_path: Path to the Markdown file to rewrite. Must already exist; an
+            unreadable or missing file is logged at debug level and skipped,
+            because the caller iterates over posts that may or may not have
+            been rendered yet.
     """
     try:
         text = md_path.read_text(encoding="utf-8")

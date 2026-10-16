@@ -11,7 +11,10 @@ from pathlib import Path
 # Paths
 # ---------------------------------------------------------------------------
 
-PROJECT_ROOT = Path(__file__).parent.parent
+# resolve() because the several modules that compute this independently use
+# __file__.resolve(); a symlinked checkout would otherwise give two different
+# roots and every relative_to() between them would raise.
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
 SITE_DIR = PROJECT_ROOT / "_site"
 
 # ---------------------------------------------------------------------------
