@@ -7,7 +7,6 @@ _site/
 # LaTeX intermediates kept by `quarto render --to pdf ... keep-tex: true`
 # (cv.tex, posts/*.tex, etc.) and lualatex's own auxiliary outputs. Build
 # artifacts, not sources.
-*.tex
 *.aux
 *.bkm
 *.bbl
@@ -50,3 +49,5 @@ GEMINI.md
 # Source images (global gitignore has *.png/*.svg/*.ico but these are project source assets)
 !images/
 !src/eleventy/static/logos/
+cv.tex
+cv-academic.tex
