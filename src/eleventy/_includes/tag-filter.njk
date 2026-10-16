@@ -116,12 +116,14 @@
       function syncFromUrl() {
         var params = new URLSearchParams(window.location.search);
         var topics = params.getAll('topic').map(function (t) { return t.toLowerCase(); });
+        topics = topics.filter(function (t) { return t !== 'all'; });
         if (!topics.length) return;
+        // Uncheck "All" so topic pills look unselected when topics come from URL.
+        if (all) all.checked = false;
         topics.forEach(function (t) {
           var cb = root.querySelector('input[type="checkbox"][name="topic"][value="' + t + '"]');
           if (cb) cb.checked = true;
         });
-        if (all) all.checked = false;
       }
 
       // "All" clears every other checkbox and resets the URL.
