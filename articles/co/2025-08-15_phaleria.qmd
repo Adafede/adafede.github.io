@@ -10,7 +10,7 @@ qid: Q135917754
 url: <https://doi.org/10.1038/s41467-025-62689-8>
 categories:
   - Bioactivity
-  - Charged Aerosol Detector
+  - Fractionation
   - Liquid Chromatography-Tandem Mass Spectrometry
   - Natural Extracts
   - Reverse Pharmacology

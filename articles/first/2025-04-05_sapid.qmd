@@ -10,6 +10,8 @@ qid: Q138348705
 image: https://raw.githubusercontent.com/Adafede/sapid/refs/heads/main/man/figures/sapid-workflow.svg
 image-alt: SAPID's Workflow
 categories:
+  - Chemical Composition
+  - Fractionation
   - Metabolite Annotation
   - Metabolomics
   - Liquid Chromatography-Tandem Mass Spectrometry

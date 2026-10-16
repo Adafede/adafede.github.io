@@ -13,6 +13,7 @@ categories:
   - In Source Fragmentation
   - Metabolomics
   - Liquid Chromatography-Tandem Mass Spectrometry
+  - Tandem Mass Spectrometry
 abstract: |
   In/postsource fragments (ISFs) arise during electrospray ionization or ion transfer in mass spectrometry when molecular bonds break, generating ions that can complicate data interpretation.
   Although ISFs have been recognized for decades, their contribution to untargeted metabolomicsparticularly in the context of the so-called “dark matter” (unannotated MS or MS/MS spectra) and the “dark metabolome” (unannotated molecules)remains unsettled.
