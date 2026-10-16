@@ -16,15 +16,26 @@ const CONTENT = join(HERE, '..', '..', 'content');
 /** Split a `---\n...\n---\n` frontmatter block off a Markdown file. */
 function parseDoc(raw) {
   if (!raw.startsWith('---')) return { data: {}, body: raw };
-  const end = raw.indexOf('\n---', 3);
-  const head = raw.slice(4, end);
-  const body = raw.slice(raw.indexOf('\n---', 3) + 4);
+  const close = raw.indexOf('\n---', 3);
+  // An unterminated block is not frontmatter: without this the closing `---`
+  // is searched for in the body as well, so a stray horizontal rule half way
+  // down the document silently becomes the end of the frontmatter and the
+  // YAML above it is handed to the parser as a document.
+  if (close === -1) return { data: {}, body: raw };
+  const head = raw.slice(4, close);
+  const body = raw.slice(close + 4);
   return { data: load(head, { schema: JSON_SCHEMA }) ?? {}, body };
 }
 
-function readDir(dir, ext = '.md') {
+/**
+ * The `.md` files in a directory, sorted.
+ *
+ * Sorted because readdir order is whatever the filesystem hands back, and a
+ * collection whose order depends on that is not reproducible across machines.
+ */
+function readDir(dir) {
   if (!existsSync(dir)) return [];
-  return readdirSync(dir).filter((f) => f.endsWith(ext));
+  return readdirSync(dir).filter((f) => f.endsWith('.md')).sort();
 }
 
 function loadCollection(dir, extra = () => ({})) {
@@ -32,29 +43,31 @@ function loadCollection(dir, extra = () => ({})) {
   return readDir(full).map((file) => {
     const raw = readFileSync(join(full, file), 'utf-8');
     const { data, body } = parseDoc(raw);
-    const id = basename(file, extOf(file));
+    const id = basename(file, '.md');
     return { id, url: '', data: { ...data, ...extra(data) }, body, inputPath: join(full, file) };
   });
 }
 
-const extOf = (f) => (f.endsWith('.mdx') ? '.mdx' : '.md');
 
 function readJson(name, fallback) {
   const p = join(CONTENT, name);
   return existsSync(p) ? JSON.parse(readFileSync(p, 'utf-8')) : fallback;
 }
 
+const subdirs = (dir) =>
+  readdirSync(dir, { withFileTypes: true }).sort((a, b) => a.name.localeCompare(b.name));
+
 /** Nested groups, e.g. articles/first/*.md. */
 function loadNested(dir) {
   const base = join(CONTENT, dir);
   if (!existsSync(base)) return [];
   const out = [];
-  for (const group of readdirSync(base, { withFileTypes: true })) {
+  for (const group of subdirs(base)) {
     if (!group.isDirectory()) continue;
     for (const file of readDir(join(base, group.name))) {
       const raw = readFileSync(join(base, group.name, file), 'utf-8');
       const { data, body } = parseDoc(raw);
-      const stem = basename(file, extOf(file));
+      const stem = basename(file, '.md');
       // A group holding a single file named after itself is one document, not
       // a listing: articles/thesis/thesis.md is the doctoral thesis, which
       // Quarto publishes at articles/thesis.html. Publishing it at
@@ -104,54 +117,53 @@ const byDateDesc = (a, b) => new Date(b.data.date) - new Date(a.data.date);
 
 export default function buildData() {
   return {
-  posts: () =>
-    loadCollection('posts', (d) => ({ pubDate: new Date(d.pubDate) }))
-      .map((p) => ({
-        ...p,
-        url: `/posts/${p.id}.html`,
-        data: { ...p.data, description: p.data.description || summaryFrom(p.body) },
-      }))
-      .sort(byPubDateDesc),
+    posts: () =>
+      loadCollection('posts', (d) => ({ pubDate: new Date(d.pubDate) }))
+        .map((p) => ({
+          ...p,
+          url: `/posts/${p.id}.html`,
+          data: { ...p.data, description: p.data.description || summaryFrom(p.body) },
+        }))
+        .sort(byPubDateDesc),
 
-  articles: () => loadNested('articles').sort(byDateDesc),
-  // Talks and teaching each get their own page; the listing links to them.
-  talks: () =>
-    loadCollection('talks')
-      .map((t) => ({ ...t, url: `/talks/${t.id}.html` }))
-      .sort(byDateDesc),
-  teaching: () =>
-    loadCollection('teaching')
-      .map((t) => ({ ...t, url: `/teaching/${t.id}.html` }))
-      .sort(byDateDesc),
-  varia: () => {
-    const base = join(CONTENT, 'varia');
-    if (!existsSync(base)) return [];
-    const out = [];
-    for (const group of readdirSync(base, { withFileTypes: true })) {
-      if (!group.isDirectory()) continue;
-      for (const file of readDir(join(base, group.name))) {
-        const raw = readFileSync(join(base, group.name, file), 'utf-8');
-        const { data, body } = parseDoc(raw);
-        const id = `${group.name}/${basename(file, '.md')}`;
-        out.push({ id, url: `/varia/${id}.html`, data, body });
+    articles: () => loadNested('articles').sort(byDateDesc),
+    // Talks and teaching each get their own page; the listing links to them.
+    talks: () =>
+      loadCollection('talks')
+        .map((t) => ({ ...t, url: `/talks/${t.id}.html` }))
+        .sort(byDateDesc),
+    teaching: () =>
+      loadCollection('teaching')
+        .map((t) => ({ ...t, url: `/teaching/${t.id}.html` }))
+        .sort(byDateDesc),
+    varia: () => {
+      const base = join(CONTENT, 'varia');
+      if (!existsSync(base)) return [];
+      const out = [];
+      for (const group of subdirs(base)) {
+        if (!group.isDirectory()) continue;
+        for (const file of readDir(join(base, group.name))) {
+          const raw = readFileSync(join(base, group.name, file), 'utf-8');
+          const { data, body } = parseDoc(raw);
+          const id = `${group.name}/${basename(file, '.md')}`;
+          out.push({ id, url: `/varia/${id}.html`, data, body });
+        }
       }
-    }
-    return out;
-  },
+      return out;
+    },
 
-  affiliations: () => readJson('affiliations.json', []),
-  profiles: () => readJson('profiles.json', {}),
+    affiliations: () => readJson('affiliations.json', []),
+    profiles: () => readJson('profiles.json', {}),
 
-  cv: () => ({
-    bio: existsSync(join(CONTENT, 'cv/bio.md'))
-      ? parseDoc(readFileSync(join(CONTENT, 'cv/bio.md'), 'utf-8')).body
-      : '',
-    experience: readJson('cv/experience.json', { label: '', entries: [] }),
-    education: readJson('cv/education.json', { label: '', entries: [] }),
-    awards: readJson('cv/awards.json', { label: '', entries: [] }),
-    sports: readJson('cv/sports.json', { label: '', entries: [] }),
-    meta: readJson('cv/meta.json', { profession: '', footer: {}, meta: [] }),
-  }),
-
-};
+    cv: () => ({
+      bio: existsSync(join(CONTENT, 'cv/bio.md'))
+        ? parseDoc(readFileSync(join(CONTENT, 'cv/bio.md'), 'utf-8')).body
+        : '',
+      experience: readJson('cv/experience.json', { label: '', entries: [] }),
+      education: readJson('cv/education.json', { label: '', entries: [] }),
+      awards: readJson('cv/awards.json', { label: '', entries: [] }),
+      sports: readJson('cv/sports.json', { label: '', entries: [] }),
+      meta: readJson('cv/meta.json', { profession: '', footer: {}, meta: [] }),
+    }),
+  };
 }
