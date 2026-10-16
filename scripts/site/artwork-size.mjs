@@ -16,7 +16,7 @@
  * Measured from the files on disk every run, never from a previous record, so
  * an edited or re-fetched image cannot keep a stale size.
  */
-import { readdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 const OUT = 'public/images/artwork';
@@ -109,7 +109,14 @@ const sizes = {};
 let measured = 0;
 let unmeasured = 0;
 
-for (const name of readdirSync(OUT)) {
+if (!existsSync(OUT)) {
+  console.error(`  ! ${OUT} does not exist; run scripts/site/fetch-artwork.mjs first`);
+  process.exit(1);
+}
+
+// Sorted so sizes.json has a stable key order across machines: the readdir
+// order it would otherwise inherit is filesystem-dependent.
+for (const name of readdirSync(OUT).sort()) {
   const lower = name.toLowerCase();
   const path = join(OUT, name);
   if (lower.endsWith('.json')) continue;
