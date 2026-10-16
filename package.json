@@ -22,13 +22,13 @@
     "check:document": "node scripts/site/check-document.mjs _eleventy_site"
   },
   "devDependencies": {
-    "@11ty/eleventy": "^3.1.6",
+    "@11ty/eleventy": "^3.1.7",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^26.6.5",
     "axe-core": "^4.14.0",
-    "js-yaml": "^5.4.3",
+    "js-yaml": "^5.5.0",
     "lightningcss": "^1.33.0",
-    "markdown-it": "^15.0.2",
+    "markdown-it": "^15.0.3",
     "markdown-it-anchor": "^10.0.0",
     "pa11y-ci": "^5.0.0",
     "parse5": "^8.0.1",
