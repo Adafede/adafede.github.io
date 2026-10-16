@@ -34,7 +34,7 @@ const FILE_SOURCES = ['_headers', 'humans.txt', 'llm.txt', 'llms.txt', 'llms-ful
  * which put the two builds at different URLs for the same file; a permalink that
  * moves is a broken link in the wild, so nothing gets re-homed.
  */
-const PDF_GLOBS = [
+const PDF_SOURCES = [
   { from: '_site/posts', to: 'posts' },
   { from: '_site', to: '.', files: ['cv.pdf', 'cv-academic.pdf'] },
 ];
@@ -62,7 +62,7 @@ for (const file of FILE_SOURCES) {
 // PDFs. Missing ones are not fatal: a branch that has never run Quarto simply
 // has no PDFs yet, and the templates already check before linking.
 let pdfCount = 0;
-for (const spec of PDF_GLOBS) {
+for (const spec of PDF_SOURCES) {
   const dir = join(ROOT, spec.from);
   if (!existsSync(dir)) continue;
   const target = join(PUBLIC, spec.to);

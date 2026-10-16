@@ -5,7 +5,8 @@
  *
  * Eleventy has no redirect support of its own, so there are two artefacts:
  *  - public/_redirects      for hosts that read it (Netlify, Cloudflare Pages)
- *  - src/pages/posts/...    real HTML pages, for hosts that do not (GitHub Pages)
+ *  - src/eleventy/redirect.njk  real HTML pages, for hosts that do not
+ *                            (GitHub Pages)
  *
  * Both are derived from this file. Run: node scripts/site/generate-redirects.mjs
  * It is invoked by `npm run sync:content`, which runs after content migration.
@@ -15,7 +16,7 @@
  * new Eleventy-only name.
  */
 
-import { readdirSync, writeFileSync, mkdirSync } from 'node:fs';
+import { existsSync, mkdirSync, readdirSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 
@@ -30,16 +31,7 @@ const PREVIOUS = {
   'articles/profiles.html': '/articles.html',
 };
 
-function exists(path) {
-  try {
-    readdirSync(path);
-    return true;
-  } catch {
-    return false;
-  }
-}
-
-const slugs = exists(POSTS)
+const slugs = existsSync(POSTS)
   ? readdirSync(POSTS)
       .filter((name) => name.endsWith('.md'))
       .map((name) => name.replace(/\.md$/, ''))
