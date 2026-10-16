@@ -19,20 +19,69 @@ DEFAULT_DESCRIPTION = (
 )
 
 
+def _meta_index(soup) -> dict[str, list]:
+    """`<meta>` elements grouped by their name/property/itemprop attribute.
+
+    See `_link_index`: `_upsert_meta` is called a dozen times per page.
+    """
+    index: dict[str, list] = {}
+    for node in soup.find_all("meta"):
+        for key in ("name", "property", "itemprop"):
+            if node.get(key):
+                index.setdefault(key, []).append(node)
+    return index
+
+
+def _meta_matching(
+    index: dict[str, list],
+    attr_name: str,
+    attr_value: str,
+    extra_attrs: dict[str, object],
+):
+    """The first meta in the index whose attributes all match, or None."""
+    selector = {attr_name: attr_value, **extra_attrs}
+    return next(
+        (
+            node
+            for node in index.get(attr_name, [])
+            if all(node.get(key) == value for key, value in selector.items())
+        ),
+        None,
+    )
+
+
 def _upsert_meta(
     soup,
     *,
     attr_name: str,
     attr_value: str,
     content: str,
+    index=None,
     **extra_attrs,
 ) -> bool:
-    """Create or update a meta tag and return whether it changed."""
-    selector = {attr_name: attr_value, **extra_attrs}
-    node = soup.find("meta", attrs=selector)
+    """Create or update a meta tag and return whether it changed.
+
+    Args:
+        soup: The document to modify.
+        attr_name: Which attribute identifies the tag (name/property/itemprop).
+        attr_value: The value of that attribute.
+        content: The content to set.
+        index: A `_meta_index` to search instead of the document. Optional, for
+            callers that upsert more than one meta tag and can share the index.
+        extra_attrs: Further attributes that must already match for the tag to
+            be reused rather than duplicated.
+    """
+    if index is None:
+        node = soup.find("meta", attrs={attr_name: attr_value, **extra_attrs})
+    else:
+        node = _meta_matching(index, attr_name, attr_value, extra_attrs)
+
     if node is None:
         attrs = {"content": content, attr_name: attr_value, **extra_attrs}
-        soup.head.append(soup.new_tag("meta", attrs=attrs))
+        node = soup.new_tag("meta", attrs=attrs)
+        soup.head.append(node)
+        if index is not None:
+            index.setdefault(attr_name, []).append(node)
         return True
 
     if node.get("content") != content:
@@ -47,24 +96,59 @@ def _upsert_meta(
     return changed
 
 
-def _upsert_link(soup, *, rel: str, href: str, **attrs) -> bool:
-    """Create or update a link tag and return whether it changed."""
-    node = None
-    for candidate in soup.find_all("link"):
-        rel_values = candidate.get("rel", [])
-        rel_tokens = (
-            rel_values if isinstance(rel_values, list) else str(rel_values).split()
-        )
-        if rel not in rel_tokens:
-            continue
+def _link_index(soup) -> dict[str, list]:
+    """`<link>` elements grouped by each rel token they carry.
 
-        if all(candidate.get(key) == value for key, value in attrs.items()):
-            node = candidate
-            break
+    `_upsert_link` is called about a dozen times per page — four preconnects,
+    four DNS prefetches and five or six more — and each call used to rescan the
+    whole head for that rel. The index holds the same Tag objects, so matching
+    against it mutates the document.
+    """
+    index: dict[str, list] = {}
+    for node in soup.find_all("link"):
+        for token in _rel_tokens(node):
+            index.setdefault(token, []).append(node)
+    return index
+
+
+def _rel_tokens(node) -> list[str]:
+    """The whitespace-separated tokens of a `<link>`'s rel attribute."""
+    values = node.get("rel", [])
+    return values if isinstance(values, list) else str(values).split()
+
+
+def _upsert_link(soup, *, rel: str, href: str, index=None, **attrs) -> bool:
+    """Create or update a link tag and return whether it changed.
+
+    Args:
+        soup: The document to modify.
+        rel: The rel token to match.
+        href: The href to set.
+        index: A `_link_index` to search instead of the head. Optional, for
+            callers that upsert more than one link and can share the index.
+        attrs: Additional attributes that must already match for the link to be
+            reused rather than duplicated.
+    """
+    candidates = (
+        index.get(rel, [])
+        if index is not None
+        else [node for node in soup.find_all("link") if rel in _rel_tokens(node)]
+    )
+    node = next(
+        (
+            candidate
+            for candidate in candidates
+            if all(candidate.get(key) == value for key, value in attrs.items())
+        ),
+        None,
+    )
 
     if node is None:
         link_attrs = {"rel": rel, "href": href, **attrs}
-        soup.head.append(soup.new_tag("link", attrs=link_attrs))
+        node = soup.new_tag("link", attrs=link_attrs)
+        soup.head.append(node)
+        if index is not None:
+            index.setdefault(rel, []).append(node)
         return True
 
     changed = False
@@ -168,6 +252,10 @@ def _inject_jsonld(
 
 def _ensure_head_basics(soup, *, site_url: str, route: str) -> bool:
     changed = False
+    # One scan each for the head's links and metas; every upsert below shares
+    # them rather than rescanning the document per tag.
+    links = _link_index(soup)
+    metas = _meta_index(soup)
     canonical = _canonical_url(site_url, route)
     description = _description_for_page(soup)
     title = _title_for_page(soup)
@@ -180,7 +268,7 @@ def _ensure_head_basics(soup, *, site_url: str, route: str) -> bool:
         "https://www.wikidata.org",
     ]
     for domain in third_party_domains:
-        changed |= _upsert_link(soup, rel="preconnect", href=domain)
+        changed |= _upsert_link(soup, rel="preconnect", href=domain, index=links)
 
     # Add DNS-prefetch for CDN and external resources (fallback for browsers not supporting preconnect)
     dns_prefetch_domains = [
@@ -190,11 +278,12 @@ def _ensure_head_basics(soup, *, site_url: str, route: str) -> bool:
         "https://hypothes.is",
     ]
     for domain in dns_prefetch_domains:
-        changed |= _upsert_link(soup, rel="dns-prefetch", href=domain)
+        changed |= _upsert_link(soup, rel="dns-prefetch", href=domain, index=links)
 
-    changed |= _upsert_link(soup, rel="canonical", href=canonical)
+    changed |= _upsert_link(soup, rel="canonical", href=canonical, index=links)
     changed |= _upsert_link(
         soup,
+        index=links,
         rel="alternate",
         href=f"{site_url.rstrip('/')}/rss.xml",
         type="application/rss+xml",
@@ -202,6 +291,7 @@ def _ensure_head_basics(soup, *, site_url: str, route: str) -> bool:
     )
     changed |= _upsert_link(
         soup,
+        index=links,
         rel="alternate",
         href=f"{site_url.rstrip('/')}/posts.json",
         type="application/feed+json",
@@ -209,38 +299,45 @@ def _ensure_head_basics(soup, *, site_url: str, route: str) -> bool:
     )
     changed |= _upsert_link(
         soup,
+        index=links,
         rel="sitemap",
         href=f"{site_url.rstrip('/')}/sitemap.xml",
     )
     changed |= _upsert_link(
         soup,
+        index=links,
         rel="author",
         href=f"{site_url.rstrip('/')}/humans.txt",
     )
-    changed |= _upsert_link(soup, rel="manifest", href="/site.webmanifest")
+    changed |= _upsert_link(soup, rel="manifest", href="/site.webmanifest", index=links)
     changed |= _upsert_meta(
         soup,
+        index=metas,
         attr_name="name",
         attr_value="description",
         content=description,
     )
     changed |= _upsert_meta(
         soup,
+        index=metas,
         attr_name="name",
         attr_value="color-scheme",
         content="light dark",
     )
     changed |= _upsert_meta(
         soup,
+        index=metas,
         attr_name="name",
         attr_value="theme-color",
         content="#ffffff",
         media="(prefers-color-scheme: light)",
     )
 
-    dark_theme_meta = soup.find(
-        "meta",
-        attrs={"name": "theme-color", "media": "(prefers-color-scheme: dark)"},
+    dark_theme_meta = _meta_matching(
+        metas,
+        "name",
+        "theme-color",
+        {"media": "(prefers-color-scheme: dark)"},
     )
     if dark_theme_meta is None:
         soup.head.append(
@@ -259,38 +356,44 @@ def _ensure_head_basics(soup, *, site_url: str, route: str) -> bool:
         changed = True
 
     og_type = "article" if route.startswith(("/posts/", "/articles/")) else "website"
+    og_image_node = _meta_matching(metas, "property", "og:image", {})
     og_image = (
-        soup.find("meta", attrs={"property": "og:image"}).get("content", "").strip()
-        if soup.find("meta", attrs={"property": "og:image"})
+        og_image_node.get("content", "").strip()
+        if og_image_node
         else f"{site_url.rstrip('/')}/images/favicon/favicon.ico"
     )
 
     changed |= _upsert_meta(
         soup,
+        index=metas,
         attr_name="property",
         attr_value="og:title",
         content=title,
     )
     changed |= _upsert_meta(
         soup,
+        index=metas,
         attr_name="property",
         attr_value="og:description",
         content=description,
     )
     changed |= _upsert_meta(
         soup,
+        index=metas,
         attr_name="property",
         attr_value="og:url",
         content=canonical,
     )
     changed |= _upsert_meta(
         soup,
+        index=metas,
         attr_name="property",
         attr_value="og:type",
         content=og_type,
     )
     changed |= _upsert_meta(
         soup,
+        index=metas,
         attr_name="property",
         attr_value="og:image",
         content=og_image,
@@ -298,24 +401,28 @@ def _ensure_head_basics(soup, *, site_url: str, route: str) -> bool:
 
     changed |= _upsert_meta(
         soup,
+        index=metas,
         attr_name="name",
         attr_value="twitter:card",
         content="summary_large_image",
     )
     changed |= _upsert_meta(
         soup,
+        index=metas,
         attr_name="name",
         attr_value="twitter:title",
         content=title,
     )
     changed |= _upsert_meta(
         soup,
+        index=metas,
         attr_name="name",
         attr_value="twitter:description",
         content=description,
     )
     changed |= _upsert_meta(
         soup,
+        index=metas,
         attr_name="name",
         attr_value="twitter:image",
         content=og_image,
