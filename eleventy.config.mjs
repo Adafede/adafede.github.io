@@ -293,11 +293,11 @@ md.block.ruler.before('fence', 'panel_tabset', (state, startLine, endLine, silen
   });
   html.push('</fieldset>');
   html.push('<div class="tabset__panels">');
-  for (const panel of panels) {
+  for (const [index, panel] of panels.entries()) {
     // No heading inside the panel: the tab above it already says which language
     // this is, and a second copy as a heading made the document outline read as
     // though the abstract had four headings in it.
-    html.push('<section class="tabset__panel tabset__panel--' + (panels.indexOf(panel) + 1) + '">');
+    html.push(`<section class="tabset__panel tabset__panel--${index + 1}">`);
     html.push(md.render(panel.lines.join('\n')));
     html.push('</section>');
   }
@@ -405,8 +405,7 @@ export default function (eleventyConfig) {
   // --- assets --------------------------------------------------------
   // The design system is shared with Quarto's typography so both builds
   // cannot drift: the same file, copied to the same output path.
-  // The design system is shared with Quarto's typography so both builds
-  // inlines it through Vite. Eleventy has no asset pipeline, so the minified
+  // Quarto inlines it through Vite. Eleventy has no asset pipeline, so the minified
   // copy is staged in build/eleventy/ and copied here; scripts/site/inline-css.mjs
   // then folds it into every page, which is what removes the render-blocking
   // request entirely.
@@ -816,46 +815,6 @@ export default function (eleventyConfig) {
   );
 
   /**
-   * Meta description for an article, derived when it has no abstract.
-   *
-   * A filter rather than a template expression because Nunjucks reads the `?`
-   * of a ternary as part of its own syntax.
-   */
-  /**
-   * Plain text for a meta description.
-   *
-   * A description ends up in a content attribute, and Nunjucks escapes it on
-   * the way in. An abstract that carries Markdown autolinks (`<https://…>`)
-   * arrives already escaped, so it would be escaped a second time and reach the
-   * crawler as `&amp;lt;https://…`. Strip the markup here, before any
-   * templating touches it.
-   */
-  /**
-   * Contact details obfuscated, in a form a person can still read.
-   *
-   * The email is spelled out with [at], and every digit is separated by a
-   * zero-width space. A phone number is the thing worth breaking up, and a
-   * scraper lifts it as an unbroken run of digits — so breaking the run is what
-   * does the work, not disguising the letters around it, which would only make
-   * the page worse to read.
-   *
-   * Zero-width rather than visible spaces because the value has to stay
-   * copy-pasteable: a visible separator ends up in whatever the reader pastes it
-   * into. A zero-width space is invisible on screen and dropped by most editors
-   * and mail clients.
-   *
-   * Worth being clear about the ceiling: this defeats harvesting that looks for
-   * a pattern. It does not defeat anything that renders the page, and no amount
-   * of obfuscation does, short of not publishing the value.
-   */
-  eleventyConfig.addFilter('obfuscateContact', (value) => {
-    const ZWSP = '\u200B';
-    return escapeHtml(String(value ?? ''))
-      .replace(/@/g, ' [at] ')
-      .replace(/\d/g, (d) => `${d}${ZWSP}`);
-  });
-
-  /**
    * Contact details obfuscated, in a form a person can still read.
    *
    * The email is spelled out with [at], and every digit is separated by a
@@ -950,6 +909,15 @@ export default function (eleventyConfig) {
     return `${words.slice(0, count).join(' ')}…`;
   });
 
+  /**
+   * Plain text for a meta description.
+   *
+   * A description ends up in a content attribute, and Nunjucks escapes it on
+   * the way in. An abstract that carries Markdown autolinks (`<https://…>`)
+   * arrives already escaped, so it would be escaped a second time and reach the
+   * crawler as `&amp;lt;https://…`. Strip the markup here, before any
+   * templating touches it.
+   */
   eleventyConfig.addFilter('plainText', (value) => {
     const markdown = String(value ?? '')
       .replace(/<https?:\/\/[^>\s]+>/gi, ' ')
@@ -968,6 +936,12 @@ export default function (eleventyConfig) {
     return truncateAtWord(text, 300);
   });
 
+  /**
+   * Meta description for an article, derived when it has no abstract.
+   *
+   * A filter rather than a template expression because Nunjucks reads the `?`
+   * of a ternary as part of its own syntax.
+   */
   eleventyConfig.addFilter('orDescription', (abstract, data) => {
     if (abstract) return abstract;
     const parts = [`${data.title}.`];
@@ -989,7 +963,7 @@ export default function (eleventyConfig) {
   /**
    * Marks for the registries this site links out to.
    *
-   * All four are the publishers' own files, under static/logos/:
+   * All five are the publishers' own files, under static/logos/:
    *
    *   ORCID          ORCID/ORCID-Source, static/img/id-icon.svg
    *   ROR            ror-community/ror-logos
@@ -997,6 +971,7 @@ export default function (eleventyConfig) {
    *                   file's width/height attributes disagree with its
    *                   viewBox, so it must be sized by height alone.
    *   Google Scholar Wikimedia Commons
+   *   DOI            DOI Foundation, doi.svg
    *
    * The remaining marks (email, GitHub, PDF) are drawn, because nothing
    * publishes one. They are paths rather than <text>: a checker treats text
@@ -1069,6 +1044,25 @@ export default function (eleventyConfig) {
   });
 
   /**
+   * One of the artwork manifests written by scripts/site/fetch-artwork.mjs and
+   * scripts/site/artwork-size.mjs, or `{}`.
+   *
+   * All three are build artifacts: absent before the first fetch and
+   * regenerable afterwards, so a missing or unreadable file is a
+   * degraded-but-working site rather than a build failure. Every filter below
+   * falls back to the original remote URL in that case.
+   */
+  const readArtworkManifest = (name) => {
+    const path = join(ROOT, 'public', 'images', 'artwork', name);
+    if (!existsSync(path)) return {};
+    try {
+      return JSON.parse(readFileSync(path, 'utf-8'));
+    } catch {
+      return {};
+    }
+  };
+
+  /**
    * Prefer the locally cached copy of a remote cover image.
    *
    * scripts/site/fetch-artwork.mjs mirrors the artwork into
@@ -1076,25 +1070,9 @@ export default function (eleventyConfig) {
    * when the image was not cached, so the page still works if the fetch step
    * has not run or a download failed.
    */
-  const artworkManifest = (() => {
-    const path = join(ROOT, 'public', 'images', 'artwork', 'manifest.json');
-    if (!existsSync(path)) return {};
-    try {
-      return JSON.parse(readFileSync(path, 'utf-8'));
-    } catch {
-      return {};
-    }
-  })();
+  const artworkManifest = readArtworkManifest('manifest.json');
   eleventyConfig.addFilter('artwork', (url) => (url ? artworkManifest[url] ?? url : ''));
-  const artworkThumbnails = (() => {
-    const path = join(ROOT, 'public', 'images', 'artwork', 'thumbnails.json');
-    if (!existsSync(path)) return {};
-    try {
-      return JSON.parse(readFileSync(path, 'utf-8'));
-    } catch {
-      return {};
-    }
-  })();
+  const artworkThumbnails = readArtworkManifest('thumbnails.json');
   eleventyConfig.addFilter('artworkThumb', (url) => (
     url ? artworkThumbnails[url] ?? artworkManifest[url] ?? url : ''
   ));
@@ -1110,15 +1088,7 @@ export default function (eleventyConfig) {
    * Falls back to a shape close to square so an unmeasured file still reserves
    * space rather than collapsing the layout while it loads.
    */
-  const artworkSizes = (() => {
-    const path = join(ROOT, 'public', 'images', 'artwork', 'sizes.json');
-    if (!existsSync(path)) return {};
-    try {
-      return JSON.parse(readFileSync(path, 'utf-8'));
-    } catch {
-      return {};
-    }
-  })();
+  const artworkSizes = readArtworkManifest('sizes.json');
 
   eleventyConfig.addFilter('artworkSize', (url) => {
     const name = String(url ?? '').split('/').pop();
