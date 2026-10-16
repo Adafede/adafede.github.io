@@ -261,10 +261,13 @@ a[target="_blank"]::after {
   color: var(--text-muted);
 }
 /* Suppress the indicator on links in the header/nav and on links that
-   already carry a registry icon. Use content: none (not "") to prevent
-   the pseudo-element from generating a box at all — content: "" still
-   creates an anonymous grid item on display:grid containers, which
-   shifts inline icons. */
+   already carry a registry icon — the icon is indicator enough.
+   Reset all properties set by the ::after rule above, not just content:
+   content: none (not "") prevents the pseudo-element from generating a box at
+   all — content: "" still creates an anonymous grid item on display:grid
+   containers, which shifts inline icons. And vertical-align/font-size from the
+   base rule can still shift inline content even with empty content, so they are
+   reset to baseline/inherit here. */
 .site-header a[target="_blank"]::after,
 .site-nav a[target="_blank"]::after,
 a[target="_blank"] .registry-icon::after,
