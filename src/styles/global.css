@@ -250,13 +250,33 @@ a:hover {
    they are leaving the site. The indicator is added by CSS, not by markup, so
    it degrades gracefully and needs no script. The build-time transform in
    eleventy.config.mjs already adds target="_blank" + rel="noopener noreferrer";
-   this is purely the visual cue. */
+   this is purely the visual cue.
+   Skipped in the header and nav (icon links, source link) and on links that
+   already contain a registry icon — the icon is indicator enough. */
 a[target="_blank"]::after {
   content: "↗";
   font-size: 0.8em;
   vertical-align: text-top;
   margin-inline-start: 0.15em;
   color: var(--text-muted);
+}
+/* Suppress the indicator on links in the header/nav and on links that
+   already carry a registry icon. Use content: none (not "") to prevent
+   the pseudo-element from generating a box at all — content: "" still
+   creates an anonymous grid item on display:grid containers, which
+   shifts inline icons. */
+.site-header a[target="_blank"]::after,
+.site-nav a[target="_blank"]::after,
+a[target="_blank"] .registry-icon::after,
+a[target="_blank"] .icon::after {
+  content: none;
+  margin-inline-start: 0;
+  vertical-align: baseline;
+  font-size: inherit;
+}
+a[target="_blank"] .registry-icon,
+a[target="_blank"] .icon {
+  display: inline-block;
 }
 
 /* Every interactive element gets the same visible ring (2.4.7). */
