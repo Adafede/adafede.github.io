@@ -13,7 +13,6 @@ categories:
   - Bioinformatics
   - Biocuration
   - Biosynthesis
-  - Database
   - Natural Products
   - Open Science
   - SMARTS

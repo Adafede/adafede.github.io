@@ -17,6 +17,7 @@ categories:
   - Monoterpene Indole Alkaloids
   - Open Science
   - Spectral Library
+  - SMARTS
   - Tandem Mass Spectrometry
   # metadata-files:
   #   - ../../_includes/entities/authors/TODO

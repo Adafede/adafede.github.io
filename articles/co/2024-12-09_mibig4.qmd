@@ -8,8 +8,9 @@ doi: 10.1093/nar/gkae1115
 qid: Q131432378
 url: <https://doi.org/10.1093/nar/gkae1115>
 categories:
-  - Bioinformatics
   - Biocuration
+  - Bioinformatics
+  - Biosynthesis
   - Open Science
 abstract: |
  Specialized or secondary metabolites are small molecules of biological origin, often showing potent biological activities with applications in agriculture, engineering and medicine.

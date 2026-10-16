@@ -11,6 +11,7 @@ categories:
   - Bioinformatics
   - Liquid Chromatography-Tandem Mass Spectrometry
   - Metabolomics
+  - Microbiome
 abstract: |
  microbeMASST, a taxonomically informed mass spectrometry (MS) search tool, tackles limited microbial metabolite annotation in untargeted metabolomics experiments.
  Leveraging a curated database of >60,000 microbial monocultures, users can search known and unknown MS/MS spectra and link them to their respective microbial producers via MS/MS fragmentation patterns.
