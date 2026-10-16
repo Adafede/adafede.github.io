@@ -83,78 +83,25 @@
 </div>
 
   {# Read topic= query parameters from the URL and check the matching
-     checkboxes on load, and write checkbox state back to the URL on change.
-     The CSS :has(:checked) rules do the actual hiding — this script only
-     syncs checkbox state with the URL, so a filtered view can be bookmarked
-     or shared. Skipped if scripting is disabled; the filter still works live
-     via CSS. URL format: ?topic=tag1&topic=tag2 (multiple params). #}
+     checkboxes on load. The CSS :has(:checked) rules do the actual hiding
+     — this script only restores checkbox state from the URL so a filtered
+     view can be bookmarked or shared. Clicking checkboxes works live via
+     CSS; the URL is not updated (pure-CSS filter, no JS for the behavior).
+     Skipped if scripting is disabled; the filter still works via CSS.
+     URL format: ?topic=tag1&topic=tag2 (multiple params). #}
   <script>
     (function () {
       var root = document.querySelector('[data-filter-root]');
       if (!root) return;
       var all = root.querySelector('#tag-all');
-      var checkboxes = root.querySelectorAll('input[type="checkbox"][name="topic"]');
-
-      function readCheckedTags() {
-        var tags = [];
-        checkboxes.forEach(function (cb) {
-          if (cb === all) return;
-          if (cb.checked) tags.push(cb.value);
-        });
-        return tags;
-      }
-
-      function updateUrl(tags) {
-        var url = new URL(window.location);
-        url.search = '';
-        tags.forEach(function (t) {
-          url.searchParams.append('topic', t);
-        });
-        // pushState (not replaceState) so the back button can undo filter
-        // changes one step at a time. When no tags are selected, strip the
-        // query string entirely so the URL is clean when showing all entries.
-        if (tags.length) {
-          window.history.pushState(null, '', url);
-        } else {
-          window.history.pushState(null, '', url.pathname + url.hash);
-        }
-      }
-
-      function syncFromUrl() {
-        var params = new URLSearchParams(window.location.search);
-        var topics = params.getAll('topic').map(function (t) { return t.toLowerCase(); });
-        topics = topics.filter(function (t) { return t !== 'all'; });
-        if (!topics.length) return;
-        // Uncheck "All" so topic pills look unselected when topics come from URL.
-        if (all) all.checked = false;
-        topics.forEach(function (t) {
-          var cb = root.querySelector('input[type="checkbox"][name="topic"][value="' + t + '"]');
-          if (cb) cb.checked = true;
-        });
-      }
-
-      // "All" clears every other checkbox and resets the URL.
-      if (all) {
-        all.addEventListener('change', function () {
-          if (all.checked) {
-            checkboxes.forEach(function (cb) {
-              if (cb !== all) cb.checked = false;
-            });
-            updateUrl([]);
-          }
-        });
-      }
-
-      // Any topic checkbox clears "All" and updates the URL.
-      checkboxes.forEach(function (cb) {
-        if (cb === all) return;
-        cb.addEventListener('change', function () {
-          if (cb.checked && all && all.checked) all.checked = false;
-          updateUrl(readCheckedTags());
-        });
+      var params = new URLSearchParams(window.location.search);
+      var topics = params.getAll('topic').map(function (t) { return t.toLowerCase(); });
+      if (!topics.length) return;
+      if (all) all.checked = false;
+      topics.forEach(function (t) {
+        var cb = root.querySelector('input[type="checkbox"][name="topic"][value="' + t + '"]');
+        if (cb) cb.checked = true;
       });
-
-      syncFromUrl();
     })();
   </script>
 {% endif %}
