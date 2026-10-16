@@ -152,10 +152,7 @@ function formatAuthors(authors) {
     // A lone author is emitted given-first, as Quarto does for the injected
     // self-citation ("Adriano Rutz. 2026."). With co-authors the lead becomes
     // family-first ("Bast, Hannah, and ...").
-    const leadText = rest.length === 0 && !first.includes(',')
-        ? first
-        : first;
-    const parts = rest.length > 0 ? [leadText, ...rest.map(givenFirst).map(demoteParticle)] : [leadText];
+    const parts = rest.length > 0 ? [first, ...rest.map(givenFirst).map(demoteParticle)] : [first];
     if (parts.length >= ET_AL_MIN) {
         return `${parts.slice(0, ET_AL_USE_FIRST).join(', ')}, et al.`;
     }
@@ -183,24 +180,25 @@ const MONTH_ABBREVIATIONS = {
  * Both spellings occur: the shared .bib uses lowercase or numeric months, while
  * the synthesised self-citation uses "January 20".
  */
+/** "january" -> "January". */
+const capitalise = (word) => word[0].toUpperCase() + word.slice(1);
 function monthName(raw) {
     const value = detex(raw);
     if (!value)
         return null;
     const named = value.toLowerCase().match(/^([a-z]+)/)?.[1] ?? '';
-    const full = MONTH_ABBREVIATIONS[named] ?? named;
-    const index = MONTHS.indexOf(full);
+    // An abbreviation and a bare full name both resolve to the canonical
+    // full name; the three-letter BibTeX abbreviation is never rendered.
+    const index = MONTHS.indexOf(MONTH_ABBREVIATIONS[named] ?? named);
     if (index >= 0) {
-        // Full month name, not the three-letter BibTeX abbreviation.
-        const full = MONTHS[index][0].toUpperCase() + MONTHS[index].slice(1);
+        const month = capitalise(MONTHS[index]);
         const day = value.match(/\b(\d{1,2})\b/)?.[1];
-        return day ? `${full} ${day}` : full;
+        return day ? `${month} ${day}` : month;
     }
+    // A bare number is a one-based month index.
     if (/^\d{1,2}$/.test(value)) {
-        const index = Number(value) - 1;
-        return index >= 0 && index < MONTHS.length
-            ? MONTHS[index][0].toUpperCase() + MONTHS[index].slice(1)
-            : value;
+        const numeric = Number(value) - 1;
+        return numeric >= 0 && numeric < MONTHS.length ? capitalise(MONTHS[numeric]) : value;
     }
     return null;
 }
@@ -232,13 +230,14 @@ function titleCase(raw) {
         ordinal++;
     }
     ordinal = 0;
+    const wordCount = words.filter((w) => !/^\s+$/.test(w)).length;
     return words
         .map((word) => {
         if (/^\s+$/.test(word))
             return word;
         const index = ordinal++;
         const isFirst = index === 0;
-        const isLast = index === words.filter((w) => !/^\s+$/.test(w)).length - 1;
+        const isLast = index === wordCount - 1;
         const force = afterColon.has(index);
         if (!isLast && !isFirst && !force && SMALL.has(word.toLowerCase())) {
             return word.toLowerCase();
