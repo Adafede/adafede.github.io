@@ -22,8 +22,13 @@ if TYPE_CHECKING:
     from scripts.infrastructure.xml_parser import XmlElement
 
 # Add project root to path so `scripts` is importable as a package
-root_dir = Path(__file__).resolve().parent.parent.parent
-sys.path.insert(0, str(root_dir))
+# Project root, computed from this file rather than from the working directory.
+# Quarto invokes these with the project root as the CWD, so a cwd-relative root
+# resolved there by luck; every other directory gave a root that exists but
+# points at the wrong tree, and the failure was a missing file or a silently
+# skipped page rather than an error.
+PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
+sys.path.insert(0, str(PROJECT_ROOT))
 
 from scripts.infrastructure import get_logger
 from scripts.infrastructure.filesystem import FileSystem
@@ -342,7 +347,7 @@ def convert_rss_to_json_feed(rss_path: str | Path, json_feed_path: str | Path) -
         # DC creator extraction from the RSS channel/item if not present.
         authors_list: list[dict[str, object]] = []
         try:
-            fs = FileSystem(Path.cwd())
+            fs = FileSystem(PROJECT_ROOT)
             yaml = YamlLoader()
             quarto_path = fs.root / "_quarto.yml"
             if quarto_path.exists():

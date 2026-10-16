@@ -17,8 +17,13 @@ from geopy import Nominatim  # pyright: ignore[reportMissingTypeStubs]
 from geopy.location import Location  # pyright: ignore[reportMissingTypeStubs]
 
 # Add project root to path so `scripts` is importable as a package
-root_dir = Path(__file__).resolve().parent.parent.parent
-sys.path.insert(0, str(root_dir))
+# Project root, computed from this file rather than from the working directory.
+# Quarto invokes these with the project root as the CWD, so a cwd-relative root
+# resolved there by luck; every other directory gave a root that exists but
+# points at the wrong tree, and the failure was a missing file or a silently
+# skipped page rather than an error.
+PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
+sys.path.insert(0, str(PROJECT_ROOT))
 
 from scripts.infrastructure import YamlLoader, get_logger
 
@@ -306,13 +311,12 @@ def talkmap(
     logger.info("=" * 80)
 
     # Initialize components
-    project_root = Path.cwd()
     yaml_loader = YamlLoader()
     cache = GeoCache(Path(cache_file))
     geocoder = Nominatim(user_agent=user_agent)
 
     # Process talks
-    talks_path = project_root / talks_dir
+    talks_path = PROJECT_ROOT / talks_dir
     if not talks_path.exists():
         logger.error(f"Talks directory not found: {talks_path}")
         return
@@ -333,7 +337,7 @@ def talkmap(
 
     # Generate map
     if locations:
-        generate_map(locations, project_root / output_map)
+        generate_map(locations, PROJECT_ROOT / output_map)
         logger.info("=" * 80)
         logger.info("Talk map generation complete")
         logger.info("=" * 80)
