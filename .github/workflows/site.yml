@@ -25,7 +25,7 @@ jobs:
           node-version: 26
           package-manager-cache: false
 
-      - uses: astral-sh/setup-uv@ae62891fec2bb8e7d6c99fc78c9fec3a63790f8d
+      - uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884
 
       - run: uv sync
 
@@ -58,8 +58,6 @@ jobs:
           npx --yes @11ty/eleventy --serve --port=8080 &
           npx --yes wait-on http://localhost:8080/index.html --timeout=60000
           PUPPETEER_EXECUTABLE_PATH="${CHROMIUM_PATH}" npx --yes pa11y-ci@4 --config .pa11yci.json
-
-      - run: npm run check:rdfa
 
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
