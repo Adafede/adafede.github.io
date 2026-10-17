@@ -254,7 +254,7 @@ a:hover {
    Skipped in the header and nav (icon links, source link) and on links that
    already contain a registry icon — the icon is indicator enough. */
 a[target="_blank"]::after {
-  content: "↗\uFE0F";
+  content: "\2197\FE0F";
   font-size: 0.8em;
   vertical-align: text-top;
   margin-inline-start: 0.15em;
