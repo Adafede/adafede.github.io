@@ -1,0 +1,11 @@
+---
+author:
+  - id: AdrienJagora
+    name:
+      given: Adrien
+      family: Jagora
+      literal: Adrien Jagora
+    # orcid: TODO
+    qid: Q141756215
+    affiliations:
+      - ref: parissaclay_biocis
