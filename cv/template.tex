@@ -43,6 +43,10 @@
 \emergencystretch=1em
 \renewcommand{\familydefault}{\sfdefault}
 \raggedright
+\newlength{\entrybodyindent}
+\setlength{\entrybodyindent}{0.4cm}
+\newlength{\descriptionindent}
+\setlength{\descriptionindent}{0.8cm}
 \pagestyle{fancy}
 \fancyhf{}
 \fancyfoot[L]{\scriptsize\textcolor{muted}{\href{$if(cvcontact.website)$$cvcontact.website$$endif$}{$if(cvcontact.website)$$cvcontact.website$$endif$}\quad\textcolor{rule}{|}\quad\href{mailto:$cvcontact.email$}{$cvcontact.email$}}}
@@ -52,19 +56,25 @@
 \renewcommand{\footrule}{\hbox to\headwidth{\color{rule}\leaders\hrule height \footrulewidth\hfill}}
 
 \newcommand{\cvsection}[1]{%
+  \setlength{\leftskip}{0pt}%
+  \everypar{}%
   \par\addvspace{5pt}%
-  {\fontsize{11}{13}\selectfont\rmfamily\bfseries\color{ink}#1}%
+  \noindent{\fontsize{11}{13}\selectfont\rmfamily\bfseries\color{ink}#1}%
   \hspace{0.7em}{\color{rule}\leaders\hrule height 0.45pt\hfill}%
   \par\vspace{2pt}%
+  \everypar{\setlength{\leftskip}{\entrybodyindent}}%
 }
 
 \newcommand{\cventry}[2]{%
+  \setlength{\leftskip}{\entrybodyindent}%
+  \everypar{\setlength{\leftskip}{\entrybodyindent}}%
   \par\addvspace{1.5pt}\noindent
   {\small\bfseries\color{ink}#1}%
   \if\relax\detokenize{#2}\relax\else
     \hfill{\footnotesize\color{muted}\textls[15]{#2}}%
   \fi
   \par
+  \everypar{\setlength{\leftskip}{\descriptionindent}}%
 }
 
 \newcommand{\cvmeta}[2]{%
