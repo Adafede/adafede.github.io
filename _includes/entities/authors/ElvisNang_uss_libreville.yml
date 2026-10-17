@@ -1,0 +1,11 @@
+---
+author:
+  - id: ElvisNang
+    name:
+      given: Elvis
+      family: Otogo N'Nang
+      literal:  Elvis Otogo N'Nang
+    orcid: 0000-0001-5904-7645
+    qid: Q92166108
+    affiliations:
+      - ref: uss_libreville
