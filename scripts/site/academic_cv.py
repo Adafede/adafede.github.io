@@ -15,7 +15,12 @@ Metadata = dict[str, Any]
 
 
 def _root() -> Path:
-    for path in (Path.cwd(), *Path.cwd().parents):
+    # Anchored to this file rather than the process CWD, so the script resolves
+    # the same project root no matter where it is invoked from.
+    candidate = Path(__file__).resolve().parents[2]
+    if (candidate / "_quarto.yml").exists() and (candidate / "talks").is_dir():
+        return candidate
+    for path in (candidate, *candidate.parents):
         if (path / "_quarto.yml").exists() and (path / "talks").is_dir():
             return path
     raise FileNotFoundError("Could not locate the Quarto project root")

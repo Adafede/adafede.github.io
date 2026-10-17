@@ -6,7 +6,6 @@ author metadata (ORCID icons, Scholia links) into corresponding HTML files.
 Uses the refactored service architecture.
 """
 
-import glob
 import sys
 from pathlib import Path
 
@@ -33,9 +32,9 @@ def process_qmd_directory(qmd_glob: str) -> None:
         >>> process_qmd_directory("posts/*.qmd")
         >>> process_qmd_directory("articles/**/*.qmd")
     """
-    # Sorted, so a run processes the same files in the same order on any
-    # machine; glob's order is filesystem-dependent.
-    qmd_files = sorted(glob.glob(qmd_glob, recursive=True))
+    # Anchored to the project root rather than the process CWD, so the same
+    # files are found no matter where the script is invoked from.
+    qmd_files = sorted(PROJECT_ROOT.glob(qmd_glob))
 
     if not qmd_files:
         logger.warning(f"No QMD files found matching pattern: {qmd_glob}")
