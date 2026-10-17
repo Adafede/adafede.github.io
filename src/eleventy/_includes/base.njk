@@ -7,6 +7,12 @@
     <meta name="theme-color" content="#fbfbfd" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#16181c" media="(prefers-color-scheme: dark)" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {# The analytics script is only discovered when parsing reaches the end of
+       the body, so the head is the one place that can prewarm its connection:
+       DNS resolves cheaply, and preconnect completes the TCP+TLS handshake in
+       parallel with the document rather than after it. #}
+    <link rel="preconnect" href="https://scripts.simpleanalyticscdn.com" crossorigin />
+    <link rel="dns-prefetch" href="https://scripts.simpleanalyticscdn.com" />
     <!-- Content Security Policy: the only scripts are SimpleAnalytics (external
          CDN) and the inlined CSS. No inline scripts, no eval, no object/embed.
          connect-src allows SimpleAnalytics' beacon endpoint. -->
