@@ -196,7 +196,4 @@
 /.well-known/agent-skills/*
   Cache-Control: public, max-age=3600, stale-while-revalidate=86400
 
-# =============================================================================
-# Talk map (interactive content)
-# =============================================================================
-  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+# (Talk map is inlined into the page; no separate cache rule needed.)
