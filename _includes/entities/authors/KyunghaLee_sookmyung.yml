@@ -1,0 +1,11 @@
+---
+author:
+  - id: KyunghaLee
+    name:
+      given: Kyungha
+      family: Lee
+      literal: Kyungha Lee
+    # orcid: TODO
+    # qid: TODO
+    affiliations:
+      - ref: sookmyung_seoul

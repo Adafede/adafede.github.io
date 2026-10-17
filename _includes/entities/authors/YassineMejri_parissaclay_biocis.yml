@@ -1,0 +1,12 @@
+---
+author:
+  - id: YassineMejri
+    name:
+      given: Yassine
+      family: Mejri
+      literal: Yassine Mejri
+    # orcid: TODO
+    # qid: TODO
+    affiliations:
+      - ref: parissaclay_biocis
+      - ref: dauphine_lamsade

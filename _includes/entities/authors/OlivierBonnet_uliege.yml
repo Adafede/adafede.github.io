@@ -1,0 +1,11 @@
+---
+author:
+  - id: OlivierBonnet
+    name:
+      given: Olivier
+      family: Bonnet
+      literal: Olivier Bonnet
+    orcid: 0000-0003-0350-6640
+    qid: Q141756127
+    affiliations:
+      - ref: uliege
