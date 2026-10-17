@@ -25,7 +25,7 @@
   {# A real <fieldset>, not a div with role="group": these are checkboxes,
      and the native grouping element gives them an accessible name without an
      aria-label bolted on. WAVE flags a bare group. #}
-  <form class="tag-filter__form" onsubmit="return false">
+  <form class="tag-filter__form">
   <fieldset class="tag-filter__inputs">
     <legend class="visually-hidden">Filter by topic</legend>
     <input type="checkbox" name="topic" id="tag-all" value="all" checked>
@@ -34,7 +34,8 @@
     {% endfor %}
   </fieldset>
   {# Pa11y requires a submit control on every form. Filtering is CSS-only;
-     submit is a no-op (`onsubmit="return false"`). #}
+     submit is a no-op: the self-hosted theme-form.js end the submit event, so
+     the form stays CSP-clean (no inline handler under 'strict-dynamic'). #}
   <button type="submit" class="visually-hidden" tabindex="-1" aria-hidden="true">Apply topic filter</button>
   </form>
 

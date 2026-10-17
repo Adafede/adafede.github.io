@@ -16,7 +16,7 @@
     <!-- Content Security Policy: the only scripts are SimpleAnalytics (external
          CDN) and the inlined CSS. No inline scripts, no eval, no object/embed.
          connect-src allows SimpleAnalytics' beacon endpoint. -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'strict-dynamic' 'sha384-6r8ANWkTbGeAoBOxTtwsJD6VBfqnKe+kD3q/w51t91jCOCSxtKcCN2erSIv/1GHO' 'sha256-6NFXs12LxEocFIyymA5VBzJnNqOxiG9ZQtwWO5b1I6k=' https://scripts.simpleanalyticscdn.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://*.simpleanalytics.com https://scripts.simpleanalyticscdn.com https://*.wikidata.org https://*.wikimedia.org https://*.scholia.wiki https://hypothes.is; base-uri 'self'; form-action 'self'; object-src 'none'; require-trusted-types-for 'script'; trusted-types 'none'; upgrade-insecure-requests" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'strict-dynamic' 'sha384-6r8ANWkTbGeAoBOxTtwsJD6VBfqnKe+kD3q/w51t91jCOCSxtKcCN2erSIv/1GHO' 'sha256-5Xs5GHX+hOJe9hZ9eN4+5L7WXx0N0TpaoMpQ/3/dH4E=' https://scripts.simpleanalyticscdn.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://*.simpleanalytics.com https://scripts.simpleanalyticscdn.com https://*.wikidata.org https://*.wikimedia.org https://*.scholia.wiki https://hypothes.is; base-uri 'self'; form-action 'self'; object-src 'none'; require-trusted-types-for 'script'; trusted-types 'none'; upgrade-insecure-requests" />
 
     {%- set pageTitle = (site.author ~ ' — ' ~ title) if (title and title != site.author) else site.author %}
     <title>{{ pageTitle }}</title>
@@ -163,7 +163,7 @@
        handled at build time by an Eleventy transform that adds
        target="_blank" and rel="noopener noreferrer" — see the comment on
        externalLinks in eleventy.config.mjs. #}
-    <script defer src="/theme-form.js" integrity="sha256-6NFXs12LxEocFIyymA5VBzJnNqOxiG9ZQtwWO5b1I6k="></script>
+    <script defer src="/theme-form.js" integrity="sha256-5Xs5GHX+hOJe9hZ9eN4+5L7WXx0N0TpaoMpQ/3/dH4E="></script>
     <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js" crossorigin="anonymous" integrity="sha384-6r8ANWkTbGeAoBOxTtwsJD6VBfqnKe+kD3q/w51t91jCOCSxtKcCN2erSIv/1GHO"></script>
   </body>
 </html>
