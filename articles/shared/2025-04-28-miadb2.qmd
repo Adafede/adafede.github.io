@@ -9,44 +9,46 @@ cv-equal-contributors:
   - Sarah Szwarc
   - Adriano Rutz
 cv-corresponding-authors:
+  - Pierre Le Pogam
   - Mehdi A. Beniddir
 qid: Q134267957
 image: https://media.springernature.com/lw685/springer-static/image/art%3A10.1186%2Fs13321-025-01009-0/MediaObjects/13321_2025_1009_Figa_HTML.png
 image-alt: Article's Graphical Abstract
 categories:
+  - CiTO
   - Monoterpene Indole Alkaloids
   - Open Science
   - Spectral Library
   - SMARTS
   - Tandem Mass Spectrometry
-  # metadata-files:
-  #   - ../../_includes/entities/authors/TODO
-  #   - ../../_includes/entities/authors/TODO
-  #   - ../../_includes/entities/authors/TODO
-  #   - ../../_includes/entities/authors/TODO
-  #   - ../../_includes/entities/authors/TODO
-  #   - ../../_includes/entities/authors/TODO
-  #   - ../../_includes/entities/authors/TODO
-  #   - ../../_includes/entities/authors/TODO
-  #   - ../../_includes/entities/authors/TODO
-  #   - ../../_includes/entities/authors/TODO
-  #   - ../../_includes/entities/authors/TODO
-  #   - ../../_includes/entities/authors/TODO
-  #   - ../../_includes/entities/authors/TODO
-  #   - ../../_includes/entities/authors/TODO
-  #   - ../../_includes/entities/authors/TODO
-  #   - ../../_includes/entities/authors/TODO
-  #   - ../../_includes/entities/authors/TODO
-  #   - ../../_includes/entities/authors/TODO
-  #   - ../../_includes/entities/authors/TODO
-  #   - ../../_includes/entities/authors/TODO
-  #   - ../../_includes/entities/authors/TODO
-  #   - ../../_includes/entities/authors/TODO
-  #   - ../../_includes/entities/authors/TODO
-  #   - ../../_includes/entities/authors/TODO
-  #   - ../../_includes/entities/authors/TODO
-  #   - ../../_includes/entities/affiliations/TODO
-  #   - ../../_includes/entities/affiliations/TODO
+metadata-files:
+  - ../../_includes/entities/authors/SarahSzwarc_parissaclay_biocis_eq.yml
+  - ../../_includes/entities/authors/AdrianoRutz_ethz_imsb_zamboni_eq.yml
+  - ../../_includes/entities/authors/KyunghaLee_todo.yml
+  - ../../_includes/entities/authors/YassineMejri_todo.yml
+  - ../../_includes/entities/authors/OlivierBonnet_todo.yml
+  - ../../_includes/entities/authors/HazrinaHazni_todo.yml
+  - ../../_includes/entities/authors/AdrienJagora_todo.yml
+  - ../../_includes/entities/authors/RanyObame_todo.yml
+  - ../../_includes/entities/authors/JinNoh_todo.yml
+  - ../../_includes/entities/authors/ElvisNang_todo.yml
+  - ../../_includes/entities/authors/StephenieAlaribe_todo.yml
+  - ../../_includes/entities/authors/KhalijahAwang_todo.yml
+  - ../../_includes/entities/authors/GuillaumeBernadat_todo.yml
+  - ../../_includes/entities/authors/YoungChoi_todo.yml
+  - ../../_includes/entities/authors/VincentCourdavault_todo.yml
+  - ../../_includes/entities/authors/MichelFrederich_todo.yml
+  - ../../_includes/entities/authors/ThomasGaslonde_todo.yml
+  - ../../_includes/entities/authors/FlorianHuber_todo.yml
+  - ../../_includes/entities/authors/TohKam_todo.yml
+  - ../../_includes/entities/authors/YunLow_todo.yml
+  - ../../_includes/entities/authors/ErwanPoupon_todo.yml
+  - ../../_includes/entities/authors/JustinVanDerHooft_MULTI.yml
+  - ../../_includes/entities/authors/KyoKang_todo.yml
+  - ../../_includes/entities/authors/PierreLePogam_todo_corr.yml
+  - ../../_includes/entities/authors/MehdiBeniddir_parissaclay_biocis_corr.yml
+  - ../../_includes/entities/affiliations/parissaclay_biocis.yml
+  - ../../_includes/entities/affiliations/ethz_imsb_zamboni.yml
   #   - ../../_includes/entities/affiliations/TODO
   #   - ../../_includes/entities/affiliations/TODO
   #   - ../../_includes/entities/affiliations/TODO
