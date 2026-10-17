@@ -75,13 +75,13 @@ SCORE_QUERY = (
     + f"""
 SELECT ?score ?topic ?topicLabel WHERE {{
   {{ SELECT (SUM(?score_) AS ?score) ?topic WHERE {{
-    {{ SELECT (64 AS ?score_) ?topic WHERE {{ <http://www.wikidata.org/entity/{QID}>: wdt:P101 ?topic . }} }}
-    UNION {{ SELECT (32 AS ?score_) ?topic WHERE {{ ?work wdt:P50 <http://www.wikidata.org/entity/{QID}>: ; wdt:P921 ?topic . }} }}
-    UNION {{ SELECT (16 AS ?score_) ?topic WHERE {{ ?work wdt:P50 <http://www.wikidata.org/entity/{QID}>: ; (wdt:P921/wdt:P279) ?topic . }} }}
-    UNION {{ SELECT (8 AS ?score_) ?topic WHERE {{ ?work wdt:P50 <http://www.wikidata.org/entity/{QID}>: ; (wdt:P921/wdt:P279/wdt:P279) ?topic . }} }}
-    UNION {{ SELECT (32 AS ?score_) ?topic WHERE {{ ?work wdt:P50 <http://www.wikidata.org/entity/{QID}>: ; wdt:P4510 ?topic . }} }}
-    UNION {{ SELECT (16 AS ?score_) ?topic WHERE {{ ?work wdt:P50 <http://www.wikidata.org/entity/{QID}>: ; (wdt:P4510/wdt:P279) ?topic . }} }}
-    UNION {{ SELECT (8 AS ?score_) ?topic WHERE {{ ?work wdt:P50 <http://www.wikidata.org/entity/{QID}>: ; (wdt:P4510/wdt:P279/wdt:P279) ?topic . }} }}
+    {{ SELECT (64 AS ?score_) ?topic WHERE {{ <http://www.wikidata.org/entity/{QID}> wdt:P101 ?topic . }} }}
+    UNION {{ SELECT (32 AS ?score_) ?topic WHERE {{ ?work wdt:P50 <http://www.wikidata.org/entity/{QID}> ; wdt:P921 ?topic . }} }}
+    UNION {{ SELECT (16 AS ?score_) ?topic WHERE {{ ?work wdt:P50 <http://www.wikidata.org/entity/{QID}> ; (wdt:P921/wdt:P279) ?topic . }} }}
+    UNION {{ SELECT (8 AS ?score_) ?topic WHERE {{ ?work wdt:P50 <http://www.wikidata.org/entity/{QID}> ; (wdt:P921/wdt:P279/wdt:P279) ?topic . }} }}
+    UNION {{ SELECT (32 AS ?score_) ?topic WHERE {{ ?work wdt:P50 <http://www.wikidata.org/entity/{QID}> ; wdt:P4510 ?topic . }} }}
+    UNION {{ SELECT (16 AS ?score_) ?topic WHERE {{ ?work wdt:P50 <http://www.wikidata.org/entity/{QID}> ; (wdt:P4510/wdt:P279) ?topic . }} }}
+    UNION {{ SELECT (8 AS ?score_) ?topic WHERE {{ ?work wdt:P50 <http://www.wikidata.org/entity/{QID}> ; (wdt:P4510/wdt:P279/wdt:P279) ?topic . }} }}
   }} GROUP BY ?topic }}
   ?topic rdfs:label ?topicLabel .
   FILTER(LANG(?topicLabel) = "en")

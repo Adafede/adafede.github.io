@@ -2,23 +2,95 @@
   "qid": "Q97455964",
   "source": "https://qlever.dev/api/wikidata",
   "topics": [
-    ["Q117788892", "liquid chromatography-tandem mass spectrometry", 576],
-    ["Q12149006", "metabolomics", 512],
-    ["Q15305109", "fractionation", 448],
-    ["Q901227", "natural product", 416],
-    ["Q874296", "tandem mass spectrometry", 384],
-    ["Q112505120", "GNPS", 384],
-    ["Q420", "biology", 352],
-    ["Q180809", "mass spectrometry", 352],
-    ["Q177005", "computational biology", 344],
-    ["Q2013", "Wikidata", 288],
-    ["Q112506514", "msConvert", 288],
-    ["Q901688", "liquid chromatography", 288],
-    ["Q10359898", "NMR spectroscopy", 288],
-    ["Q898987", "separation process", 272],
-    ["Q79529", "chemical substance", 264],
-    ["Q7094", "biochemistry", 264],
-    ["Q483666", "spectroscopy", 248],
-    ["Q158666", "omics", 232]
+    [
+      "Q117788892",
+      "liquid chromatography-tandem mass spectrometry",
+      576
+    ],
+    [
+      "Q12149006",
+      "metabolomics",
+      512
+    ],
+    [
+      "Q15305109",
+      "fractionation",
+      448
+    ],
+    [
+      "Q901227",
+      "natural product",
+      416
+    ],
+    [
+      "Q874296",
+      "tandem mass spectrometry",
+      384
+    ],
+    [
+      "Q112505120",
+      "GNPS",
+      384
+    ],
+    [
+      "Q420",
+      "biology",
+      352
+    ],
+    [
+      "Q180809",
+      "mass spectrometry",
+      352
+    ],
+    [
+      "Q177005",
+      "computational biology",
+      344
+    ],
+    [
+      "Q10359898",
+      "NMR spectroscopy",
+      288
+    ],
+    [
+      "Q2013",
+      "Wikidata",
+      288
+    ],
+    [
+      "Q901688",
+      "liquid chromatography",
+      288
+    ],
+    [
+      "Q112506514",
+      "msConvert",
+      288
+    ],
+    [
+      "Q898987",
+      "separation process",
+      272
+    ],
+    [
+      "Q79529",
+      "chemical substance",
+      264
+    ],
+    [
+      "Q7094",
+      "biochemistry",
+      264
+    ],
+    [
+      "Q483666",
+      "spectroscopy",
+      248
+    ],
+    [
+      "Q158666",
+      "omics",
+      232
+    ]
   ]
 }

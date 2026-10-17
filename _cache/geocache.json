@@ -1,77 +1,72 @@
 {
+  "Dublin, Ireland": {
+    "latitude": 53.3493795,
+    "longitude": -6.2605593,
+    "address": "Dublin, County Dublin, Leinster, Éire / Ireland"
+  },
+  "Zurich, Switzerland": {
+    "latitude": 47.3744489,
+    "longitude": 8.5410422,
+    "address": "Zürich, Bezirk Zürich, Zürich, Schweiz/Suisse/Svizzera/Svizra"
+  },
   "Aussois, France": {
     "latitude": 45.2275415,
     "longitude": 6.7413988,
     "address": "Aussois, Saint-Jean-de-Maurienne, Savoie, Auvergne-Rhône-Alpes, France métropolitaine, 73500, France"
   },
-  "Bern, Switzerland": {
-    "address": "Bern, Verwaltungskreis Bern-Mittelland, Verwaltungsregion Bern-Mittelland, Bern/Berne, Schweiz/Suisse/Svizzera/Svizra",
-    "latitude": 46.9484742,
-    "longitude": 7.4521749
-  },
-  "Chieti, Italy": {
-    "latitude": 42.1026928,
-    "longitude": 14.4159053,
-    "address": "Chieti, Abruzzo, Italia"
-  },
-  "Dublin, Ireland": {
-    "address": "Dublin, County Dublin, Leinster, Éire / Ireland",
-    "latitude": 53.3493795,
-    "longitude": -6.2605593
-  },
   "Innsbruck, Austria": {
-    "address": "Innsbruck, Tirol, Österreich",
     "latitude": 47.2654296,
-    "longitude": 11.3927685
+    "longitude": 11.3927685,
+    "address": "Innsbruck, Tirol, Österreich"
   },
-  "Jena, Germany": {
-    "address": "Jena, Thüringen, Deutschland",
-    "latitude": 50.9281717,
-    "longitude": 11.5879359
+  "Saclay, France": {
+    "latitude": 48.7305162,
+    "longitude": 2.172576,
+    "address": "Saclay, Palaiseau, Essonne, Île-de-France, France métropolitaine, 91400, France"
+  },
+  "Napoli, Italy": {
+    "latitude": 40.8358846,
+    "longitude": 14.2487679,
+    "address": "Napoli, Campania, Italia"
+  },
+  "Bern, Switzerland": {
+    "latitude": 46.9484742,
+    "longitude": 7.4521749,
+    "address": "Bern, Verwaltungskreis Bern-Mittelland, Verwaltungsregion Bern-Mittelland, Bern/Berne, Schweiz/Suisse/Svizzera/Svizra"
   },
   "Leuven, Belgium": {
     "latitude": 50.879202,
     "longitude": 4.7011675,
     "address": "Leuven, Vlaams-Brabant, Vlaanderen, België / Belgique / Belgien"
   },
-  "Napoli, Italy": {
-    "address": "Napoli, Campania, Italia",
-    "latitude": 40.8358846,
-    "longitude": 14.2487679
-  },
   "Prague, Czech Republic": {
-    "address": "Hlavní město Praha, Praha, Česko",
     "latitude": 50.0874654,
-    "longitude": 14.4212535
-  },
-  "Prague, Czech Republic\"": {
-    "address": "Hlavní město Praha, Praha, Česko",
-    "latitude": 50.0874654,
-    "longitude": 14.4212535
-  },
-  "Saclay, France": {
-    "address": "Saclay, Palaiseau, Essonne, Île-de-France, France métropolitaine, 91400, France",
-    "latitude": 48.7305162,
-    "longitude": 2.172576
-  },
-  "Saint-Rémy-lès-Chevreuse, France": {
-    "address": "Saint-Rémy-lès-Chevreuse, Rambouillet, Yvelines, Île-de-France, France métropolitaine, 78470, France",
-    "latitude": 48.7054888,
-    "longitude": 2.071109
+    "longitude": 14.4212535,
+    "address": "Praha, Česko"
   },
   "Seefeld, Austria": {
-    "address": "Seefeld in Tirol, Bezirk Innsbruck-Land, Tirol, 6100, Österreich",
     "latitude": 47.3289241,
-    "longitude": 11.1867187
+    "longitude": 11.1867187,
+    "address": "Seefeld in Tirol, Bezirk Innsbruck-Land, Tirol, Österreich"
+  },
+  "Jena, Germany": {
+    "latitude": 50.9281717,
+    "longitude": 11.5879359,
+    "address": "Jena, Thüringen, Deutschland"
   },
   "Wageningen, the Netherlands": {
-    "address": "Wageningen, Gelderland, Nederland",
     "latitude": 51.9685817,
-    "longitude": 5.6682981
+    "longitude": 5.6682981,
+    "address": "Wageningen, Gelderland, Nederland"
   },
-  "Zürich, Switzerland": {
-    "address": "Zürich, Bezirk Zürich, Zürich, Schweiz/Suisse/Svizzera/Svizra",
-    "latitude": 47.3744489,
-    "longitude": 8.5410422
+  "Chieti, Italy": {
+    "latitude": 42.1026928,
+    "longitude": 14.4159053,
+    "address": "Chieti, Abruzzo, Italia"
+  },
+  "Saint-Rémy-lès-Chevreuse, France": {
+    "latitude": 48.7054888,
+    "longitude": 2.071109,
+    "address": "Saint-Rémy-lès-Chevreuse, Rambouillet, Yvelines, Île-de-France, France métropolitaine, 78470, France"
   }
 }
