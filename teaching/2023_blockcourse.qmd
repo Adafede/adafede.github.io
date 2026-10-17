@@ -1,8 +1,8 @@
 ---
 title: Metabolomics block course
-venue: ETH Zürich, Institute of Molecular Systems Biology
+venue: ETH Zurich, Institute of Molecular Systems Biology
 date: 2023-03-01
-location: Zürich, Switzerland
+location: Zurich, Switzerland
 categories:
   - Teaching
 metadata-files:

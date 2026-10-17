@@ -4,7 +4,7 @@ title: "The LOTUS Initiative: Integrating Natural Products to the Wikidata
 venue: "LS2 Annual Meeting 2022 - Life Sciences in the 2020s: Quantitation,
   Integration and Prediction"
 date: 2022-04-22
-location: Zürich, Switzerland
+location: Zurich, Switzerland
 categories:
   - Poster
 metadata-files:

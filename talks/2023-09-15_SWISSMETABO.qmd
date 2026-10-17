@@ -2,7 +2,7 @@
 title: Prior Knowledge as a Compass Guiding Untargeted Metabolomics
 venue: Swiss Metabolomics Society Annual Meeting
 date: 2023-09-15
-location: Zürich, Switzerland
+location: Zurich, Switzerland
 categories:
   - Poster
 metadata-files:

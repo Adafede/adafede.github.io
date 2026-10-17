@@ -5,7 +5,7 @@ Rutz]{about="wd:Q97455964" property="wdt:P31" resource="wd:Q5" typeof="schema:Pe
 is a [postdoctoral
 researcher]{about="wd:Q1125292" property="wdt:P31" resource="wd:Q28640" typeof="schema:Occupation"}
 at [ETH
-Zürich]{about="wd:Q11942" property="wdt:P31" resource="wd:Q875538" typeof="schema:CollegeOrUniversity"},
+Zurich]{about="wd:Q11942" property="wdt:P31" resource="wd:Q875538" typeof="schema:CollegeOrUniversity"},
 where he develops [computational]{about="wd:Q104595152"} and [analytical
 methods]{about="wd:Q4751159"} for [metabolomics]{about="wd:Q12149006"}. His
 [research]{about="wd:Q42240"} focuses on the [chemistry]{about="wd:Q2329"} of

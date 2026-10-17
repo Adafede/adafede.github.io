@@ -818,7 +818,7 @@ CV_SECTIONS = [
     ("sports", "Sports"),
 ]
 
-# "### Postdoctoral Researcher, ETH Zürich, Zürich (2022 - present)"
+# "### Postdoctoral Researcher, ETH Zurich, Zurich (2022 - present)"
 CV_HEADING_RE = re.compile(r"^###\s+(?P<title>.+?)(?:\s*\((?P<range>[^)]*)\))?\s*$")
 
 # The separator between the two years is a run of dashes, not a single one: the

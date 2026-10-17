@@ -26,7 +26,7 @@ cvcontact:
   email: adriano.rutz@ik.me
   website: https://adafede.github.io
   phone: "+41 76 521 45 40"
-  location: Zürich, Switzerland
+  location: Zurich, Switzerland
 
   # The header strip: one statement each, with no trailing detail to parse.
   #
@@ -37,7 +37,7 @@ cvcontact:
   # text.
 cvmeta:
   - title: Current position
-    left: Postdoctoral Researcher, ETH Zürich
+    left: Postdoctoral Researcher, ETH Zurich
   - title: Areas of expertise
     left: Mass Spectrometry, Metabolomics, Natural Products, Open Science
   - title: Languages

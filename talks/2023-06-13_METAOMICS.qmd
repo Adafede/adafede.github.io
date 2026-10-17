@@ -2,7 +2,7 @@
 title: Metabolomics Workshop
 venue: Summer School on Applied Meta-Omics
 date: 2023-06-13
-location: Zürich, Switzerland
+location: Zurich, Switzerland
 categories:
   - Talk
 metadata-files:
