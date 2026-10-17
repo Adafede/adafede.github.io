@@ -1,0 +1,11 @@
+---
+author:
+  - id: JinNoh
+    name:
+      given: Jin Kyoung
+      family: Noh
+      literal:  Jin Kyoung Noh
+    # orcid: TODO
+    # qid: TODO
+    affiliations:
+      - ref: ikiam
