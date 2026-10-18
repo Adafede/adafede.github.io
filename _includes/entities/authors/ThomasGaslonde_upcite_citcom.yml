@@ -1,0 +1,11 @@
+---
+author:
+  - id: ThomasGaslonde
+    name:
+      given: Thomas
+      family: Gaslonde
+      literal: Thomas Gaslonde
+    orcid: 0000-0002-0262-746X
+    qid: Q141768895
+    affiliations:
+      - ref: upcite_citcom

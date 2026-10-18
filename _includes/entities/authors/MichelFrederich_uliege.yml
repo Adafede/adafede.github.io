@@ -1,0 +1,11 @@
+---
+author:
+  - id: MichelFrederich
+    name:
+      given: Michel
+      family: Frédéric
+      literal: Michel Frédéric
+    orcid: 0000-0002-0770-9990
+    qid: Q56744752
+    affiliations:
+      - ref: uliege

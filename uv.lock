@@ -35,7 +35,7 @@ requires-dist = [
     { name = "bs4", specifier = ">=0.0.2" },
     { name = "circlify", specifier = ">=0.15.1" },
     { name = "cmcrameri", specifier = ">=1.10" },
-    { name = "commonmeta-py", specifier = ">=0.310" },
+    { name = "commonmeta-py", specifier = ">=0.311" },
     { name = "folium", specifier = ">=0.20.0" },
     { name = "geopy", specifier = ">=2.5.0" },
     { name = "ipython", specifier = ">=9.17.1" },
@@ -230,11 +230,11 @@ wheels = [
 
 [[package]]
 name = "certifi"
-version = "2026.7.22"
+version = "2026.10.18"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/a3/c2/24167ea9858356b47a87a50d39908bfdb72ceeefe0041586e704e5376b3a/certifi-2026.7.22.tar.gz", hash = "sha256:741e2c3b351ddf169a738da9f2c048608ff7f2c5cc02f1ebc6b118bb090d5d55", size = 138112, upload-time = "2026-07-22T03:35:12.644Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/7e/eb/a2aa1ac3ea30dd3f30ca57f40232138b6b0040719316ecb85daf61167771/certifi-2026.10.18.tar.gz", hash = "sha256:b9995d97b64d0431a5af837d8ca8cd6238104d1f319f04bd93ea43124d6c861e", size = 135227, upload-time = "2026-10-18T16:21:07.655Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/0b/a7/71ac2cff56fec219ed242bb11b8efb69fcc4bec75db06fb7bfe35de520e6/certifi-2026.7.22-py3-none-any.whl", hash = "sha256:62f22742b58a1a33014a2b6b706588a8d7e2a88ae7bd1a6ebe8c992928483775", size = 136983, upload-time = "2026-07-22T03:35:11.276Z" },
+    { url = "https://files.pythonhosted.org/packages/08/ba/95dd616042484f7c83a06974388b37b837732740ee70bc5dc715b5fcd55a/certifi-2026.10.18-py3-none-any.whl", hash = "sha256:73191c47aaa79da394e8fee2dbc2ec827432cab56311122c9e47abf79e390f62", size = 134093, upload-time = "2026-10-18T16:21:06.276Z" },
 ]
 
 [[package]]
@@ -411,7 +411,7 @@ wheels = [
 
 [[package]]
 name = "commonmeta-py"
-version = "0.310"
+version = "0.311"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "babel" },
@@ -450,9 +450,9 @@ dependencies = [
     { name = "xmltodict" },
     { name = "zstandard" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/53/77/e66f971ac7fde50cd82fa8c0c7f5d9d5a1bc4ab2e7af62d840eded6fbba0/commonmeta_py-0.310.tar.gz", hash = "sha256:d27c1bbba30b1cb90d1deeec307c67bc38d7ec4d765111498a0e44fed98976a2", size = 1747007, upload-time = "2026-10-17T12:56:36.879Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/19/02/095e1a48805d251d371c0954ee3f48c5ebb130b7cdd7a8f9dff4a3261517/commonmeta_py-0.311.tar.gz", hash = "sha256:edad694eb002cb6ff5febb8e41de3fe14aa48378e89e41351d9114d3c8ac7ad5", size = 1747020, upload-time = "2026-10-18T08:17:07.471Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/60/ce/d6902642b413f5c2ddaabe1391d512dd4c00088c33bd365234b692e01d49/commonmeta_py-0.310-py3-none-any.whl", hash = "sha256:4a20325bb1cda2a65ca58194e685dc33fb75f66aba31e12df4958db291710295", size = 1809352, upload-time = "2026-10-17T12:56:34.793Z" },
+    { url = "https://files.pythonhosted.org/packages/7b/60/0c0a132c9e5450192038b95b0d5acfb2cd3bd181dd5c8cb13e150e00b5cd/commonmeta_py-0.311-py3-none-any.whl", hash = "sha256:827d324e77efc644192f7c212b5eff4716bdd9fe8940d9cf1ed1a32014dc83f4", size = 1809431, upload-time = "2026-10-18T08:17:04.844Z" },
 ]
 
 [[package]]

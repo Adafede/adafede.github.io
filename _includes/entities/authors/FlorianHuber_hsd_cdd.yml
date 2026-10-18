@@ -1,0 +1,11 @@
+---
+author:
+  - id: FlorianHuber
+    name:
+      given: Florian
+      family: Huber
+      literal: Florian Huber
+    orcid: 0000-0002-3535-9406
+    qid: Q60735170
+    affiliations:
+      - ref: hsd_cdd

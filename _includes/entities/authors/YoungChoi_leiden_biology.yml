@@ -1,0 +1,11 @@
+---
+author:
+  - id: YoungChoi
+    name:
+      given: Young Hae
+      family: Choi
+      literal: Young Hae Choi
+    orcid: 0000-0003-1484-1700
+    qid: Q89534171
+    affiliations:
+      - ref: leiden_biology

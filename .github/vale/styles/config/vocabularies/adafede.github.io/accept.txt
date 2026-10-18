@@ -12,6 +12,7 @@ Eleventy
 ethz
 frontmatter
 GPTBot
+Hae
 iaskspider
 imsb
 Omgili

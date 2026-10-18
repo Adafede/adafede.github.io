@@ -1,0 +1,11 @@
+---
+author:
+  - id: VincentCourdavaut
+    name:
+      given: Vincent
+      family: Courdavaut
+      literal: Vincent Courdavaut
+    orcid: 0000-0001-8902-4532
+    qid: Q42416864
+    affiliations:
+      - ref: utours_bbv

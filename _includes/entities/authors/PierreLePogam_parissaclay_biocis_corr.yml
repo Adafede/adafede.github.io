@@ -1,0 +1,13 @@
+---
+author:
+  - id: PierreLePogam
+    name:
+      given: Pierre
+      family: Le Pogam
+      literal: Pierre Le Pogam
+    orcid: 0000-0002-3351-4708
+    qid: Q87755802
+    email: pierre.le-pogam-alluard@universite-paris-saclay.fr
+    correspondence: true
+    affiliations:
+      - ref: parissaclay_biocis

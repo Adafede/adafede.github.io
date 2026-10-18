@@ -1,0 +1,11 @@
+---
+author:
+  - id: ErwanPoupon
+    name:
+      given: Erwan
+      family: Poupon
+      literal: Erwan Poupon
+    orcid: 0000-0002-1178-6083
+    qid: Q58808567
+    affiliations:
+      - ref: parissaclay_biocis
