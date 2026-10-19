@@ -38,6 +38,10 @@ jobs:
       # exists, nothing downstream can fix that.
       - run: npm run check:agent-docs
 
+      # Nothing machine-local may be committed: absolute home paths leak the
+      # local username and break everywhere else.
+      - run: npm run check:local-paths
+
       # Lint, format, types, typos and prose style. Until this ran here, the
       # whole set was enforced only by the local pre-commit hook, so an agent
       # working on a cloud runner or pushing through the GitHub/Codeberg web

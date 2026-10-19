@@ -123,6 +123,7 @@ Every check below runs without arguments, and is wired into pre-commit or CI:
 | Check | Guards |
 | ----- | ------ |
 | `npm run check:agent-docs` | every command and path named in this file resolves |
+| `npm run check:local-paths` | no tracked file contains an absolute home-directory path (`/Users/…`, `C:\Users\…`, `/home/…`) |
 | `npm run check:agent-endpoints` | the URLs published under `.well-known/` and `llm*.txt` still exist; `llm.txt` still matches `llms.txt` |
 | `npm run check:graph` | the knowledge graph matches the working tree |
 | `npm run lint` | ruff, ruff-format, deptry, ty, typos, vale, zizmor, panache |

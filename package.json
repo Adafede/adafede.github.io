@@ -25,7 +25,8 @@
     "check:agent-endpoints": "node scripts/site/check-agent-endpoints.mjs",
     "check:graph": "node scripts/site/check-graph-age.mjs",
     "graph:update": "graphify update .",
-    "lint": "uv run prek run --all-files"
+    "lint": "uv run prek run --all-files",
+    "check:local-paths": "node scripts/site/check-no-local-paths.mjs"
   },
   "engines": {
     "node": ">=26"

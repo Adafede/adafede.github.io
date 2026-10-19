@@ -48,7 +48,7 @@ of integrating Rogue Scholar into a Quarto-based site surprisingly smooth.
 
 All the changes are documented in the following commit:
 
-<https://github.com/Adafede/adafede.github.io/commit/bc2dfe6f>
+<https://github.com/adafede/adafede.github.io/commit/bc2dfe6f>
 
 If you care about attribution, long-term archiving, DOIs and metadata, I highly
 recommend looking into [Rogue Scholar](https://rogue-scholar.org/).

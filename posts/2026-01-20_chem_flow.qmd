@@ -267,7 +267,7 @@ the flow a bit further:
 - Contributions were also made to the Blue Obelisk IUPAC Names project (also led
   by Egon): <https://github.com/BlueObelisk/iupac-names>, integrating
   Wikidata-derived name-compound pairs. See
-  <https://github.com/Adafede/wd-labels-to-iupac> and
+  <https://github.com/adafede/wd-labels-to-iupac> and
   <https://chem-bla-ics.linkedchemistry.info/2025/08/09/one-million-iupac-names-4.html>
   [@cites_as_recommended_reading:Willighagen2025c] These bridges allow names and
   identifiers to circulate consistently across systems.

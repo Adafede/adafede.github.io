@@ -60,6 +60,10 @@ hooks = [
   # path that does not exist. This is what keeps the instruction file from
   # rotting: it was already stale four ways before this existed.
   { id = "check-agent-docs", name = "check-agent-docs", language = "system", entry = "node scripts/site/check-agent-docs.mjs AGENTS.md", pass_filenames = false, files = '^(AGENTS\.md|package\.json|pyproject\.toml|scripts/site/check-agent-docs\.mjs)$' },
+  # Blocks absolute home-directory paths (`/Users/…`, `C:\Users\…`, `/home/…`) from
+  # being committed. They leak the local username, break on every other
+  # machine, and mean a shell command was pasted rather than written.
+  { id = "check-no-local-paths", name = "check-no-local-paths", language = "system", entry = "node scripts/site/check-no-local-paths.mjs", pass_filenames = false, always_run = true },
   # The knowledge graph answers navigation questions, so a stale one gives
   # confidently wrong answers. Rebuilding is ~3s and needs no model access:
   # `npm run graph:update`. Exits zero when there is no graph at all, so this
