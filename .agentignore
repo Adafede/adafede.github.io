@@ -1,0 +1,50 @@
+# Keeps file-walking agents out of build output, dependencies and binaries.
+#
+# .gitignore already covers most of this, but agents that index the working
+# directory (Cursor auto-index, Copilot) do not necessarily consult .gitignore,
+# and generated content is the single biggest context-bloat source in this repo.
+#
+# Deliberately NOT ignored, because an agent needs them:
+#   AGENTS.md, CLAUDE.md, GEMINI.md   — the instructions
+#   .kb/                             — the scratch ledger
+#   .well-known/                     — the published agent skills
+#   _includes/, cv/, posts/, talks/   — the content source of truth
+
+# Dependencies and toolchains
+node_modules/
+.venv/
+.quarto/
+.ruff_cache/
+.pytest_cache/
+
+# Generated output
+_site/
+_eleventy_site/
+public/
+build/
+src/content/
+_freeze/
+varia/
+*.aux
+*.bbl
+*.blg
+*.toc
+*.log
+
+# Derived but committed caches — read them, never index them wholesale
+_cache/
+data/
+
+# Lockfiles
+uv.lock
+package-lock.json
+
+# Binary assets: large, and never the thing an agent is editing
+*.png
+*.webp
+*.ico
+*.pdf
+
+# Local agent scratch
+graphify-out/
+.kb/

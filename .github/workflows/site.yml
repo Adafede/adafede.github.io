@@ -33,6 +33,11 @@ jobs:
 
       - run: npm ci
 
+      # Cheapest gate in the pipeline, and the one that protects every other
+      # step: if AGENTS.md tells an agent to run something that no longer
+      # exists, nothing downstream can fix that.
+      - run: npm run check:agent-docs
+
       # Cheap, and they catch what the build cannot: these assert properties of
       # the helpers (citation rendering, CSL formatting, path rebasing, sitemap
       # coverage) that a successful build says nothing about.

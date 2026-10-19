@@ -54,7 +54,13 @@ hooks = [{ id = "shellcheck" }]
 
 [[repos]]
 repo = "local"
-hooks = [{ id = "ty-check", name = "ty-check", language = "python", entry = "ty check", exclude = '^(?!.*\.py$).*$', additional_dependencies = ["ty"] }]
+hooks = [
+  { id = "ty-check", name = "ty-check", language = "python", entry = "ty check", exclude = '^(?!.*\.py$).*$', additional_dependencies = ["ty"] },
+  # Fails when AGENTS.md names an npm script, a uv tool, a node file or a repo
+  # path that does not exist. This is what keeps the instruction file from
+  # rotting: it was already stale four ways before this existed.
+  { id = "check-agent-docs", name = "check-agent-docs", language = "system", entry = "node scripts/site/check-agent-docs.mjs AGENTS.md", pass_filenames = false, files = '^(AGENTS\.md|package\.json|pyproject\.toml|scripts/site/check-agent-docs\.mjs)$' },
+]
 
 [[repos]]
 repo = "https://github.com/vale-cli/vale"
