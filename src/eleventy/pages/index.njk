@@ -10,13 +10,20 @@ permalink: /index.html
     {# srcset: the portrait is the LCP element on this page, so it should not be
        a compromise size for every display. width/height reserve the box; the
        sizes attribute lets the browser pick before layout. #}
-    <img class="hero__avatar" src="/images/profile/avatar-260.webp"
-      srcset="/images/profile/avatar-150.webp 150w,
-              /images/profile/avatar-260.webp 260w,
-              /images/profile/avatar-520.webp 520w"
-      sizes="(max-width: 36rem) 5.5rem, (max-width: 48rem) 6.5rem, 9rem"
-      width="150" height="150"
-      alt="" property="image" decoding="async" fetchpriority="high" />
+    <picture class="hero__avatar">
+      <source type="image/avif"
+        srcset="/images/profile/avatar-150.avif 150w,
+                /images/profile/avatar-260.avif 260w,
+                /images/profile/avatar-520.avif 520w"
+        sizes="(max-width: 36rem) 5.5rem, (max-width: 48rem) 6.5rem, 9rem" />
+      <img src="/images/profile/avatar-260.webp"
+        srcset="/images/profile/avatar-150.webp 150w,
+                /images/profile/avatar-260.webp 260w,
+                /images/profile/avatar-520.webp 520w"
+        sizes="(max-width: 36rem) 5.5rem, (max-width: 48rem) 6.5rem, 9rem"
+        width="150" height="150"
+        alt="" property="image" decoding="async" fetchpriority="high" />
+    </picture>
      {# One top-level heading: the name, with the role folded in as a
         visually-subdued span. WAVE flags a paragraph styled like a byline as a
         "possible heading"; co-locating the role inside the h1 removes that

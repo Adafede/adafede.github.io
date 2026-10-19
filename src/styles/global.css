@@ -2020,6 +2020,17 @@ h3:hover > .heading-anchor,
   box-shadow: 0 0 0 1px var(--border-strong);
 }
 
+/* The avatar is a <picture> so the browser can pick AVIF before the WebP
+   fallback; the size, radius and shadow above belong to the wrapper, so the
+   inner <img> only has to fill it. */
+.hero__avatar > img {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  border-radius: inherit;
+  object-fit: cover;
+}
+
 /* Explicit placement. Auto-placement cannot work here: the name spans both
    columns, so it would be pushed onto its own row and leave the text column
    only as wide as the portrait. */
