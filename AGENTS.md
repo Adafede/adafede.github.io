@@ -110,11 +110,19 @@ npm run dev              # eleventy --serve
 2. `graphify query "..."` is useful for the **Python** layer only. It has 0 nodes
    for the Nunjucks templates and the CSS, and 2 for the 222 entity files, so
    for `src/eleventy/**`, `src/styles/**` and `_includes/**` it will point at the
-   wrong file. Rebuild with `npm run graph:update` when the Python layer moves;
-   `npm run check:graph` reports how stale it is.
-3. Quiet flags, summarize output, report only failures. Target one test, not the
+   wrong file. It is worth about 41x fewer tokens per query here — run
+   `graphify benchmark` for the current number. Three more verbs worth knowing:
+   `graphify path "A" "B"` (shortest path), `graphify explain "Node"` (what a
+   node connects to), `graphify benchmark` (token saving). All take a plain
+   question; add `--budget N` to `query` when the answer runs long.
+3. The graph keeps itself current: `graphify hook install` puts a post-commit
+   (and post-checkout/post-merge) hook in `.git/hooks/`, which rebuilds the
+   changed files in ~3s with no LLM. That is local and uncommitted. Until it is
+   installed, `npm run graph:update` does the same thing by hand, and
+   `npm run check:graph` reports how far behind the graph is.
+4. Quiet flags, summarize output, report only failures. Target one test, not the
    suite, unless at a pass boundary.
-4. Keep every command and path in this file runnable — `npm run check:agent-docs`
+5. Keep every command and path in this file runnable — `npm run check:agent-docs`
    enforces it, and runs in pre-commit and CI.
 
 ## Anti-drift gates
