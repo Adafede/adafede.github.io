@@ -2605,9 +2605,10 @@ h3:hover > .heading-anchor,
   font-size: var(--step--1);
 }
 
-/* The map is inlined into the talks page (scripts/site/build_talkmap.py), so
-   it is styled with the page's own tokens rather than a second set of colours.
-   That is what keeps it in step with the theme switch. */
+/* The markers are inlined into the talks page (scripts/site/build_talkmap.py)
+   so they use the page's own tokens and follow the theme switch. The land
+   outline under them is a separate cached file with fixed "paper map" colours —
+   it is most of the drawing and does not need to change with the theme. */
 .talk-map {
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
@@ -2619,12 +2620,6 @@ h3:hover > .heading-anchor,
   display: block;
   inline-size: 100%;
   block-size: auto;
-}
-
-.talk-map__land {
-  fill: #ded8cd;
-  stroke: #c6bfb1;
-  stroke-width: 0.5;
 }
 
 .talk-map__country circle {

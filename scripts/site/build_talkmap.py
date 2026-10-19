@@ -11,9 +11,11 @@ fit for the static build:
     render-blocking request and shows nothing offline.
 
 So the map is rendered at build time instead: talk locations become markers on
-an equirectangular projection over a Natural Earth land outline, and the whole
-thing is one inline SVG with no runtime dependencies. Talks whose location is
-not in the geocode cache are reported and skipped rather than silently dropped.
+an equirectangular projection over a Natural Earth land outline, with no runtime
+dependencies. The outline is by far the largest part of the drawing and carries
+fixed colours, so it goes to its own cached file; the markers, which follow the
+theme, stay inline. Talks whose location is not in the geocode cache are
+reported and skipped rather than silently dropped.
 
 The output is an Eleventy include rather than a standalone page. That is not
 just convenience: an iframe resolves `prefers-color-scheme` from the operating
@@ -44,6 +46,14 @@ CONTENT = ROOT / "src" / "content" / "talks"
 GEOCACHE = ROOT / "_cache" / "geocache.json"
 LAND = ROOT / "data" / "world-land.json"
 OUT = ROOT / "src" / "eleventy" / "_includes" / "talk-map.njk"
+LAND_OUT = ROOT / "src" / "eleventy" / "static" / "talk-map-land.svg"
+
+# The land outline is a "paper map" beige under the theme-styled markers, so its
+# colours are fixed and it can live outside the page. Baking them here keeps the
+# file self-contained; an inline <path> takes them from CSS instead.
+LAND_FILL = "#ded8cd"
+LAND_STROKE = "#c6bfb1"
+LAND_STROKE_WIDTH = 0.5
 
 # Equirectangular. Cropped tightly to Europe: at a wider extent every
 # talk sits in one overlapping cluster near the Alps and the labels collide.
@@ -112,6 +122,23 @@ def land_paths() -> str:
                 d = "M" + " ".join(f"{x:.1f},{y:.1f}" for x, y in points) + "Z"
                 paths.append(d)
     return "".join(paths)
+
+
+def write_land(d: str) -> None:
+    """Write the land outline to its own cached file.
+
+    The outline is one path of a few thousand coordinates; inlined it is parsed
+    on every talks page load and re-sent with the document. As a file it is
+    downloaded once and cached, and only the markers are left in the page.
+    """
+    LAND_OUT.parent.mkdir(parents=True, exist_ok=True)
+    LAND_OUT.write_text(
+        f'<svg xmlns="http://www.w3.org/2000/svg" '
+        f'viewBox="0 0 {WIDTH} {HEIGHT}" width="{WIDTH}" height="{HEIGHT}">'
+        f'<path fill="{LAND_FILL}" stroke="{LAND_STROKE}" '
+        f'stroke-width="{LAND_STROKE_WIDTH}" d="{d}"/></svg>\n',
+        encoding="utf-8",
+    )
 
 
 def main() -> int:
@@ -263,14 +290,23 @@ def main() -> int:
             f"</summary><ul>{rows}</ul></details>",
         )
 
+    land = land_paths()
+    land_markup = ""
+    if land:
+        write_land(land)
+        land_markup = (
+            f'\n  <image href="/talk-map-land.svg" x="0" y="0" '
+            f'width="{WIDTH}" height="{HEIGHT}"/>'
+        )
+
     total = sum(len(c["talks"]) for c in countries.values())
     html = f"""<div class="talk-map" role="group" aria-labelledby="talk-map-caption">
 <!-- Decorative: the list below carries exactly the same information as the
      markers, so a screen reader gains nothing from this being an image. Saying
      so also keeps the contrast checker from measuring text inside a vector
-     drawing, which it resolves against no background and always fails. -->
-<svg viewBox="0 0 {WIDTH} {HEIGHT}" aria-hidden="true" focusable="false">
-  <path class="talk-map__land" d="{land_paths()}"/>
+     drawing, which it resolves against no background and always fails. The land
+     outline is a separate cached file, drawn under the markers. -->
+<svg viewBox="0 0 {WIDTH} {HEIGHT}" aria-hidden="true" focusable="false">{land_markup}
   {"".join(markers)}
 </svg>
 <p class="talk-map__legend" id="talk-map-caption">{len(countries)} countries, {total} talks. Marker size grows with the number of talks; the circles carry a tooltip with their cities.</p>
@@ -280,6 +316,8 @@ def main() -> int:
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(html, encoding="utf-8")
     print(f"  + {OUT.relative_to(ROOT)} ({len(countries)} countries, {total} talks)")
+    if land:
+        print(f"  + {LAND_OUT.relative_to(ROOT)} ({len(land) // 1024} KB outline)")
     return 0
 
 

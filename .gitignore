@@ -39,6 +39,10 @@ src/eleventy/_includes/talk-map.njk
 # scripts/site/build_expertise.py from the committed scores in
 # _cache/expertise.json. The picture is derived.
 src/eleventy/_includes/expertise.njk
+# Land outline for the talk map, written by scripts/site/build_talkmap.py. The
+# markers stay inline (they follow the theme); only the fixed-colour outline is
+# a cached file.
+src/eleventy/static/talk-map-land.svg
 
 # --- agent tooling ---
 # AGENTS.md is deliberately NOT ignored: it is the only orientation document a
