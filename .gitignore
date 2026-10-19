@@ -41,11 +41,8 @@ src/eleventy/_includes/talk-map.njk
 src/eleventy/_includes/expertise.njk
 
 # --- agent tooling ---
-# AGENTS.md / CLAUDE.md / GEMINI.md are deliberately NOT ignored: they are the
-# only onboarding documentation a coding agent (or a collaborator) gets, so they
-# have to ship with the clone. CLAUDE.md and GEMINI.md are symlinks to
-# AGENTS.md, so there is exactly one file to maintain.
-#
+# AGENTS.md is deliberately NOT ignored: it is the only orientation document a
+# new contributor or a coding agent gets, so it has to ship with the clone.
 # Scratch state stays out:
 .kb/
 graphify-out/

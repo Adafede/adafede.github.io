@@ -58,7 +58,7 @@ npm run dev              # eleventy --serve
 5. If you touched `_includes/entities/` or a `.qmd`, the change flows through
    `npm run sync:content` — never patch `src/content/` directly.
 6. If you touched a `.py` or `.mjs` under `scripts/`, run `npm run graph:update`
-   (~3s, no LLM) or the pre-commit graph hook will fail the commit.
+   (~3s, no model access) or the pre-commit graph hook will fail the commit.
 7. Commit messages are Conventional Commits (`feat:`, `fix:`, `chore(scope):`).
 
 ## Repo map
@@ -80,7 +80,8 @@ npm run dev              # eleventy --serve
 - `_includes/entities/{authors,affiliations}/*.yml` — content source of truth for
   people and affiliations.
 - `_cache/*.json` — committed caches (geocode, expertise).
-- `.well-known/` — published agent skills, AI catalog, security.txt.
+- `.well-known/`, `llm.txt`, `llms.txt`, `llms-full.txt`, `humans.txt` — published
+  as site resources (`_quarto.yml`), so their URLs are part of the published API.
 - Output: `_eleventy_site/` (HTML), `_site/` (PDFs), `public/` (staging).
 
 ## Conventions that differ from defaults
@@ -97,29 +98,24 @@ npm run dev              # eleventy --serve
   `uv run quarto render`. Read `README.md` "Deploy" before editing either.
 
 ## Do not touch
-- `src/content/`, `_eleventy_site/`, `public/`, `build/` — generated, and denied
-  in `.claude/settings.json` as well as ignored by git.
+- `src/content/`, `_eleventy_site/`, `public/`, `build/` — generated, and ignored
+  by git. An edit there is silently overwritten by the next `npm run sync:content`.
 - `_cache/*.json` — committed cache; delete deliberately, never hand-edit.
-- `cv.tex`, `cv-academic.tex` — Quarto output, also denied.
-- `.venv/`, `node_modules/`, `.quarto/`, `_freeze/`, `.kb/`, `graphify-out/`.
+- `cv.tex`, `cv-academic.tex` — Quarto output, also gitignored.
+- `.venv/`, `node_modules/`, `.quarto/`, `_freeze/`, `graphify-out/`.
 
 ## Navigation
 1. `rg` with tight globs first: get filenames and counts, then drill into a line range.
-   Never `cat` a whole large file; never read generated output.
-2. The knowledge graph (`graphify query "..."`) is useful for the **Python** layer
-   only. It has 0 nodes for the Nunjucks templates and the CSS, and 2 for the 222
-   entity files, so for `src/eleventy/**`, `src/styles/**` and `_includes/**` it
-   will point at the wrong file. Rebuild with `npm run graph:update` when the
-   Python layer moves; `npm run check:graph` reports how stale it is.
+   Never read a whole large file; never read generated output.
+2. `graphify query "..."` is useful for the **Python** layer only. It has 0 nodes
+   for the Nunjucks templates and the CSS, and 2 for the 222 entity files, so
+   for `src/eleventy/**`, `src/styles/**` and `_includes/**` it will point at the
+   wrong file. Rebuild with `npm run graph:update` when the Python layer moves;
+   `npm run check:graph` reports how stale it is.
 3. Quiet flags, summarize output, report only failures. Target one test, not the
    suite, unless at a pass boundary.
-4. Write findings to `.kb/ledger.md` as you go, not into chat. It is a personal
-   scratch ledger, gitignored and not authoritative.
-5. Delegate nothing — review inline; subagents are unreliable in this environment.
-6. `AGENTS.md`, `CLAUDE.md` and `GEMINI.md` are committed. `CLAUDE.md` and
-   `GEMINI.md` are symlinks to `AGENTS.md`, so edit `AGENTS.md` only.
-   Keep every command and path in this file runnable —
-   `npm run check:agent-docs` enforces it, and runs in pre-commit and CI.
+4. Keep every command and path in this file runnable — `npm run check:agent-docs`
+   enforces it, and runs in pre-commit and CI.
 
 ## Anti-drift gates
 Every check below runs without arguments, and is wired into pre-commit or CI:

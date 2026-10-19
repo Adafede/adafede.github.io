@@ -61,13 +61,13 @@ hooks = [
   # rotting: it was already stale four ways before this existed.
   { id = "check-agent-docs", name = "check-agent-docs", language = "system", entry = "node scripts/site/check-agent-docs.mjs AGENTS.md", pass_filenames = false, files = '^(AGENTS\.md|package\.json|pyproject\.toml|scripts/site/check-agent-docs\.mjs)$' },
   # The knowledge graph answers navigation questions, so a stale one gives
-  # confidently wrong answers. Rebuilding is ~3s and needs no LLM:
+  # confidently wrong answers. Rebuilding is ~3s and needs no model access:
   # `npm run graph:update`. Exits zero when there is no graph at all, so this
   # costs nothing on a machine that has not built one.
   { id = "check-graph-age", name = "check-graph-age", language = "system", entry = "node scripts/site/check-graph-age.mjs --strict", pass_filenames = false, files = '^(?!.*/?(graphify-out|node_modules|\.git|public|_site|_eleventy_site|src/content)/?$).*$' },
-  # The agent-facing endpoints under .well-known/ and the llm*.txt files are
-  # published for other people's agents. Nothing else checks that the URLs they
-  # advertise still exist.
+  # The endpoints under .well-known/ and the llm*.txt files are published as
+  # site content, for whatever reads them. Nothing else checks that the URLs
+  # they advertise still exist.
   { id = "check-agent-endpoints", name = "check-agent-endpoints", language = "system", entry = "node scripts/site/check-agent-endpoints.mjs", pass_filenames = false, files = '^(\.well-known/.*|llm.*\.txt|_eleventy_site/.*)$' },
 ]
 
@@ -90,20 +90,19 @@ repo = "https://github.com/zizmorcore/zizmor-pre-commit"
 rev = "v1.31.1"
 hooks = [{ id = "zizmor", entry = "zizmor --fix=all ." }]
 
-# Panache formats Quarto/Pandoc site content. The agent docs are engineering
-# documentation, not site content: reformatting them turns the em-dash list
-# separators into "---", and the linter reads code like `argv[2]` as an undefined
-# cross-reference label. They are excluded here rather than in .panache.toml
+# Panache formats Quarto/Pandoc site content. AGENTS.md is engineering
+# documentation, not site content: reformatting it turns the em-dash list
+# separators into "---", and the linter reads code like `argv[2]` as an
+# undefined cross-reference label. Excluded here rather than in .panache.toml
 # because panache's own config schema moved between the pinned hook (v3.16) and
 # the locally installed binary, so prek's exclude regex is the stable layer.
-# CLAUDE.md and GEMINI.md are symlinks to AGENTS.md. Vale excludes them the same
-# way, via its own .vale.ini sections.
+# Vale excludes it the same way, via its own .vale.ini section.
 [[repos]]
 repo = "https://github.com/jolars/panache-pre-commit"
 rev = "v3.16.0"
 hooks = [
-  { id = "panache-format", exclude = '^(AGENTS|CLAUDE|GEMINI|AGENT_AUDIT)\.md$' },
-  { id = "panache-lint", exclude = '^(AGENTS|CLAUDE|GEMINI|AGENT_AUDIT)\.md$' },
+  { id = "panache-format", exclude = '^AGENTS\.md$' },
+  { id = "panache-lint", exclude = '^AGENTS\.md$' },
 ]
 
 [[repos]]
