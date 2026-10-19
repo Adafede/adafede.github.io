@@ -2362,19 +2362,25 @@ h3:hover > .heading-anchor,
   margin-block-end: var(--space-l);
 }
 
-/* The inputs drive the CSS and JS but are not drawn: a row of checkboxes above
-   a row of pills is noise. They stay in the DOM and keyboard-reachable; the
-   matching label carries the focus ring and the checked state. */
-/* The fieldset exists for semantics and for the focus target; the checkboxes
-   themselves are not drawn. A row of checkboxes above a row of pills is noise. */
+/* The fieldset exists for semantics: it groups the checkboxes and gives them
+   their accessible name. The checkboxes themselves are not drawn — a row of
+   boxes above a row of pills is noise — so each is hidden in place, inside the
+   label that toggles it. That nesting is also what lets one generic rule style
+   the selected and focused pill instead of one rule per tag. */
 .tag-filter__inputs {
-  position: absolute;
-  inline-size: 1px;
-  block-size: 1px;
   /* A fieldset defaults to min-inline-size: min-content, so without this it
      refuses to collapse and pushes the page wider than the viewport — the one
      place a <fieldset> behaves differently from a <div>. */
   min-inline-size: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.tag-filter__inputs input {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
   margin: -1px;
   padding: 0;
   border: 0;
@@ -2446,6 +2452,19 @@ h3:hover > .heading-anchor,
 .tag-filter label.tag:hover {
   color: var(--text);
   border-color: var(--text-faint);
+}
+
+/* The input lives inside the label, so `:checked` and `:focus-visible` reach the
+   pill directly — one rule for every tag instead of one per tag. */
+.tag-filter label.tag:has(input:checked) {
+  background: var(--brand);
+  border-color: var(--brand);
+  color: var(--brand-ink);
+}
+
+.tag-filter label.tag:has(input:focus-visible) {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
 }
 
 /* The count is dimmed with `opacity`, which drops it below the contrast
