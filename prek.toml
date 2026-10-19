@@ -60,6 +60,15 @@ hooks = [
   # path that does not exist. This is what keeps the instruction file from
   # rotting: it was already stale four ways before this existed.
   { id = "check-agent-docs", name = "check-agent-docs", language = "system", entry = "node scripts/site/check-agent-docs.mjs AGENTS.md", pass_filenames = false, files = '^(AGENTS\.md|package\.json|pyproject\.toml|scripts/site/check-agent-docs\.mjs)$' },
+  # The knowledge graph answers navigation questions, so a stale one gives
+  # confidently wrong answers. Rebuilding is ~3s and needs no LLM:
+  # `npm run graph:update`. Exits zero when there is no graph at all, so this
+  # costs nothing on a machine that has not built one.
+  { id = "check-graph-age", name = "check-graph-age", language = "system", entry = "node scripts/site/check-graph-age.mjs --strict", pass_filenames = false, files = '^(?!.*/?(graphify-out|node_modules|\.git|public|_site|_eleventy_site|src/content)/?$).*$' },
+  # The agent-facing endpoints under .well-known/ and the llm*.txt files are
+  # published for other people's agents. Nothing else checks that the URLs they
+  # advertise still exist.
+  { id = "check-agent-endpoints", name = "check-agent-endpoints", language = "system", entry = "node scripts/site/check-agent-endpoints.mjs", pass_filenames = false, files = '^(\.well-known/.*|llm.*\.txt|_eleventy_site/.*)$' },
 ]
 
 [[repos]]

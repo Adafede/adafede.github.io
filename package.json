@@ -22,8 +22,10 @@
     "check:a11y": "pa11y-ci --config .pa11yci.json",
     "check:document": "node scripts/site/check-document.mjs _eleventy_site",
     "check:agent-docs": "node scripts/site/check-agent-docs.mjs AGENTS.md",
+    "check:agent-endpoints": "node scripts/site/check-agent-endpoints.mjs",
     "check:graph": "node scripts/site/check-graph-age.mjs",
-    "graph:update": "graphify update ."
+    "graph:update": "graphify update .",
+    "lint": "uv run prek run --all-files"
   },
   "engines": {
     "node": ">=26"
