@@ -38,6 +38,14 @@ jobs:
       # exists, nothing downstream can fix that.
       - run: npm run check:agent-docs
 
+      # Lint, format, types, typos and prose style. Until this ran here, the
+      # whole set was enforced only by the local pre-commit hook, so an agent
+      # working on a cloud runner or pushing through the GitHub/Codeberg web
+      # UI got no style gate at all. Same hooks, same config, same results as
+      # `npm run lint` locally.
+      - name: Lint and style
+        run: npm run lint
+
       # Cheap, and they catch what the build cannot: these assert properties of
       # the helpers (citation rendering, CSL formatting, path rebasing, sitemap
       # coverage) that a successful build says nothing about.
@@ -65,6 +73,11 @@ jobs:
           PUPPETEER_EXECUTABLE_PATH="${CHROMIUM_PATH}" npx --yes pa11y-ci@4 --config .pa11yci.json
 
       - run: npm run check:rdfa
+
+      # Last, because it needs a built site: the endpoints under .well-known/
+      # and the llm*.txt files are published for other people's agents, and a
+      # rename upstream silently breaks them.
+      - run: npm run check:agent-endpoints
 
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
