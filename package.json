@@ -11,7 +11,7 @@
     "test": "uv run pytest -q && node --test tests/",
     "build": "npm run build:eleventy",
     "build:all": "npm run render-pdfs && npm run sync:content && npm run build:eleventy",
-    "sync:content": "uv run python scripts/site/migrate_posts.py && uv run python scripts/site/optimize_images.py && uv run python scripts/site/build_talkmap.py && uv run python scripts/site/build_expertise.py && node scripts/site/generate-redirects.mjs && node scripts/site/fetch-artwork.mjs && node scripts/site/artwork-size.mjs && node scripts/site/minify-css.mjs && node scripts/site/stage-public.mjs",
+    "sync:content": "uv run python scripts/site/migrate_posts.py && uv run python scripts/site/optimize_images.py && uv run python scripts/site/build_talkmap.py && uv run python scripts/site/build_expertise.py && node scripts/site/generate-redirects.mjs && node scripts/site/fetch-artwork.mjs && node scripts/site/artwork-size.mjs && node scripts/site/minify-css.mjs && node scripts/site/stage-public.mjs && node scripts/site/sri.mjs",
     "check": "npm run check:links && npm run check:rdfa && npm run check:document && npm run check:contrast",
     "check:links": "node scripts/site/check-links.mjs _eleventy_site",
     "check:contrast": "node scripts/site/check-contrast.mjs",

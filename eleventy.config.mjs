@@ -31,6 +31,7 @@ import {
 } from "./src/lib/bib.mjs";
 import siteContent from "./src/eleventy/_data/sitecontent.js";
 import { buildJsonFeed } from "./src/lib/jsonFeed.mjs";
+import { sriFor } from "./scripts/site/sri.mjs";
 
 const ROOT = dirname(fileURLToPath(import.meta.url));
 
@@ -577,6 +578,10 @@ export default function (eleventyConfig) {
   eleventyConfig.addGlobalData("profiles", content.profiles());
   eleventyConfig.addGlobalData("affiliations", content.affiliations());
   eleventyConfig.addGlobalData("varia", content.varia());
+  // Hashed from the script itself, so the integrity attribute and the CSP meta
+  // tag cannot drift apart (scripts/site/sri.mjs stages the same value into
+  // public/_headers).
+  eleventyConfig.addGlobalData("sri", () => ({ themeForm: sriFor("themeForm") }));
 
   // Quarto published /posts.json and /listings.json. Nothing in this build
   // reads them, but both addresses are live and a feed that stops resolving is
