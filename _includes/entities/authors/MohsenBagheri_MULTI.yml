@@ -6,6 +6,7 @@ author:
       family: Bagheri
       literal: Mohsen Bagheri
     qid: Q104381967
+    # orcid: TODO
     affiliations:
       - ref: unige_pharm_wolfender
       - ref: sbu_phyto_ebrahimi
