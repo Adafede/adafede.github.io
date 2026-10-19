@@ -2356,6 +2356,28 @@ h3:hover > .heading-anchor,
   }
 }
 
+/* -------------------------------------------------------- page transitions */
+
+/* Cross-document view transitions. A multi-page site shows a white gap while
+   the next document is fetched and parsed; the browser instead crossfades the
+   old page into the new one, which removes that flash and makes navigation
+   feel immediate even when the response is not. Pure CSS, and a no-op where
+   the API is unsupported. */
+@view-transition {
+  navigation: auto;
+}
+
+/* The crossfade is decoration, so it is dropped with the reader's motion
+   preference. The transition itself still runs: the old page stays on screen
+   until the new one is ready and then swaps instantly, so there is no flash. */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
 /* ------------------------------------------------------------- tag filtering */
 
 .tag-filter {
