@@ -39,7 +39,7 @@ hooks = [{ id = "uv-lock" }]
 
 [[repos]]
 repo = "https://github.com/tombi-toml/tombi-pre-commit"
-rev = "v1.8.7"
+rev = "v1.8.8"
 hooks = [{ id = "tombi-format" }, { id = "tombi-lint" }]
 
 [[repos]]
@@ -103,7 +103,7 @@ hooks = [{ id = "zizmor", entry = "zizmor --fix=all ." }]
 # Vale excludes it the same way, via its own .vale.ini section.
 [[repos]]
 repo = "https://github.com/jolars/panache-pre-commit"
-rev = "v3.16.0"
+rev = "v3.17.0"
 hooks = [
   { id = "panache-format", exclude = '^AGENTS\.md$' },
   { id = "panache-lint", exclude = '^AGENTS\.md$' },
