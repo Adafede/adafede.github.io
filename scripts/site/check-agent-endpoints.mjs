@@ -40,6 +40,7 @@ const problems = [];
 
 const read = (path) => readFileSync(join(ROOT, path), "utf-8");
 const readJson = (path) => JSON.parse(read(path));
+const escapeRegExp = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
 /* ----------------------------------------------- 1. published URLs resolve --- */
 
@@ -78,7 +79,7 @@ for (const source of SOURCES) {
   // Stop at whitespace and at any punctuation that can trail a URL in markdown
   // or JSON: a closing paren, bracket, comma, or backtick from an inline-code
   // span. Built from a RegExp so the backtick needs no template-literal escape.
-  const URL_IN_SOURCE = new RegExp(HOST + "[^\\s\"'<>)\\]`,]+", "g");
+  const URL_IN_SOURCE = new RegExp(escapeRegExp(HOST) + "[^\\s\"'<>)\\]`,]+", "g");
   const urls = [...read(source).matchAll(URL_IN_SOURCE)].map((m) =>
     m[0].replace(/[.,;:]+$/, ""),
   );
