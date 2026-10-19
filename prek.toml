@@ -87,8 +87,8 @@ hooks = [{ id = "zizmor", entry = "zizmor --fix=all ." }]
 repo = "https://github.com/jolars/panache-pre-commit"
 rev = "v3.16.0"
 hooks = [
-  { id = "panache-format", exclude = '^(?!(AGENTS|CLAUDE|GEMINI)\.md$)' },
-  { id = "panache-lint", exclude = '^(?!(AGENTS|CLAUDE|GEMINI)\.md$)' },
+  { id = "panache-format", exclude = '^(AGENTS|CLAUDE|GEMINI|AGENT_AUDIT)\.md$' },
+  { id = "panache-lint", exclude = '^(AGENTS|CLAUDE|GEMINI|AGENT_AUDIT)\.md$' },
 ]
 
 [[repos]]
