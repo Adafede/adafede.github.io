@@ -13,7 +13,7 @@ npm ci && uv sync
 ```sh
 npm test                                    # 92 pytest + 25 node --test, ~5s
 npm run build:eleventy && npm run check    # links + rdfa + document + contrast, ~1.5s
-uv run prek run --all-files                 # 37 hooks (ruff, deptry, ty, typos, vale, …), ~17s
+npm run lint                                # the full prek hook set, ~17s
 ```
 
 `npm run check` reads `_eleventy_site/`, so **build first or you validate stale HTML**.
@@ -25,7 +25,8 @@ uv run pytest tests/test_url_utils.py -q            # one file
 uv run pytest tests/test_url_utils.py -k test_url_has_host -q   # one test
 node --test tests/bib.test.mjs                      # one JS file
 
-uv run --with ruff ruff check .
+npm run lint -- check-agent-docs                    # one hook
+uv run --with ruff ruff check .                     # one linter
 uv run --with ruff ruff format --check .
 uv run deptry .
 uv run --with typos typos
@@ -35,6 +36,9 @@ node scripts/site/check-links.mjs _eleventy_site    # …or pass it directly whe
 node scripts/site/check-rdfa.mjs _eleventy_site    #   different output dir
 node scripts/site/check-document.mjs _eleventy_site
 node scripts/site/render-pdfs.mjs --dry-run         # list the PDFs that would render
+npm run check:agent-docs                            # AGENTS.md still resolves
+npm run check:agent-endpoints                       # published agent URLs still resolve
+npm run check:graph                                 # how stale the knowledge graph is
 ```
 Only `check-links.mjs`, `check-rdfa.mjs` and `check-document.mjs` take a directory
 (`process.argv.slice(2)`). `render-pdfs.mjs` takes `--dry-run`; the other
@@ -49,10 +53,13 @@ npm run dev              # eleventy --serve
 ## Definition of done
 1. `npm test` passes.
 2. `npm run build:eleventy && npm run check` passes against a **fresh** build.
-3. `uv run prek run --all-files` passes.
-4. If you touched `_includes/entities/` or a `.qmd`, the change flows through
+3. `npm run check:agent-endpoints` passes — it needs the build from step 2.
+4. `npm run lint` passes. CI runs it too, so a local skip is a CI failure.
+5. If you touched `_includes/entities/` or a `.qmd`, the change flows through
    `npm run sync:content` — never patch `src/content/` directly.
-5. Commit messages are Conventional Commits (`feat:`, `fix:`, `chore(scope):`).
+6. If you touched a `.py` or `.mjs` under `scripts/`, run `npm run graph:update`
+   (~3s, no LLM) or the pre-commit graph hook will fail the commit.
+7. Commit messages are Conventional Commits (`feat:`, `fix:`, `chore(scope):`).
 
 ## Repo map
 - `eleventy.config.mjs` (1277 lines, 31 `addFilter` calls) — all filters, collections,
@@ -90,8 +97,10 @@ npm run dev              # eleventy --serve
   `uv run quarto render`. Read `README.md` "Deploy" before editing either.
 
 ## Do not touch
-- `src/content/`, `_eleventy_site/`, `public/`, `build/` — generated.
+- `src/content/`, `_eleventy_site/`, `public/`, `build/` — generated, and denied
+  in `.claude/settings.json` as well as ignored by git.
 - `_cache/*.json` — committed cache; delete deliberately, never hand-edit.
+- `cv.tex`, `cv-academic.tex` — Quarto output, also denied.
 - `.venv/`, `node_modules/`, `.quarto/`, `_freeze/`, `.kb/`, `graphify-out/`.
 
 ## Navigation
@@ -110,4 +119,16 @@ npm run dev              # eleventy --serve
 6. `AGENTS.md`, `CLAUDE.md` and `GEMINI.md` are committed. `CLAUDE.md` and
    `GEMINI.md` are symlinks to `AGENTS.md`, so edit `AGENTS.md` only.
    Keep every command and path in this file runnable —
-   `node scripts/site/check-agent-docs.mjs` enforces it, and runs in pre-commit and CI.
+   `npm run check:agent-docs` enforces it, and runs in pre-commit and CI.
+
+## Anti-drift gates
+Every check below runs without arguments, and is wired into pre-commit or CI:
+
+| Check | Guards |
+| ----- | ------ |
+| `npm run check:agent-docs` | every command and path named in this file resolves |
+| `npm run check:agent-endpoints` | the URLs published under `.well-known/` and `llm*.txt` still exist; `llm.txt` still matches `llms.txt` |
+| `npm run check:graph` | the knowledge graph matches the working tree |
+| `npm run lint` | ruff, ruff-format, deptry, ty, typos, vale, zizmor, panache |
+
+If one of these fails, fix the file it names — do not weaken the check.
