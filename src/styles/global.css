@@ -2358,13 +2358,6 @@ h3:hover > .heading-anchor,
 
 /* ------------------------------------------------------------- tag filtering */
 
-/* JS-driven hiding: the inline script sets data-hidden to hide entries that
-   match none of the checked tags. This is the union (OR) path that CSS
-   `:has(:checked)` cannot express without enumerating every subset. */
-[data-hidden] { display: none !important; }
-/* The same treatment for whole sections left with no surviving entries. */
-[data-group-hidden] { display: none !important; }
-
 .tag-filter {
   margin-block-end: var(--space-l);
 }
