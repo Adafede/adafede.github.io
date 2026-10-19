@@ -824,8 +824,81 @@ nonzero exit and message.
 | HTML changed, run the validators | false green against yesterday's build | build-then-check is stated, and is step 2 of the definition of done |
 | Instruction file rots | silently | pre-commit hook + first CI step |
 
-**Not applied, on purpose:** everything in §5.6 (N1–N8). The two that matter
-most are N2 (add a lint job to CI — ruff, deptry, ty, typos and vale are still
-gated only by a local git hook, so a cloud agent that pushes a branch still
-gets no lint feedback) and N5 (commit a `.claude/settings.json` deny-list).
-Both change what the project enforces rather than what it documents.
+### Second pass — "fix everything stale, and do not let it be stale again"
+
+The first pass left the two highest-impact items as proposals. Both are now
+applied, along with the remaining stale content.
+
+**Staleness that was fixed**
+
+| Was | Now |
+| --- | --- |
+| Graph 72/108 indexed files stale, 54 commits behind | Rebuilt: **0 stale**, 468 files indexed, 1257 nodes (was 892), 3.4 s, no LLM |
+| `.kb/ledger.md` claimed 68/13 tests, "461 tracked files", `graphify-out/` empty, "current HEAD is e70a1ad" | Corrected; a `## Coverage` section duplicated verbatim is gone |
+| `llm.txt` declares itself an alias of `llms.txt`; nothing enforced it | `check:agent-endpoints` fails on drift |
+| The 77 URLs in `.well-known/` and `llm*.txt` were unchecked | All resolve, and are now checked against the build |
+| An untracked `POLISH_LOG.md` sat at the repo root, duplicating `.kb/POLISH_LOG.md` under the same name | Moved to `.kb/polish-full-pass.md`, with a header saying which pass it records |
+
+Note on the rebuild: `graphify update` resets community labels to file names
+("community=minify-css.mjs"). Restoring descriptive names needs
+`graphify label`, which calls an LLM and was not run. The graph is more
+current and larger, and no more *useful* for CSS or template work — it still
+indexes 0 `.css` and 0 `.njk` nodes. That is a graphify extractor limitation,
+not staleness, and it is why `AGENTS.md` still puts `rg` first.
+
+**Gates added so none of it recurs**
+
+| Gate | Runs in | Guards |
+| ---- | ------- | ------ |
+| `npm run check:agent-docs` | pre-commit + CI | every command and path in AGENTS.md resolves |
+| `npm run check:agent-endpoints` | pre-commit + CI | published agent URLs resolve; `llm.txt` matches `llms.txt`; skill files agree |
+| `npm run check:graph --strict` | pre-commit | the graph matches the working tree |
+| `npm run lint` | pre-commit + **CI** | ruff, ruff-format, deptry, ty, typos, vale, zizmor, panache |
+| `.claude/settings.json` | every Claude Code session | deny generated paths and destructive verbs; ask before publishing |
+
+The last two close D5-F6 and D7-F1 — the two findings this audit called its
+largest remaining risks.
+
+### Verification of the second pass
+
+```
+npm test                      →  92 pytest + 25 node --test, 0 failed
+npm run build:eleventy        →  94 pages
+npm run check                 →  0 dead links, 0 RDFa problems, 0 document problems, 34/34 contrast
+npm run check:agent-docs      →  every command and path resolves
+npm run check:agent-endpoints →  77 advertised URL(s) resolve; llm.txt aligned; skill files agree
+npm run check:graph           →  468 indexed file(s), 0 stale
+npm run lint                  →  39 hooks, 0 failed
+```
+
+`check-agent-endpoints` was tested in the negative direction against three
+injected faults — a renamed page, `llm.txt` drifting from `llms.txt`, and a
+catalog entry pointed elsewhere — and caught each with a specific message.
+
+### Before/after friction
+
+| | Before | After |
+| - | ------ | ----- |
+| Fresh clone has instructions | no (`git ls-files` → 0) | yes, one file, three symlinks |
+| Agent's first command | read `.gitignore`, guess | `npm test`, 5 s |
+| Which commands are safe | 4 documented claims stale, 2 machine-dependent | all resolve; a bad one fails the commit |
+| Template/CSS/entity task | `graphify query` → wrong file or truncated noise | `rg` first, graph scoped to Python, with the counts that justify it |
+| HTML changed, run the validators | false green against yesterday's build | build-then-check is step 2 of the definition of done |
+| Instruction file rots | silently | pre-commit + CI |
+| Published agent URLs rot | silently | pre-commit + CI |
+| Graph rots | silently, 67% stale for weeks | pre-commit, rebuild is 3 s |
+| Style/format/type errors | local hook only | local hook **and** CI |
+| Editing `src/content/` | silently overwritten later | denied by `.claude/settings.json` |
+
+### Still open — and deliberately so
+
+- **Test coverage.** `ror_service.py` (343 LOC, carried a severity-1 bug),
+  `jsonFeed.mjs`, `prefixes.mjs` and `build_talkmap.py` still have no direct
+  test. That is missing tests, not stale ones.
+- **The `.forgejo` pipeline** still runs the legacy `uv run quarto render`
+  (ledger #17). Retiring a deployment path is a human decision.
+- **`.panache.toml`** is valid for the pinned hook (v3.16.0) and invalid for
+  the locally installed binary (3.12.0). It is correct as committed; changing
+  it would break whichever version the other side runs.
+- **The graph's blind spot.** 0 nodes for `.css` and `.njk`; 2 for 222 `.yml`.
+  Closing that needs a different tool (see D2-F6) or upstream extractors.
