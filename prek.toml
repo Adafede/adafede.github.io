@@ -75,10 +75,21 @@ repo = "https://github.com/zizmorcore/zizmor-pre-commit"
 rev = "v1.31.1"
 hooks = [{ id = "zizmor", entry = "zizmor --fix=all ." }]
 
+# Panache formats Quarto/Pandoc site content. The agent docs are engineering
+# documentation, not site content: reformatting them turns the em-dash list
+# separators into "---", and the linter reads code like `argv[2]` as an undefined
+# cross-reference label. They are excluded here rather than in .panache.toml
+# because panache's own config schema moved between the pinned hook (v3.16) and
+# the locally installed binary, so prek's exclude regex is the stable layer.
+# CLAUDE.md and GEMINI.md are symlinks to AGENTS.md. Vale excludes them the same
+# way, via its own .vale.ini sections.
 [[repos]]
 repo = "https://github.com/jolars/panache-pre-commit"
 rev = "v3.16.0"
-hooks = [{ id = "panache-format" }, { id = "panache-lint" }]
+hooks = [
+  { id = "panache-format", exclude = '^(?!(AGENTS|CLAUDE|GEMINI)\.md$)' },
+  { id = "panache-lint", exclude = '^(?!(AGENTS|CLAUDE|GEMINI)\.md$)' },
+]
 
 [[repos]]
 repo = "https://github.com/adafede/pre-commit-uv-pep723-upgrade"
