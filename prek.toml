@@ -72,7 +72,7 @@ hooks = [
   # The endpoints under .well-known/ and the llm*.txt files are published as
   # site content, for whatever reads them. Nothing else checks that the URLs
   # they advertise still exist.
-  { id = "check-agent-endpoints", name = "check-agent-endpoints", language = "system", entry = "node scripts/site/check-agent-endpoints.mjs", pass_filenames = false, files = '^(\.well-known/.*|llm.*\.txt|_eleventy_site/.*)$' },
+  { id = "check-agent-endpoints", name = "check-agent-endpoints", language = "system", entry = "node scripts/site/check-agent-endpoints.mjs --if-built", pass_filenames = false, files = '^(\.well-known/.*|llm.*\.txt)$' },
 ]
 
 [[repos]]
@@ -92,7 +92,10 @@ args = ["--output=line", "--minAlertLevel=error"]
 [[repos]]
 repo = "https://github.com/zizmorcore/zizmor-pre-commit"
 rev = "v1.31.1"
-hooks = [{ id = "zizmor", entry = "zizmor --fix=all ." }]
+# Scoped to .github, not `.`: zizmor honours .gitignore, but only for paths it
+# is not handed explicitly, and `--fix=all` will happily rewrite third-party
+# workflow files under node_modules/ when the clone has them.
+hooks = [{ id = "zizmor", entry = "zizmor --fix=all .github" }]
 
 # Panache formats Quarto/Pandoc site content. AGENTS.md is engineering
 # documentation, not site content: reformatting it turns the em-dash list

@@ -53,3 +53,32 @@ graphify-out/
 !src/eleventy/static/logos/
 cv.tex
 cv-academic.tex
+
+# --- dependencies, caches and local state ---
+# These were all covered only by ~/.gitignore_global, which the author's machine
+# has and CI does not. Anything listed here must be listed here, or CI behaves
+# differently from the local clone. zizmor found this the hard way: it walked
+# node_modules/*/.github/workflows/*.yml in CI and audited third-party files
+# that the local clone had been quietly skipping.
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.DS_Store
+Thumbs.db
+.idea/
+*.iml
+
+# Credentials. Untracked here is not enough on its own — see the note above.
+.env
+.env.*
+!.env.example
+!.env.template
+*.pem
+*.key
+*.pfx
+*.p12

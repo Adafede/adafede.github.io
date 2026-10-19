@@ -14,7 +14,15 @@
  *   3. ai-catalog.json, agent-skills/index.json and the SKILL.md agree on
  *      their mutual URLs and on the skill's id and name
  *
- * Run: node scripts/site/check-agent-endpoints.mjs [_eleventy_site]
+ * Run: node scripts/site/check-agent-endpoints.mjs            # strict
+ *      node scripts/site/check-agent-endpoints.mjs --if-built # skip if unbuilt
+ *
+ * `--if-built` exists because pre-commit cannot assume a build has happened.
+ * `npm run lint` runs this hook over the tree, and in CI it runs before
+ * `build:all`, so a strict check there fails on a fresh clone for no reason.
+ * The pre-commit hook passes `--if-built`; the CI step, which runs *after*
+ * `build:all`, stays strict and still fails if the build never happened.
+ *
  * Exits nonzero on any mismatch, like the other validators in this directory.
  */
 import { readFileSync, existsSync } from "node:fs";
@@ -22,7 +30,10 @@ import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
-const SITE = join(ROOT, process.argv[2] ?? "_eleventy_site");
+const args = process.argv.slice(2);
+const ifBuilt = args.includes("--if-built");
+const dirArg = args.find((a) => !a.startsWith("--"));
+const SITE = join(ROOT, dirArg ?? "_eleventy_site");
 const HOST = "https://adafede.github.io/";
 
 const problems = [];
@@ -49,7 +60,12 @@ function toBuiltPath(url) {
 }
 
 if (!existsSync(SITE)) {
-  console.log(`  ${SITE}: not built. Run \`npm run build:eleventy\` first.`);
+  const msg = `${SITE}: not built. Run \`npm run build:eleventy\` first.`;
+  if (ifBuilt) {
+    console.log(`  ${msg} Skipped (--if-built).`);
+    process.exit(0);
+  }
+  console.error(msg);
   process.exit(1);
 }
 
