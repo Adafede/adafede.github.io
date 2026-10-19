@@ -40,10 +40,12 @@ src/eleventy/_includes/talk-map.njk
 # _cache/expertise.json. The picture is derived.
 src/eleventy/_includes/expertise.njk
 
-# --- local agent tooling (never commit / publish) ---
-AGENTS.md
-CLAUDE.md
-GEMINI.md
+# --- agent tooling ---
+# AGENTS.md is deliberately NOT ignored: it is the only orientation document a
+# new contributor or a coding agent gets, so it has to ship with the clone.
+# Scratch state stays out:
+.kb/
+graphify-out/
 *.agent-scratch*
 
 # Source images (global gitignore has *.png/*.svg/*.ico but these are project source assets)
