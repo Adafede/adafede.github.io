@@ -13,7 +13,7 @@ npm ci && uv sync
 ```sh
 npm test                                    # 92 pytest + 25 node --test, ~5s
 npm run build:eleventy && npm run check    # links + rdfa + document + contrast, ~1.5s
-uv run prek run --all-files                 # 38 hooks (ruff, deptry, ty, typos, vale, …), ~17s
+uv run prek run --all-files                 # 37 hooks (ruff, deptry, ty, typos, vale, …), ~17s
 ```
 
 `npm run check` reads `_eleventy_site/`, so **build first or you validate stale HTML**.
