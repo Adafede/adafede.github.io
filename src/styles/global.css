@@ -22,7 +22,12 @@
 /* ------------------------------------------------------------------ tokens */
 
 :root {
-  color-scheme: light dark;
+  /* The UA picks form controls, scrollbars and the canvas backdrop from this.
+     `only light` follows the OS default but is overridden by the two
+     `@media (prefers-color-scheme: dark)` and `html:has(#theme-*:checked)`
+     blocks below; `light dark` would be wrong because the token blocks decide
+     the palette, so the property has to agree with them rather than the OS. */
+  color-scheme: light;
 
   /* Type. System stacks only — no webfont, so no request and no shift.
      Body is serif, headings and metadata are sans: the split that gives a page
@@ -85,11 +90,6 @@
      hard cut across the pale fills. Sized to sit entirely inside the gap the
      generator leaves between circles — see .expertise__topic circle. */
   --expertise-stroke: rgb(28 26 22 / 0.14);
-
-  /* The same outline on a dark page. The circle fills are the same pale
-     pastels in both themes, so the outline has to stay faint to sit behind
-     them rather than cut across them. */
-  --expertise-stroke: rgb(255 255 255 / 0.18);
   --shadow: 0 1px 2px rgb(27 26 23 / 0.04);
   --shadow-lg: 0 10px 30px -12px rgb(27 26 23 / 0.18);
 }
@@ -331,15 +331,17 @@ pre code {
   font-size: 0.84rem;
 }
 
-/* Shiki emits both themes as custom properties; pick by the used scheme. */
-@media (prefers-color-scheme: light) {
-  pre {
-    color: var(--shiki-light, inherit);
-    background-color: var(--shiki-light-bg, var(--code-bg));
-  }
-  pre span {
-    color: var(--shiki-light, inherit);
-  }
+/* Shiki emits both themes as custom properties. The default is the light pair;
+   the dark pair is selected by the OS preference *or* an explicit dark choice,
+   so forcing the theme also repaints code rather than leaving a light block on
+   a dark page (the bug an OS-only media query left behind). */
+pre {
+  color: var(--shiki-light, inherit);
+  background-color: var(--shiki-light-bg, var(--code-bg));
+}
+
+pre span {
+  color: var(--shiki-light, inherit);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -347,9 +349,31 @@ pre code {
     color: var(--shiki-dark, inherit);
     background-color: var(--shiki-dark-bg, var(--code-bg));
   }
+
   pre span {
     color: var(--shiki-dark, inherit);
   }
+}
+
+/* An explicit choice wins over the OS, so it comes after the media query. The
+   light override has to restate the light pair because a dark-OS reader who
+   forces light would otherwise keep the dark block the media query set. */
+html:has(#theme-light:checked) pre {
+  color: var(--shiki-light, inherit);
+  background-color: var(--shiki-light-bg, var(--code-bg));
+}
+
+html:has(#theme-light:checked) pre span {
+  color: var(--shiki-light, inherit);
+}
+
+html:has(#theme-dark:checked) pre {
+  color: var(--shiki-dark, inherit);
+  background-color: var(--shiki-dark-bg, var(--code-bg));
+}
+
+html:has(#theme-dark:checked) pre span {
+  color: var(--shiki-dark, inherit);
 }
 
 /* ------------------------------------------------------------- quotes etc */
@@ -2704,6 +2728,7 @@ h3:hover > .heading-anchor,
    colour rather than having to evaluate `light-dark()`. */
 @media (prefers-color-scheme: dark) {
   :root {
+    color-scheme: dark;
     --bg: #100f12;
     --surface: #17161a;
     --surface-sunken: #0a0a0c;
@@ -2720,6 +2745,10 @@ h3:hover > .heading-anchor,
     --focus: #9fd6f5;
     --mark: #4a3f16;
     --code-bg: #131216;
+    /* The circle fills are the same pale pastels in both themes, so on a dark
+       page the outline flips to white to sit behind them instead of cutting
+       across them. */
+    --expertise-stroke: rgb(255 255 255 / 0.18);
     --shadow: 0 1px 2px rgb(0 0 0 / 0.35);
     --shadow-lg: 0 10px 30px -12px rgb(0 0 0 / 0.6);
   }
@@ -2745,6 +2774,7 @@ html:has(#theme-light:checked) {
   --focus: #0d5a80;
   --mark: #fdf0c8;
   --code-bg: #f3f0ea;
+  --expertise-stroke: rgb(28 26 22 / 0.14);
 }
 
 html:has(#theme-dark:checked) {
@@ -2764,6 +2794,7 @@ html:has(#theme-dark:checked) {
   --focus: #9fd6f5;
   --mark: #4a3f16;
   --code-bg: #131216;
+  --expertise-stroke: rgb(255 255 255 / 0.18);
 }
 
 /* -------------------------------------------------------------- theme switch

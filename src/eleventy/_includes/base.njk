@@ -4,8 +4,13 @@
     <meta charset="UTF-8" />
     <!-- Paints the right backdrop before the stylesheet is parsed. -->
     <meta name="color-scheme" content="light dark" />
-    <meta name="theme-color" content="#fbfbfd" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#16181c" media="(prefers-color-scheme: dark)" />
+    {# theme-color tints browser chrome (address bar, status bar). It can only key
+       off `prefers-color-scheme`, so it tracks the OS and not the theme radios —
+       a reader who forces light on a dark phone keeps the browser's own dark
+       chrome. Fixing that needs a script to rewrite the meta; the CSS theme
+       itself is already correct. Values match --bg in each scheme. #}
+    <meta name="theme-color" content="#faf8f5" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#100f12" media="(prefers-color-scheme: dark)" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     {# The analytics script is only discovered when parsing reaches the end of
        the body, so the head is the one place that can prewarm its connection:
