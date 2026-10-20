@@ -47,8 +47,16 @@ Only `check-links.mjs`, `check-rdfa.mjs` and `check-document.mjs` take a directo
 Build:
 ```sh
 npm run build:all        # PDFs -> sync:content -> eleventy (CI + deploy)
+npm run clean            # drop _site/, _eleventy_site/, public/, build/
 npm run dev              # eleventy --serve
 ```
+
+`npm run clean` matters because none of the build steps empty their output.
+Eleventy's passthrough copy and `inline-css.mjs` overwrite the files they touch
+and leave the rest, so a file that stops being generated (an inlined sheet, a
+deleted script) lingers. The CI build starts from a clean checkout, so a stale
+local output never reaches Pages — but it will mislead `npm run check`, which
+reads `_eleventy_site/`.
 
 ## Definition of done
 1. `npm test` passes.
@@ -83,6 +91,10 @@ npm run dev              # eleventy --serve
 - `.well-known/`, `llm.txt`, `llms.txt`, `llms-full.txt`, `humans.txt` — published
   as site resources (`_quarto.yml`), so their URLs are part of the published API.
 - Output: `_eleventy_site/` (HTML), `_site/` (PDFs), `public/` (staging).
+  `render-pdfs.mjs` prunes `_site/` back to the four PDFs it renders: Quarto is
+  a *website* project, so a `--to pdf` render also copies the whole repo tree
+  into `_site/` (~9 MB of `src/`, `public/`, `site_libs/`, stale HTML) that
+  nothing reads.
 
 ## Conventions that differ from defaults
 - Python: full type hints, `from __future__ import annotations`, `logging` not print,

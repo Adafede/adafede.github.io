@@ -83,8 +83,9 @@ jobs:
       # rename upstream silently breaks them.
       - run: npm run check:agent-endpoints
 
-      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
-        with:
-          name: eleventy-site
-          path: _eleventy_site
-          retention-days: 14
+      # No upload-artifact step on purpose. The built site was being uploaded
+      # here on every push *and* pull request (~4 MB compressed, 14-day
+      # retention) and nothing ever downloaded it: the Pages deploy in
+      # publish.yml uploads its own copy via upload-pages-artifact. Dropping
+      # the duplicate removes the artifact from every run without changing
+      # what ships.

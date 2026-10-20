@@ -21,6 +21,8 @@ import { fileURLToPath } from "node:url";
 import { spawnSync } from "node:child_process";
 import { load as loadYaml } from "js-yaml";
 
+import { pruneSiteToPdfs } from "./prune-site.mjs";
+
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
 const POSTS_DIR = join(ROOT, "posts");
 
@@ -120,5 +122,9 @@ if (result.status !== 0) {
   console.error(`  ! uv run quarto render --to pdf failed (${result.status})`);
   process.exitCode = 1;
 } else {
-  console.log(`  + rendered ${sources.length} PDF(s) into _site/`);
+  const removed = pruneSiteToPdfs(join(ROOT, "_site"));
+  console.log(
+    `  + rendered ${sources.length} PDF(s) into _site/` +
+      (removed ? ` (pruned ${removed} non-PDF item(s))` : ""),
+  );
 }

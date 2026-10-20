@@ -8,6 +8,7 @@
   "private": true,
   "scripts": {
     "dev": "npx @11ty/eleventy --serve",
+    "clean": "node scripts/site/clean.mjs",
     "test": "uv run pytest -q && node --test tests/",
     "build": "npm run build:eleventy",
     "build:all": "npm run render-pdfs && npm run sync:content && npm run build:eleventy",
