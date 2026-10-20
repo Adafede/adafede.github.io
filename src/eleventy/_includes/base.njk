@@ -21,7 +21,7 @@
     <!-- Content Security Policy: the only scripts are SimpleAnalytics (external
          CDN) and the inlined CSS. No inline scripts, no eval, no object/embed.
          connect-src allows SimpleAnalytics' beacon endpoint. -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'strict-dynamic' 'sha384-6r8ANWkTbGeAoBOxTtwsJD6VBfqnKe+kD3q/w51t91jCOCSxtKcCN2erSIv/1GHO' '{{ sri.themeForm }}' https://scripts.simpleanalyticscdn.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://*.simpleanalytics.com https://scripts.simpleanalyticscdn.com https://*.wikidata.org https://*.wikimedia.org https://*.scholia.wiki https://hypothes.is; base-uri 'self'; form-action 'self'; object-src 'none'; require-trusted-types-for 'script'; trusted-types 'none'; upgrade-insecure-requests" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'strict-dynamic' 'sha384-6r8ANWkTbGeAoBOxTtwsJD6VBfqnKe+kD3q/w51t91jCOCSxtKcCN2erSIv/1GHO' https://scripts.simpleanalyticscdn.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://*.simpleanalytics.com https://scripts.simpleanalyticscdn.com https://*.wikidata.org https://*.wikimedia.org https://*.scholia.wiki https://hypothes.is; base-uri 'self'; form-action 'self'; object-src 'none'; require-trusted-types-for 'script'; trusted-types 'none'; upgrade-insecure-requests" />
 
     {%- set pageTitle = (site.author ~ ' — ' ~ title) if (title and title != site.author) else site.author %}
     <title>{{ pageTitle }}</title>
@@ -112,38 +112,11 @@
           {% endfor %}
         </ul>
         <div class="site-header__controls">
-        {# Theme control. Three radios, not a checkbox, so "follow the system"
-           is the default and an explicit choice can override it either way.
-           The only thing that changes is `color-scheme`: every token is a
-           `light-dark()` pair, so flipping it flips the whole palette. No
-           script — and nothing that remembers the choice, which would need one.
-           Wrapped as a WebMCP tool so agents can set the theme declaratively. #}
-        <form class="theme-switch-form" toolname="set_colour_theme" tooldescription="Set the site colour theme to follow the system, light, or dark. The change applies immediately via CSS; nothing is submitted to a server.">
-        <fieldset class="theme-switch">
-          <legend class="visually-hidden">Colour theme</legend>
-          <input type="radio" name="theme" id="theme-auto" value="auto" toolparamdescription="Colour theme: auto follows the operating system preference." checked>
-          <input type="radio" name="theme" id="theme-light" value="light" toolparamdescription="Colour theme: force light appearance.">
-          <input type="radio" name="theme" id="theme-dark" value="dark" toolparamdescription="Colour theme: force dark appearance.">
-          <div class="theme-switch__options">
-            <label class="theme-switch__btn" for="theme-auto" title="Theme: follow the system">
-              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="2.5" y="4" width="19" height="12.5" rx="1.5"/><path d="M8.5 20.5h7"/></svg>
-              <span class="visually-hidden">Follow the system</span>
-            </label>
-            <label class="theme-switch__btn" for="theme-light" title="Theme: light">
-              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg>
-              <span class="visually-hidden">Light</span>
-            </label>
-            <label class="theme-switch__btn" for="theme-dark" title="Theme: dark">
-              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5"/></svg>
-              <span class="visually-hidden">Dark</span>
-            </label>
-          </div>
-        </fieldset>
-        {# Pa11y requires a submit control on every form. Theme applies via CSS
-           on radio change; submit is a no-op (`onsubmit="return false"`). #}
-        <button type="submit" class="visually-hidden" tabindex="-1" aria-hidden="true">Apply colour theme</button>
-        </form>
-
+        {# No theme control. The palette follows the operating system, which is
+           the one thing a page can read without script — so there is nothing to
+           remember and no flash when a reader follows a link. An explicit toggle
+           cannot survive navigation without storage, and a choice that snaps
+           back on every click is worse than no choice. #}
         <ul class="site-nav site-nav--utility">
           <li>
             <a href="/rss.xml" title="RSS feed" aria-label="RSS feed">
@@ -167,10 +140,8 @@
     {# SimpleAnalytics — the only script on the site. External links are
        handled at build time by an Eleventy transform that adds
        target="_blank" and rel="noopener noreferrer" — see the comment on
-       externalLinks in eleventy.config.mjs. theme-form.js is hashed at build
-       time by scripts/site/sri.mjs, so editing the script cannot leave the CSP
-       and the integrity attribute disagreeing. #}
-    <script defer src="/theme-form.js" integrity="{{ sri.themeForm }}"></script>
+       externalLinks in eleventy.config.mjs. Its SRI hash is hard-coded because
+       it is fetched from a versionless URL with no local file to derive it. #}
     <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js" crossorigin="anonymous" integrity="sha384-6r8ANWkTbGeAoBOxTtwsJD6VBfqnKe+kD3q/w51t91jCOCSxtKcCN2erSIv/1GHO"></script>
   </body>
 </html>

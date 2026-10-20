@@ -26,8 +26,12 @@
      and the native grouping element gives them an accessible name without an
      aria-label bolted on. WAVE flags a bare group. Each checkbox sits inside
      the label that toggles it, so the selected and focus styling is one generic
-     rule in global.css rather than one rule per tag. #}
-  <form class="tag-filter__form">
+     rule in global.css rather than one rule per tag.
+
+     No <form>: the filter never submits (it is pure CSS :has(:checked)), and a
+     form with no action would only reload the page. A <fieldset> is valid
+     outside a form, and dropping the form drops the submit control Pa11y
+     otherwise demands — and the script that used to swallow the submit. #}
   <fieldset class="tag-filter__inputs">
     <legend class="visually-hidden">Filter by topic</legend>
     <ul class="tag-filter__list">
@@ -37,11 +41,6 @@
       {% endfor %}
     </ul>
   </fieldset>
-  {# Pa11y requires a submit control on every form. Filtering is CSS-only;
-     submit is a no-op: the self-hosted theme-form.js end the submit event, so
-     the form stays CSP-clean (no inline handler under 'strict-dynamic'). #}
-  <button type="submit" class="visually-hidden" tabindex="-1" aria-hidden="true">Apply topic filter</button>
-  </form>
 
   {# Only the no-JS hide rules have to be per-tag: the selector must name which
      checkbox to observe. Scoped to .site-main (which holds both the filter and

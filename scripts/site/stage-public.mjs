@@ -12,8 +12,8 @@
  * _site/ into public/. A missing PDF is not fatal: a branch that has never run
  * Quarto has no PDFs yet, and the templates check before linking.
  *
- * _headers is not copied here: scripts/site/sri.mjs writes public/_headers so the
- * CSP carries a script hash derived from the script itself.
+ * _headers is copied verbatim: it carries no build-derived value now that the
+ * only hash in the CSP is the hard-coded SimpleAnalytics one.
  *
  * Run: node scripts/site/stage-public.mjs
  */
@@ -35,6 +35,7 @@ const DIR_SOURCES = ["images", ".well-known"];
 
 /** Individual files copied from the repository root. */
 const FILE_SOURCES = [
+  "_headers",
   "humans.txt",
   "llm.txt",
   "llms.txt",

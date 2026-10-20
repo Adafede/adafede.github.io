@@ -22,12 +22,10 @@
 /* ------------------------------------------------------------------ tokens */
 
 :root {
-  /* The UA picks form controls, scrollbars and the canvas backdrop from this.
-     `only light` follows the OS default but is overridden by the two
-     `@media (prefers-color-scheme: dark)` and `html:has(#theme-*:checked)`
-     blocks below; `light dark` would be wrong because the token blocks decide
-     the palette, so the property has to agree with them rather than the OS. */
-  color-scheme: light;
+  /* The UA keys form controls, scrollbars and the canvas backdrop off this.
+     `light dark` tells it the page supports both and to follow the operating
+     system, which is exactly what the token blocks below do too. */
+  color-scheme: light dark;
 
   /* Type. System stacks only — no webfont, so no request and no shift.
      Body is serif, headings and metadata are sans: the split that gives a page
@@ -331,10 +329,9 @@ pre code {
   font-size: 0.84rem;
 }
 
-/* Shiki emits both themes as custom properties. The default is the light pair;
-   the dark pair is selected by the OS preference *or* an explicit dark choice,
-   so forcing the theme also repaints code rather than leaving a light block on
-   a dark page (the bug an OS-only media query left behind). */
+/* Shiki emits both themes as custom properties; pick them by the used scheme.
+   The palette follows the operating system, so this media query is the only
+   switch. */
 pre {
   color: var(--shiki-light, inherit);
   background-color: var(--shiki-light-bg, var(--code-bg));
@@ -353,27 +350,6 @@ pre span {
   pre span {
     color: var(--shiki-dark, inherit);
   }
-}
-
-/* An explicit choice wins over the OS, so it comes after the media query. The
-   light override has to restate the light pair because a dark-OS reader who
-   forces light would otherwise keep the dark block the media query set. */
-html:has(#theme-light:checked) pre {
-  color: var(--shiki-light, inherit);
-  background-color: var(--shiki-light-bg, var(--code-bg));
-}
-
-html:has(#theme-light:checked) pre span {
-  color: var(--shiki-light, inherit);
-}
-
-html:has(#theme-dark:checked) pre {
-  color: var(--shiki-dark, inherit);
-  background-color: var(--shiki-dark-bg, var(--code-bg));
-}
-
-html:has(#theme-dark:checked) pre span {
-  color: var(--shiki-dark, inherit);
 }
 
 /* ------------------------------------------------------------- quotes etc */
@@ -2242,15 +2218,6 @@ h3:hover > .heading-anchor,
     block-size: 2.5rem;
   }
 
-  .theme-switch__options {
-    padding: 1px;
-  }
-
-  .theme-switch__btn {
-    inline-size: 1.85rem;
-    block-size: 1.85rem;
-  }
-
   /* Body links get real padding so thumbs do not have to hit a text line. */
   .prose a,
   .article a,
@@ -2728,7 +2695,6 @@ h3:hover > .heading-anchor,
    colour rather than having to evaluate `light-dark()`. */
 @media (prefers-color-scheme: dark) {
   :root {
-    color-scheme: dark;
     --bg: #100f12;
     --surface: #17161a;
     --surface-sunken: #0a0a0c;
@@ -2754,155 +2720,10 @@ h3:hover > .heading-anchor,
   }
 }
 
-/* An explicit choice overrides the operating system. These come last so they
-   win on specificity and source order, and they carry the same literals rather
-   than relying on `color-scheme` to do the work. */
-html:has(#theme-light:checked) {
-  --bg: #faf8f5;
-  --surface: #ffffff;
-  --surface-sunken: #f3f0ea;
-  --border: #e6e1d8;
-  --border-strong: #938b7e;
-  --text: #1b1a17;
-  --text-muted: #5e594f;
-  --text-faint: #6f685c;
-  --link: #0d5a80;
-  --link-visited: #6b3d75;
-  --brand: #0d5a80;
-  --brand-ink: #ffffff;
-  --brand-soft: #e4eff5;
-  --focus: #0d5a80;
-  --mark: #fdf0c8;
-  --code-bg: #f3f0ea;
-  --expertise-stroke: rgb(28 26 22 / 0.14);
-}
-
-html:has(#theme-dark:checked) {
-  --bg: #100f12;
-  --surface: #17161a;
-  --surface-sunken: #0a0a0c;
-  --border: #2b2a30;
-  --border-strong: #837d8c;
-  --text: #ecebe7;
-  --text-muted: #a8a49b;
-  --text-faint: #918b83;
-  --link: #8ccbef;
-  --link-visited: #d3abe2;
-  --brand: #8ccbef;
-  --brand-ink: #08131a;
-  --brand-soft: #16242c;
-  --focus: #9fd6f5;
-  --mark: #4a3f16;
-  --code-bg: #131216;
-  --expertise-stroke: rgb(255 255 255 / 0.18);
-}
-
-/* -------------------------------------------------------------- theme switch
-
-   Three radios: follow the system, light, dark. The palette itself is decided
-   by the token blocks near the top of this file; these rules only carry the
-   `color-scheme` hint to the UA and draw the control.
-
-   The cost of doing this without script is that the choice is not remembered
-   across pages: a visitor who picks dark lands on a light page after a click.
-   Persisting it needs one line of script, which is the trade being made. */
-
-.theme-switch-form {
-  flex-shrink: 0;
-  margin: 0;
-}
-
-.theme-switch {
-  flex-shrink: 0;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  min-inline-size: 0;
-}
-
-.theme-switch > input {
-  position: absolute;
-  inline-size: 1px;
-  block-size: 1px;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.theme-switch__options {
-  display: flex;
-  gap: 2px;
-  padding: 2px;
-  background: var(--surface-sunken);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-pill);
-}
-
-.theme-switch__btn {
-  display: grid;
-  place-items: center;
-  inline-size: 1.9rem;
-  block-size: 1.9rem;
-  border-radius: var(--radius-pill);
-  color: var(--text-faint);
-  cursor: pointer;
-  transition:
-    color 0.15s,
-    background-color 0.15s;
-}
-
-.theme-switch__btn:hover {
-  color: var(--text);
-}
-
-/* The pressed button is the one whose radio is checked. Drawn on the label
-   because the input itself is hidden, so keyboard focus needs somewhere to go. */
-html:has(#theme-auto:checked) label[for="theme-auto"],
-html:has(#theme-light:checked) label[for="theme-light"],
-html:has(#theme-dark:checked) label[for="theme-dark"] {
-  color: var(--brand-ink);
-  background: var(--brand);
-}
-
-/* A selected button is marked by a ring as well as a fill. The fill alone is
-   invisible in Windows High Contrast, where the system paints over the
-   background colour, so the ring is what actually carries "this is the current
-   choice" there. */
-html:has(#theme-auto:checked) label[for="theme-auto"],
-html:has(#theme-light:checked) label[for="theme-light"],
-html:has(#theme-dark:checked) label[for="theme-dark"] {
-  box-shadow: inset 0 0 0 1.5px var(--brand-ink);
-}
-
-/* Focus and selection are different things and must not be drawn the same way:
-   an outline means "you are here", a fill means "this is chosen". Both can be
-   present at once, so focus is an offset outline that reads clearly on top of
-   the selected fill. */
-html:has(#theme-auto:focus-visible) label[for="theme-auto"],
-html:has(#theme-light:focus-visible) label[for="theme-light"],
-html:has(#theme-dark:focus-visible) label[for="theme-dark"] {
-  outline: 3px solid var(--focus);
-  outline-offset: 2px;
-}
-
-@media (forced-colors: active) {
-  /* In forced-colors the fill and box-shadow above are stripped, so mark the
-     selected option with a border and the focused one with an outline the
-     system colour. */
-  html:has(#theme-auto:checked) label[for="theme-auto"],
-  html:has(#theme-light:checked) label[for="theme-light"],
-  html:has(#theme-dark:checked) label[for="theme-dark"] {
-    outline: 2px solid ButtonText;
-    outline-offset: -2px;
-  }
-}
-
-html:has(#theme-light:checked) {
-  color-scheme: light;
-}
-
-html:has(#theme-dark:checked) {
-  color-scheme: dark;
-}
+/* The palette is the `:root` light values and the dark override above, chosen
+   by the operating system. There is no theme control: a scriptless override
+   cannot survive navigation, so it would flash back to the OS choice on every
+   link — see the note in base.njk. */
 
 /* ---------------------------------------------------------- registry icons */
 
