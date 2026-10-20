@@ -68,6 +68,11 @@
   --radius-lg: 10px;
   --radius-pill: 999px;
 
+  /* --bg is mirrored in two places that cannot read it: the two
+     <meta name="theme-color"> tags in src/eleventy/_includes/base.njk (browser
+     chrome) and the `color-scheme` backdrop. Change --bg here or in the dark
+     block below and update the matching theme-color value, or the address bar
+     tints the wrong colour. */
   --bg: #faf8f5;
   --surface: #ffffff;
   --surface-sunken: #f3f0ea;

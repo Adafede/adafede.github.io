@@ -4,11 +4,11 @@
     <meta charset="UTF-8" />
     <!-- Paints the right backdrop before the stylesheet is parsed. -->
     <meta name="color-scheme" content="light dark" />
-    {# theme-color tints browser chrome (address bar, status bar). It can only key
-       off `prefers-color-scheme`, so it tracks the OS and not the theme radios —
-       a reader who forces light on a dark phone keeps the browser's own dark
-       chrome. Fixing that needs a script to rewrite the meta; the CSS theme
-       itself is already correct. Values match --bg in each scheme. #}
+    {# theme-color tints browser chrome (address bar, status bar). It only keys
+       off `prefers-color-scheme`, which is the same signal the palette uses, so
+       the chrome and the page always agree. The values must stay in step with
+       --bg in `:root` and in the dark block of src/styles/global.css; change one
+       without the other and the address bar tints the wrong colour. #}
     <meta name="theme-color" content="#faf8f5" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#100f12" media="(prefers-color-scheme: dark)" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />

@@ -100,6 +100,51 @@ def test_the_dark_block_redeclares_every_light_colour_token():
     )
 
 
+def test_the_theme_color_metas_match_bg():
+    """The two `<meta name="theme-color">` values must equal `--bg`.
+
+    The browser tints its own chrome (address bar, status bar) from these metas,
+    and they cannot read a CSS custom property, so the hex is duplicated by hand.
+    If `--bg` moves and the meta does not, the address bar is a different colour
+    from the page in exactly one of the two schemes.
+    """
+    base = (
+        Path(__file__).resolve().parents[1]
+        / "src"
+        / "eleventy"
+        / "_includes"
+        / "base.njk"
+    ).read_text(encoding="utf-8")
+
+    css = CSS.read_text(encoding="utf-8")
+    light_bg = _value(_light_root(css), "--bg")
+    dark_bg = _value(_inner_root(css), "--bg")
+    assert light_bg and dark_bg, "could not read --bg from both blocks"
+
+    metas = {
+        scheme: value
+        for value, scheme in re.findall(
+            r'<meta name="theme-color" content="([^"]+)" '
+            r'media="\(prefers-color-scheme: (\w+)\)"',
+            base,
+        )
+    }
+    assert metas.get("light") == light_bg, (
+        f"theme-color light is {metas.get('light')} but --bg is {light_bg}"
+    )
+    assert metas.get("dark") == dark_bg, (
+        f"theme-color dark is {metas.get('dark')} but --bg is {dark_bg}"
+    )
+
+
+def _value(body: str | None, prop: str) -> str | None:
+    """The literal value of `prop` in a declaration block body."""
+    if not body:
+        return None
+    match = re.search(rf"{re.escape(prop)}\s*:\s*([^;]+);", body)
+    return match.group(1).strip() if match else None
+
+
 def _light_root(css: str) -> str | None:
     """The body of the first top-level `:root` (the light palette).
 
