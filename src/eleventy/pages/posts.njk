@@ -1,12 +1,12 @@
 ---
 layout: base.njk
 title: Posts
-description: Blog posts and long-form notes on open chemistry, metabolomics, Wikidata and cheminformatics.
+description: Blog posts and long-form notes.
 permalink: /posts.html
 ---
 <div class="page-header">
   <h1>Posts</h1>
-  <p class="page-header__lede">{{ collections.posts.length }} post{{ '' if collections.posts.length == 1 else 's' }} on open chemistry, metabolomics, Wikidata and the infrastructure around them. Newest first.</p>
+  <p class="page-header__lede">{{ collections.posts.length }} post{{ '' if collections.posts.length == 1 else 's' }}. Newest first.</p>
 
 {% set items = collections.posts %}
 {% include 'tag-filter.njk' %}
