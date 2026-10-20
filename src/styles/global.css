@@ -1509,8 +1509,13 @@ figcaption {
   color: var(--link);
 }
 
+/* The header (title, metadata, artwork, the author grid) earns the full
+   container: on a wide screen a 66ch article left half the page blank and made
+   a fifty-author list scroll for three screens. The reading prose stays at the
+   measure — see .article__abstract/.article__body below — so line length is
+   still capped where it matters and only the scaffolding gets wider. */
 .article {
-  max-width: var(--measure);
+  max-width: var(--wide);
 }
 
 .article__header {
@@ -1539,10 +1544,23 @@ figcaption {
   margin-block: var(--space-m) var(--space-2xs);
 }
 
+/* Two columns on roomy screens: a fifty-author paper in one column is a
+   three-screen scroll, and the list is a set of short, independent entries, so
+   it reads fine in two. `columns` rather than a grid keeps the source order
+   (the numbering and the RDFa author sequence) intact and lets the browser
+   balance the two columns by height. Collapses to one column below 48rem,
+   where two columns would be too narrow to hold an ORCID pill. */
 .author-list {
   list-style: none;
   padding: 0;
   margin: 0;
+}
+
+@media (min-width: 48.01rem) {
+  .author-list {
+    columns: 2;
+    column-gap: var(--space-l);
+  }
 }
 
 .author-list li + li {
@@ -1593,11 +1611,26 @@ figcaption {
   font-size: var(--step-0);
 }
 
+/* Reading prose inside the now-wide article. The scaffolding above runs the
+   full --wide width, but body text and the abstract stay at the measure and sit
+   centred, so a long line never spans the page and the text column lines up
+   under the header instead of hugging the left edge. Two classes each so they
+   beat the bare `.prose { max-width: var(--measure) }` on specificity without
+   relying on source order. */
+.prose.article__abstract,
+.prose.article__body {
+  max-width: var(--measure);
+  margin-inline: auto;
+}
+
 /* The figure on the article page itself. `contain` rather than `cover`, so a
-   logo or a workflow is never cropped, and capped in width so a wide diagram
-   does not run past the measure. */
+   logo or a workflow is never cropped. The article is now --wide, so the image
+   is capped at the measure and centred: a full-bleed diagram at 68rem would
+   dominate the page, but the frame still gets the article's full width. */
 .article__figure {
   margin-block: var(--space-m);
+  max-width: var(--measure);
+  margin-inline: auto;
 }
 
 .article__image {
