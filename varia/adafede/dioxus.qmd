@@ -1,10 +1,10 @@
 ---
 title: Dioxus
-url: https://adafede.codeberg.page/dioxus
+url: https://adafede.github.io/dioxus
 image: https://raw.githubusercontent.com/DioxusLabs/dioxus/main/examples/assets/logo.png
 image-alt: Logo of Dioxus
 categories:
   - Rust
 description: |
-  <https://adafede.codeberg.page/dioxus>
+  <https://adafede.github.io/dioxus>
 ---
