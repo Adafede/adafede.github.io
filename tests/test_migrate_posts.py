@@ -213,7 +213,7 @@ def test_the_bibliography_is_resolved_against_the_project_root(tmp_path, monkeyp
 
     `Path("posts") / "references.bib"` resolves against whatever directory the
     process was started in, so every post silently lost its bibliography the
-    moment the script was invoked from anywhere but the repo root. npm happens to
+    moment the script was invoked from anywhere but the repo root. The build happens to
     run it from the root, which is why it went unnoticed.
     """
     import scripts.site.migrate_posts as migrate

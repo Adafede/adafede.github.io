@@ -5,7 +5,7 @@
  * from one declaration and cannot drift apart. This resolves both halves and
  * checks every pair that carries text or UI.
  *
- * Run: npm run check:contrast
+ * Run: bun run check:contrast
  */
 
 import { readFileSync } from "node:fs";

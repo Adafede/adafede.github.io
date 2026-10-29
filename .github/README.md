@@ -22,8 +22,8 @@ no longer the website renderer, only the PDF renderer.
 git clone https://github.com/adafede/adafede.github.io.git
 cd adafede.github.io
 
-# 2. Install Node.js dependencies (requires Node.js 26+)
-npm ci
+# 2. Install JavaScript dependencies (requires Bun 1.4+ and Node.js 26+)
+bun install --frozen-lockfile
 
 # 3. Install Python dependencies (requires Python 3.14+ and uv)
 uv sync --all-extras
@@ -34,13 +34,13 @@ uv sync --all-extras
 Run the Eleventy development server with hot reload:
 
 ```sh
-npm run dev
+bun run dev
 ```
 
 Validate the site (links, RDFa, document structure, contrast):
 
 ```sh
-npm run check
+bun run check
 ```
 
 Run Python tests:
@@ -55,16 +55,16 @@ One command builds everything --- PDFs, content, and the Eleventy site --- and
 is the same command used locally and in CI/deploy:
 
 ```sh
-npm run build:all
+bun run build:all
 ```
 
 That runs, in order:
 
   | Step | Script                   | Produces                                                                                                                              |
   | ---- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------- |
-  | 1    | `npm run render-pdfs`    | `_site/*.pdf` (Quarto + LuaTeX; skipped if no tool chain)                                                                             |
-  | 2    | `npm run sync:content`   | `src/content/**`, then `public/` (migrate `.qmd` → Markdown, stage PDFs, optimise images, talk map, expertise, redirects, minify CSS) |
-  | 3    | `npm run build:eleventy` | `_eleventy_site/` (Eleventy + CSS)                                                                                                    |
+  | 1    | `bun run render-pdfs`    | `_site/*.pdf` (Quarto + LuaTeX; skipped if no tool chain)                                                                             |
+  | 2    | `bun run sync:content`   | `src/content/**`, then `public/` (migrate `.qmd` → Markdown, stage PDFs, optimise images, talk map, expertise, redirects, minify CSS) |
+  | 3    | `bun run build:eleventy` | `_eleventy_site/` (Eleventy + CSS)                                                                                                    |
 
 The PDF step runs **before** the content migration on purpose: the migrator only
 writes a `pdf:` link into a post's frontmatter when the PDF already exists in
@@ -74,16 +74,16 @@ writes a `pdf:` link into a post's frontmatter when the PDF already exists in
 
   | Command                | Purpose                                                       |
   | ---------------------- | ------------------------------------------------------------- |
-  | `npm run dev`          | Serve Eleventy locally with hot reload.                       |
-  | `npm run build`        | Build only the Eleventy HTML site (no PDFs, no migration).    |
-  | `npm run sync:content` | Re-migrate `src/content/` and stage `public/` only.           |
-  | `npm run render-pdfs`  | (Re)render only the Quarto PDFs.                              |
-  | `npm run check`        | Validate links, RDFa, document structure, and color contrast. |
-  | `npm run check:a11y`   | Run pa11y (axe + HTMLCS) over the served site.                |
+  | `bun run dev`          | Serve Eleventy locally with hot reload.                       |
+  | `bun run build`        | Build only the Eleventy HTML site (no PDFs, no migration).    |
+  | `bun run sync:content` | Re-migrate `src/content/` and stage `public/` only.           |
+  | `bun run render-pdfs`  | (Re)render only the Quarto PDFs.                              |
+  | `bun run check`        | Validate links, RDFa, document structure, and color contrast. |
+  | `bun run check:a11y`   | Run pa11y (axe + HTMLCS) over the served site.                |
 
 ### Deploy
 
-`publish.yml` runs `npm run build:all` and publishes `_eleventy_site/` to GitHub
+`publish.yml` runs `bun run build:all` and publishes `_eleventy_site/` to GitHub
 Pages. PDFs render there because the deploy job installs TeX Live and Quarto.
 
 ## CiTO annotations

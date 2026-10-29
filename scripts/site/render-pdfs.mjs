@@ -81,7 +81,7 @@ for (const src of sources) console.log(`    - ${src.replace(ROOT + sep, "")}`);
 if (dryRun) process.exit(0);
 
 // Probe whether the quarto binary resolves on PATH. Mirrors the CI guard
-// (`command -v quarto`); avoids a hard dependency on the `which` npm package.
+// (`command -v quarto`); avoids a hard dependency on the `which` package.
 const probe = spawnSync("quarto", ["--version"], {
   encoding: "utf-8",
   stdio: "ignore",

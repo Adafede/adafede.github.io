@@ -56,7 +56,7 @@ hooks = [{ id = "shellcheck" }]
 repo = "local"
 hooks = [
   { id = "ty-check", name = "ty-check", language = "python", entry = "ty check", exclude = '^(?!.*\.py$).*$', additional_dependencies = ["ty"] },
-  # Fails when AGENTS.md names an npm script, a uv tool, a node file or a repo
+  # Fails when AGENTS.md names a bun script, a uv tool, a node file or a repo
   # path that does not exist. This is what keeps the instruction file from
   # rotting: it was already stale four ways before this existed.
   { id = "check-agent-docs", name = "check-agent-docs", language = "system", entry = "node scripts/site/check-agent-docs.mjs AGENTS.md", pass_filenames = false, files = '^(AGENTS\.md|package\.json|pyproject\.toml|scripts/site/check-agent-docs\.mjs)$' },
@@ -66,7 +66,7 @@ hooks = [
   { id = "check-no-local-paths", name = "check-no-local-paths", language = "system", entry = "node scripts/site/check-no-local-paths.mjs", pass_filenames = false, always_run = true },
   # The knowledge graph answers navigation questions, so a stale one gives
   # confidently wrong answers. Rebuilding is ~3s and needs no model access:
-  # `npm run graph:update`. Exits zero when there is no graph at all, so this
+  # `bun run graph:update`. Exits zero when there is no graph at all, so this
   # costs nothing on a machine that has not built one.
   { id = "check-graph-age", name = "check-graph-age", language = "system", entry = "node scripts/site/check-graph-age.mjs --strict", pass_filenames = false, files = '^(?!.*/?(graphify-out|node_modules|\.git|public|_site|_eleventy_site|src/content)/?$).*$' },
   # The endpoints under .well-known/ and the llm*.txt files are published as

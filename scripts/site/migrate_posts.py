@@ -491,7 +491,7 @@ def build_frontmatter(
     #
     # Resolved against PROJECT_ROOT, not the working directory: this runs as
     # `Path("posts") / "references.bib"`, which is relative to wherever the
-    # process happened to be started. Invoked from the repo root by npm it
+    # process happened to be started. Invoked from the repo root by the build it
     # worked; invoked from anywhere else every post silently lost its
     # bibliography and nothing said so.
     if (PROJECT_ROOT / "posts" / "references.bib").exists():

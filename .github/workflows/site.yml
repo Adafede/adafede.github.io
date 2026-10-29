@@ -25,30 +25,35 @@ jobs:
           node-version: 26
           package-manager-cache: false
 
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+        with:
+          bun-version: 1.4.4
+          no-cache: true
+
       - uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884
 
       - uses: pandoc/actions/setup@86321b6dd4675f5014c611e05088e10d4939e09e
 
       - run: uv sync
 
-      - run: npm ci
+      - run: bun install --frozen-lockfile
 
       # Cheapest gate in the pipeline, and the one that protects every other
       # step: if AGENTS.md tells an agent to run something that no longer
       # exists, nothing downstream can fix that.
-      - run: npm run check:agent-docs
+      - run: bun run check:agent-docs
 
       # Nothing machine-local may be committed: absolute home paths leak the
       # local username and break everywhere else.
-      - run: npm run check:local-paths
+      - run: bun run check:local-paths
 
       # Lint, format, types, typos and prose style. Until this ran here, the
       # whole set was enforced only by the local pre-commit hook, so an agent
       # working on a cloud runner or pushing through the GitHub/Codeberg web
       # UI got no style gate at all. Same hooks, same config, same results as
-      # `npm run lint` locally.
+      # `bun run lint` locally.
       - name: Lint and style
-        run: npm run lint
+        run: bun run lint
 
       # Cheap, and they catch what the build cannot: these assert properties of
       # the helpers (citation rendering, CSL formatting, path rebasing, sitemap
@@ -57,13 +62,13 @@ jobs:
 
       - run: node --test tests/
 
-      - run: npm run build:all
+      - run: bun run build:all
 
-      - run: npm run check:contrast
+      - run: bun run check:contrast
 
-      - run: npm run check:links
+      - run: bun run check:links
 
-      - run: npm run check:document
+      - run: bun run check:document
 
       - name: Install Chromium for pa11y
         run: |
@@ -72,16 +77,16 @@ jobs:
           echo "CHROMIUM_PATH=$(which chromium || which chromium-browser)" >> "$GITHUB_ENV"
 
       - run: |
-          npx --yes @11ty/eleventy --serve --port=8080 &
-          npx --yes wait-on http://localhost:8080/index.html --timeout=60000
-          PUPPETEER_EXECUTABLE_PATH="${CHROMIUM_PATH}" npx --yes pa11y-ci@4 --config .pa11yci.json
+          bunx @11ty/eleventy --serve --port=8080 &
+          bunx wait-on http://localhost:8080/index.html --timeout=60000
+          PUPPETEER_EXECUTABLE_PATH="${CHROMIUM_PATH}" bunx pa11y-ci@4 --config .pa11yci.json
 
-      - run: npm run check:rdfa
+      - run: bun run check:rdfa
 
       # Last, because it needs a built site: the endpoints under .well-known/
       # and the llm*.txt files are published for other people's agents, and a
       # rename upstream silently breaks them.
-      - run: npm run check:agent-endpoints
+      - run: bun run check:agent-endpoints
 
       # No upload-artifact step on purpose. The built site was being uploaded
       # here on every push *and* pull request (~4 MB compressed, 14-day

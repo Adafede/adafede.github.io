@@ -2,21 +2,22 @@
 
 ## Stack
 Eleventy 3 (JS site) + Quarto/LaTeX (PDFs only) + Python 3.14 build scripts.
-Node 26+, `uv`, `quarto` optional for HTML work.
+Bun 1.4+ (package manager, script runner), Node 26+ (runtime for `node` calls),
+`uv`, `quarto` optional for HTML work.
 
 ## Setup
 ```sh
-npm ci && uv sync
+bun install --frozen-lockfile && uv sync
 ```
 
 ## Verify — start here
 ```sh
-npm test                                    # 92 pytest + 25 node --test, ~5s
-npm run build:eleventy && npm run check    # links + rdfa + document + contrast, ~1.5s
-npm run lint                                # the full prek hook set, ~17s
+bun run test                                # 92 pytest + 25 node --test, ~5s
+bun run build:eleventy && bun run check     # links + rdfa + document + contrast, ~1.5s
+bun run lint                                # the full prek hook set, ~17s
 ```
 
-`npm run check` reads `_eleventy_site/`, so **build first or you validate stale HTML**.
+`bun run check` reads `_eleventy_site/`, so **build first or you validate stale HTML**.
 On a clean clone it fails with a bare `ENOENT` stack trace rather than a useful message.
 
 Fast subsets:
@@ -25,20 +26,20 @@ uv run pytest tests/test_url_utils.py -q            # one file
 uv run pytest tests/test_url_utils.py -k test_url_has_host -q   # one test
 node --test tests/bib.test.mjs                      # one JS file
 
-npm run lint -- check-agent-docs                    # one hook
+bun run lint -- check-agent-docs                    # one hook
 uv run --with ruff ruff check .                     # one linter
 uv run --with ruff ruff format --check .
 uv run deptry .
 uv run --with typos typos
 
-npm run check:links                                 # the dir is already in package.json
+bun run check:links                                 # the dir is already in package.json
 node scripts/site/check-links.mjs _eleventy_site    # …or pass it directly when you want a
 node scripts/site/check-rdfa.mjs _eleventy_site    #   different output dir
 node scripts/site/check-document.mjs _eleventy_site
 node scripts/site/render-pdfs.mjs --dry-run         # list the PDFs that would render
-npm run check:agent-docs                            # AGENTS.md still resolves
-npm run check:agent-endpoints                       # published agent URLs still resolve
-npm run check:graph                                 # how stale the knowledge graph is
+bun run check:agent-docs                            # AGENTS.md still resolves
+bun run check:agent-endpoints                       # published agent URLs still resolve
+bun run check:graph                                 # how stale the knowledge graph is
 ```
 Only `check-links.mjs`, `check-rdfa.mjs` and `check-document.mjs` take a directory
 (`process.argv.slice(2)`). `render-pdfs.mjs` takes `--dry-run`; the other
@@ -46,26 +47,26 @@ Only `check-links.mjs`, `check-rdfa.mjs` and `check-document.mjs` take a directo
 
 Build:
 ```sh
-npm run build:all        # PDFs -> sync:content -> eleventy (CI + deploy)
-npm run clean            # drop _site/, _eleventy_site/, public/, build/
-npm run dev              # eleventy --serve
+bun run build:all        # PDFs -> sync:content -> eleventy (CI + deploy)
+bun run clean            # drop _site/, _eleventy_site/, public/, build/
+bun run dev              # eleventy --serve
 ```
 
-`npm run clean` matters because none of the build steps empty their output.
+`bun run clean` matters because none of the build steps empty their output.
 Eleventy's passthrough copy and `inline-css.mjs` overwrite the files they touch
 and leave the rest, so a file that stops being generated (an inlined sheet, a
 deleted script) lingers. The CI build starts from a clean checkout, so a stale
-local output never reaches Pages — but it will mislead `npm run check`, which
+local output never reaches Pages — but it will mislead `bun run check`, which
 reads `_eleventy_site/`.
 
 ## Definition of done
-1. `npm test` passes.
-2. `npm run build:eleventy && npm run check` passes against a **fresh** build.
-3. `npm run check:agent-endpoints` passes — it needs the build from step 2.
-4. `npm run lint` passes. CI runs it too, so a local skip is a CI failure.
+1. `bun run test` passes.
+2. `bun run build:eleventy && bun run check` passes against a **fresh** build.
+3. `bun run check:agent-endpoints` passes — it needs the build from step 2.
+4. `bun run lint` passes. CI runs it too, so a local skip is a CI failure.
 5. If you touched `_includes/entities/` or a `.qmd`, the change flows through
-   `npm run sync:content` — never patch `src/content/` directly.
-6. If you touched a `.py` or `.mjs` under `scripts/`, run `npm run graph:update`
+   `bun run sync:content` — never patch `src/content/` directly.
+6. If you touched a `.py` or `.mjs` under `scripts/`, run `bun run graph:update`
    (~3s, no model access) or the pre-commit graph hook will fail the commit.
 7. Commit messages are Conventional Commits (`feat:`, `fix:`, `chore(scope):`).
 
@@ -106,12 +107,12 @@ reads `_eleventy_site/`.
   of a design token or the PDF and HTML drift.
 - Every `.qmd` post has a matching record in `_includes/entities/`.
 - Two build pipelines exist on purpose — `.github/workflows/publish.yml` runs
-  `npm run build:all`, `.forgejo/workflows/publish.yml` still runs the legacy
+  `bun run build:all`, `.forgejo/workflows/publish.yml` still runs the legacy
   `uv run quarto render`. Read `README.md` "Deploy" before editing either.
 
 ## Do not touch
 - `src/content/`, `_eleventy_site/`, `public/`, `build/` — generated, and ignored
-  by git. An edit there is silently overwritten by the next `npm run sync:content`.
+  by git. An edit there is silently overwritten by the next `bun run sync:content`.
 - `_cache/*.json` — committed cache; delete deliberately, never hand-edit.
 - `cv.tex`, `cv-academic.tex` — Quarto output, also gitignored.
 - `.venv/`, `node_modules/`, `.quarto/`, `_freeze/`, `graphify-out/`.
@@ -130,11 +131,11 @@ reads `_eleventy_site/`.
 3. The graph keeps itself current: `graphify hook install` puts a post-commit
    (and post-checkout/post-merge) hook in `.git/hooks/`, which rebuilds the
    changed files in ~3s with no LLM. That is local and uncommitted. Until it is
-   installed, `npm run graph:update` does the same thing by hand, and
-   `npm run check:graph` reports how far behind the graph is.
+   installed, `bun run graph:update` does the same thing by hand, and
+   `bun run check:graph` reports how far behind the graph is.
 4. Quiet flags, summarize output, report only failures. Target one test, not the
    suite, unless at a pass boundary.
-5. Keep every command and path in this file runnable — `npm run check:agent-docs`
+5. Keep every command and path in this file runnable — `bun run check:agent-docs`
    enforces it, and runs in pre-commit and CI.
 
 ## Anti-drift gates
@@ -142,10 +143,10 @@ Every check below runs without arguments, and is wired into pre-commit or CI:
 
 | Check | Guards |
 | ----- | ------ |
-| `npm run check:agent-docs` | every command and path named in this file resolves |
-| `npm run check:local-paths` | no tracked file contains an absolute home-directory path (`/Users/…`, `C:\Users\…`, `/home/…`) |
-| `npm run check:agent-endpoints` | the URLs published under `.well-known/` and `llm*.txt` still exist; `llm.txt` still matches `llms.txt` |
-| `npm run check:graph` | the knowledge graph matches the working tree |
-| `npm run lint` | ruff, ruff-format, deptry, ty, typos, vale, zizmor, panache |
+| `bun run check:agent-docs` | every command and path named in this file resolves |
+| `bun run check:local-paths` | no tracked file contains an absolute home-directory path (`/Users/…`, `C:\Users\…`, `/home/…`) |
+| `bun run check:agent-endpoints` | the URLs published under `.well-known/` and `llm*.txt` still exist; `llm.txt` still matches `llms.txt` |
+| `bun run check:graph` | the knowledge graph matches the working tree |
+| `bun run lint` | ruff, ruff-format, deptry, ty, typos, vale, zizmor, panache |
 
 If one of these fails, fix the file it names — do not weaken the check.

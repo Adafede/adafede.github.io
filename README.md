@@ -22,8 +22,8 @@ no longer the website renderer, only the PDF renderer.
 git clone https://github.com/adafede/adafede.github.io.git
 cd adafede.github.io
 
-# 2. Install Node.js dependencies (requires Node.js 26+)
-npm ci
+# 2. Install JavaScript dependencies (requires Bun 1.4+ and Node.js 26+)
+bun install --frozen-lockfile
 
 # 3. Install Python dependencies (requires Python 3.14+ and uv)
 uv sync
@@ -34,19 +34,19 @@ uv sync
 Run the Eleventy development server with hot reload:
 
 ```sh
-npm run dev
+bun run dev
 ```
 
 Validate the site (links, RDFa, document structure, contrast):
 
 ```sh
-npm run check
+bun run check
 ```
 
 Run the test suites (both run in CI):
 
 ```sh
-npm test                # both, in order
+bun run test            # both, in order
 
 uv run pytest -q        # Python: the content pipeline and its helpers
 node --test tests/      # JavaScript: the Eleventy data loaders and feeds
@@ -58,16 +58,16 @@ One command builds everything --- PDFs, content, and the Eleventy site --- and
 is the same command used locally and in CI/deploy:
 
 ```sh
-npm run build:all
+bun run build:all
 ```
 
 That runs, in order:
 
   | Step | Script                   | Produces                                                                                                                              |
   | ---- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------- |
-  | 1    | `npm run render-pdfs`    | `_site/*.pdf` (Quarto + LuaTeX; skipped if no tool chain)                                                                             |
-  | 2    | `npm run sync:content`   | `src/content/**`, then `public/` (migrate `.qmd` → Markdown, stage PDFs, optimise images, talk map, expertise, redirects, minify CSS) |
-  | 3    | `npm run build:eleventy` | `_eleventy_site/` (Eleventy + CSS)                                                                                                    |
+  | 1    | `bun run render-pdfs`    | `_site/*.pdf` (Quarto + LuaTeX; skipped if no tool chain)                                                                             |
+  | 2    | `bun run sync:content`   | `src/content/**`, then `public/` (migrate `.qmd` → Markdown, stage PDFs, optimise images, talk map, expertise, redirects, minify CSS) |
+  | 3    | `bun run build:eleventy` | `_eleventy_site/` (Eleventy + CSS)                                                                                                    |
 
 The PDF step runs **before** the content migration on purpose: the migrator only
 writes a `pdf:` link into a post's frontmatter when the PDF already exists in
@@ -75,18 +75,18 @@ writes a `pdf:` link into a post's frontmatter when the PDF already exists in
 
 ### Other commands
 
-  | Command                | Purpose                                                       |
-  | ---------------------- | ------------------------------------------------------------- |
-  | `npm run dev`          | Serve Eleventy locally with hot reload.                       |
-  | `npm test`             | Run the Python and JavaScript test suites.                    |
-  | `npm run build`        | Build only the Eleventy HTML site (no PDFs, no migration).    |
-  | `npm run sync:content` | Re-migrate `src/content/` and stage `public/` only.           |
-  | `npm run render-pdfs`  | (Re)render only the Quarto PDFs.                              |
-  | `npm run check`        | Validate links, RDFa, document structure, and color contrast. |
-  | `npm run check:a11y`   | Run pa11y (axe + HTMLCS) over the served site.                |
+  | Command                    | Purpose                                                       |
+  | ----------------------     | ------------------------------------------------------------- |
+  | `bun run dev`              | Serve Eleventy locally with hot reload.                       |
+  | `bun run test`             | Run the Python and JavaScript test suites.                    |
+  | `bun run build`            | Build only the Eleventy HTML site (no PDFs, no migration).    |
+  | `bun run sync:content`     | Re-migrate `src/content/` and stage `public/` only.           |
+  | `bun run render-pdfs`      | (Re)render only the Quarto PDFs.                              |
+  | `bun run check`            | Validate links, RDFa, document structure, and color contrast. |
+  | `bun run check:a11y`       | Run pa11y (axe + HTMLCS) over the served site.                |
 
 `check:a11y` expects a site already being served on port 8080, which is the host
-`.pa11yci.json` points at. Run `npm run dev -- --port=8080` alongside it.
+`.pa11yci.json` points at. Run `bun run dev -- --port=8080` alongside it.
 
 ### Deploy
 
@@ -95,7 +95,7 @@ before editing either.
 
   | Workflow                         | Builds                                  | Publishes to            |
   | -------------------------------- | --------------------------------------- | ----------------------- |
-  | `.github/workflows/publish.yml`  | `npm run build:all` → `_eleventy_site/` | GitHub Pages            |
+  | `.github/workflows/publish.yml`  | `bun run build:all` → `_eleventy_site/` | GitHub Pages            |
   | `.forgejo/workflows/publish.yml` | `uv run quarto render` → `_site/`       | `adafede.codeberg.page` |
 
 The GitHub one is the site as it stands: Eleventy renders the HTML, and PDFs

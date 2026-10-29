@@ -18,7 +18,7 @@
  *      node scripts/site/check-agent-endpoints.mjs --if-built # skip if unbuilt
  *
  * `--if-built` exists because pre-commit cannot assume a build has happened.
- * `npm run lint` runs this hook over the tree, and in CI it runs before
+ * `bun run lint` runs this hook over the tree, and in CI it runs before
  * `build:all`, so a strict check there fails on a fresh clone for no reason.
  * The pre-commit hook passes `--if-built`; the CI step, which runs *after*
  * `build:all`, stays strict and still fails if the build never happened.
@@ -61,7 +61,7 @@ function toBuiltPath(url) {
 }
 
 if (!existsSync(SITE)) {
-  const msg = `${SITE}: not built. Run \`npm run build:eleventy\` first.`;
+  const msg = `${SITE}: not built. Run \`bun run build:eleventy\` first.`;
   if (ifBuilt) {
     console.log(`  ${msg} Skipped (--if-built).`);
     process.exit(0);

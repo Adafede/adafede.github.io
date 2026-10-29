@@ -8,7 +8,7 @@
  * CI build always starts from a clean checkout — but locally it makes the
  * output look like the source of truth when it is not.
  *
- * Run: npm run clean   (then `npm run build:all` to rebuild)
+ * Run: bun run clean   (then `bun run build:all` to rebuild)
  */
 import { rmSync } from "node:fs";
 import { dirname, join } from "node:path";

@@ -75,7 +75,7 @@ export default {
   // from disk instead of from a sibling key.
   //
   // src/content/ is generated and gitignored, so on a clone that has not run
-  // `npm run sync:content` yet the file is absent. That used to be a hard
+  // `bun run sync:content` yet the file is absent. That used to be a hard
   // stack trace at data-import time; it now degrades to no scholar link, the
   // way the three artwork manifests below already do.
   scholarUrl: (() => {

@@ -29,7 +29,7 @@ const strict = process.argv.includes("--strict");
 if (!existsSync(MANIFEST)) {
   console.log(
     "  no graph (graphify-out/manifest.json absent).\n" +
-      "  Build one with `npm run graph:update`, or ignore this file — the graph is optional.",
+      "  Build one with `bun run graph:update`, or ignore this file — the graph is optional.",
   );
   process.exit(0);
 }
@@ -67,7 +67,7 @@ console.log(`  stale since the last build: ${stale.length}`);
 if (stale.length) {
   for (const file of stale.slice(0, 5)) console.log(`    - ${file}`);
   if (stale.length > 5) console.log(`    … and ${stale.length - 5} more`);
-  console.log("  Rebuild with `npm run graph:update`.");
+  console.log("  Rebuild with `bun run graph:update`.");
 }
 if (missing.length) {
   console.log(`  indexed but no longer on disk: ${missing.length}`);

@@ -9,7 +9,7 @@
  *                            (GitHub Pages)
  *
  * Both are derived from this file. Run: node scripts/site/generate-redirects.mjs
- * It is invoked by `npm run sync:content`, which runs after content migration.
+ * It is invoked by `bun run sync:content`, which runs after content migration.
  *
  * The direction matters: the Quarto URLs have been live for years, so they are
  * the ones that must keep resolving. Nothing here redirects a Quarto URL to a

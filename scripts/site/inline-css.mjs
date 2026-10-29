@@ -42,11 +42,11 @@ if (!existsSync(SITE) || !readdirSync(SITE, { withFileTypes: true }).length) {
 }
 
 // The minified sheet is a passthrough copy of build/eleventy/styles.css. If it
-// is missing, `npm run minify:css` did not run — say that rather than letting
+// is missing, `bun run minify:css` did not run — say that rather than letting
 // readFileSync raise an ENOENT with a bare stack trace.
 if (!existsSync(CSS_FILE)) {
   console.error(
-    "  ! _eleventy_site/styles.css is missing; run `npm run minify:css`",
+    "  ! _eleventy_site/styles.css is missing; run `bun run minify:css`",
   );
   process.exit(1);
 }
