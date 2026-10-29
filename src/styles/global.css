@@ -267,6 +267,8 @@ a[target="_blank"]::after {
 }
 /* Suppress the indicator on links in the header/nav and on links that
    already carry a registry icon — the icon is indicator enough.
+   The analytics badge is already a labelled image, so the arrow reads as a
+   stray glyph next to it.
    Reset all properties set by the ::after rule above, not just content:
    content: none (not "") prevents the pseudo-element from generating a box at
    all — content: "" still creates an anonymous grid item on display:grid
@@ -275,6 +277,7 @@ a[target="_blank"]::after {
    reset to baseline/inherit here. */
 .site-header a[target="_blank"]::after,
 .site-nav a[target="_blank"]::after,
+a.analytics-badge[target="_blank"]::after,
 a[target="_blank"] .registry-icon::after,
 a[target="_blank"] .icon::after {
   content: none;
