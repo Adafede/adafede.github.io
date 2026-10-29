@@ -674,6 +674,12 @@ figcaption {
   padding: var(--space-l) var(--space-m) var(--space-2xl);
 }
 
+.site-footer {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-m) var(--space-m) var(--space-l);
+}
+
 /* Prose and article bodies keep to the narrower measure; listings that need the
    extra room opt in with a modifier. */
 .prose,
