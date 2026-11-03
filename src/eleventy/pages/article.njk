@@ -52,7 +52,7 @@ eleventyComputed:
     {% set artwork = article.data.image | artwork %}
     {% set artworkSize = article.data.image | artworkSize %}
     <figure class="article__figure">
-      <img class="article__image" property="image" src="{{ artwork }}" alt="{{ article.data.imageAlt or '' }}" decoding="async"
+      <img class="article__image" property="image" src="{{ artwork }}" alt="{{ article.data.imageAlt or '' }}" fetchpriority="high" decoding="async"
         width="{{ artworkSize.width }}" height="{{ artworkSize.height }}" />
     </figure>
     {% endif %}

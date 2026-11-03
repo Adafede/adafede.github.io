@@ -92,7 +92,7 @@ lens for communities to see what they already collectively know.
 One important step was enabling Wikipedia articles and
 <a href="https://www.wikidata.org/wiki/Q15515987" about="wd:Q15515987">infoboxes</a>
 to directly access *found in taxon*
-(<a href="https://www.wikidata.org/wiki/Property:P703" about="wd:Property:P703">P703</a>)
+(<a href="https://www.wikidata.org/wiki/Property:P703" about="wd:P703">P703</a>)
 relationships from Wikidata in an efficient way.
 
 This sounds like a small technical detail. It is not.
@@ -279,7 +279,7 @@ Recently, I also contributed to improving how
 reactions</a> are modeled in Wikidata.
 
 Previously, many reactions were modeled as
-<a href="https://www.wikidata.org/wiki/Property:P31" about="wd:Property:P31">instances
+<a href="https://www.wikidata.org/wiki/Property:P31" about="wd:P31">instances
 of</a> "chemical reaction", which violated disjointness, see
 [@cites_as_recommended_reading:Doan2025].
 
@@ -287,7 +287,7 @@ The introduction of
 <a href="https://www.wikidata.org/wiki/Q137796968" about="wd:Q137796968">type of
 chemical reaction</a> now allows reactions to be classified more precisely,
 while preserving their hierarchy using
-<a href="https://www.wikidata.org/wiki/Property:P279" about="wd:Property:P279">subclass
+<a href="https://www.wikidata.org/wiki/Property:P279" about="wd:P279">subclass
 of</a>.
 
 ### Wikifunctions

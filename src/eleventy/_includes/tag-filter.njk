@@ -13,9 +13,8 @@
   and stacking several hide-rules only ever removes more entries. The original
   single-select variant documented this explicitly.
 
-  The "All" checkbox is checked by default and, being a checkbox rather than a
-  radio, does not prevent others from being checked. When every topic box is
-  unchecked, "All" appears checked and the full list is shown.
+  The full list is shown when every topic checkbox is unchecked; checking one
+  or more topics narrows the list to entries carrying all selected topics.
 #}
 {% set counts = items | tagCounts %}
 {% if counts.length %}
@@ -35,7 +34,6 @@
   <fieldset class="tag-filter__inputs">
     <legend class="visually-hidden">Filter by topic</legend>
     <ul class="tag-filter__list">
-      <li><label class="tag"><input type="checkbox" name="topic" id="tag-all" value="all" checked>All <span class="tag-filter__count">{{ items | length }}</span></label></li>
       {% for entry in counts %}
       <li><label class="tag"><input type="checkbox" name="topic" id="tag-{{ loop.index }}" value="{{ entry.tag | lower }}">{{ entry.tag }} <span class="tag-filter__count">{{ entry.count }}</span></label></li>
       {% endfor %}

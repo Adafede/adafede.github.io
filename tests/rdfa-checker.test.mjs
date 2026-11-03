@@ -59,3 +59,12 @@ test("a genuinely undeclared prefix is still reported", () => {
   assert.equal(status, 1, "expected the checker to fail");
   assert.match(stdout, /uses undeclared prefix "cito:"/);
 });
+
+test("a malformed Wikidata CURIE local part is reported", () => {
+  const { status, stdout } = run({
+    "a.html":
+      '<div prefix="wd: http://www.wikidata.org/entity/"><span about="wd:Q7180763s">x</span></div>',
+  });
+  assert.equal(status, 1, "expected the checker to fail");
+  assert.match(stdout, /has malformed CURIE "wd:Q7180763s"/);
+});

@@ -36,6 +36,7 @@ permalink: /articles.html
   {% include 'tag-filter.njk' %}
 
   {% for group in groups %}
+  {% set isFirstGroup = loop.first %}
   {% if group.items.length %}
   <section class="listing-section" data-filter-group aria-labelledby="{{ group.key }}-heading">
     <h2 id="{{ group.key }}-heading">

@@ -664,8 +664,17 @@ figcaption {
 
 .site-footer {
   display: flex;
+  flex-wrap: wrap;
+  align-items: center;
   justify-content: center;
+  gap: var(--space-s) var(--space-m);
   padding: var(--space-m) var(--space-m) var(--space-l);
+}
+
+.site-footer__link {
+  font-family: var(--sans);
+  font-size: var(--step--2);
+  color: var(--text-muted);
 }
 
 /* Prose and article bodies keep to the narrower measure; listings that need the
@@ -1001,6 +1010,9 @@ figcaption {
   gap: var(--space-3xs);
   padding-block-end: var(--space-m);
   border-block-end: 1px solid var(--border);
+}
+
+.publication + .publication {
   content-visibility: auto;
   contain-intrinsic-size: auto 16rem;
 }
@@ -1611,6 +1623,9 @@ figcaption {
 
 .cv-section {
   margin-block-end: var(--space-xl);
+}
+
+.cv-section + .cv-section {
   content-visibility: auto;
   contain-intrinsic-size: auto 20rem;
 }
@@ -2273,6 +2288,9 @@ a[role="doc-biblioref"]:hover {
 
 .listing-section {
   margin-block-end: var(--space-xl);
+}
+
+.listing-section + .listing-section {
   content-visibility: auto;
   contain-intrinsic-size: auto 24rem;
 }

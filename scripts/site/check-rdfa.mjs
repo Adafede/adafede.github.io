@@ -54,6 +54,19 @@ const BARE_TERMS = new Set([
 /** An absolute IRI: scheme://... — its first colon is a scheme separator. */
 const IRI = /^[a-z][a-z0-9+.-]*:\/\//i;
 
+/** Expected local-part syntax for registry prefixes whose IDs have a fixed grammar. */
+const LOCAL_PATTERNS = {
+  wd: /^[QPML]\d+$/,
+  wdt: /^P\d+$/,
+  wdtn: /^P\d+$/,
+  wdno: /^P\d+$/,
+  p: /^P\d+$/,
+  ps: /^P\d+$/,
+  pq: /^P\d+$/,
+  orcid: /^\d{4}-\d{4}-\d{4}-\d{3}[\dX]$/,
+  ror: /^0[a-z0-9]{6}\d{2}$/,
+};
+
 let totalProblems = 0;
 
 for (const root of roots) {
@@ -95,10 +108,19 @@ for (const root of roots) {
           // as undeclared prefixes.
           if (!term.includes(":")) continue;
           if (IRI.test(term)) continue; // A bare IRI or term.
-          const prefix = term.slice(0, term.indexOf(":"));
+          const colon = term.indexOf(":");
+          const prefix = term.slice(0, colon);
+          const local = term.slice(colon + 1);
           if (!declared.has(prefix)) {
             problems.push(
               `${name}: <${tag.slice(0, 90)}…> uses undeclared prefix "${prefix}:"`,
+            );
+            break;
+          }
+          const pattern = LOCAL_PATTERNS[prefix];
+          if (pattern && !pattern.test(local)) {
+            problems.push(
+              `${name}: <${tag.slice(0, 90)}…> has malformed CURIE "${term}"`,
             );
             break;
           }

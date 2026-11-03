@@ -26,7 +26,8 @@ eleventyComputed:
 
   <header class="event-detail__header">
     {% if item.data.image %}
-    <img class="event-detail__image" property="image" src="{{ item.data.image | artworkThumb }}" loading="eager" decoding="async" fetchpriority="high" width="256" height="160"
+    {% set artworkSize = item.data.image | artwork | artworkSize %}
+    <img class="event-detail__image" property="image" src="{{ item.data.image | artworkThumb }}" loading="eager" decoding="async" fetchpriority="high" width="{{ artworkSize.width }}" height="{{ artworkSize.height }}"
       {% if item.data.imageAlt %}alt="{{ item.data.imageAlt }}"{% else %}alt=""{% endif %} />
     {% endif %}
     <h1 property="name">{{ item.data.title }}</h1>

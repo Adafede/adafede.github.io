@@ -95,8 +95,6 @@
   <body{% if page.url == '/' %} class="is-home"{% endif %}>
     <a class="skip-link" href="#main">Skip to main content</a>
 
-    <div hidden prefix="{{ site.prefixes }}"></div>
-
     <header class="site-header" typeof="WPHeader">
       <nav class="site-header__inner" aria-label="Main" typeof="SiteNavigationElement">
         <a class="site-header__brand" href="/" rel="home" property="name">{{ site.author }}</a>
@@ -155,6 +153,7 @@
           />
         </picture>
       </a>
+      <a class="site-footer__link" href="/privacy.html" rel="privacy-policy">Privacy</a>
     </footer>
 
     {# SimpleAnalytics — the only script on the site. External links are

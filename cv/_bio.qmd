@@ -11,7 +11,7 @@ methods]{about="wd:Q4751159"} for [metabolomics]{about="wd:Q12149006"}. His
 [research]{about="wd:Q42240"} focuses on the [chemistry]{about="wd:Q2329"} of
 [Life]{about="wd:Q3"} and the [metabolites]{about="wd:Q407595"} found in
 [organisms]{about="wd:Q7239"}. He trained in [pharmaceutical
-sciences]{about="wd:Q7180763s"} and [phytochemistry]{about="wd:Q640068"}, worked
+sciences]{about="wd:Q7180763"} and [phytochemistry]{about="wd:Q640068"}, worked
 at Tradall SA ([Bacardi Group]{about="wd:Q685395"}), and completed his
 [PhD]{about="wd:Q752297"} at the [University of Geneva]{about="wd:Q503473"}.
 
