@@ -24,14 +24,13 @@ eleventyComputed:
 <nav class="breadcrumb" aria-label="Breadcrumb">
   <ol class="breadcrumb__list" vocab="https://schema.org/" typeof="BreadcrumbList">
     <li property="itemListElement" typeof="ListItem">
-      <a property="item" href="/articles.html" typeof="WebPage">Articles</a>
+      <a property="item" href="/articles.html" typeof="WebPage"><span property="name">Articles</span></a>
       <meta property="position" content="1" />
     </li>
     <li><span aria-hidden="true">/</span></li>
     <li property="itemListElement" typeof="ListItem">
-      <span property="item" typeof="WebPage">{{ authorship }}</span>
+      <span property="item" typeof="WebPage"><span property="name">{{ authorship }}</span></span>
       <meta property="position" content="2" />
-      <meta property="name" content="{{ authorship }}" />
     </li>
   </ol>
 </nav>
@@ -42,8 +41,8 @@ eleventyComputed:
   <header class="article__header">
     <h1 property="name">{{ article.data.title }}</h1>
     <p class="article__meta">
-      {% if article.data.venue %}<span class="article__venue" typeof="Periodical" property="isPartOf">{{ article.data.venue }}</span><span aria-hidden="true"> · </span>{% endif %}
-      <time property="datePublished" datetime="{{ article.data.date | readableDate }}">{{ article.data.date | readableDate }}</time>
+      {% if article.data.venue %}<span class="article__venue" typeof="Periodical" property="isPartOf"><span property="name">{{ article.data.venue }}</span></span><span aria-hidden="true"> · </span>{% endif %}
+      <time property="datePublished" datatype="xsd:date" datetime="{{ article.data.date | readableDate }}">{{ article.data.date | readableDate }}</time>
     </p>
 
     {# The artwork, at full resolution. The listing card shows a preview; this
@@ -53,22 +52,22 @@ eleventyComputed:
     {% set artwork = article.data.image | artwork %}
     {% set artworkSize = article.data.image | artworkSize %}
     <figure class="article__figure">
-      <img class="article__image" src="{{ artwork }}" alt="{{ article.data.imageAlt or '' }}" decoding="async"
+      <img class="article__image" property="image" src="{{ artwork }}" alt="{{ article.data.imageAlt or '' }}" decoding="async"
         width="{{ artworkSize.width }}" height="{{ artworkSize.height }}" />
     </figure>
     {% endif %}
 
     {% if article.data.authors.length %}
-    <div class="article__authors" property="author">
+    <div class="article__authors">
       <h2 class="article__subheading">Authors</h2>
       <ol class="author-list">
         {% for author in article.data.authors %}
         {# `about` names the Wikidata item; the visible registry links are
            declared `rel="sameAs"` so a consumer reading the RDFa gets the
            ORCID and Wikidata URLs as graph edges, not just as anchors. #}
-        <li class="author" typeof="Person"{% if author.qid %} about="wd:{{ author.qid }}"{% endif %}>
-          <span class="author__name" property="name">
-            {{ loop.index }}. {{ author.name }}
+        <li class="author" property="author" typeof="Person"{% if author.qid %} about="wd:{{ author.qid }}"{% endif %}>
+          <span class="author__name">
+            {{ loop.index }}. <span property="name">{{ author.name }}</span>
             {% if author.corresponding %}<abbr class="mark" title="Corresponding author">†</abbr>{% endif %}
             {% if author.equalContributor %}<abbr class="mark" title="Equal contribution">*</abbr>{% endif %}
             {% if author.orcid %} <a class="author__id" href="https://orcid.org/{{ author.orcid }}" rel="sameAs noopener noreferrer" title="ORCID {{ author.orcid }}">{% registryIcon 'orcid' %}ORCID</a>{% endif %}
@@ -76,7 +75,7 @@ eleventyComputed:
           </span>
           {% if author.affiliationIds.length %}
           <span class="author__affiliation">
-            {% for affId in author.affiliationIds %}{% if loop.index0 > 0 %}; {% endif %}{% set aff = affId | affiliation %}{% if aff.ror %}<a href="{{ aff.ror }}" rel="noopener noreferrer" title="ROR {{ aff.ror }}">{% registryIcon 'ror' %}{{ aff.name }}</a>{% elif aff.qid %}<a href="https://www.wikidata.org/wiki/{{ aff.qid }}" rel="noopener noreferrer" title="Wikidata {{ aff.qid }}">{{ aff.name }}</a>{% else %}{{ aff.name }}{% endif %}{% endfor %}
+            {% for affId in author.affiliationIds %}{% if loop.index0 > 0 %}; {% endif %}{% set aff = affId | affiliation %}<span property="affiliation" typeof="Organization"{% if aff.qid %} about="wd:{{ aff.qid }}"{% endif %}>{% if aff.ror %}<a href="{{ aff.ror }}" rel="sameAs noopener noreferrer" title="ROR {{ aff.ror }}">{% registryIcon 'ror' %}<span property="name">{{ aff.name }}</span></a>{% elif aff.qid %}<a href="https://www.wikidata.org/wiki/{{ aff.qid }}" rel="sameAs noopener noreferrer" title="Wikidata {{ aff.qid }}"><span property="name">{{ aff.name }}</span></a>{% else %}<span property="name">{{ aff.name }}</span>{% endif %}</span>{% endfor %}
           </span>
           {% endif %}
         </li>

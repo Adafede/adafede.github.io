@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" vocab="https://schema.org/" prefix="{{ site.prefixes }}">
   <head>
     <meta charset="UTF-8" />
     <!-- Paints the right backdrop before the stylesheet is parsed. -->
@@ -97,9 +97,9 @@
 
     <div hidden prefix="{{ site.prefixes }}"></div>
 
-    <header class="site-header">
-      <nav class="site-header__inner" aria-label="Main">
-        <a class="site-header__brand" href="/">{{ site.author }}</a>
+    <header class="site-header" typeof="WPHeader">
+      <nav class="site-header__inner" aria-label="Main" typeof="SiteNavigationElement">
+        <a class="site-header__brand" href="/" rel="home" property="name">{{ site.author }}</a>
         <ul class="site-nav">
           {% for item in site.nav %}
           <li>
@@ -137,7 +137,7 @@
       {{ content | safe }}
     </main>
 
-    <footer class="site-footer">
+    <footer class="site-footer" typeof="WPFooter">
       <a class="analytics-badge" href="https://www.simpleanalytics.com?utm_source=adafede.github.io&utm_content=badge" referrerpolicy="origin" target="_blank" rel="noopener noreferrer">
         <picture>
           <source

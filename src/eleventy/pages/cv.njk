@@ -7,10 +7,10 @@ permalink: /cv.html
 {# addGlobalData exposes `curriculum` at the top of the cascade; cvData is
    just a local alias so the template reads clearly. #}
 {% set cvData = curriculum %}
-<article class="cv" vocab="https://schema.org/" typeof="schema:Person" about="wd:Q97455964">
+<article class="cv" vocab="https://schema.org/" typeof="schema:Person" about="wd:Q97455964" resource="{{ site.url }}/#me">
   <header class="cv-header">
     <h1 property="name">Curriculum Vitæ</h1>
-    {% if cvData.meta.profession %}<p class="page-header__lede">{{ cvData.meta.profession }}</p>{% endif %}
+    {% if cvData.meta.profession %}<p class="page-header__lede" property="jobTitle">{{ cvData.meta.profession }}</p>{% endif %}
     {# The facts: status, field, languages. Only `left` is printed.
 
        `right` is deliberately dropped, and that is the whole point of the split.
@@ -28,7 +28,7 @@ permalink: /cv.html
            that makes the label readable is what makes it machine-readable. A
            fact with no matching property is printed plainly rather than forced
            into an unrelated one. #}
-        <dd {% if prop %}itemprop="{{ prop }}" {% endif %}>{{ item.left }}</dd>
+        <dd{% if prop %} property="{{ prop }}"{% endif %}>{{ item.left }}</dd>
       </div>
       {% endfor %}
     </dl>
@@ -46,7 +46,7 @@ permalink: /cv.html
     {% if contact.email or contact.location %}
      {# An address element is the right one for "where this person is", and it is
         also what carries the structured data for the location. #}
-     <address class="cv-header__contact" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+     <address class="cv-header__contact" property="address" typeof="PostalAddress">
        <dl>
          {% if contact.email %}
          <div class="cv-header__contact-item">
@@ -55,13 +55,13 @@ permalink: /cv.html
               the document, which puts the address back in the page for anything
               that reads markup; the spelled form is readable, typeable, and
               cannot be lifted as one unbroken string. #}
-           <dd><span class="contact-obfuscated">{{ contact.email | obfuscateContact }}</span></dd>
+           <dd><span class="contact-obfuscated" property="email">{{ contact.email | obfuscateContact }}</span></dd>
          </div>
          {% endif %}
          {% if contact.location %}
          <div class="cv-header__contact-item">
            <dt>Location</dt>
-           <dd><span itemprop="addressLocality">{{ contact.location }}</span></dd>
+           <dd><span property="addressLocality">{{ contact.location }}</span></dd>
          </div>
          {% endif %}
        </dl>
@@ -70,10 +70,10 @@ permalink: /cv.html
      {% if site.hasCvPdf or site.hasAcademicCvPdf %}
      <p class="cv-header__actions">
        {% if site.hasCvPdf %}
-       <a class="button" href="/cv.pdf" type="application/pdf" target="_blank" rel="noopener">Download the CV as PDF</a>
+       <a class="button" href="/cv.pdf" type="application/pdf" target="_blank" rel="alternate noopener">Download the CV as PDF</a>
        {% endif %}
        {% if site.hasAcademicCvPdf %}
-       <a class="button" href="/cv-academic.pdf" type="application/pdf" target="_blank" rel="noopener">Download the academic CV PDF</a>
+       <a class="button" href="/cv-academic.pdf" type="application/pdf" target="_blank" rel="alternate noopener">Download the academic CV PDF</a>
        {% endif %}
      </p>
      {% endif %}
@@ -84,27 +84,29 @@ permalink: /cv.html
     {# Full width, like every other part of the CV: the reading measure is set
        for article prose, and here it left the Bio as the one narrow column on a
        page that is otherwise edge to edge. #}
-    <div class="prose prose--wide">{{ cvData.bio | renderMarkdown | safe }}</div>
+    <div class="prose prose--wide" property="description">{{ cvData.bio | renderMarkdown | safe }}</div>
   </section>
 
+  {% set sectionProps = { 'professional-experience': 'hasOccupation', 'education': 'alumniOf', 'awards': 'award' } %}
   {% for section in curriculum | cvSections %}
+  {% set entryProp = sectionProps[section.id] %}
   <section class="cv-section" aria-labelledby="cv-{{ section.id }}">
     <h2 id="cv-{{ section.id }}">{{ section.label }}</h2>
     <ul class="cv-entries">
       {% for entry in section.entries %}
-      <li class="cv-entry">
+      <li class="cv-entry"{% if entryProp %} property="{{ entryProp }}"{% endif %} typeof="Role">
         <div class="cv-entry__head">
-          <h3 class="cv-entry__title">
+          <h3 class="cv-entry__title" property="roleName name">
             {# Awards entries carry no heading of their own; the label is the award. #}
             {{ entry.title or (entry.bullets[0].label if entry.bullets else section.label) }}
           </h3>
           {% if entry.startYear %}
           <p class="cv-entry__range">
-            {% if entry.current %}{{ entry.startYear }} – present{% elif entry.endYear %}{{ entry.startYear }} – {{ entry.endYear }}{% else %}{{ entry.startYear }}{% endif %}
+            <span property="startDate">{{ entry.startYear }}</span>{% if entry.current %} – present{% elif entry.endYear %} – <span property="endDate">{{ entry.endYear }}</span>{% endif %}
           </p>
           {% endif %}
         </div>
-        {% if entry.summary %}<p class="cv-entry__summary">{{ entry.summary | safe }}</p>{% endif %}
+        {% if entry.summary %}<p class="cv-entry__summary" property="description">{{ entry.summary | safe }}</p>{% endif %}
         {% if entry.bullets %}
         {% for bullet in entry.bullets %}
         <div class="cv-entry__bullet">

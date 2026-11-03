@@ -7,24 +7,24 @@
   {% if article.data.image %}
   {# width/height are the rendered box doubled, so the browser reserves space
      before the image loads; CSS overrides them for display. #}
-  <img class="publication__image" src="{{ article.data.image | artworkThumb }}" loading="lazy" decoding="async" fetchpriority="low"
+  <img class="publication__image" property="image" src="{{ article.data.image | artworkThumb }}" loading="lazy" decoding="async" fetchpriority="low"
     width="352" height="256"
     {% if article.data.imageAlt %}alt="{{ article.data.imageAlt }}"{% else %}alt=""{% endif %} />
   {% endif %}
   <div class="publication__text">
-  <h3 class="publication__title">
+  <h3 class="publication__title" property="name">
     <a href="{{ href }}" property="url" rel="item">{{ article.data.title }}</a>
   </h3>
   <p class="publication__meta">
-    {% if article.data.venue %}<span class="publication__venue">{{ article.data.venue }}</span><span aria-hidden="true"> · </span>{% endif %}
-    <time property="datePublished" datetime="{{ article.data.date | readableDate }}">{{ article.data.date | readableDate }}</time>
+    {% if article.data.venue %}<span class="publication__venue" property="isPartOf" typeof="Periodical"><span property="name">{{ article.data.venue }}</span></span><span aria-hidden="true"> · </span>{% endif %}
+    <time property="datePublished" datatype="xsd:date" datetime="{{ article.data.date | readableDate }}">{{ article.data.date | readableDate }}</time>
   </p>
   {% if article.data.authors.length %}
   {# Every author, in full. A summary line with a "46 more" link hid the people
      who actually did the work behind a click, and on a paper with fifty authors
      the four that happened to be listed first were an arbitrary subset. #}
-  <p class="publication__authors" property="author">
-    {% for author in article.data.authors %}{% if loop.index0 > 0 %}, {% endif %}<span typeof="Person"{% if author.qid %} about="wd:{{ author.qid }}"{% endif %}>{{ author.name }}</span>{% endfor %}
+  <p class="publication__authors">
+    {% for author in article.data.authors %}{% if loop.index0 > 0 %}, {% endif %}<span property="author" typeof="Person"{% if author.qid %} about="wd:{{ author.qid }}"{% endif %}><span property="name">{{ author.name }}</span></span>{% endfor %}
   </p>
   {% endif %}
   {# The abstract is clipped to three lines. A `<details>` reveals the rest with

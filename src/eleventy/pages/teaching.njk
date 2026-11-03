@@ -5,8 +5,9 @@ description: "Courses and course material."
 permalink: /teaching.html
 ---
 <div class="page-header">
-  <h1>Teaching</h1>
-  <p class="page-header__lede">Courses and block courses taught or helped to build, newest first.</p>
+  <h1 property="name">Teaching</h1>
+  <p class="page-header__lede" property="description">Courses and block courses taught or helped to build, newest first.</p>
+</div>
 
 {% set items = collections.teaching %}
 {% include "tag-filter.njk" %}

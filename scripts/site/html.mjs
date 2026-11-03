@@ -1,6 +1,5 @@
 import { readdirSync } from "node:fs";
 import { join } from "node:path";
-import { parse, parseFragment, serialize } from "parse5";
 
 /**
  * Every .html file under a directory, recursively.
@@ -19,62 +18,69 @@ export function htmlFiles(dir) {
   return out;
 }
 
-function appendText(node, parts, separateTags) {
-  const tag = node.tagName;
-  if (tag === "script" || tag === "style") return;
+const SCRIPT_OR_STYLE_RE = /<(script|style)\b[^>]*>[\s\S]*?<\/\1\s*>/gi;
+const COMMENT_OR_TAG_RE = /<!--[\s\S]*?-->|<\/?[a-zA-Z!][^>]*>/g;
+const ATTR_RE =
+  /([a-zA-Z_:][\w:.-]*)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=<>`]+)))?/g;
+const NAMED_ENTITIES = {
+  amp: "&",
+  lt: "<",
+  gt: ">",
+  quot: '"',
+  apos: "'",
+  nbsp: "\u00a0",
+};
 
-  if (node.nodeName === "#text") {
-    parts.push(node.value);
-    return;
-  }
+function decodeEntities(text) {
+  return text.replace(
+    /&(?:#(\d+)|#x([0-9a-fA-F]+)|([a-zA-Z0-9]+));/g,
+    (match, dec, hex, named) => {
+      if (dec) return String.fromCodePoint(Number.parseInt(dec, 10));
+      if (hex) return String.fromCodePoint(Number.parseInt(hex, 16));
+      return NAMED_ENTITIES[named.toLowerCase()] ?? match;
+    },
+  );
+}
 
-  if (separateTags && tag) parts.push(" ");
-  for (const child of node.childNodes ?? [])
-    appendText(child, parts, separateTags);
-  if (node.content) appendText(node.content, parts, separateTags);
-  if (separateTags && tag) parts.push(" ");
+export function removeScriptAndStyle(html) {
+  return String(html ?? "").replace(SCRIPT_OR_STYLE_RE, "");
 }
 
 export function htmlText(html, { separateTags = false } = {}) {
-  const parts = [];
-  appendText(parseFragment(String(html ?? "")), parts, separateTags);
-  return parts.join("").replace(/\s+/g, " ").trim();
+  const stripped = removeScriptAndStyle(html).replace(
+    COMMENT_OR_TAG_RE,
+    separateTags ? " " : "",
+  );
+  return decodeEntities(stripped).replace(/\s+/g, " ").trim();
 }
 
 export function firstElement(html, tagName) {
-  return findElement(parseFragment(String(html ?? "")), tagName);
-}
+  const tag = String(tagName).toLowerCase();
+  const escaped = tag.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const openRe = new RegExp(`<${escaped}\\b([^>]*)>`, "i");
+  const cleaned = removeScriptAndStyle(html);
+  const match = openRe.exec(cleaned);
+  if (!match) return null;
 
-function findElement(node, tagName) {
-  if (node.tagName === tagName) return node;
-  for (const child of node.childNodes ?? []) {
-    const found = findElement(child, tagName);
-    if (found) return found;
+  const attrs = [];
+  for (const attr of match[1].matchAll(ATTR_RE)) {
+    attrs.push({
+      name: attr[1].toLowerCase(),
+      value: decodeEntities(attr[2] ?? attr[3] ?? attr[4] ?? ""),
+    });
   }
-  if (node.content) return findElement(node.content, tagName);
-  return null;
+
+  const start = match.index + match[0].length;
+  const closeRe = new RegExp(`</${escaped}\\s*>`, "i");
+  const closeMatch = closeRe.exec(cleaned.slice(start));
+  const innerHtml = closeMatch
+    ? cleaned.slice(start, start + closeMatch.index)
+    : "";
+
+  return { tagName: tag, attrs, innerHtml };
 }
 
 export function elementText(html, tagName) {
   const element = firstElement(html, tagName);
-  if (!element) return "";
-  const parts = [];
-  appendText(element, parts, false);
-  return parts.join("").replace(/\s+/g, " ").trim();
-}
-
-export function removeScriptAndStyle(html) {
-  const document = parse(String(html ?? ""));
-  const removeElements = (nodes) =>
-    nodes.filter((node) => {
-      if (node.tagName === "script" || node.tagName === "style") return false;
-      if (node.childNodes) node.childNodes = removeElements(node.childNodes);
-      if (node.content?.childNodes) {
-        node.content.childNodes = removeElements(node.content.childNodes);
-      }
-      return true;
-    });
-
-  document.childNodes = removeElements(document.childNodes);
-  return serialize(document);
+  return element ? htmlText(element.innerHtml) : "";
 }

@@ -419,12 +419,20 @@ md.inline.ruler.before("html_inline", "cito_citation", (state, silent) => {
 });
 
 md.renderer.rules.cito_citation = (tokens, idx) => {
-  const keys = [...new Set(tokens[idx].meta.map((item) => item.key))];
+  const byKey = new Map();
+  for (const item of tokens[idx].meta) {
+    if (!byKey.has(item.key)) byKey.set(item.key, new Set());
+    if (item.predicate) byKey.get(item.key).add(citoPredicate(item.predicate));
+  }
+  const keys = [...byKey.keys()];
   const links = keys
-    .map(
-      (key) =>
-        `<a href="#ref-${key}" role="doc-biblioref">${inlineCitation(bib.get(key))}</a>`,
-    )
+    .map((key) => {
+      const preds = byKey.get(key);
+      const prop = preds.size
+        ? [...preds].map((p) => `cito:${p}`).join(" ")
+        : "cito:cites";
+      return `<a href="#ref-${key}" role="doc-biblioref" property="${prop}" resource="#ref-${key}">${inlineCitation(bib.get(key))}</a>`;
+    })
     .join("; ");
   return `<span class="citation" data-cites="${keys.join(" ")}">(${links})</span>`;
 };
@@ -455,14 +463,18 @@ md.core.ruler.push("eleventy_references", (state) => {
   const html = keys
     .map((key) => {
       const predicates = [...(cited.get(key) ?? [])].map(citoPredicate);
-      const cito = predicates.length
-        ? `<span class="cito"> [cito:${predicates.join(",")}]</span>`
+      const resolved = entries.get(key) ?? { key, type: "misc", fields: {} };
+      const doiAttr = resolved.fields?.doi
+        ? ` resource="https://doi.org/${escapeHtml(resolved.fields.doi)}"`
         : "";
-      const entry = renderReference(
-        entries.get(key) ?? { key, type: "misc", fields: {} },
-        suffixes.get(key) ?? "",
-      );
-      return `<div class="csl-entry" id="ref-${key}" role="listitem">${entry}${cito}</div>`;
+      const citoProp = predicates.length
+        ? ` property="${predicates.map((p) => `cito:${p}`).join(" ")}"`
+        : "";
+      const cito = predicates.length
+        ? `<span class="cito"${citoProp}> [cito:${predicates.join(",")}]</span>`
+        : "";
+      const entry = renderReference(resolved, suffixes.get(key) ?? "");
+      return `<div class="csl-entry" id="ref-${key}" role="listitem" typeof="schema:ScholarlyArticle"${doiAttr}>${entry}${cito}</div>`;
     })
     .join("");
 
@@ -731,13 +743,17 @@ export default function (eleventyConfig) {
    * through the same renderer as the page — not a raw md.render() that quietly
    * drops the references the citations point at.
    */
+  const renderedCache = new Map();
+
   function renderBody(body, frontmatter = {}) {
     if (!body) return { html: "", references: [] };
+    const cacheKey = `${frontmatter.doi ?? frontmatter.title ?? ""}\0${body}`;
+    if (renderedCache.has(cacheKey)) return renderedCache.get(cacheKey);
     const env = { frontmatter };
     let html = markPdfLinks(md.render(body, env));
 
     if (env.references) {
-      const block = `<div class="references csl-bib-body hanging-indent" id="refs" role="list">${env.references}</div>`;
+      const block = `<div class="references csl-bib-body hanging-indent" id="refs" role="list" property="citation">${env.references}</div>`;
       html = /<h2[^>]*id="references"[^>]*>/i.test(html)
         ? html.replace(
             /(<h2[^>]*id="references"[^>]*>[\s\S]*?<\/h2>)/i,
@@ -787,7 +803,7 @@ export default function (eleventyConfig) {
       references.push(ref);
     }
 
-    return {
+    const result = {
       html,
       references,
       // The first paragraph, tags out. The Quarto feed used the first paragraph
@@ -797,6 +813,8 @@ export default function (eleventyConfig) {
       // The first figure's source, absolutized by the feed builder.
       image: firstImageSrc(html),
     };
+    renderedCache.set(cacheKey, result);
+    return result;
   }
 
   eleventyConfig.addFilter(

@@ -298,8 +298,9 @@ def render(data: dict[str, Any]) -> str:
     parts.append('<ol class="expertise__list">')
     for qid, label, score in topics:
         parts.append(
-            f'<li><a href="https://www.wikidata.org/wiki/{qid}" target="_blank" rel="noopener">'
-            f"{escape(display_label(label))}</a>"
+            f'<li property="knowsAbout" typeof="Thing" about="wd:{qid}">'
+            f'<a property="url" href="https://www.wikidata.org/wiki/{qid}" target="_blank" rel="sameAs noopener">'
+            f'<span property="name">{escape(display_label(label))}</span></a>'
             f'<span class="expertise__score">{score}</span></li>',
         )
     parts.append("</ol>")

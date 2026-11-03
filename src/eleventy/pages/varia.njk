@@ -5,8 +5,9 @@ description: "Projects, tools, datasets and assorted resources."
 permalink: /varia.html
 ---
 <div class="page-header">
-  <h1>Varia</h1>
-  <p class="page-header__lede">Tools, datasets and side projects that do not fit anywhere else.</p>
+  <h1 property="name">Varia</h1>
+  <p class="page-header__lede" property="description">Tools, datasets and side projects that do not fit anywhere else.</p>
+</div>
 
 {% set items = varia %}
 {% include 'tag-filter.njk' %}
@@ -15,9 +16,9 @@ permalink: /varia.html
 {% set isFirstGroup = loop.first %}
 <section class="listing-section" data-filter-group aria-labelledby="varia-{{ group.id }}">
   <h2 id="varia-{{ group.id }}">{{ group.label }} <span class="listing-section__count">{{ group.items.length }}</span></h2>
-  <ul class="entry-list entry-list--grid">
+  <ul class="entry-list entry-list--grid" vocab="https://schema.org/">
     {% for card in group.items %}
-    <li class="entry{% if card.data.image %} entry--with-image{% endif %}" data-tags="{{ card | tagKey }}">
+    <li class="entry{% if card.data.image %} entry--with-image{% endif %}" typeof="CreativeWork" resource="{{ site.url }}{{ card.url }}" data-tags="{{ card | tagKey }}">
       {% if card.data.image %}
       {% set artworkSize = card.data.image | artwork | artworkSize %}
       {# The frame is a wrapper, not the <img>, so the artwork can be sized to
@@ -26,23 +27,23 @@ permalink: /varia.html
          the frame's shape has to be letterboxed into it — which is what made
          the square and tall logos read as images that failed to load. #}
       <div class="entry__media">
-        <img class="entry__image" src="{{ card.data.image | artworkThumb }}"
+        <img class="entry__image" property="image" src="{{ card.data.image | artworkThumb }}"
           loading="{% if isFirstGroup and loop.first %}eager{% else %}lazy{% endif %}" decoding="async"
           fetchpriority="{% if isFirstGroup and loop.first %}high{% else %}low{% endif %}"
           width="{{ artworkSize.width }}" height="{{ artworkSize.height }}"
           {% if card.data.imageAlt %}alt="{{ card.data.imageAlt }}"{% else %}alt=""{% endif %} />
       </div>
       {% endif %}
-      <h3 class="entry__title"><a href="{{ card.url }}">{{ card.data.title }}</a></h3>
+      <h3 class="entry__title" property="name"><a href="{{ card.url }}" property="url">{{ card.data.title }}</a></h3>
       {# Many entries carry only their URL as the description; printing it
          again just repeats the link below. #}
-      {% if card.data.description and card.data.description != card.data.url %}<p class="entry__summary">{{ card.data.description }}</p>{% endif %}
+      {% if card.data.description and card.data.description != card.data.url %}<p property="description" class="entry__summary">{{ card.data.description }}</p>{% endif %}
       {% if card.data.tags.length %}
-      <ul class="tag-list" aria-label="Tags for {{ card.data.title }}">
+      <ul class="tag-list" property="keywords" aria-label="Tags for {{ card.data.title }}">
         {% for tag in card.data.tags %}<li><span class="tag">{{ tag }}</span></li>{% endfor %}
       </ul>
       {% endif %}
-      {% if card.data.url %}<p class="entry__meta"><a href="{{ card.data.url }}" rel="noopener" target="_blank">Visit</a></p>{% endif %}
+      {% if card.data.url %}<p class="entry__meta"><a href="{{ card.data.url }}" rel="sameAs noopener" target="_blank">Visit</a></p>{% endif %}
     </li>
     {% endfor %}
   </ul>

@@ -4,9 +4,9 @@ title: Swiss pharmaceutical scientist
 description: "Personal website of Adriano Rutz — Swiss pharmaceutical scientist specialising in metabolomics, mass spectrometry, and natural products research."
 permalink: /index.html
 ---
-<article class="home" vocab="https://schema.org/" typeof="Blog">
+<article class="home" vocab="https://schema.org/" typeof="ProfilePage" resource="{{ site.url }}/">
 
-  <header class="hero">
+  <header class="hero" property="mainEntity" typeof="Person" about="wd:Q97455964" resource="{{ site.url }}/#me">
     {# srcset: the portrait is the LCP element on this page, so it should not be
        a compromise size for every display. width/height reserve the box; the
        sizes attribute lets the browser pick before layout. #}
@@ -31,28 +31,28 @@ permalink: /index.html
         top-level heading. The portrait's alt is empty: the name is right
         beside it in this heading, so repeating it there is the redundancy
         WAVE flags. #}
-     <h1 class="hero__name p-name" property="name">Adriano Rutz<span class="hero__role">, Swiss pharmaceutical scientist</span></h1>
+     <h1 class="hero__name p-name"><span property="name">Adriano Rutz</span><span class="hero__role" property="jobTitle">, Swiss pharmaceutical scientist</span></h1>
      <div class="hero__text">
-       <p class="hero__lede">
+       <p class="hero__lede" property="description">
         Metabolomics, mass spectrometry, open science, and natural products — currently at the
-        Institute for Molecular Systems Biology at ETH Zurich.
+        <span property="affiliation" typeof="Organization" about="wd:Q11942"><span property="name">Institute for Molecular Systems Biology at ETH Zurich</span></span>.
       </p>
       {# Contact details, not publication profiles. Someone landing here wants to
          reach you; the scholarly identifiers belong with the articles, which is
          where they are. #}
       <ul class="identifiers" aria-label="Contact">
-        <li><a href="mailto:{{ site.contact.email | obfuscate | safe }}">{% registryIcon 'email' %}Email<span class="visually-hidden"> — {{ site.contact.email | spellEmail }}</span></a></li>
-        <li><a href="https://www.linkedin.com/in/AdrianoRutz/" rel="me noopener" target="_blank">{% registryIcon 'linkedin' %}LinkedIn</a></li>
-        <li><a href="https://github.com/adafede" rel="me noopener" target="_blank">{% registryIcon 'github' %}GitHub</a></li>
+        <li><a href="mailto:{{ site.contact.email | obfuscate | safe }}" property="email">{% registryIcon 'email' %}Email<span class="visually-hidden"> — {{ site.contact.email | spellEmail }}</span></a></li>
+        <li><a href="https://www.linkedin.com/in/AdrianoRutz/" rel="me sameAs noopener" target="_blank">{% registryIcon 'linkedin' %}LinkedIn</a></li>
+        <li><a href="https://github.com/adafede" rel="me sameAs noopener" target="_blank">{% registryIcon 'github' %}GitHub</a></li>
       </ul>
     </div>
   </header>
 
-  <section class="home__bio">
+  <section class="home__bio" about="wd:Q97455964">
     {{ curriculum.bio | renderMarkdown | safe }}
   </section>
 
-  <section class="home__expertise" aria-labelledby="expertise-heading">
+  <section class="home__expertise" aria-labelledby="expertise-heading" about="wd:Q97455964">
     <h2 id="expertise-heading">Areas of expertise</h2>
     {% include "expertise.njk" %}
   </section>

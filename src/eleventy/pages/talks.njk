@@ -5,8 +5,9 @@ description: "Conference talks, invited and contributed."
 permalink: /talks.html
 ---
 <div class="page-header">
-  <h1>Talks</h1>
-  <p class="page-header__lede">Talks, workshops, and posters at conferences or symposia, newest first.</p>
+  <h1 property="name">Talks</h1>
+  <p class="page-header__lede" property="description">Talks, workshops, and posters at conferences or symposia, newest first.</p>
+</div>
 
 {% set items = collections.talks %}
 {% include "tag-filter.njk" %}

@@ -69,7 +69,7 @@ export default {
   // Same RDFa prefix table the Quarto build emits.
   prefixes: Object.entries(PREFIXES)
     .map(([prefix, iri]) => `${prefix}: ${iri}`)
-    .join("\n             "),
+    .join(" "),
   // Assembled here because a literal `?` inside a Nunjucks tag reads as ternary.
   // `site` and `sitecontent` are separate data objects, so the profile id is read
   // from disk instead of from a sibling key.

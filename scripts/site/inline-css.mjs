@@ -61,6 +61,8 @@ const classesIn = (html) =>
   new Set([...html.matchAll(CLASS_ATTR)].flatMap((m) => m[1].split(/\s+/)));
 
 const pages = htmlFiles(SITE);
+const cssBuffer = Buffer.from(css);
+const purgedCache = new Map();
 
 let rewritten = 0;
 let shipped = 0;
@@ -71,33 +73,38 @@ for (const page of pages) {
   if (!html.includes('href="/styles.css"')) continue;
 
   const used = classesIn(html);
-  const unused = defined.filter((name) => !used.has(name));
-  const { code } = transform({
-    filename: "inline.css",
-    code: Buffer.from(css),
-    minify: true,
-    unusedSymbols: unused,
-  });
-  const out = code.toString();
+  const key = [...used].sort().join(" ");
+  let out = purgedCache.get(key);
+  if (out === undefined) {
+    const unused = defined.filter((name) => !used.has(name));
+    const { code } = transform({
+      filename: "inline.css",
+      code: cssBuffer,
+      minify: true,
+      unusedSymbols: unused,
+    });
+    out = code.toString();
 
-  // Safety net: purging must never remove a custom property a surviving rule
-  // still reads. Referenced-without-fallback-and-nowhere-defined is a build
-  // failure, not a silent visual regression.
-  const definedVars = new Set(
-    [...out.matchAll(/(--[\w-]+)\s*:/g)].map((m) => m[1]),
-  );
-  const orphanVars = [
-    ...new Set(
-      [...out.matchAll(/var\(\s*(--[\w-]+)\s*([,)])/g)]
-        .filter(([, name, next]) => next === ")" && !definedVars.has(name))
-        .map(([, name]) => name),
-    ),
-  ];
-  if (orphanVars.length) {
-    console.error(
-      `  ! ${page.replace(`${ROOT}/`, "")}: unresolved custom property${orphanVars.length > 1 ? "ies" : "y"} ${orphanVars.join(", ")}`,
+    // Safety net: purging must never remove a custom property a surviving rule
+    // still reads. Referenced-without-fallback-and-nowhere-defined is a build
+    // failure, not a silent visual regression.
+    const definedVars = new Set(
+      [...out.matchAll(/(--[\w-]+)\s*:/g)].map((m) => m[1]),
     );
-    process.exit(1);
+    const orphanVars = [
+      ...new Set(
+        [...out.matchAll(/var\(\s*(--[\w-]+)\s*([,)])/g)]
+          .filter(([, name, next]) => next === ")" && !definedVars.has(name))
+          .map(([, name]) => name),
+      ),
+    ];
+    if (orphanVars.length) {
+      console.error(
+        `  ! ${page.replace(`${ROOT}/`, "")}: unresolved custom property${orphanVars.length > 1 ? "ies" : "y"} ${orphanVars.join(", ")}`,
+      );
+      process.exit(1);
+    }
+    purgedCache.set(key, out);
   }
 
   const styleTag = `<style>${out}</style>`;

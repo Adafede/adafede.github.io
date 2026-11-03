@@ -30,7 +30,9 @@ export const PREFIXES = {
   dbo: "http://dbpedia.org/ontology/",
   dbr: "http://dbpedia.org/resource/",
   cc: "http://creativecommons.org/ns#",
+  cito: "http://purl.org/spar/cito/",
   orcid: "https://orcid.org/",
+  ror: "https://ror.org/",
   viaf: "http://viaf.org/viaf/",
   xsd: "http://www.w3.org/2001/XMLSchema#",
 };

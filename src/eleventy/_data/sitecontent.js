@@ -73,7 +73,8 @@ function loadNested(dir) {
   const out = [];
   for (const group of subdirs(base)) {
     if (!group.isDirectory()) continue;
-    for (const file of readDir(join(base, group.name))) {
+    const files = readDir(join(base, group.name));
+    for (const file of files) {
       const raw = readFileSync(join(base, group.name, file), "utf-8");
       const { data, body } = parseDoc(raw);
       const stem = basename(file, ".md");
@@ -82,8 +83,7 @@ function loadNested(dir) {
       // Quarto publishes at articles/thesis.html. Publishing it at
       // articles/thesis/thesis.html would put the two builds at different URLs,
       // and the URL is what has to stay put.
-      const only =
-        readDir(join(base, group.name)).length === 1 && stem === group.name;
+      const only = files.length === 1 && stem === group.name;
       out.push({
         id: only ? group.name : `${group.name}/${stem}`,
         url: only
@@ -136,8 +136,12 @@ function loadEvents(dir) {
 }
 
 export default function buildData() {
+  const memo = (fn) => {
+    let cached;
+    return () => (cached ??= fn());
+  };
   return {
-    posts: () =>
+    posts: memo(() =>
       loadCollection("posts", (d) => ({ pubDate: new Date(d.pubDate) }))
         .map((p) => ({
           ...p,
@@ -148,12 +152,13 @@ export default function buildData() {
           },
         }))
         .sort(byPubDateDesc),
+    ),
 
-    articles: () => loadNested("articles").sort(byDateDesc),
+    articles: memo(() => loadNested("articles").sort(byDateDesc)),
     // Talks and teaching each get their own page; the listing links to them.
-    talks: () => loadEvents("talks"),
-    teaching: () => loadEvents("teaching"),
-    varia: () => {
+    talks: memo(() => loadEvents("talks")),
+    teaching: memo(() => loadEvents("teaching")),
+    varia: memo(() => {
       const base = join(CONTENT, "varia");
       if (!existsSync(base)) return [];
       const out = [];
@@ -167,12 +172,12 @@ export default function buildData() {
         }
       }
       return out;
-    },
+    }),
 
-    affiliations: () => readJson("affiliations.json", []),
-    profiles: () => readJson("profiles.json", {}),
+    affiliations: memo(() => readJson("affiliations.json", [])),
+    profiles: memo(() => readJson("profiles.json", {})),
 
-    cv: () => ({
+    cv: memo(() => ({
       bio: existsSync(join(CONTENT, "cv/bio.md"))
         ? parseDoc(readFileSync(join(CONTENT, "cv/bio.md"), "utf-8")).body
         : "",
@@ -181,6 +186,6 @@ export default function buildData() {
       awards: readJson("cv/awards.json", { label: "", entries: [] }),
       sports: readJson("cv/sports.json", { label: "", entries: [] }),
       meta: readJson("cv/meta.json", { profession: "", footer: {}, meta: [] }),
-    }),
+    })),
   };
 }
