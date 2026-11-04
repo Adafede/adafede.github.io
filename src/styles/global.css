@@ -1172,6 +1172,10 @@ figcaption {
   inline-size: min(100%, 34rem);
   block-size: auto;
   margin-inline: auto;
+  /* Default label ink for light circles; inherited by <text> unless the
+     element carries its own fill="#ffffff" presentation attribute for dark
+     circles (an author fill rule on `text` itself would beat the attribute). */
+  fill: #0f172a;
 }
 
 .expertise__pack a {
@@ -1208,7 +1212,6 @@ figcaption {
 }
 
 .expertise__pack a text {
-  fill: #0f172a;
   text-anchor: middle;
   dominant-baseline: central;
   font-family: var(--sans);

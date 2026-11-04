@@ -74,3 +74,16 @@ def test_a_known_acronym_is_left_alone():
     assert display_label("metabolomics") == "Metabolomics"
     assert display_label("msConvert") == "msConvert"
     assert display_label("") == ""
+
+
+def test_css_text_rule_does_not_override_svg_fill_attribute():
+    """An author `fill` rule on `text` beats SVG `fill="#ffffff"` presentation
+    attributes; default ink must sit on `.expertise__pack` so `<text>` inherits
+    it only when no `fill` attribute is present."""
+    import re
+    from pathlib import Path
+
+    css = Path("src/styles/global.css").read_text(encoding="utf-8")
+    match = re.search(r"\.expertise__pack\s+a\s+text\s*\{([^}]*)\}", css)
+    assert match is not None
+    assert "fill:" not in match.group(1)
