@@ -99,6 +99,59 @@ def project(lon: float, lat: float) -> tuple[float, float]:
     return x, y
 
 
+def _clip_ring(
+    pts: list[tuple[float, float]],
+    x_min: float,
+    y_min: float,
+    x_max: float,
+    y_max: float,
+) -> list[tuple[float, float]]:
+    """Sutherland-Hodgman polygon clip against [x_min, x_max] x [y_min, y_max]."""
+
+    def clip_edge(
+        poly: list[tuple[float, float]],
+        inside: Any,
+        intersect: Any,
+    ) -> list[tuple[float, float]]:
+        if not poly:
+            return []
+        out: list[tuple[float, float]] = []
+        prev = poly[-1]
+        prev_in = inside(prev)
+        for curr in poly:
+            curr_in = inside(curr)
+            if curr_in:
+                if not prev_in:
+                    out.append(intersect(prev, curr))
+                out.append(curr)
+            elif prev_in:
+                out.append(intersect(prev, curr))
+            prev, prev_in = curr, curr_in
+        return out
+
+    poly = pts
+    poly = clip_edge(
+        poly,
+        lambda p: p[0] >= x_min,
+        lambda a, b: (x_min, a[1] + (b[1] - a[1]) * (x_min - a[0]) / (b[0] - a[0])),
+    )
+    poly = clip_edge(
+        poly,
+        lambda p: p[0] <= x_max,
+        lambda a, b: (x_max, a[1] + (b[1] - a[1]) * (x_max - a[0]) / (b[0] - a[0])),
+    )
+    poly = clip_edge(
+        poly,
+        lambda p: p[1] >= y_min,
+        lambda a, b: (a[0] + (b[0] - a[0]) * (y_min - a[1]) / (b[1] - a[1]), y_min),
+    )
+    return clip_edge(
+        poly,
+        lambda p: p[1] <= y_max,
+        lambda a, b: (a[0] + (b[0] - a[0]) * (y_max - a[1]) / (b[1] - a[1]), y_max),
+    )
+
+
 def land_paths() -> str:
     """Land outlines as SVG path data, clipped to the map extent."""
     if not LAND.exists():
@@ -117,9 +170,10 @@ def land_paths() -> str:
                 if len(ring) < 3:
                     continue
                 points = [project(lon, lat) for lon, lat in ring]
-                if not any(0 <= x <= WIDTH and 0 <= y <= HEIGHT for x, y in points):
-                    continue  # Entirely outside the crop.
-                d = "M" + " ".join(f"{x:.1f},{y:.1f}" for x, y in points) + "Z"
+                clipped = _clip_ring(points, -10.0, -10.0, WIDTH + 10.0, HEIGHT + 10.0)
+                if len(clipped) < 3:
+                    continue
+                d = "M" + " ".join(f"{x:.1f},{y:.1f}" for x, y in clipped) + "Z"
                 paths.append(d)
     return "".join(paths)
 

@@ -45,12 +45,7 @@
      the entries as siblings), not .tag-filter (which only contains the
      controls), so the hide rule can reach the entries. Stacking several checked
      boxes narrows to the intersection of their tags. #}
-  <style>
-    {% for entry in counts %}
-    .site-main:has(#tag-{{ loop.index }}:checked) [data-tags]:not([data-tags*="|{{ entry.tag | lower }}|"]) { display: none; }
-    .site-main:has(#tag-{{ loop.index }}:checked) [data-filter-group]:not(:has([data-tags*="|{{ entry.tag | lower }}|"])) { display: none; }
-    {% endfor %}
-  </style>
+  <style>{% for entry in counts %}.site-main:has(#tag-{{ loop.index }}:checked) :is([data-tags]:not([data-tags*="|{{ entry.tag | lower }}|"]),[data-filter-group]:not(:has([data-tags*="|{{ entry.tag | lower }}|"]))){display:none}{% endfor %}</style>
 </div>
 
   {# No JavaScript. The filter works entirely via CSS :has(:checked).

@@ -899,7 +899,6 @@ export default function (eleventyConfig) {
     new Date(toDate(value)).toUTCString(),
   );
   eleventyConfig.addFilter("stripTags", (html) => stripTags(html));
-  eleventyConfig.addFilter("json", (value) => JSON.stringify(value));
 
   // Nunjucks has no `map`, so the operations a component would do inline are
   // provided here instead.
@@ -976,17 +975,6 @@ export default function (eleventyConfig) {
     "tagKey",
     (item) =>
       `|${(item.data?.tags ?? []).map((t) => String(t).toLowerCase()).join("|")}|`,
-  );
-
-  eleventyConfig.addFilter("where", (items, prop, value) =>
-    (items ?? []).filter(
-      (item) =>
-        String(
-          String(prop)
-            .split(".")
-            .reduce((acc, k) => acc?.[k], item),
-        ) === String(value),
-    ),
   );
 
   /** The CV's four sections, newest first, for the section loop. */
@@ -1160,7 +1148,6 @@ export default function (eleventyConfig) {
    */
   const affiliations = new Map(content.affiliations().map((a) => [a.id, a]));
   const affiliation = (id) => affiliations.get(id) ?? {};
-  eleventyConfig.addFilter("affiliation", affiliation);
   /**
    * Marks for the registries this site links out to.
    *
@@ -1249,17 +1236,18 @@ export default function (eleventyConfig) {
   const ICON_SCHOLIA = renderRegistryIcon("scholia");
   const ICON_ROR = renderRegistryIcon("ror");
 
-  const renderAffiliationSpan = (affId) => {
+  const renderAffiliationSpan = (affId, linkClass = "") => {
     const aff = affiliation(affId);
     const about = aff.qid ? ` about="wd:${escapeHtml(aff.qid)}"` : "";
-    const name = `<span property="name">${escapeHtml(aff.name ?? "")}</span>`;
+    const cls = linkClass ? ` class="${linkClass}"` : "";
+    const name = `<span${linkClass && !aff.ror && !aff.qid ? cls : ""} property="name">${escapeHtml(aff.name ?? "")}</span>`;
     let inner = name;
     if (aff.ror) {
       const ror = escapeHtml(aff.ror);
-      inner = `<a href="${ror}" rel="sameAs noopener noreferrer" title="ROR ${ror}">${ICON_ROR}${name}</a>`;
+      inner = `<a${cls} href="${ror}" rel="sameAs noopener noreferrer" title="ROR ${ror}">${ICON_ROR}<span property="name">${escapeHtml(aff.name ?? "")}</span></a>`;
     } else if (aff.qid) {
       const qid = escapeHtml(aff.qid);
-      inner = `<a href="https://www.wikidata.org/wiki/${qid}" rel="sameAs noopener noreferrer" title="Wikidata ${qid}">${name}</a>`;
+      inner = `<a${cls} href="https://www.wikidata.org/wiki/${qid}" rel="sameAs noopener noreferrer" title="Wikidata ${qid}"><span property="name">${escapeHtml(aff.name ?? "")}</span></a>`;
     }
     return `<span property="affiliation" typeof="Organization"${about}>${inner}</span>`;
   };
@@ -1283,12 +1271,30 @@ export default function (eleventyConfig) {
             ? ` <a class="author__id" href="https://qlever.scholia.wiki/author/${escapeHtml(author.qid)}" rel="sameAs noopener noreferrer" title="Scholia ${escapeHtml(author.qid)}">${ICON_SCHOLIA}Scholia</a>`
             : "";
           const affs = author.affiliationIds?.length
-            ? `<span class="author__affiliation">${author.affiliationIds.map(renderAffiliationSpan).join("; ")}</span>`
+            ? `<span class="author__affiliation">${author.affiliationIds.map((id) => renderAffiliationSpan(id)).join("; ")}</span>`
             : "";
           return `<li class="author" property="author" typeof="Person"${about}><span class="author__name">${idx + 1}. <span property="name">${escapeHtml(author.name)}</span>${corr}${eq}${orcid}${scholia}</span>${affs}</li>`;
         })
         .join("");
       return `<div class="article__authors"><h2 class="article__subheading">Authors</h2><ol class="author-list">${items}</ol></div>`;
+    }
+    if (mode === "post") {
+      const items = authors
+        .map((author) => {
+          const about = author.qid ? ` about="wd:${escapeHtml(author.qid)}"` : "";
+          const orcid = author.orcid
+            ? ` <a class="author__id" href="https://orcid.org/${escapeHtml(author.orcid)}" rel="sameAs noopener noreferrer" title="ORCID ${escapeHtml(author.orcid)}">${ICON_ORCID}ORCID</a>`
+            : "";
+          const scholia = author.qid
+            ? ` <a class="author__id" href="https://qlever.scholia.wiki/author/${escapeHtml(author.qid)}" rel="sameAs noopener noreferrer" title="Scholia ${escapeHtml(author.qid)}">${ICON_SCHOLIA}Scholia</a>`
+            : "";
+          const affs = author.affiliationIds?.length
+            ? ` ${author.affiliationIds.map((id) => renderAffiliationSpan(id, "author__affiliation")).join("; ")}`
+            : "";
+          return `<span property="author" rel="author" typeof="Person"${about}><span class="author__name" property="name">${escapeHtml(author.name)}</span>${orcid}${scholia}${affs}</span>`;
+        })
+        .join(", ");
+      return `<span class="post-header__authors">${items}</span>`;
     }
     const items = authors
       .map((author) => {
@@ -1300,7 +1306,7 @@ export default function (eleventyConfig) {
           ? `<a class="author__id" href="https://qlever.scholia.wiki/author/${escapeHtml(author.qid)}" rel="sameAs noopener noreferrer" title="Scholia ${escapeHtml(author.qid)}">${ICON_SCHOLIA}Scholia</a>`
           : "";
         const affs = author.affiliationIds?.length
-          ? `<span class="event-detail__affiliations">${author.affiliationIds.map(renderAffiliationSpan).join("; ")}</span>`
+          ? `<span class="event-detail__affiliations">${author.affiliationIds.map((id) => renderAffiliationSpan(id)).join("; ")}</span>`
           : "";
         return `<p class="event-detail__author" property="${mode}" typeof="Person"${about}><span property="name">${escapeHtml(author.name)}</span>${orcid}${scholia}${affs}</p>`;
       })

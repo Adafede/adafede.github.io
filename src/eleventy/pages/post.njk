@@ -34,16 +34,7 @@ eleventyExcludeFromCollections: true
     <h1 property="headline name" class="p-name">{{ post.data.title }}</h1>
 
     <div class="post-header__meta">
-      {% if post.data.authors.length %}
-      {# Authors are grouped per author — name, then each registry id, then the
-         affiliation — so a person appears once with everything that belongs to
-         them, mirroring the article header. (`about` carries the Wikidata item;
-         the registry links are rel="sameAs" so a graph consumer sees them as
-         edges, not just anchors.) #}
-      <span class="post-header__authors">
-        {% for author in post.data.authors %}{% if loop.index0 > 0 %}, {% endif %}<span property="author" rel="author" typeof="Person"{% if author.qid %} about="wd:{{ author.qid }}"{% endif %}><span class="author__name" property="name">{{ author.name }}</span>{% if author.orcid %} <a class="author__id" href="https://orcid.org/{{ author.orcid }}" rel="sameAs noopener noreferrer" title="ORCID {{ author.orcid }}">{% registryIcon 'orcid' %}ORCID</a>{% endif %}{% if author.qid %} <a class="author__id" href="https://qlever.scholia.wiki/author/{{ author.qid }}" rel="sameAs noopener noreferrer" title="Scholia {{ author.qid }}">{% registryIcon 'scholia' %}Scholia</a>{% endif %}{% if author.affiliationIds %}{% for affId in author.affiliationIds %}{% if loop.index0 > 0 %}; {% endif %}{% set aff = affId | affiliation %} <span property="affiliation" typeof="Organization"{% if aff.qid %} about="wd:{{ aff.qid }}"{% endif %}>{% if aff.ror %}<a class="author__affiliation" href="{{ aff.ror }}" rel="sameAs noopener noreferrer" title="ROR {{ aff.ror }}">{% registryIcon 'ror' %}<span property="name">{{ aff.name }}</span></a>{% elif aff.qid %}<a class="author__affiliation" href="https://www.wikidata.org/wiki/{{ aff.qid }}" rel="sameAs noopener noreferrer" title="Wikidata {{ aff.qid }}"><span property="name">{{ aff.name }}</span></a>{% else %}<span class="author__affiliation" property="name">{{ aff.name }}</span>{% endif %}</span>{% endfor %}{% endif %}</span>{% endfor %}
-      </span>
-      {% endif %}
+      {% authorList post.data.authors, "post" %}
 
       <time property="datePublished" datatype="xsd:date" datetime="{{ post.data.pubDate | readableDate }}">{{ post.data.pubDate | readableDate }}</time>
       {% if post.data.updatedDate %}<meta property="dateModified" datatype="xsd:date" content="{{ post.data.updatedDate | readableDate }}" />{% endif %}

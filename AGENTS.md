@@ -71,12 +71,12 @@ reads `_eleventy_site/`.
 7. Commit messages are Conventional Commits (`feat:`, `fix:`, `chore(scope):`).
 
 ## Repo map
-- `eleventy.config.mjs` (1379 lines, 29 `addFilter` calls) — all filters, collections,
+- `eleventy.config.mjs` (1385 lines, 28 `addFilter` calls) — all filters, collections,
   markdown-it plugins. The hottest file; read it by line range, never whole.
 - `src/eleventy/**` — Nunjucks templates (`pages/`, `_includes/`) and `_data/*.js`.
 - `src/eleventy/static/` — passthrough assets, including the logo set.
 - `src/lib/*.mjs` — bib, jsonFeed and prefixes (all tested).
-- `src/styles/global.css` (2569 lines) — the whole design system as CSS custom properties.
+- `src/styles/global.css` (2564 lines) — the whole design system as CSS custom properties.
 - `src/content/**` — GENERATED, gitignored. Never edit.
 - `scripts/site/*.py` — content pipeline: `migrate_posts`, `build_talkmap`,
   `build_expertise`, `academic_cv` (runs in `cv-academic.qmd`'s python cell),

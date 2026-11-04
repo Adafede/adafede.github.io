@@ -22,7 +22,13 @@
  * Run: node scripts/site/inline-css.mjs   (after an Eleventy build)
  */
 
-import { existsSync, readFileSync, writeFileSync, readdirSync } from "node:fs";
+import {
+  existsSync,
+  readFileSync,
+  writeFileSync,
+  readdirSync,
+  unlinkSync,
+} from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { transform } from "lightningcss";
@@ -33,8 +39,12 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
 const SITE = join(ROOT, "_eleventy_site");
 const CSS_FILE = join(SITE, "styles.css");
 const CSS_LINK = /[ \t]*<link rel="stylesheet" href="\/styles\.css"\s*\/?>\n?/g;
+const BODY_STYLE = /<style>([\s\S]*?)<\/style>/g;
 const CLASS_ATTR = /class="([^"]*)"/g;
+const ID_ATTR = /\bid="([^"]*)"/g;
+const TAG_NAME = /<([a-z0-9-]+)\b/gi;
 const CLASS_IN_SELECTOR = /\.([a-zA-Z_][\w-]*)/g;
+const ID_IN_SELECTOR = /#([a-zA-Z_][\w-]*)/g;
 
 if (!existsSync(SITE) || !readdirSync(SITE, { withFileTypes: true }).length) {
   console.error("  ! _eleventy_site is empty; run the Eleventy build first");
@@ -55,10 +65,24 @@ const css = readFileSync(CSS_FILE, "utf-8").trim();
 // Strip url(...) before harvesting so `.svg` in `url("/logos/doi.svg")` is not
 // mistaken for a class name.
 const selectorsOnly = css.replace(/url\([^)]*\)/g, "");
-const defined = [...new Set([...selectorsOnly.matchAll(CLASS_IN_SELECTOR)].map((m) => m[1]))];
+const definedClasses = [
+  ...new Set([...selectorsOnly.matchAll(CLASS_IN_SELECTOR)].map((m) => m[1])),
+];
+const definedIds = [
+  ...new Set(
+    [
+      ...selectorsOnly
+        .replace(/#[0-9a-fA-F]{3,8}\b/g, "")
+        .matchAll(ID_IN_SELECTOR),
+    ].map((m) => m[1]),
+  ),
+];
 
 const classesIn = (html) =>
   new Set([...html.matchAll(CLASS_ATTR)].flatMap((m) => m[1].split(/\s+/)));
+const idsIn = (html) => new Set([...html.matchAll(ID_ATTR)].map((m) => m[1]));
+const tagsIn = (html) =>
+  new Set([...html.matchAll(TAG_NAME)].map((m) => m[1].toLowerCase()));
 
 const pages = htmlFiles(SITE);
 const cssBuffer = Buffer.from(css);
@@ -68,32 +92,64 @@ let rewritten = 0;
 let shipped = 0;
 
 for (const page of pages) {
-  const html = readFileSync(page, "utf-8");
+  const rawHtml = readFileSync(page, "utf-8");
 
-  if (!html.includes('href="/styles.css"')) continue;
+  if (!rawHtml.includes('href="/styles.css"')) continue;
 
-  const used = classesIn(html);
-  const key = [...used].sort().join(" ");
+  const extraStyles = [];
+  const html = rawHtml.replace(BODY_STYLE, (_, block) => {
+    extraStyles.push(block.trim());
+    return "";
+  });
+
+  const usedClasses = classesIn(html);
+  const usedIds = idsIn(html);
+  const usedTags = tagsIn(html);
+  const key = [
+    [...usedClasses].sort().join(" "),
+    [...usedIds].sort().join(" "),
+    [...usedTags].sort().join(" "),
+  ].join("|");
   let out = purgedCache.get(key);
   if (out === undefined) {
-    const unused = defined.filter((name) => !used.has(name));
+    const unused = [
+      ...definedClasses.filter((name) => !usedClasses.has(name)),
+      ...definedIds.filter((name) => !usedIds.has(name)),
+    ];
     const { code } = transform({
       filename: "inline.css",
       code: cssBuffer,
       minify: true,
       unusedSymbols: unused,
+      visitor: {
+        Rule: {
+          style(rule) {
+            const everyMissing = rule.value.selectors.every((sel) =>
+              sel.some(
+                (comp) =>
+                  comp.type === "type" &&
+                  !usedTags.has(comp.name.toLowerCase()),
+              ),
+            );
+            if (everyMissing) return [];
+          },
+        },
+      },
     });
-    out = code.toString();
+    const rawOut = code.toString();
 
     // Safety net: purging must never remove a custom property a surviving rule
     // still reads. Referenced-without-fallback-and-nowhere-defined is a build
     // failure, not a silent visual regression.
     const definedVars = new Set(
-      [...out.matchAll(/(--[\w-]+)\s*:/g)].map((m) => m[1]),
+      [...rawOut.matchAll(/(--[\w-]+)\s*:/g)].map((m) => m[1]),
+    );
+    const usedVars = new Set(
+      [...rawOut.matchAll(/var\(\s*(--[\w-]+)/g)].map((m) => m[1]),
     );
     const orphanVars = [
       ...new Set(
-        [...out.matchAll(/var\(\s*(--[\w-]+)\s*([,)])/g)]
+        [...rawOut.matchAll(/var\(\s*(--[\w-]+)\s*([,)])/g)]
           .filter(([, name, next]) => next === ")" && !definedVars.has(name))
           .map(([, name]) => name),
       ),
@@ -104,17 +160,25 @@ for (const page of pages) {
       );
       process.exit(1);
     }
+    out = rawOut.replace(/(--[\w-]+)\s*:[^;}]+;?/g, (decl, name) =>
+      usedVars.has(name) ? decl : "",
+    );
     purgedCache.set(key, out);
   }
 
-  const styleTag = `<style>${out}</style>`;
+  const combinedCss = extraStyles.length
+    ? `${out}${extraStyles.join("")}`
+    : out;
+  const styleTag = `<style>${combinedCss}</style>`;
   const updated = html.replace(CSS_LINK, `    ${styleTag}\n`);
-  if (updated === html) continue;
+  if (updated === rawHtml) continue;
 
   writeFileSync(page, updated);
-  shipped += out.length;
+  shipped += combinedCss.length;
   rewritten++;
 }
+
+unlinkSync(CSS_FILE);
 
 const kb = (n) => `${(n / 1024).toFixed(1)} KB`;
 console.log(

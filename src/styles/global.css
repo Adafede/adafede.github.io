@@ -40,10 +40,8 @@
   --step--1: clamp(0.85rem, 0.83rem + 0.1vw, 0.92rem);
   --step-0: clamp(1.05rem, 1.02rem + 0.16vw, 1.12rem);
   --step-1: clamp(1.26rem, 1.21rem + 0.26vw, 1.4rem);
-  --step-2: clamp(1.51rem, 1.42rem + 0.42vw, 1.76rem);
   --step-3: clamp(1.81rem, 1.67rem + 0.68vw, 2.2rem);
   --step-4: clamp(2.18rem, 1.94rem + 1.12vw, 2.76rem);
-  --step-5: clamp(2.61rem, 2.25rem + 1.76vw, 3.46rem);
 
   /* A slightly wider scale than before: the pages had more air than they had
      hierarchy, which reads as unfinished rather than calm. */
@@ -59,7 +57,6 @@
   /* Two widths: a narrower column for prose, a slightly wider one for listings
      that carry a metadata gutter. Both are within a comfortable line length. */
   --measure: 66ch;
-  --page: 60rem;
   --wide: 68rem;
 
   /* Restrained. Cards get a hairline and a whisper of shadow; only genuinely
@@ -94,7 +91,6 @@
      generator leaves between circles — see .expertise__topic circle. */
   --expertise-stroke: rgb(28 26 22 / 0.14);
   --shadow: 0 1px 2px rgb(27 26 23 / 0.04);
-  --shadow-lg: 0 10px 30px -12px rgb(27 26 23 / 0.18);
 }
 
 /* ------------------------------------------------------------------- reset */
@@ -2501,7 +2497,6 @@ a[role="doc-biblioref"]:hover {
        across them. */
     --expertise-stroke: rgb(255 255 255 / 0.18);
     --shadow: 0 1px 2px rgb(0 0 0 / 0.35);
-    --shadow-lg: 0 10px 30px -12px rgb(0 0 0 / 0.6);
   }
 }
 

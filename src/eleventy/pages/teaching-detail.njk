@@ -29,27 +29,8 @@ eleventyExcludeFromCollections: true
        the same order and the same registry links as the article, post and talk
        pages. Some course pages declare their lecturers through `metadata-files`,
        some do not; those fall back to the site owner, who is who teaches them. #}
-    {% set lecturers = course.data.authors | default([], true) %}
-    <div class="event-detail__authors">
-      {% for lecturer in lecturers %}
-      <p class="event-detail__author" property="author" typeof="Person"{% if lecturer.qid %} about="wd:{{ lecturer.qid }}"{% endif %}>
-        <span property="name">{{ lecturer.name }}</span>
-        {% if lecturer.orcid %}<a class="author__id" href="https://orcid.org/{{ lecturer.orcid }}" rel="sameAs noopener noreferrer" title="ORCID {{ lecturer.orcid }}">{% registryIcon 'orcid' %}ORCID</a>{% endif %}
-        {% if lecturer.qid %}<a class="author__id" href="https://qlever.scholia.wiki/author/{{ lecturer.qid }}" rel="sameAs noopener noreferrer" title="Scholia {{ lecturer.qid }}">{% registryIcon 'scholia' %}Scholia</a>{% endif %}
-        {% if lecturer.affiliationIds.length %}
-        <span class="event-detail__affiliations">
-          {% for affId in lecturer.affiliationIds %}{% if loop.index0 > 0 %}; {% endif %}{% set aff = affId | affiliation %}<span property="affiliation" typeof="Organization"{% if aff.qid %} about="wd:{{ aff.qid }}"{% endif %}>{% if aff.ror %}<a href="{{ aff.ror }}" rel="sameAs noopener noreferrer" title="ROR {{ aff.ror }}">{% registryIcon 'ror' %}<span property="name">{{ aff.name }}</span></a>{% elif aff.qid %}<a href="https://www.wikidata.org/wiki/{{ aff.qid }}" rel="sameAs noopener noreferrer" title="Wikidata {{ aff.qid }}"><span property="name">{{ aff.name }}</span></a>{% else %}<span property="name">{{ aff.name }}</span>{% endif %}</span>{% endfor %}
-        </span>
-        {% endif %}
-      </p>
-      {% else %}
-      <p class="event-detail__author" property="author" typeof="Person"{% if profiles.qid %} about="wd:{{ profiles.qid }}"{% endif %}>
-        <span property="name">{{ site.author }}</span>
-        {% if profiles.orcid %}<a class="author__id" href="https://orcid.org/{{ profiles.orcid }}" rel="sameAs noopener noreferrer" title="ORCID {{ profiles.orcid }}">{% registryIcon 'orcid' %}ORCID</a>{% endif %}
-        {% if profiles.qid %}<a class="author__id" href="https://qlever.scholia.wiki/author/{{ profiles.qid }}" rel="sameAs noopener noreferrer" title="Scholia {{ profiles.qid }}">{% registryIcon 'scholia' %}Scholia</a>{% endif %}
-      </p>
-      {% endfor %}
-    </div>
+    {% set lecturers = course.data.authors if course.data.authors.length else [{ name: site.author, qid: profiles.qid, orcid: profiles.orcid }] %}
+    {% authorList lecturers, "author" %}
 
     <p class="event-detail__meta">
       {% if course.data.date %}<time property="dateCreated" datatype="xsd:date" datetime="{{ course.data.date | readableDate }}">{{ course.data.date | readableDate }}</time>{% endif %}
