@@ -2,7 +2,7 @@
 <html lang="en" vocab="https://schema.org/" prefix="{{ site.prefixes }}">
   <head>
     <meta charset="UTF-8" />
-    <!-- Paints the right backdrop before the stylesheet is parsed. -->
+    {# Paints the right backdrop before the stylesheet is parsed. #}
     <meta name="color-scheme" content="light dark" />
     {# theme-color tints browser chrome (address bar, status bar). It only keys
        off `prefers-color-scheme`, which is the same signal the palette uses, so
@@ -18,10 +18,10 @@
        parallel with the document rather than after it. #}
     <link rel="preconnect" href="https://scripts.simpleanalyticscdn.com" crossorigin />
     <link rel="dns-prefetch" href="https://scripts.simpleanalyticscdn.com" />
-    <!-- Content Security Policy: the only scripts are SimpleAnalytics (external
-         CDN) and the inlined CSS. No inline scripts, no eval, no object/embed.
-         connect-src allows SimpleAnalytics' beacon endpoint. -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'strict-dynamic' 'sha384-6r8ANWkTbGeAoBOxTtwsJD6VBfqnKe+kD3q/w51t91jCOCSxtKcCN2erSIv/1GHO' https://scripts.simpleanalyticscdn.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://*.simpleanalytics.com https://scripts.simpleanalyticscdn.com https://*.wikidata.org https://*.wikimedia.org https://*.scholia.wiki https://hypothes.is; base-uri 'self'; form-action 'self'; object-src 'none'; require-trusted-types-for 'script'; trusted-types 'none'; upgrade-insecure-requests" />
+    {# Content Security Policy: the only scripts are SimpleAnalytics (external
+       CDN) and the inlined CSS. No inline scripts, no eval, no object/embed.
+       connect-src allows SimpleAnalytics' beacon endpoint. #}
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'strict-dynamic' 'sha384-yzZn7eUfB4MGWLJ6nlCFRZcvWNWya4kAYI7R7BcN/dXNqrHoUK/IHwn1vzD7ssM/' https://scripts.simpleanalyticscdn.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://*.simpleanalytics.com https://scripts.simpleanalyticscdn.com https://*.wikidata.org https://*.wikimedia.org https://*.scholia.wiki https://hypothes.is; base-uri 'self'; form-action 'self'; object-src 'none'; require-trusted-types-for 'script'; trusted-types 'none'; upgrade-insecure-requests" />
 
     {%- set entry = post or article or talk or course or item %}
     {%- set meta = post and post.data %}
@@ -131,7 +131,7 @@
           </li>
           <li>
             <a href="https://github.com/adafede/adafede.github.io" rel="me noopener" title="Source on GitHub" aria-label="Source on GitHub">
-              <svg class="icon" viewBox="0 0 78 78" fill="currentColor" aria-hidden="true" focusable="false"><path transform="translate(10 10) rotate(-45 29 29)" d="M5,58c-2.76142,0 -5,-2.23858 -5,-5v-48c0,-2.76142 2.23858,-5 5,-5h33v12.54404c-2.06553,0.94801 -3.5,3.03446 -3.5,5.45596c0,0.73514 0.13221,1.43941 0.37415,2.09031l-15.28384,15.28384c-0.6509,-0.24194 -1.35517,-0.37415 -2.09031,-0.37415c-3.31371,0 -6,2.68629 -6,6c0,3.31371 2.68629,6 6,6c3.31371,0 6,-2.68629 6,-6c0,-0.73514 -0.13221,-1.43941 -0.37415,-2.09031l14.87415,-14.87415l0,11.50851c-2.06553,0.94801 -3.5,3.03446 -3.5,5.45596c0,3.31371 2.68629,6 6,6c3.31371,0 6,-2.68629 6,-6c0,-2.42149 -1.43447,-4.50795 -3.5,-5.45596l0,-12.08808c2.06553,-0.94801 3.5,-3.03446 3.5,-5.45596c0,-2.42149 -1.43447,-4.50795 -3.5,-5.45596l0,-12.54404h10c2.76142,0 5,2.23858 5,5v48c0,2.76142 -2.23858,5 -5,5z"/></svg>
+              <svg class="icon" viewBox="0 0 78 78" fill="currentColor" aria-hidden="true" focusable="false"><path transform="translate(10 10) rotate(-45 29 29)" d="M5 58c-2.76 0-5-2.24-5-5V5c0-2.76 2.24-5 5-5h33v12.54c-2.07.95-3.5 3.03-3.5 5.46 0 .74.13 1.44.37 2.09L19.59 35.37a5.9 5.9 0 0 0-2.09-.37 6 6 0 1 0 6 6c0-.74-.13-1.44-.37-2.09l14.87-14.87v11.5a6 6 0 1 0 5 0V23.46a6 6 0 0 0 0-10.92V0h10c2.76 0 5 2.24 5 5v48c0 2.76-2.24 5-5 5z"/></svg>
             </a>
           </li>
         </ul>
@@ -156,6 +156,6 @@
        target="_blank" rel="noopener noreferrer" and rel="noopener noreferrer" — see the comment on
        externalLinks in eleventy.config.mjs. Its SRI hash is hard-coded because
        it is fetched from a versionless URL with no local file to derive it. #}
-    <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js" crossorigin="anonymous" integrity="sha384-6r8ANWkTbGeAoBOxTtwsJD6VBfqnKe+kD3q/w51t91jCOCSxtKcCN2erSIv/1GHO"></script>
+    <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js" crossorigin="anonymous" integrity="sha384-yzZn7eUfB4MGWLJ6nlCFRZcvWNWya4kAYI7R7BcN/dXNqrHoUK/IHwn1vzD7ssM/"></script>
   </body>
 </html>

@@ -269,7 +269,7 @@ def render(data: dict[str, Any]) -> str:
         # every one of these topics is also a link in the list underneath —
         # which is the accessible copy of this picture in any case.
         parts.append(
-            f'<a class="expertise__topic" href="https://www.wikidata.org/wiki/{qid}" '
+            f'<a href="https://www.wikidata.org/wiki/{qid}" '
             f'tabindex="-1" target="_blank" rel="noopener">'
             f"<title>{escape(text)} — score {score}</title>",
         )

@@ -1,15 +1,19 @@
 """Metadata service for YAML header updates."""
 
+from __future__ import annotations
+
 import re
+import secrets
 from pathlib import Path
 from typing import override
 
 import yaml
 
-from scripts.config import DOI_URL_PREFIX
 from scripts.infrastructure import FileSystem, get_logger
 
 logger = get_logger(__name__)
+
+_CROCKFORD_BASE32 = "0123456789abcdefghjkmnpqrstvwxyz"
 
 
 class MetadataService:
@@ -78,11 +82,17 @@ class MetadataService:
         return changed
 
     def _generate_doi(self) -> str:
-        """Generate a stable DOI and strip the resolver URL prefix."""
-        from commonmeta import encode_doi  # pyright: ignore[reportMissingTypeStubs]
-
-        doi_url = encode_doi("10.59350")
-        return doi_url.removeprefix(DOI_URL_PREFIX)
+        """Generate a random Rogue Scholar DOI with a Crockford Base32 suffix and MOD 97-10 checksum."""
+        number = secrets.randbits(40)
+        n = number
+        chars: list[str] = []
+        while n > 0:
+            n, rem = divmod(n, 32)
+            chars.append(_CROCKFORD_BASE32[rem])
+        base = "".join(reversed(chars)) or "0"
+        checksum = 98 - ((100 * number) % 97)
+        encoded = f"{base}{checksum:02d}".zfill(10)
+        return f"10.59350/{encoded[:5]}-{encoded[5:]}"
 
     def _write_frontmatter(
         self,

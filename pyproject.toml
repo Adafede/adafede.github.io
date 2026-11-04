@@ -11,7 +11,6 @@ dependencies = [
   "bs4>=0.0.2",
   "circlify>=0.15.1",
   "cmcrameri>=1.10",
-  "commonmeta-py>=0.312",
   "folium>=0.20.0",
   "geopy>=2.5.0",
   "ipython>=9.17.1",
@@ -44,9 +43,6 @@ known_first_party = [
 ]
 
 [tool.deptry.package_module_name_map]
-commonmeta-py = [
-  "commonmeta",
-]
 ipython = [
   "IPython",
 ]

@@ -1174,7 +1174,7 @@ figcaption {
   margin-inline: auto;
 }
 
-.expertise__topic {
+.expertise__pack a {
   cursor: pointer;
 }
 
@@ -1191,7 +1191,7 @@ figcaption {
    and the visible line is half the nominal width: 2.2 leaves about one
    screen pixel of outline, which is the thinnest that still reads as a border
    rather than as an artefact. */
-.expertise__topic circle {
+.expertise__pack a circle {
   stroke: var(--expertise-stroke);
   stroke-width: 2.2;
   paint-order: stroke fill;
@@ -1200,14 +1200,14 @@ figcaption {
 
 /* Hovered or focused, a ring is useful: there is no resting outline to grow
    from, and one circle at a time is picked out. */
-.expertise__topic:hover circle,
-.expertise__topic:focus-visible circle {
+.expertise__pack a:hover circle,
+.expertise__pack a:focus-visible circle {
   opacity: 0.82;
   stroke: var(--brand);
   stroke-width: 2.6;
 }
 
-.expertise__topic text {
+.expertise__pack a text {
   fill: #0f172a;
   text-anchor: middle;
   dominant-baseline: central;
@@ -1264,7 +1264,7 @@ figcaption {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .expertise__topic circle {
+  .expertise__pack a circle {
     transition: none;
   }
 }
@@ -1829,6 +1829,8 @@ a[role="doc-biblioref"]:hover {
 }
 
 .hero__avatar {
+  grid-area: 2 / 1 / 3 / 2;
+  align-self: center;
   inline-size: 9rem;
   block-size: 9rem;
   border-radius: 50%;
@@ -1862,11 +1864,6 @@ a[role="doc-biblioref"]:hover {
   letter-spacing: -0.01em;
   color: var(--text-muted);
   margin-block-end: var(--space-m);
-}
-
-.hero__avatar {
-  grid-area: 2 / 1 / 3 / 2;
-  align-self: center;
 }
 
 .hero__text {
@@ -1917,11 +1914,6 @@ a[role="doc-biblioref"]:hover {
     position: static;
   }
 
-  .site-header__inner,
-  .site-main {
-    padding-inline: var(--space-s);
-  }
-
   /* Two rows: wordmark and controls, then the page links. The links are a
      three-column grid rather than a horizontally scrolling strip — a strip that
      runs past the edge of a phone reads as broken, not as scrollable, and the
@@ -1932,11 +1924,9 @@ a[role="doc-biblioref"]:hover {
     grid-template-areas:
       "brand controls"
       "nav   nav";
-    align-items: center;
-    gap: var(--space-2xs) var(--space-s);
     block-size: auto;
     min-block-size: 3.25rem;
-    padding-block: var(--space-2xs);
+    padding: var(--space-2xs) var(--space-s);
   }
 
   html {
@@ -1945,6 +1935,7 @@ a[role="doc-biblioref"]:hover {
   }
 
   .site-main {
+    padding-inline: var(--space-s);
     padding-block-end: calc(var(--space-2xl) + env(safe-area-inset-bottom));
   }
 

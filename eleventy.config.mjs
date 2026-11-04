@@ -1183,12 +1183,12 @@ export default function (eleventyConfig) {
     // every other mark on the page. The "in" logotype on its own is the same
     // brand shape and takes the text colour, so it sits with the rest.
     linkedin:
-      '<circle cx="4.4" cy="4.6" r="2.1" fill="currentColor"/>' +
-      '<path fill="currentColor" d="M2.6 8.6h3.6v12.2H2.6zM9 8.6h3.45v1.67h.05a3.78 3.78 0 0 1 3.4-1.87c3.64 0 4.31 2.4 4.31 5.52v6.88h-3.6v-6.1c0-1.46-.03-3.34-2.03-3.34-2.04 0-2.35 1.59-2.35 3.23v6.21H9z"/>',
+      '<circle cx="4.4" cy="4.6" r="2.1"/>' +
+      '<path d="M2.6 8.6h3.6v12.2H2.6zM9 8.6h3.45v1.67h.05a3.78 3.78 0 0 1 3.4-1.87c3.64 0 4.31 2.4 4.31 5.52v6.88h-3.6v-6.1c0-1.46-.03-3.34-2.03-3.34-2.04 0-2.35 1.59-2.35 3.23v6.21H9z"/>',
     email:
-      '<path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M3 6.5h18v11H3z"/><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M3 7l9 6.5L21 7"/>',
+      '<path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M3 6.5h18v11H3zM3 7l9 6.5L21 7"/>',
     github:
-      '<path fill="currentColor" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2"/>',
+      '<path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2"/>',
   };
 
   /**
@@ -1222,8 +1222,7 @@ export default function (eleventyConfig) {
         return (
           '<svg class="registry-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">' +
           '<path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" d="M6 2.8h8l4 4v14.4H6z"/>' +
-          '<path fill="currentColor" d="M14 2.8v4h4z"/>' +
-          '<path fill="currentColor" d="M8.4 16.2h7.2v1.5H8.4z"/>' +
+          '<path d="M14 2.8v4h4zM8.4 16.2h7.2v1.5H8.4z"/>' +
           "</svg>"
         );
       default:

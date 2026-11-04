@@ -43,6 +43,7 @@ const BODY_STYLE = /<style>([\s\S]*?)<\/style>/g;
 const CLASS_ATTR = /class="([^"]*)"/g;
 const ID_ATTR = /\bid="([^"]*)"/g;
 const TAG_NAME = /<([a-z0-9-]+)\b/gi;
+const ATTR_NAME = /\s([a-zA-Z_:][\w:.-]*)(?:="([^"]*)")?/g;
 const CLASS_IN_SELECTOR = /\.([a-zA-Z_][\w-]*)/g;
 const ID_IN_SELECTOR = /#([a-zA-Z_][\w-]*)/g;
 
@@ -83,6 +84,16 @@ const classesIn = (html) =>
 const idsIn = (html) => new Set([...html.matchAll(ID_ATTR)].map((m) => m[1]));
 const tagsIn = (html) =>
   new Set([...html.matchAll(TAG_NAME)].map((m) => m[1].toLowerCase()));
+const attrsIn = (html) => {
+  const names = new Set();
+  const pairs = new Set();
+  for (const m of html.matchAll(ATTR_NAME)) {
+    const k = m[1].toLowerCase();
+    names.add(k);
+    if (m[2] !== undefined) pairs.add(`${k}=${m[2]}`);
+  }
+  return { names, pairs };
+};
 
 const pages = htmlFiles(SITE);
 const cssBuffer = Buffer.from(css);
@@ -105,10 +116,13 @@ for (const page of pages) {
   const usedClasses = classesIn(html);
   const usedIds = idsIn(html);
   const usedTags = tagsIn(html);
+  const usedAttrs = attrsIn(html);
   const key = [
     [...usedClasses].sort().join(" "),
     [...usedIds].sort().join(" "),
     [...usedTags].sort().join(" "),
+    [...usedAttrs.names].sort().join(" "),
+    [...usedAttrs.pairs].sort().join(" "),
   ].join("|");
   let out = purgedCache.get(key);
   if (out === undefined) {
@@ -125,11 +139,21 @@ for (const page of pages) {
         Rule: {
           style(rule) {
             const everyMissing = rule.value.selectors.every((sel) =>
-              sel.some(
-                (comp) =>
-                  comp.type === "type" &&
-                  !usedTags.has(comp.name.toLowerCase()),
-              ),
+              sel.some((comp) => {
+                if (comp.type === "type") {
+                  return !usedTags.has(comp.name.toLowerCase());
+                }
+                if (comp.type === "attribute") {
+                  const attr = comp.name.toLowerCase();
+                  if (!usedAttrs.names.has(attr)) return true;
+                  if (comp.operation?.operator === "equal") {
+                    return !usedAttrs.pairs.has(
+                      `${attr}=${comp.operation.value}`,
+                    );
+                  }
+                }
+                return false;
+              }),
             );
             if (everyMissing) return [];
           },
@@ -160,9 +184,11 @@ for (const page of pages) {
       );
       process.exit(1);
     }
-    out = rawOut.replace(/(--[\w-]+)\s*:[^;}]+;?/g, (decl, name) =>
-      usedVars.has(name) ? decl : "",
-    );
+    out = rawOut
+      .replace(/(--[\w-]+)\s*:[^;}]+;?/g, (decl, name) =>
+        usedVars.has(name) ? decl : "",
+      )
+      .replace(/@media[^{]+\{\}/g, "");
     purgedCache.set(key, out);
   }
 

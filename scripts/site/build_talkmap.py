@@ -360,11 +360,11 @@ def main() -> int:
 
     total = sum(len(c["talks"]) for c in countries.values())
     html = f"""<div class="talk-map" role="group" aria-labelledby="talk-map-caption">
-<!-- Decorative: the list below carries exactly the same information as the
+{{# Decorative: the list below carries exactly the same information as the
      markers, so a screen reader gains nothing from this being an image. Saying
      so also keeps the contrast checker from measuring text inside a vector
      drawing, which it resolves against no background and always fails. The land
-     outline is a separate cached file, drawn under the markers. -->
+     outline is a separate cached file, drawn under the markers. #}}
 <svg viewBox="0 0 {WIDTH} {HEIGHT}" aria-hidden="true" focusable="false">{land_markup}
   {"".join(markers)}
 </svg>
