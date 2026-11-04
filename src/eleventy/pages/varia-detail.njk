@@ -46,7 +46,7 @@ eleventyComputed:
   {% endif %}
 
   <p class="event-detail__links">
-    {% if item.data.url %}<a class="button" href="{{ item.data.url }}" rel="sameAs noopener" target="_blank">Visit</a>{% endif %}
+    {% if item.data.url %}<a class="button" href="{{ item.data.url }}" rel="sameAs noopener" target="_blank">Visit<span class="visually-hidden"> {{ item.data.title }}</span></a>{% endif %}
     <a href="/varia.html">All varia</a>
   </p>
 </article>

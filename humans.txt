@@ -11,4 +11,4 @@ Standards: HTML5, CSS3, RDFa, CiTO, JSON Feed, RSS, Atom
 Built-with: Quarto (sources), Eleventy (site)
 Source: https://github.com/adafede/adafede.github.io
 Language: en
-Updated: 2026-10-12
+Updated: 2026-11-04

@@ -910,7 +910,16 @@ export default function (eleventyConfig) {
       ),
     ].sort((a, b) => b - a),
   );
-  /** Varia cards grouped by their subdirectory, alphabetically. */
+  /** Varia cards grouped by their subdirectory, in the order defined by varia.qmd. */
+  const VARIA_GROUPS = {
+    adafede: { label: "Extras", order: 1 },
+    lotus: { label: "LOTUS", order: 2 },
+    taxonomicallyinformedannotation: {
+      label: "Taxonomically Informed Metabolite Annotation",
+      order: 3,
+    },
+    additional_contributions: { label: "Additional contributions", order: 4 },
+  };
   eleventyConfig.addFilter("groupByVaria", (cards) => {
     const groups = new Map();
     for (const card of cards) {
@@ -919,12 +928,16 @@ export default function (eleventyConfig) {
       groups.get(key).push(card);
     }
     return [...groups.entries()]
-      .sort(([a], [b]) => a.localeCompare(b))
+      .sort(
+        ([a], [b]) =>
+          (VARIA_GROUPS[a]?.order ?? 99) - (VARIA_GROUPS[b]?.order ?? 99) ||
+          a.localeCompare(b),
+      )
       .map(([id, items]) => ({
         id: id.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
-        label: id
-          .replace(/[-_]/g, " ")
-          .replace(/\b\w/g, (c) => c.toUpperCase()),
+        label:
+          VARIA_GROUPS[id]?.label ??
+          id.replace(/[-_]/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()),
         items: items.sort((a, b) => a.data.title.localeCompare(b.data.title)),
       }));
   });

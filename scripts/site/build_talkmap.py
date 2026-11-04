@@ -259,22 +259,27 @@ def main() -> int:
         )
         # SVG only: an HTML element inside <svg> ends the parser early and
         # silently drops every marker after the first.
+        count = len(entry["talks"])
+        noun = "talk" if count == 1 else "talks"
         markers.append(
             f'<g class="talk-map__country">'
             f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{radius:.1f}">'
-            f"<title>{escape(country)} — {len(entry['talks'])} talk(s): {escape(cities)}</title>"
+            f"<title>{escape(country)} — {count} {noun}: {escape(cities)}</title>"
             f"</circle>"
             f'<text x="{x:.1f}" y="{label_y:.1f}">{escape(country)}'
-            f'<tspan class="talk-map__n"> {len(entry["talks"])}</tspan></text>'
+            f'<tspan class="talk-map__n"> {count}</tspan></text>'
             f"</g>",
         )
 
     listing = []
     for country, entry in ranked:
         rows = "".join(
-            f'<li><a href="{escape(t["url"])}">{escape(t["title"])}</a>'
-            f'<span class="talk-map__venue">{escape(city_name(location))}'
-            f"{' · ' + escape(t['venue']) if t['venue'] else ''}</span></li>"
+            f'<li typeof="Event" resource="https://adafede.github.io{escape(t["url"])}">'
+            f'<a href="{escape(t["url"])}" property="url"><span property="name">{escape(t["title"])}</span></a>'
+            f'<span class="talk-map__venue">'
+            f'<span property="location" typeof="Place"><span property="name">{escape(city_name(location))}</span></span>'
+            f"{(' · <span property="superEvent" typeof="Event"><span property="name">' + escape(t['venue']) + '</span></span>') if t['venue'] else ''}"
+            f"</span></li>"
             for t, location, _, _ in sorted(
                 entry["talks"],
                 key=lambda x: x[0]["date"],

@@ -43,7 +43,7 @@ permalink: /varia.html
         {% for tag in card.data.tags %}<li><span class="tag">{{ tag }}</span></li>{% endfor %}
       </ul>
       {% endif %}
-      {% if card.data.url %}<p class="entry__meta"><a href="{{ card.data.url }}" rel="sameAs noopener" target="_blank">Visit</a></p>{% endif %}
+      {% if card.data.url %}<p class="entry__meta"><a href="{{ card.data.url }}" rel="sameAs noopener" target="_blank">Visit<span class="visually-hidden"> {{ card.data.title }}</span></a></p>{% endif %}
     </li>
     {% endfor %}
   </ul>

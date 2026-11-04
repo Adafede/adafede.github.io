@@ -116,12 +116,16 @@ function check(html) {
       problems.push(`<img> without alt: ${tag.slice(0, 80)}`);
   }
 
-  for (const link of doc.matchAll(/<a\b[^>]*>/g)) {
-    const tag = link[0];
+  for (const link of doc.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/gi)) {
+    const tag = `<a${link[1]}>`;
     if (!/\shref=/.test(tag)) problems.push("anchor without href");
     if (/\shref=""/.test(tag)) problems.push("empty href");
     if (/\starget="_blank"/.test(tag) && !/\srel="[^"]*noopener/.test(tag)) {
       problems.push('target="_blank" without rel="noopener"');
+    }
+    const label = htmlText(link[2], { separateTags: true });
+    if (/^(?:visit|click here|read more|more|link)$/i.test(label)) {
+      problems.push(`generic link text: "${label}"`);
     }
   }
 

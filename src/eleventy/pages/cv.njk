@@ -7,9 +7,11 @@ permalink: /cv.html
 {# addGlobalData exposes `curriculum` at the top of the cascade; cvData is
    just a local alias so the template reads clearly. #}
 {% set cvData = curriculum %}
-<article class="cv" vocab="https://schema.org/" typeof="schema:Person" about="wd:Q97455964" resource="{{ site.url }}/#me">
+<article class="cv" vocab="https://schema.org/" typeof="ProfilePage" resource="{{ site.url }}/cv.html">
+  <div property="mainEntity" typeof="Person" about="wd:Q97455964" resource="{{ site.url }}/#me">
+  <meta property="name" content="{{ site.author }}" />
   <header class="cv-header">
-    <h1 property="name">Curriculum Vitæ</h1>
+    <h1 about="{{ site.url }}/cv.html" property="name">Curriculum Vitæ</h1>
     {% if cvData.meta.profession %}<p class="page-header__lede" property="jobTitle">{{ cvData.meta.profession }}</p>{% endif %}
     {# The facts: status, field, languages. Only `left` is printed.
 
@@ -120,5 +122,5 @@ permalink: /cv.html
     </ul>
   </section>
   {% endfor %}
-
+  </div>
 </article>
