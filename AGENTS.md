@@ -76,7 +76,7 @@ reads `_eleventy_site/`.
 - `src/eleventy/**` — Nunjucks templates (`pages/`, `_includes/`) and `_data/*.js`.
 - `src/eleventy/static/` — passthrough assets, including the logo set.
 - `src/lib/*.mjs` — bib, jsonFeed and prefixes (all tested).
-- `src/styles/global.css` (2571 lines) — the whole design system as CSS custom properties.
+- `src/styles/global.css` (2569 lines) — the whole design system as CSS custom properties.
 - `src/content/**` — GENERATED, gitignored. Never edit.
 - `scripts/site/*.py` — content pipeline: `migrate_posts`, `build_talkmap`,
   `build_expertise`, `academic_cv` (runs in `cv-academic.qmd`'s python cell),

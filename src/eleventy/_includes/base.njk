@@ -92,6 +92,9 @@
     <link rel="icon" href="/images/favicon/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/images/favicon/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
+    {%- if page.url == '/' %}
+    <link rel="preload" as="image" type="image/avif" imagesrcset="/images/profile/avatar-150.avif 160w, /images/profile/avatar-260.avif 290w, /images/profile/avatar-520.avif 520w" imagesizes="(max-width: 48rem) 5.5rem, 9rem" fetchpriority="high" />
+    {%- endif %}
     <link rel="stylesheet" href="/styles.css">
   </head>
 
@@ -142,21 +145,8 @@
 
     <footer class="site-footer" typeof="WPFooter">
       <a class="analytics-badge" href="https://www.simpleanalytics.com?utm_source=adafede.github.io&utm_content=badge" referrerpolicy="origin" target="_blank" rel="noopener noreferrer">
-        <picture>
-          <source
-            srcset="https://simpleanalyticsbadges.com/adafede.github.io?mode=dark&counter=false&radius=10&background-dark=0a0f19&text-dark=b8c5d6&logo-dark=d69999"
-            media="(prefers-color-scheme: dark)"
-          />
-          <img
-            src="https://simpleanalyticsbadges.com/adafede.github.io?mode=light&counter=false&radius=10&background-light=f7fafc&text-light=4a5a6d&logo-light=990000"
-            alt="Simple Analytics"
-            width="118"
-            height="28"
-            loading="lazy"
-            referrerpolicy="no-referrer"
-            crossorigin="anonymous"
-          />
-        </picture>
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="13" width="3.2" height="7" rx="1" fill="currentColor"/><rect x="10.4" y="8.5" width="3.2" height="11.5" rx="1" fill="currentColor"/><rect x="16.8" y="4" width="3.2" height="16" rx="1" fill="currentColor"/></svg>
+        Simple Analytics
       </a>
       <a class="site-footer__link" href="/privacy.html" rel="privacy-policy">Privacy</a>
     </footer>

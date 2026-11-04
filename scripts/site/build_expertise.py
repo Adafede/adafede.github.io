@@ -279,15 +279,19 @@ def render(data: dict[str, Any]) -> str:
             # the drawing is generated once for both.
             f'<circle cx="{cx:.1f}" cy="{cy:.1f}" r="{r:.1f}" fill="{fill}"/>',
         )
-        parts.append(
-            f'<text x="{cx:.1f}" y="{top:.1f}" font-size="{size}" fill="{ink}" '
-            f'text-anchor="middle" dominant-baseline="central">',
-        )
-        for i, line in enumerate(lines):
+        fill_attr = "" if ink == INK_DARK else f' fill="{ink}"'
+        if len(lines) == 1:
             parts.append(
-                f'<tspan x="{cx:.1f}" y="{top + i * leading:.1f}">{escape(line)}</tspan>',
+                f'<text x="{cx:.1f}" y="{top:.1f}" font-size="{size}"{fill_attr}>'
+                f"{escape(lines[0])}</text></a>",
             )
-        parts.append("</text></a>")
+        else:
+            parts.append(f'<text font-size="{size}"{fill_attr}>')
+            for i, line in enumerate(lines):
+                parts.append(
+                    f'<tspan x="{cx:.1f}" y="{top + i * leading:.1f}">{escape(line)}</tspan>',
+                )
+            parts.append("</text></a>")
 
     parts.append("</svg>")
     # Not a visible column under the figure: the packing is the reading of it.

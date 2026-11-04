@@ -671,7 +671,11 @@ figcaption {
   padding: var(--space-m) var(--space-m) var(--space-l);
 }
 
+.analytics-badge,
 .site-footer__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
   font-family: var(--sans);
   font-size: var(--step--2);
   color: var(--text-muted);
@@ -1158,6 +1162,11 @@ figcaption {
    scripts/site/build_expertise.py. The circles carry the picture and the list
    carries the content — the drawing is decorative, so it stays measurable and
    the names stay selectable. */
+.home__expertise {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 34rem;
+}
+
 .expertise {
   margin-block-start: var(--space-m);
 }
@@ -1203,6 +1212,9 @@ figcaption {
 }
 
 .expertise__topic text {
+  fill: #0f172a;
+  text-anchor: middle;
+  dominant-baseline: central;
   font-family: var(--sans);
   font-weight: 600;
   pointer-events: none;
@@ -1879,16 +1891,6 @@ a[role="doc-biblioref"]:hover {
 }
 
 @media (max-width: 36rem) {
-  .hero {
-    grid-template-columns: 1fr;
-    justify-items: start;
-    gap: var(--space-s);
-  }
-  .hero__avatar {
-    inline-size: 6.5rem;
-    block-size: 6.5rem;
-  }
-
   /* A long topic name ("Liquid Chromatography-Tandem Mass Spectrometry")
      must not push the page wider than a small phone. */
   .tag {
@@ -1999,11 +2001,16 @@ a[role="doc-biblioref"]:hover {
   .site-nav--utility {
     display: flex;
     grid-area: auto;
+    gap: var(--space-2xs);
     margin-inline-start: 0;
     overflow-x: visible;
   }
 
   .site-nav--utility a {
+    display: grid;
+    place-items: center;
+    inline-size: 2.75rem;
+    block-size: 2.75rem;
     border-color: transparent;
   }
 
@@ -2013,15 +2020,6 @@ a[role="doc-biblioref"]:hover {
   .tag {
     /* 44px minimum touch target. */
     min-block-size: 2.75rem;
-  }
-
-  /* The header has to fit a wordmark, three theme buttons and two utility
-     icons on one 360px row, so these sit a little under the 44px floor. */
-  .site-nav--utility a {
-    display: grid;
-    place-items: center;
-    inline-size: 2.5rem;
-    block-size: 2.5rem;
   }
 
   /* Body links get real padding so thumbs do not have to hit a text line. */
