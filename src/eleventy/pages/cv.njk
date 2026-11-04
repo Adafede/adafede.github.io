@@ -12,16 +12,24 @@ permalink: /cv.html
   <meta property="name" content="{{ site.author }}" />
   <header class="cv-header">
     <h1 about="{{ site.url }}/cv.html" property="name">Curriculum Vitæ</h1>
-    {% if cvData.meta.profession %}<p class="page-header__lede" property="jobTitle">{{ cvData.meta.profession }}</p>{% endif %}
-    {# The facts: status, field, languages. Only `left` is printed.
+    {# The facts: profession, status, field, languages. Only `left` is printed.
+       Keeping `profession` in the definition list rather than as a standalone
+       large paragraph avoids WAVE's "possible heading" alert on short,
+       20px-styled paragraphs.
 
        `right` is deliberately dropped, and that is the whole point of the split.
        In the source it is where the phone number, the email, this site's own URL
        and the postcode ended up — attached to Field and to Languages — because
        there was nowhere else for them to go. cv/template.tex reads those same
        values into the PDF, which is where they belong. #}
-    {% if cvData.meta.meta.length %}
+    {% if cvData.meta.profession or cvData.meta.meta.length %}
     <dl class="cv-header__facts">
+      {% if cvData.meta.profession %}
+      <div class="cv-header__fact">
+        <dt>Profession</dt>
+        <dd property="jobTitle">{{ cvData.meta.profession }}</dd>
+      </div>
+      {% endif %}
       {% for item in cvData.meta.meta %}
       {% set prop = item.title | schemaProperty %}
       <div class="cv-header__fact">

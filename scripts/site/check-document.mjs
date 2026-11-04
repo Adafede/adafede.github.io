@@ -116,6 +116,18 @@ function check(html) {
       problems.push(`<img> without alt: ${tag.slice(0, 80)}`);
   }
 
+  for (const lede of main.matchAll(
+    /<p\b[^>]*class="[^"]*\bpage-header__lede\b[^"]*"[^>]*>([\s\S]*?)<\/p>/gi,
+  )) {
+    const text = htmlText(lede[1]).trim();
+    if (text.length < 50 || !/[.?!]$/.test(text)) {
+      problems.push(
+        `short or unpunctuated .page-header__lede ("${text}") triggers WAVE's "possible heading" alert`,
+      );
+    }
+  }
+
+  let prevHref = null;
   for (const link of doc.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/gi)) {
     const tag = `<a${link[1]}>`;
     if (!/\shref=/.test(tag)) problems.push("anchor without href");
@@ -123,6 +135,12 @@ function check(html) {
     if (/\starget="_blank"/.test(tag) && !/\srel="[^"]*noopener/.test(tag)) {
       problems.push('target="_blank" without rel="noopener"');
     }
+    const hrefMatch = tag.match(/\shref="([^"]+)"/);
+    const href = hrefMatch ? hrefMatch[1] : null;
+    if (href && href === prevHref) {
+      problems.push(`adjacent links to the same URL: "${href}"`);
+    }
+    prevHref = href;
     const label = htmlText(link[2], { separateTags: true });
     if (/^(?:visit|click here|read more|more|link)$/i.test(label)) {
       problems.push(`generic link text: "${label}"`);
