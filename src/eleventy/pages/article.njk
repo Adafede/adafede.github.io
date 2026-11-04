@@ -5,12 +5,8 @@ pagination:
   size: 1
   alias: article
 permalink: "/articles/{{ article.id }}.html"
-eleventyComputed:
-  title: "{{ article.data.title | safe }}"
-  description: "{{ article.data.abstract | orDescription(article.data) | plainText | safe }}"
-  rdfaType: ScholarlyArticle
-  doi: "{{ article.data.doi }}"
-  authors: "{{ article.data.authors }}"
+eleventyExcludeFromCollections: true
+rdfaType: ScholarlyArticle
 ---
 {% set groupLabels = { first: 'Single first author', shared: 'Shared first author', co: 'Co-author', thesis: 'Doctoral thesis' } %}
 {% set summary = article.data.abstract | orDescription(article.data) %}
@@ -57,32 +53,7 @@ eleventyComputed:
     </figure>
     {% endif %}
 
-    {% if article.data.authors.length %}
-    <div class="article__authors">
-      <h2 class="article__subheading">Authors</h2>
-      <ol class="author-list">
-        {% for author in article.data.authors %}
-        {# `about` names the Wikidata item; the visible registry links are
-           declared `rel="sameAs"` so a consumer reading the RDFa gets the
-           ORCID and Wikidata URLs as graph edges, not just as anchors. #}
-        <li class="author" property="author" typeof="Person"{% if author.qid %} about="wd:{{ author.qid }}"{% endif %}>
-          <span class="author__name">
-            {{ loop.index }}. <span property="name">{{ author.name }}</span>
-            {% if author.corresponding %}<abbr class="mark" title="Corresponding author">†</abbr>{% endif %}
-            {% if author.equalContributor %}<abbr class="mark" title="Equal contribution">*</abbr>{% endif %}
-            {% if author.orcid %} <a class="author__id" href="https://orcid.org/{{ author.orcid }}" rel="sameAs noopener noreferrer" title="ORCID {{ author.orcid }}">{% registryIcon 'orcid' %}ORCID</a>{% endif %}
-            {% if author.qid %} <a class="author__id" href="https://qlever.scholia.wiki/author/{{ author.qid }}" rel="sameAs noopener noreferrer" title="Scholia {{ author.qid }}">{% registryIcon 'scholia' %}Scholia</a>{% endif %}
-          </span>
-          {% if author.affiliationIds.length %}
-          <span class="author__affiliation">
-            {% for affId in author.affiliationIds %}{% if loop.index0 > 0 %}; {% endif %}{% set aff = affId | affiliation %}<span property="affiliation" typeof="Organization"{% if aff.qid %} about="wd:{{ aff.qid }}"{% endif %}>{% if aff.ror %}<a href="{{ aff.ror }}" rel="sameAs noopener noreferrer" title="ROR {{ aff.ror }}">{% registryIcon 'ror' %}<span property="name">{{ aff.name }}</span></a>{% elif aff.qid %}<a href="https://www.wikidata.org/wiki/{{ aff.qid }}" rel="sameAs noopener noreferrer" title="Wikidata {{ aff.qid }}"><span property="name">{{ aff.name }}</span></a>{% else %}<span property="name">{{ aff.name }}</span>{% endif %}</span>{% endfor %}
-          </span>
-          {% endif %}
-        </li>
-        {% endfor %}
-      </ol>
-    </div>
-    {% endif %}
+    {% authorList article.data.authors, "article" %}
   </header>
 
   {% if article.data.abstract %}

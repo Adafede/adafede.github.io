@@ -5,9 +5,7 @@ pagination:
   size: 1
   alias: course
 permalink: "/teaching/{{ course.id }}.html"
-eleventyComputed:
-  title: "{{ course.data.title | safe }}"
-  description: "{{ course.data.venue | plainText }}"
+eleventyExcludeFromCollections: true
 ---
 <article class="event-detail" vocab="https://schema.org/" typeof="Course" resource="{{ site.url }}{{ page.url }}">
   <nav class="breadcrumb" aria-label="Breadcrumb">

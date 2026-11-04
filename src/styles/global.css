@@ -77,16 +77,16 @@
   --surface: #ffffff;
   --surface-sunken: #f3f0ea;
   --border: #e6e1d8;
-  --border-strong: #938b7e;
+  --border-strong: #544f46;
   --text: #1b1a17;
-  --text-muted: #5e594f;
-  --text-faint: #6f685c;
-  --link: #0d5a80;
+  --text-muted: #4b463e;
+  --text-faint: #524d44;
+  --link: #095275;
   --link-visited: #6b3d75;
-  --brand: #0d5a80;
+  --brand: #095275;
   --brand-ink: #ffffff;
-  --brand-soft: #e4eff5;
-  --focus: #0d5a80;
+  --brand-soft: #ebf3f7;
+  --focus: #095275;
   --mark: #fdf0c8;
   --code-bg: #f3f0ea;
   /* Outline on the expertise circles. Grey rather than white: white reads as a
@@ -2486,10 +2486,10 @@ a[role="doc-biblioref"]:hover {
     --surface: #17161a;
     --surface-sunken: #0a0a0c;
     --border: #2b2a30;
-    --border-strong: #837d8c;
+    --border-strong: #a29ca9;
     --text: #ecebe7;
     --text-muted: #a8a49b;
-    --text-faint: #918b83;
+    --text-faint: #a49f96;
     --link: #8ccbef;
     --link-visited: #d3abe2;
     --brand: #8ccbef;

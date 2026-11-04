@@ -5,9 +5,7 @@ pagination:
   size: 1
   alias: talk
 permalink: "/talks/{{ talk.id }}.html"
-eleventyComputed:
-  title: "{{ talk.data.title | safe }}"
-  description: "{{ talk.data.description | plainText }}"
+eleventyExcludeFromCollections: true
 ---
 <article class="event-detail" vocab="https://schema.org/" typeof="Event" resource="{{ site.url }}{{ page.url }}">
   <nav class="breadcrumb" aria-label="Breadcrumb">
@@ -31,22 +29,7 @@ eleventyComputed:
        the same order and the same registry links as the article and post pages.
      Affiliations are read per author, so a co-presented talk does not read as a
      list of institutions belonging to whoever happens to be named first. #}
-    {% if talk.data.authors.length %}
-    <div class="event-detail__authors">
-      {% for author in talk.data.authors %}
-      <p class="event-detail__author" property="performer" typeof="Person"{% if author.qid %} about="wd:{{ author.qid }}"{% endif %}>
-        <span property="name">{{ author.name }}</span>
-        {% if author.orcid %}<a class="author__id" href="https://orcid.org/{{ author.orcid }}" rel="sameAs noopener noreferrer" title="ORCID {{ author.orcid }}">{% registryIcon 'orcid' %}ORCID</a>{% endif %}
-        {% if author.qid %}<a class="author__id" href="https://qlever.scholia.wiki/author/{{ author.qid }}" rel="sameAs noopener noreferrer" title="Scholia {{ author.qid }}">{% registryIcon 'scholia' %}Scholia</a>{% endif %}
-        {% if author.affiliationIds.length %}
-        <span class="event-detail__affiliations">
-          {% for affId in author.affiliationIds %}{% if loop.index0 > 0 %}; {% endif %}{% set aff = affId | affiliation %}<span property="affiliation" typeof="Organization"{% if aff.qid %} about="wd:{{ aff.qid }}"{% endif %}>{% if aff.ror %}<a href="{{ aff.ror }}" rel="sameAs noopener noreferrer" title="ROR {{ aff.ror }}">{% registryIcon 'ror' %}<span property="name">{{ aff.name }}</span></a>{% elif aff.qid %}<a href="https://www.wikidata.org/wiki/{{ aff.qid }}" rel="sameAs noopener noreferrer" title="Wikidata {{ aff.qid }}"><span property="name">{{ aff.name }}</span></a>{% else %}<span property="name">{{ aff.name }}</span>{% endif %}</span>{% endfor %}
-        </span>
-        {% endif %}
-      </p>
-      {% endfor %}
-    </div>
-    {% endif %}
+    {% authorList talk.data.authors, "performer" %}
 
     <p class="event-detail__meta">
       {% if talk.data.date %}<time property="startDate" datatype="xsd:date" datetime="{{ talk.data.date | readableDate }}">{{ talk.data.date | readableDate }}</time>{% endif %}

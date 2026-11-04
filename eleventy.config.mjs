@@ -12,7 +12,6 @@
  * Eleventy has no component model, so reusable markup is Nunjucks includes and
  * data files here.
  */
-import { EleventyHtmlBasePlugin } from "@11ty/eleventy";
 import markdownIt from "markdown-it";
 import { existsSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
@@ -264,6 +263,19 @@ const md = markdownIt({ html: true, linkify: false, typographer: false });
 superscript(md);
 subscript(md);
 
+const inlineMd = markdownIt({
+  html: false,
+  linkify: true,
+  typographer: false,
+});
+inlineMd.linkify.set({ fuzzyLink: false, fuzzyEmail: false });
+superscript(inlineMd);
+subscript(inlineMd);
+// Warm up linkify's regex state machine at module load time.
+inlineMd.renderInline("https://example.org");
+
+const rawIncludeCache = new Map();
+
 // --- panel tabsets -----------------------------------------------------------
 
 /**
@@ -482,8 +494,7 @@ md.core.ruler.push("eleventy_references", (state) => {
 });
 
 export default function (eleventyConfig) {
-  eleventyConfig.addPlugin(EleventyHtmlBasePlugin);
-
+  eleventyConfig.setQuietMode(true);
   const content = siteContent();
 
   // --- assets --------------------------------------------------------
@@ -520,16 +531,15 @@ export default function (eleventyConfig) {
   eleventyConfig.addTransform("externalLinks", (content, outputPath) => {
     if (!outputPath || !outputPath.endsWith(".html")) return content;
     return content.replace(EXTERNAL_LINK_RE, (tag, attrs) => {
+      if (!attrs.includes("http") || attrs.includes('target="_blank"')) return tag;
       const hrefMatch = attrs.match(HREF_RE);
       if (!hrefMatch) return tag;
       let href = hrefMatch[1];
+      if (!href.startsWith("http://") && !href.startsWith("https://")) return tag;
       let url;
       try { url = new URL(href); } catch { return tag; }
       if (url.protocol !== "http:" && url.protocol !== "https:") return tag;
       if (url.hostname === SITE_HOST) return tag;
-
-      // Don't double-process: skip if target is already _blank.
-      if (/\starget="_blank"/.test(attrs)) return tag;
 
       // Preserve existing rel, ensure noopener + noreferrer.
       let rel = "noopener noreferrer";
@@ -605,23 +615,14 @@ export default function (eleventyConfig) {
 
   // --- filters -------------------------------------------------------
   eleventyConfig.setLibrary("md", md);
-
-  /**
-   * Renders a single line of Markdown as inline HTML.
-   *
-   * Used for abstracts and summaries, which are prose that happens to arrive as
-   * one string: they need `*Swertia chirayita*` to come out italic and a bare
-   * DOI or URL to become a link, but they are not block content and must not
-   * gain a wrapping <p>. `html: false` escapes any raw HTML that came in with
-   * the content, and `linkify` turns bare URLs into links.
-   */
-  const inlineMd = markdownIt({
-    html: false,
-    linkify: true,
-    typographer: false,
+  eleventyConfig.addShortcode("rawInclude", (name) => {
+    let html = rawIncludeCache.get(name);
+    if (html === undefined) {
+      html = readFileSync(join(ROOT, "src", "eleventy", "_includes", name), "utf-8");
+      rawIncludeCache.set(name, html);
+    }
+    return html;
   });
-  superscript(inlineMd);
-  subscript(inlineMd);
 
   /**
    * Link text that tells a screen-reader user nothing on its own.
@@ -713,17 +714,22 @@ export default function (eleventyConfig) {
     );
   }
 
+  const inlineMarkdownCache = new Map();
   eleventyConfig.addFilter("inlineMarkdown", (value) => {
     if (!value) return "";
-    return markPdfLinks(
+    const key = String(value);
+    if (inlineMarkdownCache.has(key)) return inlineMarkdownCache.get(key);
+    const rendered = markPdfLinks(
       inlineMd
-        .renderInline(String(value))
+        .renderInline(key)
         .replace(/<a href="([^"]+)">([^<]*)<\/a>/g, (match, href, text) =>
           GENERIC_LINK_TEXT.test(text)
             ? `<a href="${href}">${text}<span class="visually-hidden"> (${describeTarget(href)})</span></a>`
             : match,
         ),
     );
+    inlineMarkdownCache.set(key, rendered);
+    return rendered;
   });
 
   /**
@@ -1108,8 +1114,11 @@ export default function (eleventyConfig) {
    * crawler as `&amp;lt;https://…`. Strip the markup here, before any
    * templating touches it.
    */
+  const plainTextCache = new Map();
   eleventyConfig.addFilter("plainText", (value) => {
-    const markdown = String(value ?? "")
+    const key = String(value ?? "");
+    if (plainTextCache.has(key)) return plainTextCache.get(key);
+    const markdown = key
       .replace(/<https?:\/\/[^>\s]+>/gi, " ")
       .replace(/\[([^\]]*)\]\([^)]*\)/g, "$1") // links
       .replace(/[*_`]/g, ""); // emphasis and code markers
@@ -1123,7 +1132,9 @@ export default function (eleventyConfig) {
       .trim();
     // Roughly what a search result will show; the rest is truncated by the
     // consumer anyway, and a description that fits is one that gets read.
-    return truncateAtWord(text, 300);
+    const out = truncateAtWord(text, 300);
+    plainTextCache.set(key, out);
+    return out;
   });
 
   /**
@@ -1210,7 +1221,7 @@ export default function (eleventyConfig) {
     doi: [512, 512],
   };
 
-  eleventyConfig.addShortcode("registryIcon", (name) => {
+  const renderRegistryIcon = (name) => {
     if (LOGO_FILES[name]) {
       const [w, h] = LOGO_SIZES[name] ?? [512, 512];
       return `<img class="registry-icon registry-icon--${name}" src="/logos/${LOGO_FILES[name]}" alt="" width="${w}" height="${h}" loading="lazy" decoding="async">`;
@@ -1231,6 +1242,70 @@ export default function (eleventyConfig) {
       default:
         return "";
     }
+  };
+  eleventyConfig.addShortcode("registryIcon", renderRegistryIcon);
+
+  const ICON_ORCID = renderRegistryIcon("orcid");
+  const ICON_SCHOLIA = renderRegistryIcon("scholia");
+  const ICON_ROR = renderRegistryIcon("ror");
+
+  const renderAffiliationSpan = (affId) => {
+    const aff = affiliation(affId);
+    const about = aff.qid ? ` about="wd:${escapeHtml(aff.qid)}"` : "";
+    const name = `<span property="name">${escapeHtml(aff.name ?? "")}</span>`;
+    let inner = name;
+    if (aff.ror) {
+      const ror = escapeHtml(aff.ror);
+      inner = `<a href="${ror}" rel="sameAs noopener noreferrer" title="ROR ${ror}">${ICON_ROR}${name}</a>`;
+    } else if (aff.qid) {
+      const qid = escapeHtml(aff.qid);
+      inner = `<a href="https://www.wikidata.org/wiki/${qid}" rel="sameAs noopener noreferrer" title="Wikidata ${qid}">${name}</a>`;
+    }
+    return `<span property="affiliation" typeof="Organization"${about}>${inner}</span>`;
+  };
+
+  eleventyConfig.addShortcode("authorList", (authors, mode = "article") => {
+    if (!authors?.length) return "";
+    if (mode === "article") {
+      const items = authors
+        .map((author, idx) => {
+          const about = author.qid ? ` about="wd:${escapeHtml(author.qid)}"` : "";
+          const corr = author.corresponding
+            ? '<abbr class="mark" title="Corresponding author">†</abbr>'
+            : "";
+          const eq = author.equalContributor
+            ? '<abbr class="mark" title="Equal contribution">*</abbr>'
+            : "";
+          const orcid = author.orcid
+            ? ` <a class="author__id" href="https://orcid.org/${escapeHtml(author.orcid)}" rel="sameAs noopener noreferrer" title="ORCID ${escapeHtml(author.orcid)}">${ICON_ORCID}ORCID</a>`
+            : "";
+          const scholia = author.qid
+            ? ` <a class="author__id" href="https://qlever.scholia.wiki/author/${escapeHtml(author.qid)}" rel="sameAs noopener noreferrer" title="Scholia ${escapeHtml(author.qid)}">${ICON_SCHOLIA}Scholia</a>`
+            : "";
+          const affs = author.affiliationIds?.length
+            ? `<span class="author__affiliation">${author.affiliationIds.map(renderAffiliationSpan).join("; ")}</span>`
+            : "";
+          return `<li class="author" property="author" typeof="Person"${about}><span class="author__name">${idx + 1}. <span property="name">${escapeHtml(author.name)}</span>${corr}${eq}${orcid}${scholia}</span>${affs}</li>`;
+        })
+        .join("");
+      return `<div class="article__authors"><h2 class="article__subheading">Authors</h2><ol class="author-list">${items}</ol></div>`;
+    }
+    const items = authors
+      .map((author) => {
+        const about = author.qid ? ` about="wd:${escapeHtml(author.qid)}"` : "";
+        const orcid = author.orcid
+          ? `<a class="author__id" href="https://orcid.org/${escapeHtml(author.orcid)}" rel="sameAs noopener noreferrer" title="ORCID ${escapeHtml(author.orcid)}">${ICON_ORCID}ORCID</a>`
+          : "";
+        const scholia = author.qid
+          ? `<a class="author__id" href="https://qlever.scholia.wiki/author/${escapeHtml(author.qid)}" rel="sameAs noopener noreferrer" title="Scholia ${escapeHtml(author.qid)}">${ICON_SCHOLIA}Scholia</a>`
+          : "";
+        const affs = author.affiliationIds?.length
+          ? `<span class="event-detail__affiliations">${author.affiliationIds.map(renderAffiliationSpan).join("; ")}</span>`
+          : "";
+        return `<p class="event-detail__author" property="${mode}" typeof="Person"${about}><span property="name">${escapeHtml(author.name)}</span>${orcid}${scholia}${affs}</p>`;
+      })
+      .join("");
+    return `<div class="event-detail__authors">${items}</div>`;
   });
 
   /**

@@ -99,29 +99,29 @@ function contrast(a, b) {
   return (l1 + 0.05) / (l2 + 0.05);
 }
 
-/** [foreground, background, required ratio, label] */
+/** [foreground, background, required ratio (WCAG AAA 7:1), label] */
 const PAIRS = [
-  ["text", "bg", 4.5, "body text"],
-  ["text", "surface", 4.5, "text on raised surface"],
-  ["text-muted", "bg", 4.5, "muted text"],
-  ["text-muted", "surface", 4.5, "muted text on surface"],
-  ["text-muted", "surface-sunken", 4.5, "muted text on sunken"],
-  ["text-faint", "bg", 4.5, "faint text (CiTO labels)"],
-  ["link", "bg", 4.5, "link"],
-  ["link", "surface", 4.5, "link on surface"],
-  ["link-visited", "bg", 4.5, "visited link"],
-  ["brand-ink", "brand", 4.5, "button text"],
-  ["text", "code-bg", 4.5, "text on code background"],
-  ["border-strong", "bg", 3.0, "tag border + year rule"],
-  ["focus", "bg", 3.0, "focus ring"],
-  ["focus", "surface", 3.0, "focus ring on surface"],
+  ["text", "bg", 7.0, "body text"],
+  ["text", "surface", 7.0, "text on raised surface"],
+  ["text-muted", "bg", 7.0, "muted text"],
+  ["text-muted", "surface", 7.0, "muted text on surface"],
+  ["text-muted", "surface-sunken", 7.0, "muted text on sunken"],
+  ["text-faint", "bg", 7.0, "faint text (CiTO labels)"],
+  ["link", "bg", 7.0, "link"],
+  ["link", "surface", 7.0, "link on surface"],
+  ["link-visited", "bg", 7.0, "visited link"],
+  ["brand-ink", "brand", 7.0, "button text"],
+  ["text", "code-bg", 7.0, "text on code background"],
+  ["border-strong", "bg", 7.0, "tag border + year rule"],
+  ["focus", "bg", 7.0, "focus ring"],
+  ["focus", "surface", 7.0, "focus ring on surface"],
   // The topic pills and the selected theme button, both of which paint text on
   // a brand or sunken ground.
-  ["brand", "brand-soft", 4.5, "topic pill on brand-soft (hover)"],
-  ["text-faint", "surface-sunken", 4.5, "topic count on sunken"],
+  ["brand", "brand-soft", 7.0, "topic pill on brand-soft (hover)"],
+  ["text-faint", "surface-sunken", 7.0, "topic count on sunken"],
   // A registry value (`.identifier`) inherits its colour from its link, so it
   // is the link pair on each ground it appears over.
-  ["link", "brand-soft", 4.5, "identifier link on brand-soft"],
+  ["link", "brand-soft", 7.0, "identifier link on brand-soft"],
 ];
 
 const css = readFileSync(SHEET, "utf-8");

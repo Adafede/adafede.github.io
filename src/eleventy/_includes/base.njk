@@ -23,9 +23,14 @@
          connect-src allows SimpleAnalytics' beacon endpoint. -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'strict-dynamic' 'sha384-6r8ANWkTbGeAoBOxTtwsJD6VBfqnKe+kD3q/w51t91jCOCSxtKcCN2erSIv/1GHO' https://scripts.simpleanalyticscdn.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://*.simpleanalytics.com https://scripts.simpleanalyticscdn.com https://*.wikidata.org https://*.wikimedia.org https://*.scholia.wiki https://hypothes.is; base-uri 'self'; form-action 'self'; object-src 'none'; require-trusted-types-for 'script'; trusted-types 'none'; upgrade-insecure-requests" />
 
-    {%- set pageTitle = (site.author ~ ' — ' ~ title) if (title and title != site.author) else site.author %}
+    {%- set entry = post or article or talk or course or item %}
+    {%- set meta = post and post.data %}
+    {%- set effectiveRdfaType = (meta and meta.rdfaType) or rdfaType %}
+    {%- set effectiveTitle = title or (entry and entry.data.title) %}
+    {%- set pageTitle = (site.author ~ ' — ' ~ effectiveTitle) if (effectiveTitle and effectiveTitle != site.author) else site.author %}
     <title>{{ pageTitle }}</title>
-    {% set summary = (meta and meta.description) or description %}
+    {%- set rawSummary = description or (article and (article.data.abstract | orDescription(article.data))) or (entry and (entry.data.description or entry.data.venue)) %}
+    {%- set summary = (rawSummary | plainText) if entry else rawSummary %}
     {# The canonical URL is this page's own address. Deriving it from `page.url`
        rather than from a front-matter field means every page gets one: a
        canonical link that is present on some pages and absent on others is
@@ -39,7 +44,7 @@
        this used to render as a bare "Eleventy ". #}
     <meta name="generator" content="Eleventy" />
 
-    <meta property="og:type" content="{% if meta and meta.rdfaType %}article{% else %}website{% endif %}" />
+    <meta property="og:type" content="{% if effectiveRdfaType %}article{% else %}website{% endif %}" />
     <meta property="og:site_name" content="{{ site.author }}" />
     <meta property="og:locale" content="en" />
     {# The full title, not the bare page title. A link preview stands alone in
@@ -60,7 +65,7 @@
     {% if summary %}<meta name="twitter:description" content="{{ summary }}" />{% endif %}
     <meta name="twitter:image" content="{{ site.url }}{{ site.ogImage }}" />
 
-    {% if meta and meta.rdfaType %}<meta property="schema:type" content="{{ meta.rdfaType }}" />{% endif %}
+    {% if effectiveRdfaType %}<meta property="schema:type" content="{{ effectiveRdfaType }}" />{% endif %}
     {% if meta and meta.authors %}{% for author in meta.authors %}<meta name="citation_author" content="{{ author.name }}" />{% endfor %}{% endif %}
     {% if meta and meta.pubDate %}<meta name="citation_publication_date" content="{{ meta.pubDate | readableDate }}" />{% endif %}
     {% if meta and meta.doi %}<meta name="citation_doi" content="{{ meta.doi }}" />{% endif %}

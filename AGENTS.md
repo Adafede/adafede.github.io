@@ -12,7 +12,7 @@ bun install --frozen-lockfile && uv sync
 
 ## Verify — start here
 ```sh
-bun run test                                # 92 pytest + 25 node --test, ~5s
+bun run test                                # 95 pytest + 31 node --test, ~3s
 bun run build:eleventy && bun run check     # links + rdfa + document + contrast, ~1.5s
 bun run lint                                # the full prek hook set, ~17s
 ```
@@ -71,12 +71,12 @@ reads `_eleventy_site/`.
 7. Commit messages are Conventional Commits (`feat:`, `fix:`, `chore(scope):`).
 
 ## Repo map
-- `eleventy.config.mjs` (1277 lines, 31 `addFilter` calls) — all filters, collections,
+- `eleventy.config.mjs` (1379 lines, 29 `addFilter` calls) — all filters, collections,
   markdown-it plugins. The hottest file; read it by line range, never whole.
 - `src/eleventy/**` — Nunjucks templates (`pages/`, `_includes/`) and `_data/*.js`.
 - `src/eleventy/static/` — passthrough assets, including the logo set.
-- `src/lib/*.mjs` — bib (tested), jsonFeed and prefixes (currently untested).
-- `src/styles/global.css` (2909 lines) — the whole design system as CSS custom properties.
+- `src/lib/*.mjs` — bib, jsonFeed and prefixes (all tested).
+- `src/styles/global.css` (2571 lines) — the whole design system as CSS custom properties.
 - `src/content/**` — GENERATED, gitignored. Never edit.
 - `scripts/site/*.py` — content pipeline: `migrate_posts`, `build_talkmap`,
   `build_expertise`, `academic_cv` (runs in `cv-academic.qmd`'s python cell),

@@ -5,11 +5,7 @@ pagination:
   size: 1
   alias: post
 permalink: "/posts/{{ post.id }}.html"
-# `description` is derived from the opening prose in _data/sitecontent.js,
-# because eleventyComputed would escape the raw body passing it through here.
-eleventyComputed:
-  title: "{{ post.data.title | safe }}"
-  description: "{{ post.data.description | plainText }}"
+eleventyExcludeFromCollections: true
 ---
 {% set meta = post.data %}
 {# Same trail as talks/articles/varia: listing → this page. Without it a post

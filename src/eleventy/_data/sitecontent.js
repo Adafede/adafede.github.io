@@ -135,12 +135,15 @@ function loadEvents(dir) {
     .sort(byDateDesc);
 }
 
+let singleton;
+
 export default function buildData() {
+  if (singleton) return singleton;
   const memo = (fn) => {
     let cached;
     return () => (cached ??= fn());
   };
-  return {
+  singleton = {
     posts: memo(() =>
       loadCollection("posts", (d) => ({ pubDate: new Date(d.pubDate) }))
         .map((p) => ({
@@ -188,4 +191,5 @@ export default function buildData() {
       meta: readJson("cv/meta.json", { profession: "", footer: {}, meta: [] }),
     })),
   };
+  return singleton;
 }

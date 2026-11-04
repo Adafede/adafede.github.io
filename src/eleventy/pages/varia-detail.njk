@@ -5,9 +5,7 @@ pagination:
   size: 1
   alias: item
 permalink: "/varia/{{ item.id }}.html"
-eleventyComputed:
-  title: "{{ item.data.title | safe }}"
-  description: "{{ item.data.description | plainText }}"
+eleventyExcludeFromCollections: true
 ---
 <article class="event-detail" vocab="https://schema.org/" typeof="CreativeWork" resource="{{ site.url }}{{ page.url }}">
   <nav class="breadcrumb" aria-label="Breadcrumb">
