@@ -76,4 +76,4 @@ testpaths = ["tests"]
 target-version = "py313"
 
 [tool.ty.rules]
-unresolved-import = "ignore"
+import-not-found = "ignore"
