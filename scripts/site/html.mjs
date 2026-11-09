@@ -31,6 +31,16 @@ const NAMED_ENTITIES = {
   nbsp: "\u00a0",
 };
 
+function replaceUntilStable(input, re, replacement) {
+  let current = String(input ?? "");
+  let previous;
+  do {
+    previous = current;
+    current = current.replace(re, replacement);
+  } while (current !== previous);
+  return current;
+}
+
 function decodeEntities(text) {
   return text.replace(
     /&(?:#(\d+)|#x([0-9a-fA-F]+)|([a-zA-Z0-9]+));/g,
@@ -43,11 +53,12 @@ function decodeEntities(text) {
 }
 
 export function removeScriptAndStyle(html) {
-  return String(html ?? "").replace(SCRIPT_OR_STYLE_RE, "");
+  return replaceUntilStable(html, SCRIPT_OR_STYLE_RE, "");
 }
 
 export function htmlText(html, { separateTags = false } = {}) {
-  const stripped = removeScriptAndStyle(html).replace(
+  const stripped = replaceUntilStable(
+    removeScriptAndStyle(html),
     COMMENT_OR_TAG_RE,
     separateTags ? " " : "",
   );
