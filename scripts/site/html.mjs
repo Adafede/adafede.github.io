@@ -43,7 +43,13 @@ function decodeEntities(text) {
 }
 
 export function removeScriptAndStyle(html) {
-  return String(html ?? "").replace(SCRIPT_OR_STYLE_RE, "");
+  let cleaned = String(html ?? "");
+  let previous;
+  do {
+    previous = cleaned;
+    cleaned = cleaned.replace(SCRIPT_OR_STYLE_RE, "");
+  } while (cleaned !== previous);
+  return cleaned;
 }
 
 export function htmlText(html, { separateTags = false } = {}) {
