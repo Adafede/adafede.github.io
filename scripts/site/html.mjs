@@ -18,7 +18,7 @@ export function htmlFiles(dir) {
   return out;
 }
 
-const SCRIPT_OR_STYLE_RE = /<(script|style)\b[^>]*>[\s\S]*?<\/\1\s*>/gi;
+const SCRIPT_OR_STYLE_RE = /<(script|style)\b[^>]*>[\s\S]*?(?:<\/\1\s*>|$)/gi;
 const COMMENT_OR_TAG_RE = /<!--[\s\S]*?-->|<\/?[a-zA-Z!][^>]*>/g;
 const ATTR_RE =
   /([a-zA-Z_:][\w:.-]*)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=<>`]+)))?/g;

@@ -39,10 +39,10 @@ test("finds the first matching HTML element independent of tag case", () => {
   );
 });
 
-test("removes script and style elements including mixed-case tags", () => {
+test("removes script and style elements including mixed-case and unclosed tags", () => {
   const result = removeScriptAndStyle(
-    "<!doctype html><html><head><STYLE>secret</STYLE></head><body><SCRIPT>bad()</SCRIPT><main>ok</main></body></html>",
+    "<!doctype html><html><head><STYLE>secret</STYLE></head><body><SCRIPT>bad()</SCRIPT><main>ok</main><script>unclosed()",
   );
-  assert.doesNotMatch(result, /secret|bad\(\)/);
+  assert.doesNotMatch(result, /secret|bad\(\)|unclosed\(\)/);
   assert.match(result, /<main>ok<\/main>/);
 });
