@@ -40,9 +40,10 @@
     <link rel="canonical" href="{{ canonicalUrl }}" />
 
     <meta name="author" content="{{ site.author }}" />
-    {# Not a version pin: `eleventy.generator` is not exposed to templates, so
-       this used to render as a bare "Eleventy ". #}
-    <meta name="generator" content="Eleventy" />
+    {# `eleventy.generator` is populated by Eleventy's data cascade (e.g.
+       "Eleventy v3.1.7"), which tools like Speedlify read for stack version
+       detection; falls back to "Eleventy" if rendered outside the cascade. #}
+    <meta name="generator" content="{{ eleventy.generator or 'Eleventy' }}" />
 
     <meta property="og:type" content="{% if effectiveRdfaType %}article{% else %}website{% endif %}" />
     <meta property="og:site_name" content="{{ site.author }}" />
@@ -75,11 +76,11 @@
     <link rel="alternate" type="application/rss+xml" title="{{ site.author }} — All items" href="/rss.xml" />
     <link rel="alternate" type="application/atom+xml" title="{{ site.author }} — Posts" href="/atom.xml" />
     <link rel="alternate" type="application/feed+json" title="{{ site.author }} — Posts" href="/posts.json" />
-    {# One feed per listing, as Quarto published. Declared here so a reader
-       arriving at any page can subscribe to the section they are reading
-       without first finding its feed URL. #}
+    {# One feed per listing, as Quarto published. Declared on the listing and
+       its detail pages so a reader arriving at a section can subscribe to it
+       without first finding its feed URL, while keeping other pages lean. #}
     {%- for feed in listingFeeds %}
-    {%- if feed.slug != 'rss' %}
+    {%- if feed.slug != 'rss' and (page.url == feed.url or page.url.startsWith('/' + feed.slug + '/')) %}
     <link rel="alternate" type="application/rss+xml" title="{{ site.author }} — {{ feed.title }}" href="/{{ feed.slug }}.xml" />
     {%- endif %}
     {%- endfor %}

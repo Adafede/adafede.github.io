@@ -130,37 +130,42 @@ for (const page of pages) {
       ...definedClasses.filter((name) => !usedClasses.has(name)),
       ...definedIds.filter((name) => !usedIds.has(name)),
     ];
+    const isMissing = (comp) => {
+      if (comp.type === "class") return !usedClasses.has(comp.name);
+      if (comp.type === "id") return !usedIds.has(comp.name);
+      if (comp.type === "type") return !usedTags.has(comp.name.toLowerCase());
+      if (comp.type === "attribute") {
+        const attr = comp.name.toLowerCase();
+        if (!usedAttrs.names.has(attr)) return true;
+        if (comp.operation?.operator === "equal") {
+          return !usedAttrs.pairs.has(`${attr}=${comp.operation.value}`);
+        }
+      }
+      return false;
+    };
     const { code } = transform({
       filename: "inline.css",
       code: cssBuffer,
       minify: true,
       unusedSymbols: unused,
       visitor: {
+        Selector(sel) {
+          if (sel.some(isMissing)) {
+            return [{ type: "class", name: "__unused__" }];
+          }
+        },
         Rule: {
           style(rule) {
-            const everyMissing = rule.value.selectors.every((sel) =>
-              sel.some((comp) => {
-                if (comp.type === "type") {
-                  return !usedTags.has(comp.name.toLowerCase());
-                }
-                if (comp.type === "attribute") {
-                  const attr = comp.name.toLowerCase();
-                  if (!usedAttrs.names.has(attr)) return true;
-                  if (comp.operation?.operator === "equal") {
-                    return !usedAttrs.pairs.has(
-                      `${attr}=${comp.operation.value}`,
-                    );
-                  }
-                }
-                return false;
-              }),
-            );
-            if (everyMissing) return [];
+            if (rule.value.selectors.every((sel) => sel.some(isMissing))) {
+              return [];
+            }
           },
         },
       },
     });
-    const rawOut = code.toString();
+    const rawOut = code
+      .toString()
+      .replace(/(?:,\.__unused__)+|\.__unused__,/g, "");
 
     // Safety net: purging must never remove a custom property a surviving rule
     // still reads. Referenced-without-fallback-and-nowhere-defined is a build

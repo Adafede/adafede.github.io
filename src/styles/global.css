@@ -1165,6 +1165,8 @@ figcaption {
 
 .expertise {
   margin-block-start: var(--space-m);
+  content-visibility: auto;
+  contain-intrinsic-size: auto 34rem;
 }
 
 .expertise__pack {
