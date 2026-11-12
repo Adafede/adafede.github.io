@@ -20,7 +20,7 @@ class MetadataService:
     """Handles YAML metadata updates for posts."""
 
     YAML_FRONTMATTER_PATTERN: re.Pattern[str] = re.compile(
-        r"^---\n(.*?)\n---\n(.*)$",
+        r"\A---[ \t]*\r?\n(.*?)\r?\n---[ \t]*(?:\r?\n|\Z)(.*)\Z",
         re.DOTALL,
     )
 
@@ -47,9 +47,6 @@ class MetadataService:
         else:
             data = {}
             body = content
-
-        if "doi" in data and not generate_doi:
-            return False
 
         changed = False
 

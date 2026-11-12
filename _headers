@@ -15,7 +15,7 @@
   # Harden against XSS and clickjacking while allowing the one analytics script the site loads.
   # There are no inline or self-hosted scripts, so the only hash is SimpleAnalytics' (hard-coded:
   # it comes from a versionless URL with no local file to derive it from).
-  Content-Security-Policy: default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'strict-dynamic' 'sha384-yzZn7eUfB4MGWLJ6nlCFRZcvWNWya4kAYI7R7BcN/dXNqrHoUK/IHwn1vzD7ssM/' https://scripts.simpleanalyticscdn.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self' https://*.simpleanalytics.com https://scripts.simpleanalyticscdn.com https://*.wikidata.org https://*.wikimedia.org https://*.scholia.wiki https://hypothes.is; frame-src 'self' https://*.wikidata.org https://*.scholia.wiki; media-src 'self'; manifest-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests; block-all-mixed-content; require-trusted-types-for 'script'; trusted-types 'none'
+  Content-Security-Policy: default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'strict-dynamic' 'sha384-yzZn7eUfB4MGWLJ6nlCFRZcvWNWya4kAYI7R7BcN/dXNqrHoUK/IHwn1vzD7ssM/' https://scripts.simpleanalyticscdn.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self' https://*.simpleanalytics.com https://scripts.simpleanalyticscdn.com https://*.wikidata.org https://*.wikimedia.org https://*.scholia.wiki https://hypothes.is; frame-src 'self' https://*.wikidata.org https://*.scholia.wiki; media-src 'self'; manifest-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests
 
   # Prevent MIME type sniffing
   X-Content-Type-Options: nosniff
@@ -41,7 +41,7 @@
   # DNS prefetch control
   X-DNS-Prefetch-Control: on
 
-  # Prevent search engines from showing cached versions
+  # Opt out of AI/ML training dataset scraping
   X-Robots-Tag: noai, noimageai
 
   # Machine-readable discovery links for agents and crawlers
@@ -77,6 +77,15 @@
 # =============================================================================
 /images/*
   Cache-Control: public, max-age=2592000, stale-while-revalidate=604800
+  Cross-Origin-Resource-Policy: cross-origin
+
+/logos/*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=604800
+  Cross-Origin-Resource-Policy: cross-origin
+
+/*.avif
+  Cache-Control: public, max-age=31536000, immutable
+  Cross-Origin-Resource-Policy: cross-origin
 
 /*.png
   Cache-Control: public, max-age=2592000, stale-while-revalidate=604800
@@ -148,12 +157,13 @@
   Content-Type: application/feed+json; charset=utf-8
   Access-Control-Allow-Origin: *
 
+/atom.xml
+  Cache-Control: public, max-age=1800, stale-while-revalidate=3600
+  Content-Type: application/atom+xml; charset=utf-8
+
 /rss.xml
   Cache-Control: public, max-age=1800, stale-while-revalidate=3600
   Content-Type: application/rss+xml; charset=utf-8
-
-/*.xml
-  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
 
 # =============================================================================
 # Sitemap

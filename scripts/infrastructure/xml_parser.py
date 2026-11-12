@@ -8,7 +8,6 @@ so the rest of the codebase can rely on real static types instead of `Any`.
 from __future__ import annotations
 
 from typing import Protocol, cast
-from xml.etree.ElementTree import ParseError as XmlParseError
 
 
 # Typed interface for lxml.etree module
@@ -31,12 +30,13 @@ class EtreeModule(Protocol):
     def CDATA(self, content: str) -> object: ...
 
     ElementTree: ElementTreeClass
+    XMLSyntaxError: type[Exception]
 
 
 # Import lxml and cast to typed interface
 import lxml.etree as _lxml_etree
 
-_etree: EtreeModule = _lxml_etree  # pyright: ignore[reportAssignmentType]
+_etree: EtreeModule = cast(EtreeModule, _lxml_etree)
 
 
 class XmlElement(Protocol):
@@ -55,7 +55,7 @@ class XmlElement(Protocol):
 class XmlParser:
     """Thin, typed facade over ``lxml.etree``."""
 
-    ParseError: type[XmlParseError] = XmlParseError
+    ParseError: type[Exception] = _etree.XMLSyntaxError
 
     @staticmethod
     def fromstring(content: bytes | str) -> XmlElement:

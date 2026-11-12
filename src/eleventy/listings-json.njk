@@ -11,8 +11,8 @@ eleventyExcludeFromCollections: true
 [
 {% for feed in listingFeeds %}{% if not loop.first %},{% endif %}
   {
-    "listing": "{{ feed.url }}",
-    "items": [{% for item in feed.items() %}"{{ item.url }}"{% if not loop.last %},{% endif %}{% endfor %}]
+    "listing": {{ feed.url | dump | safe }},
+    "items": [{% for item in feed.items() | limitCount(feed.limit) %}{{ item.url | dump | safe }}{% if not loop.last %},{% endif %}{% endfor %}]
   }
 {% endfor %}
 ]

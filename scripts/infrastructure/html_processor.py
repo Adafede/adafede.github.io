@@ -42,17 +42,6 @@ class HtmlProcessor:
             logger.error(f"Failed to parse HTML from {path}: {e}")
             return None
 
-    def load_from_string(self, html_str: str) -> BeautifulSoup:
-        """Parse HTML from string.
-
-        Args:
-            html_str: HTML content as string
-
-        Returns:
-            BeautifulSoup object
-        """
-        return BeautifulSoup(html_str, self.parser)
-
     def save_to_path(self, soup: BeautifulSoup, path: Path) -> None:
         """Save BeautifulSoup object to file.
 
@@ -157,5 +146,5 @@ class HtmlProcessor:
         """
         value = element.get(attr_name, default)
         if isinstance(value, list):
-            return str(value[0]) if value else default
+            return " ".join(str(v) for v in value) if value else default
         return value

@@ -7,7 +7,6 @@ pagination:
 permalink: "/posts/{{ post.id }}.html"
 eleventyExcludeFromCollections: true
 ---
-{% set meta = post.data %}
 {# Same trail as talks/articles/varia: listing → this page. Without it a post
    was the one detail type that left readers with only the sticky header. #}
 <nav class="breadcrumb" aria-label="Breadcrumb">
@@ -18,7 +17,7 @@ eleventyExcludeFromCollections: true
     </li>
     <li><span aria-hidden="true">/</span></li>
     <li property="itemListElement" typeof="ListItem">
-      <span property="item" typeof="WebPage"><span property="name">{{ post.data.title }}</span></span>
+      <span property="item" typeof="WebPage" resource="{{ site.url }}{{ page.url }}"><span property="name">{{ post.data.title }}</span></span>
       <meta property="position" content="2" />
     </li>
   </ol>
@@ -28,8 +27,7 @@ eleventyExcludeFromCollections: true
    measure. A post is a page of its own here, and a page that stops two thirds
    of the way across reads as an accident. #}
 <article class="post post--wide" vocab="https://schema.org/" typeof="{{ post.data.rdfaType }}"
-  resource="{{ site.url }}{{ page.url }}"
-  {% if post.data.tags %}about="{{ post.data.tags | join(' ') }}"{% endif %}>
+  resource="{{ site.url }}{{ page.url }}">
   <header class="post-header">
     <h1 property="headline name" class="p-name">{{ post.data.title }}</h1>
 

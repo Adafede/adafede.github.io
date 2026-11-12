@@ -32,6 +32,7 @@ import { dirname, extname, join } from "node:path";
 import { tmpdir } from "node:os";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
+import { parseFrontmatter } from "../../src/lib/frontmatter.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
 const CONTENT = join(ROOT, "src", "content");
@@ -61,9 +62,8 @@ for (const section of ["articles", "varia"]) {
 
 const urls = new Set();
 for (const file of contentFiles) {
-  const image = readFileSync(file, "utf-8").match(
-    /^image:\s*"?([^"\n]+)"?\s*$/m,
-  )?.[1];
+  const { data } = parseFrontmatter(readFileSync(file, "utf-8"));
+  const image = typeof data.image === "string" ? data.image.trim() : "";
   if (image && CACHEABLE.test(image)) {
     urls.add(image);
   }
@@ -83,6 +83,29 @@ const readManifest = (path) => {
 const manifest = readManifest(MANIFEST);
 const thumbnails = readManifest(THUMBNAILS);
 
+for (const store of [manifest, thumbnails]) {
+  for (const key of Object.keys(store)) {
+    if (!urls.has(key)) delete store[key];
+  }
+}
+
+function runOptimizeArtwork(sourceExt, stem, buffer, targetPath) {
+  const temporaryDirectory = mkdtempSync(join(tmpdir(), "site-artwork-"));
+  const source = join(temporaryDirectory, `${stem}${sourceExt}`);
+  try {
+    writeFileSync(source, buffer);
+    const result = spawnSync(
+      "uv",
+      ["run", "python", "scripts/site/optimize_artwork.py", source, targetPath],
+      { cwd: ROOT, encoding: "utf-8" },
+    );
+    if (result.error) throw result.error;
+    return result;
+  } finally {
+    rmSync(temporaryDirectory, { recursive: true, force: true });
+  }
+}
+
 let fetched = 0;
 let failed = 0;
 
@@ -90,7 +113,7 @@ for (const url of urls) {
   const stem = createHash("sha256").update(url).digest("hex").slice(0, 16);
   let extension;
   try {
-    extension = extname(new URL(url).pathname) || ".img";
+    extension = (extname(new URL(url).pathname) || ".img").toLowerCase();
   } catch {
     // The CACHEABLE test already requires an absolute https URL, so this is a
     // malformed one. Skip it and say so rather than aborting the fetch loop.
@@ -165,72 +188,42 @@ for (const url of urls) {
     if (name.endsWith(".svg")) {
       // Nothing to do; `buffer` is already what was downloaded.
     } else if (extension === ".png" && needsRasterThumb) {
-      const temporaryDirectory = mkdtempSync(join(tmpdir(), "site-artwork-"));
-      const source = join(temporaryDirectory, `${stem}.png`);
-      const thumbnail = join(OUT, thumbnailName);
-      try {
-        writeFileSync(source, buffer);
-        const result = spawnSync(
-          "uv",
-          [
-            "run",
-            "python",
-            "scripts/site/optimize_artwork.py",
-            source,
-            thumbnail,
-          ],
-          { cwd: ROOT, encoding: "utf-8" },
+      const result = runOptimizeArtwork(
+        ".png",
+        stem,
+        buffer,
+        join(OUT, thumbnailName),
+      );
+      if (result.status === 0) {
+        thumbnails[url] = `/images/artwork/${thumbnailName}`;
+      } else if (result.status !== 2) {
+        throw new Error(
+          `Artwork thumbnail generation failed: ${result.stderr || result.status}`,
         );
-        if (result.error) throw result.error;
-        if (result.status === 0) {
-          thumbnails[url] = `/images/artwork/${thumbnailName}`;
-        } else if (result.status !== 2) {
-          throw new Error(
-            `Artwork thumbnail generation failed: ${result.stderr || result.status}`,
-          );
-        } else {
-          console.log(
-            `  = kept original PNG (no smaller WebP preview): ${url}`,
-          );
-        }
-      } finally {
-        rmSync(temporaryDirectory, { recursive: true, force: true });
+      } else {
+        console.log(`  = kept original PNG (no smaller WebP preview): ${url}`);
       }
     } else if (extension === ".gif") {
-      const temporaryDirectory = mkdtempSync(join(tmpdir(), "site-artwork-"));
-      const source = join(temporaryDirectory, `${stem}.gif`);
       const optimizedName = `${stem}-thumb.webp`;
-      const optimized = join(OUT, optimizedName);
-      try {
-        writeFileSync(source, buffer);
-        const result = spawnSync(
-          "uv",
-          [
-            "run",
-            "python",
-            "scripts/site/optimize_artwork.py",
-            source,
-            optimized,
-          ],
-          { cwd: ROOT, encoding: "utf-8" },
+      const result = runOptimizeArtwork(
+        ".gif",
+        stem,
+        buffer,
+        join(OUT, optimizedName),
+      );
+      if (result.status === 0) {
+        name = optimizedName;
+      } else if (result.status !== 2) {
+        throw new Error(
+          `GIF optimization failed: ${result.stderr || result.status}`,
         );
-        if (result.error) throw result.error;
-        if (result.status === 0) {
-          name = optimizedName;
-        } else if (result.status !== 2) {
-          throw new Error(
-            `GIF optimization failed: ${result.stderr || result.status}`,
-          );
-        } else {
-          console.log(
-            `  = kept original GIF (animated or cwebp unavailable): ${url}`,
-          );
-        }
-        if (cached && cached !== join(OUT, name) && existsSync(cached))
-          unlinkSync(cached);
-      } finally {
-        rmSync(temporaryDirectory, { recursive: true, force: true });
+      } else {
+        console.log(
+          `  = kept original GIF (animated or cwebp unavailable): ${url}`,
+        );
       }
+      if (cached && cached !== join(OUT, name) && existsSync(cached))
+        unlinkSync(cached);
     }
 
     if (name.endsWith(".gif")) writeFileSync(join(OUT, name), buffer);

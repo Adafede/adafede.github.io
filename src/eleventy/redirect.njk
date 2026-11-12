@@ -12,7 +12,7 @@ permalink: "{{ redirect.from }}"
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="refresh" content="0; url={{ redirect.to }}" />
-    <link rel="canonical" href="{{ redirect.to }}" />
+    <link rel="canonical" href="{{ site.url }}{{ redirect.to }}" />
     <meta name="robots" content="noindex, follow" />
     <title>Moved</title>
   </head>

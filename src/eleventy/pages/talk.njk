@@ -16,7 +16,7 @@ eleventyExcludeFromCollections: true
       </li>
       <li><span aria-hidden="true">/</span></li>
       <li property="itemListElement" typeof="ListItem">
-        <span property="item" typeof="WebPage"><span property="name">{{ talk.data.title }}</span></span>
+        <span property="item" typeof="WebPage" resource="{{ site.url }}{{ page.url }}"><span property="name">{{ talk.data.title }}</span></span>
         <meta property="position" content="2" />
       </li>
     </ol>

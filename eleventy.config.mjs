@@ -22,37 +22,25 @@ import {
   htmlText as extractHtmlText,
 } from "./scripts/site/html.mjs";
 import {
-  parseBib,
-  renderReference,
+  MONTHS,
+  detex,
+  escapeHtml,
   inlineCitation,
   parseAuthors,
-  detex,
+  parseBib,
+  renderReference,
 } from "./src/lib/bib.mjs";
-import siteContent from "./src/eleventy/_data/sitecontent.js";
+import { truncateAtWord } from "./src/lib/frontmatter.mjs";
+import siteContent, { resetSiteContent } from "./src/eleventy/_data/sitecontent.js";
 import { buildJsonFeed } from "./src/lib/jsonFeed.mjs";
 
 const ROOT = dirname(fileURLToPath(import.meta.url));
+const BIB_PATH = fileURLToPath(new URL("./posts/references.bib", import.meta.url));
+const SITE_HOST = "adafede.github.io";
 
-const BIB = readFileSync(
-  fileURLToPath(new URL("./posts/references.bib", import.meta.url)),
-  "utf-8",
-);
-const bib = parseBib(BIB);
+let bib = parseBib(readFileSync(BIB_PATH, "utf-8"));
 
-const MONTH_NAMES = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
+const MONTH_NAMES = MONTHS.map((m) => m[0].toUpperCase() + m.slice(1));
 
 /**
  * CiTO predicates are snake_case in the post sources (`[@cites_as_data:key]`)
@@ -171,97 +159,44 @@ const toDate = (value) => {
   return d;
 };
 
-/**
- * Truncate to `limit` characters, but never mid-word.
- *
- * Cutting at a fixed index reads as a rendering bug rather than as an
- * ellipsis: "…that fits are one that ge…" is the kind of thing a reader
- * notices and trusts less. Break at the last space before the limit and keep
- * the word whole.
- */
-function truncateAtWord(text, limit) {
-  const value = String(text ?? "").trim();
-  if (value.length <= limit) return value;
-  const clipped = value.slice(0, limit);
-  const lastSpace = clipped.lastIndexOf(" ");
-  const cut = lastSpace > limit * 0.6 ? clipped.slice(0, lastSpace) : clipped;
-  return `${cut.replace(/[\s,;:.—-]+$/, "")}…`;
-}
-
-// --- superscript -----------------------------------------------------------
+// --- superscript & subscript ------------------------------------------------
 
 /**
- * Pandoc's `^2^` superscript, which markdown-it has no rule for.
- *
- * The Quarto sources write MultiMS^2^ and Pandoc renders it `<sup>2</sup>`.
- * Without this rule markdown-it passes the carets through, and every title and
- * abstract in that shape reads as "^2^" on the page.
- *
- * Anchored like Pandoc: no whitespace inside the pair and none immediately
- * before it, so a bare "^" in prose, an exponent like "x^2" and a caret with
- * nothing after it are all left as written.
+ * Pandoc's `^2^` superscript and `~2~` subscript, which markdown-it has no
+ * built-in rule for. Anchored like Pandoc: no whitespace inside the pair.
  */
-function superscript(mdi) {
-  mdi.inline.ruler.before("emphasis", "superscript", (state, silent) => {
+function delimitedInlineRule(mdi, markerCode, markerChar, name, tag) {
+  mdi.inline.ruler.before("emphasis", name, (state, silent) => {
     const start = state.pos;
     const max = state.posMax;
-    if (state.src.charCodeAt(start) !== 0x5e /* ^ */) return false;
+    if (state.src.charCodeAt(start) !== markerCode) return false;
     if (state.src[start + 1] === undefined || /\s/.test(state.src[start + 1]))
       return false;
 
     let pos = start + 1;
     while (pos < max) {
       const ch = state.src[pos];
-      if (ch === "^") break;
+      if (ch === markerChar) break;
       if (/\s/.test(ch) || ch === undefined) return false;
       pos++;
     }
     if (pos >= max || pos === start + 1) return false;
 
     if (!silent) {
-      const token = state.push("superscript", "", 0);
+      const token = state.push(name, "", 0);
       token.content = state.src.slice(start + 1, pos);
     }
     state.pos = pos + 1;
     return true;
   });
 
-  mdi.renderer.rules.superscript = (tokens, idx) =>
-    `<sup>${escapeHtml(tokens[idx].content)}</sup>`;
+  mdi.renderer.rules[name] = (tokens, idx) =>
+    `<${tag}>${escapeHtml(tokens[idx].content)}</${tag}>`;
 }
 
-function subscript(mdi) {
-  mdi.inline.ruler.before("emphasis", "subscript", (state, silent) => {
-    const start = state.pos;
-    const max = state.posMax;
-    if (state.src.charCodeAt(start) !== 0x7e /* ~ */) return false;
-    if (state.src[start + 1] === undefined || /\s/.test(state.src[start + 1]))
-      return false;
-
-    let pos = start + 1;
-    while (pos < max) {
-      const ch = state.src[pos];
-      if (ch === "~") break;
-      if (/\s/.test(ch) || ch === undefined) return false;
-      pos++;
-    }
-    if (pos >= max || pos === start + 1) return false;
-
-    if (!silent) {
-      const token = state.push("subscript", "", 0);
-      token.content = state.src.slice(start + 1, pos);
-    }
-    state.pos = pos + 1;
-    return true;
-  });
-
-  mdi.renderer.rules.subscript = (tokens, idx) =>
-    `<sub>${escapeHtml(tokens[idx].content)}</sub>`;
-}
-
-const md = markdownIt({ html: true, linkify: false, typographer: false });
-superscript(md);
-subscript(md);
+export const md = markdownIt({ html: true, linkify: false, typographer: false });
+delimitedInlineRule(md, 0x5e, "^", "superscript", "sup");
+delimitedInlineRule(md, 0x7e, "~", "subscript", "sub");
 
 const inlineMd = markdownIt({
   html: false,
@@ -269,8 +204,8 @@ const inlineMd = markdownIt({
   typographer: false,
 });
 inlineMd.linkify.set({ fuzzyLink: false, fuzzyEmail: false });
-superscript(inlineMd);
-subscript(inlineMd);
+delimitedInlineRule(inlineMd, 0x5e, "^", "superscript", "sup");
+delimitedInlineRule(inlineMd, 0x7e, "~", "subscript", "sub");
 // Warm up linkify's regex state machine at module load time.
 inlineMd.renderInline("https://example.org");
 
@@ -293,6 +228,28 @@ const rawIncludeCache = new Map();
  * keyboard-operable and announced correctly, controlling a region that is
  * simply shown or hidden.
  */
+const PANEL_LANGS = {
+  english: "en",
+  francais: "fr",
+  français: "fr",
+  french: "fr",
+  deutsch: "de",
+  german: "de",
+  italiano: "it",
+  italian: "it",
+  espanol: "es",
+  español: "es",
+  spanish: "es",
+};
+
+function resolvePanelLang(label) {
+  const lower = String(label ?? "")
+    .trim()
+    .toLowerCase();
+  if (/^[a-z]{2}$/.test(lower)) return lower;
+  return PANEL_LANGS[lower] ?? "";
+}
+
 md.block.ruler.before(
   "fence",
   "panel_tabset",
@@ -305,26 +262,28 @@ md.block.ruler.before(
 
     // Collect until the closing fence.
     let nextLine = startLine;
+    let closed = false;
     while (nextLine + 1 < endLine) {
       nextLine++;
       const from = state.bMarks[nextLine] + state.tShift[nextLine];
       const to = state.eMarks[nextLine];
-      if (state.src.slice(from, to).trim() === ":::") break;
+      if (state.src.slice(from, to).trim() === ":::") {
+        closed = true;
+        break;
+      }
     }
-    if (nextLine >= endLine) return false;
+    if (!closed) return false;
 
     // Split the block at its `### Label` headings; each becomes one tab.
     const lines = [];
     for (let i = startLine + 1; i < nextLine; i++) {
-      const from = state.bMarks[i] + state.tShift[i];
-      const to = state.eMarks[i];
-      lines.push(state.src.slice(from, to));
+      lines.push(state.src.slice(state.bMarks[i], state.eMarks[i]));
     }
 
     const panels = [];
     let current = null;
     for (const line of lines) {
-      const heading = /^###\s+(.+?)\s*$/.exec(line);
+      const heading = /^\s*###\s+(.+?)\s*$/.exec(line);
       if (heading) {
         current = { label: heading[1].trim(), lines: [] };
         panels.push(current);
@@ -342,36 +301,28 @@ md.block.ruler.before(
 
     const html = [];
     html.push('<div class="tabset">');
-    // The radios live inside the fieldset, with the labels and the legend, because
-    // that is what a fieldset is for: it groups a set of related controls. An
-    // earlier version had to keep the radios outside it so a sibling combinator
-    // could reach the panels, which left a fieldset grouping nothing but labels —
-    // malformed, and WAVE reported exactly that.
-    //
-    // :has() on the container is what lets the controls go back inside. It is
-    // used here rather than nth-of-type because the minifier rewrites those and
-    // the rewritten rules stopped matching anything.
     html.push('<fieldset class="tabset__tabs">');
     html.push('<legend class="tabset__legend">Language</legend>');
     panels.forEach((panel, index) => {
-      const id = slug(panel.label);
+      const id = `tabset-${startLine}-${index + 1}-${slug(panel.label)}`;
+      const lang = resolvePanelLang(panel.label);
+      const langAttr = lang ? ` lang="${escapeHtml(lang)}"` : "";
       html.push(
-        `<input class="tabset__radio tabset__radio--${index + 1}" type="radio" name="tabset-${startLine}" id="tabset-${startLine}-${id}"${index === 0 ? " checked" : ""}>`,
+        `<input class="tabset__radio tabset__radio--${index + 1}" type="radio" name="tabset-${startLine}" id="${id}"${index === 0 ? " checked" : ""}>`,
       );
-      // The label sits immediately after its radio, which is also how the focus
-      // ring below finds it.
       html.push(
-        `<label class="tabset__tab tabset__tab--${index + 1}" for="tabset-${startLine}-${id}"${/^[a-z]{2}$/i.test(panel.label) ? ` lang="${escapeHtml(panel.label)}"` : ""}>${escapeHtml(panel.label)}</label>`,
+        `<label class="tabset__tab tabset__tab--${index + 1}" for="${id}"${langAttr}>${escapeHtml(panel.label)}</label>`,
       );
     });
     html.push("</fieldset>");
     html.push('<div class="tabset__panels">');
     for (const [index, panel] of panels.entries()) {
-      // No heading inside the panel: the tab above it already says which language
-      // this is, and a second copy as a heading made the document outline read as
-      // though the abstract had four headings in it.
-      html.push(`<section class="tabset__panel tabset__panel--${index + 1}">`);
-      html.push(md.render(panel.lines.join("\n")));
+      const lang = resolvePanelLang(panel.label);
+      const langAttr = lang ? ` lang="${escapeHtml(lang)}"` : "";
+      html.push(
+        `<section class="tabset__panel tabset__panel--${index + 1}"${langAttr}>`,
+      );
+      html.push(md.render(panel.lines.join("\n"), state.env));
       html.push("</section>");
     }
     html.push("</div>");
@@ -385,31 +336,32 @@ md.block.ruler.before(
   },
 );
 
-function escapeHtml(value) {
-  return String(value)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
-}
-
 // --- citations -------------------------------------------------------------
 
 md.inline.ruler.before("html_inline", "cito_citation", (state, silent) => {
-  const src = state.src.slice(state.pos, state.pos + 200);
-  const match = src.match(/^\[@([^\]]+)\]/);
-  if (!match) return false;
+  if (
+    state.src.charCodeAt(state.pos) !== 0x5b /* [ */ ||
+    state.src.charCodeAt(state.pos + 1) !== 0x40 /* @ */
+  )
+    return false;
+  const close = state.src.indexOf("]", state.pos + 2);
+  if (close === -1) return false;
+  const inner = state.src.slice(state.pos + 1, close);
+  if (inner.includes("[")) return false;
 
-  const items = match[1]
+  const items = inner
     .split(";")
     .map((part) => part.trim().replace(/^@/, ""))
     .filter(Boolean)
     .map((item) => {
-      const [predicate, key] = item.includes(":")
-        ? item.split(":")
-        : [null, item];
-      return { key: (key ?? predicate).trim(), predicate: predicate?.trim() };
-    });
+      const colon = item.indexOf(":");
+      const hasPredicate =
+        colon > 0 && /^[a-z_]+$/i.test(item.slice(0, colon).trim());
+      const predicate = hasPredicate ? item.slice(0, colon).trim() : null;
+      const key = (hasPredicate ? item.slice(colon + 1) : item).trim();
+      return { key, predicate };
+    })
+    .filter((item) => Boolean(item.key));
 
   if (!items.length) return false;
 
@@ -418,19 +370,18 @@ md.inline.ruler.before("html_inline", "cito_citation", (state, silent) => {
     token.meta = items;
     state.env.cito ??= new Map();
     for (const item of items) {
-      if (item.predicate) {
-        if (!state.env.cito.has(item.key))
-          state.env.cito.set(item.key, new Set());
-        state.env.cito.get(item.key).add(item.predicate);
-      }
+      if (!state.env.cito.has(item.key)) state.env.cito.set(item.key, new Set());
+      if (item.predicate) state.env.cito.get(item.key).add(item.predicate);
     }
   }
 
-  state.pos += match[0].length;
+  state.pos = close + 1;
   return true;
 });
 
-md.renderer.rules.cito_citation = (tokens, idx) => {
+md.renderer.rules.cito_citation = (tokens, idx, _opts, env) => {
+  const entries = env?.bibEntries ?? bib;
+  const suffixes = env?.yearSuffixes;
   const byKey = new Map();
   for (const item of tokens[idx].meta) {
     if (!byKey.has(item.key)) byKey.set(item.key, new Set());
@@ -443,10 +394,14 @@ md.renderer.rules.cito_citation = (tokens, idx) => {
       const prop = preds.size
         ? [...preds].map((p) => `cito:${p}`).join(" ")
         : "cito:cites";
-      return `<a href="#ref-${key}" role="doc-biblioref" property="${prop}" resource="#ref-${key}">${inlineCitation(bib.get(key))}</a>`;
+      const safeKey = escapeHtml(key);
+      const label = escapeHtml(
+        inlineCitation(entries.get(key), suffixes?.get(key) ?? ""),
+      );
+      return `<a href="#ref-${safeKey}" role="doc-biblioref" property="${escapeHtml(prop)}" resource="#ref-${safeKey}">${label}</a>`;
     })
     .join("; ");
-  return `<span class="citation" data-cites="${keys.join(" ")}">(${links})</span>`;
+  return `<span class="citation" data-cites="${escapeHtml(keys.join(" "))}">(${links})</span>`;
 };
 
 md.core.ruler.push("eleventy_references", (state) => {
@@ -455,13 +410,6 @@ md.core.ruler.push("eleventy_references", (state) => {
 
   // Per-document view, so one post's self-citation cannot leak into another.
   const entries = new Map(bib);
-
-  // A post can cite itself, so the entry is made resolvable — but it is NOT
-  // added to `cited`. Putting it there made every post list itself under its own
-  // References whether or not the text ever mentioned it, which is what Quarto
-  // does not do and reads as a mistake. An entry in `entries` only means a
-  // citation such as @rutz2026 resolves; whether it is *listed* is decided by
-  // the text, like any other reference.
   const self = selfCitation(state.env.frontmatter ?? {});
   if (self) entries.set(self.key, self);
 
@@ -471,104 +419,149 @@ md.core.ruler.push("eleventy_references", (state) => {
     ),
   );
   const suffixes = yearSuffixes(keys, entries);
+  state.env.bibEntries = entries;
+  state.env.yearSuffixes = suffixes;
 
   const html = keys
     .map((key) => {
-      const predicates = [...(cited.get(key) ?? [])].map(citoPredicate);
+      const predicates = [
+        ...new Set([...(cited.get(key) ?? [])].map(citoPredicate)),
+      ].sort();
       const resolved = entries.get(key) ?? { key, type: "misc", fields: {} };
       const doiAttr = resolved.fields?.doi
         ? ` resource="https://doi.org/${escapeHtml(resolved.fields.doi)}"`
         : "";
       const citoProp = predicates.length
-        ? ` property="${predicates.map((p) => `cito:${p}`).join(" ")}"`
+        ? ` property="${escapeHtml(predicates.map((p) => `cito:${p}`).join(" "))}"`
         : "";
       const cito = predicates.length
-        ? `<span class="cito"${citoProp}> [cito:${predicates.join(",")}]</span>`
+        ? `<span class="cito"${citoProp}> [cito:${escapeHtml(predicates.join(","))}]</span>`
         : "";
       const entry = renderReference(resolved, suffixes.get(key) ?? "");
-      return `<div class="csl-entry" id="ref-${key}" role="listitem" typeof="schema:ScholarlyArticle"${doiAttr}>${entry}${cito}</div>`;
+      return `<div class="csl-entry" id="ref-${escapeHtml(key)}" role="listitem" typeof="schema:ScholarlyArticle"${doiAttr}>${entry}${cito}</div>`;
     })
     .join("");
 
   state.env.references = html;
 });
 
+function mergeRel(attrs, extraTokens) {
+  const relRe = /\srel=(["'])([^"']*)\1/i;
+  const match = attrs.match(relRe);
+  if (!match) return `${attrs} rel="${extraTokens.join(" ")}"`;
+  const existing = match[2].split(/\s+/).filter(Boolean);
+  const combined = [...new Set([...existing, ...extraTokens])].join(" ");
+  return attrs.replace(relRe, ` rel="${combined}"`);
+}
+
+export function describeTarget(href) {
+  try {
+    const u = new URL(href, `https://${SITE_HOST}`);
+    if (/\.pdf$/i.test(u.pathname)) return "PDF";
+    if (u.hostname !== SITE_HOST) return "external page";
+    if (u.pathname === "/") return "home page";
+    return "internal page";
+  } catch {
+    return /\.pdf$/i.test(href) ? "PDF" : "external page";
+  }
+}
+
 export default function (eleventyConfig) {
   eleventyConfig.setQuietMode(true);
-  const content = siteContent();
+  let affiliationsMap = new Map();
+  let artworkManifest = {};
+  let artworkThumbnails = {};
+  let artworkSizes = {};
+
+  const inlineMarkdownCache = new Map();
+  const renderedCache = new Map();
+  const plainTextCache = new Map();
+
+  const readArtworkManifest = (name) => {
+    const path = join(ROOT, "public", "images", "artwork", name);
+    if (!existsSync(path)) return {};
+    try {
+      return JSON.parse(readFileSync(path, "utf-8"));
+    } catch {
+      return {};
+    }
+  };
+
+  const refreshState = () => {
+    resetSiteContent();
+    rawIncludeCache.clear();
+    inlineMarkdownCache.clear();
+    renderedCache.clear();
+    plainTextCache.clear();
+    if (existsSync(BIB_PATH)) bib = parseBib(readFileSync(BIB_PATH, "utf-8"));
+    affiliationsMap = new Map(
+      siteContent()
+        .affiliations()
+        .map((a) => [a.id, a]),
+    );
+    artworkManifest = readArtworkManifest("manifest.json");
+    artworkThumbnails = readArtworkManifest("thumbnails.json");
+    artworkSizes = readArtworkManifest("sizes.json");
+  };
+  refreshState();
+  eleventyConfig.on("eleventy.before", refreshState);
 
   // --- assets --------------------------------------------------------
-  // The design system is shared with Quarto's typography so both builds
-  // cannot drift: the same file, copied to the same output path.
-  // Quarto inlines it through Vite. Eleventy has no asset pipeline, so the minified
-  // copy is staged in build/eleventy/ and copied here; scripts/site/inline-css.mjs
-  // then folds it into every page, which is what removes the render-blocking
-  // request entirely.
   eleventyConfig.addPassthroughCopy({
     "build/eleventy/styles.css": "styles.css",
   });
   eleventyConfig.addPassthroughCopy({ "src/eleventy/static": "." });
   eleventyConfig.addPassthroughCopy({ public: "." });
 
+  // Root-level resources that Quarto handles via `resources:` in _quarto.yml.
+  // Eleventy needs explicit passthrough copies for each.
+  eleventyConfig.addPassthroughCopy({ ".well-known": ".well-known" });
+  eleventyConfig.addPassthroughCopy({ images: "images" });
+  eleventyConfig.addPassthroughCopy("robots.txt");
+  eleventyConfig.addPassthroughCopy("_headers");
+  eleventyConfig.addPassthroughCopy("humans.txt");
+  eleventyConfig.addPassthroughCopy("llm.txt");
+  eleventyConfig.addPassthroughCopy("llms.txt");
+  eleventyConfig.addPassthroughCopy("llms-full.txt");
+  eleventyConfig.addPassthroughCopy("site.webmanifest");
+
   eleventyConfig.addWatchTarget("src/content/");
+  eleventyConfig.addWatchTarget("posts/references.bib");
 
   // --- transforms ----------------------------------------------------
-  /**
-   * Adds `target="_blank"` and `rel="noopener noreferrer"` to every external
-   * link at build time, replacing the inline script that previously did the
-   * same at runtime. This keeps the site free of inline JavaScript while
-   * ensuring outbound links open safely.
-   *
-   * A link is "external" when its href is an absolute URL whose host differs
-   * from the site host. Links already carrying a rel attribute keep the
-   * existing value (with noopener/noreferrer added) so explicit `rel="me"` or
-   * `rel="sameAs"` declarations are preserved.
-   */
-  const SITE_HOST = "adafede.github.io";
   const EXTERNAL_LINK_RE = /<a\b([^>]*)>/g;
-  const HREF_RE = /\bhref=["']([^"']*)["']/;
+  const HREF_RE = /\bhref=(["'])([^"']*)\1/i;
 
   eleventyConfig.addTransform("externalLinks", (content, outputPath) => {
     if (!outputPath || !outputPath.endsWith(".html")) return content;
     return content.replace(EXTERNAL_LINK_RE, (tag, attrs) => {
-      if (!attrs.includes("http") || attrs.includes('target="_blank"')) return tag;
+      if (!attrs.includes("http")) return tag;
       const hrefMatch = attrs.match(HREF_RE);
       if (!hrefMatch) return tag;
-      let href = hrefMatch[1];
-      if (!href.startsWith("http://") && !href.startsWith("https://")) return tag;
+      const href = hrefMatch[2];
+      if (!href.startsWith("http://") && !href.startsWith("https://"))
+        return tag;
       let url;
-      try { url = new URL(href); } catch { return tag; }
+      try {
+        url = new URL(href);
+      } catch {
+        return tag;
+      }
       if (url.protocol !== "http:" && url.protocol !== "https:") return tag;
       if (url.hostname === SITE_HOST) return tag;
 
-      // Preserve existing rel, ensure noopener + noreferrer.
-      let rel = "noopener noreferrer";
-      const relMatch = attrs.match(/\srel="([^"]*)"/);
-      if (relMatch) {
-        const existing = relMatch[1].split(/\s+/).filter(Boolean);
-        const combined = [...new Set([...existing, "noopener", "noreferrer"])];
-        rel = combined.join(" ");
-        attrs = attrs.replace(/\srel="[^"]*"/, ` rel="${rel}"`);
-      } else {
-        attrs += ` rel="${rel}"`;
-      }
-      attrs += ' target="_blank"';
-      return `<a${attrs}>`;
+      let nextAttrs = mergeRel(attrs, ["noopener", "noreferrer"]);
+      if (!/\btarget=/i.test(nextAttrs)) nextAttrs += ' target="_blank"';
+      return `<a${nextAttrs}>`;
     });
   });
 
   // --- collections ---------------------------------------------------
-  // Backed by _data/sitecontent.js rather than getFilteredByGlob: the
-  // generated Markdown lives outside dir.input (src/eleventy), and Eleventy
-  // does not traverse a symlinked directory, so a glob there returns nothing
-  // and pagination over an empty collection is silently skipped.
-  eleventyConfig.addCollection("posts", () => content.posts());
-  eleventyConfig.addCollection("articles", () => content.articles());
-  eleventyConfig.addCollection("talks", () => content.talks());
-  eleventyConfig.addCollection("teaching", () => content.teaching());
-  // Varia is plain data rather than a Markdown collection, so it needs a
-  // collection for the per-entry pages to paginate over.
-  eleventyConfig.addCollection("variaItems", () => content.varia());
+  eleventyConfig.addCollection("posts", () => siteContent().posts());
+  eleventyConfig.addCollection("articles", () => siteContent().articles());
+  eleventyConfig.addCollection("talks", () => siteContent().talks());
+  eleventyConfig.addCollection("teaching", () => siteContent().teaching());
+  eleventyConfig.addCollection("variaItems", () => siteContent().varia());
 
   const ARTICLE_GROUPS = [
     { key: "first", label: "Articles as single first author", table: false },
@@ -577,13 +570,8 @@ export default function (eleventyConfig) {
     { key: "thesis", label: "Doctoral thesis", table: true },
   ];
 
-  // `articleGroups` is a collection, not global data: each entry carries the
-  // label and the `table` flag alongside its items.
-
-  // Precomputed because Nunjucks cannot filter inside {% set %} — it is a parse
-  // error, so `{% set items = list | where: ... %}` is not an option.
   eleventyConfig.addCollection("articleGroups", () => {
-    const articles = content.articles();
+    const articles = siteContent().articles();
     return ARTICLE_GROUPS.map((group) => ({
       ...group,
       items: articles
@@ -593,22 +581,14 @@ export default function (eleventyConfig) {
   });
 
   // --- global data ---------------------------------------------------
-  const cv = content.cv();
   // Not named `cv`: Eleventy reserves that on the data cascade.
-  eleventyConfig.addGlobalData("curriculum", cv);
-  eleventyConfig.addGlobalData("profiles", content.profiles());
-  eleventyConfig.addGlobalData("affiliations", content.affiliations());
-  eleventyConfig.addGlobalData("varia", content.varia());
+  eleventyConfig.addGlobalData("curriculum", () => siteContent().cv());
+  eleventyConfig.addGlobalData("profiles", () => siteContent().profiles());
+  eleventyConfig.addGlobalData("varia", () => siteContent().varia());
 
-
-  // Quarto published /posts.json and /listings.json. Nothing in this build
-  // reads them, but both addresses are live and a feed that stops resolving is
-  // a silent outage for every reader who already subscribed to it.
   eleventyConfig.addGlobalData("postsJsonFeed", () =>
-    buildJsonFeed(content.posts(), {
+    buildJsonFeed(siteContent().posts(), {
       url: "https://adafede.github.io/posts.html",
-      // The same renderer the pages use, so the feed's content_html carries the
-      // bibliography and CiTO annotations the post page shows.
       renderBody: (post) => renderBody(post.body, post.data),
     }),
   );
@@ -618,49 +598,20 @@ export default function (eleventyConfig) {
   eleventyConfig.addShortcode("rawInclude", (name) => {
     let html = rawIncludeCache.get(name);
     if (html === undefined) {
-      html = readFileSync(join(ROOT, "src", "eleventy", "_includes", name), "utf-8");
+      html = readFileSync(
+        join(ROOT, "src", "eleventy", "_includes", name),
+        "utf-8",
+      );
       rawIncludeCache.set(name, html);
     }
     return html;
   });
 
-  /**
-   * Link text that tells a screen-reader user nothing on its own.
-   *
-   * The Quarto sources use "here" and "link" as link text, which is fine
-   * visually — the surrounding sentence gives the context — but read out of
-   * context it is just the word "here". Rather than rewrite the author's
-   * sentences, each such link gets a visually hidden descriptor of where it
-   * goes, so the accessible name carries the same information the reader gets
-   * from the sentence around it.
-   */
-  const GENERIC_LINK_TEXT = /^\s*(here|link|this|read more|more)\s*$/i;
-  const describeTarget = (href) => {
-    let path = "";
-    try {
-      path = new URL(href, "https://adafede.github.io").pathname;
-    } catch {
-      path = href;
-    }
-    if (/\.pdf$/i.test(path)) return "PDF";
-    if (path === "/" || path.endsWith("/")) return "home page";
-    return "external page";
-  };
+  const GENERIC_LINK_TEXT = /^\s*(here|link|this|read more|more|visit|click here)\s*$/i;
 
   /** The text of a fragment of HTML, tags out. */
   function stripTags(html) {
     return extractHtmlText(html, { separateTags: true });
-  }
-
-  /**
-   * The text of a fragment of HTML, tags removed without adding spaces.
-   *
-   * `stripTags` inserts a space for every tag, which is right for sentences but
-   * wrong for inline runs like `<span>(<a>…</a>)</span>`, where it would open a
-   * gap inside the parentheses. This one concatenates the text nodes as-is.
-   */
-  function htmlText(html) {
-    return extractHtmlText(html);
   }
 
   /** The text of the first paragraph of a rendered body, or ''. */
@@ -676,37 +627,15 @@ export default function (eleventyConfig) {
     );
   }
 
-  /**
-   * Open links to PDFs in a new tab, and say so.
-   *
-   * A PDF replaces the page, so a reader who followed "slides" from a talk
-   * description loses their place and has to find their way back. WAVE flags
-   * these for the same reason. `rel="noopener"` comes along because the target
-   * is external, and the file type is announced rather than left to be guessed.
-   */
   function markPdfLinks(html) {
     return String(html ?? "").replace(
-      /<a\b([^>]*?)href="([^"]*\.pdf(?:#[^"]*)?)"([^>]*)>([\s\S]*?)<\/a>/gi,
-      (match, before, href, after, text) => {
-        const attrs = /target=/.test(match)
-          ? `${before}href="${href}"${after}`
-          : `${before}href="${href}"${after} target="_blank" rel="noopener"`;
+      /<a\b([^>]*?)href="([^"]*\.pdf(?:[?#][^"]*)?)"([^>]*)>([\s\S]*?)<\/a>/gi,
+      (_match, before, href, after, text) => {
+        const rawAttrs = `${before}href="${href}"${after}`;
+        let attrs = mergeRel(rawAttrs, ["noopener", "noreferrer"]);
+        if (!/\btarget=/i.test(attrs)) attrs += ' target="_blank"';
 
-        // WAVE flags a PDF link whose text does not say it is a PDF, and the
-        // flag is fair: the file type is the one thing a reader cannot guess
-        // from the destination, and an icon alone does not reach a screen
-        // reader at all.
-        //
-        // Real text, added at build time rather than by a CSS ::after, for two
-        // reasons. It is in the accessibility tree and in the accessible name,
-        // and it survives the styling being changed or the CSS not loading.
-        // A pseudo-element gives you neither guarantee.
-        //
-        // Only appended when the link text does not already say PDF, so the
-        // links that are already explicit are left exactly as written.
         const saysPdf = /\bpdf\b/i.test(stripTags(text));
-        // The leading space is in the text, not only in CSS: copied and pasted
-        // link text should still read as two words.
         const label = saysPdf ? "" : '<span class="link-format"> (PDF)</span>';
 
         return `<a${attrs}>${text}${label}</a>`;
@@ -714,7 +643,6 @@ export default function (eleventyConfig) {
     );
   }
 
-  const inlineMarkdownCache = new Map();
   eleventyConfig.addFilter("inlineMarkdown", (value) => {
     if (!value) return "";
     const key = String(value);
@@ -732,25 +660,6 @@ export default function (eleventyConfig) {
     return rendered;
   });
 
-  /**
-   * Renders the Markdown body.
-   *
-   * Nunjucks has no component slot, so post and article bodies are rendered
-   * here and injected with | safe. The reference list is appended after the
-   * "References" heading, which is where Quarto inserts it in
-   * the mdast tree.
-   */
-  /**
-   * Renders a Markdown body, reference list included.
-   *
-   * Shared by the page templates and the JSON feed. Quarto's feed carries the
-   * rendered bibliography inside content_html and a machine-readable
-   * `_references` list beside it, and for the two to agree the feed has to go
-   * through the same renderer as the page — not a raw md.render() that quietly
-   * drops the references the citations point at.
-   */
-  const renderedCache = new Map();
-
   function renderBody(body, frontmatter = {}) {
     if (!body) return { html: "", references: [] };
     const cacheKey = `${frontmatter.doi ?? frontmatter.title ?? ""}\0${body}`;
@@ -760,11 +669,9 @@ export default function (eleventyConfig) {
 
     if (env.references) {
       const block = `<div class="references csl-bib-body hanging-indent" id="refs" role="list" property="citation">${env.references}</div>`;
-      html = /<h2[^>]*id="references"[^>]*>/i.test(html)
-        ? html.replace(
-            /(<h2[^>]*id="references"[^>]*>[\s\S]*?<\/h2>)/i,
-            `$1\n${block}`,
-          )
+      const refHeadingRe = /<h2\b[^>]*>\s*References\s*<\/h2>/i;
+      html = refHeadingRe.test(html)
+        ? html.replace(refHeadingRe, (m) => `${m}\n${block}`)
         : `${html}\n${block}`;
     }
 
@@ -833,26 +740,9 @@ export default function (eleventyConfig) {
    * A post's own modification date wins over its publication date, so the feed's
    * single build date moves when a post is edited rather than going stale.
    */
-  eleventyConfig.addFilter("latestPostDate", (posts) => {
+  const pickNewestDate = (items, pick) => {
     let newest = null;
-    for (const post of posts ?? []) {
-      const date = new Date(post.data.updatedDate || post.data.pubDate);
-      if (!Number.isNaN(date.valueOf()) && (!newest || date > newest))
-        newest = date;
-    }
-    return newest;
-  });
-
-  /**
-   * The most recent date among a set of items, as a Date or null.
-   *
-   * `pick` extracts the date from an item. Feeds need exactly one build date
-   * and it has to be the newest item in them, which is a question about the
-   * whole set rather than any single item.
-   */
-  eleventyConfig.addFilter("latestDate", (items, pick) => {
-    let newest = null;
-    for (const item of items) {
+    for (const item of items ?? []) {
       const value = pick(item);
       const date =
         value instanceof Date ? value : value ? new Date(value) : null;
@@ -860,7 +750,13 @@ export default function (eleventyConfig) {
         newest = date;
     }
     return newest;
-  });
+  };
+
+  eleventyConfig.addFilter("latestPostDate", (posts) =>
+    pickNewestDate(posts, (post) => post.data.updatedDate || post.data.pubDate),
+  );
+
+  eleventyConfig.addFilter("latestDate", pickNewestDate);
 
   /**
    * A string, percent-encoded for use in a query string.
@@ -1011,7 +907,7 @@ export default function (eleventyConfig) {
    */
   eleventyConfig.addFilter("obfuscateContact", (value) => {
     const ZWSP = "\u200B";
-    return escapeHtml(String(value ?? ""))
+    return String(value ?? "")
       .replace(/@/g, " [at] ")
       .replace(/\d/g, (d) => `${d}${ZWSP}`);
   });
@@ -1102,7 +998,6 @@ export default function (eleventyConfig) {
    * crawler as `&amp;lt;https://…`. Strip the markup here, before any
    * templating touches it.
    */
-  const plainTextCache = new Map();
   eleventyConfig.addFilter("plainText", (value) => {
     const key = String(value ?? "");
     if (plainTextCache.has(key)) return plainTextCache.get(key);
@@ -1146,8 +1041,7 @@ export default function (eleventyConfig) {
    * Resolve an author's affiliation id to its record, so templates can show the
    * name and link it to the ROR entry and Wikidata item Quarto linked to.
    */
-  const affiliations = new Map(content.affiliations().map((a) => [a.id, a]));
-  const affiliation = (id) => affiliations.get(id) ?? {};
+  const affiliation = (id) => affiliationsMap.get(id) ?? {};
   /**
    * Marks for the registries this site links out to.
    *
@@ -1202,7 +1096,7 @@ export default function (eleventyConfig) {
    */
   const LOGO_SIZES = {
     orcid: [256, 256],
-    ror: [400, 400],
+    ror: [156, 111],
     scholia: [512, 512],
     scholar: [512, 512],
     doi: [512, 512],
@@ -1251,28 +1145,33 @@ export default function (eleventyConfig) {
     return `<span property="affiliation" typeof="Organization"${about}>${inner}</span>`;
   };
 
+  const authorBadges = (author, leadSpace = " ") => {
+    const about = author.qid ? ` about="wd:${escapeHtml(author.qid)}"` : "";
+    const orcid = author.orcid
+      ? `${leadSpace}<a class="author__id" href="https://orcid.org/${escapeHtml(author.orcid)}" rel="sameAs noopener noreferrer" title="ORCID ${escapeHtml(author.orcid)}">${ICON_ORCID}ORCID</a>`
+      : "";
+    const scholia = author.qid
+      ? `${leadSpace}<a class="author__id" href="https://qlever.scholia.wiki/author/${escapeHtml(author.qid)}" rel="sameAs noopener noreferrer" title="Scholia ${escapeHtml(author.qid)}">${ICON_SCHOLIA}Scholia</a>`
+      : "";
+    return { about, orcid, scholia };
+  };
+
   eleventyConfig.addShortcode("authorList", (authors, mode = "article") => {
     if (!authors?.length) return "";
     if (mode === "article") {
       const items = authors
         .map((author, idx) => {
-          const about = author.qid ? ` about="wd:${escapeHtml(author.qid)}"` : "";
+          const { about, orcid, scholia } = authorBadges(author);
           const corr = author.corresponding
             ? '<abbr class="mark" title="Corresponding author">†</abbr>'
             : "";
           const eq = author.equalContributor
             ? '<abbr class="mark" title="Equal contribution">*</abbr>'
             : "";
-          const orcid = author.orcid
-            ? ` <a class="author__id" href="https://orcid.org/${escapeHtml(author.orcid)}" rel="sameAs noopener noreferrer" title="ORCID ${escapeHtml(author.orcid)}">${ICON_ORCID}ORCID</a>`
-            : "";
-          const scholia = author.qid
-            ? ` <a class="author__id" href="https://qlever.scholia.wiki/author/${escapeHtml(author.qid)}" rel="sameAs noopener noreferrer" title="Scholia ${escapeHtml(author.qid)}">${ICON_SCHOLIA}Scholia</a>`
-            : "";
           const affs = author.affiliationIds?.length
             ? `<span class="author__affiliation">${author.affiliationIds.map((id) => renderAffiliationSpan(id)).join("; ")}</span>`
             : "";
-          return `<li class="author" property="author" typeof="Person"${about}><span class="author__name">${idx + 1}. <span property="name">${escapeHtml(author.name)}</span>${corr}${eq}${orcid}${scholia}</span>${affs}</li>`;
+          return `<li class="author" property="author" typeof="Person"${about}><span class="author__name"><span aria-hidden="true">${idx + 1}. </span><span property="name">${escapeHtml(author.name)}</span>${corr}${eq}${orcid}${scholia}</span>${affs}</li>`;
         })
         .join("");
       return `<div class="article__authors"><h2 class="article__subheading">Authors</h2><ol class="author-list">${items}</ol></div>`;
@@ -1280,13 +1179,7 @@ export default function (eleventyConfig) {
     if (mode === "post") {
       const items = authors
         .map((author) => {
-          const about = author.qid ? ` about="wd:${escapeHtml(author.qid)}"` : "";
-          const orcid = author.orcid
-            ? ` <a class="author__id" href="https://orcid.org/${escapeHtml(author.orcid)}" rel="sameAs noopener noreferrer" title="ORCID ${escapeHtml(author.orcid)}">${ICON_ORCID}ORCID</a>`
-            : "";
-          const scholia = author.qid
-            ? ` <a class="author__id" href="https://qlever.scholia.wiki/author/${escapeHtml(author.qid)}" rel="sameAs noopener noreferrer" title="Scholia ${escapeHtml(author.qid)}">${ICON_SCHOLIA}Scholia</a>`
-            : "";
+          const { about, orcid, scholia } = authorBadges(author);
           const affs = author.affiliationIds?.length
             ? ` ${author.affiliationIds.map((id) => renderAffiliationSpan(id, "author__affiliation")).join("; ")}`
             : "";
@@ -1297,75 +1190,26 @@ export default function (eleventyConfig) {
     }
     const items = authors
       .map((author) => {
-        const about = author.qid ? ` about="wd:${escapeHtml(author.qid)}"` : "";
-        const orcid = author.orcid
-          ? `<a class="author__id" href="https://orcid.org/${escapeHtml(author.orcid)}" rel="sameAs noopener noreferrer" title="ORCID ${escapeHtml(author.orcid)}">${ICON_ORCID}ORCID</a>`
-          : "";
-        const scholia = author.qid
-          ? `<a class="author__id" href="https://qlever.scholia.wiki/author/${escapeHtml(author.qid)}" rel="sameAs noopener noreferrer" title="Scholia ${escapeHtml(author.qid)}">${ICON_SCHOLIA}Scholia</a>`
-          : "";
+        const { about, orcid, scholia } = authorBadges(author, "");
         const affs = author.affiliationIds?.length
           ? `<span class="event-detail__affiliations">${author.affiliationIds.map((id) => renderAffiliationSpan(id)).join("; ")}</span>`
           : "";
-        return `<p class="event-detail__author" property="${mode}" typeof="Person"${about}><span property="name">${escapeHtml(author.name)}</span>${orcid}${scholia}${affs}</p>`;
+        return `<p class="event-detail__author" property="${escapeHtml(mode)}" typeof="Person"${about}><span property="name">${escapeHtml(author.name)}</span>${orcid}${scholia}${affs}</p>`;
       })
       .join("");
     return `<div class="event-detail__authors">${items}</div>`;
   });
 
-  /**
-   * One of the artwork manifests written by scripts/site/fetch-artwork.mjs and
-   * scripts/site/artwork-size.mjs, or `{}`.
-   *
-   * All three are build artifacts: absent before the first fetch and
-   * regenerable afterwards, so a missing or unreadable file is a
-   * degraded-but-working site rather than a build failure. Every filter below
-   * falls back to the original remote URL in that case.
-   */
-  const readArtworkManifest = (name) => {
-    const path = join(ROOT, "public", "images", "artwork", name);
-    if (!existsSync(path)) return {};
-    try {
-      return JSON.parse(readFileSync(path, "utf-8"));
-    } catch {
-      return {};
-    }
-  };
-
-  /**
-   * Prefer the locally cached copy of a remote cover image.
-   *
-   * scripts/site/fetch-artwork.mjs mirrors the artwork into
-   * public/images/artwork/ and writes the mapping. The original URL is returned
-   * when the image was not cached, so the page still works if the fetch step
-   * has not run or a download failed.
-   */
-  const artworkManifest = readArtworkManifest("manifest.json");
   eleventyConfig.addFilter("artwork", (url) =>
     url ? (artworkManifest[url] ?? url) : "",
   );
-  const artworkThumbnails = readArtworkManifest("thumbnails.json");
   eleventyConfig.addFilter("artworkThumb", (url) =>
     url ? (artworkThumbnails[url] ?? artworkManifest[url] ?? url) : "",
   );
-
-  /**
-   * The intrinsic size of a cached artwork file, as { width, height }.
-   *
-   * Read from the file by scripts/site/artwork-size.mjs rather than guessed.
-   * The point is the ratio: this artwork is a wide logo, that one is a tall
-   * hexagon, and putting either behind the same fixed 16:9 box is what made the
-   * varia cards look like they had failed to load.
-   *
-   * Falls back to a shape close to square so an unmeasured file still reserves
-   * space rather than collapsing the layout while it loads.
-   */
-  const artworkSizes = readArtworkManifest("sizes.json");
-
   eleventyConfig.addFilter("artworkSize", (url) => {
-    const name = String(url ?? "")
-      .split("/")
-      .pop();
+    const resolved =
+      artworkManifest[url] ?? artworkThumbnails[url] ?? String(url ?? "");
+    const name = resolved.split("/").pop();
     return artworkSizes[name] ?? { width: 576, height: 576 };
   });
 

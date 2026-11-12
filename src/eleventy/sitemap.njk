@@ -7,7 +7,7 @@ eleventyExcludeFromCollections: true
 {% for url in sitemap %}
   <url>
     <loc>{{ site.url }}{{ url.loc }}</loc>
-    {% if url.lastmod %}<lastmod>{{ url.lastmod }}</lastmod>{% endif %}
+    {% if url.lastmod %}<lastmod>{{ url.lastmod | readableDate }}</lastmod>{% endif %}
     {% if url.priority %}<priority>{{ url.priority }}</priority>{% endif %}
   </url>
 {% endfor %}

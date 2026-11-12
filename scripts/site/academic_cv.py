@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 import subprocess
 import unicodedata
 from datetime import date
@@ -12,6 +13,16 @@ from typing import Any
 import yaml
 
 Metadata = dict[str, Any]
+
+_FRONTMATTER_RE = re.compile(
+    r"\A---[ \t]*\r?\n(.*?)\r?\n---[ \t]*(?:\r?\n|\Z)",
+    re.DOTALL,
+)
+_DOI_PREFIX_RE = re.compile(r"^(?:https?://)?(?:dx\.)?doi\.org/", re.IGNORECASE)
+
+
+def _normalize_doi(value: Any) -> str:
+    return _DOI_PREFIX_RE.sub("", str(value or "").strip()).lower()
 
 
 def _root() -> Path:
@@ -28,12 +39,11 @@ def _root() -> Path:
 
 def _frontmatter(path: Path) -> Metadata:
     text = path.read_text(encoding="utf-8")
-    if not text.startswith("---\n"):
+    match = _FRONTMATTER_RE.match(text)
+    if not match:
         return {}
-    end = text.find("\n---", 4)
-    if end < 0:
-        return {}
-    return yaml.safe_load(text[4:end]) or {}
+    loaded = yaml.safe_load(match.group(1))
+    return loaded if isinstance(loaded, dict) else {}
 
 
 def _meta(value: Any) -> Any:
@@ -75,13 +85,27 @@ def _inline(item: Metadata) -> str:
         return content if isinstance(content, str) else ""
     if kind in ("Space", "SoftBreak", "LineBreak"):
         return " "
-    if kind in ("Emph", "Strong", "SmallCaps", "Quoted"):
-        if kind == "Quoted":
-            if isinstance(content, list) and len(content) > 1:
-                quoted = content[1]
-                return _inline_text(quoted) if isinstance(quoted, list) else ""
-            return ""
+    if kind in ("Emph", "Strong", "SmallCaps", "Strikeout", "Underline"):
         return _inline_text(content) if isinstance(content, list) else ""
+    if kind == "Superscript":
+        inner = _inline_text(content) if isinstance(content, list) else ""
+        return f"^{inner}^" if inner else ""
+    if kind == "Subscript":
+        inner = _inline_text(content) if isinstance(content, list) else ""
+        return f"~{inner}~" if inner else ""
+    if kind in ("Quoted", "Span", "Link"):
+        if isinstance(content, list) and len(content) > 1:
+            inner_list = content[1]
+            return _inline_text(inner_list) if isinstance(inner_list, list) else ""
+        return ""
+    if kind == "Math":
+        if (
+            isinstance(content, list)
+            and len(content) > 1
+            and isinstance(content[1], str)
+        ):
+            return f"${content[1]}$"
+        return ""
     if (
         kind == "Code"
         and isinstance(content, list)
@@ -94,18 +118,28 @@ def _inline(item: Metadata) -> str:
 
 def _bibliography(root: Path) -> dict[str, Metadata]:
     references: dict[str, Metadata] = {}
-    for path in sorted((root / "articles").glob("**/references.bib")):
-        result = subprocess.run(
-            ["pandoc", "--from=bibtex", "--to=json", str(path)],
-            check=True,
-            capture_output=True,
-            text=True,
+    chunks: list[str] = []
+    for idx, path in enumerate(sorted((root / "articles").glob("**/references.bib"))):
+        raw = path.read_text(encoding="utf-8")
+        # Namespace entry keys per file so one Pandoc invocation can parse all
+        # bibliographies without dropping entries that reuse a citekey.
+        chunks.append(
+            re.sub(r"@(\w+)\s*\{\s*([^,\s]+)", rf"@\1{{f{idx}_\2", raw),
         )
-        document = json.loads(result.stdout)
-        for item in _meta(document["meta"]["references"]) or []:
-            doi = str(item.get("doi", "")).lower()
-            if doi:
-                references[doi] = item
+    if not chunks:
+        return references
+    result = subprocess.run(
+        ["pandoc", "--from=bibtex", "--to=json"],
+        input="\n\n".join(chunks),
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    document = json.loads(result.stdout)
+    for item in _meta(document["meta"].get("references")) or []:
+        doi = _normalize_doi(item.get("doi"))
+        if doi:
+            references[doi] = item
     return references
 
 
@@ -148,6 +182,8 @@ def _format_authors(
     equal_contributors: set[str],
     corresponding_authors: set[str],
 ) -> str:
+    if not authors:
+        return ""
     names = [_person_name(author) for author in authors]
     final_author = _key(names[-1])
     if len(authors) > 6:
@@ -190,7 +226,7 @@ def publication_list() -> str:
     for relative in selected:
         source = root / relative
         metadata = _frontmatter(source)
-        doi = str(metadata["doi"]).lower()
+        doi = _normalize_doi(metadata["doi"])
         reference = references[doi]
         authors = _meta(reference["author"])
         if not isinstance(authors, list) or not all(
@@ -212,7 +248,7 @@ def publication_list() -> str:
         )
         entries.append(
             f"{_format_authors(authors, equal, corresponding)}. "
-            f"[{title}](https://doi.org/{metadata['doi']}). "
+            f"[{title}](https://doi.org/{doi}). "
             f"*{journal}*, {year}.",
         )
 
@@ -220,6 +256,7 @@ def publication_list() -> str:
 
 
 def talk_list() -> str:
+    """Format Talk and Workshop entries in reverse chronological order."""
     root = _root()
     talks = []
     for source in (root / "talks").glob("*.qmd"):
@@ -227,7 +264,7 @@ def talk_list() -> str:
         categories = metadata.get("categories", []) or []
         if not {"Talk", "Workshop"}.intersection(categories):
             continue
-        talk_date = metadata.get("date")
+        talk_date = metadata.get("date") or ""
         year = talk_date.year if isinstance(talk_date, date) else str(talk_date)[:4]
         talks.append((str(talk_date), metadata, year))
 

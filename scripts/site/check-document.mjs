@@ -56,11 +56,12 @@ function check(html) {
   }
 
   if (!/<a class="skip-link"/.test(doc)) problems.push("no skip link");
-  if (!/<main\b/.test(doc)) problems.push("no <main> landmark");
+  const mainMatch = /<main\b[^>]*>([\s\S]*?)<\/main>/i.exec(doc);
+  if (!mainMatch) problems.push("no <main> landmark");
 
   // Headings inside <main> only: a page can legitimately have an <h1> in a
   // hidden template block, and what matters is what the reader can reach.
-  const main = doc.slice(doc.indexOf("<main"));
+  const main = mainMatch ? mainMatch[1] : "";
 
   // The <h1> must not be a copy of the <title>. WAVE reports that as a
   // "possible heading reference": on a page where the two are identical the
@@ -96,8 +97,14 @@ function check(html) {
     previous = level;
   }
 
-  if (!/<link rel="canonical"/.test(doc)) problems.push("no canonical URL");
-  if (!/<meta name="description"/.test(doc))
+  const isNoindex =
+    /<meta\b[^>]*\bname="robots"[^>]*\bcontent="[^"]*\bnoindex\b/i.test(doc);
+  if (
+    !isNoindex &&
+    !/<link\b[^>]*\brel="canonical"[^>]*\bhref="https?:\/\/[^"]+"/i.test(doc)
+  )
+    problems.push("no canonical URL");
+  if (!/<meta\b[^>]*\bname="description"[^>]*\bcontent="[^"]+"/i.test(doc))
     problems.push("no meta description");
 
   // Escaped twice: the first pass turns `<`, the second turns `&`, so the
@@ -128,6 +135,7 @@ function check(html) {
   }
 
   let prevHref = null;
+  let prevEnd = -1;
   for (const link of doc.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/gi)) {
     const tag = `<a${link[1]}>`;
     if (!/\shref=/.test(tag)) problems.push("anchor without href");
@@ -137,10 +145,16 @@ function check(html) {
     }
     const hrefMatch = tag.match(/\shref="([^"]+)"/);
     const href = hrefMatch ? hrefMatch[1] : null;
-    if (href && href === prevHref) {
+    if (
+      href &&
+      href === prevHref &&
+      prevEnd >= 0 &&
+      doc.slice(prevEnd, link.index).trim() === ""
+    ) {
       problems.push(`adjacent links to the same URL: "${href}"`);
     }
     prevHref = href;
+    prevEnd = link.index + link[0].length;
     const label = htmlText(link[2], { separateTags: true });
     if (/^(?:visit|click here|read more|more|link)$/i.test(label)) {
       problems.push(`generic link text: "${label}"`);
@@ -160,7 +174,8 @@ function check(html) {
 
 let total = 0;
 
-for (const root of roots) {
+for (const rawRoot of roots) {
+  const root = rawRoot.replace(/\/+$/, "");
   let pages = 0;
   const failures = [];
 
@@ -175,7 +190,7 @@ for (const root of roots) {
   }
 
   total += failures.reduce((sum, [, problems]) => sum + problems.length, 0);
-  console.log(`${root}: ${pages} pages, ${failures.length} with problems`);
+  console.log(`${rawRoot}: ${pages} pages, ${failures.length} with problems`);
   for (const [name, problems] of failures.slice(0, 12)) {
     console.log(`  ${name}`);
     for (const problem of problems) console.log(`    - ${problem}`);

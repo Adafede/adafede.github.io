@@ -38,7 +38,7 @@ function isoOffset(date) {
  * kept under underscore keys so spec-compliant readers ignore them.
  */
 export function buildJsonFeed(posts, { url, renderBody }) {
-  const base = url.replace(/\/[^/]*$/, "");
+  const base = new URL(url).origin;
   const feed = {
     version: "https://jsonfeed.org/version/1.1",
     title: SITE.author,
@@ -82,7 +82,9 @@ export function buildJsonFeed(posts, { url, renderBody }) {
         // Derived from `base` rather than a literal host, so the feed cannot
         // end up pointing at one domain while every other URL in it points at
         // another.
-        const source = body.image.replace(/\.webp$/i, ".png");
+        const source = body.image.startsWith("/")
+          ? body.image.replace(/\.webp$/i, ".png")
+          : body.image;
         item.image = source.startsWith("/") ? `${base}${source}` : source;
       }
       if (post.data.pdf) {

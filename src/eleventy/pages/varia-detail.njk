@@ -16,7 +16,7 @@ eleventyExcludeFromCollections: true
       </li>
       <li><span aria-hidden="true">/</span></li>
       <li property="itemListElement" typeof="ListItem">
-        <span property="item" typeof="WebPage"><span property="name">{{ item.data.title }}</span></span>
+        <span property="item" typeof="WebPage" resource="{{ site.url }}{{ page.url }}"><span property="name">{{ item.data.title }}</span></span>
         <meta property="position" content="2" />
       </li>
     </ol>
@@ -24,8 +24,9 @@ eleventyExcludeFromCollections: true
 
   <header class="event-detail__header">
     {% if item.data.image %}
-    {% set artworkSize = item.data.image | artwork | artworkSize %}
-    <img class="event-detail__image" property="image" src="{{ item.data.image | artworkThumb }}" loading="eager" decoding="async" fetchpriority="high" width="{{ artworkSize.width }}" height="{{ artworkSize.height }}"
+    {% set artwork = item.data.image | artwork %}
+    {% set artworkSize = artwork | artworkSize %}
+    <img class="event-detail__image" property="image" src="{{ artwork }}" loading="eager" decoding="async" fetchpriority="high" width="{{ artworkSize.width }}" height="{{ artworkSize.height }}"
       {% if item.data.imageAlt %}alt="{{ item.data.imageAlt }}"{% else %}alt=""{% endif %} />
     {% endif %}
     <h1 property="name">{{ item.data.title }}</h1>

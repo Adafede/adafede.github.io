@@ -38,14 +38,13 @@ from scripts.utilities import (
     run_pandoc_for_all_qmds,
 )
 
-# Setup logging
-setup_logging(level=LOG_LEVEL)
 logger = get_logger(__name__)
 
 
-def process_articles_talks_teaching() -> None:
-    """Process articles, talks, and teaching directories."""
+def process_articles_talks_teaching() -> int:
+    """Process articles, talks, and teaching directories; return failure count."""
     logger.info("Processing articles, talks, and teaching directories")
+    failures = 0
 
     # Process all QMD patterns except posts (handled separately with CiTO)
     for name, pattern in QMD_PATTERNS.items():
@@ -55,7 +54,9 @@ def process_articles_talks_teaching() -> None:
             logger.info(f"Processing {name}: {pattern}")
             process_qmd_directory(qmd_glob=pattern)
         except Exception:
+            failures += 1
             logger.exception(f"Failed to process {name}")
+    return failures
 
 
 def process_posts(
@@ -64,17 +65,10 @@ def process_posts(
     author_service: AuthorService,
     ror_service: RorService,
     yaml_loader: YamlLoader,
-) -> None:
-    """Process all posts with CiTO, author, and ROR annotations.
-
-    Args:
-        fs: FileSystem instance
-        cito_service: CitoService instance
-        author_service: AuthorService instance
-        ror_service: RorService instance
-        yaml_loader: YamlLoader instance
-    """
+) -> int:
+    """Process all posts with CiTO, author, and ROR annotations."""
     logger.info("Processing posts")
+    failures = 0
 
     # Find all post QMD files
     post_qmds = fs.find_posts("posts")
@@ -82,7 +76,7 @@ def process_posts(
 
     if not post_qmds:
         logger.warning("No post QMD files found - skipping post processing")
-        return
+        return 0
 
     # Parse CiTO annotations from all posts
     logger.info("Parsing CiTO annotations from posts")
@@ -111,27 +105,23 @@ def process_posts(
             _ = author_service.inject_into_html(qmd_file, html_file)
 
         except Exception:
+            failures += 1
             logger.exception(f"Failed to inject annotations for {qmd_file.name}")
 
     # Process RSS and feeds
-    process_rss_and_feeds(post_qmds, citation_properties, yaml_loader)
+    failures += process_rss_and_feeds(post_qmds, citation_properties, yaml_loader)
+    return failures
 
 
 def process_rss_and_feeds(
     post_qmds: list[Path],
     citation_properties: Mapping[str, Iterable[str]],
     yaml_loader: YamlLoader,
-) -> None:
-    """Process RSS feed and convert to JSON feed.
-
-    Args:
-        post_qmds: List of post QMD file paths
-        citation_properties: Dictionary of citation properties
-        yaml_loader: YamlLoader instance for DOI extraction
-    """
+) -> int:
+    """Process RSS feed and convert to JSON feed; return failure count."""
     if not RSS_FILE.exists():
         logger.warning(f"RSS file not found at {RSS_FILE}")
-        return
+        return 0
 
     logger.info("Processing RSS and JSON feeds")
 
@@ -156,12 +146,15 @@ def process_rss_and_feeds(
         )
 
         logger.info("RSS and JSON feeds processed successfully")
+        return 0
     except Exception:
         logger.exception("Failed to process feeds")
+        return 1
 
 
 def postrender() -> None:
     """Main post-render orchestration function."""
+    setup_logging(level=LOG_LEVEL)
     # PDF-only renders (`quarto render --to pdf`, driven by
     # scripts/site/render-pdfs.mjs) set PDF_ONLY=1. The post-render pipeline
     # here is HTML-centric (CiTO injection, RSS, a11y, website-spec, Pandoc PDF
@@ -187,17 +180,25 @@ def postrender() -> None:
         author_service = AuthorService(fs, html_processor, yaml_loader)
         ror_service = RorService(fs, html_processor, yaml_loader)
 
+        failures = 0
+
         # Step 1: Run Pandoc conversion for PDFs
         logger.info("Step 1: Running Pandoc conversions")
         run_pandoc_for_all_qmds()
 
         # Step 2: Process articles, talks, and teaching
         logger.info("Step 2: Processing articles, talks, and teaching")
-        process_articles_talks_teaching()
+        failures += process_articles_talks_teaching()
 
         # Step 3: Process posts
         logger.info("Step 3: Processing posts")
-        process_posts(fs, cito_service, author_service, ror_service, yaml_loader)
+        failures += process_posts(
+            fs,
+            cito_service,
+            author_service,
+            ror_service,
+            yaml_loader,
+        )
 
         # Step 4: Fix accessibility issues
         logger.info("Step 4: Fixing accessibility issues")
@@ -207,6 +208,10 @@ def postrender() -> None:
         # Step 5: Enforce baseline website-spec metadata/discovery tags
         logger.info("Step 5: Enforcing website-spec metadata")
         enforce_website_spec(html_files, site_url="https://adafede.github.io")
+
+        if failures:
+            logger.error("Post-render finished with %s error(s)", failures)
+            sys.exit(1)
 
         logger.info("=" * 80)
         logger.info("Post-render processing completed successfully")

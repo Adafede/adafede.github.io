@@ -17,9 +17,11 @@
  * an edited or re-fetched image cannot keep a stale size.
  */
 import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const OUT = "public/images/artwork";
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
+const OUT = join(ROOT, "public", "images", "artwork");
 const SIZES = join(OUT, "sizes.json");
 
 /** Lengths inside an SVG can carry a unit; CSS absolute units all resolve against 96dpi. */
@@ -42,8 +44,10 @@ const UNITS = {
  * they are absolute lengths — a percentage width describes no fixed shape.
  */
 function svgSize(buffer) {
-  const text = buffer.toString("utf-8", 0, 4096);
-  const root = /<svg\b[^>]*>/i.exec(text);
+  let root = /<svg\b[^>]*>/i.exec(buffer.toString("utf-8", 0, 4096));
+  if (!root && buffer.length > 4096) {
+    root = /<svg\b[^>]*>/i.exec(buffer.toString("utf-8"));
+  }
   if (!root) return null;
   const tag = root[0];
 
@@ -93,20 +97,30 @@ function pngSize(buffer) {
   return { width: buffer.readUInt32BE(16), height: buffer.readUInt32BE(20) };
 }
 
-/** Intrinsic dimensions for the lossy VP8 files emitted by cwebp. */
+function gifSize(buffer) {
+  if (buffer.length < 10) return null;
+  const header = buffer.toString("ascii", 0, 6);
+  if (header !== "GIF87a" && header !== "GIF89a") return null;
+  return { width: buffer.readUInt16LE(6), height: buffer.readUInt16LE(8) };
+}
+
+/** Intrinsic dimensions for VP8, VP8L and VP8X WebP files. */
 function webpSize(buffer) {
   if (
+    buffer.length < 12 ||
     buffer.toString("ascii", 0, 4) !== "RIFF" ||
     buffer.toString("ascii", 8, 12) !== "WEBP"
   )
     return null;
   let offset = 12;
-  while (offset + 18 <= buffer.length) {
+  while (offset + 8 <= buffer.length) {
     const type = buffer.toString("ascii", offset, offset + 4);
     const length = buffer.readUInt32LE(offset + 4);
     const data = offset + 8;
+    if (data + length > buffer.length) break;
     if (
       type === "VP8 " &&
+      length >= 10 &&
       buffer[data + 3] === 0x9d &&
       buffer[data + 4] === 0x01 &&
       buffer[data + 5] === 0x2a
@@ -114,6 +128,19 @@ function webpSize(buffer) {
       return {
         width: buffer.readUInt16LE(data + 6) & 0x3fff,
         height: buffer.readUInt16LE(data + 8) & 0x3fff,
+      };
+    }
+    if (type === "VP8L" && length >= 5 && buffer[data] === 0x2f) {
+      const bits = buffer.readUInt32LE(data + 1);
+      return {
+        width: (bits & 0x3fff) + 1,
+        height: ((bits >>> 14) & 0x3fff) + 1,
+      };
+    }
+    if (type === "VP8X" && length >= 10) {
+      return {
+        width: buffer.readUIntLE(data + 4, 3) + 1,
+        height: buffer.readUIntLE(data + 7, 3) + 1,
       };
     }
     offset = data + length + (length % 2);
@@ -145,9 +172,11 @@ for (const name of readdirSync(OUT).sort()) {
       ? svgSize(buffer)
       : lower.endsWith(".png")
         ? pngSize(buffer)
-        : lower.endsWith(".webp")
-          ? webpSize(buffer)
-          : null;
+        : lower.endsWith(".gif")
+          ? gifSize(buffer)
+          : lower.endsWith(".webp")
+            ? webpSize(buffer)
+            : null;
   } catch {
     size = null;
   }

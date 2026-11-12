@@ -36,6 +36,15 @@ test("detex drops the remaining TeX rather than printing it", () => {
   assert.equal(detex("a {b} c"), "a b c");
 });
 
+test("detex distinguishes cedilla from caron and expands TeX letters", () => {
+  // `\c` is the cedilla; `\v` is the caron. They were once mapped together,
+  // which turned every cedilla into the wrong diacritic.
+  assert.equal(detex("fa{\\c{c}}ade"), "façade");
+  assert.equal(detex("Erd{\\v{s}}ly"), "Erdšly");
+  assert.equal(detex("S{\\o}ren"), "Søren");
+  assert.equal(detex("{\\aa}ngstr{\\\"o}m"), "ångström");
+});
+
 test("an entry with no author renders its year alone", () => {
   assert.equal(inlineCitation({ fields: { year: "2024" } }), "2024");
 });
@@ -63,6 +72,25 @@ test("a year-less entry falls back to n.d. rather than an empty year", () => {
     inlineCitation(entry("@misc{k, author = {Rutz, Adriano}}")),
     "Rutz n.d.",
   );
+});
+
+test("a year suffix disambiguates same-author same-year citations", () => {
+  const cited = entry("@article{k, author = {Rutz, Adriano}, year = {2024}}");
+  assert.equal(inlineCitation(cited, "a"), "Rutz 2024a");
+  // A missing year stays n.d. rather than growing a dangling suffix.
+  const undated = entry("@misc{k, author = {Rutz, Adriano}}");
+  assert.equal(inlineCitation(undated, "a"), "Rutz n.d.");
+});
+
+test("quoted and bare BibTeX values parse like braced ones", () => {
+  const parsed = entry(
+    '@article{k, title = "A {B} C", year = 2024, month = may}',
+  );
+  assert.deepEqual(parsed.fields, {
+    title: "A {B} C",
+    year: "2024",
+    month: "may",
+  });
 });
 
 test("parseAuthors splits on the BibTeX author separator and detexes", () => {
@@ -121,6 +149,24 @@ test("page ranges elide the shared leading digits", () => {
 
   assert.match(elided, /647–56/);
   assert.match(notElided, /647–700/);
+});
+
+test("a noble particle is demoted after the given name", () => {
+  // The .bib stores this author given-first; Chicago reads family-first, so
+  // the particle moves behind the given name rather than leading the entry.
+  const alone = renderReference(
+    entry(
+      "@article{k, author = {von Csefalvay, Chris}, year = {2024}, title = {T}, journal = {J}}",
+    ),
+  );
+  const withCoauthor = renderReference(
+    entry(
+      "@article{k, author = {von Csefalvay, Chris and Bach, Sara}, year = {2024}, title = {T}, journal = {J}}",
+    ),
+  );
+
+  assert.match(alone, /^Csefalvay, Chris von\. 2024\./);
+  assert.match(withCoauthor, /^Csefalvay, Chris von, and Sara Bach\. 2024\./);
 });
 
 test("every entry in the real .bib renders without an empty string", () => {

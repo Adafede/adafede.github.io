@@ -49,7 +49,15 @@ NUMBERED_HEADING_RE = re.compile(r"^###\s+References\s*$", re.MULTILINE)
 # processes the file, emitting responsive WebP/AVIF with width/height, which is
 # what fixes the LCP on post pages. A plain `/images/...` path would be copied
 # through raw and blow up the Largest Contentful Paint.
-PARENT_PATH_RE = re.compile(r"(?<=[(\"'])\.\./(?=[a-zA-Z0-9_])")
+PARENT_PATH_RE = re.compile(r"(?<=[(\"'])(?:\.\./)+(?=[a-zA-Z0-9_])")
+FRONTMATTER_RE = re.compile(
+    r"\A---[ \t]*\r?\n(.*?)\r?\n---[ \t]*(?:\r?\n|\Z)",
+    re.DOTALL,
+)
+FENCED_BLOCK_RE = re.compile(
+    r"^```[^\n]*\n.*?^```[ \t]*$",
+    re.MULTILINE | re.DOTALL,
+)
 
 # This script emits optimized
 # WebP next to the originals, so a relative path would
@@ -72,27 +80,25 @@ def absolutise_images(body: str) -> str:
 
 
 def rewrite_paths(body: str, extra_depth: int) -> str:
-    """Rebase `../x` references for a file that now sits `extra_depth` levels deeper.
-
-    Depth is counted from the repo root, so posts/ -> src/content/posts/ is +2.
-    """
-    return (
-        PARENT_PATH_RE.sub("../" * extra_depth, body)
-        if extra_depth
-        else PARENT_PATH_RE.sub("", body)
-    )
+    """Rebase `../x` references for a file sitting `extra_depth` levels below root."""
+    if extra_depth <= 0:
+        return body
+    return PARENT_PATH_RE.sub("../" * extra_depth, body)
 
 
 def load_yaml(path: Path) -> Metadata:
+    """Read a YAML file as a dictionary."""
     with path.open(encoding="utf-8") as fh:
         return yaml.safe_load(fh) or {}
 
 
 def split_frontmatter(text: str) -> tuple[Metadata, str]:
-    if not text.startswith("---"):
+    """Split leading YAML frontmatter from Markdown body."""
+    match = FRONTMATTER_RE.match(text)
+    if not match:
         return {}, text
-    _, fm, body = text.split("---", 2)
-    return yaml.safe_load(fm) or {}, body
+    loaded = yaml.safe_load(match.group(1))
+    return (loaded if isinstance(loaded, dict) else {}), text[match.end() :]
 
 
 def _load_entity_records(
@@ -121,7 +127,11 @@ def duplicate_affiliation_ids(
     id or two is an editorial call about the paper, not something a build
     script may decide by concatenation, so this only says what is there.
     """
-    records = affil_records or _load_entity_records("affiliations", "affiliations")
+    records = (
+        _load_entity_records("affiliations", "affiliations")
+        if affil_records is None
+        else affil_records
+    )
     by_id: dict[str, list[tuple[str, Metadata]]] = {}
     for filename, entry in records:
         if entry.get("id"):
@@ -131,11 +141,12 @@ def duplicate_affiliation_ids(
     for identifier, entries in sorted(by_id.items()):
         if len(entries) < 2:
             continue
-        differing = sorted(
+        all_keys = sorted({key for _, entry in entries for key in entry})
+        differing = [
             key
-            for key in entries[0][1]
+            for key in all_keys
             if len({str(entry.get(key)) for _, entry in entries}) > 1
-        )
+        ]
         out.append((identifier, [name for name, _ in entries], differing))
     return out
 
@@ -155,7 +166,11 @@ def split_affiliation_ids(
     So the evidence is a shared ROR *and* a shared unit: the same department or
     group recorded under two ids, where only one spelling can be right.
     """
-    records = affil_records or _load_entity_records("affiliations", "affiliations")
+    records = (
+        _load_entity_records("affiliations", "affiliations")
+        if affil_records is None
+        else affil_records
+    )
     by_ror: dict[str, list[tuple[str, Metadata]]] = {}
     for _, entry in records:
         if entry.get("ror") and entry.get("id"):
@@ -174,11 +189,6 @@ def split_affiliation_ids(
     return out
 
 
-def duplicate_affiliation_ids_records() -> list[Metadata]:
-    """Every affiliation record, one entry per file."""
-    return [entry for _, entry in _load_entity_records("affiliations", "affiliations")]
-
-
 def unresolved_affiliation_refs(
     author_records: list[tuple[str, Metadata]] | None = None,
     affil_records: list[tuple[str, Metadata]] | None = None,
@@ -190,8 +200,16 @@ def unresolved_affiliation_refs(
     and nothing anywhere says why. `ulaberta` sat in DavidWishart_UALBERTA.yml
     for that reason.
     """
-    affils = affil_records or _load_entity_records("affiliations", "affiliations")
-    authors = author_records or _load_entity_records("authors", "author")
+    affils = (
+        _load_entity_records("affiliations", "affiliations")
+        if affil_records is None
+        else affil_records
+    )
+    authors = (
+        _load_entity_records("authors", "author")
+        if author_records is None
+        else author_records
+    )
     known = {entry["id"] for _, entry in affils if entry.get("id")}
     out: dict[str, list[str]] = {}
     for filename, entry in authors:
@@ -323,7 +341,7 @@ def normalize_license(value: Any) -> Metadata | None:
             "CC0": "https://creativecommons.org/publicdomain/zero/1.0/",
             "CC BY-NC": "https://creativecommons.org/licenses/by-nc/4.0/",
         }
-        return {"name": value, "url": urls.get(value)}
+        return compact({"name": value, "url": urls.get(value)})
     if isinstance(value, dict):
         out = {"name": str(value.get("name", ""))}
         if value.get("url"):
@@ -393,15 +411,26 @@ def convert_body(body: str, extra_depth: int = 0) -> str:
 
     `extra_depth` rebases `../`-relative references; see rewrite_paths().
     """
-    body = REFS_DIV_RE.sub("\n", body)
-    body = NUMBERED_HEADING_RE.sub("## References", body)
+    body = QUARTO_RAW_BLOCK_RE.sub("", body)
     # ```{r} -> ``` ; drop Quarto cell options (#| label: ...)
     body = CODE_FENCE_RE.sub("```", body)
     body = QUARTO_OPTION_RE.sub("", body)
+
+    fences: list[str] = []
+
+    def _stash_fence(match: re.Match[str]) -> str:
+        fences.append(match.group(0))
+        return f"\x00FENCE_{len(fences) - 1}\x00"
+
+    body = FENCED_BLOCK_RE.sub(_stash_fence, body)
+    body = REFS_DIV_RE.sub("\n", body)
+    body = NUMBERED_HEADING_RE.sub("## References", body)
     body = convert_span_attributes(body)
-    body = strip_quarto_raw_html(body)
+    body = QUARTO_IFRAME_RE.sub("", body)
     body = rewrite_paths(body, extra_depth)
     body = absolutise_images(body)
+    for idx, fence in enumerate(fences):
+        body = body.replace(f"\x00FENCE_{idx}\x00", fence)
     return body.strip() + "\n"
 
 
@@ -795,6 +824,8 @@ def migrate_articles(clean: bool, affils_all: dict[str, Metadata]) -> int:
         )
         print(f"  + {registry_target.relative_to(PROJECT_ROOT)}")
         written += 1
+    elif registry_target.exists():
+        registry_target.unlink()
 
     # Publication profiles (Scholia / ORCID / Google Scholar).
     profiles = ARTICLES_DIR / "profiles.qmd"
@@ -810,6 +841,8 @@ def migrate_articles(clean: bool, affils_all: dict[str, Metadata]) -> int:
             target.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
             print(f"  + {target.relative_to(PROJECT_ROOT)}")
             written += 1
+        elif target.exists():
+            target.unlink()
 
     return written
 
@@ -933,23 +966,30 @@ def inline_md(text: str) -> str:
     Handles `[label](url)`, `<url>` autolinks, and `*emphasis*`. Everything is
     HTML-escaped first, so the result is safe to emit with set:html.
     """
-    escaped = html.escape(text, quote=False)
+    escaped = html.escape(text, quote=True)
+    links: list[str] = []
 
-    # [label](url) — the label may itself contain escaped entities.
-    escaped = re.sub(
-        r"\[([^\]]+)\]\((https?://[^\s)]+)\)",
-        r'<a href="\2">\1</a>',
-        escaped,
-    )
-    # <https://...> autolink; the angle brackets survive escaping.
-    escaped = re.sub(
-        r"&lt;(https?://[^\s&]+)&gt;",
-        r'<a href="\1">\1</a>',
-        escaped,
-    )
-    # *emphasis* and **strong**, innermost first.
+    def _stash_md_link(match: re.Match[str]) -> str:
+        label, url = match.group(1), match.group(2)
+        label = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", label)
+        label = re.sub(r"(?<!\*)\*([^*]+?)\*(?!\*)", r"<em>\1</em>", label)
+        links.append(f'<a href="{url}">{label}</a>')
+        return f"\x00LINK_{len(links) - 1}\x00"
+
+    def _stash_auto_link(match: re.Match[str]) -> str:
+        url = match.group(1)
+        links.append(f'<a href="{url}">{url}</a>')
+        return f"\x00LINK_{len(links) - 1}\x00"
+
+    escaped = re.sub(r"\[([^\]]+)\]\((https?://[^\s)]+)\)", _stash_md_link, escaped)
+    escaped = re.sub(r"&lt;(https?://[^\s&]+)&gt;", _stash_auto_link, escaped)
+
+    # *emphasis* and **strong**, innermost first, without touching URLs.
     escaped = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", escaped)
     escaped = re.sub(r"(?<!\*)\*([^*]+?)\*(?!\*)", r"<em>\1</em>", escaped)
+
+    for idx, anchor in enumerate(links):
+        escaped = escaped.replace(f"\x00LINK_{idx}\x00", anchor)
     return escaped.strip()
 
 
@@ -1106,7 +1146,7 @@ def migrate(clean: bool = False) -> int:
         if clean and target.exists():
             target.unlink()
             continue
-        write(target, frontmatter, body, extra_depth=3)
+        write(target, frontmatter, body, extra_depth=4)
         print(f"  + {target.relative_to(PROJECT_ROOT)}")
         written += 1
 

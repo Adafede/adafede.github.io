@@ -117,6 +117,9 @@ def _rel_tokens(node) -> list[str]:
     return values if isinstance(values, list) else str(values).split()
 
 
+_MULTI_LINK_RELS = frozenset({"preconnect", "dns-prefetch"})
+
+
 def _upsert_link(soup, *, rel: str, href: str, index=None, **attrs) -> bool:
     """Create or update a link tag and return whether it changed.
 
@@ -134,11 +137,13 @@ def _upsert_link(soup, *, rel: str, href: str, index=None, **attrs) -> bool:
         if index is not None
         else [node for node in soup.find_all("link") if rel in _rel_tokens(node)]
     )
+    match_href = rel in _MULTI_LINK_RELS
     node = next(
         (
             candidate
             for candidate in candidates
-            if all(candidate.get(key) == value for key, value in attrs.items())
+            if (not match_href or candidate.get("href") == href)
+            and all(candidate.get(key) == value for key, value in attrs.items())
         ),
         None,
     )
@@ -329,31 +334,17 @@ def _ensure_head_basics(soup, *, site_url: str, route: str) -> bool:
         index=metas,
         attr_name="name",
         attr_value="theme-color",
-        content="#ffffff",
+        content="#faf8f5",
         media="(prefers-color-scheme: light)",
     )
-
-    dark_theme_meta = _meta_matching(
-        metas,
-        "name",
-        "theme-color",
-        {"media": "(prefers-color-scheme: dark)"},
+    changed |= _upsert_meta(
+        soup,
+        index=metas,
+        attr_name="name",
+        attr_value="theme-color",
+        content="#100f12",
+        media="(prefers-color-scheme: dark)",
     )
-    if dark_theme_meta is None:
-        soup.head.append(
-            soup.new_tag(
-                "meta",
-                attrs={
-                    "name": "theme-color",
-                    "content": "#0f172a",
-                    "media": "(prefers-color-scheme: dark)",
-                },
-            ),
-        )
-        changed = True
-    elif dark_theme_meta.get("content") != "#0f172a":
-        dark_theme_meta["content"] = "#0f172a"
-        changed = True
 
     og_type = "article" if route.startswith(("/posts/", "/articles/")) else "website"
     og_image_node = _meta_matching(metas, "property", "og:image", {})
@@ -440,17 +431,24 @@ def _ensure_head_basics(soup, *, site_url: str, route: str) -> bool:
     return changed
 
 
-def enforce_website_spec(html_files: list[Path], site_url: str) -> None:
+def enforce_website_spec(
+    html_files: list[Path],
+    site_url: str,
+    site_dir: Path | None = None,
+) -> None:
     """Apply metadata and discovery defaults to all rendered HTML pages."""
     fixed_count = 0
     changed_count = 0
 
-    site_dir = None
+    resolved_site_dir = site_dir
     for html_file in html_files:
-        if site_dir is None:
-            site_dir = html_file.parent
-            while site_dir.name != "_site" and site_dir.parent != site_dir:
-                site_dir = site_dir.parent
+        if resolved_site_dir is None:
+            resolved_site_dir = html_file.parent
+            while (
+                resolved_site_dir.name != "_site"
+                and resolved_site_dir.parent != resolved_site_dir
+            ):
+                resolved_site_dir = resolved_site_dir.parent
 
         content = html_file.read_text(encoding="utf-8")
 
@@ -458,7 +456,7 @@ def enforce_website_spec(html_files: list[Path], site_url: str) -> None:
         if not soup.head:
             continue
 
-        route = _route_from_html(html_file, site_dir)
+        route = _route_from_html(html_file, resolved_site_dir)
         if _ensure_head_basics(soup, site_url=site_url, route=route):
             _ = html_file.write_text(str(soup), encoding="utf-8")
             changed_count += 1

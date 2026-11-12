@@ -113,6 +113,11 @@ for (const page of pages) {
     return "";
   });
 
+  const extraCss = extraStyles.join("\n");
+  const extraUsedVars = [
+    ...new Set([...extraCss.matchAll(/var\(\s*(--[\w-]+)/g)].map((m) => m[1])),
+  ].sort();
+
   const usedClasses = classesIn(html);
   const usedIds = idsIn(html);
   const usedTags = tagsIn(html);
@@ -123,6 +128,7 @@ for (const page of pages) {
     [...usedTags].sort().join(" "),
     [...usedAttrs.names].sort().join(" "),
     [...usedAttrs.pairs].sort().join(" "),
+    extraUsedVars.join(" "),
   ].join("|");
   let out = purgedCache.get(key);
   if (out === undefined) {
@@ -167,18 +173,13 @@ for (const page of pages) {
       .toString()
       .replace(/(?:,\.__unused__)+|\.__unused__,/g, "");
 
-    // Safety net: purging must never remove a custom property a surviving rule
-    // still reads. Referenced-without-fallback-and-nowhere-defined is a build
-    // failure, not a silent visual regression.
+    const fullScope = `${rawOut}\n${extraCss}`;
     const definedVars = new Set(
-      [...rawOut.matchAll(/(--[\w-]+)\s*:/g)].map((m) => m[1]),
-    );
-    const usedVars = new Set(
-      [...rawOut.matchAll(/var\(\s*(--[\w-]+)/g)].map((m) => m[1]),
+      [...fullScope.matchAll(/(--[\w-]+)\s*:/g)].map((m) => m[1]),
     );
     const orphanVars = [
       ...new Set(
-        [...rawOut.matchAll(/var\(\s*(--[\w-]+)\s*([,)])/g)]
+        [...fullScope.matchAll(/var\(\s*(--[\w-]+)\s*([,)])/g)]
           .filter(([, name, next]) => next === ")" && !definedVars.has(name))
           .map(([, name]) => name),
       ),
@@ -189,11 +190,20 @@ for (const page of pages) {
       );
       process.exit(1);
     }
-    out = rawOut
-      .replace(/(--[\w-]+)\s*:[^;}]+;?/g, (decl, name) =>
+
+    let pruned = rawOut;
+    while (true) {
+      const usedVars = new Set([
+        ...[...pruned.matchAll(/var\(\s*(--[\w-]+)/g)].map((m) => m[1]),
+        ...extraUsedVars,
+      ]);
+      const next = pruned.replace(/(--[\w-]+)\s*:[^;}]+;?/g, (decl, name) =>
         usedVars.has(name) ? decl : "",
-      )
-      .replace(/@media[^{]+\{\}/g, "");
+      );
+      if (next === pruned) break;
+      pruned = next;
+    }
+    out = pruned.replace(/@media[^{]+\{\}/g, "");
     purgedCache.set(key, out);
   }
 
@@ -201,7 +211,7 @@ for (const page of pages) {
     ? `${out}${extraStyles.join("")}`
     : out;
   const styleTag = `<style>${combinedCss}</style>`;
-  const updated = html.replace(CSS_LINK, `    ${styleTag}\n`);
+  const updated = html.replace(CSS_LINK, () => `    ${styleTag}\n`);
   if (updated === rawHtml) continue;
 
   writeFileSync(page, updated);

@@ -19,7 +19,8 @@ export function htmlFiles(dir) {
 }
 
 const SCRIPT_OR_STYLE_RE = /<(script|style)\b[^>]*>[\s\S]*?(?:<\/\1\s*>|$)/gi;
-const COMMENT_OR_TAG_RE = /<!--[\s\S]*?-->|<\/?[a-zA-Z!][^>]*>/g;
+const COMMENT_OR_TAG_RE =
+  /<!--[\s\S]*?-->|<![^>]*>|<\/?[a-zA-Z][\w:-]*(?:\s+(?:[^<>"']|"[^"]*"|'[^']*')*)?>/g;
 const ATTR_RE =
   /([a-zA-Z_:][\w:.-]*)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=<>`]+)))?/g;
 const NAMED_ENTITIES = {
@@ -31,12 +32,18 @@ const NAMED_ENTITIES = {
   nbsp: "\u00a0",
 };
 
+function safeCodePoint(cp) {
+  return cp >= 1 && cp <= 0x10ffff && !(cp >= 0xd800 && cp <= 0xdfff)
+    ? String.fromCodePoint(cp)
+    : "\uFFFD";
+}
+
 function decodeEntities(text) {
   return text.replace(
     /&(?:#(\d+)|#x([0-9a-fA-F]+)|([a-zA-Z0-9]+));/g,
     (match, dec, hex, named) => {
-      if (dec) return String.fromCodePoint(Number.parseInt(dec, 10));
-      if (hex) return String.fromCodePoint(Number.parseInt(hex, 16));
+      if (dec) return safeCodePoint(Number.parseInt(dec, 10));
+      if (hex) return safeCodePoint(Number.parseInt(hex, 16));
       return NAMED_ENTITIES[named.toLowerCase()] ?? match;
     },
   );
@@ -77,11 +84,23 @@ export function firstElement(html, tagName) {
   }
 
   const start = match.index + match[0].length;
-  const closeRe = new RegExp(`</${escaped}\\s*>`, "i");
-  const closeMatch = closeRe.exec(cleaned.slice(start));
-  const innerHtml = closeMatch
-    ? cleaned.slice(start, start + closeMatch.index)
-    : "";
+  const tokenRe = new RegExp(`<(\\/)?${escaped}\\b[^>]*>`, "gi");
+  tokenRe.lastIndex = start;
+  let depth = 1;
+  let closeIndex = -1;
+  let token;
+  while ((token = tokenRe.exec(cleaned)) !== null) {
+    if (token[1]) {
+      depth--;
+      if (depth === 0) {
+        closeIndex = token.index;
+        break;
+      }
+    } else if (!token[0].endsWith("/>")) {
+      depth++;
+    }
+  }
+  const innerHtml = closeIndex >= 0 ? cleaned.slice(start, closeIndex) : "";
 
   return { tagName: tag, attrs, innerHtml };
 }

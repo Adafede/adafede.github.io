@@ -65,7 +65,7 @@ permalink: /cv.html
               the document, which puts the address back in the page for anything
               that reads markup; the spelled form is readable, typeable, and
               cannot be lifted as one unbroken string. #}
-           <dd><span class="contact-obfuscated" property="email">{{ contact.email | obfuscateContact }}</span></dd>
+           <dd><span class="contact-obfuscated">{{ contact.email | obfuscateContact }}</span></dd>
          </div>
          {% endif %}
          {% if contact.location %}
@@ -100,23 +100,24 @@ permalink: /cv.html
   {% set sectionProps = { 'professional-experience': 'hasOccupation', 'education': 'alumniOf', 'awards': 'award' } %}
   {% for section in curriculum | cvSections %}
   {% set entryProp = sectionProps[section.id] %}
+  {% set isRole = entryProp == 'hasOccupation' or entryProp == 'alumniOf' %}
   <section class="cv-section" aria-labelledby="cv-{{ section.id }}">
     <h2 id="cv-{{ section.id }}">{{ section.label }}</h2>
     <ul class="cv-entries">
       {% for entry in section.entries %}
-      <li class="cv-entry"{% if entryProp %} property="{{ entryProp }}"{% endif %} typeof="Role">
+      <li class="cv-entry"{% if isRole %} property="{{ entryProp }}" typeof="Role"{% endif %}>
         <div class="cv-entry__head">
-          <h3 class="cv-entry__title" property="roleName name">
+          <h3 class="cv-entry__title"{% if isRole %} property="roleName name"{% elif entryProp == 'award' %} property="award"{% endif %}>
             {# Awards entries carry no heading of their own; the label is the award. #}
             {{ entry.title or (entry.bullets[0].label if entry.bullets else section.label) }}
           </h3>
           {% if entry.startYear %}
           <p class="cv-entry__range">
-            <span property="startDate">{{ entry.startYear }}</span>{% if entry.current %} – present{% elif entry.endYear %} – <span property="endDate">{{ entry.endYear }}</span>{% endif %}
+            <span{% if isRole %} property="startDate"{% endif %}>{{ entry.startYear }}</span>{% if entry.current %} – present{% elif entry.endYear %} – <span{% if isRole %} property="endDate"{% endif %}>{{ entry.endYear }}</span>{% endif %}
           </p>
           {% endif %}
         </div>
-        {% if entry.summary %}<p class="cv-entry__summary" property="description">{{ entry.summary | safe }}</p>{% endif %}
+        {% if entry.summary %}<p class="cv-entry__summary"{% if isRole %} property="description"{% endif %}>{{ entry.summary | safe }}</p>{% endif %}
         {% if entry.bullets %}
         {% for bullet in entry.bullets %}
         <div class="cv-entry__bullet">

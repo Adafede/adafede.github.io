@@ -13,6 +13,7 @@ Run: uv run python scripts/site/optimize_images.py
 
 from __future__ import annotations
 
+import html
 import re
 import shutil
 import struct
@@ -54,7 +55,7 @@ def main() -> int:
     else:
         print("  ! cwebp not installed; keeping ONGs with intrinsic dimensions")
 
-    names = []
+    rendered: dict[str, tuple[str, str | None]] = {}
 
     for source in sorted(SOURCE_DIR.glob("*.png")):
         stem = source.stem
@@ -66,11 +67,9 @@ def main() -> int:
             width, height = map(int, size.split("x")) if size else (0, 0)
             longest_edge = max(width, height)
             scale = MAX_DIMENSION / longest_edge if longest_edge > MAX_DIMENSION else 1
-            resize = (
-                ["-resize", str(round(width * scale)), str(round(height * scale))]
-                if scale < 1
-                else []
-            )
+            out_w = round(width * scale)
+            out_h = round(height * scale)
+            resize = ["-resize", str(out_w), str(out_h)] if scale < 1 else []
             subprocess.run(
                 [
                     converter,
@@ -86,7 +85,10 @@ def main() -> int:
                 ],
                 check=True,
             )
-        names.append((stem, size))
+            out_dims = f"{out_w}x{out_h}" if out_w and out_h else None
+            rendered[stem] = ("webp", out_dims)
+        else:
+            rendered[stem] = ("png", size)
 
     if BLOG_DIR.exists():
         for post in sorted(BLOG_DIR.glob("*.md")):
@@ -95,16 +97,20 @@ def main() -> int:
 
             def replace(match: re.Match[str]) -> str:
                 stem = match.group("name")
-                dims = dict(names).get(stem)
-                extension = "webp" if converter else "png"
+                extension, dims = rendered.get(stem, ("png", None))
                 src = f"/images/screenshots/{stem}.{extension}"
                 alt = match.group("alt")
                 if not dims:
                     return f"![{alt}]({src})"
                 width, height = dims.split("x")
+                src_attr = html.escape(src, quote=True)
+                alt_attr = html.escape(alt, quote=True)
                 # Explicit dimensions let the browser reserve the box, which is
                 # what removes the unsized-image finding and the layout shift.
-                return f'<img src="{src}" alt="{alt}" width="{width}" height="{height}" loading="lazy" decoding="async">'
+                return (
+                    f'<img src="{src_attr}" alt="{alt_attr}" '
+                    f'width="{width}" height="{height}" loading="lazy" decoding="async">'
+                )
 
             updated = IMAGE_RE.sub(replace, text)
             if updated != text:

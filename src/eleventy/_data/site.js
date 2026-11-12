@@ -4,6 +4,9 @@ import { existsSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
+const HERE = dirname(fileURLToPath(import.meta.url));
+const PUBLIC_DIR = join(HERE, "..", "..", "..", "public");
+
 export default {
   /** The site title used by <title> and og:title. */
   get title() {
@@ -17,26 +20,12 @@ export default {
   // Quarto publishes it: /cv.pdf. This used to look under public/pdf/, which is
   // where the PDFs lived before they were moved onto the Quarto URLs — the
   // button quietly stopped rendering when that changed.
-  hasCvPdf: existsSync(
-    join(
-      dirname(fileURLToPath(import.meta.url)),
-      "..",
-      "..",
-      "..",
-      "public",
-      "cv.pdf",
-    ),
-  ),
-  hasAcademicCvPdf: existsSync(
-    join(
-      dirname(fileURLToPath(import.meta.url)),
-      "..",
-      "..",
-      "..",
-      "public",
-      "cv-academic.pdf",
-    ),
-  ),
+  get hasCvPdf() {
+    return existsSync(join(PUBLIC_DIR, "cv.pdf"));
+  },
+  get hasAcademicCvPdf() {
+    return existsSync(join(PUBLIC_DIR, "cv-academic.pdf"));
+  },
   author: "Adriano Rutz",
   /**
    * The one place the contact address is written down.
@@ -78,17 +67,21 @@ export default {
   // `bun run sync:content` yet the file is absent. That used to be a hard
   // stack trace at data-import time; it now degrades to no scholar link, the
   // way the three artwork manifests below already do.
-  scholarUrl: (() => {
+  get scholarUrl() {
     try {
-      const profiles = readFileSync(
-        fileURLToPath(new URL("../../content/profiles.json", import.meta.url)),
-        "utf-8",
+      const profiles = JSON.parse(
+        readFileSync(
+          fileURLToPath(new URL("../../content/profiles.json", import.meta.url)),
+          "utf-8",
+        ),
       );
-      return `https://scholar.google.com/citations?user=${profiles.match(/"scholar":\s*"([^"]+)"/)?.[1] ?? ""}`;
+      return profiles?.scholar
+        ? `https://scholar.google.com/citations?user=${encodeURIComponent(profiles.scholar)}`
+        : "https://scholar.google.com/citations";
     } catch {
       return "https://scholar.google.com/citations";
     }
-  })(),
+  },
   nav: [
     { url: "/articles.html", label: "Articles" },
     { url: "/cv.html", label: "CV" },

@@ -111,12 +111,12 @@ class AccessibilityFixer:
         return False
 
     def _fix_image_alt_text(self, soup) -> bool:
-        """Ensure all images have alt text."""
+        """Ensure all images have an explicit alt attribute."""
         modified = False
         images = soup.find_all("img")
 
         for img in images:
-            if not img.get("alt"):
+            if "alt" not in img.attrs:
                 # Try to get meaningful alt text from context
                 alt_text = self._generate_alt_text(img)
                 img["alt"] = alt_text
@@ -157,13 +157,19 @@ class AccessibilityFixer:
         return "Image"
 
     def _fix_empty_links(self, soup) -> bool:
-        """Fix links with no text content."""
+        """Fix links with no accessible name."""
         modified = False
         links = soup.find_all("a")
 
         for link in links:
             text = link.get_text(strip=True)
-            if not text and not link.get("aria-label"):
+            has_child_name = any(
+                bool((img.get("alt") or "").strip()) for img in link.find_all("img")
+            ) or any(
+                bool((svg.get("aria-label") or "").strip())
+                for svg in link.find_all("svg")
+            )
+            if not text and not has_child_name and not link.get("aria-label"):
                 # Add aria-label based on context
                 aria_label = self._generate_link_label(link)
                 if aria_label:
@@ -393,10 +399,10 @@ class AccessibilityFixer:
         modified = False
         search_inputs = soup.find_all("input", {"type": "search"})
 
-        for input_tag in search_inputs:
+        for index, input_tag in enumerate(search_inputs, start=1):
             if not input_tag.get("aria-label") and not input_tag.get("id"):
-                # Generate an ID for the input
-                input_id = f"search-{id(input_tag)}"
+                # Generate a deterministic ID for the input
+                input_id = f"search-input-{index}"
                 input_tag["id"] = input_id
                 modified = True
                 logger.debug(f"Added ID to search input: {input_id}")
@@ -422,10 +428,11 @@ class AccessibilityFixer:
         Returns:
             Associated label text, or empty string if none found
         """
-        # Check for <label> elements with for attribute matching the input ID
-        label = input_tag.find_previous("label", for_=input_tag.get("id"))
-        if label and label.get_text(strip=True):
-            return label.get_text(strip=True)
+        input_id = input_tag.get("id")
+        if input_id:
+            label = input_tag.find_previous("label", attrs={"for": input_id})
+            if label and label.get_text(strip=True):
+                return label.get_text(strip=True)
 
         # Check for nearby <label> elements
         label = input_tag.find_previous("label")
@@ -557,13 +564,11 @@ class AccessibilityFixer:
         """Fix accessibility issues in Quarto listing grids."""
         modified = False
 
-        # Find all divs that might be listing grids (based on class or other attributes)
         grids = soup.find_all("div", class_="listing-grid")
 
         for grid in grids:
-            # Ensure grid has an aria-label or role="grid"
-            if not grid.get("aria-label") and grid.get("role") != "grid":
-                # Try to find a heading or label for the grid
+            if not grid.get("aria-label") and not grid.get("role"):
+                grid["role"] = "region"
                 label = grid.find_previous(
                     ["h1", "h2", "h3", "h4", "h5", "h6", "label"],
                 )
@@ -578,11 +583,10 @@ class AccessibilityFixer:
                     modified = True
                     logger.debug("Added generic aria-label to listing grid")
 
-            # Ensure all items in the grid have accessible names
-            items = grid.find_all(["a", "button", "div"], recursive=False)
+            # Only interactive children may carry aria-label without an ARIA role.
+            items = grid.find_all(["a", "button"], recursive=False)
             for item in items:
                 if not item.get("aria-label") and not item.get("title"):
-                    # Try to generate a label from text content or context
                     label = self._generate_listing_item_label(item)
                     if label:
                         item["aria-label"] = label

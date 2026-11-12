@@ -49,14 +49,19 @@ const SOURCES = [
   "llms.txt",
   "llms-full.txt",
   ".well-known/ai-catalog.json",
+  ".well-known/api-catalog",
   ".well-known/ard.json",
+  ".well-known/security.txt",
   ".well-known/agent-skills/index.json",
   ".well-known/agent-skills/site-navigation/SKILL.md",
 ];
 
 /** Map a site-absolute URL onto the path it serves. */
 function toBuiltPath(url) {
-  const path = url.startsWith(HOST) ? url.slice(HOST.length) : url.replace(/^\//, "");
+  const clean = url.split(/[?#]/, 1)[0];
+  const path = clean.startsWith(HOST)
+    ? clean.slice(HOST.length)
+    : clean.replace(/^\//, "");
   return path === "" || path.endsWith("/") ? join(path, "index.html") : path;
 }
 
@@ -96,11 +101,15 @@ for (const source of SOURCES) {
 const canonical = read("llms.txt").split("\n");
 const alias = read("llm.txt").split("\n");
 // Line 4 is the one-line description each file uses; everything else must match.
-const drift = canonical.filter((line, i) => line !== alias[i] && i !== 3);
-if (drift.length) {
+const maxLen = Math.max(canonical.length, alias.length);
+let drift = 0;
+for (let i = 0; i < maxLen; i++) {
+  if (i !== 3 && canonical[i] !== alias[i]) drift++;
+}
+if (drift) {
   problems.push(
     "llm.txt has drifted from llms.txt (it is declared an alias at llm.txt:4); " +
-      `differing line(s): ${drift.length}`,
+      `differing line(s): ${drift}`,
   );
 }
 

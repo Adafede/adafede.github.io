@@ -23,7 +23,6 @@ export default function listingFeeds() {
       url: "/articles.html",
       items: () => content.articles(),
       date: (item) => item.data.date,
-      category: () => undefined,
     },
     {
       slug: "talks",
@@ -31,7 +30,6 @@ export default function listingFeeds() {
       url: "/talks.html",
       items: () => content.talks(),
       date: (item) => item.data.date,
-      category: (item) => (item.data.tags ?? [])[0] ?? undefined,
     },
     {
       slug: "teaching",
@@ -39,7 +37,6 @@ export default function listingFeeds() {
       url: "/teaching.html",
       items: () => content.teaching(),
       date: (item) => item.data.date,
-      category: (item) => (item.data.tags ?? [])[0] ?? undefined,
     },
     {
       slug: "posts",
@@ -47,7 +44,6 @@ export default function listingFeeds() {
       url: "/posts.html",
       items: () => content.posts(),
       date: (item) => item.data.date || item.data.pubDate,
-      category: (item) => (item.data.tags ?? [])[0] ?? undefined,
     },
     {
       slug: "varia",
@@ -55,7 +51,6 @@ export default function listingFeeds() {
       url: "/varia.html",
       items: () => content.varia(),
       date: () => undefined,
-      category: (item) => (item.data.tags ?? [])[0] ?? undefined,
     },
     {
       // Quarto's catch-all listing. It has no page of its own, but the address
@@ -67,7 +62,6 @@ export default function listingFeeds() {
       // page this feed actually describes.
       url: "/",
       date: (item) => item.data.date || item.data.pubDate,
-      category: (item) => (item.data.tags ?? [])[0] ?? undefined,
       // Newest first, so that the cap below keeps the 20 most recent items
       // rather than the first 20 articles and nothing else. Undated items (the
       // varia listings) sort last.

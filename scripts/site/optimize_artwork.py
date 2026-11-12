@@ -16,10 +16,12 @@ from PIL import Image
 MAX_SIZE = (512, 512)
 
 
-def encode_webp(png: Path, target: Path) -> None:
+def encode_webp(cwebp: str, png: Path, target: Path) -> None:
+    """Encode an intermediate PNG into a stripped WebP file."""
+    target.parent.mkdir(parents=True, exist_ok=True)
     subprocess.run(
         [
-            "cwebp",
+            cwebp,
             "-quiet",
             "-q",
             "88",
@@ -36,35 +38,28 @@ def encode_webp(png: Path, target: Path) -> None:
 
 
 def optimize_artwork(source: Path, target: Path) -> bool:
-    """Downsample raster artwork for a card preview; preserve animation.
+    """Downsample static raster artwork for a card preview.
 
-    Vectors are not accepted. Rasterizing a vector trades away the scaling and the
-    sharpness it was published in, so SVGs are served as they were authored.
+    Animated GIFs and vectors return False so the caller serves the original file
+    untouched rather than losing animation or vector sharpness.
     """
     cwebp = shutil.which("cwebp")
-    if not cwebp:
+    if not cwebp or source.suffix.lower() not in {".gif", ".png"}:
         return False
 
     with tempfile.TemporaryDirectory() as directory:
         png = Path(directory) / "artwork.png"
-        if source.suffix.lower() in {".gif", ".png"}:
-            with Image.open(source) as image:
-                expected_format = source.suffix[1:].upper()
-                if image.format != expected_format:
-                    return False
-                if getattr(image, "n_frames", 1) > 1:
-                    return False
-                image.seek(0)
-                frame = image.convert("RGBA")
-            frame.thumbnail(MAX_SIZE, Image.Resampling.LANCZOS)
-            frame.save(png)
-        else:
-            return False
-        with Image.open(png) as image:
-            preview = image.convert("RGBA")
-        preview.thumbnail(MAX_SIZE, Image.Resampling.LANCZOS)
-        preview.save(png)
-        encode_webp(png, target)
+        with Image.open(source) as image:
+            expected_format = source.suffix[1:].upper()
+            if image.format != expected_format:
+                return False
+            if getattr(image, "n_frames", 1) > 1:
+                return False
+            image.seek(0)
+            frame = image.convert("RGBA")
+        frame.thumbnail(MAX_SIZE, Image.Resampling.LANCZOS)
+        frame.save(png)
+        encode_webp(cwebp, png, target)
     if target.stat().st_size >= source.stat().st_size:
         target.unlink()
         return False

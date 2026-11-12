@@ -20,9 +20,11 @@ license: CC-BY-4.0
 - Posts: https://adafede.github.io/posts.html
 - Talks: https://adafede.github.io/talks.html
 - Teaching: https://adafede.github.io/teaching.html
+- Varia: https://adafede.github.io/varia.html
 - Privacy: https://adafede.github.io/privacy.html
 - Sitemap: https://adafede.github.io/sitemap.xml
 - RSS: https://adafede.github.io/rss.xml
+- Atom: https://adafede.github.io/atom.xml
 - JSON feed: https://adafede.github.io/posts.json
 - LLMs: https://adafede.github.io/llms.txt
 - AI catalog: https://adafede.github.io/.well-known/ai-catalog.json

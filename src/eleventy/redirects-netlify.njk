@@ -1,0 +1,7 @@
+---
+permalink: /_redirects
+eleventyExcludeFromCollections: true
+---
+# Generated from src/eleventy/_data/redirects.js — do not edit by hand.
+{% for r in redirects %}{{ r.from }} {{ r.to }} 301
+{% endfor %}

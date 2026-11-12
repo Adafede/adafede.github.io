@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import subprocess
 import sys
 from datetime import UTC, datetime
@@ -145,25 +146,24 @@ def get_qmd_modification_time(
         relative_path = relative_path.removesuffix(".html")
 
         qmd_candidates = [
-            f"{relative_path}/index.qmd",
-            f"{relative_path}.qmd",
-            f"posts/{relative_path}/index.qmd",
-            f"posts/{relative_path}.qmd",
+            PROJECT_ROOT / f"{relative_path}/index.qmd",
+            PROJECT_ROOT / f"{relative_path}.qmd",
+            PROJECT_ROOT / f"posts/{relative_path}/index.qmd",
+            PROJECT_ROOT / f"posts/{relative_path}.qmd",
         ]
 
         for candidate in qmd_candidates:
-            if os.path.isfile(candidate):
-                git_date = get_git_commit_date(candidate)
+            if candidate.is_file():
+                git_date = get_git_commit_date(str(candidate.relative_to(PROJECT_ROOT)))
                 if git_date:
                     return git_date
-                else:
-                    mod_timestamp = os.path.getmtime(candidate)
-                    return datetime.fromtimestamp(mod_timestamp, tz=UTC).isoformat()
+                mod_timestamp = candidate.stat().st_mtime
+                return datetime.fromtimestamp(mod_timestamp, tz=UTC).isoformat()
 
         return None
 
     except (OSError, ValueError) as e:
-        print(f"Warning: Could not get .qmd modification time for {item_url}: {e}")
+        logger.warning("Could not get .qmd modification time for %s: %s", item_url, e)
         return None
 
 
@@ -171,6 +171,7 @@ def get_git_commit_date(file_path: str) -> str | None:
     try:
         result = subprocess.run(
             ["git", "log", "-1", "--format=%cI", "--", file_path],
+            cwd=PROJECT_ROOT,
             capture_output=True,
             text=True,
             check=True,
@@ -276,14 +277,13 @@ def extract_item_data(
                             "https://doi.org/",
                         )
                         ref["doi"] = doi
-                # Find all cito annotations
+                # Find all cito annotations (may be space-separated in one span)
                 cito_spans = entry.find_all("span", class_="cito")
                 cito_relations: list[str] = []
                 for span in cito_spans:
-                    text = span.get_text(strip=True)
-                    if text.startswith("[cito:") and text.endswith("]"):
-                        # remove [cito:] prefix and trailing ]
-                        cito_relations.append(text[6:-1])
+                    cito_relations.extend(
+                        re.findall(r"\[cito:([^\]]+)\]", span.get_text()),
+                    )
                 if ref.get("doi") and cito_relations:
                     ref["cito"] = cito_relations
                     references.append(ref)
@@ -302,7 +302,7 @@ def extract_item_data(
 def convert_rss_to_json_feed(rss_path: str | Path, json_feed_path: str | Path) -> None:
     """Convert RSS XML to JSON Feed format."""
     if not os.path.isfile(rss_path):
-        print(f"RSS file not found at {rss_path}")
+        logger.warning("RSS file not found at %s", rss_path)
         return
 
     # Known top-level JSON Feed fields; metadata keys outside this set are
@@ -324,7 +324,7 @@ def convert_rss_to_json_feed(rss_path: str | Path, json_feed_path: str | Path) -
 
         channel = root.find("channel")
         if channel is None:
-            print(f"No channel found in RSS file {rss_path}")
+            logger.warning("No channel found in RSS file %s", rss_path)
             return
 
         # Build JSON Feed structure with proper ordering: version, title,
@@ -354,7 +354,11 @@ def convert_rss_to_json_feed(rss_path: str | Path, json_feed_path: str | Path) -
                 meta_raw = yaml.load_from_path(quarto_path)
                 # YAML is untyped; narrow with explicit checks and casts
                 if isinstance(meta_raw, dict):
-                    authors_raw = meta_raw.get("authors", [])
+                    authors_raw = (
+                        meta_raw.get("authors")
+                        or meta_raw.get("authors_for_feed")
+                        or []
+                    )
                     if isinstance(authors_raw, list):
                         authors_data = cast("list[object]", authors_raw)
                         for a_raw in authors_data:
@@ -412,10 +416,10 @@ def convert_rss_to_json_feed(rss_path: str | Path, json_feed_path: str | Path) -
         with open(json_feed_path, "w", encoding="utf-8") as f:
             json.dump(json_feed, f, indent=2, ensure_ascii=False)
 
-        print(f"Generated JSON Feed: {json_feed_path}")
+        logger.info("Generated JSON Feed: %s", json_feed_path)
 
     except (OSError, XmlParser.ParseError, ValueError) as e:
-        print(f"Error converting RSS to JSON: {e}")
+        logger.error("Error converting RSS to JSON: %s", e)
 
 
 if __name__ == "__main__":

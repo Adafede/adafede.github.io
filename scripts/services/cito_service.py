@@ -148,7 +148,7 @@ class CitoService:
         if entry.find("span", class_=CITO_SPAN_CLASS):
             return False
 
-        camel_props = [snake_to_camel(prop) for prop in cito_props]
+        camel_props = sorted({snake_to_camel(prop) for prop in cito_props})
         annotation_text = " ".join(f"[cito:{prop}]" for prop in camel_props)
 
         cito_span = self.html.create_element(

@@ -219,8 +219,7 @@ class RorService:
 
                 # Add Scholia link
                 qid = aff_data.get("qid")
-                if qid:
-                    self._add_scholia_link(soup, aff_elem, qid)
+                if qid and self._add_scholia_link(soup, aff_elem, qid):
                     enriched_count += 1
 
         return enriched_count
@@ -286,14 +285,19 @@ class RorService:
         soup: BeautifulSoup,
         element,
         qid: str,
-    ) -> None:
-        """Add Scholia link to element.
+    ) -> bool:
+        """Add Scholia link to element if not already present."""
+        existing_link = element.find(
+            "a",
+            href=lambda href: url_has_host(
+                href,
+                "scholia.toolforge.org",
+                "scholia.wiki",
+            ),
+        )
+        if existing_link:
+            return False
 
-        Args:
-            soup: BeautifulSoup object
-            element: Element to add link to
-            qid: Wikidata QID
-        """
         scholia_url = f"https://qlever.scholia.wiki/organization/{qid}"
         scholia_img = (
             f'<img src="{self.SCHOLIA_SVG_URL}" alt="" aria-hidden="true" '
@@ -312,32 +316,4 @@ class RorService:
 
         element.append(" ")
         element.append(link)
-
-    def process_files(
-        self,
-        qmd_files: list[Path],
-        site_dir: Path,
-    ) -> int:
-        """Process multiple QMD/HTML file pairs.
-
-        Args:
-            qmd_files: List of QMD source files
-            site_dir: Site output directory
-
-        Returns:
-            Total number of affiliations enriched
-        """
-        total_enriched = 0
-
-        for qmd_path in qmd_files:
-            html_path = self.fs.get_html_path(qmd_path, str(site_dir))
-            if self.fs.exists(html_path):
-                enriched = self.inject_into_html(qmd_path, html_path)
-                total_enriched += enriched
-            else:
-                logger.warning(f"HTML not found for {qmd_path.name}")
-
-        logger.info(
-            f"Enriched {total_enriched} affiliations across {len(qmd_files)} files",
-        )
-        return total_enriched
+        return True

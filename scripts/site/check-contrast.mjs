@@ -24,30 +24,57 @@ function readBlock(block) {
   return tokens;
 }
 
+/** Return the interior of the `{ ... }` block whose `{` is at or after `from`. */
+function readBraced(css, from) {
+  const open = css.indexOf("{", from);
+  if (open < 0) return null;
+  let depth = 1;
+  for (let i = open + 1; i < css.length; i++) {
+    if (css[i] === "/" && css[i + 1] === "*") {
+      const end = css.indexOf("*/", i + 2);
+      if (end < 0) break;
+      i = end + 1;
+      continue;
+    }
+    if (css[i] === "{") depth++;
+    else if (css[i] === "}" && --depth === 0) {
+      return css.slice(open + 1, i);
+    }
+  }
+  return null;
+}
+
 /** Pull `--name: value;` out of the :root blocks, one per theme. */
 function extractTokens(css) {
-  // The dark palette is a second :root inside
-  // `@media (prefers-color-scheme: dark)` rather than a light-dark() override,
-  // so reading only the first :root meant the "dark scheme" pass silently
-  // re-checked the light values and the dark theme was never actually tested.
-  // The first `prefers-color-scheme: dark` block only restyles code blocks, so
-  // match the one whose :root actually declares the palette.
-  const darkAt = css.lastIndexOf("@media (prefers-color-scheme: dark)");
-  const darkRoot = css.indexOf(":root {", darkAt);
-  const lightStart = css.indexOf(":root {");
-  const lightEnd = css.indexOf("\n}", lightStart);
-  if (lightStart < 0 || lightEnd < 0) {
+  const lightStart = css.search(/(?:^|\n):root\s*\{/);
+  const lightBlock = lightStart >= 0 ? readBraced(css, lightStart) : null;
+  if (lightBlock === null) {
     console.error(`! could not locate the light :root block in ${SHEET}`);
     process.exit(2);
   }
-  const darkEnd = css.indexOf("\n}", darkRoot);
-  if (darkRoot < 0 || darkEnd < 0) {
+
+  let darkBlock = null;
+  for (const m of css.matchAll(/@media\s*\(\s*prefers-color-scheme\s*:\s*dark\s*\)/g)) {
+    const mediaBody = readBraced(css, m.index);
+    if (!mediaBody) continue;
+    const rootAt = mediaBody.search(/(?:^|\n)\s*:root\s*\{/);
+    if (rootAt >= 0) {
+      const candidate = readBraced(mediaBody, rootAt);
+      if (candidate && /--bg\s*:/.test(candidate)) {
+        darkBlock = candidate;
+        break;
+      }
+    }
+  }
+  if (darkBlock === null) {
     console.error(`! could not locate the dark :root block in ${SHEET}`);
     process.exit(2);
   }
+
+  const lightTokens = readBlock(lightBlock);
   const blocks = {
-    light: readBlock(css.slice(lightStart, lightEnd)),
-    dark: readBlock(css.slice(darkRoot, darkEnd)),
+    light: lightTokens,
+    dark: { ...lightTokens, ...readBlock(darkBlock) },
   };
 
   // Resolve light-dark(a, b) and nested var() references into two themes.
@@ -62,10 +89,9 @@ function extractTokens(css) {
     const source = blocks[theme];
     for (const [name, raw] of Object.entries(source)) {
       let value = resolve(raw, theme);
-      // One pass of var() substitution is enough for this palette.
-      for (let i = 0; i < 3; i++) {
+      for (let i = 0; i < 4; i++) {
         const next = value.replace(/var\(--([\w-]+)\)/g, (whole, ref) => {
-          return source[ref] ?? whole;
+          return resolve(source[ref] ?? whole, theme);
         });
         if (next === value) break;
         value = next;
@@ -78,9 +104,8 @@ function extractTokens(css) {
 }
 
 function hexToRgb(hex) {
-  let h = hex.trim().replace("#", "");
-  if (h.length === 3 || h.length === 4) h = [...h].map((c) => c + c).join("");
-  if (h.length === 8) h = h.slice(0, 6);
+  let h = hex.trim().slice(1);
+  if (h.length === 3) h = [...h].map((c) => c + c).join("");
   const n = parseInt(h, 16);
   return { r: (n >> 16) & 255, g: (n >> 8) & 255, b: n & 255 };
 }
@@ -136,8 +161,8 @@ for (const theme of ["light", "dark"]) {
   console.log(`\n${theme} scheme`);
   for (const [fg, bg, required, label] of PAIRS) {
     if (
-      !/^#[0-9a-f]{3,8}$/i.test(t[fg] ?? "") ||
-      !/^#[0-9a-f]{3,8}$/i.test(t[bg] ?? "")
+      !/^#(?:[0-9a-f]{3}|[0-9a-f]{6})$/i.test(t[fg] ?? "") ||
+      !/^#(?:[0-9a-f]{3}|[0-9a-f]{6})$/i.test(t[bg] ?? "")
     ) {
       console.log(`  ?  ${label}: unresolved (${fg}=${t[fg]}, ${bg}=${t[bg]})`);
       unresolved++;

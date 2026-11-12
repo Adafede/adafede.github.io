@@ -8,24 +8,10 @@
 import { readFileSync, readdirSync, existsSync } from "node:fs";
 import { join, basename, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { load, JSON_SCHEMA } from "js-yaml";
+import { parseFrontmatter, truncateAtWord } from "../../lib/frontmatter.mjs";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const CONTENT = join(HERE, "..", "..", "content");
-
-/** Split a `---\n...\n---\n` frontmatter block off a Markdown file. */
-function parseDoc(raw) {
-  if (!raw.startsWith("---")) return { data: {}, body: raw };
-  const close = raw.indexOf("\n---", 3);
-  // An unterminated block is not frontmatter: without this the closing `---`
-  // is searched for in the body as well, so a stray horizontal rule half way
-  // down the document silently becomes the end of the frontmatter and the
-  // YAML above it is handed to the parser as a document.
-  if (close === -1) return { data: {}, body: raw };
-  const head = raw.slice(4, close);
-  const body = raw.slice(close + 4);
-  return { data: load(head, { schema: JSON_SCHEMA }) ?? {}, body };
-}
 
 /**
  * The `.md` files in a directory, sorted.
@@ -44,7 +30,7 @@ function loadCollection(dir, extra = () => ({})) {
   const full = join(CONTENT, dir);
   return readDir(full).map((file) => {
     const raw = readFileSync(join(full, file), "utf-8");
-    const { data, body } = parseDoc(raw);
+    const { data, body } = parseFrontmatter(raw);
     const id = basename(file, ".md");
     return {
       id,
@@ -76,7 +62,7 @@ function loadNested(dir) {
     const files = readDir(join(base, group.name));
     for (const file of files) {
       const raw = readFileSync(join(base, group.name, file), "utf-8");
-      const { data, body } = parseDoc(raw);
+      const { data, body } = parseFrontmatter(raw);
       const stem = basename(file, ".md");
       // A group holding a single file named after itself is one document, not
       // a listing: articles/thesis/thesis.md is the doctoral thesis, which
@@ -115,13 +101,7 @@ function summaryFrom(body) {
     .replace(/^#+\s+.*$/gm, " ") // headings
     .replace(/\s+/g, " ")
     .trim();
-  // Break at a word, never mid-word: a description cut through the middle of a
-  // word reads as a rendering fault rather than as an ellipsis.
-  if (text.length <= 175) return text;
-  const clipped = text.slice(0, 175);
-  const lastSpace = clipped.lastIndexOf(" ");
-  const cut = lastSpace > 100 ? clipped.slice(0, lastSpace) : clipped;
-  return `${cut.replace(/[\s,;:.—-]+$/, "")}…`;
+  return truncateAtWord(text, 175);
 }
 
 const byPubDateDesc = (a, b) =>
@@ -136,6 +116,10 @@ function loadEvents(dir) {
 }
 
 let singleton;
+
+export function resetSiteContent() {
+  singleton = undefined;
+}
 
 export default function buildData() {
   if (singleton) return singleton;
@@ -169,7 +153,7 @@ export default function buildData() {
         if (!group.isDirectory()) continue;
         for (const file of readDir(join(base, group.name))) {
           const raw = readFileSync(join(base, group.name, file), "utf-8");
-          const { data, body } = parseDoc(raw);
+          const { data, body } = parseFrontmatter(raw);
           const id = `${group.name}/${basename(file, ".md")}`;
           out.push({ id, url: `/varia/${id}.html`, data, body });
         }
@@ -182,7 +166,7 @@ export default function buildData() {
 
     cv: memo(() => ({
       bio: existsSync(join(CONTENT, "cv/bio.md"))
-        ? parseDoc(readFileSync(join(CONTENT, "cv/bio.md"), "utf-8")).body
+        ? parseFrontmatter(readFileSync(join(CONTENT, "cv/bio.md"), "utf-8")).body
         : "",
       experience: readJson("cv/experience.json", { label: "", entries: [] }),
       education: readJson("cv/education.json", { label: "", entries: [] }),

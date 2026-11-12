@@ -20,14 +20,15 @@ permalink: /varia.html
     {% for card in group.items %}
     <li class="entry{% if card.data.image %} entry--with-image{% endif %}" typeof="CreativeWork" resource="{{ site.url }}{{ card.url }}" data-tags="{{ card | tagKey }}">
       {% if card.data.image %}
-      {% set artworkSize = card.data.image | artwork | artworkSize %}
+      {% set thumb = card.data.image | artworkThumb %}
+      {% set artworkSize = thumb | artworkSize %}
       {# The frame is a wrapper, not the <img>, so the artwork can be sized to
          its own shape inside a frame of consistent size. Putting the frame on
          the image means the image fills the frame, and an artwork that is not
          the frame's shape has to be letterboxed into it — which is what made
          the square and tall logos read as images that failed to load. #}
       <div class="entry__media">
-        <img class="entry__image" property="image" src="{{ card.data.image | artworkThumb }}"
+        <img class="entry__image" property="image" src="{{ thumb }}"
           loading="{% if isFirstGroup and loop.first %}eager{% else %}lazy{% endif %}" decoding="async"
           fetchpriority="{% if isFirstGroup and loop.first %}high{% else %}low{% endif %}"
           width="{{ artworkSize.width }}" height="{{ artworkSize.height }}"

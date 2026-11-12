@@ -9,7 +9,6 @@ eleventyExcludeFromCollections: true
 rdfaType: ScholarlyArticle
 ---
 {% set groupLabels = { first: 'Single first author', shared: 'Shared first author', co: 'Co-author', thesis: 'Doctoral thesis' } %}
-{% set summary = article.data.abstract | orDescription(article.data) %}
 {# `article.data.group` is the authorship bucket; deriving it here rather than
    reading a bare `group` is what the breadcrumb used to do, and `group` is not
    in scope on this page, so the label rendered as an empty element. #}
@@ -25,7 +24,7 @@ rdfaType: ScholarlyArticle
     </li>
     <li><span aria-hidden="true">/</span></li>
     <li property="itemListElement" typeof="ListItem">
-      <span property="item" typeof="WebPage"><span property="name">{{ authorship }}</span></span>
+      <span property="item" typeof="WebPage" resource="{{ site.url }}{{ page.url }}"><span property="name">{{ authorship }}</span></span>
       <meta property="position" content="2" />
     </li>
   </ol>
@@ -46,7 +45,7 @@ rdfaType: ScholarlyArticle
        arrived as one, never a raster stand-in. #}
     {% if article.data.image %}
     {% set artwork = article.data.image | artwork %}
-    {% set artworkSize = article.data.image | artworkSize %}
+    {% set artworkSize = artwork | artworkSize %}
     <figure class="article__figure">
       <img class="article__image" property="image" src="{{ artwork }}" alt="{{ article.data.imageAlt or '' }}" fetchpriority="high" decoding="async"
         width="{{ artworkSize.width }}" height="{{ artworkSize.height }}" />

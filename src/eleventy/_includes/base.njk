@@ -21,10 +21,11 @@
     {# Content Security Policy: the only scripts are SimpleAnalytics (external
        CDN) and the inlined CSS. No inline scripts, no eval, no object/embed.
        connect-src allows SimpleAnalytics' beacon endpoint. #}
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'strict-dynamic' 'sha384-yzZn7eUfB4MGWLJ6nlCFRZcvWNWya4kAYI7R7BcN/dXNqrHoUK/IHwn1vzD7ssM/' https://scripts.simpleanalyticscdn.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://*.simpleanalytics.com https://scripts.simpleanalyticscdn.com https://*.wikidata.org https://*.wikimedia.org https://*.scholia.wiki https://hypothes.is; base-uri 'self'; form-action 'self'; object-src 'none'; require-trusted-types-for 'script'; trusted-types 'none'; upgrade-insecure-requests" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'strict-dynamic' 'sha384-yzZn7eUfB4MGWLJ6nlCFRZcvWNWya4kAYI7R7BcN/dXNqrHoUK/IHwn1vzD7ssM/' https://scripts.simpleanalyticscdn.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://*.simpleanalytics.com https://scripts.simpleanalyticscdn.com https://*.wikidata.org https://*.wikimedia.org https://*.scholia.wiki https://hypothes.is; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests" />
 
     {%- set entry = post or article or talk or course or item %}
-    {%- set meta = post and post.data %}
+    {%- set meta = (post and post.data) or (article and article.data) %}
+    {%- set metaDate = meta and (meta.pubDate or meta.date) %}
     {%- set effectiveRdfaType = (meta and meta.rdfaType) or rdfaType %}
     {%- set effectiveTitle = title or (entry and entry.data.title) %}
     {%- set pageTitle = (site.author ~ ' — ' ~ effectiveTitle) if (effectiveTitle and effectiveTitle != site.author) else site.author %}
@@ -32,12 +33,13 @@
     {%- set rawSummary = description or (article and (article.data.abstract | orDescription(article.data))) or (entry and (entry.data.description or entry.data.venue)) %}
     {%- set summary = (rawSummary | plainText) if entry else rawSummary %}
     {# The canonical URL is this page's own address. Deriving it from `page.url`
-       rather than from a front-matter field means every page gets one: a
-       canonical link that is present on some pages and absent on others is
-       worse than none, because it makes the omissions look deliberate. #}
-    {% set canonicalUrl = site.url + (page.url | replace('index.html', '')) %}
+       rather than from a front-matter field means every indexable page gets one:
+       error pages (`noindex`) omit canonical so missing URLs are not collapsed
+       onto `/404.html`. #}
+    {%- set cleanPath = page.url.slice(0, -10) if page.url.endsWith('/index.html') else page.url %}
+    {% set canonicalUrl = site.url + cleanPath %}
     {% if summary %}<meta name="description" content="{{ summary }}" />{% endif %}
-    <link rel="canonical" href="{{ canonicalUrl }}" />
+    {% if noindex %}<meta name="robots" content="noindex" />{% else %}<link rel="canonical" href="{{ canonicalUrl }}" />{% endif %}
 
     <meta name="author" content="{{ site.author }}" />
     {# `eleventy.generator` is populated by Eleventy's data cascade (e.g.
@@ -47,16 +49,16 @@
 
     <meta property="og:type" content="{% if effectiveRdfaType %}article{% else %}website{% endif %}" />
     <meta property="og:site_name" content="{{ site.author }}" />
-    <meta property="og:locale" content="en" />
+    <meta property="og:locale" content="en_US" />
     {# The full title, not the bare page title. A link preview stands alone in
        a feed: "Swiss pharmaceutical scientist" with no name on it reads as a
        page about an unnamed person. #}
     <meta property="og:title" content="{{ pageTitle }}" />
     {% if summary %}<meta property="og:description" content="{{ summary }}" />{% endif %}
-    <meta property="og:url" content="{{ canonicalUrl }}" />
+    {% if not noindex %}<meta property="og:url" content="{{ canonicalUrl }}" />{% endif %}
     <meta property="og:image" content="{{ site.url }}{{ site.ogImage }}" />
     <meta property="og:image:alt" content="{{ site.author }}" />
-    {% if meta and meta.pubDate %}<meta property="article:published_time" content="{{ meta.pubDate | isoDate }}" />{% endif %}
+    {% if metaDate %}<meta property="article:published_time" content="{{ metaDate | isoDate }}" />{% endif %}
     {% if meta and meta.updatedDate %}<meta property="article:modified_time" content="{{ meta.updatedDate | isoDate }}" />{% endif %}
 
     {# Twitter/X reads the og:* tags, but only if told to; without this the card
@@ -67,11 +69,14 @@
     <meta name="twitter:image" content="{{ site.url }}{{ site.ogImage }}" />
 
     {% if effectiveRdfaType %}<meta property="schema:type" content="{{ effectiveRdfaType }}" />{% endif %}
+    {% if meta and meta.title %}<meta name="citation_title" content="{{ meta.title }}" />{% endif %}
     {% if meta and meta.authors %}{% for author in meta.authors %}<meta name="citation_author" content="{{ author.name }}" />{% endfor %}{% endif %}
-    {% if meta and meta.pubDate %}<meta name="citation_publication_date" content="{{ meta.pubDate | readableDate }}" />{% endif %}
+    {% if metaDate %}<meta name="citation_publication_date" content="{{ metaDate | readableDate }}" />{% endif %}
+    {% if meta and meta.venue %}<meta name="citation_journal_title" content="{{ meta.venue }}" />{% endif %}
     {% if meta and meta.doi %}<meta name="citation_doi" content="{{ meta.doi }}" />{% endif %}
+    {% if meta and meta.pdf %}<meta name="citation_pdf_url" content="{{ site.url }}{{ meta.pdf }}" />{% endif %}
     {% if meta and meta.license and meta.license.url %}<link rel="license" href="{{ meta.license.url }}" />{% endif %}
-    {% if meta and meta.tags %}<meta name="keywords" content="{{ meta.tags | join(', ') }}" />{% endif %}
+    {% if meta and meta.tags and meta.tags.length %}<meta name="keywords" content="{{ meta.tags | join(', ') }}" />{% endif %}
 
     <link rel="alternate" type="application/rss+xml" title="{{ site.author }} — All items" href="/rss.xml" />
     <link rel="alternate" type="application/atom+xml" title="{{ site.author }} — Posts" href="/atom.xml" />

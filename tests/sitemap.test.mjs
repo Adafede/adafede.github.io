@@ -12,11 +12,12 @@ test(
   "sitemap contains every content page exactly once",
   { skip: !available },
   async () => {
-    const { default: sitemap } =
+    const { default: buildSitemap } =
       await import("../src/eleventy/_data/sitemap.js");
     const { default: buildContent } =
       await import("../src/eleventy/_data/sitecontent.js");
     const content = buildContent();
+    const sitemap = buildSitemap();
 
     const locs = sitemap.map((u) => u.loc);
 

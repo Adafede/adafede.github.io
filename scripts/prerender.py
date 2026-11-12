@@ -15,13 +15,12 @@ from scripts.config import LOG_LEVEL, PROJECT_ROOT
 from scripts.infrastructure import FileSystem, get_logger, setup_logging
 from scripts.services import MetadataService
 
-# Setup logging
-setup_logging(level=LOG_LEVEL)
 logger = get_logger(__name__)
 
 
 def prerender() -> None:
     """Main pre-render orchestration."""
+    setup_logging(level=LOG_LEVEL)
     # PDF-only renders (`quarto render --to pdf`, driven by
     # scripts/site/render-pdfs.mjs) set PDF_ONLY=1. The pre-render step here
     # updates QMD metadata (dates, DOIs) consumed by the HTML/RSS pipeline,

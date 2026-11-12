@@ -35,11 +35,14 @@ from __future__ import annotations
 
 import json
 import math
+import re
 import sys
 from collections import Counter
 from html import escape
 from pathlib import Path
 from typing import Any
+
+import yaml
 
 ROOT = Path(__file__).resolve().parents[2]
 CONTENT = ROOT / "src" / "content" / "talks"
@@ -62,30 +65,19 @@ LON_MIN, LON_MAX = -11.0, 24.0
 LAT_MIN, LAT_MAX = 35.0, 56.0
 
 
-def parse_frontmatter(raw: str) -> dict[str, Any]:
-    """Minimal YAML frontmatter reader.
+_FRONTMATTER_RE = re.compile(
+    r"\A---[ \t]*\r?\n(.*?)\r?\n---[ \t]*(?:\r?\n|\Z)",
+    re.DOTALL,
+)
 
-    The talk files only use flat scalars and inline lists, so pulling in a YAML
-    parser here would add a dependency for no benefit.
-    """
-    if not raw.startswith("---"):
+
+def parse_frontmatter(raw: str) -> dict[str, Any]:
+    """Parse YAML frontmatter from a Markdown file."""
+    match = _FRONTMATTER_RE.match(raw)
+    if not match:
         return {}
-    end = raw.find("\n---", 3)
-    if end == -1:
-        return {}
-    data: dict[str, Any] = {}
-    for line in raw[3:end].splitlines():
-        if not line.strip() or line.startswith((" ", "\t", "-")):
-            continue
-        key, _, value = line.partition(":")
-        value = value.strip()
-        if value.startswith("[") and value.endswith("]"):
-            data[key.strip()] = [
-                v.strip().strip("'\"") for v in value[1:-1].split(",") if v.strip()
-            ]
-        else:
-            data[key.strip()] = value.strip("'\"")
-    return data
+    loaded = yaml.safe_load(match.group(1))
+    return loaded if isinstance(loaded, dict) else {}
 
 
 def city_name(location: str) -> str:
@@ -248,7 +240,11 @@ def main() -> int:
     countries: dict[str, dict[str, Any]] = {}
     for location, talks in places.items():
         country = location.rsplit(",", 1)[-1].strip().strip('"') or "Unknown"
-        entry = countries.setdefault(country, {"talks": [], "cities": {}})
+        entry = countries.setdefault(
+            country,
+            {"talks": [], "cities": {}, "coords": {}},
+        )
+        entry["coords"][location] = (talks[0]["lat"], talks[0]["lon"])
         for talk in talks:
             entry["talks"].append((talk, location, talks[0]["lat"], talks[0]["lon"]))
             entry["cities"][location] = entry["cities"].get(location, 0) + 1
@@ -264,8 +260,8 @@ def main() -> int:
     # drag the marker away from where the country actually is.
     discs = []
     for country, entry in ranked:
-        lats = [t[2] for t in entry["talks"]]
-        lons = [t[3] for t in entry["talks"]]
+        lats = [lat for lat, _ in entry["coords"].values()]
+        lons = [lon for _, lon in entry["coords"].values()]
         x, y = project(sum(lons) / len(lons), sum(lats) / len(lats))
         discs.append(
             (country, entry, x, y, 7 + 11 * math.sqrt(len(entry["talks"]) / biggest)),

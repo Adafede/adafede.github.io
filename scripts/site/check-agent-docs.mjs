@@ -68,7 +68,7 @@ for (const match of text.matchAll(/uv run (?!--with )([a-z][\w-]*)/g)) {
 }
 for (const name of [...uvNames].sort()) {
   if (name === "python" || name === "python3") continue;
-  const installed = declared.has(name) || existsSync(join(ROOT, ".venv", "bin", name));
+  const installed = declared.has(name);
   if (!installed) {
     problems.push(
       `\`uv run ${name}\` — not a declared dependency; it only works if ` +

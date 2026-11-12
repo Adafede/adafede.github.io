@@ -19,22 +19,11 @@ import { readFileSync, readdirSync, existsSync } from "node:fs";
 import { dirname, join, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 import { spawnSync } from "node:child_process";
-import { load as loadYaml } from "js-yaml";
-
+import { parseFrontmatter } from "../../src/lib/frontmatter.mjs";
 import { pruneSiteToPdfs } from "./prune-site.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
 const POSTS_DIR = join(ROOT, "posts");
-
-function splitFrontmatter(text) {
-  if (!text.startsWith("---")) return { data: {}, body: text };
-  const end = text.indexOf("\n---", 3);
-  if (end < 0) return { data: {}, body: text };
-  return {
-    data: loadYaml(text.slice(4, end)) ?? {},
-    body: text.slice(end + 4),
-  };
-}
 
 /** A post opts in to a PDF via `format-links: [pdf]` (or `- pdf`). */
 function pdfRequested(data) {
@@ -59,7 +48,7 @@ function collectSources() {
       .filter((f) => f.endsWith(".qmd"))
       .sort()) {
       const path = join(POSTS_DIR, file);
-      const { data } = splitFrontmatter(readFileSync(path, "utf-8"));
+      const { data } = parseFrontmatter(readFileSync(path, "utf-8"));
       if (pdfRequested(data)) sources.push(path);
     }
   }

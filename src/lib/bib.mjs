@@ -18,13 +18,14 @@ function* iterateEntries(bib) {
     const start = i;
     while (i < bib.length && depth > 0) {
       const ch = bib[i];
-      if (ch === '"' && bib[i - 1] !== "\\") inQuote = !inQuote;
+      if (depth === 1 && ch === '"' && bib[i - 1] !== "\\") inQuote = !inQuote;
       if (!inQuote) {
         if (ch === "{") depth++;
         else if (ch === "}") depth--;
       }
       i++;
     }
+    entryRe.lastIndex = i;
     const body = bib.slice(start, i - 1);
     for (const [name, value] of parseFields(body)) fields[name] = value;
     yield { key, type, fields };
@@ -32,13 +33,46 @@ function* iterateEntries(bib) {
 }
 function parseFields(body) {
   const out = [];
-  // BibTeX values come in four shapes: braced {…}, quoted "…", a bare number,
-  // and a bare word (e.g. `month = may`). All four appear in these files.
-  const fieldRe =
-    /(\w[\w-]*)\s*=\s*(\{(?:[^{}]|\{[^{}]*\})*\}|"[^"]*"|\d+|[A-Za-z][\w.-]*)\s*,?/g;
-  let m;
-  while ((m = fieldRe.exec(body))) {
-    out.push([m[1].toLowerCase(), unwrap(m[2])]);
+  let i = 0;
+  const n = body.length;
+  while (i < n) {
+    while (i < n && /[\s,]/.test(body[i])) i++;
+    const nameMatch = /^[A-Za-z_][\w-]*/.exec(body.slice(i));
+    if (!nameMatch) {
+      i++;
+      continue;
+    }
+    const name = nameMatch[0].toLowerCase();
+    i += nameMatch[0].length;
+    while (i < n && /\s/.test(body[i])) i++;
+    if (body[i] !== "=") continue;
+    i++;
+    while (i < n && /\s/.test(body[i])) i++;
+    if (i >= n) break;
+    let raw = "";
+    if (body[i] === "{") {
+      let depth = 1;
+      const vStart = i;
+      i++;
+      while (i < n && depth > 0) {
+        if (body[i] === "{") depth++;
+        else if (body[i] === "}") depth--;
+        i++;
+      }
+      raw = body.slice(vStart, i);
+    } else if (body[i] === '"') {
+      const vStart = i;
+      i++;
+      while (i < n && !(body[i] === '"' && body[i - 1] !== "\\")) i++;
+      if (i < n) i++;
+      raw = body.slice(vStart, i);
+    } else {
+      const bareMatch = /^(?:\d+|[A-Za-z][\w.-]*)/.exec(body.slice(i));
+      if (!bareMatch) continue;
+      raw = bareMatch[0];
+      i += raw.length;
+    }
+    out.push([name, unwrap(raw)]);
   }
   return out;
 }
@@ -57,26 +91,43 @@ const ACCENTS = {
   "~": "tilde",
   "=": "macron",
   ".": "dotaccent",
-  c: "caron",
+  c: "cedilla",
   v: "caron",
   u: "breve",
   H: "doubleacute",
   k: "ogonek",
   r: "ring",
-  d: "stroke",
+  d: "dotbelow",
+};
+const TEX_LETTERS = {
+  o: "ø",
+  O: "Ø",
+  l: "ł",
+  L: "Ł",
+  aa: "å",
+  AA: "Å",
+  ae: "æ",
+  AE: "Æ",
+  oe: "œ",
+  OE: "Œ",
+  ss: "ß",
 };
 /** `{\"o}` -> `ö`, `{\v r}` -> `ř`, drop the remaining TeX braces. */
 export function detex(input) {
   return (
-    input
-      // braced accent: \", \', \v{...}, or the { \"o } form
+    String(input ?? "")
+      // braced accent: \", \', \v{...}, or the { \"o } / {\v r} form
       .replace(
         /\\(["'`^~=.])\s*\{?\\?([A-Za-z])\}?/g,
         (m, acc, ch) => compose(ACCENTS[acc], ch) ?? m,
       )
       .replace(
-        /\\([cvurHkd])\s*\{([A-Za-z])\}/g,
-        (m, acc, ch) => compose(ACCENTS[acc], ch) ?? m,
+        /\\([cvurHkd])(?:\s+([A-Za-z])|\s*\{([A-Za-z])\})/g,
+        (m, acc, ch1, ch2) => compose(ACCENTS[acc], ch1 || ch2) ?? m,
+      )
+      .replace(
+        /\\(aa|AA|ae|AE|oe|OE|ss|[oOlL])(?![a-zA-Z])\s*/g,
+        (_, cmd) => TEX_LETTERS[cmd] ?? "",
       )
       .replace(/\\&/g, "&")
       .replace(/\\[a-zA-Z]+\s*/g, "")
@@ -86,19 +137,20 @@ export function detex(input) {
   );
 }
 const COMBINING = {
-  diaeresis: "̈",
-  acute: "́",
-  grave: "̀",
-  circumflex: "̂",
-  tilde: "̃",
-  macron: "̄",
-  dotaccent: "̇",
-  caron: "̌",
-  breve: "̆",
-  doubleacute: "̋",
-  ogonek: "̨",
-  ring: "̊",
-  stroke: "̸",
+  diaeresis: "\u0308",
+  acute: "\u0301",
+  grave: "\u0300",
+  circumflex: "\u0302",
+  tilde: "\u0303",
+  macron: "\u0304",
+  dotaccent: "\u0307",
+  cedilla: "\u0327",
+  caron: "\u030c",
+  breve: "\u0306",
+  doubleacute: "\u030b",
+  ogonek: "\u0328",
+  ring: "\u030a",
+  dotbelow: "\u0323",
 };
 function compose(kind, ch) {
   const mark = kind ? COMBINING[kind] : undefined;
@@ -120,10 +172,11 @@ function familyName(author) {
   const parts = author.split(" ");
   return parts.length > 1 ? `${parts[parts.length - 1]}` : author;
 }
-export function inlineCitation(entry) {
+export function inlineCitation(entry, yearSuffix = "") {
   if (!entry) return "???";
   const authors = parseAuthors(entry.fields.author ?? "");
-  const year = detex(entry.fields.year ?? "").slice(0, 4) || "n.d.";
+  const baseYear = detex(entry.fields.year ?? "").slice(0, 4);
+  const year = baseYear ? `${baseYear}${yearSuffix}` : "n.d.";
   if (!authors.length) return year;
   const [first, second] = authors.map(familyName);
   if (authors.length === 1) return `${first} ${year}`;
@@ -167,22 +220,21 @@ function formatAuthors(authors) {
     return `${family.slice(particle.length).trim()}, ${given} ${particle}`;
   };
   // The first author stays family-first; the rest flip to given-first.
-  // A single author keeps the bare family-first form Quarto emits
-  // ("Csefalvay, Chris von"); with co-authors it reads "Csefalvay, Chris von, and X".
-  // A lone author is emitted given-first, as Quarto does for the injected
-  // self-citation ("Adriano Rutz. 2026."). With co-authors the lead becomes
-  // family-first ("Bast, Hannah, and ...").
+  // A lone author keeps the bare family-first form Quarto emits
+  // ("Csefalvay, Chris von"); with co-authors it reads
+  // "Csefalvay, Chris von, and X".
+  const lead = demoteParticle(first);
   const parts =
     rest.length > 0
-      ? [first, ...rest.map(givenFirst).map(demoteParticle)]
-      : [first];
+      ? [lead, ...rest.map(givenFirst)]
+      : [lead];
   if (parts.length >= ET_AL_MIN) {
     return `${parts.slice(0, ET_AL_USE_FIRST).join(", ")}, et al.`;
   }
   if (parts.length === 1) return parts[0];
   return `${parts.slice(0, -1).join(", ")}, and ${parts[parts.length - 1]}`;
 }
-const MONTHS = [
+export const MONTHS = [
   "january",
   "february",
   "march",
@@ -346,12 +398,13 @@ function pageRange(raw) {
       : match;
   });
 }
-const escapeHtml = (value) =>
-  value
+export const escapeHtml = (value) =>
+  String(value ?? "")
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
 /**
  * Render a reference the way the repository's Chicago author-date CSL does.
  *

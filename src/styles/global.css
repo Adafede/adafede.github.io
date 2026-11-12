@@ -282,8 +282,7 @@ a[target="_blank"]::after {
 .site-header a[target="_blank"]::after,
 .site-nav a[target="_blank"]::after,
 a.analytics-badge[target="_blank"]::after,
-a[target="_blank"] .registry-icon::after,
-a[target="_blank"] .icon::after {
+a[target="_blank"]:has(.registry-icon, .icon)::after {
   content: none;
   margin-inline-start: 0;
   vertical-align: baseline;
@@ -1935,8 +1934,8 @@ a[role="doc-biblioref"]:hover {
   }
 
   html {
-    /* Anchor targets must clear a header that is now two rows tall. */
-    scroll-padding-top: 7rem;
+    /* Header is static on narrow viewports, so anchors only need breathing room. */
+    scroll-padding-top: 1rem;
   }
 
   .site-main {
@@ -2008,8 +2007,7 @@ a[role="doc-biblioref"]:hover {
 
   .site-nav--utility a,
   .button,
-  .entry,
-  .tag {
+  .entry {
     /* 44px minimum touch target. */
     min-block-size: 2.75rem;
   }
@@ -2022,13 +2020,11 @@ a[role="doc-biblioref"]:hover {
     padding-block: 2px;
   }
 
-  /* Wide tables and code scroll inside their own box. */
-  table {
+  /* Wide prose tables scroll horizontally when unwrapped; .table-scroll handles structured tables. */
+  .prose table {
     display: block;
     overflow-x: auto;
-    white-space: nowrap;
     max-inline-size: 100%;
-    overflow-wrap: anywhere;
   }
 
   pre {
@@ -2122,12 +2118,6 @@ a[role="doc-biblioref"]:hover {
   .post-body,
   .page-header__lede {
     font-size: var(--step--1);
-  }
-
-  /* Filter chips are touch targets, but at the 44px default they eat half the
-     first screen. 2.25rem is still comfortably tappable. */
-  .tag {
-    min-block-size: 2.25rem;
   }
 }
 
@@ -2242,10 +2232,6 @@ a[role="doc-biblioref"]:hover {
   }
 }
 
-.tag-filter__count {
-  line-height: 1;
-}
-
 .tag-filter label.tag:hover {
   color: var(--text);
   border-color: var(--text-faint);
@@ -2272,6 +2258,7 @@ a[role="doc-biblioref"]:hover {
    below the contrast minimum against the pill background. */
 .tag-filter__count {
   color: inherit;
+  line-height: 1;
   font-variant-numeric: tabular-nums;
   margin-inline-start: 0.15em;
 }
@@ -2436,7 +2423,22 @@ a[role="doc-biblioref"]:hover {
   cursor: pointer;
   font-family: var(--sans);
   font-size: var(--step--1);
-  list-style-position: inside;
+  list-style: none;
+}
+
+.talk-map__place summary::-webkit-details-marker {
+  display: none;
+}
+
+.talk-map__place summary::before {
+  content: "▸";
+  color: var(--text-muted);
+  display: inline-block;
+  transition: transform 0.15s ease;
+}
+
+.talk-map__place[open] > summary::before {
+  transform: rotate(90deg);
 }
 
 .talk-map__country-name {
@@ -2555,6 +2557,10 @@ a:hover .registry-icon {
   margin-block: 0;
 }
 
-.home__bio p {
-  margin-block: 0;
+.home__bio > :first-child {
+  margin-block-start: 0;
+}
+
+.home__bio > :last-child {
+  margin-block-end: 0;
 }

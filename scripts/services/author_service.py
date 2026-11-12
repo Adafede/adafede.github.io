@@ -421,30 +421,3 @@ class AuthorService:
             alt = (img.get("alt") or "").lower()
             if "orcid" in src or "orcid" in alt:
                 img.decompose()
-
-    def process_files(
-        self,
-        qmd_files: list[Path],
-        site_dir: Path,
-    ) -> int:
-        """Process multiple QMD/HTML file pairs.
-
-        Args:
-            qmd_files: List of QMD source files
-            site_dir: Site output directory
-
-        Returns:
-            Total number of enrichments made
-        """
-        total_enriched = 0
-
-        for qmd_path in qmd_files:
-            html_path = self.fs.get_html_path(qmd_path, str(site_dir))
-            if self.fs.exists(html_path):
-                enriched = self.inject_into_html(qmd_path, html_path)
-                total_enriched += enriched
-            else:
-                logger.warning(f"HTML not found for {qmd_path.name}")
-
-        logger.info(f"Enriched {total_enriched} authors across {len(qmd_files)} files")
-        return total_enriched

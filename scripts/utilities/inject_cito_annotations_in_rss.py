@@ -101,7 +101,7 @@ def inject_cito_annotations_in_rss(
                 continue
 
             # Transform snake_case properties to camelCase
-            camel_case_props = [snake_to_camel(prop) for prop in cito_props]
+            camel_case_props = sorted({snake_to_camel(prop) for prop in cito_props})
             annotation_text = " ".join(f"[cito:{prop}]" for prop in camel_case_props)
 
             # Create and append CiTO annotation span
