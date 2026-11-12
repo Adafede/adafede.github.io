@@ -15,7 +15,7 @@
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 
-import { htmlFiles, removeScriptAndStyle } from "./html.mjs";
+import { htmlFiles, removeComments, removeScriptAndStyle } from "./html.mjs";
 
 const roots = process.argv.slice(2);
 if (!roots.length) {
@@ -56,9 +56,8 @@ for (const rawRoot of roots) {
   const pageIds = new Map();
   for (const page of pages) {
     const rel = page.slice(root.length);
-    const cleaned = removeScriptAndStyle(readFileSync(page, "utf-8")).replace(
-      /<!--[\s\S]*?-->/g,
-      "",
+    const cleaned = removeComments(
+      removeScriptAndStyle(readFileSync(page, "utf-8")),
     );
     pageIds.set(rel, { html: cleaned, ids: collectIds(cleaned) });
   }

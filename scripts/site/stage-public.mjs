@@ -1,48 +1,25 @@
 /**
- * Stages Eleventy's passthrough directory.
+ * Stages generated files for Eleventy's passthrough directory.
  *
- * public/ is what the Eleventy build copies verbatim, but almost none of it is
- * original: images, the well-known directory and the text files all already
- * live at the repository root, and PDFs come from the Quarto build. Committing
- * a second copy would mean two sources of truth for the same avatar and two
- * places to forget an edit, so public/ is generated here and gitignored.
+ * public/ is gitignored and holds build-derived artifacts that are not already
+ * present at stable repository paths. PDFs come from the Quarto build (_site/):
+ * this copies them out of _site/ into public/. A missing PDF is not fatal: a
+ * branch that has never run Quarto has no PDFs yet, and the templates check
+ * before linking.
  *
- * PDFs come from the Quarto build (_site/). Quarto renders the PDFs (with
- * CiTO citations and LaTeX-quality typography), so this copies them out of
- * _site/ into public/. A missing PDF is not fatal: a branch that has never run
- * Quarto has no PDFs yet, and the templates check before linking.
- *
- * _headers is copied verbatim: it carries no build-derived value now that the
- * only hash in the CSP is the hard-coded SimpleAnalytics one.
+ * Source-of-truth files that already live at the repository root (images,
+ * .well-known, robots/llm/manifest text files, _headers) are copied directly by
+ * Eleventy and must not be duplicated here, otherwise passthrough copy would try
+ * to write the same output from two inputs.
  *
  * Run: node scripts/site/stage-public.mjs
  */
-import {
-  copyFileSync,
-  cpSync,
-  existsSync,
-  mkdirSync,
-  readdirSync,
-} from "node:fs";
+import { copyFileSync, existsSync, mkdirSync, readdirSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
 const PUBLIC = join(ROOT, "public");
-
-/** Directories copied wholesale from the repository root. */
-const DIR_SOURCES = ["images", ".well-known"];
-
-/** Individual files copied from the repository root. */
-const FILE_SOURCES = [
-  "_headers",
-  "humans.txt",
-  "llm.txt",
-  "llms.txt",
-  "llms-full.txt",
-  "robots.txt",
-  "site.webmanifest",
-];
 
 /**
  * Quarto build output that the site links to.
@@ -57,24 +34,6 @@ const PDF_SOURCES = [
 ];
 
 mkdirSync(PUBLIC, { recursive: true });
-
-for (const dir of DIR_SOURCES) {
-  const from = join(ROOT, dir);
-  if (!existsSync(from)) {
-    console.log(`  ! missing source directory ${dir}`);
-    continue;
-  }
-  cpSync(from, join(PUBLIC, dir), { recursive: true });
-}
-
-for (const file of FILE_SOURCES) {
-  const from = join(ROOT, file);
-  if (!existsSync(from)) {
-    console.log(`  ! missing source file ${file}`);
-    continue;
-  }
-  copyFileSync(from, join(PUBLIC, file));
-}
 
 // PDFs. Missing ones are not fatal: a branch that has never run Quarto simply
 // has no PDFs yet, and the templates already check before linking.

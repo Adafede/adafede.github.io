@@ -4,6 +4,7 @@ import {
   elementText,
   firstElement,
   htmlText,
+  removeComments,
   removeScriptAndStyle,
 } from "../scripts/site/html.mjs";
 
@@ -45,4 +46,12 @@ test("removes script and style elements including mixed-case and unclosed tags",
   );
   assert.doesNotMatch(result, /secret|bad\(\)|unclosed\(\)/);
   assert.match(result, /<main>ok<\/main>/);
+});
+
+test("removes HTML comments iteratively so new comment boundaries do not survive", () => {
+  // Removing the inner comment exposes a complete outer comment; a single
+  // pass would leave that newly formed comment behind.
+  const crafted = "a<!<!-- -->--b-->e";
+  assert.equal(removeComments(crafted), "ae");
+  assert.equal(htmlText(`<p>${crafted}</p>`), "ae");
 });

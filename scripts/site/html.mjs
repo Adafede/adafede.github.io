@@ -19,8 +19,9 @@ export function htmlFiles(dir) {
 }
 
 const SCRIPT_OR_STYLE_RE = /<(script|style)\b[^>]*>[\s\S]*?(?:<\/\1\s*>|$)/gi;
-const COMMENT_OR_TAG_RE =
-  /<!--[\s\S]*?-->|<![^>]*>|<\/?[a-zA-Z][\w:-]*(?:\s+(?:[^<>"']|"[^"]*"|'[^']*')*)?>/g;
+const HTML_COMMENT_RE = /<!--[\s\S]*?-->/g;
+const TAG_RE =
+  /<![^>]*>|<\/?[a-zA-Z][\w:-]*(?:\s+(?:[^<>"']|"[^"]*"|'[^']*')*)?>/g;
 const ATTR_RE =
   /([a-zA-Z_:][\w:.-]*)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=<>`]+)))?/g;
 const NAMED_ENTITIES = {
@@ -59,11 +60,23 @@ export function removeScriptAndStyle(html) {
   return cleaned;
 }
 
+/**
+ * Strip HTML comments repeatedly so a removal cannot reveal a new comment
+ * boundary (incomplete multi-character sanitization).
+ */
+export function removeComments(html) {
+  let cleaned = String(html ?? "");
+  let previous;
+  do {
+    previous = cleaned;
+    cleaned = cleaned.replace(HTML_COMMENT_RE, "");
+  } while (cleaned !== previous);
+  return cleaned;
+}
+
 export function htmlText(html, { separateTags = false } = {}) {
-  const stripped = removeScriptAndStyle(html).replace(
-    COMMENT_OR_TAG_RE,
-    separateTags ? " " : "",
-  );
+  const withoutComments = removeComments(removeScriptAndStyle(html));
+  const stripped = withoutComments.replace(TAG_RE, separateTags ? " " : "");
   return decodeEntities(stripped).replace(/\s+/g, " ").trim();
 }
 

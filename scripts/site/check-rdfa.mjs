@@ -16,7 +16,7 @@
  */
 import { readFileSync } from "node:fs";
 
-import { htmlFiles, removeScriptAndStyle } from "./html.mjs";
+import { htmlFiles, removeComments, removeScriptAndStyle } from "./html.mjs";
 
 const roots = process.argv.slice(2);
 if (!roots.length) {
@@ -75,7 +75,7 @@ for (const rawRoot of roots) {
 
   for (const page of pages) {
     const rawHtml = readFileSync(page, "utf-8");
-    const html = removeScriptAndStyle(rawHtml).replace(/<!--[\s\S]*?-->/g, "");
+    const html = removeComments(removeScriptAndStyle(rawHtml));
     const name = page.slice(root.length) || "/";
 
     // Prefixes declared anywhere on the page (including <html prefix="...">).
