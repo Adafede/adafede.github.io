@@ -76,7 +76,13 @@ export function removeComments(html) {
 
 export function htmlText(html, { separateTags = false } = {}) {
   const withoutComments = removeComments(removeScriptAndStyle(html));
-  const stripped = withoutComments.replace(TAG_RE, separateTags ? " " : "");
+  const replacement = separateTags ? " " : "";
+  let stripped = withoutComments;
+  let previous;
+  do {
+    previous = stripped;
+    stripped = stripped.replace(TAG_RE, replacement);
+  } while (stripped !== previous);
   return decodeEntities(stripped).replace(/\s+/g, " ").trim();
 }
 
