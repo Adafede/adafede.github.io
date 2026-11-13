@@ -1,16 +1,12 @@
 import assert from "node:assert/strict";
-import { existsSync } from "node:fs";
+import { join } from "node:path";
 import test from "node:test";
-import { fileURLToPath } from "node:url";
-import { dirname, join } from "node:path";
 
-const here = dirname(fileURLToPath(import.meta.url));
-const contentDir = join(here, "..", "src", "content");
-const available = existsSync(contentDir);
+import { contentSkip } from "./build-state.mjs";
 
 test(
   "sitemap contains every content page exactly once",
-  { skip: !available && !process.env.CI && "needs src/content (bun run sync:content)" },
+  { skip: contentSkip() },
   async () => {
     const { default: buildSitemap } =
       await import("../src/eleventy/_data/sitemap.js");

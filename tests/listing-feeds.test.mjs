@@ -1,12 +1,8 @@
 import assert from "node:assert/strict";
-import { existsSync } from "node:fs";
+import { join } from "node:path";
 import test from "node:test";
-import { fileURLToPath } from "node:url";
-import { dirname, join } from "node:path";
 
-const here = dirname(fileURLToPath(import.meta.url));
-const contentDir = join(here, "..", "src", "content");
-const available = existsSync(contentDir);
+import { contentSkip } from "./build-state.mjs";
 
 async function rssFeed() {
   const { default: listingFeeds } =
@@ -16,7 +12,7 @@ async function rssFeed() {
 
 test(
   "rss feed is capped to the most recent items from every listing, not the first 20 articles",
-  { skip: !available && !process.env.CI && "needs src/content (bun run sync:content)" },
+  { skip: contentSkip() },
   async () => {
     const rss = await rssFeed();
     const capped = rss.items().slice(0, rss.limit);
@@ -47,7 +43,7 @@ test(
 
 test(
   "rss feed is ordered newest-first with undated items last",
-  { skip: !available && !process.env.CI && "needs src/content (bun run sync:content)" },
+  { skip: contentSkip() },
   async () => {
     const rss = await rssFeed();
     const items = rss.items();
