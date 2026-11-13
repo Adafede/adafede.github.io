@@ -446,10 +446,10 @@ export function renderReference(entry, yearSuffix = "") {
   const authorText = formatAuthors(authors);
   // A containerless entry has nothing to carry the date, so the month does.
   const authorLead = authorText.replace(/\.$/, "");
-  const yearText = `${year}${yearSuffix}`;
+  const yearText = escapeHtml(`${year}${yearSuffix}`);
   add(
     authorText
-      ? `${authorLead}. ${yearText}.`
+      ? `${escapeHtml(authorLead)}. ${yearText}.`
       : month
         ? `${escapeHtml(month)}. ${yearText}.`
         : `${yearText}.`,

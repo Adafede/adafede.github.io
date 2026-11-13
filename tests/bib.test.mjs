@@ -124,6 +124,16 @@ test("an article renders author, year, title, journal and DOI", () => {
   assert.match(rendered, /https:\/\/doi\.org\/10\.1234\/abc/);
 });
 
+test("author names are HTML-escaped like every other field", () => {
+  const rendered = renderReference(
+    entry(
+      "@article{k, author = {{AT&T <Labs>} and Doe, J}, year = {2024}, title = {T}, journal = {J}}",
+    ),
+  );
+  assert.doesNotMatch(rendered, /<Labs>/);
+  assert.match(rendered, /AT&amp;T &lt;Labs&gt;/);
+});
+
 test("a containerless entry puts its title in the italic container slot", () => {
   const rendered = renderReference(
     entry(
