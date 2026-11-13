@@ -91,11 +91,12 @@ function loadNested(dir) {
  * string, which escapes it, so deriving the summary here — where the Markdown
  * is still plain — is both simpler and more accurate.
  */
-function summaryFrom(body) {
+export function summaryFrom(body) {
   const text = String(body ?? "")
     .replace(/```[\s\S]*?```/g, " ") // code fences
     .replace(/\[@[^\]]+\]/g, "") // citations
-    .replace(/\[!\[[^\]]*\]\([^)]*\)\]\([^)]*\)/g, "") // images
+    .replace(/\[!\[[^\]]*\]\([^)]*\)\]\([^)]*\)/g, "") // linked images
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, "") // images
     .replace(/\[([^\]]*)\]\([^)]*\)/g, "$1") // links
     .replace(/<[^>]+>/g, " ") // inline RDFa anchors
     .replace(/^#+\s+.*$/gm, " ") // headings
