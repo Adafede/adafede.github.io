@@ -400,12 +400,6 @@ QUARTO_RAW_BLOCK_RE = re.compile(
 QUARTO_IFRAME_RE = re.compile(r"<iframe\b.*?</iframe>", re.DOTALL | re.IGNORECASE)
 
 
-def strip_quarto_raw_html(body: str) -> str:
-    """Remove Quarto raw-HTML blocks and any bare iframe left in the body."""
-    body = QUARTO_RAW_BLOCK_RE.sub("", body)
-    return QUARTO_IFRAME_RE.sub("", body)
-
-
 def convert_body(body: str, extra_depth: int = 0) -> str:
     """Rewrite Quarto/Pandoc-isms into plain Markdown.
 
@@ -451,28 +445,7 @@ def build_frontmatter(
     date_hint: str | None,
     pdf_slug: str | None = None,
 ) -> Metadata:
-    authors_meta = meta.get("author") or []
-    if isinstance(authors_meta, dict):
-        authors_meta = [authors_meta]
-
-    authors = []
-    for entry in authors_meta:
-        if not isinstance(entry, dict):
-            continue
-        authors.append(
-            compact(
-                {
-                    "name": author_literal(entry),
-                    "orcid": optional_str(entry.get("orcid")),
-                    "qid": optional_str(entry.get("qid")),
-                    "affiliationIds": [
-                        a["ref"]
-                        for a in entry.get("affiliations") or []
-                        if a.get("ref")
-                    ],
-                },
-            ),
-        )
+    authors = normalize_authors(meta)
 
     affiliations_meta = meta.get("affiliations") or []
     if isinstance(affiliations_meta, dict):
