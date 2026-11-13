@@ -129,7 +129,7 @@ export function detex(input) {
         /\\(aa|AA|ae|AE|oe|OE|ss|[oOlL])(?![a-zA-Z])\s*/g,
         (_, cmd) => TEX_LETTERS[cmd] ?? "",
       )
-      .replace(/\\&/g, "&")
+      .replace(/\\([&_%#$])/g, "$1")
       .replace(/\\[a-zA-Z]+\s*/g, "")
       .replace(/[{}]/g, "")
       .replace(/\s+/g, " ")

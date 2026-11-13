@@ -190,3 +190,8 @@ test("every entry in the real .bib renders without an empty string", () => {
     );
   }
 });
+
+test("detex unescapes the TeX specials BibTeX fields carry", () => {
+  assert.equal(detex("10.1000/abc\\_def"), "10.1000/abc_def");
+  assert.equal(detex("50\\% \\& \\#1"), "50% & #1");
+});
