@@ -292,9 +292,9 @@ ALWAYS_EMITTED = frozenset({"tags"})
 def prune(out: Metadata) -> Metadata:
     """Drop keys whose value is empty, so an absent field is missing, not empty.
 
-    The collections schema rejects null, an empty list and an empty string alike,
-    and a frontmatter key that is present but empty reads as "this was set and
-    has no value" rather than as "this was never set".
+    The templates test fields with `{% if %}`, so an empty value and a missing
+    one render the same; keeping only what was set keeps the generated
+    frontmatter honest about what the source said.
     """
     return {
         key: value
@@ -308,7 +308,7 @@ def optional_str(value) -> str | None:
 
     Several entity files spell an absent identifier as an explicit `null`,
     which PyYAML surfaces either as None or as the string "null". Both mean
-    "no value", and both would fail the collection schema.
+    "no value"; the string would otherwise be printed on the page as "null".
     """
     if value is None:
         return None
@@ -650,9 +650,9 @@ def normalize_url(value) -> str | None:
 def normalize_doi(value) -> str | None:
     """Accept `10.x/y` or a full resolver URL and store the bare DOI.
 
-    talks/2023-07-03_GA.qmd carries `https://doi.org/10.1055/...`, which the
-    articles schema rejects. Normalising here keeps the schema strict instead of
-    loosening it to `z.string()`.
+    talks/2023-07-03_GA.qmd carries `https://doi.org/10.1055/...`. The
+    templates prepend `https://doi.org/` themselves, so a resolver URL here
+    would produce `https://doi.org/https://doi.org/...`.
     """
     if not value:
         return None
@@ -709,8 +709,8 @@ def normalize_authors(meta: Metadata) -> list[Metadata]:
         item = compact(
             {
                 "name": author_literal(entry),
-                # Zod's .optional() rejects an explicit null, so empty
-                # identifiers have to be omitted rather than set to None.
+                # Empty identifiers are omitted rather than set to None, so
+                # the templates' `{% if %}` checks see them as absent.
                 "orcid": optional_str(entry.get("orcid")),
                 "qid": optional_str(entry.get("qid")),
                 "affiliationIds": [
@@ -937,7 +937,8 @@ def inline_md(text: str) -> str:
     """Convert the inline Markdown the CV uses into HTML.
 
     Handles `[label](url)`, `<url>` autolinks, and `*emphasis*`. Everything is
-    HTML-escaped first, so the result is safe to emit with set:html.
+    HTML-escaped first, so the result is safe to emit with `| safe` in
+    cv.njk.
     """
     escaped = html.escape(text, quote=True)
     links: list[str] = []
