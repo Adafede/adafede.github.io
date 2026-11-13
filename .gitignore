@@ -49,6 +49,7 @@ src/eleventy/static/talk-map-land.svg
 # new contributor or a coding agent gets, so it has to ship with the clone.
 # Scratch state stays out:
 .kb/
+.agent-work/
 graphify-out/
 *.agent-scratch*
 
