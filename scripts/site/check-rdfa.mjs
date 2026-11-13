@@ -16,7 +16,7 @@
  */
 import { readFileSync } from "node:fs";
 
-import { htmlFiles, removeComments, removeScriptAndStyle } from "./html.mjs";
+import { siteHtmlFiles, removeComments, removeScriptAndStyle } from "./html.mjs";
 
 const roots = process.argv.slice(2);
 if (!roots.length) {
@@ -70,7 +70,7 @@ let totalProblems = 0;
 
 for (const rawRoot of roots) {
   const root = rawRoot.replace(/\/+$/, "");
-  const pages = htmlFiles(root);
+  const pages = siteHtmlFiles(root);
   const problems = [];
 
   for (const page of pages) {

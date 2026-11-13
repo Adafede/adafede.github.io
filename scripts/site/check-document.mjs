@@ -21,7 +21,7 @@
  */
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
-import { htmlFiles, htmlText, removeScriptAndStyle } from "./html.mjs";
+import { siteHtmlFiles, htmlText, removeScriptAndStyle } from "./html.mjs";
 
 const roots = process.argv.slice(2);
 if (!roots.length) {
@@ -179,7 +179,7 @@ for (const rawRoot of roots) {
   let pages = 0;
   const failures = [];
 
-  for (const page of htmlFiles(root)) {
+  for (const page of siteHtmlFiles(root)) {
     const html = readFileSync(page, "utf-8");
     if (isStub(html)) continue;
     pages++;

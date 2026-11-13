@@ -15,7 +15,7 @@
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 
-import { htmlFiles, removeComments, removeScriptAndStyle } from "./html.mjs";
+import { siteHtmlFiles, removeComments, removeScriptAndStyle } from "./html.mjs";
 
 const roots = process.argv.slice(2);
 if (!roots.length) {
@@ -48,11 +48,20 @@ function* extractTargets(html) {
   }
 }
 
+/** decodeURIComponent, but a malformed escape is a dead link, not a crash. */
+function decodePath(text) {
+  try {
+    return decodeURIComponent(text);
+  } catch {
+    return null;
+  }
+}
+
 let totalDead = 0;
 
 for (const rawRoot of roots) {
   const root = rawRoot.replace(/\/+$/, "");
-  const pages = htmlFiles(root);
+  const pages = siteHtmlFiles(root);
   const pageIds = new Map();
   for (const page of pages) {
     const rel = page.slice(root.length);
@@ -77,7 +86,12 @@ for (const rawRoot of roots) {
         continue;
       }
 
-      let target = decodeURIComponent(resolved.pathname);
+      let target = decodePath(resolved.pathname);
+      if (target === null) {
+        if (!dead.has(from)) dead.set(from, new Set());
+        dead.get(from).add(href);
+        continue;
+      }
       if (target.endsWith("/")) target += "index.html";
       else if (!hasExtension(target)) {
         target = existsSync(join(root, target, "index.html"))
@@ -93,7 +107,7 @@ for (const rawRoot of roots) {
         continue;
       }
 
-      const fragment = resolved.hash ? decodeURIComponent(resolved.hash.slice(1)) : "";
+      const fragment = resolved.hash ? (decodePath(resolved.hash.slice(1)) ?? resolved.hash) : "";
       if (fragment && pageIds.has(target)) {
         const ids = pageIds.get(target).ids;
         if (!ids.has(fragment)) {

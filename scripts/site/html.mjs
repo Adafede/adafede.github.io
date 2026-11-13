@@ -1,4 +1,4 @@
-import { readdirSync } from "node:fs";
+import { existsSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 
 /**
@@ -16,6 +16,26 @@ export function htmlFiles(dir) {
     else if (entry.name.endsWith(".html")) out.push(path);
   }
   return out;
+}
+
+/**
+ * htmlFiles() for a validator: exits instead of returning nothing.
+ *
+ * A validator that finds no pages reports "0 problems" and exits 0, so a build
+ * that wrote nothing, or a check pointed at the wrong directory, passed. A
+ * missing directory used to surface as a bare ENOENT stack trace.
+ */
+export function siteHtmlFiles(dir) {
+  if (!existsSync(dir)) {
+    console.error(`${dir}: no such directory. Build first: bun run build:eleventy`);
+    process.exit(2);
+  }
+  const pages = htmlFiles(dir);
+  if (pages.length === 0) {
+    console.error(`${dir}: no .html files. Build first: bun run build:eleventy`);
+    process.exit(2);
+  }
+  return pages;
 }
 
 const SCRIPT_OR_STYLE_RE = /<(script|style)\b[^>]*>[\s\S]*?(?:<\/\1\s*>|$)/gi;
