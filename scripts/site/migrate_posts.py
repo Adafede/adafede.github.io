@@ -771,8 +771,8 @@ def migrate_articles(clean: bool, affils_all: dict[str, Metadata]) -> int:
             date_hint = match.group(1) if match else None
 
             target = out_dir / f"{source.stem}.md"
-            if clean and target.exists():
-                target.unlink()
+            if clean:
+                target.unlink(missing_ok=True)
                 continue
             write(
                 target,
@@ -1097,8 +1097,8 @@ def migrate(clean: bool = False) -> int:
             meta.setdefault("author", meta["authors_for_feed"])
 
         target = OUT_DIR / f"{date_hint}_{slug}.md"
-        if clean and target.exists():
-            target.unlink()
+        if clean:
+            target.unlink(missing_ok=True)
             continue
         write(
             target,
@@ -1119,8 +1119,8 @@ def migrate(clean: bool = False) -> int:
             match = FILENAME_RE.match(source.stem)
             date_hint = match.group(1) if match else None
             target = out_dir / f"{source.stem}.md"
-            if clean and target.exists():
-                target.unlink()
+            if clean:
+                target.unlink(missing_ok=True)
                 continue
             write(
                 target,
@@ -1143,8 +1143,8 @@ def migrate(clean: bool = False) -> int:
             PROJECT_ROOT / "src" / "content" / "varia" / group / f"{source.stem}.md"
         )
         target.parent.mkdir(parents=True, exist_ok=True)
-        if clean and target.exists():
-            target.unlink()
+        if clean:
+            target.unlink(missing_ok=True)
             continue
         write(target, frontmatter, body, extra_depth=4)
         print(f"  + {target.relative_to(PROJECT_ROOT)}")

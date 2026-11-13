@@ -262,3 +262,52 @@ def test_the_quarto_pipeline_paths_are_anchored_to_the_project_root():
     assert pandoc.SITE_POSTS_DIR.is_absolute()
 
     assert directory.PROJECT_ROOT == root
+
+
+def test_clean_removes_generated_files_and_writes_none(tmp_path, monkeypatch):
+    """`--clean` is documented as "remove generated files and exit".
+
+    Each section only skipped the write when the target already existed, so a
+    clean run over a tree that had never been built wrote every file instead of
+    removing them.
+    """
+    import scripts.site.migrate_posts as migrate
+
+    for name in ("posts", "talks", "teaching", "varia/tools", "articles/first"):
+        (tmp_path / name).mkdir(parents=True)
+    for kind in ("authors", "affiliations"):
+        (tmp_path / "_includes" / "entities" / kind).mkdir(parents=True)
+    (tmp_path / "posts" / "2026-01-01_a.qmd").write_text("---\ntitle: A\n---\nx\n")
+    (tmp_path / "talks" / "2026-01-02_b.qmd").write_text("---\ntitle: B\n---\n")
+    (tmp_path / "varia" / "tools" / "c.qmd").write_text("---\ntitle: C\n---\n")
+    (tmp_path / "articles" / "first" / "2026-01-03_d.qmd").write_text(
+        "---\ntitle: D\n---\n",
+    )
+
+    monkeypatch.setattr(migrate, "PROJECT_ROOT", tmp_path)
+    for attr, rel in {
+        "POSTS_DIR": "posts",
+        "TALKS_DIR": "talks",
+        "TEACHING_DIR": "teaching",
+        "VARIA_DIR": "varia",
+        "ARTICLES_DIR": "articles",
+        "CV_DIR": "cv",
+        "ENTITIES_DIR": "_includes/entities",
+        "OUT_DIR": "src/content/posts",
+    }.items():
+        monkeypatch.setattr(migrate, attr, tmp_path / rel)
+
+    migrate.migrate(clean=False)
+    content = tmp_path / "src" / "content"
+    assert sorted(p.name for p in content.rglob("*.md")) == [
+        "2026-01-01_a.md",
+        "2026-01-02_b.md",
+        "2026-01-03_d.md",
+        "c.md",
+    ]
+
+    migrate.migrate(clean=True)
+    assert not [p for p in content.rglob("*") if p.is_file()]
+
+    assert migrate.migrate(clean=True) == 0
+    assert not [p for p in content.rglob("*") if p.is_file()]
