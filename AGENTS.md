@@ -114,8 +114,9 @@ reads `_eleventy_site/`.
 - Run `bun run sync:content` whole, never `migrate_posts.py` alone: `optimize_images.py`
   rewrites the `.png` refs to `.webp` with sizes; skipping it fails `check:document`.
 - `tests/{sitemap,listing-feeds,rendered-content}.test.mjs` read `src/content/` and
-  `_eleventy_site/`. Locally they skip without a build and pass on a stale one;
-  with `CI` set they fail. Rebuild before trusting them.
+  `_eleventy_site/`. Locally they skip (with the reason) when that output is
+  missing or older than its sources (`tests/build-state.mjs`); with `CI` set they
+  always run. A "skipped 5" in `bun run test` means rebuild, not pass.
 - Do not strip `'`/`"` to dodge escaping. Nunjucks escapes once; `check-document.mjs`
   fails on double-escaped text. Stripping them corrupted published descriptions.
 - Prefer failing loudly to `catch { return {} }`: a swallowed parse error ships a
