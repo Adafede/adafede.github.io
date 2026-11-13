@@ -12,13 +12,13 @@ bun install --frozen-lockfile && uv sync
 
 ## Verify — start here
 ```sh
-bun run test                                # 95 pytest + 31 node --test, ~3s
+bun run test                                # pytest, then node --test; ~3s
 bun run build:eleventy && bun run check     # links + rdfa + document + contrast, ~1.5s
 bun run lint                                # the full prek hook set, ~17s
 ```
 
 `bun run check` reads `_eleventy_site/`, so **build first or you validate stale HTML**.
-On a clean clone it fails with a bare `ENOENT` stack trace rather than a useful message.
+With no build output the validators exit 2 with "Build first"; they never pass on an empty dir.
 
 Fast subsets:
 ```sh
@@ -71,12 +71,12 @@ reads `_eleventy_site/`.
 7. Commit messages are Conventional Commits (`feat:`, `fix:`, `chore(scope):`).
 
 ## Repo map
-- `eleventy.config.mjs` (1384 lines, 28 `addFilter` calls) — all filters, collections,
+- `eleventy.config.mjs` (~1200 lines) — all filters, collections,
   markdown-it plugins. The hottest file; read it by line range, never whole.
 - `src/eleventy/**` — Nunjucks templates (`pages/`, `_includes/`) and `_data/*.js`.
 - `src/eleventy/static/` — passthrough assets, including the logo set.
 - `src/lib/*.mjs` — bib, jsonFeed and prefixes (all tested).
-- `src/styles/global.css` (2555 lines) — the whole design system as CSS custom properties.
+- `src/styles/global.css` (~2500 lines) — the whole design system as CSS custom properties.
 - `src/content/**` — GENERATED, gitignored. Never edit.
 - `scripts/site/*.py` — content pipeline: `migrate_posts`, `build_talkmap`,
   `build_expertise`, `academic_cv` (runs in `cv-academic.qmd`'s python cell),
@@ -109,6 +109,20 @@ reads `_eleventy_site/`.
 - Two build pipelines exist on purpose — `.github/workflows/publish.yml` runs
   `bun run build:all`, `.forgejo/workflows/publish.yml` still runs the legacy
   `uv run quarto render`. Read `README.md` "Deploy" before editing either.
+
+## Pitfalls found in the 2026-11 audit
+- Run `bun run sync:content` whole, never `migrate_posts.py` alone: `optimize_images.py`
+  rewrites the `.png` refs to `.webp` with sizes; skipping it fails `check:document`.
+- `tests/{sitemap,listing-feeds,rendered-content}.test.mjs` read `src/content/` and
+  `_eleventy_site/`. Locally they skip without a build and pass on a stale one;
+  with `CI` set they fail. Rebuild before trusting them.
+- Do not strip `'`/`"` to dodge escaping. Nunjucks escapes once; `check-document.mjs`
+  fails on double-escaped text. Stripping them corrupted published descriptions.
+- Prefer failing loudly to `catch { return {} }`: a swallowed parse error ships a
+  green build with wrong output.
+- `README.md` is checked by `bun run check:agent-docs` too: every bun script named there
+  must exist in `package.json`.
+- Commits: Conventional Commits, no AI attribution trailers.
 
 ## Do not touch
 - `src/content/`, `_eleventy_site/`, `public/`, `build/` — generated, and ignored
