@@ -53,11 +53,10 @@ node --test tests/      # JavaScript: the Eleventy data loaders and feeds
 ```
 
 A few JavaScript tests read the generated `src/content/` and `_eleventy_site/`
-rather than fixtures. Without a build they're skipped with a note saying which
-command to run; in CI they fail instead, and CI runs them after the build. They
-also read whatever is there, so after editing content run `bun run build:all`
-(or at least `bun run sync:content` and `bun run build:eleventy`) before
-trusting them.
+rather than fixtures. When that output is missing, or older than the sources
+it's built from, they're skipped with a note naming the command to run
+(`bun run sync:content`, then `bun run build:eleventy`). In CI they never skip:
+CI runs them after the build, and a missing build fails them.
 
 ## Build the whole website
 
