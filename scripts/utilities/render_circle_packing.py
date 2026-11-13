@@ -77,6 +77,7 @@ root_dir = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(root_dir))
 
 from scripts.infrastructure import get_logger
+from scripts.site.build_expertise import ink_for
 
 logger = get_logger(__name__)
 
@@ -202,9 +203,9 @@ def compute_text_styling(
     rgba = cmap(rank_norm)
     color = mcolors.to_hex(rgba)
 
-    # W3C relative luminance contrast check
-    luminance = 0.299 * rgba[0] + 0.587 * rgba[1] + 0.114 * rgba[2]
-    text_color = "#FFF" if luminance < 0.5 else "#0F172A"
+    # Same ink rule as the Eleventy build. This copy used a luma threshold at
+    # 0.5 with #0F172A, which picks the worse ink for many mid-tones.
+    text_color = ink_for(rgba)
 
     # Word wrapping logic
     words = label.split(" ")

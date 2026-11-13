@@ -163,8 +163,11 @@ def font_size(lines: list[str], radius: float) -> int:
 
 
 # The two label inks. Every circle gets whichever of these reads better against
-# its own fill.
-INK_DARK = "#0f172a"
+# its own fill. Pure black, not a near-black: with black and white the better
+# of the two is at least ~4.58:1 against any colour (WCAG AA at every size).
+# #0f172a left the worst circle at 4.35:1. The CSS default fill on
+# .expertise__pack must match INK_DARK.
+INK_DARK = "#000000"
 INK_LIGHT = "#ffffff"
 
 

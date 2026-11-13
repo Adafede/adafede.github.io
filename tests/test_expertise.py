@@ -51,18 +51,16 @@ def test_ink_is_whichever_reads_better_not_which_side_of_a_threshold():
     )
 
 
-def test_no_label_in_the_actual_colormap_gets_the_worse_ink():
-    """Measured over every colour build_expertise renders, the chosen ink is
-    always the better of the two — which is the property the threshold test
-    did not have and could not state."""
+def test_every_label_meets_wcag_aa_contrast():
+    """Over every colour build_expertise renders, and a sweep of the whole grey
+    range, the chosen ink reaches 4.5:1. With a near-black ink the worst
+    circle was at 4.35:1."""
     cmap = cm.__dict__["batlowK"]
-    for index in range(18):
-        colour = mcolors.to_rgba(mcolors.to_hex(cmap(1 - index / 17)))
-        chosen = ink_for(colour)
-        dark = contrast_ratio(colour, mcolors.to_rgba(INK_DARK))
-        light = contrast_ratio(colour, mcolors.to_rgba(INK_LIGHT))
-        expected = INK_DARK if dark >= light else INK_LIGHT
-        assert chosen == expected
+    colours = [mcolors.to_rgba(mcolors.to_hex(cmap(1 - i / 17))) for i in range(18)]
+    colours += [(v / 255, v / 255, v / 255, 1.0) for v in range(256)]
+    for colour in colours:
+        ratio = contrast_ratio(colour, mcolors.to_rgba(ink_for(colour)))
+        assert ratio >= 4.5, (mcolors.to_hex(colour), round(ratio, 2))
 
 
 def test_ink_flips_across_the_colormap_range():
@@ -83,7 +81,26 @@ def test_css_text_rule_does_not_override_svg_fill_attribute():
     import re
     from pathlib import Path
 
-    css = Path("src/styles/global.css").read_text(encoding="utf-8")
+    css = (Path(__file__).resolve().parents[1] / "src/styles/global.css").read_text(
+        encoding="utf-8",
+    )
     match = re.search(r"\.expertise__pack\s+a\s+text\s*\{([^}]*)\}", css)
     assert match is not None
     assert "fill:" not in match.group(1)
+
+
+def test_css_default_ink_is_ink_dark():
+    """Dark-ink labels carry no fill attribute and take the CSS default, so the
+    stylesheet and INK_DARK must agree or the contrast test checks the wrong
+    colour."""
+    import re
+    from pathlib import Path
+
+    css = (Path(__file__).resolve().parents[1] / "src/styles/global.css").read_text(
+        encoding="utf-8",
+    )
+    match = re.search(r"\.expertise__pack\s*\{([^}]*)\}", css)
+    assert match is not None
+    fill = re.search(r"fill:\s*(#[0-9a-fA-F]{3,8})", match.group(1))
+    assert fill is not None
+    assert mcolors.to_hex(fill.group(1)) == mcolors.to_hex(INK_DARK)

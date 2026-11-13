@@ -1176,7 +1176,7 @@ figcaption {
   /* Default label ink for light circles; inherited by <text> unless the
      element carries its own fill="#ffffff" presentation attribute for dark
      circles (an author fill rule on `text` itself would beat the attribute). */
-  fill: #0f172a;
+  fill: #000000;
 }
 
 .expertise__pack a {
