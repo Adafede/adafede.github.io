@@ -170,5 +170,7 @@ def test_convert_after_doi_injection(tmp_path: Path):
 
     data = json.loads((tmp_path / "feed.json").read_text(encoding="utf-8"))
     item = data["items"][0]
-    # inject_doi_in_rss writes <doi> tag (not <guid>), so it won't appear as item id
+    # inject_doi_in_rss writes a <doi> element, which the converter promotes to
+    # the item id in place of the post URL.
     assert item["title"] == "First Post"
+    assert item["id"] == "https://doi.org/10.59350/abc123"
