@@ -6,6 +6,7 @@ import {
   rmSync,
   readdirSync,
   cpSync,
+  writeFileSync,
 } from "node:fs";
 import { tmpdir } from "node:os";
 import test from "node:test";
@@ -50,6 +51,30 @@ test("site data loads when the generated profiles.json is absent", async () => {
       !site.scholarUrl.includes("?user="),
       `unexpected scholar query: ${site.scholarUrl}`,
     );
+  } finally {
+    rmSync(sandbox, { recursive: true, force: true });
+  }
+});
+
+test("site data rejects a profiles.json that does not parse", async () => {
+  const sandbox = mkdtempSync(join(tmpdir(), "site-data-bad-"));
+  try {
+    const dataDir = join(sandbox, "src", "eleventy", "_data");
+    mkdirSync(dataDir, { recursive: true });
+    mkdirSync(join(sandbox, "src", "content"));
+    cpSync(join(repo, "src", "lib"), join(sandbox, "src", "lib"), {
+      recursive: true,
+    });
+    copyFileSync(
+      join(repo, "src", "eleventy", "_data", "site.js"),
+      join(dataDir, "site.js"),
+    );
+    writeFileSync(join(sandbox, "src", "content", "profiles.json"), "{bad");
+
+    const { default: site } = await import(
+      pathToFileURL(join(dataDir, "site.js")).href
+    );
+    assert.throws(() => site.scholarUrl, /unreadable profiles file/);
   } finally {
     rmSync(sandbox, { recursive: true, force: true });
   }

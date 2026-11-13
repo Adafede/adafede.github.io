@@ -65,22 +65,23 @@ export default {
   //
   // src/content/ is generated and gitignored, so on a clone that has not run
   // `bun run sync:content` yet the file is absent. That used to be a hard
-  // stack trace at data-import time; it now degrades to no scholar link, the
-  // way the three artwork manifests below already do.
+  // stack trace at data-import time; it now degrades to no scholar link.
+  // A file that exists but does not parse still throws: falling back there
+  // would publish the generic link with the build green.
   get scholarUrl() {
+    const path = fileURLToPath(
+      new URL("../../content/profiles.json", import.meta.url),
+    );
+    if (!existsSync(path)) return "https://scholar.google.com/citations";
+    let profiles;
     try {
-      const profiles = JSON.parse(
-        readFileSync(
-          fileURLToPath(new URL("../../content/profiles.json", import.meta.url)),
-          "utf-8",
-        ),
-      );
-      return profiles?.scholar
-        ? `https://scholar.google.com/citations?user=${encodeURIComponent(profiles.scholar)}`
-        : "https://scholar.google.com/citations";
-    } catch {
-      return "https://scholar.google.com/citations";
+      profiles = JSON.parse(readFileSync(path, "utf-8"));
+    } catch (error) {
+      throw new Error(`${path}: unreadable profiles file`, { cause: error });
     }
+    return profiles?.scholar
+      ? `https://scholar.google.com/citations?user=${encodeURIComponent(profiles.scholar)}`
+      : "https://scholar.google.com/citations";
   },
   nav: [
     { url: "/articles.html", label: "Articles" },
