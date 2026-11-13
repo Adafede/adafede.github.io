@@ -406,6 +406,27 @@ export const escapeHtml = (value) =>
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
 /**
+ * The DOI a rendered reference links to, or null.
+ *
+ * Read from the href rather than the visible text: the attribute ends at its
+ * quote, so DOIs containing ")" or "<" (SICI-style, e.g.
+ * 10.1002/(SICI)1097-0258(...)) come out whole, and the escaping that
+ * renderReference applied is undone so the JSON carries "<", not "&lt;".
+ */
+export function referenceDoi(entryHtml) {
+  const match = String(entryHtml ?? "").match(
+    /href="https?:\/\/(?:dx\.)?doi\.org\/([^"]+)"/i,
+  );
+  if (!match) return null;
+  return match[1]
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&amp;/g, "&");
+}
+
+/**
  * Render a reference the way the repository's Chicago author-date CSL does.
  *
  * This is not a general CSL processor: it covers the fields these .bib files

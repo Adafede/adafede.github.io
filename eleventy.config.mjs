@@ -28,6 +28,7 @@ import {
   inlineCitation,
   parseAuthors,
   parseBib,
+  referenceDoi,
   renderReference,
 } from "./src/lib/bib.mjs";
 import { truncateAtWord } from "./src/lib/frontmatter.mjs";
@@ -696,11 +697,8 @@ export default function (eleventyConfig) {
     const entryRe = /<div class="csl-entry"[^>]*>([\s\S]*?)<\/div>/g;
     for (const match of bibliography.matchAll(entryRe)) {
       const entry = match[1];
-      const doiMatch = entry.match(
-        /https?:\/\/(?:dx\.)?doi\.org\/([^\s"'<)]+)/i,
-      );
-      if (!doiMatch) continue;
-      const doi = doiMatch[1].replace(/[.,;]$/, "");
+      const doi = referenceDoi(entry);
+      if (!doi) continue;
       // A post that lists itself among its own references is not a reference.
       // Quarto drops the self-citation here, and a feed that reports one back to
       // the reader as "this post cites this post" reads as a bug.

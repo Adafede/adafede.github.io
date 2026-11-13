@@ -9,6 +9,7 @@ import {
   inlineCitation,
   parseAuthors,
   parseBib,
+  referenceDoi,
   renderReference,
 } from "../src/lib/bib.mjs";
 
@@ -194,4 +195,13 @@ test("every entry in the real .bib renders without an empty string", () => {
 test("detex unescapes the TeX specials BibTeX fields carry", () => {
   assert.equal(detex("10.1000/abc\\_def"), "10.1000/abc_def");
   assert.equal(detex("50\\% \\& \\#1"), "50% & #1");
+});
+
+test("referenceDoi keeps parentheses and undoes HTML escaping", () => {
+  const doi = "10.1002/(SICI)1097-0258(19980815)17:15<1661::AID>3.0.CO;2-2";
+  const rendered = renderReference(
+    entry(`@article{k, author = {Doe, J}, year = {1998}, title = {T}, journal = {J}, doi = {${doi}}}`),
+  );
+  assert.equal(referenceDoi(rendered), doi);
+  assert.equal(referenceDoi("<p>no link</p>"), null);
 });
