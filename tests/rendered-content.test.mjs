@@ -10,7 +10,7 @@ const built = existsSync(site);
 
 test(
   "listing summaries render descriptions as plain text, not Markdown",
-  { skip: !built },
+  { skip: !built && !process.env.CI && "needs _eleventy_site (bun run build:eleventy)" },
   () => {
     // Descriptions are Markdown prose. Rendering them raw leaked literal
     // backticks and `*` emphasis markers into the visible summary.

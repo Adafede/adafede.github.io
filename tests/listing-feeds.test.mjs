@@ -16,7 +16,7 @@ async function rssFeed() {
 
 test(
   "rss feed is capped to the most recent items from every listing, not the first 20 articles",
-  { skip: !available },
+  { skip: !available && !process.env.CI && "needs src/content (bun run sync:content)" },
   async () => {
     const rss = await rssFeed();
     const capped = rss.items().slice(0, rss.limit);
@@ -47,7 +47,7 @@ test(
 
 test(
   "rss feed is ordered newest-first with undated items last",
-  { skip: !available },
+  { skip: !available && !process.env.CI && "needs src/content (bun run sync:content)" },
   async () => {
     const rss = await rssFeed();
     const items = rss.items();

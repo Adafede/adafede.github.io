@@ -60,9 +60,12 @@ jobs:
       # coverage) that a successful build says nothing about.
       - run: uv run pytest -q
 
-      - run: node --test tests/
-
       - run: bun run build:all
+
+      # After the build, not before: sitemap, listing-feeds and rendered-content
+      # read src/content/ and _eleventy_site/. Run earlier, they skipped on the
+      # clean checkout and a skip is not a failure. With CI set they fail instead.
+      - run: node --test tests/
 
       - run: bun run check:contrast
 

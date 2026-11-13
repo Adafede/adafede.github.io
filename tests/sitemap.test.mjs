@@ -10,7 +10,7 @@ const available = existsSync(contentDir);
 
 test(
   "sitemap contains every content page exactly once",
-  { skip: !available },
+  { skip: !available && !process.env.CI && "needs src/content (bun run sync:content)" },
   async () => {
     const { default: buildSitemap } =
       await import("../src/eleventy/_data/sitemap.js");
