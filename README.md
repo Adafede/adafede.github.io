@@ -52,6 +52,13 @@ uv run pytest -q        # Python: the content pipeline and its helpers
 node --test tests/      # JavaScript: the Eleventy data loaders and feeds
 ```
 
+A few JavaScript tests read the generated `src/content/` and `_eleventy_site/`
+rather than fixtures. Without a build they're skipped with a note saying which
+command to run; in CI they fail instead, and CI runs them after the build. They
+also read whatever is there, so after editing content run `bun run build:all`
+(or at least `bun run sync:content` and `bun run build:eleventy`) before
+trusting them.
+
 ## Build the whole website
 
 One command builds everything --- PDFs, content, and the Eleventy site --- and
@@ -63,11 +70,11 @@ bun run build:all
 
 That runs, in order:
 
-  | Step | Script                   | Produces                                                                                                                              |
-  | ---- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------- |
-  | 1    | `bun run render-pdfs`    | `_site/*.pdf` (Quarto + LuaTeX; skipped if no tool chain)                                                                             |
-  | 2    | `bun run sync:content`   | `src/content/**`, then `public/` (migrate `.qmd` → Markdown, stage PDFs, optimise images, talk map, expertise, redirects, minify CSS) |
-  | 3    | `bun run build:eleventy` | `_eleventy_site/` (Eleventy + CSS)                                                                                                    |
+  | Step | Script                   | Produces                                                                                                                                            |
+  | ---- | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------               |
+  | 1    | `bun run render-pdfs`    | `_site/*.pdf` (Quarto + LuaTeX; skipped if no tool chain)                                                                                           |
+  | 2    | `bun run sync:content`   | `src/content/**`, then `public/` (migrate `.qmd` → Markdown, optimise images, talk map, expertise, artwork thumbnails, minify CSS, stage `public/`) |
+  | 3    | `bun run build:eleventy` | `_eleventy_site/` (Eleventy + CSS)                                                                                                                  |
 
 The PDF step runs **before** the content migration on purpose: the migrator only
 writes a `pdf:` link into a post's frontmatter when the PDF already exists in
