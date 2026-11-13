@@ -82,7 +82,7 @@ jobs:
       - run: |
           bunx @11ty/eleventy --serve --port=8080 &
           bunx wait-on http://localhost:8080/index.html --timeout=60000
-          PUPPETEER_EXECUTABLE_PATH="${CHROMIUM_PATH}" bunx pa11y-ci@4 --config .pa11yci.json
+          PUPPETEER_EXECUTABLE_PATH="${CHROMIUM_PATH}" bun run check:a11y
 
       - run: bun run check:rdfa
 

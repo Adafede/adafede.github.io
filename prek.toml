@@ -59,7 +59,7 @@ hooks = [
   # Fails when AGENTS.md names a bun script, a uv tool, a node file or a repo
   # path that does not exist. This is what keeps the instruction file from
   # rotting: it was already stale four ways before this existed.
-  { id = "check-agent-docs", name = "check-agent-docs", language = "system", entry = "node scripts/site/check-agent-docs.mjs AGENTS.md", pass_filenames = false, files = '^(AGENTS\.md|package\.json|pyproject\.toml|scripts/site/check-agent-docs\.mjs)$' },
+  { id = "check-agent-docs", name = "check-agent-docs", language = "system", entry = "node scripts/site/check-agent-docs.mjs AGENTS.md README.md", pass_filenames = false, files = '^(AGENTS\.md|README\.md|package\.json|pyproject\.toml|scripts/site/check-agent-docs\.mjs)$' },
   # Blocks absolute home-directory paths (`/Users/…`, `C:\Users\…`, `/home/…`) from
   # being committed. They leak the local username, break on every other
   # machine, and mean a shell command was pasted rather than written.
