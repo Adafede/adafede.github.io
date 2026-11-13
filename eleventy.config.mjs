@@ -480,10 +480,12 @@ export default function (eleventyConfig) {
   const readArtworkManifest = (name) => {
     const path = join(ROOT, "public", "images", "artwork", name);
     if (!existsSync(path)) return {};
+    // Missing is normal before fetch-artwork has run. Corrupt is not: falling
+    // back to {} silently served original URLs and 576x576 sizes everywhere.
     try {
       return JSON.parse(readFileSync(path, "utf-8"));
-    } catch {
-      return {};
+    } catch (error) {
+      throw new Error(`${path}: unreadable artwork manifest`, { cause: error });
     }
   };
 
