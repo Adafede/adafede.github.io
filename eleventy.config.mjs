@@ -1005,12 +1005,10 @@ export default function (eleventyConfig) {
       .replace(/<https?:\/\/[^>\s]+>/gi, " ")
       .replace(/\[([^\]]*)\]\([^)]*\)/g, "$1") // links
       .replace(/[*_`]/g, ""); // emphasis and code markers
+    // Quotes and apostrophes are kept: Nunjucks escapes the attribute once, and
+    // stripping them turned "l'acquisition" into "lacquisition".
+    // check-document.mjs fails the build on any double-escaped text.
     const text = extractHtmlText(markdown)
-      // A description is prose, not code: quotes and apostrophes carry no
-      // meaning here, and keeping them means the attribute is escaped twice
-      // (once by eleventyComputed, once by the content attribute) and the
-      // reader sees a literal &quot;.
-      .replace(/["'\u2018\u2019]/g, "")
       .replace(/\s+/g, " ")
       .trim();
     // Roughly what a search result will show; the rest is truncated by the

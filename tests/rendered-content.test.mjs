@@ -40,3 +40,28 @@ test(
     }
   },
 );
+
+test(
+  "meta descriptions keep their apostrophes and quotes",
+  { skip: !built && !process.env.CI && "needs _eleventy_site (bun run build:eleventy)" },
+  () => {
+    // plainText used to delete every ' and ", so the published description
+    // read "lacquisition" for "l'acquisition".
+    const descriptions = readdirSync(join(site, "talks"))
+      .filter((name) => name.endsWith(".html"))
+      .map((name) => readFileSync(join(site, "talks", name), "utf-8"))
+      .flatMap((html) => [
+        ...html.matchAll(/<meta name="description" content="([^"]*)"/g),
+      ])
+      .map((m) => m[1]);
+
+    assert.ok(descriptions.length > 0, "expected talk pages with descriptions");
+    assert.ok(
+      descriptions.some((d) => d.includes("l&#39;acquisition")),
+      "the METABIODIVEX talk description lost its apostrophe",
+    );
+    for (const d of descriptions) {
+      assert.doesNotMatch(d, /&amp;(?:#39|quot);/, `double-escaped: ${d}`);
+    }
+  },
+);
