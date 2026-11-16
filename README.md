@@ -81,15 +81,15 @@ writes a `pdf:` link into a post's frontmatter when the PDF already exists in
 
 ### Other commands
 
-  | Command                    | Purpose                                                       |
-  | ----------------------     | ------------------------------------------------------------- |
-  | `bun run dev`              | Serve Eleventy locally with hot reload.                       |
-  | `bun run test`             | Run the Python and JavaScript test suites.                    |
-  | `bun run build`            | Build only the Eleventy HTML site (no PDFs, no migration).    |
-  | `bun run sync:content`     | Re-migrate `src/content/` and stage `public/` only.           |
-  | `bun run render-pdfs`      | (Re)render only the Quarto PDFs.                              |
-  | `bun run check`            | Validate links, RDFa, document structure, and color contrast. |
-  | `bun run check:a11y`       | Run pa11y (axe + HTMLCS) over the served site.                |
+  | Command                | Purpose                                                       |
+  | ---------------------- | ------------------------------------------------------------- |
+  | `bun run dev`          | Serve Eleventy locally with hot reload.                       |
+  | `bun run test`         | Run the Python and JavaScript test suites.                    |
+  | `bun run build`        | Build only the Eleventy HTML site (no PDFs, no migration).    |
+  | `bun run sync:content` | Re-migrate `src/content/` and stage `public/` only.           |
+  | `bun run render-pdfs`  | (Re)render only the Quarto PDFs.                              |
+  | `bun run check`        | Validate links, RDFa, document structure, and color contrast. |
+  | `bun run check:a11y`   | Run pa11y (axe + HTMLCS) over the served site.                |
 
 `check:a11y` expects a site already being served on port 8080, which is the host
 `.pa11yci.json` points at. Run `bun run dev -- --port=8080` alongside it.
