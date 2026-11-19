@@ -6,7 +6,7 @@
   "author": "Adriano Rutz",
   "license": "AGPL-3.0",
   "private": true,
-  "packageManager": "bun@1.4.4",
+  "packageManager": "bun@1.4.5",
   "scripts": {
     "dev": "node scripts/site/minify-css.mjs && bunx @11ty/eleventy --serve",
     "clean": "node scripts/site/clean.mjs",
