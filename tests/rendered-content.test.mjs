@@ -65,3 +65,55 @@ test(
     }
   },
 );
+
+test(
+  "built homepage ships zero scripts, no-JS analytics pixel, pruned RDFa prefixes, and CSS optimizations",
+  { skip: siteSkip() },
+  () => {
+    const indexHtml = readFileSync(join(site, "index.html"), "utf-8");
+    const privacyHtml = readFileSync(join(site, "privacy.html"), "utf-8");
+
+    assert.doesNotMatch(indexHtml, /<script\b/i);
+    assert.match(
+      indexHtml,
+      /<meta http-equiv="Content-Security-Policy" content="[^"]*script-src 'none'/,
+    );
+    assert.ok(
+      indexHtml.includes(
+        'src="https://queue.simpleanalyticscdn.com/noscript.gif?hostname=adafede.github.io&amp;path=%2F"',
+      ),
+      "expected no-JS analytics pixel with hostname and root path",
+    );
+    assert.match(
+      indexHtml,
+      /<img\b[^>]*\bclass="analytics-pixel"[^>]*>/,
+    );
+    const pixelTag = indexHtml.match(/<img\b[^>]*\bclass="analytics-pixel"[^>]*>/)?.[0] ?? "";
+    assert.match(pixelTag, /\bwidth="1"/);
+    assert.match(pixelTag, /\bheight="1"/);
+    assert.match(pixelTag, /\balt=""/);
+    assert.doesNotMatch(
+      indexHtml,
+      /<noscript>[\s\S]*?noscript\.gif[\s\S]*?<\/noscript>/i,
+    );
+
+    const indexPrefix = indexHtml.match(/<html\b[^>]*\bprefix="([^"]*)"/)?.[1] ?? "";
+    const declaredKeys = [...indexPrefix.matchAll(/([\w-]+):\s*\S+/g)].map(
+      (m) => m[1],
+    );
+    assert.deepEqual(declaredKeys, ["wd", "wdt", "schema"]);
+
+    const privacyHtmlTag = privacyHtml.match(/<html\b[^>]*>/)?.[0] ?? "";
+    assert.doesNotMatch(privacyHtmlTag, /\bprefix=/);
+
+    const style = indexHtml.match(/<style>([\s\S]*?)<\/style>/)?.[1] ?? "";
+    assert.ok(style.length > 0, "expected inlined stylesheet on index.html");
+    assert.doesNotMatch(style, /optimizelegibility/i);
+    assert.doesNotMatch(style, /text-wrap:\s*pretty/i);
+    assert.match(style, /\.analytics-pixel\{/);
+    assert.match(
+      style,
+      /@media\s*\(width\s*<=\s*48rem\)\{[\s\S]*?\.site-header\{[^}]*backdrop-filter:\s*none/,
+    );
+  },
+);

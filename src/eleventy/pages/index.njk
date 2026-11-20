@@ -7,9 +7,11 @@ permalink: /index.html
 <article class="home" vocab="https://schema.org/" typeof="ProfilePage" resource="{{ site.url }}/">
 
   <header class="hero" property="mainEntity" typeof="Person" about="wd:Q97455964" resource="{{ site.url }}/#me">
-    {# srcset: the portrait is the LCP element on this page, so it should not be
-       a compromise size for every display. width/height reserve the box; the
-       sizes attribute lets the browser pick before layout. #}
+    {# srcset: the portrait is preloaded with fetchpriority="high" for visual
+       completeness / Speed Index so it should not be a compromise size for
+       every display (on mobile, the first .home__bio paragraph is the LCP
+       element). width/height reserve the box; sizes lets the browser pick
+       before layout. #}
     <picture class="hero__avatar">
       <source type="image/avif"
         srcset="/images/profile/avatar-150.avif 160w,

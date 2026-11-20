@@ -34,6 +34,7 @@ import {
 import { truncateAtWord } from "./src/lib/frontmatter.mjs";
 import siteContent, { resetSiteContent } from "./src/eleventy/_data/sitecontent.js";
 import { buildJsonFeed } from "./src/lib/jsonFeed.mjs";
+import { pruneRdfaPrefixes } from "./src/lib/prefixes.mjs";
 
 const ROOT = dirname(fileURLToPath(import.meta.url));
 const BIB_PATH = fileURLToPath(new URL("./posts/references.bib", import.meta.url));
@@ -557,6 +558,11 @@ export default function (eleventyConfig) {
       if (!/\btarget=/i.test(nextAttrs)) nextAttrs += ' target="_blank"';
       return `<a${nextAttrs}>`;
     });
+  });
+
+  eleventyConfig.addTransform("pruneRdfaPrefixes", (content, outputPath) => {
+    if (!outputPath || !outputPath.endsWith(".html")) return content;
+    return pruneRdfaPrefixes(content);
   });
 
   // --- collections ---------------------------------------------------
