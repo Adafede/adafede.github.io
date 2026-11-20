@@ -16,8 +16,8 @@ personal data to a server.
 - Server infrastructure may process standard request logs (IP address,
   user-agent, timestamp, requested URL) for delivery, caching, and abuse
   prevention.
-- Aggregated traffic analytics are collected with Simple Analytics
-  (`https://scripts.simpleanalyticscdn.com/latest.js`).
+- Aggregated traffic analytics are collected without JavaScript using a Simple
+  Analytics image pixel (`https://queue.simpleanalyticscdn.com/noscript.gif`).
 - This site does not intentionally set tracking cookies for analytics.
 
 ## Third-party requests

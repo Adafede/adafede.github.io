@@ -221,3 +221,77 @@ def test_a_link_reachable_under_two_rel_tokens_is_reused():
     wikidata = soup.find_all("link", href="https://www.wikidata.org")
     assert len(wikidata) == 1
     assert set(wikidata[0]["rel"]) == {"dns-prefetch", "preconnect"}
+
+
+def test_does_not_add_simpleanalytics_preconnect(tmp_path: Path):
+    html_file = _write_html(tmp_path)
+
+    enforce_website_spec([html_file], site_url="https://adafede.github.io")
+
+    raw = html_file.read_text(encoding="utf-8")
+    assert "scripts.simpleanalyticscdn.com" not in raw
+
+
+def test_injects_nojs_analytics_pixel_for_root_and_nested_route(tmp_path: Path):
+    root_html = _write_html(tmp_path, "index.html")
+    nested_html = _write_html(tmp_path, "posts/demo.html")
+
+    enforce_website_spec([root_html, nested_html], site_url="https://adafede.github.io")
+
+    for html_file, expected_path in [
+        (root_html, "%2F"),
+        (nested_html, "%2Fposts%2Fdemo.html"),
+    ]:
+        raw = html_file.read_text(encoding="utf-8")
+        expected_src = (
+            "https://queue.simpleanalyticscdn.com/noscript.gif"
+            f"?hostname=adafede.codeberg.page&amp;path={expected_path}"
+        )
+        assert f'src="{expected_src}"' in raw
+        assert "&amp;amp;" not in raw
+
+        soup = BeautifulSoup(raw, "html.parser")
+        pixel = soup.body.find("img", class_="analytics-pixel")
+        assert pixel is not None
+        assert pixel.find_parent("noscript") is None
+        assert pixel.get("alt") == ""
+        assert pixel.get("width") == "1"
+        assert pixel.get("height") == "1"
+        assert pixel.get("referrerpolicy") == "no-referrer-when-downgrade"
+        assert pixel.get("decoding") == "async"
+        assert pixel.get("fetchpriority") == "low"
+        assert pixel.get("aria-hidden") == "true"
+        assert "loading" not in pixel.attrs
+        assert "crossorigin" not in pixel.attrs
+
+
+def test_strips_legacy_simpleanalytics_script_and_noscript_pixel(tmp_path: Path):
+    site = tmp_path / "_site"
+    html_file = site / "about.html"
+    html_file.parent.mkdir(parents=True, exist_ok=True)
+    _ = html_file.write_text(
+        """<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>About</title>
+  <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+</head>
+<body>
+  <p>Hello</p>
+  <noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt=""></noscript>
+</body>
+</html>
+""",
+        encoding="utf-8",
+    )
+
+    enforce_website_spec([html_file], site_url="https://adafede.github.io")
+
+    raw = html_file.read_text(encoding="utf-8")
+    assert "scripts.simpleanalyticscdn.com" not in raw
+    assert "<noscript>" not in raw
+    assert (
+        'src="https://queue.simpleanalyticscdn.com/noscript.gif'
+        '?hostname=adafede.codeberg.page&amp;path=%2Fabout.html"' in raw
+    )

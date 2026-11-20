@@ -115,5 +115,47 @@ test(
       style,
       /@media\s*\(width\s*<=\s*48rem\)\{[\s\S]*?\.site-header\{[^}]*backdrop-filter:\s*none/,
     );
+
+    const headersText = readFileSync(join(ROOT, "_headers"), "utf-8");
+    const cspLine =
+      headersText
+        .split("\n")
+        .find((line) => line.trimStart().startsWith("Content-Security-Policy:")) ??
+      "";
+    assert.match(cspLine, /script-src 'none'/);
+    assert.doesNotMatch(cspLine, /simpleanalytics/i);
+
+    const nestedPostHtml = readFileSync(
+      join(site, "posts", "2026-01-20_chem_flow.html"),
+      "utf-8",
+    );
+    for (const [label, html, expectedPath] of [
+      ["privacy", privacyHtml, "%2Fprivacy.html"],
+      ["post", nestedPostHtml, "%2Fposts%2F2026-01-20_chem_flow.html"],
+    ]) {
+      assert.doesNotMatch(
+        html,
+        /scripts\.simpleanalyticscdn\.com|latest\.js|<script\b/i,
+        `${label}: expected zero scripts and no Simple Analytics JS`,
+      );
+      assert.ok(
+        html.includes(
+          `src="https://queue.simpleanalyticscdn.com/noscript.gif?hostname=adafede.github.io&amp;path=${expectedPath}"`,
+        ),
+        `${label}: expected analytics pixel with path ${expectedPath}`,
+      );
+      assert.ok(
+        !html.includes("&amp;amp;"),
+        `${label}: found double-escaped &amp;amp;`,
+      );
+      const tag =
+        html.match(/<img\b[^>]*\bclass="analytics-pixel"[^>]*>/)?.[0] ?? "";
+      assert.match(tag, /\bwidth="1"/);
+      assert.match(tag, /\bheight="1"/);
+      assert.match(tag, /\balt=""/);
+      assert.doesNotMatch(tag, /\bloading="lazy"/);
+      assert.doesNotMatch(tag, /\bcrossorigin\b/);
+      assert.doesNotMatch(html, /connect-src[^"]*simpleanalytics/i);
+    }
   },
 );

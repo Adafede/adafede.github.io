@@ -33,6 +33,9 @@ format:
       - none
     respect-user-color-scheme: true
     smooth-scroll: true
+    include-in-header:
+      - text: |
+          <style>.analytics-pixel{position:absolute;inset-block-start:0;inset-inline-start:0;inline-size:1px;block-size:1px;opacity:0;pointer-events:none;}</style>
 
 kernel: .venv
 
@@ -109,6 +112,3 @@ website:
       </picture>
     </a>
     </div>
-  body-header: |
-    <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js" crossorigin="anonymous">
-    </script>

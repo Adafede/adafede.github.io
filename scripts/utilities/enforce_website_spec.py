@@ -3,11 +3,14 @@
 Adds missing head tags so generated pages meet modern baseline expectations.
 """
 
+from __future__ import annotations
+
 import json
 from datetime import date
 from pathlib import Path
+from urllib.parse import quote
 
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, Tag
 
 from scripts.infrastructure import get_logger
 
@@ -267,7 +270,6 @@ def _ensure_head_basics(soup, *, site_url: str, route: str) -> bool:
 
     # Add preconnect links for performance optimization
     third_party_domains = [
-        "https://scripts.simpleanalyticscdn.com",
         "https://cdnjs.cloudflare.com",
         "https://cdn.jsdelivr.net",
         "https://www.wikidata.org",
@@ -431,10 +433,86 @@ def _ensure_head_basics(soup, *, site_url: str, route: str) -> bool:
     return changed
 
 
+def _ensure_analytics_pixel(soup: BeautifulSoup, *, hostname: str, route: str) -> bool:
+    """Ensure the JavaScript-free Simple Analytics pixel is the last child of ``<body>``.
+
+    Removes legacy Simple Analytics ``<script>`` tags and ``<noscript>`` pixel
+    wrappers, and idempotently upserts the ``.analytics-pixel`` ``<img>`` tag.
+    """
+    body = soup.body
+    if body is None:
+        return False
+
+    changed = False
+
+    for script in list(soup.find_all("script", src=True)):
+        src = str(script.get("src", ""))
+        if "simpleanalyticscdn.com" in src:
+            script.decompose()
+            changed = True
+
+    for noscript in list(soup.find_all("noscript")):
+        if "noscript.gif" in str(noscript):
+            noscript.decompose()
+            changed = True
+
+    encoded_path = quote(route, safe="")
+    pixel_src = (
+        f"https://queue.simpleanalyticscdn.com/noscript.gif"
+        f"?hostname={quote(hostname, safe='.-')}&path={encoded_path}"
+    )
+    expected_attrs: dict[str, str | list[str]] = {
+        "src": pixel_src,
+        "alt": "",
+        "width": "1",
+        "height": "1",
+        "referrerpolicy": "no-referrer-when-downgrade",
+        "decoding": "async",
+        "fetchpriority": "low",
+        "aria-hidden": "true",
+        "class": ["analytics-pixel"],
+    }
+
+    existing_pixels = body.find_all("img", class_="analytics-pixel")
+    node: Tag | None = existing_pixels[0] if existing_pixels else None
+    for duplicate in existing_pixels[1:]:
+        duplicate.decompose()
+        changed = True
+
+    if node is None:
+        node = soup.new_tag("img", attrs=expected_attrs)
+        body.append(node)
+        return True
+
+    for attr, expected in expected_attrs.items():
+        if attr == "class":
+            current_classes = node.get("class")
+            if current_classes != expected:
+                node["class"] = list(expected)
+                changed = True
+        elif node.get(attr) != expected:
+            node[attr] = expected
+            changed = True
+
+    for forbidden in ("loading", "crossorigin"):
+        if forbidden in node.attrs:
+            del node.attrs[forbidden]
+            changed = True
+
+    body_tags = [child for child in body.contents if isinstance(child, Tag)]
+    if not body_tags or body_tags[-1] is not node:
+        node.extract()
+        body.append(node)
+        changed = True
+
+    return changed
+
+
 def enforce_website_spec(
     html_files: list[Path],
     site_url: str,
     site_dir: Path | None = None,
+    analytics_hostname: str = "adafede.codeberg.page",
 ) -> None:
     """Apply metadata and discovery defaults to all rendered HTML pages."""
     fixed_count = 0
@@ -457,7 +535,13 @@ def enforce_website_spec(
             continue
 
         route = _route_from_html(html_file, resolved_site_dir)
-        if _ensure_head_basics(soup, site_url=site_url, route=route):
+        changed = _ensure_head_basics(soup, site_url=site_url, route=route)
+        changed |= _ensure_analytics_pixel(
+            soup,
+            hostname=analytics_hostname,
+            route=route,
+        )
+        if changed:
             _ = html_file.write_text(str(soup), encoding="utf-8")
             changed_count += 1
 
