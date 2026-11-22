@@ -2,5 +2,13 @@
 title: Adriano Rutz's website
 search: false
 listing:
+  contents:
+    - articles/*/*.qmd
+    - articles/thesis.qmd
+    - posts/*.qmd
+    - talks/*.qmd
+    - teaching/*.qmd
+    - varia/*/*.qmd
+  sort: date desc
   feed: true
 ---

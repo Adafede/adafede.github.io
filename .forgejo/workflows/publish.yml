@@ -67,6 +67,7 @@ jobs:
             fancyhdr \
             ifmtarg \
             koma-script \
+            microtype \
             moresize \
             multirow \
             pgf \

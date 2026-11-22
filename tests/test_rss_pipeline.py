@@ -4,6 +4,8 @@ Covers the three live utility functions that postrender.py chains together:
 inject_doi_in_rss, inject_cito_annotations_in_rss, and convert_rss_to_json_feed.
 """
 
+from __future__ import annotations
+
 import json
 from pathlib import Path
 
@@ -13,6 +15,8 @@ from scripts.utilities.inject_cito_annotations_in_rss import (
     inject_cito_annotations_in_rss,
 )
 from scripts.utilities.inject_doi_in_rss import inject_doi_in_rss
+
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
 # ---------------------------------------------------------------------------
 # Test fixtures / helpers
@@ -174,3 +178,34 @@ def test_convert_after_doi_injection(tmp_path: Path):
     # the item id in place of the post URL.
     assert item["title"] == "First Post"
     assert item["id"] == "https://doi.org/10.59350/abc123"
+
+
+def test_rss_listing_excludes_listing_pages() -> None:
+    """``rss.qmd`` must scope ``contents`` so listing pages are never nested."""
+    yaml_loader = YamlLoader()
+    meta = yaml_loader.load_from_path(PROJECT_ROOT / "rss.qmd")
+    assert isinstance(meta, dict)
+
+    listing = meta.get("listing")
+    assert isinstance(listing, dict)
+
+    contents = listing.get("contents")
+    assert isinstance(contents, list)
+    assert contents
+
+    matched: set[Path] = set()
+    for pattern in contents:
+        assert isinstance(pattern, str)
+        matched.update(PROJECT_ROOT.glob(pattern))
+
+    sections = {path.relative_to(PROJECT_ROOT).parts[0] for path in matched}
+    assert {"articles", "posts", "talks", "teaching", "varia"}.issubset(sections)
+    assert PROJECT_ROOT / "rss.qmd" not in matched
+    assert PROJECT_ROOT / "articles" / "profiles.qmd" not in matched
+
+    for qmd_path in sorted(matched):
+        item_meta = yaml_loader.load_from_path(qmd_path)
+        assert isinstance(item_meta, dict), f"Missing YAML frontmatter in {qmd_path}"
+        assert "listing" not in item_meta, (
+            f"Listing page {qmd_path} must not be included in rss.qmd"
+        )
