@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import importlib
+import sys
+import types
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -28,10 +30,36 @@ __all__ = [
     "talkmap",
 ]
 
+_EXPORTS = frozenset(__all__)
+
+
+class _UtilitiesModule(types.ModuleType):
+    """Package module whose lazy callable exports are not shadowed by submodules."""
+
+    def __setattr__(self, name: str, value: object) -> None:
+        """Bind the exported callable when Python attaches a same-named submodule."""
+        if (
+            name in _EXPORTS
+            and isinstance(value, types.ModuleType)
+            and value.__name__ == f"{self.__name__}.{name}"
+        ):
+            value = getattr(value, name)
+        super().__setattr__(name, value)
+
 
 def __getattr__(name: str) -> object:
     """Lazily import utility callables so heavy optional plots load on demand."""
-    if name in __all__:
+    if name in _EXPORTS:
         module = importlib.import_module(f".{name}", __name__)
-        return getattr(module, name)
+        value = getattr(module, name)
+        globals()[name] = value
+        return value
     raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
+
+
+def __dir__() -> list[str]:
+    """Include lazy exports in ``dir(scripts.utilities)``."""
+    return sorted({*globals(), *__all__})
+
+
+sys.modules[__name__].__class__ = _UtilitiesModule
