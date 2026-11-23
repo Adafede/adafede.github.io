@@ -8,7 +8,7 @@ from __future__ import annotations
 import json
 from datetime import date
 from pathlib import Path
-from urllib.parse import quote
+from urllib.parse import quote, urlparse
 
 from bs4 import BeautifulSoup, Tag
 
@@ -447,7 +447,9 @@ def _ensure_analytics_pixel(soup: BeautifulSoup, *, hostname: str, route: str) -
 
     for script in list(soup.find_all("script", src=True)):
         src = str(script.get("src", ""))
-        if "simpleanalyticscdn.com" in src:
+        parsed = urlparse(src)
+        host = (parsed.hostname or "").lower()
+        if host == "simpleanalyticscdn.com" or host.endswith(".simpleanalyticscdn.com"):
             script.decompose()
             changed = True
 
