@@ -9,37 +9,20 @@ on:
     types: [published]
   workflow_dispatch: null
 
-permissions:
-  actions: write
-  checks: write
-  contents: write
-  deployments: write
-  id-token: write
-  issues: read
-  discussions: read
-  packages: write
-  pages: write
-  pull-requests: read
-  repository-projects: read
-  security-events: read
-  statuses: read
+permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
-  publish:
+  build:
     runs-on: ubuntu-latest
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}
-      cancel-in-progress: ${{ github.event_name == 'pull_request' }}
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       TEXINPUTS: "_texlocal:"
     permissions:
       contents: read
-      id-token: write
-      pages: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       # Checkout repository
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
@@ -111,5 +94,17 @@ jobs:
           # agent-skills) never reached Pages while HTML still linked to them.
           include-hidden-files: true
 
-      - uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346
-        if: github.event_name != 'pull_request'
+  deploy:
+    if: github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      pages: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346
