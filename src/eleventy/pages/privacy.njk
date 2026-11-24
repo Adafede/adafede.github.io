@@ -35,7 +35,7 @@ permalink: /privacy.html
   <p>You can reduce data sharing by using browser privacy controls, content blockers, and DNS/network filtering for third-party domains.</p>
 
   <h2>Contact</h2>
-  <p>For privacy questions, contact: <a href="mailto:{{ site.contact.email | obfuscate | safe }}">{{ site.contact.email | spellEmail }}</a>.</p>
+  <p>For privacy questions, contact: <a href="{{ site.contact.email | obfuscateMailto | safe }}">{{ site.contact.email | obfuscateEmailHtml | safe }}</a>.</p>
 
   <h2>Policy Updates</h2>
   <p>This page may be updated when site features or third-party services change.</p>

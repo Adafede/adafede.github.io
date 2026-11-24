@@ -795,6 +795,12 @@ figcaption {
   border: 0;
 }
 
+/* Decoy token inside obfuscated email addresses: hidden from sight,
+   screen readers, and clipboard selection while breaking naive scrapers. */
+.contact-decoy {
+  display: none;
+}
+
 /* --------------------------------------------------------------- post head */
 
 .post-header {

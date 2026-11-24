@@ -59,7 +59,7 @@ function safeCodePoint(cp) {
     : "\uFFFD";
 }
 
-function decodeEntities(text) {
+export function decodeEntities(text) {
   return text.replace(
     /&(?:#(\d+)|#x([0-9a-fA-F]+)|([a-zA-Z0-9]+));/g,
     (match, dec, hex, named) => {

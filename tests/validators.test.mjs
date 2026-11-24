@@ -40,3 +40,14 @@ test("check-links reports a malformed percent-escape as a dead link", () => {
   assert.match(result.stdout, /1 dead internal link/);
   assert.match(result.stdout, /\/x%zz\.html/);
 });
+
+test("check-links accepts entity-encoded mailto URIs", () => {
+  const dir = mkdtempSync(join(tmpdir(), "encoded-mailto-site-"));
+  writeFileSync(
+    join(dir, "index.html"),
+    '<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#97;&#64;&#98;&#46;&#99;">Email</a>',
+  );
+  const result = run("check-links.mjs", dir);
+  assert.equal(result.status, 0);
+  assert.match(result.stdout, /0 dead internal link/);
+});

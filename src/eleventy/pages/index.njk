@@ -43,7 +43,7 @@ permalink: /index.html
          reach you; the scholarly identifiers belong with the articles, which is
          where they are. #}
       <ul class="identifiers" aria-label="Contact">
-        <li><a href="mailto:{{ site.contact.email | obfuscate | safe }}" property="email">{% registryIcon 'email' %}Email<span class="visually-hidden"> — {{ site.contact.email | spellEmail }}</span></a></li>
+        <li><a href="{{ site.contact.email | obfuscateMailto | safe }}" property="email">{% registryIcon 'email' %}Email<span class="visually-hidden"> — {{ site.contact.email | spellEmail }}</span></a></li>
         <li><a href="https://www.linkedin.com/in/AdrianoRutz/" rel="me sameAs noopener" target="_blank">{% registryIcon 'linkedin' %}LinkedIn</a></li>
         <li><a href="https://github.com/adafede" rel="me sameAs noopener" target="_blank">{% registryIcon 'github' %}GitHub</a></li>
       </ul>

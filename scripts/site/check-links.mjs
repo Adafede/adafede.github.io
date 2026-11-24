@@ -15,7 +15,12 @@
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 
-import { siteHtmlFiles, removeComments, removeScriptAndStyle } from "./html.mjs";
+import {
+  decodeEntities,
+  siteHtmlFiles,
+  removeComments,
+  removeScriptAndStyle,
+} from "./html.mjs";
 
 const roots = process.argv.slice(2);
 if (!roots.length) {
@@ -75,11 +80,12 @@ for (const rawRoot of roots) {
   for (const [rel, { html }] of pageIds) {
     const from = rel || "/";
     for (const href of extractTargets(html)) {
-      if (EXTERNAL.test(href)) continue;
+      const decoded = decodeEntities(href);
+      if (EXTERNAL.test(decoded)) continue;
 
       let resolved;
       try {
-        resolved = new URL(href, `https://site.local${from}`);
+        resolved = new URL(decoded, `https://site.local${from}`);
       } catch {
         if (!dead.has(from)) dead.set(from, new Set());
         dead.get(from).add(href);

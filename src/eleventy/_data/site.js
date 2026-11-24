@@ -30,9 +30,10 @@ export default {
   /**
    * The one place the contact address is written down.
    *
-   * Templates render it through the `obfuscate` and `spellEmail` filters rather
-   * than writing it out, so the address exists literally in exactly one file in
-   * the source and nowhere in the published HTML.
+   * Templates render it through the `obfuscateMailto`, `obfuscateEmailHtml`,
+   * and `spellEmail` filters rather than writing it out, so the address exists
+   * literally in exactly one file in the source and nowhere in the published
+   * HTML.
    */
   contact: {
     email: "rutz@imsb.biol.ethz.ch",

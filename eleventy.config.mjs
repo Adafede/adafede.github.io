@@ -31,6 +31,12 @@ import {
   referenceDoi,
   renderReference,
 } from "./src/lib/bib.mjs";
+import {
+  encodeHtmlEntities,
+  obfuscateEmailHtml,
+  obfuscateMailto,
+  spellEmail,
+} from "./src/lib/email.mjs";
 import { truncateAtWord } from "./src/lib/frontmatter.mjs";
 import siteContent, { resetSiteContent } from "./src/eleventy/_data/sitecontent.js";
 import { buildJsonFeed } from "./src/lib/jsonFeed.mjs";
@@ -894,31 +900,6 @@ export default function (eleventyConfig) {
   );
 
   /**
-   * Contact details obfuscated, in a form a person can still read.
-   *
-   * The email is spelled out with [at], and every digit is separated by a
-   * zero-width space. A phone number is the thing worth breaking up, and a
-   * scraper lifts it as an unbroken run of digits — so breaking the run is what
-   * does the work, not disguising the letters around it, which would only make
-   * the page worse to read.
-   *
-   * Zero-width rather than visible spaces because the value has to stay
-   * copy-pasteable: a visible separator ends up in whatever the reader pastes it
-   * into. A zero-width space is invisible on screen and dropped by most editors
-   * and mail clients.
-   *
-   * Worth being clear about the ceiling: this defeats harvesting that looks for
-   * a pattern. It does not defeat anything that renders the page, and no amount
-   * of obfuscation does, short of not publishing the value.
-   */
-  eleventyConfig.addFilter("obfuscateContact", (value) => {
-    const ZWSP = "\u200B";
-    return String(value ?? "")
-      .replace(/@/g, " [at] ")
-      .replace(/\d/g, (d) => `${d}${ZWSP}`);
-  });
-
-  /**
    * The schema.org property a CV header fact is, keyed off its label.
    *
    * "Status" and "Field" said almost nothing, so the labels in cv.qmd are the
@@ -959,9 +940,19 @@ export default function (eleventyConfig) {
    * manipulation technique and can act on the whole site. Every visitor gets
    * byte-identical markup.
    */
-  eleventyConfig.addFilter("obfuscate", (value) =>
-    [...String(value ?? "")].map((c) => `&#${c.codePointAt(0)};`).join(""),
-  );
+  eleventyConfig.addFilter("obfuscate", encodeHtmlEntities);
+
+  /**
+   * Encode a full `mailto:<email>` URI as HTML entities so the `mailto:` scheme
+   * itself never appears in plaintext in the raw HTML.
+   */
+  eleventyConfig.addFilter("obfuscateMailto", obfuscateMailto);
+
+  /**
+   * Obfuscate a displayed email address using HTML entities, a CSS-hidden decoy
+   * token (`.contact-decoy`), and an HTML comment.
+   */
+  eleventyConfig.addFilter("obfuscateEmailHtml", obfuscateEmailHtml);
 
   /**
    * An address spelled out for reading: "rutz [at] imsb [dot] …".
@@ -971,13 +962,7 @@ export default function (eleventyConfig) {
    * harvester matches on — one run of characters, an @, a domain — does not
    * appear.
    */
-  eleventyConfig.addFilter("spellEmail", (value) =>
-    String(value ?? "")
-      .replace(/@/g, " [at] ")
-      .replace(/\./g, " [dot] ")
-      .replace(/\s+/g, " ")
-      .trim(),
-  );
+  eleventyConfig.addFilter("spellEmail", spellEmail);
 
   /**
    * The first `count` words of some text, cut at a word boundary.

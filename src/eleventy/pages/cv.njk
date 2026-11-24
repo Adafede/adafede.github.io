@@ -61,11 +61,10 @@ permalink: /cv.html
          {% if contact.email %}
          <div class="cv-header__contact-item">
            <dt>Email</dt>
-           {# Spelled rather than linked. A mailto has to exist as a real URL in
-              the document, which puts the address back in the page for anything
-              that reads markup; the spelled form is readable, typeable, and
-              cannot be lifted as one unbroken string. #}
-           <dd><span class="contact-obfuscated">{{ contact.email | obfuscateContact }}</span></dd>
+           {# Unlinked and obfuscated in HTML rather than a mailto: link; CSS hides
+              the decoy token from sight, screen readers, and clipboard copy while
+              entities and comments break naive markup scrapers. #}
+           <dd><span class="contact-obfuscated">{{ contact.email | obfuscateEmailHtml | safe }}</span></dd>
          </div>
          {% endif %}
          {% if contact.location %}

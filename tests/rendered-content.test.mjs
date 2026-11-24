@@ -4,6 +4,7 @@ import test from "node:test";
 
 import { join } from "node:path";
 
+import { obfuscateMailto } from "../src/lib/email.mjs";
 import { ROOT, siteSkip } from "./build-state.mjs";
 
 const site = join(ROOT, "_eleventy_site");
@@ -157,5 +158,67 @@ test(
       assert.doesNotMatch(tag, /\bcrossorigin\b/);
       assert.doesNotMatch(html, /connect-src[^"]*simpleanalytics/i);
     }
+  },
+);
+
+test(
+  "built contact pages obfuscate email without leaking plaintext or unused CSS",
+  { skip: siteSkip() },
+  () => {
+    const address = "rutz@imsb.biol.ethz.ch";
+    const encodedMailto = obfuscateMailto(address);
+    const indexHtml = readFileSync(join(site, "index.html"), "utf-8");
+    const privacyHtml = readFileSync(join(site, "privacy.html"), "utf-8");
+    const cvHtml = readFileSync(join(site, "cv.html"), "utf-8");
+
+    for (const [name, html] of [
+      ["index.html", indexHtml],
+      ["privacy.html", privacyHtml],
+      ["cv.html", cvHtml],
+    ]) {
+      assert.doesNotMatch(
+        html,
+        /mailto:/i,
+        `${name}: must not contain literal mailto: scheme`,
+      );
+      assert.ok(
+        !html.toLowerCase().includes(address),
+        `${name}: must not contain plaintext email address`,
+      );
+    }
+
+    assert.ok(
+      indexHtml.includes(`href="${encodedMailto}"`),
+      "index.html: expected entity-encoded mailto href",
+    );
+    assert.ok(
+      privacyHtml.includes(`href="${encodedMailto}"`),
+      "privacy.html: expected entity-encoded mailto href",
+    );
+    assert.ok(
+      !cvHtml.includes(`href="${encodedMailto}"`),
+      "cv.html: email must remain unlinked",
+    );
+
+    for (const [name, html] of [
+      ["privacy.html", privacyHtml],
+      ["cv.html", cvHtml],
+    ]) {
+      const style = html.match(/<style>([\s\S]*?)<\/style>/)?.[1] ?? "";
+      assert.ok(
+        style.includes(".contact-decoy{display:none}"),
+        `${name}: expected .contact-decoy{display:none} in inlined <style>`,
+      );
+      assert.ok(
+        html.includes('class="contact-decoy"'),
+        `${name}: expected class="contact-decoy" in body`,
+      );
+    }
+
+    const indexStyle = indexHtml.match(/<style>([\s\S]*?)<\/style>/)?.[1] ?? "";
+    assert.ok(
+      !indexStyle.includes(".contact-decoy"),
+      "index.html: must not inline unused .contact-decoy CSS",
+    );
   },
 );
